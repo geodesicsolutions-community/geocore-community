@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Mobile Detect Library
  * =====================
@@ -535,8 +536,8 @@ class Mobile_Detect
         // @reference: http://en.wikipedia.org/wiki/Minimo
         // http://en.wikipedia.org/wiki/Vision_Mobile_Browser
         'GenericBrowser'  => 'NokiaBrowser|OviBrowser|OneBrowser|TwonkyBeamBrowser|SEMC.*Browser|FlyFlow|Minimo|NetFront|Novarra-Vision|MQQBrowser|MicroMessenger',
-		// @reference: https://en.wikipedia.org/wiki/Pale_Moon_(web_browser)
-		'PaleMoon'        => 'Android.*PaleMoon|Mobile.*PaleMoon',
+        // @reference: https://en.wikipedia.org/wiki/Pale_Moon_(web_browser)
+        'PaleMoon'        => 'Android.*PaleMoon|Mobile.*PaleMoon',
     );
 
     /**
@@ -628,13 +629,13 @@ class Mobile_Detect
         'Skyfire'       => 'Skyfire/[VER]',
         'Tizen'         => 'Tizen/[VER]',
         'Webkit'        => 'webkit[ /][VER]',
-		'PaleMoon'         => 'PaleMoon/[VER]',
+        'PaleMoon'         => 'PaleMoon/[VER]',
 
         // Engine
         'Gecko'         => 'Gecko/[VER]',
         'Trident'       => 'Trident/[VER]',
         'Presto'        => 'Presto/[VER]',
-		'Goanna'           => 'Goanna/[VER]',
+        'Goanna'           => 'Goanna/[VER]',
 
         // OS
         'iOS'              => ' \bi?OS\b [VER][ ;]{1}',
@@ -776,7 +777,8 @@ class Mobile_Detect
      *
      * @return  boolean If there were CloudFront headers to be set
      */
-    public function setCfHeaders($cfHeaders = null) {
+    public function setCfHeaders($cfHeaders = null)
+    {
         // use global _SERVER if $cfHeaders aren't defined
         if (!is_array($cfHeaders) || !count($cfHeaders)) {
             $cfHeaders = $_SERVER;
@@ -954,7 +956,6 @@ class Mobile_Detect
         }
 
         return $rules;
-
     }
 
     /**
@@ -1038,7 +1039,6 @@ class Mobile_Detect
         }
 
         return false;
-
     }
 
     /**
@@ -1100,7 +1100,6 @@ class Mobile_Detect
         // Make the keys lowercase so we can match: isIphone(), isiPhone(), isiphone(), etc.
         $key = strtolower($key);
         if (false === isset($this->cache[$key])) {
-
             // change the keys to lower case
             $_rules = array_change_key_case($this->getRules());
 
@@ -1137,7 +1136,7 @@ class Mobile_Detect
         // Check specifically for cloudfront headers if the useragent === 'Amazon CloudFront'
         if ($this->getUserAgent() === 'Amazon CloudFront') {
             $cfHeaders = $this->getCfHeaders();
-            if(array_key_exists('HTTP_CLOUDFRONT_IS_MOBILE_VIEWER', $cfHeaders) && $cfHeaders['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'] === 'true') {
+            if (array_key_exists('HTTP_CLOUDFRONT_IS_MOBILE_VIEWER', $cfHeaders) && $cfHeaders['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'] === 'true') {
                 return true;
             }
         }
@@ -1149,7 +1148,6 @@ class Mobile_Detect
         } else {
             return $this->matchDetectionRulesAgainstUA();
         }
-
     }
 
     /**
@@ -1165,7 +1163,7 @@ class Mobile_Detect
         // Check specifically for cloudfront headers if the useragent === 'Amazon CloudFront'
         if ($this->getUserAgent() === 'Amazon CloudFront') {
             $cfHeaders = $this->getCfHeaders();
-            if(array_key_exists('HTTP_CLOUDFRONT_IS_TABLET_VIEWER', $cfHeaders) && $cfHeaders['HTTP_CLOUDFRONT_IS_TABLET_VIEWER'] === 'true') {
+            if (array_key_exists('HTTP_CLOUDFRONT_IS_TABLET_VIEWER', $cfHeaders) && $cfHeaders['HTTP_CLOUDFRONT_IS_TABLET_VIEWER'] === 'true') {
                 return true;
             }
         }
@@ -1293,13 +1291,11 @@ class Mobile_Detect
 
         // Check if the property exists in the properties array.
         if (true === isset($properties[$propertyName])) {
-
             // Prepare the pattern to be matched.
             // Make sure we always deal with an array (string is converted).
             $properties[$propertyName] = (array) $properties[$propertyName];
 
             foreach ($properties[$propertyName] as $propertyMatchString) {
-
                 $propertyPattern = str_replace('[VER]', self::VER, $propertyMatchString);
 
                 // Identify and extract the version.
@@ -1310,9 +1306,7 @@ class Mobile_Detect
 
                     return $version;
                 }
-
             }
-
         }
 
         return false;
@@ -1337,7 +1331,7 @@ class Mobile_Detect
             // Android 3.1 (Honeycomb)  - Tested on the Samsung Galaxy Tab 10.1 and Motorola XOOM
             // Android 4.0 (ICS)  - Tested on a Galaxy Nexus. Note: transition performance can be poor on upgraded devices
             // Android 4.1 (Jelly Bean)  - Tested on a Galaxy Nexus and Galaxy 7
-            ( $this->version('Android', self::VERSION_TYPE_FLOAT)>2.1 && $this->is('Webkit') ) ||
+            ( $this->version('Android', self::VERSION_TYPE_FLOAT) > 2.1 && $this->is('Webkit') ) ||
 
             // Windows Phone 7.5-8 - Tested on the HTC Surround (7.5), HTC Trophy (7.5), LG-E900 (7.5), Nokia 800 (7.8), HTC Mazaa (7.8), Nokia Lumia 520 (8), Nokia Lumia 920 (8), HTC 8x (8)
             $this->version('Windows Phone OS', self::VERSION_TYPE_FLOAT) >= 7.5 ||
@@ -1398,17 +1392,17 @@ class Mobile_Detect
 
             // Opera Desktop 10-12 - Tested on OS X 10.7 and Windows 7
             $this->version('Opera', self::VERSION_TYPE_FLOAT) >= 10 && !$isMobile
-        ){
+        ) {
             return self::MOBILE_GRADE_A;
         }
 
         if (
-            $this->is('iOS') && $this->version('iPad', self::VERSION_TYPE_FLOAT)<4.3 ||
-            $this->is('iOS') && $this->version('iPhone', self::VERSION_TYPE_FLOAT)<4.3 ||
-            $this->is('iOS') && $this->version('iPod', self::VERSION_TYPE_FLOAT)<4.3 ||
+            $this->is('iOS') && $this->version('iPad', self::VERSION_TYPE_FLOAT) < 4.3 ||
+            $this->is('iOS') && $this->version('iPhone', self::VERSION_TYPE_FLOAT) < 4.3 ||
+            $this->is('iOS') && $this->version('iPod', self::VERSION_TYPE_FLOAT) < 4.3 ||
 
             // Blackberry 5.0: Tested on the Storm 2 9550, Bold 9770
-            $this->is('Blackberry') && $this->version('BlackBerry', self::VERSION_TYPE_FLOAT) >= 5 && $this->version('BlackBerry', self::VERSION_TYPE_FLOAT)<6 ||
+            $this->is('Blackberry') && $this->version('BlackBerry', self::VERSION_TYPE_FLOAT) >= 5 && $this->version('BlackBerry', self::VERSION_TYPE_FLOAT) < 6 ||
 
             //Opera Mini (5.0-6.5) - Tested on iOS 3.2/4.3 and Android 2.3
             ($this->version('Opera Mini', self::VERSION_TYPE_FLOAT) >= 5.0 && $this->version('Opera Mini', self::VERSION_TYPE_FLOAT) <= 7.0 &&
@@ -1419,7 +1413,7 @@ class Mobile_Detect
 
             // @todo: report this (tested on Nokia N71)
             $this->version('Opera Mobi', self::VERSION_TYPE_FLOAT) >= 11 && $this->is('SymbianOS')
-        ){
+        ) {
             return self::MOBILE_GRADE_B;
         }
 
@@ -1436,7 +1430,7 @@ class Mobile_Detect
 
             // Internet Explorer 7 and older - Tested on Windows XP
             $this->version('IE', self::VERSION_TYPE_FLOAT) <= 7.0 && !$isMobile
-        ){
+        ) {
             return self::MOBILE_GRADE_C;
         }
 

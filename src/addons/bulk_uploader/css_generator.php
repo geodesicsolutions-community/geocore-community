@@ -1,4 +1,5 @@
 <?php
+
 //css_generator.php
 /**************************************************************************
 Addon Created by Geodesic Solutions, LLC
@@ -8,10 +9,10 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.5.3-36-gea36ae7
-## 
+##
 ##################################
 
 # Bulk Uploader

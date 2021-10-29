@@ -1,4 +1,5 @@
 <?php
+
 //addons/attention_getters/info.php
 /**************************************************************************
 Addon Created by Geodesic Solutions, LLC
@@ -8,31 +9,31 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    16.09.0-96-gf3bd8a1
-## 
+##
 ##################################
 
 # Attention Getters Addon
 
-class addon_attention_getters_info{
-	//The following are required variables
-	var $name = 'attention_getters';
-	var $version = '3.1.0';
-	var $core_version_minimum = '17.01.0';
-	var $title = 'Attention Getters';
-	var $author = "Geodesic Solutions LLC.";
-	var $icon_image = "menu_attn_getter.gif";
-	var $info_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/67-attention-getters.html?directory=64';
-	var $description = 'This addon enables the use of attention getters.  This addon is compatible
+class addon_attention_getters_info
+{
+    //The following are required variables
+    var $name = 'attention_getters';
+    var $version = '3.1.0';
+    var $core_version_minimum = '17.01.0';
+    var $title = 'Attention Getters';
+    var $author = "Geodesic Solutions LLC.";
+    var $icon_image = "menu_attn_getter.gif";
+    var $info_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/67-attention-getters.html?directory=64';
+    var $description = 'This addon enables the use of attention getters.  This addon is compatible
 	with Geo 4.0+.';
-	var $auth_tag = 'geo_addons';
-
+    var $auth_tag = 'geo_addons';
 }
 /*
  * CHANGELOG - Attention Getters
- * 
+ *
  * v3.1.0 - REQUIRES 17.01.0
  *  - Implemented new admin design
  *
@@ -102,4 +103,3 @@ class addon_attention_getters_info{
  *  - initial changlog creation
  */
 //leave whitespace at the end of this, or Eclipse dies
-

@@ -1,4 +1,5 @@
 <?php
+
 //geo_api.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,10 +9,10 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    6.0.7-2-gc953682
-## 
+##
 ##################################
 
 require_once 'app_top.common.php';

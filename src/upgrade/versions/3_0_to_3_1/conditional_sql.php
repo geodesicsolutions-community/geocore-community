@@ -1,4 +1,5 @@
 <?php
+
 //This is where conditional queries go.
 //For cases where an sql query might not be run, in the
 //case that it is not run, add an empty string
@@ -60,57 +61,51 @@ $query = "SELECT `name` FROM `geodesic_payment_choices` WHERE `payment_choice_id
 $result = $this->_db->Execute($query);
 $result = $result->FetchRow();
 
-if($result['name'] == "Credit Card")
-{
-	$sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '99' WHERE `payment_choice_id` =5 LIMIT 1";
-	$sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '5' WHERE `payment_choice_id` =4 LIMIT 1";
-	$sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '4' WHERE `payment_choice_id` =3 LIMIT 1";
-	$sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '3' WHERE `payment_choice_id` =2 LIMIT 1";
-	$sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '2' WHERE `payment_choice_id` =99 LIMIT 1";
-}
-else
-{
-	$sql_not_strict[] = "";
-	$sql_not_strict[] = "";
-	$sql_not_strict[] = "";
-	$sql_not_strict[] = "";
-	$sql_not_strict[] = "";
+if ($result['name'] == "Credit Card") {
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '99' WHERE `payment_choice_id` =5 LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '5' WHERE `payment_choice_id` =4 LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '4' WHERE `payment_choice_id` =3 LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '3' WHERE `payment_choice_id` =2 LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '2' WHERE `payment_choice_id` =99 LIMIT 1";
+} else {
+    $sql_not_strict[] = "";
+    $sql_not_strict[] = "";
+    $sql_not_strict[] = "";
+    $sql_not_strict[] = "";
+    $sql_not_strict[] = "";
 }
 
 // Fix it to allow multiple classified sessions with same session ID
 $result = $this->_db->Execute('SHOW INDEX FROM `geodesic_classifieds_sell_session`');
 $remove_primary = false;
 $add_index = true;
-if (!$result)
-{
-	//this table is changed in 4.0 so in testing and development this will throw an error
-	//just skip if this is the case.
-}
-else
-{
-	while($row = $result->FetchRow()){
-		if ($row['Column_name'] == 'session'){
-			//this is an index from the session column.
-			if ($row['Non_unique'] == 0){
-				//it is set to unique, so need to remove primary.
-				$remove_primary = true;
-			} else {
-				//this is a normal index, so do not add another index for this column.
-				$add_index = false;
-			}
-		}
-		//echo '<pre>'.print_r($row,1).'</pre><br />';
-	}
-	if ($remove_primary){
-		$sql_strict[] = 'ALTER TABLE `geodesic_classifieds_sell_session` DROP PRIMARY KEY';
-	} else {
-		$sql_strict[] = '';
-	}
-	if ($add_index){
-		$sql_strict[] = 'ALTER TABLE `geodesic_classifieds_sell_session` ADD INDEX ( `session` )';
-	} else {
-		$sql_strict[] = '';
-	}
+if (!$result) {
+    //this table is changed in 4.0 so in testing and development this will throw an error
+    //just skip if this is the case.
+} else {
+    while ($row = $result->FetchRow()) {
+        if ($row['Column_name'] == 'session') {
+            //this is an index from the session column.
+            if ($row['Non_unique'] == 0) {
+                //it is set to unique, so need to remove primary.
+                $remove_primary = true;
+            } else {
+                //this is a normal index, so do not add another index for this column.
+                $add_index = false;
+            }
+        }
+        //echo '<pre>'.print_r($row,1).'</pre><br />';
+    }
+    if ($remove_primary) {
+        $sql_strict[] = 'ALTER TABLE `geodesic_classifieds_sell_session` DROP PRIMARY KEY';
+    } else {
+        $sql_strict[] = '';
+    }
+    if ($add_index) {
+        $sql_strict[] = 'ALTER TABLE `geodesic_classifieds_sell_session` ADD INDEX ( `session` )';
+    } else {
+        $sql_strict[] = '';
+    }
 }
 
 

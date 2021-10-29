@@ -1,4 +1,5 @@
 <?php
+
 /*
  * # CJAX FRAMEWORK 2.1
  * Ajax made easy with CJAX
@@ -11,6 +12,6 @@
  **/
 
 $engine = array (
-	'version' => '2.0.1'
+    'version' => '2.0.1'
 );
-include( "core/cjax_config.php" );
+include("core/cjax_config.php");

@@ -1,4 +1,5 @@
 <?php
+
 //cron_manage.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -11,52 +12,61 @@ see license attached to distribution
 ##
 ## File Changed In GIT Commit:
 ## ##    16.09.0-79-gb63e5d8
-## 
+##
 ##################################
 
-require_once(CLASSES_DIR.PHP5_DIR.'Cron.class.php');
+require_once(CLASSES_DIR . PHP5_DIR . 'Cron.class.php');
 
-class AdminCronManage {
-	function update_cron_config(){
-		$db = true;
-		include (GEO_BASE_DIR.'get_common_vars.php');
-		if (PHP5_DIR) $menu_loader = geoAdmin::getInstance();
-		else $menu_loader =& geoAdmin::getInstance();
-		//clean inputs
-		$cron_disable_heartbeat = (isset($_POST['cron_method']) && $_POST['cron_method']=='cron')? 1: false;
-		$cron_deadlock = (isset($_POST['cron_deadlock_time_limit']) && $_POST['cron_deadlock_time_limit'] > 5)? intval($_POST['cron_deadlock_time_limit']): 1800;
+class AdminCronManage
+{
+    function update_cron_config()
+    {
+        $db = true;
+        include(GEO_BASE_DIR . 'get_common_vars.php');
+        if (PHP5_DIR) {
+            $menu_loader = geoAdmin::getInstance();
+        } else {
+            $menu_loader =& geoAdmin::getInstance();
+        }
+        //clean inputs
+        $cron_disable_heartbeat = (isset($_POST['cron_method']) && $_POST['cron_method'] == 'cron') ? 1 : false;
+        $cron_deadlock = (isset($_POST['cron_deadlock_time_limit']) && $_POST['cron_deadlock_time_limit'] > 5) ? intval($_POST['cron_deadlock_time_limit']) : 1800;
 
-		//save settings
-		$db->set_site_setting('cron_disable_heartbeat',$cron_disable_heartbeat);
-		$db->set_site_setting('cron_deadlock_time_limit',$cron_deadlock);
-		$cron = geoCron::getInstance();
-		$cron->resetKey(trim($_POST['cron_key']));
-		$menu_loader->userSuccess('Settings Saved.'); //success
-		if ($cron_disable_heartbeat){
-			$menu_loader->userNotice('Warning: Auto heartbeat disabled!  This requires a manual cron job to be run on the server, otherwise listings may never close!');
-		}
-		if (!(isset($_POST['cron_deadlock_time_limit']) && $_POST['cron_deadlock_time_limit'] > 5)){
-			$menu_loader->userNotice('Setting "Time before lock removed" needs to be at least 6 seconds.');
-		}
-	}
+        //save settings
+        $db->set_site_setting('cron_disable_heartbeat', $cron_disable_heartbeat);
+        $db->set_site_setting('cron_deadlock_time_limit', $cron_deadlock);
+        $cron = geoCron::getInstance();
+        $cron->resetKey(trim($_POST['cron_key']));
+        $menu_loader->userSuccess('Settings Saved.'); //success
+        if ($cron_disable_heartbeat) {
+            $menu_loader->userNotice('Warning: Auto heartbeat disabled!  This requires a manual cron job to be run on the server, otherwise listings may never close!');
+        }
+        if (!(isset($_POST['cron_deadlock_time_limit']) && $_POST['cron_deadlock_time_limit'] > 5)) {
+            $menu_loader->userNotice('Setting "Time before lock removed" needs to be at least 6 seconds.');
+        }
+    }
 
-	function display_cron_config(){
-		$db = true;
-		$product_configuration = true;
-		include (GEO_BASE_DIR.'get_common_vars.php');
-		if (PHP5_DIR) $menu_loader = geoAdmin::getInstance();
-		else $menu_loader =& geoAdmin::getInstance();
-		$cron_key = geoString::specialChars($db->get_site_setting('cron_key'));
-		$cron_deadlock = $db->get_site_setting('cron_deadlock_time_limit');
-		if (strlen(trim($cron_key)) == 0){
-			$cron = geoCron::getInstance();
-			$cron->resetKey();
-			$cron_key = geoString::specialChars($db->get_site_setting('cron_key'));
-		}
-		$cron_url = substr($db->get_site_setting('classifieds_url'),0,strpos($db->get_site_setting('classifieds_url'),$db->get_site_setting('classifieds_file_name')));
-		$cron_url .= 'cron.php?action=cron&cron_key='.$cron_key;
-		$cron_command = $product_configuration->path_translated().'/cron.php --help';
-		$html = $menu_loader->getUserMessages()."
+    function display_cron_config()
+    {
+        $db = true;
+        $product_configuration = true;
+        include(GEO_BASE_DIR . 'get_common_vars.php');
+        if (PHP5_DIR) {
+            $menu_loader = geoAdmin::getInstance();
+        } else {
+            $menu_loader =& geoAdmin::getInstance();
+        }
+        $cron_key = geoString::specialChars($db->get_site_setting('cron_key'));
+        $cron_deadlock = $db->get_site_setting('cron_deadlock_time_limit');
+        if (strlen(trim($cron_key)) == 0) {
+            $cron = geoCron::getInstance();
+            $cron->resetKey();
+            $cron_key = geoString::specialChars($db->get_site_setting('cron_key'));
+        }
+        $cron_url = substr($db->get_site_setting('classifieds_url'), 0, strpos($db->get_site_setting('classifieds_url'), $db->get_site_setting('classifieds_file_name')));
+        $cron_url .= 'cron.php?action=cron&cron_key=' . $cron_key;
+        $cron_command = $product_configuration->path_translated() . '/cron.php --help';
+        $html = $menu_loader->getUserMessages() . "
 <div class=\"page_note_error\"><strong>Warning</strong>: Changing settings on this page can have drastic effects if your server
 is not configured correctly.  It is important that you <strong>consult the user manual</strong>, so that you may fully understand what is happening, before changing any settings on this page.</div>
 
@@ -68,8 +78,8 @@ is not configured correctly.  It is important that you <strong>consult the user 
 	<div class='form-group'>
 		<label class='control-label col-md-5 col-sm-5 col-xs-12'>Run &quot;Heartbeat&quot;: </label>
 		<div class='col-md-6 col-sm-6 col-xs-12'>
-			<input type=\"radio\" name=\"cron_method\" ".(($db->get_site_setting('cron_disable_heartbeat'))? '': 'checked="true" ')."value=\"ajax\" /> Automatically when page loads (Default)<br />
-			<input type=\"radio\" name=\"cron_method\" ".(($db->get_site_setting('cron_disable_heartbeat'))? 'checked="true" ': '')."value=\"cron\" /> Manually with Cron Job (Requires Manual Server-Side Cron Jobs)
+			<input type=\"radio\" name=\"cron_method\" " . (($db->get_site_setting('cron_disable_heartbeat')) ? '' : 'checked="true" ') . "value=\"ajax\" /> Automatically when page loads (Default)<br />
+			<input type=\"radio\" name=\"cron_method\" " . (($db->get_site_setting('cron_disable_heartbeat')) ? 'checked="true" ' : '') . "value=\"cron\" /> Manually with Cron Job (Requires Manual Server-Side Cron Jobs)
 		</div>
 	</div>
 
@@ -96,7 +106,7 @@ is not configured correctly.  It is important that you <strong>consult the user 
 	<div>
 <div class=\"col_hdr\">Available Tasks/Heartbeat Schedule Info</div>
 
-		".$this->getStats()."
+		" . $this->getStats() . "
 <br /><br />
 
 
@@ -132,92 +142,95 @@ is not configured correctly.  It is important that you <strong>consult the user 
 </div>
 </div>
 </fieldset>";
-		geoAdmin::display_page($html);
-	}
+        geoAdmin::display_page($html);
+    }
 
-	function getStats(){
-		$db = true;
-		include GEO_BASE_DIR.'get_common_vars.php';
+    function getStats()
+    {
+        $db = true;
+        include GEO_BASE_DIR . 'get_common_vars.php';
 
-		$cron = geoCron::getInstance();
-		$cron->verbose = false;
-		$cron->load();
-		$html = '';//<div class="leftColumn">Cron Tasks:</div><div class="rightColumn">Task Info</div>';
-		$row = 'row_color1';
+        $cron = geoCron::getInstance();
+        $cron->verbose = false;
+        $cron->load();
+        $html = '';//<div class="leftColumn">Cron Tasks:</div><div class="rightColumn">Task Info</div>';
+        $row = 'row_color1';
 
-		$cron_key = geoString::specialChars($db->get_site_setting('cron_key'));
+        $cron_key = geoString::specialChars($db->get_site_setting('cron_key'));
 
-		$cron_url = substr($db->get_site_setting('classifieds_url'),0,strpos($db->get_site_setting('classifieds_url'),$db->get_site_setting('classifieds_file_name')));
-		$cron_url .= 'cron.php?action=cron&cron_key='.$cron_key.'&verbose=1&tasks=';
+        $cron_url = substr($db->get_site_setting('classifieds_url'), 0, strpos($db->get_site_setting('classifieds_url'), $db->get_site_setting('classifieds_file_name')));
+        $cron_url .= 'cron.php?action=cron&cron_key=' . $cron_key . '&verbose=1&tasks=';
 
-		foreach ($cron->tasks as $task => $data){
-			$verbose_link = $cron_url.$task;
+        foreach ($cron->tasks as $task => $data) {
+            $verbose_link = $cron_url . $task;
 
-			$html .= '
-			<div class="'.$row.'">
+            $html .= '
+			<div class="' . $row . '">
 				<div class="leftColumn">
-					'.$task.'<br />
-					<span class=\"small_font\">[ <a href="'.$verbose_link.'" target="_blank">Test Run</a> ]</span>
+					' . $task . '<br />
+					<span class=\"small_font\">[ <a href="' . $verbose_link . '" target="_blank">Test Run</a> ]</span>
 				</div>
-				<div class="rightColumn" style="white-space:pre; text-align:left;">'."<em>Last Run</em>: ".$this->niceTime($data['last_run'],false).
-				'<br /><em>Run Every</em>: '.$this->niceTime($data['interval']).
-				'<br /><em>Next Scheduled Run</em>: '.$this->niceTime($data['interval']+$data['last_run'],false).
-				'</div>
+				<div class="rightColumn" style="white-space:pre; text-align:left;">' . "<em>Last Run</em>: " . $this->niceTime($data['last_run'], false) .
+                '<br /><em>Run Every</em>: ' . $this->niceTime($data['interval']) .
+                '<br /><em>Next Scheduled Run</em>: ' . $this->niceTime($data['interval'] + $data['last_run'], false) .
+                '</div>
 				<div class="clearColumn"></div>
 			</div>
 ';
-			$row = ($row == 'row_color1')? 'row_color2': 'row_color1';
-		}
-		return $html;//.'</div>';
-	}
+            $row = ($row == 'row_color1') ? 'row_color2' : 'row_color1';
+        }
+        return $html;//.'</div>';
+    }
 
-	/**
-	 * prints the time in a pretty format.
-	 *
-	 * @param int $time
-	 */
-	function niceTime($time, $interval=true){
-		$time = intval($time);
-		if (!$interval){
-			//is most likely a date
-			if ($time < 2){
-				//never has been run..
-				return 'Never';
-			}
-			return date('g:i:sa F d, Y',$time);
-		}
-		//An interval
-		$year = 60 * 60 * 24 * 365;
-		$day = 60*60*24;
-		$hour = 60*60;
-		$minute = 60;
-		$html = array();
-		if ($time == -1){
-			//never run in heartbeat
-			return '-1 (Can only run manually)';
-		}
-		if ($time >= $year){
-			$years = floor($time/$year);
-			$time = $time-($years*$year);
-			$html[] = $years.' year'.(($years>1)? 's': '');
-		}
-		if ($time >= $day){
-			$days = floor($time/$day);
-			$time = $time-($days*$day);
-			$html[] = $days.' day'.(($days>1)? 's': '');
-		}
-		if ($time >= $hour){
-			$hours = floor($time/$hour);
-			$time = $time-($hours*$hour);
-			$html[] = $hours.' hour'.(($hours>1)? 's': '');
-		}
-		if ($time >= $minute){
-			$minutes = floor($time/$minute);
-			$time = $time-($minutes*$minute);
-			$html[] = $minutes.' minute'.(($minutes>1)? 's': '');
-		}
-		if ($time > 0)
-			$html [] = $time.' second'.(($time != 1)? 's':'');
-		return implode(' ',$html);
-	}
+    /**
+     * prints the time in a pretty format.
+     *
+     * @param int $time
+     */
+    function niceTime($time, $interval = true)
+    {
+        $time = intval($time);
+        if (!$interval) {
+            //is most likely a date
+            if ($time < 2) {
+                //never has been run..
+                return 'Never';
+            }
+            return date('g:i:sa F d, Y', $time);
+        }
+        //An interval
+        $year = 60 * 60 * 24 * 365;
+        $day = 60 * 60 * 24;
+        $hour = 60 * 60;
+        $minute = 60;
+        $html = array();
+        if ($time == -1) {
+            //never run in heartbeat
+            return '-1 (Can only run manually)';
+        }
+        if ($time >= $year) {
+            $years = floor($time / $year);
+            $time = $time - ($years * $year);
+            $html[] = $years . ' year' . (($years > 1) ? 's' : '');
+        }
+        if ($time >= $day) {
+            $days = floor($time / $day);
+            $time = $time - ($days * $day);
+            $html[] = $days . ' day' . (($days > 1) ? 's' : '');
+        }
+        if ($time >= $hour) {
+            $hours = floor($time / $hour);
+            $time = $time - ($hours * $hour);
+            $html[] = $hours . ' hour' . (($hours > 1) ? 's' : '');
+        }
+        if ($time >= $minute) {
+            $minutes = floor($time / $minute);
+            $time = $time - ($minutes * $minute);
+            $html[] = $minutes . ' minute' . (($minutes > 1) ? 's' : '');
+        }
+        if ($time > 0) {
+            $html [] = $time . ' second' . (($time != 1) ? 's' : '');
+        }
+        return implode(' ', $html);
+    }
 }

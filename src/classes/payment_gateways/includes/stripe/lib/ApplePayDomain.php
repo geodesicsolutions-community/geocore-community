@@ -9,7 +9,7 @@ namespace Stripe;
  */
 class ApplePayDomain extends ApiResource
 {
-    
+
     /**
      * @return string The class URL for this resource. It needs to be special
      *    cased because it doesn't fit into the standard resource pattern.

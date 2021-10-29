@@ -1,4 +1,5 @@
 <?php
+
 //reset_admin_password.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,10 +9,10 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.5.3-36-gea36ae7
-## 
+##
 ##################################
 
 # -------- ADMIN PASSWORD RESET TOOL -------- #
@@ -32,7 +33,7 @@ In the event that the admin password is lost, the
       Note:  For security, you will not be able to log into admin while
              this tool is turned on.  This is so that you do not accidently
              leave the tool turned on.
- 
+
 */
 
 #-------------SETTINGS--------------#
@@ -55,71 +56,72 @@ $admin_password = "geodesic";
 
 #--------DO NOT EDIT BELOW THIS LINE!-------#
 
-function reset_admin_pass($user, $pass){
-	if (!(defined('TURN_ON_RESET_PASSWORD_TOOL') && TURN_ON_RESET_PASSWORD_TOOL)){
-		//do not process if tool is not turned on.
-		exit;
-	}
-	if (strlen($user) == 0 || strlen($pass) == 0){
-		//do not process if username or password not set correctly.
-		die('ERROR: CHECK SETTINGS');
-	}
-	
-	define ('IN_ADMIN',1);
-	include "app_top.common.php";
-	
-	$product_configuration = geoPC::getInstance();
-	
-	//Just to be on safe side, store pass in plain text, it will be switched
-	//the first time the admin logs in afterwards
-	$hash_type = 'core:plain';//$db->get_site_setting('admin_pass_hash');
-	$salt = '';
-	$hashed_pass = $product_configuration->get_hashed_password($user, $pass,$hash_type);
-	
-	if (is_array($hashed_pass)) {
-		$salt = ''.$hashed_pass['salt'];
-		$hashed_pass = ''.$hashed_pass['password'];
-	}
-	
-	//make sure that username is not already taken.
-	$sql = 'SELECT * FROM '.$db->geoTables->logins_table.' WHERE username = ? AND id != 1';
-	$result = $db->Execute($sql, array($user));
-	if (!$result){
-		die ('ERROR: DATABASE ERROR');
-	}
-	if ($result->RecordCount() > 0){
-		die('ERROR: USERNAME ALREADY IN USE');
-	}
-	
-	//insert into logins table.
-	$sql = 'UPDATE '.geoTables::logins_table.' SET `username` = ?, `password` = ?, `hash_type`=?, `salt`=? WHERE `id` = 1';
-	$result = $db->Execute($sql, array($user, $hashed_pass, $hash_type, $salt));
-	
-	//update userdata table
-	$sql = "UPDATE ".geoTables::userdata_table." SET `username`=? WHERE id=1";
-	$result = $db->Execute($sql, array($user));
-	
-	//make sure to remove all admin sessions:
-	$sql = 'DELETE FROM '.$db->geoTables->session_table.' WHERE `user_id` = 1';
-	$result = $db->Execute($sql);
-	if (!$result){
-		die ('ERROR: DATABASE ERROR: REMOVING ADMIN SESSIONS<br>Query: '.$sql.'<br>Error: '.$db->ErrorMsg());
-	}
-	?>
+function reset_admin_pass($user, $pass)
+{
+    if (!(defined('TURN_ON_RESET_PASSWORD_TOOL') && TURN_ON_RESET_PASSWORD_TOOL)) {
+        //do not process if tool is not turned on.
+        exit;
+    }
+    if (strlen($user) == 0 || strlen($pass) == 0) {
+        //do not process if username or password not set correctly.
+        die('ERROR: CHECK SETTINGS');
+    }
+
+    define('IN_ADMIN', 1);
+    include "app_top.common.php";
+
+    $product_configuration = geoPC::getInstance();
+
+    //Just to be on safe side, store pass in plain text, it will be switched
+    //the first time the admin logs in afterwards
+    $hash_type = 'core:plain';//$db->get_site_setting('admin_pass_hash');
+    $salt = '';
+    $hashed_pass = $product_configuration->get_hashed_password($user, $pass, $hash_type);
+
+    if (is_array($hashed_pass)) {
+        $salt = '' . $hashed_pass['salt'];
+        $hashed_pass = '' . $hashed_pass['password'];
+    }
+
+    //make sure that username is not already taken.
+    $sql = 'SELECT * FROM ' . $db->geoTables->logins_table . ' WHERE username = ? AND id != 1';
+    $result = $db->Execute($sql, array($user));
+    if (!$result) {
+        die('ERROR: DATABASE ERROR');
+    }
+    if ($result->RecordCount() > 0) {
+        die('ERROR: USERNAME ALREADY IN USE');
+    }
+
+    //insert into logins table.
+    $sql = 'UPDATE ' . geoTables::logins_table . ' SET `username` = ?, `password` = ?, `hash_type`=?, `salt`=? WHERE `id` = 1';
+    $result = $db->Execute($sql, array($user, $hashed_pass, $hash_type, $salt));
+
+    //update userdata table
+    $sql = "UPDATE " . geoTables::userdata_table . " SET `username`=? WHERE id=1";
+    $result = $db->Execute($sql, array($user));
+
+    //make sure to remove all admin sessions:
+    $sql = 'DELETE FROM ' . $db->geoTables->session_table . ' WHERE `user_id` = 1';
+    $result = $db->Execute($sql);
+    if (!$result) {
+        die('ERROR: DATABASE ERROR: REMOVING ADMIN SESSIONS<br>Query: ' . $sql . '<br>Error: ' . $db->ErrorMsg());
+    }
+    ?>
 <html>
 <head>
 <title>Admin Password Reset Tool</title>
 <style type="text/css">
 <!--
 div.code {
-	border: thin dashed gray;
-	padding: 5px;
-	margin-bottom: 15px;
-	float:left;
-	clear:both;
+    border: thin dashed gray;
+    padding: 5px;
+    margin-bottom: 15px;
+    float:left;
+    clear:both;
 }
 li, div {
-	clear:both;
+    clear:both;
 }
 -->
 </style>
@@ -147,11 +149,11 @@ define('TURN_ON_RESET_PASSWORD_TOOL', <strong style="color:red;">0</strong>);<br
 </ol>
 </body>
 </html>
-<?php
+    <?php
 }
 
-if (defined('TURN_ON_RESET_PASSWORD_TOOL') && TURN_ON_RESET_PASSWORD_TOOL && isset($_GET['reset_password']) && $_GET['reset_password'] == sha1('reset_the_pass_now')){
-	//run the function.
-	reset_admin_pass($admin_username, $admin_password);
+if (defined('TURN_ON_RESET_PASSWORD_TOOL') && TURN_ON_RESET_PASSWORD_TOOL && isset($_GET['reset_password']) && $_GET['reset_password'] == sha1('reset_the_pass_now')) {
+    //run the function.
+    reset_admin_pass($admin_username, $admin_password);
 }
 ?>

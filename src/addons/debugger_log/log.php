@@ -1,4 +1,5 @@
 <?php
+
 //addons/debugger_log/log.php
 /*
 This file will be used to add log messages to.

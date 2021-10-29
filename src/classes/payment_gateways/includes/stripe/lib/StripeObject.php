@@ -87,14 +87,16 @@ class StripeObject implements ArrayAccess, JsonSerializable
     {
         if ($v === "") {
             throw new InvalidArgumentException(
-                'You cannot set \''.$k.'\'to an empty string. '
-                .'We interpret empty strings as NULL in requests. '
-                .'You may set obj->'.$k.' = NULL to delete the property'
+                'You cannot set \'' . $k . '\'to an empty string. '
+                . 'We interpret empty strings as NULL in requests. '
+                . 'You may set obj->' . $k . ' = NULL to delete the property'
             );
         }
 
-        if (self::$nestedUpdatableAttributes->includes($k)
-                && isset($this->$k) && $this->$k instanceof AttachedObject && is_array($v)) {
+        if (
+            self::$nestedUpdatableAttributes->includes($k)
+                && isset($this->$k) && $this->$k instanceof AttachedObject && is_array($v)
+        ) {
             $this->$k->replaceWith($v);
         } else {
             // TODO: may want to clear from $_transientValues (Won't be user-visible).
@@ -121,7 +123,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
         $nullval = null;
         if (!empty($this->_values) && array_key_exists($k, $this->_values)) {
             return $this->_values[$k];
-        } else if (!empty($this->_transientValues) && $this->_transientValues->includes($k)) {
+        } elseif (!empty($this->_transientValues) && $this->_transientValues->includes($k)) {
             $class = get_class($this);
             $attrs = join(', ', array_keys($this->_values));
             $message = "Stripe Notice: Undefined property of $class instance: $k. "

@@ -1,69 +1,53 @@
 <?php
+
 /**
-#	Date: 9/21/2007
-#	Author:	Carlos Galindo
-#	Last modified:	@LASTMODIFIED@
+#   Date: 9/21/2007
+#   Author: Carlos Galindo
+#   Last modified:  @LASTMODIFIED@
 **/
 
-define('IN_SAMPLES',1);
+define('IN_SAMPLES', 1);
 
 /**
  * include cjax.php which is inside the CJAX main directory
  */
 include '../cjax.php';
 
-if(isset($_GET['login']))
-{
-	
-	$username = $CJAX->get('username');
-	$password = $CJAX->get('password');
-	
-	$new = $CJAX->get('new_sample');
-	
+if (isset($_GET['login'])) {
+    $username = $CJAX->get('username');
+    $password = $CJAX->get('password');
 
-	
-	if($username =='')
-	{
-		
-		if(isset($new) && $new)
-		{
-				$html = ("<div class='invalidate_message'>
+    $new = $CJAX->get('new_sample');
+
+
+
+    if ($username == '') {
+        if (isset($new) && $new) {
+                $html = ("<div class='invalidate_message'>
 						This field is required!!!!
 					</div>");
-			
-			$CJAX->invalidate('username',$html);
-		}
-		else
-		{
-			$CJAX->invalidate('username','This field is required!!!!');
-		}
-	}
-	elseif ($password =='')
-	{
-		
-		if(isset($new) && $new)
-		{
-			$html = ("<div class='invalidate_message'>
+
+            $CJAX->invalidate('username', $html);
+        } else {
+            $CJAX->invalidate('username', 'This field is required!!!!');
+        }
+    } elseif ($password == '') {
+        if (isset($new) && $new) {
+            $html = ("<div class='invalidate_message'>
 						This field is required too!!!!
 					</div>");
-			
-			$CJAX->invalidate('password',$html);
-		}
-		else
-		{
-			$CJAX->invalidate('password','This field is required too!!!!');
-		}
-		
-		
-		
-	}
-	
-	if($password != ''&& $password != '')
-	{
-		$CJAX->alert("You have typed something.. in both fields. This sample is to demonstrate how to use invalidate functionality; also note that there 0 is javascript coding!! you only do PHP!  We used \$CJAX->addEventTo() to allow more interaction with the input fields");
-	}
-	flush();
-	exit();
+
+            $CJAX->invalidate('password', $html);
+        } else {
+            $CJAX->invalidate('password', 'This field is required too!!!!');
+        }
+    }
+
+    if ($password != '' && $password != '') {
+        $CJAX->alert("You have typed something.. in both fields. This sample is to demonstrate how to use invalidate functionality; also note that there 0 is javascript coding!! you only do PHP!  We used \$CJAX->addEventTo() to allow more interaction with the input fields");
+    }
+    flush();
+    exit();
 }
 
 $username = $CJAX->value('username');
@@ -76,32 +60,31 @@ $password = $CJAX->value('password');
 ?>
 <HTML>
 <HEAD>
-<?php 
+<?php
 
 
 
 
 echo $CJAX->init();
 
-if(!$CJAX->get('new_sample'))
-{
-	$call = $CJAX->call("?login=1&username=$username&password=$password&new_sample=1");
-	
-	
-	
-	$html = ("<div class='invalidate_message'>
+if (!$CJAX->get('new_sample')) {
+    $call = $CJAX->call("?login=1&username=$username&password=$password&new_sample=1");
+
+
+
+    $html = ("<div class='invalidate_message'>
 						This field is required!!!!
 					</div>");
-	
-	$html2 = ("<div class='invalidate_message'>
+
+    $html2 = ("<div class='invalidate_message'>
 						This field is required too!!!!
 					</div>");
-		
-	$CJAX->addEventTo("username","click","CJAX.invalidate('username','{$CJAX->encode($html)}')");
-	$CJAX->addEventTo("password","click","CJAX.invalidate('password','{$CJAX->encode($html2)}')");
-	
 
-?>
+    $CJAX->addEventTo("username", "click", "CJAX.invalidate('username','{$CJAX->encode($html)}')");
+    $CJAX->addEventTo("password", "click", "CJAX.invalidate('password','{$CJAX->encode($html2)}')");
+
+
+    ?>
 <style>
 
 body{
@@ -112,44 +95,44 @@ min-width: 900px;
 }
 .invalidate
 {
-	position:absolute;
-	width:300px;
-	left:50%;
-	margin-left:-150px;
-	height:auto;
-	text-align:right;
-	background-color:#E8E8E8;
-	padding-left:50px;
-	margin-right:50px;
+    position:absolute;
+    width:300px;
+    left:50%;
+    margin-left:-150px;
+    height:auto;
+    text-align:right;
+    background-color:#E8E8E8;
+    padding-left:50px;
+    margin-right:50px;
 }
 .invalidate label{
-	font-family: verdana;
-	font-color:#7F7F7F;
-	font-size:12px;
-	text-align:right;
-	
+    font-family: verdana;
+    font-color:#7F7F7F;
+    font-size:12px;
+    text-align:right;
+    
 }
 
 .invalidate_message{
-	position:relative;
-	color:#454545;
-	background-image: url(images/invalidate.gif);
-	background-repeat: no-repeat;
-	padding:11px;
-	width:255px;
-	height: 90px;
-	margin-top:-30px;
-	left:-20px;
-	padding-top:30px;
-	padding-left:45px;
-	font-family: verdana;
-	font-size:10px;
+    position:relative;
+    color:#454545;
+    background-image: url(images/invalidate.gif);
+    background-repeat: no-repeat;
+    padding:11px;
+    width:255px;
+    height: 90px;
+    margin-top:-30px;
+    left:-20px;
+    padding-top:30px;
+    padding-left:45px;
+    font-family: verdana;
+    font-size:10px;
 }
 
 .inputs{
-	border-style:solid;
-	border-color:#000000;
-	border-width:1px;
+    border-style:solid;
+    border-color:#000000;
+    border-width:1px;
 }
 </style>
 </HEAD>
@@ -192,7 +175,7 @@ you can access the variable by using the next statement:<br />
  <pre>
  if($username == '')
  {
- 	//
+    //
  }
  </pre>
  </b>
@@ -229,16 +212,11 @@ errors, it is for everyday use as you can use it in all your applications to val
 </BODY>
 </HTML>
 
-<?php
-}
-else
-{
-	
-	
-	
-	$call = $CJAX->call("?login=1&username=$username&password=$password");
-	?>
-	
+    <?php
+} else {
+    $call = $CJAX->call("?login=1&username=$username&password=$password");
+    ?>
+    
 </HEAD>
 <BODY>
 <br />
@@ -249,7 +227,7 @@ else
 <input type='button' value='Login' <?php echo $call;?>>
 <br /> <br />
 
-<?php
+    <?php
 }
 
 ?>

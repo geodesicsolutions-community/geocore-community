@@ -1,4 +1,5 @@
 <?php
+
 //flag.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,14 +9,14 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.5.3-36-gea36ae7
-## 
+##
 ##################################
 
-if (!defined('IN_GEO_API')){
-	exit('No access.');
+if (!defined('IN_GEO_API')) {
+    exit('No access.');
 }
 
 //flags a listing as possibly inappropriate
@@ -24,8 +25,8 @@ if (!defined('IN_GEO_API')){
 //a more robust flagging system may be forthcoming -- this is very bare bones to meet apple's new guidelines quickly
 
 $listingId = $args['listingId'];
-if(!$listingId || !is_numeric($listingId)) {
-	return $this->failure('Error: bad listing id');
+if (!$listingId || !is_numeric($listingId)) {
+    return $this->failure('Error: bad listing id');
 }
 
 //flag listing to addon db table

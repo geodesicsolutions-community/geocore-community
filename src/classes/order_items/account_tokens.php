@@ -1,4 +1,5 @@
 <?php
+
 //order_items/account_tokens.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,10 +9,10 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.5.3-36-gea36ae7
-## 
+##
 ##################################
 
 /**

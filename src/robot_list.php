@@ -1,6 +1,7 @@
 <?php
+
 # This is a list of "user-agents" (or a unique "portion" of the user-agent) for
-# known robots or search engine crawlers. If one of the following user-agents 
+# known robots or search engine crawlers. If one of the following user-agents
 # (or user-agent portion) is detected, it will not attempt to set a
 # cookie or redirect.
 
@@ -360,4 +361,3 @@ $robotP[] = 'YandexImages'; //Yandex Images
 $robotP[] = 'YodaoBot/'; //YodaoBot http://www.yodao.com/help/webmaster/spider/ - added 4-3-2012
 $robotP[] = 'ZipppBot'; //ZipppBot
 $robotP[] = 'ZoomSpider'; //ZoomSpider
-

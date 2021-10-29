@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 //addons/social_connect/fb.php
 /**************************************************************************
 Addon Created by Geodesic Solutions, LLC
@@ -8,15 +9,15 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.4beta1-32-g92051c6
-## 
+##
 ##################################
 
 # Facebook Connect class that overloads the main thingy
 
-require_once ADDON_DIR.'social_connect/lib/facebook/php-sdk/src/base_facebook.php';
+require_once ADDON_DIR . 'social_connect/lib/facebook/php-sdk/src/base_facebook.php';
 
 /**
  * This next class based on the main Facebook class that is part of the Facebook
@@ -25,78 +26,79 @@ require_once ADDON_DIR.'social_connect/lib/facebook/php-sdk/src/base_facebook.ph
  */
 class geoFacebook extends BaseFacebook
 {
-	/**
-	 * Identical to the parent constructor, except that
-	 * we start a PHP session to store the user ID and
-	 * access token if during the course of execution
-	 * we discover them.  NOT!  Really we use the geoSession
-	 * registry to save that data...
-	 *
-	 * @param Array $config the application configuration.
-	 * @see BaseFacebook::__construct in facebook.php
-	 */
-	public function __construct ($config)
-	{
-		//make sure session is initialized or get/set won't work.
-		geoSession::getInstance()->initSession();
-		//let parent do the rest of the work.
-		parent::__construct($config);
-	}
+    /**
+     * Identical to the parent constructor, except that
+     * we start a PHP session to store the user ID and
+     * access token if during the course of execution
+     * we discover them.  NOT!  Really we use the geoSession
+     * registry to save that data...
+     *
+     * @param Array $config the application configuration.
+     * @see BaseFacebook::__construct in facebook.php
+     */
+    public function __construct($config)
+    {
+        //make sure session is initialized or get/set won't work.
+        geoSession::getInstance()->initSession();
+        //let parent do the rest of the work.
+        parent::__construct($config);
+    }
 
-	protected static $kSupportedKeys =
-		array('state', 'code', 'access_token', 'user_id', 'IE_UA');
+    protected static $kSupportedKeys =
+        array('state', 'code', 'access_token', 'user_id', 'IE_UA');
 
-	/**
-	 * Provides the implementations of the inherited abstract
-	 * methods.	The implementation uses PHP sessions to maintain
-	 * a store for authorization codes, user ids, CSRF states, and
-	 * access tokens.
-	 */
-	protected function setPersistentData ($key, $value)
-	{
-		if (!in_array($key, self::$kSupportedKeys)) {
-			self::errorLog('Unsupported key passed to setPersistentData.');
-			return;
-		}
-		
-		$session_var_name = $this->constructSessionVariableName($key);
-		geoSession::getInstance()->set($session_var_name, $value);
-	}
+    /**
+     * Provides the implementations of the inherited abstract
+     * methods. The implementation uses PHP sessions to maintain
+     * a store for authorization codes, user ids, CSRF states, and
+     * access tokens.
+     */
+    protected function setPersistentData($key, $value)
+    {
+        if (!in_array($key, self::$kSupportedKeys)) {
+            self::errorLog('Unsupported key passed to setPersistentData.');
+            return;
+        }
 
-	protected function getPersistentData ($key, $default = false)
-	{
-		if (!in_array($key, self::$kSupportedKeys)) {
-			self::errorLog('Unsupported key passed to getPersistentData.');
-			return $default;
-		}
+        $session_var_name = $this->constructSessionVariableName($key);
+        geoSession::getInstance()->set($session_var_name, $value);
+    }
 
-		$session_var_name = $this->constructSessionVariableName($key);
-		return geoSession::getInstance()->get($session_var_name, $default);
-	}
+    protected function getPersistentData($key, $default = false)
+    {
+        if (!in_array($key, self::$kSupportedKeys)) {
+            self::errorLog('Unsupported key passed to getPersistentData.');
+            return $default;
+        }
 
-	protected function clearPersistentData ($key)
-	{
-		if (!in_array($key, self::$kSupportedKeys)) {
-			self::errorLog('Unsupported key passed to clearPersistentData.');
-			return;
-		}
+        $session_var_name = $this->constructSessionVariableName($key);
+        return geoSession::getInstance()->get($session_var_name, $default);
+    }
 
-		$session_var_name = $this->constructSessionVariableName($key);
-		geoSession::getInstance()->set($session_var_name, false);
-	}
+    protected function clearPersistentData($key)
+    {
+        if (!in_array($key, self::$kSupportedKeys)) {
+            self::errorLog('Unsupported key passed to clearPersistentData.');
+            return;
+        }
 
-	public function clearAllPersistentData ()
-	{
-		foreach (self::$kSupportedKeys as $key) {
-			$this->clearPersistentData($key);
-		}
-	}
+        $session_var_name = $this->constructSessionVariableName($key);
+        geoSession::getInstance()->set($session_var_name, false);
+    }
 
-	protected function constructSessionVariableName($key) {
-		//This was originally intended for saving in PHP session so it uses following
-		//to help prevent namespace collisions...  Since we are using geoSession registry,
-		//we'll keep this logic intact to ensure no namespace collisions within the
-		//geo session registry, since doing it this way doesn't harm anything.
-		return implode('_', array('fb', $this->getAppId(), $key));
-	}
+    public function clearAllPersistentData()
+    {
+        foreach (self::$kSupportedKeys as $key) {
+            $this->clearPersistentData($key);
+        }
+    }
+
+    protected function constructSessionVariableName($key)
+    {
+        //This was originally intended for saving in PHP session so it uses following
+        //to help prevent namespace collisions...  Since we are using geoSession registry,
+        //we'll keep this logic intact to ensure no namespace collisions within the
+        //geo session registry, since doing it this way doesn't harm anything.
+        return implode('_', array('fb', $this->getAppId(), $key));
+    }
 }

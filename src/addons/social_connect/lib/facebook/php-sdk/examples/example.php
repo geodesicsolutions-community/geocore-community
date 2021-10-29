@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2011 Facebook, Inc.
  *
@@ -33,21 +34,21 @@ $user = $facebook->getUser();
 // token is invalid if the user logged out of Facebook.
 
 if ($user) {
-  try {
-    // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $facebook->api('/me');
-  } catch (FacebookApiException $e) {
-    error_log($e);
-    $user = null;
-  }
+    try {
+      // Proceed knowing you have a logged in user who's authenticated.
+        $user_profile = $facebook->api('/me');
+    } catch (FacebookApiException $e) {
+        error_log($e);
+        $user = null;
+    }
 }
 
 // Login or logout url will be needed depending on current user state.
 if ($user) {
-  $logoutUrl = $facebook->getLogoutUrl();
+    $logoutUrl = $facebook->getLogoutUrl();
 } else {
-  $statusUrl = $facebook->getLoginStatusUrl();
-  $loginUrl = $facebook->getLoginUrl();
+    $statusUrl = $facebook->getLoginStatusUrl();
+    $loginUrl = $facebook->getLoginUrl();
 }
 
 // This call will always work since we are fetching public data.
@@ -74,9 +75,9 @@ $naitik = $facebook->api('/naitik');
   <body>
     <h1>php-sdk</h1>
 
-    <?php if ($user): ?>
+    <?php if ($user) : ?>
       <a href="<?php echo $logoutUrl; ?>">Logout</a>
-    <?php else: ?>
+    <?php else : ?>
       <div>
         Check the login status using OAuth 2.0 handled by the PHP SDK:
         <a href="<?php echo $statusUrl; ?>">Check the login status</a>
@@ -90,13 +91,13 @@ $naitik = $facebook->api('/naitik');
     <h3>PHP Session</h3>
     <pre><?php print_r($_SESSION); ?></pre>
 
-    <?php if ($user): ?>
+    <?php if ($user) : ?>
       <h3>You</h3>
       <img src="https://graph.facebook.com/<?php echo $user; ?>/picture">
 
       <h3>Your User Object (/me)</h3>
       <pre><?php print_r($user_profile); ?></pre>
-    <?php else: ?>
+    <?php else : ?>
       <strong><em>You are not Connected.</em></strong>
     <?php endif ?>
 

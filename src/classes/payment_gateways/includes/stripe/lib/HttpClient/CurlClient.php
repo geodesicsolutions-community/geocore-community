@@ -175,7 +175,8 @@ class CurlClient implements ClientInterface
         }
 
         $errno = curl_errno($curl);
-        if ($errno == CURLE_SSL_CACERT ||
+        if (
+            $errno == CURLE_SSL_CACERT ||
             $errno == CURLE_SSL_PEER_CERTIFICATE ||
             $errno == CURLE_SSL_CACERT_BADFILE
         ) {
@@ -261,9 +262,9 @@ class CurlClient implements ClientInterface
 
             if ($prefix) {
                 if ($k !== null && (!is_int($k) || is_array($v))) {
-                    $k = $prefix."[".$k."]";
+                    $k = $prefix . "[" . $k . "]";
                 } else {
-                    $k = $prefix."[]";
+                    $k = $prefix . "[]";
                 }
             }
 
@@ -273,7 +274,7 @@ class CurlClient implements ClientInterface
                     $r[] = $enc;
                 }
             } else {
-                $r[] = urlencode($k)."=".urlencode($v);
+                $r[] = urlencode($k) . "=" . urlencode($v);
             }
         }
 

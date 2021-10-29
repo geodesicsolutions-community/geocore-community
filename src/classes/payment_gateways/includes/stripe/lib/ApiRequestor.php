@@ -184,7 +184,7 @@ class ApiRequestor
             throw new Error\Authentication($msg);
         }
 
-        $absUrl = $this->_apiBase.$url;
+        $absUrl = $this->_apiBase . $url;
         $params = self::_encodeObjects($params);
         $defaultHeaders = $this->_defaultHeaders($myApiKey);
         if (Stripe::$apiVersion) {
@@ -248,7 +248,7 @@ class ApiRequestor
             // We don't have the filename or mimetype, but the API doesn't care
             return new \CURLFile($metaData['uri']);
         } else {
-            return '@'.$metaData['uri'];
+            return '@' . $metaData['uri'];
         }
     }
 

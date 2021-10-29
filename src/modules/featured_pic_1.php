@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 //module_featured_ads_pic_1.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,10 +9,10 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    6.0.7-304-g6ae40c9
-## 
+##
 ##################################
 
 $tpl_vars = array();
@@ -29,8 +30,8 @@ $txt_vars['module_display_ad_description'] = $page->messages[501187];
 
 $txt_vars['module_display_tags'] = $page->messages[501198];
 
-for ($index = 1; $index <= 20; $index ++){
-	$txt_vars['module_display_optional_field_'.$index] = $page->messages[(11*$index)+501198];
+for ($index = 1; $index <= 20; $index++) {
+    $txt_vars['module_display_optional_field_' . $index] = $page->messages[(11 * $index) + 501198];
 }
 
 $txt_vars['module_display_address'] = $page->messages[501432];

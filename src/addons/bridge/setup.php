@@ -1,4 +1,5 @@
 <?php
+
 //addons/example/setup.php
 /**************************************************************************
 Addon Created by Geodesic Solutions, LLC
@@ -9,19 +10,21 @@ see license attached to distribution
 **************************************************************************/
 
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    6.0.7-2-gc953682
-## 
+##
 ##################################
 
 # Bridge
 
-class addon_bridge_setup{
-	function install (){
-		$db = $admin = true;
-		include GEO_BASE_DIR.'get_common_vars.php';
-		$sql = 'CREATE TABLE IF NOT EXISTS `geodesic_bridge_installations` (
+class addon_bridge_setup
+{
+    function install()
+    {
+        $db = $admin = true;
+        include GEO_BASE_DIR . 'get_common_vars.php';
+        $sql = 'CREATE TABLE IF NOT EXISTS `geodesic_bridge_installations` (
   `id` int(11) NOT NULL auto_increment,
   `active` tinyint(3) NOT NULL,
   `type` varchar(255) NOT NULL,
@@ -32,22 +35,23 @@ class addon_bridge_setup{
   KEY `active` (`active`),
   KEY `type` (`type`)
 )';
-		$result = $db->Execute($sql);
-		if (!$result){
-			$admin->userError('DB Error, could not insert table needed for installation.');
-			return false;
-		}
-		return true;
-	}
-	
-	function uninstall(){
-		$db = $admin = true;
-		include GEO_BASE_DIR.'get_common_vars.php';
-		$sql = 'DROP TABLE IF EXISTS `geodesic_bridge_installations`';
-		$result = $db->Execute($sql);
-		if (!$result){
-			$admin->userError('DB Error, could not remove table `geodesic_bridge_installations` during uninstallation, you may need to remove this table manually.');
-		}
-		return true;
-	}
+        $result = $db->Execute($sql);
+        if (!$result) {
+            $admin->userError('DB Error, could not insert table needed for installation.');
+            return false;
+        }
+        return true;
+    }
+
+    function uninstall()
+    {
+        $db = $admin = true;
+        include GEO_BASE_DIR . 'get_common_vars.php';
+        $sql = 'DROP TABLE IF EXISTS `geodesic_bridge_installations`';
+        $result = $db->Execute($sql);
+        if (!$result) {
+            $admin->userError('DB Error, could not remove table `geodesic_bridge_installations` during uninstallation, you may need to remove this table manually.');
+        }
+        return true;
+    }
 }

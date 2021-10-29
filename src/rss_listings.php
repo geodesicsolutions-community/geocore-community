@@ -1,4 +1,5 @@
 <?php
+
 //rss_listings.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,22 +9,22 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.6.3-140-g86079db
-## 
+##
 ##################################
 
 //do not modify the next 2 lines:
 require_once 'app_top.common.php';
-$feed = new geoListingFeed;
+$feed = new geoListingFeed();
 
 /**
  * NOTICE:  If you want to change any defaults on this file, we recommend
- * to either use a config file rss_listings.config.php (see notes below), or 
+ * to either use a config file rss_listings.config.php (see notes below), or
  * you can rename this file first so it will not be over-written by future
  * updates.
- * 
+ *
  * Also note that you can have more than one copy of this file in use, for example
  * one to display newest listings and another for expiring soon listings.  Just
  * create 2 copies of the file, named differently.
@@ -38,24 +39,24 @@ $feed = new geoListingFeed;
  * RSS file.  So if you wanted to keep all the default RSS settings except
  * make a change to only 1 setting, you only have to put the setting you want
  * to change in the config file.
- * 
+ *
  * In other words, instead of making RSS setting changes directly to the RSS
  * file, this gives you the option to make changes in a seperate "config" file
  * instead, that will not be over-written when you update the software.
- * 
+ *
  * To do so, create the file "rss_listings.config.php" (or named how you want)
  * and copy/paste the first part of this file, up until the "END SETTINGS" line.
- * 
+ *
  * Examples:
  * detect - let the script detect what the config filename is, which will be
- * 			the same as this filename, but with .php replaced with .config.php
+ *          the same as this filename, but with .php replaced with .config.php
  * my_rss_config.php - use the file named "my_rss_config.php" for the file name.
  */
 $RSSconfigFilename = 'detect';
 
 /**
  * This is the description used for the feed channel.  Default is empty string.
- * 
+ *
  * Make sure this is valid text for XML document, or it will invalidate the Feed.
  * For example, NO html, and be sure to use HTML entities
  */
@@ -63,7 +64,7 @@ $feed->description = "";
 
 /**
  * This is the title used for the feed
- * 
+ *
  * Make sure this is valid text for XML document, or it will invalidate the Feed.
  * For example, NO html, and be sure to use HTML entities
  */
@@ -76,12 +77,12 @@ $feed->title = "Newest Listings Feed";
  * the line and setting the URL.  Note that the
  * detection should work even if you have re-named the file (as the instructions
  * recommend)
- * 
+ *
  * Note: this URL will be used for the atom link in the RSS feed.
- * 
+ *
  * Examples:
  * http://example.com/rss_listings.php - manually set the full URL
- * 
+ *
  * Warning: inproperly setting this may result in an invalid RSS feed.
  */
 //$feed->atomLink = 'http://example.com/rss_listings.php';
@@ -89,12 +90,12 @@ $feed->title = "Newest Listings Feed";
 /**
  * The max number of listings to pull, this is required and will default to 10 if
  * not set to a valid number.
- * 
+ *
  * Special value:
- * geoListingFeed::URL_SET : default display 10 listings, but can specify a 
- * 		different number in the URL, for example
- * 		"rss_listings.php?maxListings=50" would display a maximum of 50
- * 		listings.  If using this, it will also use the "forceMaxListings"
+ * geoListingFeed::URL_SET : default display 10 listings, but can specify a
+ *      different number in the URL, for example
+ *      "rss_listings.php?maxListings=50" would display a maximum of 50
+ *      listings.  If using this, it will also use the "forceMaxListings"
  *      setting below.
  */
 $feed->maxListings = 20; //geoListingFeed::URL_SET;
@@ -104,7 +105,7 @@ $feed->forceMaxListings = 100;
 
 /**
  * the category id you want to display from...
- * 
+ *
  * Special values if specific category ID not specified:
  * 0 : (numeric zero) - display from all categories & sub-categories.
  * geoListingFeed::URL_SET : default display from all categories, but can specify a specific category
@@ -116,21 +117,21 @@ $feed->catId = 0;
 
 /**
  * Restrict feed contents according to Geographic Navigation?
- * 
+ *
  * possible values:
  * 0 - do not filter on geo nav region
  * geoListingFeed::COOKIE_SET - use the current browser's active "region" selection (cookie)
  * geoListingFeed::URL_SET - default from all regions, but can specify in the URL
- * 		for example: "rss_listings.php?geoNavRegion=52" to display only listings in region 52
- * specific region value (e.g. "52") - display only listings from the given region 
- * 
- * 
+ *      for example: "rss_listings.php?geoNavRegion=52" to display only listings in region 52
+ * specific region value (e.g. "52") - display only listings from the given region
+ *
+ *
  */
 $feed->geoNavRegion = geoListingFeed::COOKIE_SET;
 
 /**
  * the user id you want to display listings for
- * 
+ *
  * Special values if specific user ID not specified:
  * 0 : (numeric zero) - do not narrow by specific seller
  * geoListingFeed::URL_SET : default display from all users, but can specify a specific user ID
@@ -143,7 +144,7 @@ $feed->userId = 0;
 /**
  * Change order of listings.  Default is "new".  Note that the RSS is not affected by
  * filters.
- * 
+ *
  * possible settings:
  * new : Order by starting date, newest first.
  * old : order by starting date, oldest first
@@ -161,7 +162,7 @@ $feed->orderBy = "new";
 
 /**
  * Type of listings to display, default is "all".
- * 
+ *
  * Possible settings:
  * all : Show any type of listing.
  * all_auction : only show auctions (only valid on auction products)
@@ -170,9 +171,9 @@ $feed->orderBy = "new";
  * dutch : only show dutch auctions (only valid on auction products)
  * reverse : only show reverse auctions (not typical)
  * classified : only show classified listings (only valid on classified products)
- * geoListingFeed::URL_SET : can be set in URL using type, for example 
- * 		"rss_listings.php?type=auction".  If invalid type is specified, will 
- * 		default to all.
+ * geoListingFeed::URL_SET : can be set in URL using type, for example
+ *      "rss_listings.php?type=auction".  If invalid type is specified, will
+ *      default to all.
  */
 $feed->type = "all";
 
@@ -188,7 +189,7 @@ $feed->charset = 'UTF-8';
  * This is the character limit for how much of the listing title to display.
  * If set to 0, it will display the entire title, otherwise it will cut off
  * the title at the appropriate length set here.
- * 
+ *
  * Default is 0 (no limit)
  */
 $feed->titleCharLimit = 0;
@@ -198,27 +199,27 @@ $feed->titleCharLimit = 0;
  * If set to 0, it will display the entire description, leaving HTML formatting intact.
  * If NOT set to 0, it will strip all HTML tags (for instance, if there was bolded
  * text, it would no longer be bolded) and truncate after the # chars specified.
- * 
+ *
  * If you want to remove all HTML formatting, but don't actually want to limit how
  * much is displayed, just set this to something realy large like 1000000.
- * 
+ *
  * Default is 0 (no limit, display description as-is)
  */
 $feed->descriptionCharLimit = 0;
 
 /**
  * Clean description of possible "character based issues" within the description
- * 
- * One of the things this setting does is tell the software to exchange some 
+ *
+ * One of the things this setting does is tell the software to exchange some
  * characters (like ?, ?,...etc) for their html entity equivalents
- * 
+ *
  */
 $feed->clean_description = true;
 
 /**
  * If $show['image'] (further below) is set to 1, this next setting determines how
  * many images are displayed. Setting to 0 makes it display all images with no limit.
- * 
+ *
  * Default is 1 (only show first image)
  */
 $feed->imageCount = 1;
@@ -226,7 +227,7 @@ $feed->imageCount = 1;
 /**
  * If $show['image'] is set to 1, the following 2 settings determine the max width
  * and height size in pixels.  Setting to 0 makes it use un-altered image size.
- * 
+ *
  * Default is 100x100 max dimensions.
  */
 $feed->imageWidth = 100;
@@ -235,17 +236,17 @@ $feed->imageHeight = 100;
 /**
  * Setting this to 1 will turn on display of lead image, with rest of the description
  * of the item flowing around it (that part depends on RSS reader though).
- * 
+ *
  * Default value is 1. Disable by setting to 0
  */
 $feed->leadImage = 1;
 
 /**
- * Used as CSS value for float for the lead image.  This can be changed to 
+ * Used as CSS value for float for the lead image.  This can be changed to
  * "left" (default), "right", or "none", or "" (to not use float).  Note that
  * some RSS feed readers will ignore any "in-line" style set, so this may have no
  * effect, depending on the RSS feed reader.
- * 
+ *
  * Default is 'left'
  */
 $feed->leadImageFloat = 'left';
@@ -253,7 +254,7 @@ $feed->leadImageFloat = 'left';
 /**
  * If $leadImage is set to 1, the following 2 settings determine the max width
  * and height size in pixels.  Setting to 0 makes it use un-altered image size.
- * 
+ *
  * Default is 200x200 max dimensions.
  */
 $feed->leadWidth = 200;
@@ -305,13 +306,13 @@ $feed->formatZeroPriceAsText = 1;
 /**
  * The following settings determine what fields will be displayed.  Note that
  * if the title will always be used, as the title of the "article" in the feed.
- * 
+ *
  * - Set 0 if you DO NOT want to display
  * - Set 1 if you DO want to display
- * 
+ *
  * Default is 0 for all fields.  Note that even if turned on, if a field is
  * blank for a listing, that field will not be displayed at all.
- * 
+ *
  * Oh, and you can change the order of the settings below, and it will change
  * the order things are displayed in the feed.
  */
@@ -389,13 +390,13 @@ $label['optional_field_20'] = 'Optional field 20: ';
  * add an additional "where field_name = 'field value'" to the SQL query that gets
  * the listings, so it lets you get fancy with things.  Remember, certain fields are
  * "url encoded", so keep that in mind when creating custom where clauses.
- * 
- * If you need to have more control over the SQL query than just adding an 
+ *
+ * If you need to have more control over the SQL query than just adding an
  * additional "where clause", you can get the geoTableSelect object by calling:
- * 
+ *
  * $query = $feed->getTableSelect();
- * 
- * Use it's methods to alter the query used when listings are retrieved.  See 
+ *
+ * Use it's methods to alter the query used when listings are retrieved.  See
  * the docs on geoTableSelect class for more info on what can be done.
  */
 #$feed->where("`geodesic_classifieds`.`location_zip` = '12345'");
@@ -410,16 +411,16 @@ $feed->debug = false;
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 //let whoever needs to know, this is being called in an RSS feed file...
-define ('IN_GEO_RSS_FEED',1);
+define('IN_GEO_RSS_FEED', 1);
 
 //Now we will see if a custom config file exists, and if it does, include
 //that file to over-write the settings set in this one.
 if ($RSSconfigFilename == 'detect') {
-	$RSSconfigFilename = str_replace('.php','.config.php', __file__);
+    $RSSconfigFilename = str_replace('.php', '.config.php', __file__);
 }
 if ($RSSconfigFilename && file_exists($RSSconfigFilename)) {
-	//include the config file to over-write the settings in this file.
-	include $RSSconfigFilename;
+    //include the config file to over-write the settings in this file.
+    include $RSSconfigFilename;
 }
 
 //assign show and label vars AFTER include of config file
@@ -429,26 +430,26 @@ $feed->show = $show;
 
 //set a few defaults specific to RSS feed
 if ($feed->titleCharLimit) {
-	//add 3 chars to account for ...
-	$feed->titleCharLimit += 3;
+    //add 3 chars to account for ...
+    $feed->titleCharLimit += 3;
 }
 if ($feed->descriptionCharLimit) {
-	$feed->descriptionCharLimit += 3;
+    $feed->descriptionCharLimit += 3;
 }
 if (!isset($feed->atomLink)) {
-	//detect what the URL should be
-	$dir = dirname(__file__).'/';
-	$file = str_replace($dir, '', __file__);
-	$feed->atomLink = geoFilter::getBaseHref() . $file;
+    //detect what the URL should be
+    $dir = dirname(__file__) . '/';
+    $file = str_replace($dir, '', __file__);
+    $feed->atomLink = geoFilter::getBaseHref() . $file;
 }
 
 if (!isset($feed->forceMaxListings)) {
-	//set default value
-	$feed->forceMaxListings = 100;
+    //set default value
+    $feed->forceMaxListings = 100;
 }
 //set the limit
 if ($feed->maxListings == geoListingFeed::URL_SET && isset($_GET['maxListings']) && intval($_GET['maxListings']) <= $feed->forceMaxListings) {
-	$feed->maxListings = $_GET['maxListings'];
+    $feed->maxListings = $_GET['maxListings'];
 }
 
 //let addons know we're at top of rss_listings
@@ -465,4 +466,3 @@ $feed->generateResultSet();
 echo $feed;
 
 include GEO_BASE_DIR . 'app_bottom.php';
-

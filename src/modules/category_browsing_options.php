@@ -1,5 +1,6 @@
 <?php
-//module_display_browsing_options.php	
+
+//module_display_browsing_options.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
 Copyright (c) 2001-2018 Geodesic Solutions, LLC
@@ -8,47 +9,47 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.5.3-36-gea36ae7
-## 
+##
 ##################################
 
 if (!$page->site_category) {
-	//this only works on pages with a category!
-	return false;
+    //this only works on pages with a category!
+    return false;
 }
 
 if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {
-	//browsing disabled, do not show module contents
-	return;
+    //browsing disabled, do not show module contents
+    return;
 }
 
 $current_choice = $_REQUEST['o'];
 
 $uri_end = $_SERVER['QUERY_STRING'];
-if (strlen($uri_end) == 0 && count($_GET) > 0){
-	//add all get params to end
-	$parts = array();
-	foreach ($_GET as $key => $val){
-		$parts[] = $key.'='.$val;
-	}
-	$uri_end = implode('&',$parts);
+if (strlen($uri_end) == 0 && count($_GET) > 0) {
+    //add all get params to end
+    $parts = array();
+    foreach ($_GET as $key => $val) {
+        $parts[] = $key . '=' . $val;
+    }
+    $uri_end = implode('&', $parts);
 }
-if (strlen($uri_end) > 0){
-	$uri_end = '?'.$uri_end;
+if (strlen($uri_end) > 0) {
+    $uri_end = '?' . $uri_end;
 }
-$uri = geoFilter::getBaseHref().$this->get_site_setting('classifieds_file_name').$uri_end;
+$uri = geoFilter::getBaseHref() . $this->get_site_setting('classifieds_file_name') . $uri_end;
 
 //Does NOT work with SEO: need to use above method instead...
 //$uri = $_SERVER["REQUEST_URI"];
 
 //remove any pre-existing options from current uri
-$uri = preg_replace("/&o=[0-9]*/","",$uri);
+$uri = preg_replace("/&o=[0-9]*/", "", $uri);
 //start at page 1 when a new option is selected
-$uri = preg_replace("/&page=[0-9]*/","",$uri);
+$uri = preg_replace("/&page=[0-9]*/", "", $uri);
 //replace & by &amp; for w3c compliance
-$uri = str_replace('&','&amp;',$uri);
+$uri = str_replace('&', '&amp;', $uri);
 
 /*
  * TO ADD A NEW OPTION:
@@ -66,31 +67,31 @@ $tpl_vars['uri'] =  $uri;
 
 
 //map QS parameter to settings
-//only set the options to be checked -- we foreach this later 
+//only set the options to be checked -- we foreach this later
 $map = array(
-	0 => array( 'setting' => 'cat_browse_all_listings', 'text' => 500138),
-	1 => array( 'setting' => 'cat_browse_end_today', 'text' => 500133),
-	6 => array( 'setting' => 'cat_browse_has_pics', 'text' => 500139),	
+    0 => array( 'setting' => 'cat_browse_all_listings', 'text' => 500138),
+    1 => array( 'setting' => 'cat_browse_end_today', 'text' => 500133),
+    6 => array( 'setting' => 'cat_browse_has_pics', 'text' => 500139),
 );
-if(geoMaster::is('classifieds') && geoMaster::is('auctions')) {
-	$map[7] = array( 'setting' => 'cat_browse_class_only', 'text' => 500140);
-	$map[8] = array( 'setting' => 'cat_browse_auc_only', 'text' => 500141);
+if (geoMaster::is('classifieds') && geoMaster::is('auctions')) {
+    $map[7] = array( 'setting' => 'cat_browse_class_only', 'text' => 500140);
+    $map[8] = array( 'setting' => 'cat_browse_auc_only', 'text' => 500141);
 }
-if(geoMaster::is('auctions')) {
-	$map[2] = array( 'setting' => 'cat_browse_buy_now', 'text' => 500134);
-	$map[3] = array( 'setting' => 'cat_browse_buy_now_only', 'text' => 500135);
-	$map[4] = array( 'setting' => 'cat_browse_auc_bids', 'text' => 500136);
-	$map[5] = array( 'setting' => 'cat_browse_auc_no_bids', 'text' => 500137);
+if (geoMaster::is('auctions')) {
+    $map[2] = array( 'setting' => 'cat_browse_buy_now', 'text' => 500134);
+    $map[3] = array( 'setting' => 'cat_browse_buy_now_only', 'text' => 500135);
+    $map[4] = array( 'setting' => 'cat_browse_auc_bids', 'text' => 500136);
+    $map[5] = array( 'setting' => 'cat_browse_auc_no_bids', 'text' => 500137);
 }
 $option_data = array();
-foreach($map as $key => $value) {
-	if($this->get_site_setting($value['setting'])) {
-		$option_data[] = array(
-			'selected' => (($current_choice == $key) ? true : false),
-			'text' => $page->messages[$value['text']],
-			'param' => $key
-		);
-	}
+foreach ($map as $key => $value) {
+    if ($this->get_site_setting($value['setting'])) {
+        $option_data[] = array(
+            'selected' => (($current_choice == $key) ? true : false),
+            'text' => $page->messages[$value['text']],
+            'param' => $key
+        );
+    }
 }
 $tpl_vars['option_data'] =  $option_data;
 
@@ -99,5 +100,5 @@ $tpl_vars['option_data'] =  $option_data;
 //yay for reusable code! :)
 $templateToUse = $this->get_site_setting('cat_browse_opts_as_ddl') ? 'dropdown.tpl' : 'links.tpl';
 
-$view->setModuleTpl($show_module['module_replace_tag'],$templateToUse)//'display_main_category_navigation_1')
-	->setModuleVar($show_module['module_replace_tag'],$tpl_vars);
+$view->setModuleTpl($show_module['module_replace_tag'], $templateToUse)//'display_main_category_navigation_1')
+    ->setModuleVar($show_module['module_replace_tag'], $tpl_vars);

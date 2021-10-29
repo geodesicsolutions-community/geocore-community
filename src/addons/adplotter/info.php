@@ -1,4 +1,5 @@
 <?php
+
 //addons/adplotter/info.php
 /**************************************************************************
 Addon Created by Geodesic Solutions, LLC
@@ -8,27 +9,28 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    16.09.0-92-gefaf632
-## 
+##
 ##################################
 
 # Adplotter Link Addon
 
-class addon_adplotter_info{
-	//The following are required variables
-	var $name = 'adplotter';
-	var $version = '1.4.0';
-	var $core_version_minimum = '17.01.0';
-	var $title = 'AdPlotter';
-	var $author = "Geodesic Solutions LLC.";
-	//var $icon_image = 'menu_anonymous.gif';
-	//var $info_url = 'http://geodesicsolutions.com/component/content/article/55-miscellaneous/77-anonymous-listing.html?directory=64';
-	var $description = 'Registers your site with the adplotter.com network and allows adplotter users to create listings';
-	var $auth_tag = 'geo_addons';
-	var $core_events = array('sell_success_email_content');
-	var $tags = array('aff_id');
+class addon_adplotter_info
+{
+    //The following are required variables
+    var $name = 'adplotter';
+    var $version = '1.4.0';
+    var $core_version_minimum = '17.01.0';
+    var $title = 'AdPlotter';
+    var $author = "Geodesic Solutions LLC.";
+    //var $icon_image = 'menu_anonymous.gif';
+    //var $info_url = 'http://geodesicsolutions.com/component/content/article/55-miscellaneous/77-anonymous-listing.html?directory=64';
+    var $description = 'Registers your site with the adplotter.com network and allows adplotter users to create listings';
+    var $auth_tag = 'geo_addons';
+    var $core_events = array('sell_success_email_content');
+    var $tags = array('aff_id');
 }
 
 /*
@@ -62,5 +64,5 @@ class addon_adplotter_info{
  *
  * v1.0.0 - Geo 7.5.0
  *  - Addon created.
-*/ 
+*/
 //leave whitespace at the end of this, or Eclipse dies

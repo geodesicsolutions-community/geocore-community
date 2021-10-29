@@ -1,4 +1,5 @@
 <?php
+
 //module_featured_ads_pic_1_level_4.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,10 +9,10 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    7.5.3-36-gea36ae7
-## 
+##
 ##################################
 
 $tpl_vars = array();
@@ -29,8 +30,8 @@ $txt_vars['module_display_ad_description'] = $page->messages[501194];
 
 $txt_vars['module_display_tags'] = $page->messages[501205];
 
-for ($index = 1; $index <= 20; $index ++){
-	$txt_vars['module_display_optional_field_'.$index] = $page->messages[(11*$index)+501205];
+for ($index = 1; $index <= 20; $index++) {
+    $txt_vars['module_display_optional_field_' . $index] = $page->messages[(11 * $index) + 501205];
 }
 
 $txt_vars['module_display_address'] = $page->messages[501439];
@@ -55,4 +56,6 @@ $txt_vars['closed'] = $page->messages[501615];
 
 $txt_vars['empty_category'] = $page->messages[200191];
 
-if (geoPC::is_ent()) require MODULES_DIR . 'shared/browsing_pic.php';
+if (geoPC::is_ent()) {
+    require MODULES_DIR . 'shared/browsing_pic.php';
+}

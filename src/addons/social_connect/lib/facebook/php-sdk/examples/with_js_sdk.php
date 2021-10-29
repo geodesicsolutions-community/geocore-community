@@ -11,13 +11,13 @@ $facebook = new Facebook(array(
 $user = $facebook->getUser();
 
 if ($user) {
-  try {
-    // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $facebook->api('/me');
-  } catch (FacebookApiException $e) {
-    echo '<pre>'.htmlspecialchars(print_r($e, true)).'</pre>';
-    $user = null;
-  }
+    try {
+      // Proceed knowing you have a logged in user who's authenticated.
+        $user_profile = $facebook->api('/me');
+    } catch (FacebookApiException $e) {
+        echo '<pre>' . htmlspecialchars(print_r($e, true)) . '</pre>';
+        $user = null;
+    }
 }
 
 ?>

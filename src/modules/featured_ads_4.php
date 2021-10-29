@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 //featured_ads_4.php
 /**************************************************************************
 Geodesic Classifieds & Auctions Platform 18.02
@@ -8,10 +9,10 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
 ## ##    6.0.7-304-g6ae40c9
-## 
+##
 ##################################
 
 $tpl_vars = array();
@@ -22,30 +23,32 @@ $tpl_vars['header_title'] = $page->messages[699];
 
 $txt_vars = array();
 if ($show_module['module_display_header_row']) {
-	$txt_vars['module_display_listing_column'] = $page->messages[200058];
-	$txt_vars['module_display_photo_icon'] = $page->messages[694];
-	$txt_vars['module_display_business'] = $page->messages[501067];
-	$txt_vars['module_display_title'] = $page->messages[695];
-	$txt_vars['module_display_ad_description'] = $page->messages[696];
-	
-	$txt_vars['module_display_tags'] = $page->messages[501068];
-	
-	for ($index = 1; $index <= 10; $index ++){
-		$txt_vars['module_display_optional_field_'.$index] = $page->messages[1008+$index];
-	}
-	for ($index = 11; $index <= 20; $index ++){
-		$txt_vars['module_display_optional_field_'.$index] = $page->messages[1766-11+$index];
-	}
-	
-	$txt_vars['module_display_address'] = $page->messages[501069];
-	$txt_vars['module_display_city'] = $page->messages[1382];
-	$txt_vars['module_display_location'] = $page->messages[501643];
-	$txt_vars['module_display_zip'] = $page->messages[1385];
-	$txt_vars['module_display_number_bids'] = $page->messages[102571];
-	$txt_vars['module_display_price'] = $page->messages[697];
-	$txt_vars['module_display_entry_date'] = $page->messages[698];
-	$txt_vars['module_display_time_left'] = $page->messages[102572];
-} if (!geoPC::is_ent()) { return; }
+    $txt_vars['module_display_listing_column'] = $page->messages[200058];
+    $txt_vars['module_display_photo_icon'] = $page->messages[694];
+    $txt_vars['module_display_business'] = $page->messages[501067];
+    $txt_vars['module_display_title'] = $page->messages[695];
+    $txt_vars['module_display_ad_description'] = $page->messages[696];
+
+    $txt_vars['module_display_tags'] = $page->messages[501068];
+
+    for ($index = 1; $index <= 10; $index++) {
+        $txt_vars['module_display_optional_field_' . $index] = $page->messages[1008 + $index];
+    }
+    for ($index = 11; $index <= 20; $index++) {
+        $txt_vars['module_display_optional_field_' . $index] = $page->messages[1766 - 11 + $index];
+    }
+
+    $txt_vars['module_display_address'] = $page->messages[501069];
+    $txt_vars['module_display_city'] = $page->messages[1382];
+    $txt_vars['module_display_location'] = $page->messages[501643];
+    $txt_vars['module_display_zip'] = $page->messages[1385];
+    $txt_vars['module_display_number_bids'] = $page->messages[102571];
+    $txt_vars['module_display_price'] = $page->messages[697];
+    $txt_vars['module_display_entry_date'] = $page->messages[698];
+    $txt_vars['module_display_time_left'] = $page->messages[102572];
+} if (!geoPC::is_ent()) {
+    return;
+}
 $txt_vars['item_type_1'] = $page->messages[200059];
 $txt_vars['item_type_2'] = $page->messages[200060];
 $txt_vars['business_type_1'] = $page->messages[501070];
