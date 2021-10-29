@@ -1,7 +1,5 @@
 <?php
 
-//this is encoded, don't need a header.
-
 require_once(CLASSES_DIR . 'rpc/XMLRPC.class.php');
 
 /**
@@ -24,9 +22,9 @@ class geoUpdateFactory
             //So we don't forget to update the above
             if (defined('IAMDEVELOPER')) {
                 die('<strong style="color: red;">ERROR!!!!</strong>  You forgot to update <strong>$latest</strong> and <strong>$released</strong> in <strong>updateFactory.php</strong>!
-					Search that file for those vars (will be near top) and update them.<br /><br />
-					If the version is released today, the $released should be set to <strong>' . time() . '</strong>
-					');
+                    Search that file for those vars (will be near top) and update them.<br /><br />
+                    If the version is released today, the $released should be set to <strong>' . time() . '</strong>
+                    ');
             }
             die(
                 '<strong>Config Error:</strong>  The versions.php and updateFactory.php files have a file version mismatch. Please contact Support.<br /><br /><strong>' . time() . '</strong>'
@@ -412,14 +410,14 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         }
         if (!$error) {
             $sql = "CREATE TABLE IF NOT EXISTS `geodesic_upgrade_progress` (
-				`order_id` INT( 5 ) NOT NULL DEFAULT '0',
-				`from` VARCHAR( 128 ) NOT NULL DEFAULT '1.0',
-				`to` VARCHAR( 128 ) NOT NULL DEFAULT '2.0',
-				`status` ENUM( '0', '1', '2', '-1' ) NOT NULL DEFAULT '0',
-				UNIQUE (
-					`order_id`
-				)
-			)";
+                `order_id` INT( 5 ) NOT NULL DEFAULT '0',
+                `from` VARCHAR( 128 ) NOT NULL DEFAULT '1.0',
+                `to` VARCHAR( 128 ) NOT NULL DEFAULT '2.0',
+                `status` ENUM( '0', '1', '2', '-1' ) NOT NULL DEFAULT '0',
+                UNIQUE (
+                    `order_id`
+                )
+            )";
 
             $result = $this->_db->Execute($sql);
             if (!$result) {
@@ -430,15 +428,15 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         }
         if (!$error) {
             $sql = "CREATE TABLE IF NOT EXISTS `geodesic_upgrade_queries` (
-				`query_id` INT( 5 ) NOT NULL DEFAULT '0',
-				`order_id` INT( 5 ) NOT NULL DEFAULT '0',
-				`strict` TINYINT( 3 ) NOT NULL DEFAULT '0',
-				`status` ENUM( '-1', '0', '1' ) NOT NULL DEFAULT '0',
-				`sql` TEXT NOT NULL,
-				UNIQUE (
-					`query_id`
-				)
-			)";
+                `query_id` INT( 5 ) NOT NULL DEFAULT '0',
+                `order_id` INT( 5 ) NOT NULL DEFAULT '0',
+                `strict` TINYINT( 3 ) NOT NULL DEFAULT '0',
+                `status` ENUM( '-1', '0', '1' ) NOT NULL DEFAULT '0',
+                `sql` TEXT NOT NULL,
+                UNIQUE (
+                    `query_id`
+                )
+            )";
             $result = $this->_db->Execute($sql);
             if (!$result) {
                 $error = __line__;
@@ -473,31 +471,6 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         //see if we are already at latest.
         include('versions/versions.php');
         $current_version = $this->getCurrentVersion();
-        if (!$licenseKey || (self::licenseChecksDev !== 'internal_coolness' && !$this->pc->verifyLicenseForUpdate($licenseKey))) {
-            //show license key page
-            $this->tplVars['body_tpl'] = 'licenseKey.tpl';
-            $this->tplVars['install'] = $this->pc->get_installation_info();
-            $this->tplVars['licenseError'] = $this->pc->errors();
-            $this->tplVars['must_agree'] = $this->pc->mustAgree();
-            $this->step_text = 'License Key';
-
-            //special: save old listing types here (before overwriting the old license key) when upgrading to GeoCore
-            $this->geoCore_init_listingTypes();
-            return;
-        } elseif ($licenseKey && isset($versions[$current_version])) {
-            //be sure to save license key, or at least attempt to
-            $this->_connectDB();
-            $this->_db->Execute("DELETE FROM `geodesic_site_settings` WHERE `setting`='license' OR `setting` = 'license_data'");
-            $this->_db->Execute("DELETE FROM `geodesic_site_settings_long` WHERE `setting`='license_data'");
-
-            //insert the new key
-            $this->_db->Execute("INSERT INTO `geodesic_site_settings` (`setting`, `value`) VALUES ('license', ?)", array($licenseKey));
-        }
-
-        if (isset($_POST['licenseKeyEntered']) && $_POST['licenseKeyEntered'] && $this->tableExists('geodesic_license_log')) {
-            //license key was just entered and is valid, so record in the license table
-            $this->_db->Execute("INSERT INTO `geodesic_license_log` SET `time`=" . time() . ", `log_type`='notice_remote', `message`='Software Update in progress (from version $current_version), resetting and validating license data for license key ($licenseKey).'");
-        }
 
         if (isset($versions[$current_version]) && $versions[$current_version]['to'] == 'latest' && !($_GET['run'] != 'finish' && isset($versions['beta']) && is_array($versions['beta']))) {
             //This is the cleanup step...
@@ -717,10 +690,10 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
                             $insert_text_array[$key][7] = 0;
                         }
                         $sql_query = "INSERT INTO `geodesic_pages_messages`
-							(`message_id`,`name`,`description`,`text`,`page_id`,`display_order`,`classauctions`)
-							VALUES
-							(" . $insert_text_array[$key][0] . ",\"" . $insert_text_array[$key][1] . "\",\"" . $insert_text_array[$key][2] . "\",\"" . $insert_text_array[$key][3] . "\",
-							\"" . $insert_text_array[$key][4] . "\",\"" . $insert_text_array[$key][5] . "\",\"" . $insert_text_array[$key][6] . "\")";
+                            (`message_id`,`name`,`description`,`text`,`page_id`,`display_order`,`classauctions`)
+                            VALUES
+                            (" . $insert_text_array[$key][0] . ",\"" . $insert_text_array[$key][1] . "\",\"" . $insert_text_array[$key][2] . "\",\"" . $insert_text_array[$key][3] . "\",
+                            \"" . $insert_text_array[$key][4] . "\",\"" . $insert_text_array[$key][5] . "\",\"" . $insert_text_array[$key][6] . "\")";
                     } else {
                         $sql_query = '';
                     }
@@ -1023,7 +996,7 @@ The log is only preserved if errors occurr during the upgrade process.';
         $body = "Upgrade Log: <br /><textarea cols=\"90\" rows=\"10\" readonly=\"readonly\">" . htmlspecialchars($body) . "</textarea>
 <br />
 <form method=\"POST\" action=\"index.php?run=$next\">
-	<input type=\"submit\" value=\"Continue or Finish Upgrade >>\" />
+    <input type=\"submit\" value=\"Continue or Finish Upgrade >>\" />
 </form>";
         $this->tplVars['body'] = $body;
     }
@@ -1033,10 +1006,10 @@ The log is only preserved if errors occurr during the upgrade process.';
     public function getFinishedLinks()
     {
         $links = '<p style="text-align:center;">
-					Take me to my:<br>
-						<a href="../admin/index.php" class="login_link">Admin Home Page</a><br>
-						<a href="../index.php" class="login_link">Front End Home Page</a><br>
-				</p>';
+                    Take me to my:<br>
+                        <a href="../admin/index.php" class="login_link">Admin Home Page</a><br>
+                        <a href="../index.php" class="login_link">Front End Home Page</a><br>
+                </p>';
         return $links;
     }
 
@@ -1087,8 +1060,8 @@ The log is only preserved if errors occurr during the upgrade process.';
     {
         //force_fresh_get is no longer needed, since we update the config table automatically.
         if (isset($this->configuration_data)) {
-            //dont get the data twice if we already have it.
-            return $this->_filterSettings();
+             //dont get the data twice if we already have it.
+             return $this->_filterSettings();
         }
 
         $sql = "SELECT * FROM `geodesic_classifieds_configuration`";
@@ -1097,14 +1070,14 @@ The log is only preserved if errors occurr during the upgrade process.';
         //to get the new site settings.
         $sql = 'SELECT `setting`, `value` FROM `geodesic_site_settings`';
 
-        $rows = $this->_db->GetAll($sql);
+         $rows = $this->_db->GetAll($sql);
 
         foreach ($rows as $row) {
             //side effect: any settings duplicated in configuration data and sit config tables,
             //will be overridden by the newer table.
             $this->configuration_data[$row['setting']] = $row['value'];
         }
-        return $this->configuration_data;
+         return $this->configuration_data;
     }
 
     /**

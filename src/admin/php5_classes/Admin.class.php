@@ -19,10 +19,11 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
-## ##    16.09.0-105-ga458f5f
-## 
+##
+##    16.09.0-105-ga458f5f
+##
 ##################################
 //the new page and menu auto loader.
 
@@ -401,12 +402,12 @@ class geoAdmin {
 			$linky = $this->genMenuLink();
 			if (isset($current_cat->title) && strlen($current_cat->title)){
 				$title = $current_cat->title;
-				
+
 				//quick hack to make the addon names show as a page subtitle (but NOT on the edit text (Addon_Manage) page (where it uses a different variable))
 				if($current_cat->parent === 'addon_management' && $current_cat->classname !== 'Addon_Manage') {
 					$this->v()->addon_title = $title;
 				}
-				
+
 				if (((isset($current_cat->type) && ($current_cat->type == 'main_page' || $current_cat->type == 'main_page_nosave')) || !isset($current_cat->type)) && isset($current_cat->filename,$current_cat->classname) && strlen($current_cat->filename) && strlen($current_cat->classname)){
 					//make it a link.
 					$title = '<a href="index.php?mc='.$current_cat->parent.'&amp;page='.$current_cat->index.$linky.'" class="pg_title1">'.$title.'</a>';
@@ -730,20 +731,6 @@ class geoAdmin {
 
 		if(defined('DEVELOPER_MODE')) {
 			$view->developer_mode = DEVELOPER_MODE;
-		}
-		if (geoPC::is_leased()) {
-			//see if we should display the "lease payment due" notice to give
-			//admin a warning before the site shuts down totally
-			$data = geoPC::getOverdueInvoice();
-
-			//number of days before start showing the invoice due message, pretend
-			//it is this many days in the future
-			$grace = 0;
-			//figure out when that actually is
-			$grace = geoUtil::time()-(86400*$grace);
-			if ($data && $data['oldest_due'] < $grace) {
-				$view->license_overdue_invoice = $data;
-			}
 		}
 
 		return $this;
@@ -1499,7 +1486,7 @@ class menu_page {
 		}
 		$page->image_fa = true;
 		$page->image = $image;
-		
+
 		//addon admin.php is already included at this point.
 		$page->filename = 'addon';
 		$page->classname = "addon_{$addon_name}_admin";
