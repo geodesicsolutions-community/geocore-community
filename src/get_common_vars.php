@@ -11,7 +11,8 @@ see license attached to distribution
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    7.5.3-36-gea36ae7
+##
+##    7.5.3-36-gea36ae7
 ##
 ##################################
 
@@ -27,15 +28,15 @@ require_once 'app_top.common.php';
 
 
 if (isset($db)) {
-    require_once CLASSES_DIR . PHP5_DIR . "DataAccess.class" . ENCODE_EXT . ".php";
+    require_once CLASSES_DIR . PHP5_DIR . "DataAccess.class.php";
     $db = DataAccess :: getInstance();
 }
 if (isset($session)) {
-    require_once CLASSES_DIR . PHP5_DIR . "products" . ENCODE_EXT . ".php";
+    require_once CLASSES_DIR . PHP5_DIR . "products.php";
     $session = geoSession::getInstance();
 }
 if (isset($product_configuration)) {
-    require_once CLASSES_DIR . PHP5_DIR . "products" . ENCODE_EXT . ".php";
+    require_once CLASSES_DIR . PHP5_DIR . "products.php";
     $product_configuration = geoPC::getInstance();
 }
 if (isset($addon)) {

@@ -8,10 +8,11 @@ http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
 ##########GIT Build Data##########
-## 
+##
 ## File Changed In GIT Commit:
-## ##    16.07.0-69-g6b76412
-## 
+##
+##    16.07.0-69-g6b76412
+##
 ##################################
 
 
@@ -21,13 +22,13 @@ set_error_handler('geo_default_debug_error_handler');
 //set up error handling.
 function geo_default_debug_error_handler($errno, $errstr, $errfile, $errline, $errcontext){
 	static $queue = array();
-	
-	$data = array ('errno' => $errno, 
-		'errstr' => $errstr, 
-		'errfile' => $errfile, 
-		'errline' => $errline, 
+
+	$data = array ('errno' => $errno,
+		'errstr' => $errstr,
+		'errfile' => $errfile,
+		'errline' => $errline,
 		'errcontext' => $errcontext);
-	
+
 	//un-comment next line for easy way to display errors if addon
 	//error handling is not working
 	//if (1) echo "$errline $errfile $errstr<br />\n\n"; else
@@ -45,7 +46,7 @@ function geo_default_debug_error_handler($errno, $errstr, $errfile, $errline, $e
 		geoAddon::triggerUpdate('errorhandle',$data);
 	} else {
 		//queue it to be reported once all the addons are enabled.
-		$queue[] = $data; 
+		$queue[] = $data;
 	}
 	return true;
 }
@@ -56,13 +57,13 @@ function Geo__autoload ($classname)
 	if (!defined('GEO_DIRS_DEFINED')) {
 		return;
 	}
-	
+
 	$classname = (strpos($classname,'geo')===0)? substr($classname,3): $classname;
 	$filename = CLASSES_DIR . PHP5_DIR . $classname . '.class.php';
 	if (file_exists($filename)){
 		require_once($filename);
 		return;
-	} 
+	}
 	$filename = CLASSES_DIR . $classname . '.class.php';
 	if (file_exists($filename)){
 		require_once($filename);
@@ -101,11 +102,11 @@ if (!defined('PHP5_DIR') && version_compare('5.2.0', phpversion()) < 1) {
 } elseif (!defined('PHP5_DIR')) {
 	//trigger_error('DEBUG STATS: Using php4 classes.');
 	define('PHP5_DIR', '');
-	
+
 	//If you want to allow using PHP 4 version, un-comment the following line.  Note that many systems will be "broken" because there
 	//are no PHP 4 versions of those systems.
 	die ('<h1 style="color: red">Error:  Minimum Server Requirements not met.</h1>
-	
+
 	<strong>Required: </strong> PHP 5.2.0<br />
 	<strong>Your Server: </strong> <span style="color: red">'.phpversion().'</span>');
 }
@@ -127,7 +128,7 @@ if (GEO_TIMEZONE_SET_GUESS) {
 }
 
 //make sure pages are not cached
-//To keep aol proxies from caching pages... to keep things like login, logout, 
+//To keep aol proxies from caching pages... to keep things like login, logout,
 //and registration from breaking.
 //also to stop caching of pages since content is always changing.
 if (GEO_CACHE_CONTROL) {
@@ -139,8 +140,8 @@ define('GEO_DIRS_DEFINED',1);
 //require core functionality files
 require_once CLASSES_DIR . 'adodb/adodb.inc.php';
 require_once CLASSES_DIR . PHP5_DIR . 'Utility.class.php';
-require_once CLASSES_DIR . PHP5_DIR .'products'.ENCODE_EXT.'.php';
-require_once CLASSES_DIR . PHP5_DIR . 'DataAccess.class'.ENCODE_EXT.'.php';
+require_once CLASSES_DIR . PHP5_DIR .'products.php';
+require_once CLASSES_DIR . PHP5_DIR . 'DataAccess.class.php';
 require_once CLASSES_DIR . PHP5_DIR . 'Singleton.class.php';
 require_once CLASSES_DIR . PHP5_DIR . 'Addon.class.php';
 require_once CLASSES_DIR . PHP5_DIR . 'Cache.class.php';
@@ -156,12 +157,12 @@ $db = DataAccess::getInstance();
 $addon = geoAddon::getInstance();
 
 if (!defined('IN_UPGRADE')){
-	
+
 	if(geoPC::geoturbo_status()) {
 		//do maintenance tasks specific to GeoTurbo
 		geoPC::GTMaint();
 	}
-	
+
 	//load any app_top's for addons.  Calling this will also make it init enabled addons.
 	if (isset($demo_location) || defined('IAMDEVELOPER')) {
 		//if in main demo, need to init license before calling app_top on addons
@@ -183,7 +184,7 @@ trigger_error('DEBUG STATS: Start of App (core addon events loaded, db object cr
  * If experiencing a problem where addons are not being called for error
  * handling, un-comment the following line to "force" a triggered event.  This
  * will force addons to be loaded, and thus allow error handle core events
- * to be called on page loads that never trigger an addon even otherwise. 
+ * to be called on page loads that never trigger an addon even otherwise.
  */
 //geoAddon::triggerUpdate('forceInit');
 
