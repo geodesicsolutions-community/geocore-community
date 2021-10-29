@@ -1,0 +1,3 @@
+Text[1] = ["Admin textareas", "If you wish to use the TinyMCE while editing your templates, html modules or page text please set your \"Admin textareas\" setting to 'TinyMCE'."]
+Text[2] = ["CSS stylesheets", "Please provide the full urls of the stylesheets used in your templates and modules, either relative to the main site folder, or relative to the sub-folder \"geo_templates/[Template Set]/external/\". You will still need link any external stylesheets in your templates.  This setting simply allows you to see the effects of your stylesheet in the WYSIWYG.  Separate multiple stylesheets with a comma."]
+

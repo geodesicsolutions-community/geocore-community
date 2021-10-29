@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+/* 7.1beta3-34-g15963b6 */
+
+table.leveled_fields {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #777;
+}
+
+table.leveled_fields td {
+	padding: 0 10px 0 10px;
+}

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Geodesic Solutions 17.12.0 Changelog</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+	<script>
+		//<![CDATA[
+		
+		var changeDiffMethod = function () {
+			var showclass = jQuery('.diffMethod:checked').prop('id');
+			var hideclass = jQuery('.diffMethod:not(:checked)').prop('id');
+			jQuery('.'+showclass).show();
+			jQuery('.'+hideclass).hide();
+		};
+		
+		jQuery(document).ready(function () {
+			jQuery('.diffMethod').click(changeDiffMethod);
+			if (jQuery('.diffMethod').length) {
+				//go ahead and do it now to start out
+				changeDiffMethod();
+			}
+			jQuery('ul.nav a').click(function () {
+				//make it scroll to the thingy
+				if (this.hash.length) {
+					var topOffset = jQuery(this.hash).offset().top - 5;
+					jQuery('html, body').animate({
+						scrollTop : topOffset
+					}, 1500);
+				}
+			});
+		});
+		
+		//]]>
+	</script>
+	
+	
+	<style>
+		
+		.toc, .code_legend {
+			float: left;
+			border-radius: 15px;
+			margin-bottom: 10px;
+		}
+		
+		.code {
+			width: 90%;
+			max-height: 500px;
+			white-space: pre;
+			border: 1px dashed black;
+			overflow: auto;
+			padding: 5px;
+		}
+		.code span:hover {
+			background-color: #eee;
+		}
+		.code span.rem {
+			background-color: #fdd;
+		}
+		.code span.rem:hover {
+			background-color: #fcc;
+		}
+		.code span.add {
+			background-color: #dfd;
+		}
+		.code span.add:hover {
+			background-color: #cfc;
+		}
+		fieldset.versions {
+			border-radius: 10px;
+			display: inline-block;
+			vertical-align: top;
+		}
+		ul.nav {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		ul.nav li {
+			display: inline-block;
+			padding: 0;
+			margin: 0;
+		}
+		ul.nav li a {
+			display: inline-block;
+			padding: 6px;
+			margin: 4px;
+			border: 1px solid #777;
+			border-radius: 5px;
+			text-decoration: none;
+			color: black;
+		}
+		ul.nav li a:hover {
+			background-color: #dfd;
+		}
+		
+	</style>
+	
+	<meta name="generator" content="SPBAS http://spbas.com" />
+</head>
+<body>
+<p>
+	This file is a technical summary of changes in the Geodesic Solutions Classifieds and Auctions software.
+	Each entry will link to the corresponding bug found in Bugzilla on our website (You will 
+	need current support contract to view, <a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,developers;bugzilla;start">more info here</a>). You can find release highlights on
+	<a href="http://geodesicsolutions.com">geodesicsolutions.com</a>.
+</p>
+<!-- 
+	This is auto-generated.  Can manually adjust order of things, just keep
+	any HTML comments that start with AUTO intact as those are used to modify
+	the changelog and/or auto-insert new changelog contents.
+ -->
+<fieldset class="versions">
+	<legend>Versions</legend>
+	<ul class="nav">
+		<!-- AUTO VERSIONS --><!-- AUTO version link 17.12.0 -->
+<li>
+	<a href="#milestone_17-12-0">17.12.0</a>
+</li>
+<!-- /AUTO version link 17.12.0 --><!-- AUTO version link 18.02.0 -->
+<li>
+	<a href="#milestone_18-02-0">18.02.0</a>
+</li>
+<!-- /AUTO version link 18.02.0 --><!-- /AUTO VERSIONS -->
+		<li><a href="../changelogs.php">More Versions</a>
+	</ul>
+</fieldset>
+<fieldset class="versions">
+	<legend>Template Change "Diff" Method</legend>
+	
+	Choose method to show template changes:<br />
+	<label><input type="radio" name="diffMethod" class="diffMethod" id="findReplace" checked="checked" /> Find &amp; Replace</label><br />
+	<label><input type="radio" name="diffMethod" class="diffMethod" id="inline" /> Inline</label>
+</fieldset>
+
+<!-- AUTO CHANGELOGS --><!-- AUTO changelog 17.12.0 -->
+<h3 id="milestone_17-12-0">17.12.0 (December 29, 2017)</h3>
+<ul class="nav">
+	<li><a href="#milestone_17-12-0_enhancements">Enhancements (5)</a></li>
+	<li><a href="#milestone_17-12-0_bugfix_secure">Security Fixes (0)</a></li>
+	<li><a href="#milestone_17-12-0_bugfix">Fixes/Maintenance (14)</a></li>
+	<li><a href="#milestone_17-12-0_templates">Template Changes (4)</a></li>
+</ul>
+<h4 id="milestone_17-12-0_enhancements">[Enhancements]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1835 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1835" onclick="window.open(this.href); return false;" id="bug_1835">1835</a> - Made the credit card entry form behave a little more sanely when wrapping to new lines<br />
+ 
+<!-- Log for bug # 1837 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1837" onclick="window.open(this.href); return false;" id="bug_1837">1837</a> - Added an &quot;admin note&quot; for each user, allowing the admin to write a brief, private blurb about any user that won't be shown publicly<br />
+ 
+<!-- Log for bug # 1838 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1838" onclick="window.open(this.href); return false;" id="bug_1838">1838</a> - Bulk Uploader: added a switch to force processing only a single Revolving Inventory file at once<br />
+ 
+<!-- Log for bug # 1842 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1842" onclick="window.open(this.href); return false;" id="bug_1842">1842</a> - PHP 7.1 Compatibility (for real, this time)<br />
+ 
+<!-- Log for bug # 1843 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1843" onclick="window.open(this.href); return false;" id="bug_1843">1843</a> - Allow &quot;friendly names&quot; in admin email addresses<br />
+</p>
+<h4 id="milestone_17-12-0_bugfix_secure">[Security Fixes]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+- No Security fixes or patches for this release.
+</p>
+<h4 id="milestone_17-12-0_bugfix">[Fixes/Maintenance]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1817 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1817" onclick="window.open(this.href); return false;" id="bug_1817">1817</a> - Fixed the email address of a user with communication set to &quot;private&quot; not being properly cloaked when initially sending a message to a seller<br />
+ 
+<!-- Log for bug # 1831 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1831" onclick="window.open(this.href); return false;" id="bug_1831">1831</a> - Fixed SMTP mail connection not using entered username/password<br />
+ 
+<!-- Log for bug # 1832 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1832" onclick="window.open(this.href); return false;" id="bug_1832">1832</a> - Restored missing &quot;Change User Group&quot; button to Category-Specific Fields to Use page<br />
+ 
+<!-- Log for bug # 1833 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1833" onclick="window.open(this.href); return false;" id="bug_1833">1833</a> - Fixed renewing a listing that was not previously Unlimited and giving it an Unlimited duration causing it to expire instantly<br />
+ 
+<!-- Log for bug # 1836 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1836" onclick="window.open(this.href); return false;" id="bug_1836">1836</a> - Geographic Navigation: Fixed display oddities caused by enabling the Breadcrumb display in the region selection nav area<br />
+ 
+<!-- Log for bug # 1839 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1839" onclick="window.open(this.href); return false;" id="bug_1839">1839</a> - Fixed image file path being incorrect if admin setting changed prior to a Listing Copy<br />
+ 
+<!-- Log for bug # 1840 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1840" onclick="window.open(this.href); return false;" id="bug_1840">1840</a> - Sharing: Shorten listing descriptions shared to Pinterest to 500 characters, which seems to be the max they can handle<br />
+ 
+<!-- Log for bug # 1841 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1841" onclick="window.open(this.href); return false;" id="bug_1841">1841</a> - Storefront: Add friendlier error message when contact form is given an invalid email address<br />
+ 
+<!-- Log for bug # 1844 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1844" onclick="window.open(this.href); return false;" id="bug_1844">1844</a> - Storefront: Hide a link into a user's storefront that is showing when it shouldn't<br />
+ 
+<!-- Log for bug # 1845 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1845" onclick="window.open(this.href); return false;" id="bug_1845">1845</a> - Storefront: fixed an issue that could make it difficult to disable &quot;free&quot; storefronts<br />
+ 
+<!-- Log for bug # 1846 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1846" onclick="window.open(this.href); return false;" id="bug_1846">1846</a> - Fixed Paypal Seller/Buyer info not behaving correctly during some Listing Edits<br />
+ 
+<!-- Log for bug # 1848 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1848" onclick="window.open(this.href); return false;" id="bug_1848">1848</a> - Fixed WYSIWYG editor adding extra code to partial-page templates, and removed branding<br />
+ 
+<!-- Log for bug # 1849 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1849" onclick="window.open(this.href); return false;" id="bug_1849">1849</a> - Google Maps Addons: Fixed maps to work better with Google's newer API, and cleaned up its admin settings<br />
+ 
+<!-- Log for bug # 1847 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1847" onclick="window.open(this.href); return false;" id="bug_1847">1847</a> - Fixed update user info's Apply to All Listings not updating user's URL<br />
+</p>
+<h4 id="milestone_17-12-0_templates">[Template Changes]</h4>
+<p style="font-style: italic;">
+	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
+	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
+	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	to find if you need to make any template changes during an update.
+</p>
+<fieldset class="code_legend">
+	<legend>Legend</legend>
+	<p>Note the following about highlighted lines you will see in this section.</p>
+	<pre class="code"><span class="add">This is a line that has been <strong>Added</strong></span>
+<span class="rem">This is a line that has been <strong>Removed</strong></span>
+<span>This is a line that has <strong>not changed</strong>.</span></pre>
+</fieldset>
+
+<ol style="clear: both;">
+			<li>
+							In file <strong>main_page/gadgets/mortgage_calculator.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 30, <strong>FIND:</strong><br />
+							<pre class="code"><span>&lt;option label=&quot;Dec&quot; value=&quot;12&quot;&gt;Dec&lt;/option&gt;</span>
+<span>&lt;/select&gt;</span>
+<span>&lt;select name=&quot;param[start_year]&quot;&gt;</span>
+<span class="rem">&lt;option label=&quot;2016&quot; value=&quot;2016&quot;&gt;2016&lt;/option&gt;</span>
+<span class="rem">&lt;option label=&quot;2017&quot; value=&quot;2017&quot;&gt;2017&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2018&quot; value=&quot;2018&quot;&gt;2018&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2019&quot; value=&quot;2019&quot;&gt;2019&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2020&quot; value=&quot;2020&quot;&gt;2020&lt;/option&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>&lt;option label=&quot;Dec&quot; value=&quot;12&quot;&gt;Dec&lt;/option&gt;</span>
+<span>&lt;/select&gt;</span>
+<span>&lt;select name=&quot;param[start_year]&quot;&gt;</span>
+<span>&lt;option label=&quot;2018&quot; value=&quot;2018&quot;&gt;2018&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2019&quot; value=&quot;2019&quot;&gt;2019&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2020&quot; value=&quot;2020&quot;&gt;2020&lt;/option&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 30, make the following changes:
+							<pre class="code"><span>&lt;option label=&quot;Dec&quot; value=&quot;12&quot;&gt;Dec&lt;/option&gt;</span>
+<span>&lt;/select&gt;</span>
+<span>&lt;select name=&quot;param[start_year]&quot;&gt;</span>
+<span class="rem">&lt;option label=&quot;2016&quot; value=&quot;2016&quot;&gt;2016&lt;/option&gt;</span>
+<span class="rem">&lt;option label=&quot;2017&quot; value=&quot;2017&quot;&gt;2017&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2018&quot; value=&quot;2018&quot;&gt;2018&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2019&quot; value=&quot;2019&quot;&gt;2019&lt;/option&gt;</span>
+<span>&lt;option label=&quot;2020&quot; value=&quot;2020&quot;&gt;2020&lt;/option&gt;</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>system/payment_gateways/shared/payment_details.cc_form.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 1, <strong>FIND:</strong><br />
+							<pre class="code"><span>{* 18.02.0-1-g4b505b7 *}</span>
+<span></span>
+<span class="rem">&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="rem">&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; name=&quot;c[cc_number]&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span></span>
+<span>{if $use_cvv2}</span>
+<span class="rem">	&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="rem">	&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; name=&quot;c[cvv2_code]&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span>{/if}</span>
+<span></span>
+<span class="rem">&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="rem">{html_select_date end_year=&quot;+19&quot; display_days=0 field_array=&quot;c[exp_date]&quot;}</span>
+<span></span>
+<span>{if $error_msgs.cc_result_message}</span>
+<span>	&lt;div class=&quot;error_message&quot;&gt;{$error_msgs.cc_result_message}&lt;/div&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>{* 18.02.0-1-g4b505b7 *}</span>
+<span></span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="add">	&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; name=&quot;c[cc_number]&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span>{if $use_cvv2}</span>
+<span class="add">	&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">		&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="add">		&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; name=&quot;c[cvv2_code]&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">	&lt;/span&gt;</span>
+<span>{/if}</span>
+<span></span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="add">	{html_select_date end_year=&quot;+19&quot; display_days=0 field_array=&quot;c[exp_date]&quot;}</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span>{if $error_msgs.cc_result_message}</span>
+<span>	&lt;div class=&quot;error_message&quot;&gt;{$error_msgs.cc_result_message}&lt;/div&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 1, make the following changes:
+							<pre class="code"><span>{* 18.02.0-1-g4b505b7 *}</span>
+<span></span>
+<span class="rem">&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="rem">&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; name=&quot;c[cc_number]&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="add">	&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; name=&quot;c[cc_number]&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span>{if $use_cvv2}</span>
+<span class="rem">	&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="rem">	&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; name=&quot;c[cvv2_code]&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">	&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">		&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="add">		&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; name=&quot;c[cvv2_code]&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">	&lt;/span&gt;</span>
+<span>{/if}</span>
+<span></span>
+<span class="rem">&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="rem">{html_select_date end_year=&quot;+19&quot; display_days=0 field_array=&quot;c[exp_date]&quot;}</span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="add">	{html_select_date end_year=&quot;+19&quot; display_days=0 field_array=&quot;c[exp_date]&quot;}</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span>{if $error_msgs.cc_result_message}</span>
+<span>	&lt;div class=&quot;error_message&quot;&gt;{$error_msgs.cc_result_message}&lt;/div&gt;</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>system/payment_gateways/stripe/payment_details.cc_form.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 1, <strong>FIND:</strong><br />
+							<pre class="code"><span>{* 18.02.0-1-g4b505b7 *}</span>
+<span></span>
+<span class="rem">&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="rem">&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; data-stripe=&quot;number&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span></span>
+<span>{if $use_cvv2}</span>
+<span class="rem">	&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="rem">	&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; data-stripe=&quot;cvc&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span>{/if}</span>
+<span></span>
+<span class="rem">&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="rem">&lt;select data-stripe=&quot;exp_month&quot; class=&quot;field&quot;&gt;</span>
+<span class="rem">	{section name='exp_month' loop='13' start='1'}</span>
+<span class="rem">		{$month = $smarty.section.exp_month.index|string_format:&quot;%02d&quot;}</span>
+<span class="rem">		&lt;option value=&quot;{$month}&quot;{if $smarty.now|date_format:&quot;%m&quot; == $month} selected=&quot;selected&quot;{/if}&gt;{$month}&lt;/option&gt;</span>
+<span class="rem">	{/section}</span>
+<span class="rem">&lt;/select&gt; / &lt;select data-stripe=&quot;exp_year&quot; class=&quot;field&quot;&gt;</span>
+<span class="rem">	{$startYear = $smarty.now|date_format:'%y'}</span>
+<span class="rem">	{section name='exp_year' loop=$startYear+13 start=$startYear}</span>
+<span class="rem">		{$year = $smarty.section.exp_year.index|string_format:&quot;%02d&quot;}</span>
+<span class="rem">		&lt;option value=&quot;{$year}&quot;{if $startYear == $year} selected=&quot;selected&quot;{/if}&gt;{$year}&lt;/option&gt;</span>
+<span class="rem">	{/section}</span>
+<span class="rem">&lt;/select&gt;</span>
+<span></span>
+<span></span>
+<span>{if $error_msgs.cc_result_message}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>{* 18.02.0-1-g4b505b7 *}</span>
+<span></span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="add">	&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; data-stripe=&quot;number&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span>{if $use_cvv2}</span>
+<span class="add">	&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">		&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="add">		&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; data-stripe=&quot;cvc&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">	&lt;/span&gt;</span>
+<span>{/if}</span>
+<span></span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="add">	&lt;select data-stripe=&quot;exp_month&quot; class=&quot;field&quot;&gt;</span>
+<span class="add">		{section name='exp_month' loop='13' start='1'}</span>
+<span class="add">			{$month = $smarty.section.exp_month.index|string_format:&quot;%02d&quot;}</span>
+<span class="add">			&lt;option value=&quot;{$month}&quot;{if $smarty.now|date_format:&quot;%m&quot; == $month} selected=&quot;selected&quot;{/if}&gt;{$month}&lt;/option&gt;</span>
+<span class="add">		{/section}</span>
+<span class="add">	&lt;/select&gt; / &lt;select data-stripe=&quot;exp_year&quot; class=&quot;field&quot;&gt;</span>
+<span class="add">		{$startYear = $smarty.now|date_format:'%y'}</span>
+<span class="add">		{section name='exp_year' loop=$startYear+13 start=$startYear}</span>
+<span class="add">			{$year = $smarty.section.exp_year.index|string_format:&quot;%02d&quot;}</span>
+<span class="add">			&lt;option value=&quot;{$year}&quot;{if $startYear == $year} selected=&quot;selected&quot;{/if}&gt;{$year}&lt;/option&gt;</span>
+<span class="add">		{/section}</span>
+<span class="add">	&lt;/select&gt;</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span></span>
+<span>{if $error_msgs.cc_result_message}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 1, make the following changes:
+							<pre class="code"><span>{* 18.02.0-1-g4b505b7 *}</span>
+<span></span>
+<span class="rem">&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="rem">&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; data-stripe=&quot;number&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label for=&quot;cc_number&quot; class=&quot;inline&quot;&gt;{$messages.500295}&lt;/label&gt;</span>
+<span class="add">	&lt;input type=&quot;text&quot; id=&quot;cc_number&quot; data-stripe=&quot;number&quot; size=&quot;20&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span>{if $use_cvv2}</span>
+<span class="rem">	&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="rem">	&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; data-stripe=&quot;cvc&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">	&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">		&lt;label for=&quot;cvv2_code&quot; class=&quot;inline&quot;&gt;&lt;a href=&quot;{external file='images/cvv2_code.gif'}&quot; class=&quot;lightUpImg&quot;&gt;{$messages.500296}&lt;/a&gt;&lt;/label&gt;</span>
+<span class="add">		&lt;input type=&quot;text&quot; id=&quot;cvv2_code&quot; data-stripe=&quot;cvc&quot; size=&quot;4&quot; class=&quot;field&quot; autocomplete=&quot;off&quot; /&gt;</span>
+<span class="add">	&lt;/span&gt;</span>
+<span>{/if}</span>
+<span></span>
+<span class="rem">&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="rem">&lt;select data-stripe=&quot;exp_month&quot; class=&quot;field&quot;&gt;</span>
+<span class="rem">	{section name='exp_month' loop='13' start='1'}</span>
+<span class="rem">		{$month = $smarty.section.exp_month.index|string_format:&quot;%02d&quot;}</span>
+<span class="rem">		&lt;option value=&quot;{$month}&quot;{if $smarty.now|date_format:&quot;%m&quot; == $month} selected=&quot;selected&quot;{/if}&gt;{$month}&lt;/option&gt;</span>
+<span class="rem">	{/section}</span>
+<span class="rem">&lt;/select&gt; / &lt;select data-stripe=&quot;exp_year&quot; class=&quot;field&quot;&gt;</span>
+<span class="rem">	{$startYear = $smarty.now|date_format:'%y'}</span>
+<span class="rem">	{section name='exp_year' loop=$startYear+13 start=$startYear}</span>
+<span class="rem">		{$year = $smarty.section.exp_year.index|string_format:&quot;%02d&quot;}</span>
+<span class="rem">		&lt;option value=&quot;{$year}&quot;{if $startYear == $year} selected=&quot;selected&quot;{/if}&gt;{$year}&lt;/option&gt;</span>
+<span class="rem">	{/section}</span>
+<span class="rem">&lt;/select&gt;</span>
+<span class="add">&lt;span class=&quot;nowrap&quot;&gt;</span>
+<span class="add">	&lt;label class=&quot;inline&quot;&gt;{$messages.500297}&lt;/label&gt;</span>
+<span class="add">	&lt;select data-stripe=&quot;exp_month&quot; class=&quot;field&quot;&gt;</span>
+<span class="add">		{section name='exp_month' loop='13' start='1'}</span>
+<span class="add">			{$month = $smarty.section.exp_month.index|string_format:&quot;%02d&quot;}</span>
+<span class="add">			&lt;option value=&quot;{$month}&quot;{if $smarty.now|date_format:&quot;%m&quot; == $month} selected=&quot;selected&quot;{/if}&gt;{$month}&lt;/option&gt;</span>
+<span class="add">		{/section}</span>
+<span class="add">	&lt;/select&gt; / &lt;select data-stripe=&quot;exp_year&quot; class=&quot;field&quot;&gt;</span>
+<span class="add">		{$startYear = $smarty.now|date_format:'%y'}</span>
+<span class="add">		{section name='exp_year' loop=$startYear+13 start=$startYear}</span>
+<span class="add">			{$year = $smarty.section.exp_year.index|string_format:&quot;%02d&quot;}</span>
+<span class="add">			&lt;option value=&quot;{$year}&quot;{if $startYear == $year} selected=&quot;selected&quot;{/if}&gt;{$year}&lt;/option&gt;</span>
+<span class="add">		{/section}</span>
+<span class="add">	&lt;/select&gt;</span>
+<span class="add">&lt;/span&gt;</span>
+<span></span>
+<span></span>
+<span>{if $error_msgs.cc_result_message}</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>system/tinymce.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 20, <strong>FIND:</strong><br />
+							<pre class="code"><span>			'bullist numlist | link charmap hr emoticons | forecolor backcolor'</span>
+<span>			],</span>
+<span>			menubar: false,</span>
+<span class="rem">			statusbar: false</span>
+<span>		});</span>
+<span>			</span>
+<span>		localStorage.tinyMCE = 'on';</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>			'bullist numlist | link charmap hr emoticons | forecolor backcolor'</span>
+<span>			],</span>
+<span>			menubar: false,</span>
+<span class="add">			statusbar: false,</span>
+<span class="add">			branding: false</span>
+<span>		});</span>
+<span>			</span>
+<span>		localStorage.tinyMCE = 'on';</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 20, make the following changes:
+							<pre class="code"><span>			'bullist numlist | link charmap hr emoticons | forecolor backcolor'</span>
+<span>			],</span>
+<span>			menubar: false,</span>
+<span class="rem">			statusbar: false</span>
+<span class="add">			statusbar: false,</span>
+<span class="add">			branding: false</span>
+<span>		});</span>
+<span>			</span>
+<span>		localStorage.tinyMCE = 'on';</span></pre>
+						</div>
+																				</li>
+	</ol>
+<!-- /AUTO changelog 17.12.0 --><!-- AUTO changelog 18.02.0 -->
+<h3 id="milestone_18-02-0">18.02.0 (February 27, 2018)</h3>
+<ul class="nav">
+	<li><a href="#milestone_18-02-0_enhancements">Enhancements (1)</a></li>
+	<li><a href="#milestone_18-02-0_bugfix_secure">Security Fixes (1)</a></li>
+	<li><a href="#milestone_18-02-0_bugfix">Fixes/Maintenance (5)</a></li>
+	<li><a href="#milestone_18-02-0_templates">Template Changes (1)</a></li>
+</ul>
+<h4 id="milestone_18-02-0_enhancements">[Enhancements]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1855 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1855" onclick="window.open(this.href); return false;" id="bug_1855">1855</a> - Storefront: cleaned up Custom Pages section of the control panel to work better with touch controls<br />
+</p>
+<h4 id="milestone_18-02-0_bugfix_secure">[Security Fixes]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1858 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1858" onclick="window.open(this.href); return false;" id="bug_1858">1858</a> - Closed a vector that could allow arbitrary javascript execution - <em>Security</em>
+<br />
+</p>
+<h4 id="milestone_18-02-0_bugfix">[Fixes/Maintenance]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1850 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1850" onclick="window.open(this.href); return false;" id="bug_1850">1850</a> - Listing Exporter: make sure image data is included in the export, when asked for<br />
+ 
+<!-- Log for bug # 1851 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1851" onclick="window.open(this.href); return false;" id="bug_1851">1851</a> - Fixed auction minimum bid getting reset to its original value during a Listing Upgrade<br />
+ 
+<!-- Log for bug # 1853 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1853" onclick="window.open(this.href); return false;" id="bug_1853">1853</a> - Fixed a few more PHP7.1 compatibility things in the admin panel<br />
+ 
+<!-- Log for bug # 1852 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1852" onclick="window.open(this.href); return false;" id="bug_1852">1852</a> - Fixed a broken query used when admin-deactivating a listings' Video attachment<br />
+ 
+<!-- Log for bug # 1857 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1857" onclick="window.open(this.href); return false;" id="bug_1857">1857</a> - Increased consistency of admin registration URL setting storage when using forced SSL<br />
+</p>
+<h4 id="milestone_18-02-0_templates">[Template Changes]</h4>
+<p style="font-style: italic;">
+	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
+	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
+	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	to find if you need to make any template changes during an update.
+</p>
+<fieldset class="code_legend">
+	<legend>Legend</legend>
+	<p>Note the following about highlighted lines you will see in this section.</p>
+	<pre class="code"><span class="add">This is a line that has been <strong>Added</strong></span>
+<span class="rem">This is a line that has been <strong>Removed</strong></span>
+<span>This is a line that has <strong>not changed</strong>.</span></pre>
+</fieldset>
+
+<ol style="clear: both;">
+			<li>
+							In file <strong>main_page/alternate_front_pages/traditional.tpl</strong>
+								<br /><br /><ol style="list-style-type: upper-alpha;">											<li>						<div class="findReplace" style="display: none;">
+							Near line 37, <strong>FIND:</strong><br />
+							<pre class="code"><span>						&lt;div id=&quot;category_column&quot;&gt;</span>
+<span>							&lt;div id=&quot;left_categories&quot;&gt;</span>
+<span>								&lt;h2 class=&quot;title categories&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-list-alt&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;{$common_text.502435}&lt;!-- Categories --&gt;&lt;/h2&gt;</span>
+<span class="rem">								&lt;!-- FANCY CATEGORY DISPLAY BEGIN --&gt;</span>
+<span>								{category_list}</span>
+<span class="rem">								&lt;!-- FANCY CATEGORY DISPLAY END --&gt;</span>
+<span>								</span>
+<span class="rem">								&lt;!-- SIMPLE LINK CATEGORY DISPLAY BEGIN </span>
+<span class="rem">								{module tag='classified_navigation_1'}</span>
+<span class="rem">								SIMPLE LINK CATEGORY DISPLAY END --&gt;</span>
+<span>							&lt;/div&gt;</span>
+<span>							</span>
+<span>							&lt;!-- START REGIONS --&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>						&lt;div id=&quot;category_column&quot;&gt;</span>
+<span>							&lt;div id=&quot;left_categories&quot;&gt;</span>
+<span>								&lt;h2 class=&quot;title categories&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-list-alt&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;{$common_text.502435}&lt;!-- Categories --&gt;&lt;/h2&gt;</span>
+<span class="add">								&lt;!-- CATEGORY DISPLAY BEGIN --&gt;</span>
+<span>								{category_list}</span>
+<span class="add">								&lt;!-- CATEGORY DISPLAY END --&gt;</span>
+<span>								</span>
+<span>							&lt;/div&gt;</span>
+<span>							</span>
+<span>							&lt;!-- START REGIONS --&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 37, make the following changes:
+							<pre class="code"><span>						&lt;div id=&quot;category_column&quot;&gt;</span>
+<span>							&lt;div id=&quot;left_categories&quot;&gt;</span>
+<span>								&lt;h2 class=&quot;title categories&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-list-alt&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;{$common_text.502435}&lt;!-- Categories --&gt;&lt;/h2&gt;</span>
+<span class="rem">								&lt;!-- FANCY CATEGORY DISPLAY BEGIN --&gt;</span>
+<span class="add">								&lt;!-- CATEGORY DISPLAY BEGIN --&gt;</span>
+<span>								{category_list}</span>
+<span class="rem">								&lt;!-- FANCY CATEGORY DISPLAY END --&gt;</span>
+<span class="add">								&lt;!-- CATEGORY DISPLAY END --&gt;</span>
+<span>								</span>
+<span class="rem">								&lt;!-- SIMPLE LINK CATEGORY DISPLAY BEGIN </span>
+<span class="rem">								{module tag='classified_navigation_1'}</span>
+<span class="rem">								SIMPLE LINK CATEGORY DISPLAY END --&gt;</span>
+<span>							&lt;/div&gt;</span>
+<span>							</span>
+<span>							&lt;!-- START REGIONS --&gt;</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 68, <strong>FIND:</strong><br />
+							<pre class="code"><span>					&lt;!-- MAIN COLUMN BEGIN --&gt;				</span>
+<span>					&lt;div class=&quot;main&quot;&gt;</span>
+<span>						{module tag='module_featured_pic_1'}</span>
+<span class="rem">						&lt;!-- FEATURED CAROUSEL BEGIN</span>
+<span>						&lt;div class=&quot;clr&quot;&gt; &lt;/div&gt;</span>
+<span>						&lt;div class=&quot;content_box gj_simple_carousel border&quot;&gt;</span>
+<span>							&lt;h3 class=&quot;title&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-star&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;{$common_text.502419}&lt;!-- Featured Listings --&gt;&lt;/h3&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>					&lt;!-- MAIN COLUMN BEGIN --&gt;				</span>
+<span>					&lt;div class=&quot;main&quot;&gt;</span>
+<span>						{module tag='module_featured_pic_1'}</span>
+<span class="add">						&lt;!-- FEATURED CAROUSEL BEGIN --&gt;</span>
+<span>						&lt;div class=&quot;clr&quot;&gt; &lt;/div&gt;</span>
+<span>						&lt;div class=&quot;content_box gj_simple_carousel border&quot;&gt;</span>
+<span>							&lt;h3 class=&quot;title&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-star&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;{$common_text.502419}&lt;!-- Featured Listings --&gt;&lt;/h3&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 68, make the following changes:
+							<pre class="code"><span>					&lt;!-- MAIN COLUMN BEGIN --&gt;				</span>
+<span>					&lt;div class=&quot;main&quot;&gt;</span>
+<span>						{module tag='module_featured_pic_1'}</span>
+<span class="rem">						&lt;!-- FEATURED CAROUSEL BEGIN</span>
+<span class="add">						&lt;!-- FEATURED CAROUSEL BEGIN --&gt;</span>
+<span>						&lt;div class=&quot;clr&quot;&gt; &lt;/div&gt;</span>
+<span>						&lt;div class=&quot;content_box gj_simple_carousel border&quot;&gt;</span>
+<span>							&lt;h3 class=&quot;title&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-star&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;{$common_text.502419}&lt;!-- Featured Listings --&gt;&lt;/h3&gt;</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 89, <strong>FIND:</strong><br />
+							<pre class="code"><span>							 *}</span>
+<span>							{module tag='module_featured_pic_1' dynamic_image_dims=1 gallery_columns=4 module_thumb_width=160}			</span>
+<span>						&lt;/div&gt;</span>
+<span class="rem">						FEATURED CAROUSEL END --&gt;</span>
+<span>						&lt;div style=&quot;width: 100%;&quot;&gt;</span>
+<span>							&lt;div class=&quot;clearfix&quot;&gt;</span>
+<span>								&lt;div class=&quot;half_column_left hottest_ads normal-whitespace&quot;&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>							 *}</span>
+<span>							{module tag='module_featured_pic_1' dynamic_image_dims=1 gallery_columns=4 module_thumb_width=160}			</span>
+<span>						&lt;/div&gt;</span>
+<span class="add">						&lt;!-- FEATURED CAROUSEL END --&gt;</span>
+<span>						&lt;div style=&quot;width: 100%;&quot;&gt;</span>
+<span>							&lt;div class=&quot;clearfix&quot;&gt;</span>
+<span>								&lt;div class=&quot;half_column_left hottest_ads normal-whitespace&quot;&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 89, make the following changes:
+							<pre class="code"><span>							 *}</span>
+<span>							{module tag='module_featured_pic_1' dynamic_image_dims=1 gallery_columns=4 module_thumb_width=160}			</span>
+<span>						&lt;/div&gt;</span>
+<span class="rem">						FEATURED CAROUSEL END --&gt;</span>
+<span class="add">						&lt;!-- FEATURED CAROUSEL END --&gt;</span>
+<span>						&lt;div style=&quot;width: 100%;&quot;&gt;</span>
+<span>							&lt;div class=&quot;clearfix&quot;&gt;</span>
+<span>								&lt;div class=&quot;half_column_left hottest_ads normal-whitespace&quot;&gt;</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 133, <strong>FIND:</strong><br />
+							<pre class="code"><span>							&lt;a href=&quot;http://www.hostmonster.com/track/geodesic/resources&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{external file='images/banners/hostmonster_300x100.jpg'}&quot; alt=&quot;HostMonster Hosting&quot; title=&quot;HostMonster Hosting&quot; /&gt;&lt;/a&gt;</span>
+<span>							&lt;a href=&quot;http://lunarpages.com/id/geodesic/goto/basic&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{external file='images/banners/lunarpages_300x100.jpg'}&quot; alt=&quot;Lunarpages.com Hosting&quot; title=&quot;Lunarpages.com Hosting&quot; /&gt;&lt;/a&gt;</span>
+<span>						&lt;/div&gt;</span>
+<span class="rem">						&lt;!-- </span>
+<span>						&lt;br /&gt;</span>
+<span>						&lt;div class=&quot;content_box&quot;&gt;</span>
+<span>							&lt;h2 class=&quot;title&quot;&gt;{$common_text.502418}&lt;!-- Recent --&gt;&lt;/h2&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>							&lt;a href=&quot;http://www.hostmonster.com/track/geodesic/resources&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{external file='images/banners/hostmonster_300x100.jpg'}&quot; alt=&quot;HostMonster Hosting&quot; title=&quot;HostMonster Hosting&quot; /&gt;&lt;/a&gt;</span>
+<span>							&lt;a href=&quot;http://lunarpages.com/id/geodesic/goto/basic&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{external file='images/banners/lunarpages_300x100.jpg'}&quot; alt=&quot;Lunarpages.com Hosting&quot; title=&quot;Lunarpages.com Hosting&quot; /&gt;&lt;/a&gt;</span>
+<span>						&lt;/div&gt;</span>
+<span class="add">						</span>
+<span>						&lt;br /&gt;</span>
+<span>						&lt;div class=&quot;content_box&quot;&gt;</span>
+<span>							&lt;h2 class=&quot;title&quot;&gt;{$common_text.502418}&lt;!-- Recent --&gt;&lt;/h2&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 133, make the following changes:
+							<pre class="code"><span>							&lt;a href=&quot;http://www.hostmonster.com/track/geodesic/resources&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{external file='images/banners/hostmonster_300x100.jpg'}&quot; alt=&quot;HostMonster Hosting&quot; title=&quot;HostMonster Hosting&quot; /&gt;&lt;/a&gt;</span>
+<span>							&lt;a href=&quot;http://lunarpages.com/id/geodesic/goto/basic&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{external file='images/banners/lunarpages_300x100.jpg'}&quot; alt=&quot;Lunarpages.com Hosting&quot; title=&quot;Lunarpages.com Hosting&quot; /&gt;&lt;/a&gt;</span>
+<span>						&lt;/div&gt;</span>
+<span class="rem">						&lt;!-- </span>
+<span class="add">						</span>
+<span>						&lt;br /&gt;</span>
+<span>						&lt;div class=&quot;content_box&quot;&gt;</span>
+<span>							&lt;h2 class=&quot;title&quot;&gt;{$common_text.502418}&lt;!-- Recent --&gt;&lt;/h2&gt;</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 142, <strong>FIND:</strong><br />
+							<pre class="code"><span>							{module tag='newest_ads_link_2'}</span>
+<span>							{module tag='newest_ads_link_3'}</span>
+<span>						&lt;/div&gt;</span>
+<span class="rem">						 --&gt;</span>
+<span>						&lt;br /&gt;</span>
+<span>						&lt;div&gt;</span>
+<span class="rem">							&lt;!-- EDIT THE FOLLOWING LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE</span>
+<span>							&lt;a href=&quot;http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,startup_tutorial_and_checklist;design_configuration;adding_banner_management;google_adsense_placement/&quot; onclick=&quot;window.open(this.href); return false;&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;{external file='images/banners/banner1_adsense_200x200.jpg'}&quot; alt=&quot;Banner Example&quot; title=&quot;Banner Example&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;&lt;/a&gt;</span>
+<span class="rem">							EDIT THE ABOVE LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE --&gt;</span>
+<span>						&lt;/div&gt;</span>
+<span>					&lt;/div&gt;</span>
+<span>					&lt;!-- RIGHT COLUMN END --&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>							{module tag='newest_ads_link_2'}</span>
+<span>							{module tag='newest_ads_link_3'}</span>
+<span>						&lt;/div&gt;</span>
+<span class="add">						 </span>
+<span>						&lt;br /&gt;</span>
+<span>						&lt;div&gt;</span>
+<span class="add">							&lt;!-- EDIT THE FOLLOWING LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE --&gt;</span>
+<span>							&lt;a href=&quot;http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,startup_tutorial_and_checklist;design_configuration;adding_banner_management;google_adsense_placement/&quot; onclick=&quot;window.open(this.href); return false;&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;{external file='images/banners/banner1_adsense_200x200.jpg'}&quot; alt=&quot;Banner Example&quot; title=&quot;Banner Example&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;&lt;/a&gt;</span>
+<span class="add">							&lt;!-- EDIT THE ABOVE LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE --&gt;</span>
+<span>						&lt;/div&gt;</span>
+<span>					&lt;/div&gt;</span>
+<span>					&lt;!-- RIGHT COLUMN END --&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 142, make the following changes:
+							<pre class="code"><span>							{module tag='newest_ads_link_2'}</span>
+<span>							{module tag='newest_ads_link_3'}</span>
+<span>						&lt;/div&gt;</span>
+<span class="rem">						 --&gt;</span>
+<span class="add">						 </span>
+<span>						&lt;br /&gt;</span>
+<span>						&lt;div&gt;</span>
+<span class="rem">							&lt;!-- EDIT THE FOLLOWING LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE</span>
+<span class="add">							&lt;!-- EDIT THE FOLLOWING LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE --&gt;</span>
+<span>							&lt;a href=&quot;http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,startup_tutorial_and_checklist;design_configuration;adding_banner_management;google_adsense_placement/&quot; onclick=&quot;window.open(this.href); return false;&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;{external file='images/banners/banner1_adsense_200x200.jpg'}&quot; alt=&quot;Banner Example&quot; title=&quot;Banner Example&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;&lt;/a&gt;</span>
+<span class="rem">							EDIT THE ABOVE LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE --&gt;</span>
+<span class="add">							&lt;!-- EDIT THE ABOVE LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE --&gt;</span>
+<span>						&lt;/div&gt;</span>
+<span>					&lt;/div&gt;</span>
+<span>					&lt;!-- RIGHT COLUMN END --&gt;</span></pre>
+						</div>
+						</li>									</ol>					</li>
+	</ol>
+<!-- /AUTO changelog 18.02.0 --><!-- /AUTO CHANGELOGS -->
+
+<a href="../changelogs.php">Other Changelogs</a>
+</body>
+</html> 

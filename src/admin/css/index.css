@@ -1,0 +1,856 @@
+@CHARSET "UTF-8";
+
+body {
+	font-size: 11px;
+	font-family: Arial, Tahoma, sans-serif;
+	color: #73879C;  /*EDIT PER STYLESHEET*/
+	margin: 0;
+	padding: 0;
+	background: #006594;  /*EDIT PER STYLESHEET*/
+}
+
+.bodyWrapper
+{
+	position:relative;
+}
+.body_html
+{
+	position: absolute;
+	top: 95px;
+	left: 210px;
+	right: 0px;
+	background: #fff;
+	padding: 15px 30px 15px 15px;
+	font-size: 13px;
+	min-height: 600px;
+	min-width: 700px;
+}
+
+.side_menu
+{
+	/* 
+	 * overall container for side menu, for
+	 * styles within the side menu, see 
+	 * side_menu.css
+	 */
+	position: absolute;
+	top: 95px;
+	left: 3px;
+	width: 200px;
+	height: auto;
+	z-index: 2000;
+	border: 1px solid #339DC1;
+	padding-bottom: 4px;
+}
+
+.side_menu_low
+{
+	z-index: 1;
+}
+
+.topIcons
+{
+	position: relative;
+	z-index: 1;
+	top: 5px;
+	max-height: 50px;
+	margin-bottom: 30px;
+}
+	
+.breadcrumb_title
+{
+	position: relative;
+	top: 10px;
+	font-family: Arial;
+	font-size: 14px;
+	color: #73879C;
+	font-weight: normal;
+	border: 0;
+	padding-left: 0;
+	padding-top: 7px;
+	left: 0px;
+	height: 24px;
+	display: inline-block;
+	max-width: 89%; /* makes this play nice with the 'help' link on mobile */
+}
+
+.breadcrumb_title a:hover,
+.breadcrumb_title a:visited,
+.breadcrumb_title a:link
+{
+	font-size: 14px;
+	color: #73879C;
+	text-decoration: underline;
+}
+
+.breadcrumb_title a:hover
+{
+	text-decoration: none;
+}
+
+.breadcrumb_title span.fa
+{
+	font-size: 14px;
+}
+
+.breadcrumb_title span i.fa-chevron-right
+{
+	font-size: 12px;
+}
+
+.page_note
+{
+	text-align: left; 
+	border: 1px solid #FED678; 
+	background-color: #FFF7D2; 
+	margin: 5px 0 10px 0; 
+	padding: 5px;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:8pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	color: #73879C;
+}
+
+.page_note_error
+{
+	text-align: center; 
+	border: 1px solid #CC0033; 
+	background-color: #FFF0F4; 
+	margin: 20px; 
+	padding: 3px;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:8pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	color: #CC0033;
+}
+
+.page_help_button {
+	position: absolute;
+	top: -9px;
+	z-index: 10;
+	width: 31px;
+	height: 25px;
+	font-size: 22px;
+}
+
+.page_help_button .fa-book:visited,
+.page_help_button .fa-book {
+	color: #26B99A;
+}
+
+.page_help_button .fa-book:hover {
+	color: #333;
+}
+
+.page_image {
+	position: relative;
+	z-index: 2;
+	overflow: visible;
+	display:inline-block;
+}
+/*links*/
+
+a:link, a:visited {
+	color: #26B99A; /*EDIT PER STYLESHEET*/
+}
+
+a:hover, a:active {
+	color: #26B99A;  /*EDIT PER STYLESHEET*/
+	text-decoration: underline;
+}
+
+a img
+{
+	/* get rid of borders around image links */
+	border: none;
+}
+
+.hiddenHomeLink 
+{
+/* Hide the link at the bottom of each admin page,
+	that link should only show if the rest of the page
+	does not load for some reason. */
+	display: none;
+	visibility: hidden;
+}
+
+/*footer*/
+#footerContainer
+{
+	position: absolute;
+	bottom: -75px;
+	height: 75px;
+	right: 0px;
+	left: -220px;
+	background: url('../admin_images/design/footer.jpg') no-repeat;
+}
+
+#footer {
+	border-top: 2px solid #FFF; /*EDIT PER STYLESHEET*/
+	font-size: 9px;
+	color: #FFF; /*EDIT PER STYLESHEET*/
+	padding: 5px 0;
+	height: 1%; /*ie7*/
+	text-align: center;
+	margin: auto;
+}
+
+div#footer-inside {
+	font-family: Arial, Helvetica;
+	color: #73879C;
+}
+
+div#footer-inside a {
+	color: #73879C;
+}
+
+div#footer-top {
+	text-align: right;
+	color: #73879C;  /*EDIT PER STYLESHEET*/
+	padding: 0px;
+	padding-right: 30px;
+}
+
+div#footer-top a {
+	text-align: right;
+	color: #73879C;  /*EDIT PER STYLESHEET*/
+	padding: 0px;
+}
+
+div#footer-top p {
+	padding-top: 5px;
+	padding-bottom: 1px;
+	margin: 0px;
+}
+
+/* Alternating row colors */
+.row_color1{
+	background-color: #F9F9F9; 
+}
+.row_color2{
+	background-color: transparent;
+}
+.row_color3{
+	background-color: #F5F5F5; }
+
+.row_color1:hover,
+.row_color2:hover {
+	background-color: #F0FBF8; 
+}
+	
+
+legend {
+	margin-left: 0px;
+	margin-bottom: 3px;
+	margin-top: 10px;
+	border: 0 solid #e6e9ed;
+	padding: 4px 25px 4px 4px;
+	font-size: 9pt;
+	font-weight: normal;
+	color: #fff;
+	background-color: transparent; /* #006699; */
+	border-radius: 12px;
+}
+
+fieldset {
+    	background-color: #ffffff;
+    	border: 1px solid #e6e9ed;
+    	border-radius: 0;
+    	margin: 0 5px 5px;
+    	padding: 0 10px 10px;
+    	position: relative;
+}
+
+fieldset ul li 
+{
+	margin-left: 20px;
+	
+}
+
+fieldset table, fieldset table tr, fieldset table tr td {
+	vertical-align: top;
+	margin: 0;
+}
+
+fieldset table {
+	width: 100%;
+	border-width: 0;	
+}
+
+.page_details_hdr,
+.col_hdr,
+.col_hdr_left,
+tr.col_hdr td,
+tr.col_hdr th
+{
+	border-top: 0px solid #588C2D;
+	border-bottom: 0px solid #588C2D;
+	background: #73879C none repeat-x top left; 
+	padding: 5px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FFF;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.col_hdr_left
+{
+	text-align: left !important;
+}
+
+.col_hdr_right
+{
+	text-align: right !important;
+}
+
+.col_hdr_left2
+{
+	border-top: 0px solid #588C2D;
+	border-bottom: 0px solid #588C2D;
+	background: #e2e4e9 url('../admin_images/design/bg_col_hdr2.gif') repeat-x top left; 
+	padding: 5px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FFF;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.col_hdr a,
+.col_hdr_left a,
+.col_hdr_top a {
+	text-decoration: none;
+	border-bottom: 1px dashed #73879C;
+	color: #73879C;
+	padding: 1px;
+}
+.col_hdr a:hover,
+.col_hdr_left a:hover,
+.col_hdr_top a:hover {
+	color: #337ab7;
+	border-bottom: 0;
+}
+
+.col_hdr2
+{
+	border-top: 0px solid #588C2D;
+	border-bottom: 0px solid #588C2D;
+	background: #e2e4e9 url('../admin_images/design/bg_col_hdr2.gif') repeat-x top left; 
+	padding: 5px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FFF;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.col_hdr_solid a:visited,
+.col_hdr_solid a:hover,
+.col_hdr_solid a,
+.col_hdr_solid
+{
+	background: #73879C none repeat-x top left; 
+	padding: 5px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FFF;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.pages_manage_nav,
+.col_hdr_top,
+tr.col_hdr_top td,
+tr.col_hdr_top th {
+	background: #FFF none top left;
+	padding: 5px;
+	text-align: center;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #73879C;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+tr.col_hdr_top th select {
+	color: #333;
+}
+
+
+A.col_hdr_top:link { color: #FFF; text-decoration: underline}
+A.col_hdr_top:visited { color: #FFF; text-decoration: underline}
+A.col_hdr_top:hover { color: #FFF; text-decoration: none;}
+A.col_hdr_top:active { color: #FFF; text-decoration: underline}
+
+
+A.pages_manage_nav,
+A.pages_manage_nav:active,
+A.pages_manage_nav:link { 
+	color: #FF4500; 
+	text-decoration: none; 
+	font-size: 1.8em; 
+	font-weight: normal;
+}
+A.pages_manage_nav:hover { 
+	text-decoration: underline;
+}
+
+.col_ftr,
+.col_ftr2,
+tfoot tr td {
+	background: #EEE none repeat-x top left;
+	border-top: 0px solid #989898;
+	border-bottom: 0px solid #989898;
+	/* background-color: #EEE; */
+	padding: 5px;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #73879C;
+	vertical-align: middle;
+}
+
+.col_ftr2 {
+	background: transparent none repeat-x top left;
+}
+
+.sec_hdr{
+	background-color: #C4C4C4; 
+	border-left: 0px solid #8AC;
+	border-right: 0px solid #8AC;
+	border-top: 0px solid #8AC;
+	border-bottom: 1px solid #8AC;
+	padding: 3px;
+	text-align: center;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #999;
+	white-space: nowrap;
+}
+
+.sec_hdr2{
+	border-top: 0px solid #E6E6E6;
+	border-bottom: 0px solid #E6E6E6;
+	background-color: #B7B7B7;
+	padding: 3px;
+	text-align: center;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:10pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FFF;
+	white-space: nowrap;
+}
+
+.sec_hdr3{
+	background-color: #D3F2AB; 
+	border-top: 1px solid #84C528;
+	border-bottom: 1px solid #84C528;
+	padding: 3px;
+	text-align: center;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #000;
+	white-space: nowrap;
+}
+
+.group_price_hdr{
+	border: 0 solid #006699;
+	/* background-color: #FFF; */
+	background: #transparent none repeat-x top left;
+	padding: 5px;
+	text-align: left;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:14pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	color: #73879C;
+	white-space: nowrap;
+}
+
+.spec_color1{
+}
+
+.cat_hdr{
+	background-color: #999; 
+	border-left: 0px solid #8AC;
+	border-right: 0px solid #8AC;
+	border-top: 0px solid #8AC;
+	border-bottom: 0px solid #8AC;
+	padding: 3px;
+	text-align: center;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:12pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FFF;
+	white-space: nowrap;
+}
+
+
+/*
+.options_header {
+	background-image: url(../admin_images/design/col_hdr.jpg);
+	background-repeat: repeat-x;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999999;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+	border-right-style: solid;
+	border-right-color: #ffffff;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	text-align: center;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #ffffff;
+
+}
+*/
+
+.options_header {
+	width: 100%;
+	font-weight: bold;
+	font-size: 8pt;
+	height: auto;
+	background-image: url(../admin_images/design/col_hdr.jpg);
+	background-repeat: repeat-x;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999999;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+	text-align: center;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.table_header_spacer{
+	float :left;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;	
+}
+
+.table_line {
+	border-style: solid;
+	border-width: 0px 1px 0px 0px;
+	border-color: #ffffff;
+}
+
+#table_header0 {
+	width: 40% ;
+	text-align: right;
+
+}
+#table_header1 {
+	width: 40%;
+	text-align: left;
+}
+
+DIV#stickyTooltipCloseButton {
+	position: absolute;
+	top: 0px;
+	right: 4px;
+	color: #FFFFFF;
+	font-size: 11pt;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.gjLightbox {
+	/* This is for the overall box the lightbox contents load in, but note that
+	 * the lightUpBox may be used for more than just the lightbox slideshow.
+	 */
+	
+	border: 10px solid #eaeaea;
+	background-color: white;
+	/* needs to be bigger than anything else on the page */
+	z-index: 2005;
+	
+	/* position needs to be absolute to be able to be moved on the page */
+	position: absolute;
+}
+.gjLightboxOverlay {
+	/* This is the new overlay for the new jquery lightbox, most of these need
+	to be set to work. */
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/* Change the background color for different looks for how back is faded */
+	background-color: #000000;
+	width: 100%;
+	/* needs to be second largest z-index on the page, right below new lightbox */
+	z-index: 2004;
+}
+
+.lightUpBox_imageBox {
+	/* In the overall box, this is the div containing the image */
+	text-align: center;
+}
+.lightUpBox_imageBox img {
+	/* The actual image */
+	border: 1px solid black;
+	cursor: pointer;
+}
+img.lightUpBigImage {
+	/* This is a stand-alone image in the box, it's not wrapped by extra HTML,
+	this is used on image upload page as a "simpler" light up box without the
+	fancy slideshow. */
+	
+	/* give it a pointer since when you click on it, it closes it. */
+	cursor: pointer;
+}
+
+.lightUpBox_navigation {
+	/* In the overall box, this is the div containing the navigation */
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 5px;
+	text-align: center;
+	/* width: 80%; */
+	background-color: white;
+	border-bottom: 1px dashed black;
+	border-left: 1px dashed black;
+}
+
+.lightUpBox_description {
+	/* In the overall box, this is the div containing the image description */
+	text-align: center;
+}
+
+
+/* Stuff for message box */
+#messageBox {
+	/* The container for messages displayed */
+	position: absolute;
+	border: 1px dashed blue;
+	padding: 10px;
+	background-color: white;
+	left: 40%;
+	width: 550px;
+	z-index: 1001;
+	font-weight: bold;
+	text-align: center;
+}
+.moveMessage {
+	/* specific for message move thingy */
+	cursor: move;
+	
+	margin-right: 5px;
+}
+.closeMessage {
+	cursor: pointer;
+}
+
+div.closeBoxX {
+	position: absolute;
+	top: 7px;
+	right: 7px;
+	cursor: pointer;
+	color: #FFF;
+	/* hack in the fontawesome styles so that we can easily replace all the old X's without change every class */
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+div.closeBoxX:before {
+	/* fa-remove */
+	content: "\f00d";
+}
+div.closeBoxX:hover {
+	color: #eee;
+}
+.gjLightbox > div {
+	padding: 2px;
+}
+.lightUpTitle
+{
+	background: #26B99A none repeat-x top left;
+	padding: 5px;
+	padding-right: 25px;
+	text-align: center;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FFF;
+	white-space: nowrap;
+}
+
+.lightUpMover,
+.lightUpTitle
+{
+	cursor: pointer;
+}
+
+.messageBoxButtons {
+	/* Box for the buttons to delete or edit an image */
+	float: right;
+	margin-top: -8px;
+	/* Works in FireFox only, to make it transparent until you hover over it */
+	opacity: 0.6;
+	
+	/* Here is the solution for IE but it makes the icon look all pixilated, IE is
+	bad at "filtering" PNG files, if you want to use it anyways, just un-comment it: */
+	/*
+	filter:alpha(opacity=60)
+	*/
+}
+
+.text_blue {
+	color: #006699;
+}
+.text_green {
+	color: #26B99A;
+}
+.text_gray {
+	/* lighter than the "standard gray" so that this text stands out from standard */
+	color: #888;
+}
+
+/* ****** MASTER SWITCHES ****** */
+
+.master_switches_grid {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.master_switch_on, .master_switch_off {
+	min-height: 170px; 
+	width: 370px;
+	margin: 10px;
+	display: inline-block;
+	border-radius: 10px;
+	cursor: pointer;
+	vertical-align: top;
+	max-width: 90%;
+}
+
+
+.master_switch_on {
+	border: 3px solid #1ABB9C;
+}
+
+.master_switch_on:hover {
+	border: 3px solid #17AA8C;
+	background-color: #EFEFEF;
+}
+
+.master_switch_off {
+	border: 3px solid #E74C3C;
+}
+
+.master_switch_off:hover {
+	border: 3px solid #C00000;
+	background-color: #EFEFEF;
+}
+
+.master_switch_label {
+	float: left;
+	position: relative;
+	top: 15px;
+	left: 20px;
+	font-size: 18pt; 
+	font-weight: bold;
+}
+
+.master_switch_on:hover .master_switch_label {
+	color: #17AA8C;
+}
+
+.master_switch_off:hover .master_switch_label {
+	color: #C00000;
+}
+
+.master_switch_status {
+	float: right;
+	position: relative;
+	top: 15px;
+	right: 30px;
+	font-size: 12pt; 
+	font-weight: bold;
+	text-align: center;
+}
+
+.master_switch_on .master_switch_status {
+	color: #1ABB9C;
+}
+
+.master_switch_off .master_switch_status {
+	color: #E74C3C;
+}
+.master_switch_description {
+	font-size: 1.1em; 
+	font-weight: normal;
+	padding: 25px 15px 10px 15px;
+	text-align: left;
+}
+
+/*  Links within admin home page */
+ul.home_links {
+	text-align: left;
+	width: 100%;
+	display: block;
+	margin: 5px;
+	padding: 0px;
+	list-style: none;
+}
+ul.home_links li {
+	/*display: inline-block;*/
+	list-style: none;
+	margin: 3px;
+}

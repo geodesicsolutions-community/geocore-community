@@ -1,0 +1,74 @@
+/* 7.6.3-190-g3b9cd85 */
+
+/* note: #storefront_side_column is legacy support for pre-7.3 templates. newer templates use .sidebar instead */
+
+.sidebar ul,
+#storefront_side_column ul {
+	margin: 0;
+	padding: 0;
+}
+
+.sidebar ul li,
+#storefront_side_column ul li {
+	list-style: none;
+	text-align: left;
+}
+
+.sidebar ul li a:link,.sidebar ul li a:visited,
+#storefront_side_column ul li a:link,#storefront_side_column ul li a:visited
+{
+	display: block;
+	padding: 0.83333em 0.41667em 0.83333em 2.91667em;
+	font-size: 12px;
+	font-weight: bold;
+	background: #F9F9F9 no-repeat left center;
+	border-top: thin solid #ffffff;
+	border-bottom: thin solid #f3f3f3;
+	text-decoration: none;
+}
+
+.sidebar ul li a:hover,.sidebar ul li a:active,
+#storefront_side_column ul li a:hover,#storefront_side_column ul li a:active
+{
+	background: #f3f3f3 no-repeat left center;
+	border-top: thin solid #ffffff;
+	border-bottom: thin solid #e5e5e5;
+	text-decoration: underline;
+}
+
+.sidebar ul li a.subcategory:link,.sidebar ul li a.subcategory:visited,
+#storefront_side_column ul li a.subcategory:link,#storefront_side_column ul li a.subcategory:visited
+{
+	background-color: #FEFEFE;
+	padding: 0.83333em 0.41667em 0.83333em 4.75em;
+}
+
+.sidebar ul li a.subcategory:hover,.sidebar ul li a.subcategory:active,
+#storefront_side_column ul li a.subcategory:hover,#storefront_side_column ul li a.subcategory:active
+{
+	background: #f3f3f3 no-repeat left center;
+	border-top: thin solid #ffffff;
+	border-bottom: thin solid #e5e5e5;
+	text-decoration: underline;
+}
+
+.manage {
+	border: thin solid #cacbcc;
+	background: #eeeff2 url('../images/backgrounds/button.gif') repeat-x top left;
+	color: #666666;
+	padding: 0.71429em;
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+	text-align: center;
+	display: block
+}
+
+#storefront_side_column {
+	width: 200px;
+	float: left;
+}
+
+.user_page {
+	font-size: 0.7em;
+}

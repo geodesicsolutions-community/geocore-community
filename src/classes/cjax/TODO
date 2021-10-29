@@ -1,0 +1,13 @@
+TODOS:
+
+1. add functionality that mimics  load_script but for style sheets files
+
+
+	//TODO ADD.
+	/*
+	ApplyClass(ELEMENT TAG)
+	ApplyFunction(ElementId,Fucntion,Event);
+	ApplyTo(ElementId,SYNTAX);
+	applyClassToType(Type,Class, optional elements_tag = input);
+	*/
+	

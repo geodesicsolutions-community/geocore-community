@@ -1,0 +1,32 @@
+<ruleset name="PSR-12 Code Standard">
+    <description>Normal PSR-12 coding standard</description>
+    <!-- only process php files -->
+    <exclude-pattern>*\.(?!php$)</exclude-pattern>
+
+    <!-- Exclude libraries -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/classes/adodb/*</exclude-pattern>
+    <exclude-pattern>*/classes/pclzip/*</exclude-pattern>
+    <exclude-pattern>*/classes/PEAR/*</exclude-pattern>
+    <exclude-pattern>*/classes/php5_classes/smarty/*</exclude-pattern>
+    <exclude-pattern>*/classes/php5_classes/swift5/*</exclude-pattern>
+    <exclude-pattern>*/geo_templates/*</exclude-pattern>
+
+    <!-- list of default files and paths to check relative to contrib/ (ignored if set on command line) -->
+    <file>../src</file>
+
+    <!-- Use PSR12 ruleset -->
+    <rule ref="PSR12">
+        <!-- The legacy code still has some work before it gets to be fully PSR12 compliant.
+            These are non-trivial to fix so leaving them for another day.
+        -->
+        <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
+        <!-- Legacy code prepends everything with `geo` (a solution from the days before namespaces) -->
+        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
+        <!-- Lots of methods will need to be renamed to be compliant with this one in legacy code... -->
+        <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
+
+        <!-- This is done in most of the directly accessed files (like index.php), just need to move to bootstrap -->
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    </rule>
+</ruleset>

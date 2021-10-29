@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+
+div.bigger_container {
+text-align:center;
+}
+div.site_map{
+text-align:left;
+width:800px;
+margin:0 auto;
+}
+div.column{
+float: left;
+width: 33%;
+min-width: 245px;
+margin:none;
+}
+div.column ul{
+list-style:none;
+margin:0px;
+padding:0px;
+}
+div.column ul li ul{
+list-style: none;
+margin-left: 0px;
+margin-top: 5px;
+padding-left:0px;
+}
+div.column ul{
+border-left: none;
+}
+
+div.column ul li div{
+/* background-color:#CC99CC; */
+background-image: none;
+background-repeat:no-repeat;
+font-size:14px;
+font-weight:bold;
+color: inherit;
+vertical-align: middle;
+white-space:nowrap;
+min-width:245px;
+}
+div.column ul li div img{
+vertical-align: middle;
+/* main category image positioning is here */
+position: relative;
+top: 0;
+left: -5px;
+}
+
+div.column ul li ul li div{
+/* sub-category style */
+color: inherit;
+padding-top: 3px;
+background-image: none;
+background-repeat: repeat;
+font-size:12px;
+font-weight:normal;
+min-width:0px;
+min-height:20px;
+vertical-align:middle;
+}
+div.column ul li ul li div img{
+/* subcategory images are here */
+vertical-align:middle;
+/* position explicitly defined so it doesn't inherit from "parent" main category image */
+position: relative;
+top: 0px;
+left: 0px;
+}
+div.column ul li{
+/* border: thin solid black; */
+margin:none;
+margin-bottom: 5px;
+padding: 5px;
+}
+
+div.column ul li ul li{
+border: none;
+margin-bottom: 0px;
+padding:1px;
+}
+
+.page a,
+.page{
+font-size:12px;
+/*text-decoration: underline;*/
+color: #26B99A;
+
+}
+.page a:hover{
+text-decoration:underline;
+color:#999;
+}
+
+/* new design */
+
+.sitemap_title
+{
+	font-family: Arial;
+	font-size: 14px;
+	color: #FFF;
+	font-weight: bold;
+	padding-top: 0px;
+	padding-right: 88px;
+	padding-left: 60px;
+	border:1px solid #0068C6;
+	background-image: url(../admin_images/design/breadcrumb_bg.gif);
+	min-height: 30px;
+	margin-top: 10px;
+}
+.sitemap_title_img
+{
+	float: left;
+	margin-right: 4px;
+}
+
+.sitemap_title_txt
+{
+	position: relative;
+	/*top:-15px;
+	left:-55px;
+	padding: 5px 200px 5px 55px; */
+}
+
+.sitemap_title_txt a:link
+{
+	font-size: 14px;
+	color: #FFF;
+	position: relative;
+}
+
+.sitemap_title_txt a:visited
+{
+	font-size: 14px;
+	color: #FFF;
+	position: relative;
+}
+
+.sitemap_title_txt a:hover
+{
+	color: #FFF;
+	position: relative;
+}
+
+.sitemap_title_txt_top
+{
+	height: 5px;
+}
+
+.sitemap_parent
+{
+	color: #000;
+}

@@ -1,0 +1,956 @@
+/* Custom CSS File Created: September 29, 2014 - 13:21:48 */
+
+
+ * Use this custom.css file to overwrite CSS from the default.css file.  If you
+ * want to customize the CSS, copy the applicable CSS section(s) to this file
+ * and customize here.  It is recommended to use the admin edit tool as it makes
+ * this process a little easier.
+ * 
+ * --- Caveat: Background Images ---
+ * 
+ * Note that images loaded in the CSS are relative, so if the default CSS file
+ * specifies a URL like url('../images/background.jpg') - since it is relative,
+ * it will use background.jpg from the default template set, NOT your custom template
+ * set.  If you want to use an image background from your own template set, copy
+ * the applicable CSS to this file so that the image location will be relative
+ * to this custom.css file rather than the default template's default.css file.
+ */
+
+/* Fixes Page Width */
+.wrapper {
+    max-width: 62.5em;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+/* Displays top menu background full screen width */
+body { 
+	font-size: 1em;
+	background: #fff url(../images/backgrounds/body-bg.jpg) repeat-x center 130px;
+}
+
+header.page {
+	height: 11em;
+}
+.banner_hdr {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0); 
+	margin: 20px 0 0 10px; 
+	position: absolute; 
+	float:right; 
+	z-index: 2;  
+	right: 30px; 
+	top: 30px;
+}
+.logo-box {
+	background: none no-repeat scroll right top white;
+	min-width: 345px;
+	min-height: 80px;
+	margin: 10px 0 0 0;
+}
+.logo-box .logo img {
+    padding: 0 5px;
+	max-height: 110px;
+    max-width: 340px;
+}
+
+.logo-box-small {
+    background-color: #FFF;
+	min-width: 130px;
+	min-height: 32px;
+	display: inline-block;
+}
+.fixed-link-logo {
+	background-color: #fff;
+	display: inline-block;
+	height: 34px;
+	left: 50%;
+	margin: 4px 0 0 -65px;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	text-decoration: none;
+	width: 130px;
+}
+.user-bar {
+    padding: 0;
+	max-width: none;
+	float:none;
+	height: 25px;
+}
+
+.user-welcome {
+	margin-right: 5px;
+}
+
+/* 52em = 832px */
+@media only screen and (max-width: 52em) {
+	body{
+    	background: none;
+	}
+	.wrapper {
+        max-width: 52em;
+    }
+	.banner_hdr {
+		display: none;
+	}
+	.logo-box {
+		min-width: 275px;
+		max-width: 100%;
+		text-align: center;
+		width: 100%;
+		margin: 3px 0;
+	}	
+	header.page {
+		height: auto;
+    }
+	.fb_button, .fb_button_rtl {
+		margin: 3px;
+	}
+	.user-welcome {
+		font-size: 1.2em;
+	}
+	.user-bar {
+		height: auto;
+	}
+}
+
+@media only screen and (max-width: 54em) {
+	.banner_hdr img {
+		max-width: 420px;
+	}
+}
+
+.header-links-rwd a {
+    color: #fff;
+}
+
+.header-links-rwd .search {
+    background-color: #3e8fd0;
+}
+
+.header-links-rwd a.search:hover {
+    background-color: #71acdd;
+}
+
+.header-links-rwd .list {
+    background-color: #279e4e;
+}
+
+.header-links-rwd a.list:hover {
+    background-color: #2db559;
+}
+
+/* 52em = 800px */
+@media only screen and (min-width: 52em) {
+	.logo-box {
+		background: none;
+		margin: 5px 0 0 10px;
+   		max-width: 200px;
+	}
+	.logo-box img {
+    	max-width: 100%;
+		min-width: auto;
+	}
+	.design2016 .user-bar {
+		padding-top: 0;
+	}
+}
+
+/* 32em = 512px */
+@media only screen and (min-width: 32em) {
+	.fixed-link-logo {
+		display: none;
+	}
+}
+
+/* 32em = 512px */
+@media only screen and (max-width: 32em) {
+	.logo-box .logo img {
+		max-height: 110px;
+		max-width: 220px;
+	}
+}
+
+
+/* 18em = 288px */
+@media only screen and (max-width: 18em) {
+	.logo-box {
+		min-width: 100%;
+	}
+}
+
+/* ==========================================================================
+   Search Form Front Page
+   ========================================================================== */
+
+.search_column_left,
+.search_column_right {
+	max-width: 100%;
+	overflow: hidden;
+	overflow-x: auto;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-bottom: .6em;
+	height: 150px;
+}
+.search_column_left p,
+.search_column_right p {
+	/* reset to NOT use white-space nowrap */
+	white-space: normal;
+}
+.search_column_right {
+    background-color: #343C43;
+    position: absolute;
+    right: 8px;
+    width: 43%;
+}
+.search_column_left {
+	width: 55%;
+	float: left;
+	background-color: #155F9B;
+	padding: 5px;
+}
+
+.search-form {
+	border-width: 0px;
+	border-style: solid;
+	border-color: #c4d9df #a4c3ca #83afb7;
+	width: 70em;
+	max-width: 100%;
+	height: 2.2em;
+	padding: 0;
+	margin: 0.3em auto;
+	position: relative;
+	z-index: 10;
+	overflow: hidden;
+	text-align: center;
+	display: inline-block;
+}
+
+.search-box-container {
+	font-size: 0.8em; 
+	color: #FFF; 
+	font-weight: bold;
+	width: 98%;
+	margin: 0 auto;
+}
+
+.search-box-container .zipbox select {
+    border: thin solid #fff;
+	border-radius: 0;
+}
+
+.search-box-container #by_zip_code {
+    border-color: #fff;
+	border-radius: 0;
+}
+
+.search-box-container .form-wrapper {
+    width: 95%;
+}
+
+.design2016 .recent-listing-links a.button:hover,
+.design2016 .recent-listing-links a.button:visited,
+.design2016 .recent-listing-links a.button {
+    color: #FFF;
+}
+
+.form-wrapper,
+.form-wrapper input {
+    border-radius: 0px;
+}
+
+.form-wrapper button::before {
+    border-color: transparent #71acdd;
+}
+
+.form-wrapper button {
+    background: #71acdd none repeat scroll 0 0;
+}
+
+.form-wrapper button:hover::before {
+    border-color: transparent #3e8fd0;
+}
+
+.form-wrapper button:hover {
+    background: #3e8fd0 none repeat scroll 0 0;
+}
+
+.home_bullets {
+	display: block;
+	margin-top: 0.6em;
+	margin-left: 0;
+	padding: 0 0.6em 0;;
+	text-align: center;
+}
+.home_bullets li {
+	list-style: none;
+	margin-bottom: .3em;
+	text-align: center;
+}
+.home_bullets li a {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	padding: 0.25em 0.5em 0.25em 0.75em;
+	border: thin solid #3E8FD0;
+	background-color: #333;
+	text-decoration: none;
+	font-weight: normal;
+	transition-duration: 0.2s;
+	color: #fff;
+	margin: 0 auto;
+	box-sizing: border-box;
+	line-height: 1.9em;
+	text-transform: uppercase;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+.home_bullets li a:hover {
+	border: thin solid #fff;
+	background-color: #71ACDD;
+}
+.home_bullets #active a{
+	border: thin solid #fff;
+	background-color: #279E4E;
+	font-weight: bold;
+}
+.home_bullets #active a:hover {
+	border: thin solid #fff;
+	background-color: #2DB559;
+}
+
+input[type="text"] {
+    background: url("../images/backgrounds/form_input.gif") repeat-x scroll left top #fff;
+}
+
+/* 38em = 608px */
+@media only screen and (max-width: 38em) {
+	.search_column_left {
+		float: none;
+		margin: 5px auto;
+		width: 98%;
+	}
+	.search_column_right {
+		display:none;
+	}
+	.half_column_left, .half_column_right {
+		margin-bottom: 0;
+	}
+}
+
+/* 18em = 288px */
+@media only screen and (max-width: 18em) {
+	.field, .editor_field {
+		font-size: 0.65rem;
+	}
+	.search_column_left, .search_column_right {
+		height: 120px;
+	}
+}
+
+/* ==========================================================================
+   Menu Bar 
+   ========================================================================== */
+
+.menu-link {
+	background: none;
+    }
+
+.page-bar {
+	border: 0;
+	border-radius: 0;
+	top: 6.4em;
+	box-shadow: inset 0 0 0 0 #fff;
+	-moz-box-sizing: border-box;
+	padding: 0;
+	background: none;
+	text-align: left;
+	position: relative;
+}
+
+.page-bar .menu-link {
+	background: none;
+	/* May need to adjust this if there are a lot of menu items */
+	min-width: 10%;
+}
+
+/* 52em = 800px */
+@media only screen and (min-width: 52em) {
+	.page-bar .menu-link {
+		font-size: 1.3em;
+		padding: 0.5em;
+		text-align: center;
+	}
+	.page-bar .menu-link:hover {
+		background-color: #343C43;
+		transition-duration: 0.2s;
+	}
+
+	/* user bar acts as the bar across the top */
+	.abs-space {
+		height: 0;
+	}
+	.user-bar {
+		text-align: right;
+	}
+}
+
+/* 52em = 832px */
+@media only screen and (max-width: 52em) {
+
+	.page-bar {
+		background: none;
+		border: none;
+		border-radius: 0;
+		top: 0;
+	}
+	.page-bar .menu-link {
+		color: #FFF;
+		background: url("../images/backgrounds/search_bar.gif") repeat-x scroll left top #4987c5;
+	}
+	.menu-link {
+		color: #FFF;
+		background: url("../images/backgrounds/search_bar.gif") repeat-x scroll left top #4987c5;
+	}
+	.menu-link:hover {
+		color: #FFF;
+	}
+	.fixed-menu {
+		max-width: none;
+	}
+}
+
+
+/* ==========================================================================
+   Front Page
+   ========================================================================== */
+
+.site_intro {
+    font-family: Arial,Helvetica,sans-serif;
+	font-size: 2rem;
+    letter-spacing: -1px;
+	color: #FF8000; 
+	font-weight: bold;
+}
+.site_intro2 {
+    font-size:1.6rem; 
+	font-weight:bold; 
+	letter-spacing: -1px;
+}
+
+div.img_fix img,
+div.ad1 img {
+	max-width: 100%;
+}
+.welcome {
+	padding: 5px 5px 10px;
+}
+.stats {
+	text-align: center;
+}
+
+.recent_ads .browsing_result_table_body_odd, 
+.recent_ads .browsing_result_table_body_even,
+.hottest_ads .browsing_result_table_body_odd, 
+.hottest_ads .browsing_result_table_body_even {
+	height: auto;
+}
+
+/* 52em = 832px */
+@media only screen and (max-width: 52em) {
+	
+	.page-bar .menu-link {
+		background: none repeat scroll 0 0 #3E8FD0;
+		margin: 0 2px 1px 0;
+		padding-left: 20px;
+		transition-duration: 0.2s;
+		width: 100%;
+		float:none;
+	}
+	.menu-link {
+		border-radius: 0;
+		background: none repeat scroll 0 0 #3e8fd0;
+		color: #FFF;
+	}
+	.user_links {
+		background: none repeat scroll 0 0 #0d5bff;
+	}
+	.menu-link:hover {
+		background-color: #71acdd;
+		color: #FFF;
+	}
+	.two-column .main {
+    	width: 100%;
+	}
+	.stats {
+		display:none;
+	}
+
+}
+
+/* 52em = 832px */
+@media only screen and (max-width: 52em) {
+	.site_intro {
+		display: none;
+	}
+	.site_intro2 {
+		display: none;
+	}
+	.welcome {
+		display: none;
+	}
+	.sidebar2 {
+		display: none;
+	}
+	.half_column_left, .half_column_right {
+		width: 100%;
+	}
+}
+
+/* 38em = 608px */
+@media only screen and (min-width: 38em) {
+	.half_column_left, .half_column_right {
+		display: inline-block;
+		width: 49.5%;
+		margin-bottom: 0;
+	}
+}
+
+/* 52em = 832px */
+@media only screen and (min-width: 52em) {
+	.half_column_left, .half_column_right {
+		width: 50%;
+	}
+}
+
+
+/* ==========================================================================
+   Listing Display Page
+   ========================================================================== */
+
+.member-since-cntnr {
+	box-sizing: content-box;
+}
+
+/* 52em = 832px */
+@media only screen and (min-width: 52em) {
+	.lead_pic_2 {
+		display: none;
+	}
+}
+
+/* 52em = 832px */
+@media only screen and (max-width: 52em) {
+	.lead_pic_1 {
+		display: none;
+	}
+}
+
+/* 18em = 288px */
+@media only screen and (max-width: 18em) {
+	.times-viewed {
+		display:none;
+	}
+}
+
+
+/* ==========================================================================
+   Box Style Changes
+   ========================================================================== */
+
+.content_box_1 h3, .content_box_2 h3, .content_box_3 h3 {
+    font-size: 1em;
+}
+.content_box_3 {
+    background-color: #FFF;
+}
+h2.title, h1.title, h3.title, h4.title, .rounded_top {
+    border-radius: 0;
+	padding-left: 10px;
+}
+.design2016 h1.title {
+	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #3E8FD0;
+}
+.design2016 h2.title {
+	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #279E4E;
+}
+.design2016 h3.title {
+	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #3E8FD0;
+	color: #FFF;
+}
+h3 {
+    font-size: 1em;
+	padding: 5px 0 5px 10px;
+}
+
+h3 a:hover {
+    text-decoration: none;
+}
+
+.design2016 h4.title {
+    background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #545454;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    vertical-align: middle;
+    border-radius: 0;
+    padding: 5px 0 5px 10px;
+}
+h1.title.rounded_top, h2.title.rounded_top, h3.title.rounded_top {
+    font-size: 1.2rem;
+	border-radius: 0;
+}
+
+/* 52em = 800px */
+@media only screen and (max-width: 52em) {
+	h2.categories {
+    	display: none;
+	}
+}
+
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+
+
+
+/* ==========================================================================
+   Change Col Width of 2 Column Page
+   ========================================================================== */
+
+.two-column .main {
+    left: 20%;
+    width: 80%;
+}
+
+/* ==========================================================================
+   Categories Menu Adjustment to Above Main for RWD
+   ========================================================================== */
+
+.two-column .sidebar {
+	left: 0;
+	width: 100%;
+}
+
+/* 52em = 832px */
+@media only screen and (min-width: 52em) {
+	.three-column .sidebar {
+		float: right;
+		left: -80%;
+		width: 20%;
+	}
+	
+	.three-column .sidebar2 {
+		float: right;
+		right: -20%;
+		width: 20%;
+	}
+	
+	.two-column .sidebar {
+		left: 0;
+		width: 20%;
+		padding: 0 0.2em;
+	}	
+	.two-column .main {
+		left: 0;
+		width: 80%;
+	}
+}
+
+/* 52em = 800px */
+@media only screen and (max-width: 52em) {
+	.two-column .main {
+    	width: 100%;
+	}
+}
+
+
+
+/* ==========================================================================
+   Misc
+   ========================================================================== */
+
+div.multiselect {
+	display: inline-block;
+}
+
+div.multiselect ul {
+	margin: 0;
+	padding: 0;
+}
+
+div.multiselect ul li {
+	list-style: none;
+	float: left;
+	padding: 0 0 0 .625em;
+}
+div.multiselect .or_field {
+	text-align: right;
+}
+
+.browsing_result_table_body_even_bold, .browsing_result_table_body_odd_bold {
+    font-size: 0.75rem;
+}
+
+nav.extra-links a:hover,
+.disclaimer a,
+.disclaimer a:hover,
+.breadcrumb .active,
+.price {
+    color: #279e4e;
+	background-color: linear-gradient(to right, #fff, #e9edf0);
+}
+
+.featured_items .listing_set article div.article_inner, .featured_browsing .listing_set article div.article_inner {
+    padding: 1em;
+}
+
+.closeBoxX {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.featured_items .listing_set article div.article_inner, .featured_browsing .listing_set article div.article_inner {
+    padding: 0.2em;
+}
+
+.browse_mode_buttons {
+    font-size: 0.8em;
+}
+
+.list-group a {
+	text-decoration: none;
+}
+
+.price {
+	white-space: nowrap;
+}
+
+.question {
+	width: 40%;
+}
+
+.answer {
+	padding: 0.3em 0 !important;
+}
+
+p, pre {
+    margin: 0.5em;
+}
+
+.field_label, .required {
+    width: 14.5em;
+}
+
+.border {
+    border:1px solid #3E8FD0;
+}
+
+.border2 {
+    border:1px solid #279E4E;
+}
+
+.sidebar .sidebar-collapse {
+	float: none;
+    max-width:100%;
+}
+
+.featured_items .listing_set article div.article_inner, .featured_browsing .listing_set article div.article_inner {
+    border: none;
+}
+
+.article_inner p img {
+	max-width: 100%;
+}
+
+/* 52em = 832px */
+@media only screen and (max-width: 52em) {
+	.main_col_spcr {
+		height: 0.5em;
+	}
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer-separator {
+	height: 0.5em;
+}
+
+nav.footer {
+    background: none;
+    border: 0 solid #eaeaea;
+    border-radius: 0;
+    padding: 0.5em 0.9em;
+    margin: 0 auto;
+	position: relative;
+	width: 65em;
+}
+
+footer.page {
+    background: url("../images/backgrounds/footer-bg.jpg") repeat-x scroll left top #515E68;
+	padding-bottom: 1em;
+}
+
+footer.page:before {
+    height: 0;
+}
+
+.footer_links {
+    display: inline-block;
+    left: 100px;
+    margin: 0 auto;
+    padding: 5px;
+    position: relative;
+    width: 90%;
+}
+
+.copyright {
+    display: inline-block; 
+	font-size: .7rem; 
+	color: #FFF; 
+	text-align: right;
+}
+
+footer.page .disclaimer p,
+footer.page .disclaimer h4 {
+	color: #FFF;
+}
+
+footer.page .disclaimer a {
+	color: #FFF;
+	float: none;
+	text-decoration: underline;
+	font-size: 0.7rem;
+	border: none;
+}
+
+footer.page .disclaimer a:hover {
+	text-decoration: none;
+}
+
+.disclaimer {
+    font-size: 0.7rem;
+    text-align: center;
+}
+.social-contacts {
+	margin: 0 auto;
+	width: auto;
+	border: 0;
+	text-align: center;
+}
+
+.social-contacts a {
+	margin: 0 0.5em;
+}
+
+/* 64em = 1024px */
+@media only screen and (max-width: 68em) {
+	nav.footer {
+    	width: 100%;
+		margin: 0 auto;
+		padding: 0;
+		}
+	.copyright {
+		text-align: center;	
+	}
+}
+
+/* 52em = 832px */
+@media only screen and (max-width: 52em) {
+	.footer_links {
+		left: 50px;
+	}
+}
+
+/* 38em = 608px */
+@media only screen and (max-width: 38em) {
+	.footer_links {
+		width: 100%;
+		left: auto;
+		padding: 0;
+	}
+	nav.footer a {
+		border-bottom: 1px solid #fff;
+		color: #fff;
+		font-size: 0.75rem;
+		background-color: transparent;
+	}
+	.copyright {
+		width: 100%;
+	}
+	nav.footer a:hover {
+		color: #343C43;
+		background-color: #EEE;
+	}
+}
+
+/* 18em = 288px */
+@media only screen and (max-width: 18em) {
+	.copyright {
+		font-size: 0.6rem;
+	}
+}
+
+/* ==========================================================================
+   GEOCORE v16 FIXES
+   ========================================================================== */
+.cz-categories {
+	display: block;
+}
+
+.form-wrapper { 
+	box-sizing: content-box; 
+}
+
+.design2016 .page-bar {
+    text-align: left;
+}
+
+.design2016 .nav-wrapper {
+    margin: 0;
+}
+
+.design2016 h1.my_account {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	border-bottom: thin dotted #535353;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	color: #535353;
+}
+
+a.list-group-item:hover, a.list-group-item.active, a.list-group-item.active:hover {
+    background-color: #3E4851;
+}
+
+.price-tag {
+    background: #279e4e none repeat scroll 0 0;
+}
+
+@media only screen and (min-width: 52em) {
+	.user-links .menu-link {
+		color: #279e4e;
+	}
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+.legend div, .legend div::before, .legend div::after,
+.legend, .legend::before, .legend::after {
+	box-sizing: content-box;
+}
+
+.browsing_filter_container h1.browsing_filter_title {
+    background: #999 url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0;
+}
+
+div.offsite_video_box_title_editing {
+    background: #3e8fd0 url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0;
+}

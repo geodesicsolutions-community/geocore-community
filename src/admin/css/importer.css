@@ -1,0 +1,31 @@
+/* 7.3.2-88-g45a1e5f */
+.tokenCol {
+	text-align: center;
+	font-size: 1rem;
+}
+.tokenCol:nth-child(even) {
+	background-color: #E0E0E0;
+}
+
+.fieldNum {
+	font-size: .8rem;
+}
+
+.fieldselect {
+	
+}
+
+.description {
+	padding: 1em;
+}
+
+.token {
+	padding: 1em;
+	font-size: 1.4em;
+	background-color: #CCCCFF;
+}
+
+.default {
+	padding: 1em;
+	font-size: 1.4em;
+}

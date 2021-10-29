@@ -1,0 +1,6548 @@
+/* 17.05.0-22-g4435795 */
+
+/** 
+ * default.css file - this file should remain in the default template set only.
+ * For a full explanation, see the design tutorials in the user manual.  Below
+ * is a brief explanation for how to get started. 
+ * 
+ * The CSS in this file is over-written by CSS from custom.css which is created
+ * for you when using the "create main template set" tool.
+ *
+ * To change CSS in this file, do NOT edit the file directly.  Instead, copy the
+ * CSS you wish to change (be sure to include the full section, including what
+ * is known as CSS selectors), and paste it into your custom.css file in your
+ * own template set.  IF you edit the custom.css file in the admin panel, it
+ * will display the contents of this file side-by-side to make it easy to
+ * copy/paste what you wish to edit into your custom.css file.
+ */
+
+
+/**
+ * 
+ * NOTE: This started from HTML5 Boilerplate but has been greatly adapted.
+ * More info at:
+ * 
+ * http://html5boilerplate.com/
+ * 
+ */
+
+
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+
+html,
+button,
+input,
+select,
+textarea {
+	color: #222;
+}
+
+html {
+	font-family: sans-serif;
+	color: #666;
+	font-size: 1em;
+	line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+@-ms-viewport {
+	width: device-width;
+}
+
+@viewport {
+	width: device-width;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+	vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+	resize: vertical;
+	/* Also make sure size does not go past the width for small-screens */
+	max-width: 98%;
+}
+
+/*
+ * Make sure input boxes do not go past the screen on small screen sizes
+ */
+input[type="text"] {
+	max-width: 98%;
+	/* Account for padding and such */
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+input[type="checkbox"], input[type="radio"] {
+    height: auto;
+}
+
+/* also have a way to make sure images stay inside their containers 
+	note: not applying this to ALL images (at least not yet) since there are lots that specify their own dimensions explicitly/directly
+*/
+img.max-90 {
+	max-width: 90%;
+}
+
+p {
+    margin: 1em 0.5em;
+}
+
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Base Classes - Used for overall page
+   ========================================================================== */
+
+/*
+ * This is the overall wrapper.  Default to use fluid style, can set it to
+ * use a fixed style in the "desktop" section if desired.
+ */
+
+.wrapper {
+	width: 100%;
+	max-width: 70em;
+	margin: auto;
+	border: none;
+	background: transparent;
+}
+
+.main,
+.sidebar,
+.sidebar2,
+.sidebar-collapse {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.half_column_left,
+.half_column_right {
+	max-width: 100%;
+	overflow: hidden;
+	overflow-x: auto;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-bottom: .6em;
+}
+.half_column_left p,
+.half_column_right p,
+.normal-whitespace {
+	/* reset to NOT use white-space nowrap */
+	white-space: normal;
+}
+
+/* ==========================================================================
+   Headings / Titles
+   ========================================================================== */
+
+h2.title, h1.title, h3.title {
+	background: #4174a8 url("../images/backgrounds/c_bar_primary.gif") repeat-x scroll 0 0;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: bold;
+	margin: 0;
+	padding: .25em;
+	vertical-align: middle;
+}
+h1.title, h3.title {
+	background: #86AE47 url("../images/backgrounds/c_bar_secondary.gif") repeat-x scroll 0 0;
+}
+h1.subtitle, h3.subtitle {
+	background: #eaeaea;
+	font-size: .88rem;
+	font-weight: bold;
+	margin: .1em 0;
+	padding: .32em 0 .32em .2em;
+	border-top: thin solid #ddd;
+	border-bottom: thin solid #ddd;
+}
+.main h3.subtitle {
+	margin: 5px 0 0 0;
+	padding-left: 10px;
+}
+h1.my_account {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	border-bottom: thin dotted #535353;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	color: #535353;
+}
+.my_account_links_inactive h1.subtitle, h2.subtitle, h3.subtitle {
+	margin: 0;	
+}
+
+h2.title a,
+h2.title a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+
+h2.title a:hover {
+	text-decoration: underline;
+}
+
+.header-links-rwd {
+    display: inline;
+    left: 50%;
+    margin: 0 auto;
+    min-width: 200px;
+    position: absolute;
+    text-align: center;
+	margin: 0 0 0 -102px;
+    overflow: hidden;
+	top: 3px;
+}
+
+.header-links-rwd a {
+    color: #535353;
+    display: inline;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 2.2em;
+    min-width: 30px;
+    padding: 0.25em 0.75em;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.2s;
+	border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px;
+	border: thin solid #FFFFFF;
+}
+
+.header-links-rwd .search {
+    background-color: #EEEEEE;
+}
+
+.header-links-rwd a.search:hover {
+    background-color: #DDDDDD;
+}
+
+.header-links-rwd .list {
+    background-color: #EEEEEE;
+    text-transform: uppercase;
+}
+
+.header-links-rwd a.list:hover {
+    background-color: #DDDDDD;
+}
+
+.language-links {
+	position: relative;
+	right: 10px;
+	top: 0;
+	display: inline-block;
+	float: none;
+}
+
+.language-links img {
+    	border: none;
+}
+
+#language_select {
+	margin: 0 0 0 10px;
+}
+
+@media only screen and (max-width: 52em) {
+	#language_select {
+		margin: 3px 2px;
+	}
+}
+
+.fb-profile-pic {
+	display: inline;
+	position: relative;
+}
+
+.fb-profile-pic img {
+	max-height: 24px;
+}
+
+.unselected {
+	opacity: 0.5;
+}
+
+.unselected:hover,
+.selected {
+	opacity: 1.0;
+}
+
+/* ==========================================================================
+   Paragraphs / Body Text
+   ========================================================================== */
+
+.page_instructions {
+	color: #666;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	margin: 0.6em 1em 1em;
+	padding: 0;
+}
+
+.help-popup .page_instructions {
+	height: 18em;
+	line-height: 1.4em;
+	max-width: 25em;
+	overflow: auto;
+	padding: 0 0 0 5px;
+}
+
+.help-popup ol {
+	padding: 0 0 0 10px;
+}
+
+.price {
+	color: #7CA93A;
+}
+
+a {
+	color: #666;
+}
+
+.body-content {
+	font-size: 0.8em; margin: 0 0.5em;
+}
+
+/* ==========================================================================
+   Collapsable Sections
+   ========================================================================== */
+
+.section-collapser {
+	cursor: pointer;
+}
+.content_box {
+	/*  Need to make sure tabular data has horizontal scroll...  but only that
+	"section" not the entire page. */
+	max-width: 100%;
+	overflow: auto;
+	text-overflow: ellipsis;
+	margin-bottom: .6em;
+}
+
+.section-collapser:after {
+	content: ' +';
+}
+
+.section-collapser-expanded:after {
+	content: ' -';
+}
+
+.section-collapser + div {
+	max-height: 1px;
+	overflow: hidden;
+	transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out; /* Safari */
+}
+
+.section-collapser + div.expand {
+	max-height: 5000px;
+}
+
+/* ==========================================================================
+   Listing Details
+   ========================================================================== */
+
+.icon-link {
+	margin: .31em;
+	white-space: nowrap;
+	font-size: 1rem;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+.icon-link img {
+	border: thin solid #D5DCE1;
+	border-radius: .31em 0 0 .31em;
+	background-color: #D5DCE1;
+	float: left;
+}
+.icon-link a {
+	display: block;
+	margin-left: 1.7em;
+	height: 1.5em;
+	border: thin solid #D5DCE1; 
+	background-color: #F9FAFB; 
+	border-radius: 0 .31em .31em 0; 
+	padding: 0 .31em;
+	text-decoration: none;
+}
+.icon-link a:hover {
+	text-decoration: underline;
+}
+
+.listing-prev-next-links {
+	/* Hide these in smaller layouts */
+	display: none;
+}
+.embed-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+	max-width: 100%;
+	height: auto;
+	margin: 1em;
+}
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+ul.info {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+}
+
+ul.info li {
+	list-style: none outside none;
+	padding: 0.3em 0;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	float: left;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+ul.info li.label {
+    	clear: both;
+    	color: #737373;
+    	display: block;
+    	font-size: 0.8rem;
+    	padding: 0.3em;
+    	width: 50%;
+	max-width: none;
+}
+
+
+ul.info li.value {
+	display: block;
+	width: 14em;
+	max-width: 50%;
+	color: #777777;
+	font-size: 0.8rem;
+	font-weight: normal;
+}
+
+ul.info li.price {
+	font-size: 1rem;
+	padding: .6em 0 .6em .6em;
+}
+
+.field_label.spacer {
+	/* hide search form spacers unless the screen is big enough to call for them */
+	display: none;
+}
+
+.seller-rating-box {
+	border: 1px solid #d5dce1; 
+	background-color:#FFF; 
+	margin-bottom: 5px;
+}
+
+.seller-profile-links {
+	margin: 5px; 
+	position:relative; 
+	float:left;
+}
+
+.times-viewed {
+	font-size: 0.8rem; 
+	font-weight: normal;
+}
+
+.unread a,
+.unread {
+	color: #4987c5;
+}
+
+.publicQuestions a,
+.publicQuestions {
+	font-size: 0.95em;
+	color: #4987c5;
+}
+
+.answer {
+	color: #888;
+}
+
+.box_pad {
+    background-color: #ffffcc;
+    border: 2px dashed #FFCC66;
+    font-size: 0.8em;
+    margin: 10px;
+    padding: 10px;
+}
+
+.buyer-options {
+	white-space: normal; 
+	padding: 5px;
+}
+
+#combined_auction-details select {
+	min-width: 15em;
+}
+
+#combined_form input.field,
+#combined_auction-details input.field {
+    width: 200px;
+}
+
+#combined_form #mapping_location,
+#combined_form #listingTags,
+#combined_form #classified_title {
+	width: 100%;
+}
+
+#combined_classified-details input.number-field,
+#combined_auction-details input.number-field {
+	width: 5em;
+}
+
+/* LISTING DETAILS AUCTION TIME LABELS SET */
+#combined_auction-details select.date-time {
+	min-width: auto;
+    width: 7em;
+}
+
+#combined_auction-details #endModeSelect {
+    clear: both;
+    margin: 0;
+    min-width: auto;
+    width: 12em;
+	padding: 0.1em;
+}
+
+.date-time-labels {
+	display:inline;
+}
+
+.date-time-labels div {
+	display:inline-block;
+}
+
+.date-time-labels div div {
+    white-space: nowrap; 
+	display:inline-block;
+}
+
+.date-time-labels label {
+    font-size: 0.8em;
+    font-weight: normal;
+    text-transform: uppercase;
+    width: auto;
+}
+
+
+
+input#listingTags,
+input#mapping_location {
+	width: 500px;
+}
+
+.publicQuestions .question {
+	color: #4987c5;
+}
+
+.public_question_asker_username {
+	font-size: 0.95rem;
+}
+
+.member-fb,
+.member {
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 55px;
+	line-height: 1.1em;
+	position: relative;
+	text-align: center;
+	top: 15px;
+	width: auto;
+}
+
+.member-fb {
+	top: 2px;
+}
+
+.member-fb img {
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	max-width: 86px;
+}
+
+/* ==========================================================================
+   Listing Details - Tabs
+   ========================================================================== */
+
+.listing-content .nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.listing-content .nav:before,
+.listing-content .nav:after {
+  display: table;
+  content: " ";
+}
+
+.listing-content .nav:after {
+  clear: both;
+}
+
+.listing-content .nav > li {
+  position: relative;
+  display: block;
+}
+
+.listing-content .nav > li > a {
+    display: block;
+    padding: 5px 7px;
+    position: relative;
+    text-decoration: none;
+}
+
+.listing-content .nav > li > a:hover,
+.listing-content .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+
+.listing-content .nav > li.disabled > a {
+  color: #999999;
+}
+
+.listing-content .nav > li.disabled > a:hover,
+.listing-content .nav > li.disabled > a:focus {
+  color: #999999;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.listing-content .nav .open > a,
+.listing-content .nav .open > a:hover,
+.listing-content .nav .open > a:focus {
+  background-color: #eeeeee;
+  border-color: #428bca;
+}
+
+.listing-content .nav .open > a .caret,
+.listing-content .nav .open > a:hover .caret,
+.listing-content .nav .open > a:focus .caret {
+  border-top-color: #2a6496;
+  border-bottom-color: #2a6496;
+}
+
+.listing-content .nav > li > a > img {
+  max-width: none;
+}
+
+.listing-content .nav-tabs {
+  border-bottom: 1px solid #dddddd;
+}
+
+.listing-content .nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+
+.listing-content .nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.428571429;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+  font-size: 0.8rem;
+}
+
+.listing-content .nav-tabs > li > a:hover {
+  border-color: #eeeeee #eeeeee #dddddd;
+}
+
+.listing-content .nav-tabs > li.active > a,
+.listing-content .nav-tabs > li.active > a:hover,
+.listing-content .nav-tabs > li.active > a:focus {
+  color: #555555;
+  cursor: default;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-bottom-color: transparent;
+}
+
+.listing-content {
+  font-size: 0.8rem;
+}
+
+.listing-content .tab-content > .tab-pane {
+  display: none;
+}
+
+.listing-content .tab-content > .active {
+  display: block;
+  border: 1px solid #DDD;
+  border-top: 0;
+  padding: 1rem;
+}
+
+.design2016 .seller-rating-box {
+	border-width: 0;
+	line-height: 1em;
+}
+
+.design2016 .seller_username {
+	line-height: 1em;
+	margin: 10px 8px 5px 0;
+}
+
+.design2016 .option_list li a:hover,
+.design2016 .option_list li a {
+	border-width: 0;
+	background: none;
+}
+
+.design2016 .user_rating img {
+	max-width: 16px;
+}
+
+#tab-contact .label {
+	min-width: 35%; 
+	display:inline-block; 
+	padding: 0 5px;
+	font-weight: bold;
+}
+
+#tab-contact .title {
+	font-size: 1.2em; 
+	border-bottom: 1px dashed #bbb; 
+	margin: 0 0 10px; 
+	padding: 5px; 
+	font-weight: bold;
+}
+
+/* ==========================================================================
+   Search Form
+   ========================================================================== */
+
+.cf:before, .cf:after{
+    content:"";
+    display:table;
+}
+
+.cf:after{
+    clear:both;
+}
+
+.cf{
+    zoom:1;
+}    
+
+/* Form wrapper styling */
+.form-wrapper {
+    background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
+    border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset, 0 1px 0 rgba(255, 255, 255, 0.2);
+    height: 40px;
+    margin: 0 auto;
+    padding: 10px;
+    width: 80%;
+}
+
+/* Form text input */
+
+.form-wrapper input {
+    background: #eee none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 3px 0 0 3px;
+    float: left;
+    font: bold 15px "lucida sans","trebuchet MS","Tahoma";
+    height: 40px;
+    padding: 10px 5px;
+    width: 85%;
+}
+
+.form-wrapper input:focus {
+    outline: 0;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+}
+
+.form-wrapper input::-webkit-input-placeholder {
+   color: #999;
+   font-weight: normal;
+   font-style: italic;
+}
+
+.form-wrapper input:-moz-placeholder {
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.form-wrapper input:-ms-input-placeholder {
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
+}    
+
+/* Form submit button */
+.form-wrapper button {
+    background: #FB7D00 none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 0 3px 3px 0;
+    color: #fff;
+    cursor: pointer;
+    float: right;
+    font: bold 15px/40px "lucida sans","trebuchet MS","Tahoma";
+    height: 40px;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    width: 15%;
+}  
+  
+.form-wrapper button:hover{		
+    background: #FF8811;
+}	
+  
+.form-wrapper button:active,
+.form-wrapper button:focus{   
+    background: #FF8811;
+	outline: 0;   
+}
+
+.form-wrapper button:before { /* left arrow */
+    content: '';
+    position: absolute;
+    border-width: 8px 8px 8px 0;
+    border-style: solid solid solid none;
+    border-color: transparent #FB7D00 transparent;
+    top: 12px;
+    left: -6px;
+}
+
+.form-wrapper button:hover:before{
+    border-right-color: #FF8811;
+}
+
+.form-wrapper button:focus:before,
+.form-wrapper button:active:before{
+        border-right-color: #FF8811;
+}      
+
+.form-wrapper button::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
+    border: 0;
+    padding: 0;
+} 
+
+#by_zip_code {
+    max-width: 5em;
+}
+
+/* DESIGN2016 BUTTON STYLES */
+
+.design2016 .button, .design2016 .button:visited, .design2016 .cancel, .design2016 .cancel:visited {
+    background: #fff none repeat scroll 0 0;
+    border: thin solid #4174a6;
+    border-radius: 0.3em;
+    box-shadow: none;
+    color: #4174a6;
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.5em 0.63em;
+    text-decoration: none;
+    text-shadow: none;
+    transition-duration: 0.2s;
+    white-space: nowrap;
+	margin: 3px 0;
+}
+
+.design2016 input.buy_now_link,
+.design2016 .make_bid_link, 
+.design2016 .buy_now_link {
+    border: medium solid #4174a6;
+    font-size: 1rem;
+}
+
+.design2016 input.buy_now_link:hover,
+.design2016 a.make_bid_link:hover, 
+.design2016 a.buy_now_link:hover {
+    border: medium solid #4174a6;
+}
+
+.bid-form-container {
+    background: #eaeaea none repeat scroll 0 0;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    margin: 0 auto;
+    max-width: 300px;
+    padding: 10px 0;
+    width: 95%;
+}
+
+.bid-price {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFF;
+    border-color: -moz-use-text-color;
+    border-image: none;
+    border-style: solid none;
+    border-width: 1px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#bid_data_form input[type="text"] {
+	width: 70px;
+}
+
+.bid-form-spacer {
+	margin: 10px;
+}
+
+.bid-form-container .bid-label {
+	color: #666;
+	padding: .1em .3em;
+	width: 55%;
+	clear: both;
+	display: inline-block;
+	font-weight: bold;
+	font-size: .75rem;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.bid-form-container .bid-value {
+	display: inline-block;
+	width: 40%;
+	text-align: right;
+	font-size: 0.75rem;
+}
+
+.design2016 .button:hover {
+	color: #FFF;
+}
+
+.design2016 .cancel, .design2016 .cancel:visited, .design2016 .mini_cancel, .design2016 .mini_cancel:visited {
+    background: #fff none repeat scroll 0 0;
+    border-color: #ca0033;
+    color: #ca0033;
+}
+
+.design2016 a.finish-edit {
+	font-size: 1.2em;
+	border: 2px solid;
+}
+
+.design2016 a.finish-edit:hover {
+	border: 2px solid;
+}
+
+.design2016 .highlight_links a.button,
+.design2016 .highlight_links a.button:visited,
+.design2016 a.button:hover {
+	background-color: #4174a6;
+	color: #fff;
+}
+
+.design2016 .cancel:hover,
+.design2016 .mini_cancel:hover {
+	border-color: #B9002F; /* required-primary */
+	background: #CE0034; /* required-primary */
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.design2016 .recent-listing-links a.button:hover
+{
+	background: none;
+	border: none solid;
+	text-decoration: none;
+	color: #444;
+}
+
+
+/* ==========================================================================
+   Dropdown Select Boxes
+   ========================================================================== */
+.language_form select,
+.multiselect select,
+#listing_select,
+.buyer-options select,
+.listing_extra_cost select,
+.listing-filter select,
+.row_odd select,
+.row_even select,
+.search_content_box select,
+.browse_mode_buttons select,
+.zipbox select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: #f7f7f7 url("../images/arrow_dn.jpg") no-repeat scroll 100% 50%;
+	border: thin solid #a3a3a3;
+	color: #333333;
+	height: 30px;
+	line-height: 1;
+	min-width: 100px;
+	padding: 0 35px 0 5px;
+	text-overflow: "";
+	border-radius: 0.31em;
+	-moz-border-radius: 0.31em; 
+	-webkit-border-radius: 0.31em;	
+}
+
+.browse_mode_buttons select {
+    height: 26px;
+}
+
+.row_odd select::-ms-expand,
+.row_even select::-ms-expand,
+.search_content_box select::-ms-expand,
+.browse_mode_buttons select::-ms-expand,
+.zipbox select::-ms-expand {
+	display: none; 
+}
+
+.row_odd select option,
+.row_even select option,
+.search_content_box select option,
+.browse_mode_buttons select option,
+.zipbox select option {
+    background: none no-repeat scroll 0 0 #f7f7f7;
+    font-weight: normal;
+}
+
+.row_odd select option:nth-child(even),
+.row_even select option:nth-child(even),
+.search_content_box select option:nth-child(even),
+.browse_mode_buttons select option:nth-child(even),
+.zipbox select option:nth-child(even) {
+	background: none no-repeat scroll 0 0 #FFFFFF;
+}
+
+/* ==========================================================================
+   Miscellaneous
+   ========================================================================== */
+
+.finish-edit {
+	font-size: 1.2em;
+}
+
+nav.extra-links {
+    	top: 0.6em;
+}
+
+.search_page_instructions {
+	font-size: .9em;
+}
+
+.search-box-container {
+	width: 65%;
+}
+
+.search-box-container #by_zip_code {
+	max-width: 8em;
+}
+
+#search_text .field, #search_text {
+    margin: 0;
+}
+
+.recentButtons {
+	width: 100%;
+}
+
+.recentButtons .button,
+.recentButtons .button:visited {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	border: medium none;
+	border-radius: 0;
+	color: #4987c5;
+	text-shadow: none;
+	box-shadow: none;
+	padding: .5em .63em;
+	font-weight: bold;
+	font-size: .75rem;
+	text-decoration: underline;
+	white-space: nowrap;
+	display: inline-block;
+	transition-duration: .2s;
+}
+
+.recentButtons .button:hover {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	border: medium none;
+	text-decoration: none;
+	color: #333;
+}
+
+.recentButtons .recent-listing-links {
+	font-size: .75rem;
+}
+
+.recentButtons a.button {
+	min-width: 3em;
+}
+
+.sell-button {
+	display: block;
+	margin-top: 10em;
+	margin-left: 0;
+	padding: 0 .1em .1em;
+	text-align: center;
+}
+
+.sell-button li {
+	list-style: none;
+	text-align: left;
+}
+
+.sell-button li a {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-image: none;
+	border-radius: 0.3em;
+	box-sizing: border-box;
+	color: #fff;
+	display: block;
+	font-weight: bold;
+	margin: 0 auto;
+	max-width: 100%;
+	padding: 0.25em 0.5em 0.25em 0.75em;
+	text-decoration: none;
+	transition-duration: 0.2s;
+	width: 11em;
+	-moz-box-sizing:border-box; /* Firefox */
+	text-align: center;
+	border: 1px solid #FF860D;
+	background-color: #FF860D;
+}
+
+.sell-button li a:hover {
+	background-color: #FF9A35;
+	transition-duration: 0.2s;
+}
+
+.social-wrapper .social-contacts{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.social-wrapper .social-contacts a {
+    margin: 0 10px;
+}
+
+.banner img {
+	margin: 5px;
+	max-width: 95%;
+}
+.contact-info-right {
+	float: left;
+   	padding-right: 0.7em;
+    	width: 77%;
+}
+.page_description {
+	font-size: .9em;
+}
+
+.regions {
+	display:normal;
+	position: absolute;
+	width: 100%;
+    	z-index: 15;
+	margin-bottom: 0;
+}
+
+.regions .center,
+.regions .section-collapser::after {
+    display:none;
+}
+
+.regions h2.title {
+	font-size: .9em;
+}
+
+.recaptcha-fix {
+	transform:scale(0.90);
+	-webkit-transform:scale(0.90);
+	transform-origin:0 0;
+	-webkit-transform-origin:0 0;
+}
+
+.active-pic img {
+	max-width: 50px;
+}
+
+#update_response .field {
+    padding: 5px; 
+}
+
+.advertise {
+	margin-bottom: 10px; 
+	text-align: center;
+}
+		
+.advertise div {
+	margin-bottom: 5px;
+}
+
+.advertise div img {
+	max-width: 95%;
+	height: auto;
+}
+
+.fb_button a:visited,
+.fb_button a {
+	text-decoration: none;
+}
+
+.fb_button a:hover {
+	opacity: 0.7;
+}
+
+.browsing_filter_container {
+    margin: 0.1em auto;
+    width: 98%;
+}
+
+.browsing_filter_container h1.browsing_filter_title {
+	-webkit-border-top-left-radius: 5px !important;
+	-webkit-border-top-right-radius: 5px !important;
+	-moz-border-radius-topleft: 5px !important;
+	-moz-border-radius-topright: 5px !important;
+	border-top-left-radius: 5px !important;
+	border-top-right-radius: 5px !important;
+	background: #999 url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0;
+}
+
+.browsing_filter_container .content_box {
+    border: 1px solid #999;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.submenu-spacer {
+	margin-top: 0.5em;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+@media only screen and (min-width: 52em) {
+	/* ==========================================================================
+	   Shared Breakpoint 1: 52em is about size that 2 column layout will
+	   fit both columns side by side comfortably.
+	   
+	   Breakpoint For:	   Base Classes | Collapsable Sections
+	   ========================================================================== */
+	
+	/* Base Classes - switch to 2 columns */
+	.main,
+	.sidebar,
+	.sidebar2 {
+		position: relative;
+		padding: .2em;
+	}
+	.two-column .main {
+		float: left;
+		left: 30%;
+		width: 70%;
+		padding: 0 .5em;
+	}
+	.two-column .sidebar {
+		float: left;
+		left: -70%;
+		width: 30%;
+	}
+	.half_column_left {
+		width: 50%;
+		float: left;
+	}
+	.half_column_right {
+		padding-left: 10px;
+	}
+	/* The overall login section of the page */
+	.login {
+		width: 75%;
+		margin: auto;
+		margin-top: 2em;
+	}
+	
+	/* Sidebar collapse - this one is a little different than normal, it will
+		be "above" the main content, and is meant to have the bulk of the contents
+		collapsed by using the section-collapser class on the main heading.
+		
+		This works by simply floating to the left.  It should be used inside
+		the .main section. */
+	.sidebar-collapse {
+		float: left;
+		max-width: 20%;
+	}
+	
+	#content_column_wide {
+		overflow: hidden;
+		padding-left: 0;
+	}
+	
+	/* Collapsable Sections - when in 2 column mode, no need to collaps any more */
+	.section-collapser {
+		cursor: auto;
+	}
+	
+	.section-collapser:after {
+		content: '';
+	}
+	
+	.section-collapser-expanded:after {
+		content: '';
+	}
+	
+	.section-collapser + div {
+		max-height: none;
+	}
+	
+	.section-collapser + div.expand {
+		max-height: none;
+	}
+	
+	/* Things that need to be adjusted once in 2 column mode, and are such
+		that they are not over-written by the default CSS... */
+	
+	.showcase h1.title {
+		padding-top: 0;
+		height: 2.5em;
+		white-space: nowrap;
+		margin: 0 -.7em -2em -1.25em;
+		z-index: 5;
+		
+		line-height: 1.5em;
+		text-shadow: 0 .2em .2em #666;
+	}
+	
+	/* Should no longer need to use scroll for horizontal overflow */
+	.content_box {
+		max-width: none;
+		overflow: visible;
+	}
+	
+	/* Only add border radius on wider screens, looks weird to have radius on
+		items that span full width of the screen */
+	h2.title, h1.title, h3.title {
+		border-radius: .3em;
+	}
+
+	.header-links-rwd {
+		display: none;
+	}
+	.lead_pic_2 {
+		display: none;
+	}
+	.pc-hide {
+		display: none;
+	}
+	.submenu-spacer {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 59em) {
+	/* ==========================================================================
+	   Shared Breakpoint 2: 59em is about size that 3 column layout will
+	   fit all the columns comfortably.
+	   
+	   Breakpoint For:	   Base Classes | Listing Details
+	   ========================================================================== */
+	
+	/* 3 column layout - 20% | 60% | 20% Layout */
+	.three-column .main {
+		float: left;
+		left: 20%;
+		width: 60%;
+	}
+	.three-column .sidebar {
+		float: left;
+		left: -60%;
+		width: 20%;
+	}
+	.three-column .sidebar2 {
+		width: 20%;
+		float: right;
+	}
+	
+	/* Listing details changes at this point */
+	.listing-prev-next-links {
+		display: block;
+		float: none;
+		margin-bottom: .33em;
+		padding-right:0.2em;
+		text-align: center;
+	}
+}
+
+
+/* ==========================================================================
+   Menu Bar
+   ========================================================================== */
+
+header.page {
+	margin-top: 2.5em;
+	margin-bottom: 0.2em;
+}
+
+/* user bar acts as the bar across the top */
+.user-bar {
+	text-align: right;
+	float: right;
+}
+
+
+.user-welcome {
+	max-width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.fixed-nav {
+    background-color: #535353;
+    border-bottom: 1px solid gray;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 20;
+}
+
+.fixed-link {
+	text-decoration: none;
+	text-align: center;
+	width: 32px;
+	height: 32px;
+	margin: 2px 4px;
+	display: inline-block;
+	background-image: url('../images/icons/menu.png');
+	background-color: transparent;
+	overflow: hidden;
+	position: relative;
+	top: 2px;
+}
+
+.fixed-link:hover {
+	background-color: transparent;
+}
+
+.fixed-nav .user {
+	background-position: right;
+	float: right;
+}
+
+.fixed-link img {
+	/* Allow profile pic act as the menu button... */
+	max-width: 100%;
+	border: thin solid #888;
+}
+
+.fixed-menu {
+	width: 100%;
+	max-width: 30em;
+	overflow: hidden;
+	display: none;
+	text-overflow: ellipsis;
+	max-height: 100%;
+	clear: both;
+	margin: 10px 0;
+}
+
+.menu-link {
+	display: block;
+	padding: .5em;
+	margin: .1em;
+	background: #4987C5 url('../images/backgrounds/nav_tab.gif') repeat-x top left;
+	color: white;
+	text-decoration: none;
+	border-radius: .3em;	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.menu-link:hover {
+	background: none;
+	background-color: #356094;
+}
+
+nav.extra-links {
+	/* Hide the extra links normally - will be displayed on larger screens only*/
+	display: none;
+}
+
+.user-bar img {
+	/* Usually only image in the user-bar will be the fb profile pic...  If that
+	is not the case for your design, consider adjusting this. */
+	border: none;
+	margin: 0 .2em 0 0;
+	vertical-align: bottom;
+}
+
+/* Shared Breakpoint: Combined with Logo Below */
+
+/* ==========================================================================
+   Logo
+   ========================================================================== */
+
+.logo-box  {
+	position: relative;
+	border: none;
+	overflow: hidden;
+	width: auto;
+	vertical-align: baseline;
+	margin: 0 auto .5em auto;
+}
+
+.logo-box img {
+	
+}
+
+.logo-box .logo img {
+	/* The actual logo image */
+	vertical-align: middle;
+	border: none;
+	padding: 0;
+	margin: 5px;
+	max-height: 90px;
+	max-width: 270px;
+}
+
+.slogan {
+	padding-left: 2.5em;
+	line-height: 0.875em;
+	font-size: 0.875rem;
+	color: #7E7E7E;
+	font-style: italic;
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+@media only screen and (min-width: 52em) {
+	/* ==========================================================================
+	   Shared Breakpoint: 52em is about size that all "default" menu items fit
+	   		horizontally on the page, may need to adjust this for different
+	   		languages or if you have more / less menu items than default.
+	   
+	   Breakpoint For:	   Menu Bar | Logo
+	   ========================================================================== */
+	
+	/* Menu Bar Breakpoint - stop hiding menus, give fancy tabbed look */
+	.wrapper {
+		position: relative;
+	}
+	header.page {
+		margin-top: 0;
+		min-height: 6em;
+	}
+	
+	.fixed-nav {
+		border-bottom: none;
+		position: relative;
+		font-size: .75rem;
+		font-weight: bold;
+		background-color: transparent;
+		z-index: 1;
+	}
+	
+	.fixed-link {
+		/* Hide links to expand / collapse the menus */
+		display: none;
+	}
+	
+	.fixed-menu {
+		width: auto;
+		display: inline-block;
+	}
+	
+	.page-bar {
+		background: #4987c5 url("../images/backgrounds/search_bar.gif") repeat-x scroll left top;
+		border: 0.4em solid #eaeaea;
+		border-radius: 0 10px 10px 0;
+		-webkit-border-radius: 0 10px 10px 0;
+		-moz-border-radius: 0 10px 10px 0;
+		box-sizing: border-box;
+		left: 0;
+		max-width: 100%;
+		padding: 0 0 0 26em;
+		position: absolute;
+		text-align: center;
+		top: 2.9em;
+		width: 100%;
+		z-index: 1;
+	}
+	.menu-link {
+		/* reset some of the styles used at smaller sizes */
+		display: inline;
+	}
+	
+	.page-bar .menu-link {
+		background: #4987c5 url("../images/backgrounds/nav_tab.gif") repeat-x scroll left top;
+		border-radius: 0;
+		box-sizing: border-box;
+		display: inline-block;
+		height: auto;
+		margin: 0 0 0 1px;
+		min-width: 12%;
+		padding: 1em;
+		vertical-align: middle;
+	}
+	
+	.design2016 .page-bar {
+		padding: 0;
+		text-align: right;
+	}
+	.design2016 .page-bar .menu-link {
+		float: none;
+		margin: 0 0 0 -2px;
+		text-align: center;
+	}
+	.design2016 .nav-wrapper {
+		margin: 0 0 0 10em;
+	}
+
+	.menu-link:hover {
+		color: white;
+		background: #356094 none;
+	}
+	
+	.page-bar .extra {
+		/* These are redundant when menus are shown */
+		display: none;
+	}
+	
+	nav.extra-links {
+		display: block;
+		float: right;
+		position: relative;
+		top: 1.2em;
+		z-index: 1;
+	}
+	nav.extra-links a {
+		color: #818181;
+		text-decoration: none;
+		padding: .32em 
+	}
+	
+	nav.extra-links a:hover {
+		color: #7CA93A;
+		text-decoration: underline;
+	}
+	
+	/* user bar acts as the bar across the top */
+	.abs-space {
+		height: 4.1em;
+		clear: both;
+	}
+	.user-bar {
+		text-align: left;
+		float: none;
+		display: block;
+		padding: 1.5em .7em .85em;
+		max-width: none;
+	}
+	.design2016 .user-bar {
+		float: right;
+		padding-top: 0.5em;
+	}
+	.user-welcome {
+		display: inline;
+	}
+	
+	.user-links:before {
+		content: "(";
+	}
+	.user-links:after {
+		content: ")";
+	}
+	.user-links .menu-link {
+		/* Un-do the fancy menu CSS */
+		background: none;
+		padding: 0;
+		margin: 0;
+		color: #7CA93A;
+		/* Fix vertical alignment on FF */
+		vertical-align: bottom;
+	}
+	
+	.user-links .menu-link:hover {
+		text-decoration: underline;
+	}
+	
+	.user-links .menu-link:after {
+		/* Add | between each item */
+		content: '|';
+		padding: 0 .2em;
+		color: #666;
+	}
+	.user-links .menu-link:last-child:after {
+		/* Make sure NOT to add | after the end item */
+		content: '';
+		padding: 0;
+	}
+	
+	/* Logo Breakpoint - Float on left, give it a background */
+	
+	.logo-box {
+		position: absolute;
+		z-index: 2;
+		background: transparent url('../images/logo_bg.png') no-repeat top right;
+		min-width: 350px;
+		min-height: 97px;
+		margin: 0;
+	}
+	
+	.logo-box .logo {
+		line-height: 48px;
+		font-size: 38px;
+		text-shadow: 1px 1px 0 #EEE, 2px 2px 0 #CCC;
+		color: #7E7E7E; 
+		font-style: italic;
+	}
+	.slogan {
+		/* Only add shadow on larger displays, as it can look "fuzzy" when smaller */
+		text-shadow: 1px 1px 0 #DDD;
+	}
+	
+	.field_label.spacer {
+		/* used mainly on the search page, to add uniform left spacing to unlabeled fields */
+		display: inline-block;
+	}
+}
+
+/* ==========================================================================
+   Footer Navigation
+   ========================================================================== */
+
+footer.page {
+	clear: both;
+}
+
+nav.footer {
+	border-top: 1px solid #CCCCCC;
+	margin: 1em 0 1em 0;
+}
+
+nav.footer a {
+	float: left;
+	width: 50%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	border-bottom: 1px solid #CCCCCC;
+	padding: 0.5em 0;
+	text-decoration: none;
+	color: #444;
+	text-align: center;
+	font-size: .75rem;
+}
+
+nav.footer a:nth-of-type(2n+1) {
+	border-right: 1px solid #CCCCCC;
+}
+
+.disclaimer a {
+	color: #7CA93A;
+	text-decoration: none;
+}
+.disclaimer a:hover {
+	color: #7CA93A;
+	text-decoration: underline;
+}
+
+.blurb,
+.disclaimer {
+	padding: 0 .3em;
+	font-size: .7rem;
+	text-align: center;
+}
+
+.blurb {
+	text-align: left;
+}
+
+@media only screen and (min-width: 37.5em) {
+	/* ==========================================================================
+	   Footer Breakpoint 1: 37.5em is about size that all the footer links "fit"
+	   		when using 4 per row
+	   ========================================================================== */
+	
+	nav.footer {
+		border: 5px solid #EAEAEA;
+		border-radius: 10px;
+		background: url("../images/backgrounds/footer_bar.gif") repeat-x scroll left top #4987C5;
+		padding: 1.25em .9em;
+	}
+	nav.footer a {
+		width: 25%;
+		color: #fff;
+		font-weight: bold;
+		text-align: left;
+		border: none;
+		padding: .37em 0;
+		font-size: .75rem;
+	}
+	nav.footer a:nth-of-type(2n+1) {
+		border-right: none;
+	}
+	nav.footer a:hover {
+		text-decoration: underline;
+	}
+}
+
+@media only screen and (min-width: 54em) {
+	/* ==========================================================================
+	   Footer Breakpoint 2: 54em is about size that all the footer links "fit"
+	   		with the contact us blurb on the right with default English text
+	   ========================================================================== */
+	
+	footer.page {
+		position: relative;
+		font-weight: bold;
+	}
+	footer.page:before {
+		/* Make room so the copyright and such shows */
+		content: "";
+		display: table;
+		height: 8em;
+		position: relative;
+	}
+	
+	/* Position the footer navigation absolutely, allowing us to move the contact
+		us blurb up along side it on the right */
+	nav.footer {
+		position: absolute;
+		padding-right: 35%;
+		top: 0;
+		left: 0;
+		width: 100%;
+		box-sizing: border-box;
+		-moz-box-sizing:border-box; /* Firefox */
+	}
+	
+	.blurb {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 35%;
+		color: #fff;
+		border-left: thin solid white;
+		margin: 4em 0 0 0;
+		padding: 0 1em 0 1.25em;
+	}
+	.blurb h3 {
+		font-size: .9rem;
+		margin: 0;
+		padding: 0 0 .31em;
+	}
+	.blurb p {
+		clear: both;
+		line-height: 1.6em;
+		margin: 0;
+		padding: 0;
+		font-size: .75rem;
+	}
+	.blurb a {
+		color: white;
+	}
+	.blurb a:hover {
+		color: white;
+		text-decoration: none;
+	}
+	
+	.social-contacts {
+		text-align: right;
+		padding: .5em;
+	}
+	/* Create a simple hover effect that "brightens" the social icons */
+	.social-contacts a {
+		opacity: .7;
+		transition-duration: .6s;
+	}
+	.social-contacts a:hover {
+		opacity: 1;
+	}
+}
+
+/* ==========================================================================
+   Text Color
+   ========================================================================== */
+
+a:hover,
+h1.subtitle,
+h2.subtitle,
+h3.subtitle,
+.highlight_links a,
+.highlight_links a:visited,
+.text_highlight,
+footer.page .disclaimer h3,
+footer.page .disclaimer h4,
+#listing_categories li.element,
+#listing_categories span.category_title,
+div.category_column ul span.category_title,
+.categories div a:hover,
+ul.social_links li.element,
+.row_header,
+h1.listing_title,
+h1.seller_username,
+h1.seller_username a:link,
+h1.seller_username a:visited,
+.galleryBigImage p,
+.full_image_item,
+h1.print_title,
+.lightUpBox_navigation,
+.lightUpBox_description,
+.title2,
+h1.search_title
+{
+	color: #4987C5;
+}
+.highlight_links a.button,
+.highlight_links a.button:visited,
+a.button:hover {
+	/* Reset color back to white */
+	color: #fff;
+}
+
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+	background-color: transparent;
+	border: 0;
+	overflow: hidden;
+	/* IE 6/7 fallback */
+	*text-indent: -9999px;
+}
+
+.ir:before {
+	content: "";
+	display: block;
+	width: 0;
+	height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+	display: none;
+	visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+	visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+	content: " "; /* 1 */
+	display: table; /* 2 */
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+	*zoom: 1;
+}
+
+/*
+ * Allow way to easily make something clear both.
+ */
+.clear, .clr {
+	/* Note: Do NOT use at end of contents of an element to make the parent the
+		right hight, instead use clearfix on the parent element.  When in doubt,
+		use clearfix not clear or clr!  */
+	clear: both;
+}
+
+/*
+ * Easily center contents of element:
+ * 
+ * cntr - only center the contents
+ * center - center contents and add a little top/bottom padding
+ */
+ 
+.cntr, .center {
+	text-align: center;
+}
+
+.center {
+	padding: .6em;
+}
+
+/* Easily float something to the right with a little bit of padding */
+.alignright {
+	float: right;
+	padding-right: .32em;
+}
+/* Quick way to make sure something does not auto wrap */
+.nowrap {
+	white-space: nowrap;
+}
+
+/* ==========================================================================
+   Showcase (mostly front page)
+   ========================================================================== */
+
+.content_box.showcase {
+        background-color: white;
+        border: 0.125em solid #eaeaea;
+        border-radius: 1em;
+        box-shadow: none;
+        margin-bottom: 0.625em;
+        padding: 0.3em;
+}
+
+.no-js .content_box.showcase .inner,
+.no-cssgradients .content_box.showcase .inner {
+	background: #F9FAFB url('../images/backgrounds/showcase-top.png') repeat-x right -5px;
+}
+
+.cssgradients .content_box.showcase .inner {
+	background-image: -moz-linear-gradient(center top , #eee, #f7f7f7 70%);
+	background-image: -webkit-linear-gradient(top, #eee, #f7f7f7 70%);
+	background-image: -ms-linear-gradient(top, #eee, #f7f7f7 70%);
+	background-image: -o-linear-gradient(top, #eee, #f7f7f7 70%);
+	background-image: linear-gradient(top, #eee, #f7f7f7 70%);
+}
+
+.showcase .inner {
+        border-radius: 0.6em;
+        padding: 0.6em 0.3em;
+        z-index: 2;
+}
+
+.showcase h1.title {
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-color: transparent;
+	
+	
+	text-align: center;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 1.25rem;
+	font-weight: normal;
+	background-image: url('../images/backgrounds/showcase-ribbon.png');
+}
+
+.showcase h1.title:after {
+	content: url('../images/backgrounds/showcase-ribbon-right.png');
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+/* Forsale Box */
+.content_box.showcase .forsale {
+	float: right;
+	margin-top: -18px;
+}
+
+.content_box.showcase .forsale_text {
+	background: url('../images/backgrounds/car_silhouette.png') no-repeat left top;
+	width: 125px;
+	
+	color: black;
+	font-family: Geneva, Arial, Helvetica, sans-serif; 
+	font-size: 16px; 
+	line-height: 32px; 
+	font-weight: bold; 
+	text-shadow: 2px 2px 0 #FFF;
+	text-align: center;
+	margin-top: -0.5em;
+	margin-left: 0.5em;
+}
+/* Fancy Search Box */
+
+.showcase.search .inner {
+	min-height: 195px;
+	padding: .1em .2em;
+	position: relative;
+}
+
+.showcase h1.search_title {
+	border: none;
+	background: transparent;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 1.2rem;
+	font-weight: bold;
+	z-index:10;
+	margin: 0 1em;
+}
+
+.search_fade_box {
+	display: none;
+}
+
+.search_content_box select.field {
+    	margin: 3px;
+}
+
+.zipbox {
+	display: inline-block;
+}
+
+.search_bullets {
+	display: none;
+}
+form.showcase {
+	display: inline;
+}
+.form-search {
+	background-color: #eaf8fc;
+	background-image: -moz-linear-gradient(#fff, #d4e8ec);
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #d4e8ec),color-stop(1, #fff));
+	border-radius: 2.1em;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #c4d9df #a4c3ca #83afb7;
+	width: 21.25em;
+	max-width: 90%;
+	height: 2.2em;
+	padding: .6em;
+	margin: .625em auto .625em;
+	position: relative;
+	z-index: 20;
+	overflow: hidden;
+	text-align: center;
+	display: inline-block;
+}
+form.showcase input.keyword {
+	padding: 5px 9px;
+	height: 2.8em;
+	width: 98%;
+	border: 1px solid #a4c3ca;
+	background: #f1f1f1;
+	border-radius: 50px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);
+	
+	font-weight: normal;
+	font-size: .81rem;
+	font-family: 'trebuchet MS', arial, helvetica;
+}
+
+/* Here are some fancy shadow DOM pseudo selectors.. Goal is to change color of
+	place-holder.  Note that if one element selector is invalid, the entire thing is
+	ignored!  So cannot combine the selectors for different browsers or will be
+	ignored by all browsers. */
+
+form.showcase input.keyword::-webkit-input-placeholder {
+	/* WebKit browsers */
+	color: #9c9c9c;
+	font-style: italic;
+}
+form.showcase input.keyword:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	color: #9c9c9c;
+	font-style: italic;
+}
+form.showcase input.keyword::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	color: #9c9c9c;
+	font-style: italic;
+}
+form.showcase input.keyword:-ms-input-placeholder {
+	/* Internet Explorer 10+ */
+	color: #9c9c9c;
+	font-style: italic;
+}
+/* End of shadow DOM stuff */
+
+.recent-listing-links {
+	text-align: center;
+	margin: 2.3em auto 0;
+}
+.design2016 .recent-listing-links {
+	margin: 0 auto;
+}
+.recent-listing-links a.button {
+	display: inline-block;
+	margin: .1em auto;
+	width: auto;
+	min-width: 4em;
+}
+
+@media only screen and (min-width: 38em) {
+	/* ==========================================================================
+	   Showcase Breakpoint - 38em is about size that the showcase search box can
+	   		display well with all the extra fancy stuff
+	   ========================================================================== */
+	
+	.form-search {
+		max-width: 55%;
+	}
+	.search_fade_box {
+	    background: rgba(0, 0, 0, 0) url("../images/backgrounds/showcase_img_fade.png") no-repeat scroll right top / 100% auto;
+	    display: block;
+	    float: right;
+	    height: 9.75em;
+	    margin-right: -0.45em;
+	    margin-top: -0.3em;
+	    overflow: visible;
+	    width: 35%;
+	}
+	.search_bullets {
+	    display: block;
+	    margin-left: 0;
+	    margin-top: 10em;
+	    padding: 0 0.1em 0.1em;
+	    text-align: center;
+	}
+	.search_bullets li {
+		list-style: none;
+		margin-bottom: .2em;
+		text-align: left;
+	}
+	
+	.search_bullets li a {
+		display: block;
+		width: 13em;
+		max-width: 100%;
+		padding: 0.25em 0.5em 0.25em 0.75em;
+		border: thin solid #7CA93A;
+		border-left: 0.5em solid #648D25;
+		background-color: #7CA93A;
+		text-decoration: none;
+		border-radius: 0 .3em .3em 0;
+		font-weight: bold;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		transition-duration: 0.2s;
+		color: #fff;
+		margin: 0 auto;
+		
+		box-sizing: border-box;
+		-moz-box-sizing:border-box; /* Firefox */
+	}
+	
+	.search_bullets li a:hover {
+		border: thin solid #648D25;
+		border-left: 0.5em solid #648D25;
+		background-color: #648D25;
+	}
+	
+	.recent-listing-links a.button {
+		display: inline-block;
+		margin: .1em auto;
+		width: auto;
+		min-width: 5em;
+	}
+	
+	.showcase h1.search_title {
+	    font-size: 1.75rem;
+	    line-height: 2em;
+	    text-shadow: 0.05em 0.05em 0 #fff, 0.1em 0.1em 0 #ccc;
+	    white-space: nowrap;
+	}
+	
+	.form_search_divider {
+	    background: rgba(0, 0, 0, 0) url("../images/backgrounds/showcase-search-divider.gif") repeat-y scroll left top;
+	    float: right;
+	    height: 7em;
+	    margin: 0 1em 0 0;
+	    width: 0.13em;
+	}
+	
+	.gj_image_fade {
+		position: relative;
+	}
+	
+	.gj_image_fade div {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		z-index: 8;
+		width: 100%;
+	}
+	
+	.gj_image_fade div.active {
+		z-index: 10;
+	}
+	
+	.gj_image_fade div.last_active {
+		z-index: 9;
+	}
+	.gj_image_fade img {
+		max-width: 100%;
+	}
+	.cz-categories {
+		display: none;
+	}
+}
+
+/* ==========================================================================
+   Category Menu - Used in left column and in RWD for smaller devices
+   ========================================================================== */
+
+.cz-categories a span {
+    float: right;
+}
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 15px;
+  margin-bottom: -1px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  transition-duration: 0.2s;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item > .badge {
+  float: right;
+}
+
+.list-group-item > .badge + .badge {
+  margin-right: 5px;
+}
+
+a.list-group-item {
+  color: #555555;
+  text-decoration: none;
+}
+
+a.list-group-item .list-group-item-heading {
+  color: #333333;
+}
+
+a.list-group-item:hover,
+a.list-group-item:focus {
+  text-decoration: none;
+  transition-duration: 0.2s;
+}
+
+a.list-group-item.active:focus {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #777;
+  border-color: #777;
+}
+
+a.list-group-item.active .list-group-item-heading,
+a.list-group-item.active:hover .list-group-item-heading,
+a.list-group-item.active:focus .list-group-item-heading {
+  color: inherit;
+}
+
+a.list-group-item.active .list-group-item-text,
+a.list-group-item.active:hover .list-group-item-text,
+a.list-group-item.active:focus .list-group-item-text {
+  color: #e1edf7;
+}
+
+a.list-group-item:hover, a.list-group-item.active, a.list-group-item.active:hover {
+  border-color: #ddd;
+  background-color: #777;
+  color: #fff;
+  z-index: 2;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+a.list-subgroup-item {
+  color: #555555;
+  font-size: 12px;
+}
+
+.list-subgroup-item {
+  position: relative;
+  display: block;
+  padding: 5px 15px;
+  margin-bottom: -1px;
+  border: 1px dotted #555555;
+  background-color: #F8F8F8;
+}
+
+
+a.list-sub-subgroup-item {
+  color: #333;
+  font-size: 12px;
+}
+
+a.list-sub-subgroup-item:hover, a.list-sub-subgroup-item.active, a.list-sub-subgroup-item.active:hover {
+  text-decoration: none;
+  border-color: #ddd;
+  background-color: #c7c7c7;
+  color: #000;
+}
+
+a.list-subgroup-item:hover, a.list-subgroup-item.active, a.list-subgroup-item.active:hover {
+  text-decoration: none;
+  border-color: #ddd;
+  background-color: #DADADA;
+  color: #000;
+}
+
+.list-sub-subgroup-item {
+  position: relative;
+  display: block;
+  padding: 5px 30px;
+  margin-bottom: -1px;
+  border: 1px dotted #ccc;
+  background-color: #E8E8E8;
+}
+
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+/* Big search button */
+
+input.button-large {
+	padding: 8px 13px;
+	color: #FFF;
+	font-weight:bold;
+	font-size: 1.4rem;
+	border-radius: .3em;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	transition-duration: 0.2s;
+	cursor: pointer;
+	margin-bottom: .2em;
+	border: thin solid #648D25;
+	background: #7CA93A;
+}
+
+input.button-large:hover {
+	background: #648D25;
+	border: thin solid #4D4d4d;
+}
+
+
+/* Buttons used everywhere */
+
+.button,
+.button:visited,
+.cancel,
+.cancel:visited {
+	border: thin solid #4174A6;
+	background: #4987C5;
+	border-radius: .3em;
+	color: #FFF;
+	text-shadow: 0 -.1em 0 rgba(0, 0, 0, 0.4);
+	box-shadow: inset 0 .1em 0 rgba(255, 255, 255, 0.4), 0 .1em .1em rgba(0, 0, 0, 0.2);
+	padding: .5em .63em;
+	font-weight: bold;
+	font-size: .75rem;
+	text-decoration: none;
+	white-space: nowrap;
+	display: inline-block;
+	transition-duration: 0.2s;
+}
+
+.button:hover {
+	background: #356094;
+	border: thin solid #244368;
+	text-decoration: none;
+}
+
+/* Varient - orange button used on front page */
+.orange,
+.orange:visited {
+	border-color: #F58905;
+	background: #F9961E;
+	white-space: nowrap;
+	
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: .5em 1.5em;
+}
+
+.orange:hover {
+	background: #E48105;
+	border-color: #D07504;
+}
+
+/* Cancel buttons */
+.cancel,
+.cancel:visited,
+.mini_cancel,
+.mini_cancel:visited {
+	border-color: #CA0033; /* required-primary */
+	background: #EA003A; /* required-primary */
+}
+
+.cancel:hover,
+.mini_cancel:hover {
+	border-color: #B9002F; /* required-primary */
+	background: #CE0034; /* required-primary */
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+/* mini_* buttons use different light background to be suitable for use with images */
+.mini_button, .mini_cancel {
+    background: #e2e4e9 url("../images/backgrounds/button.gif") repeat-x scroll left center;
+    border: thin solid #cacbcc;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+    color: #666;
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin: 0 0.1em;
+    padding: 0.2em 0.3em;
+    text-decoration: none;
+}
+.mini_cancel:hover {
+	border: thin solid #e4a0a2;
+	background: #f0b5b7 url('../images/backgrounds/button_cancel.gif') repeat-x top left;
+	color: #3c70ac;
+	text-decoration: none;
+}
+
+.mini_button:hover
+{
+	border: thin solid #7CA93A;
+	background: #EBF4DD url('../images/backgrounds/button_hover.gif') repeat-x center left;
+	color: #648D25;
+	text-decoration: none;
+}
+
+input.button,
+input.cancel,
+input.mini_button,
+input.mini_cancel
+{
+	/* have to specify this, or FF will use system-default font for text on HTML buttons */
+	font-family: Geneva,Arial,Helvetica,sans-serif;
+}
+
+
+/* ==========================================================================
+   Breadcrumbs
+   ========================================================================== */
+
+.breadcrumb {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background: #f9fafb none repeat scroll 0 0;
+	border-color: #d5dce1;
+	border-image: none;
+	border-radius: 0;
+	border-style: solid none;
+	border-width: 1px 0;
+	box-shadow: none;
+	box-sizing: border-box;
+	list-style: outside none none;
+	margin: 0.5em 0;
+	overflow: hidden;
+	padding: 0;
+	width: 100%;
+   	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.breadcrumb a,
+.breadcrumb div {
+	float: left;
+	display: block;
+	padding: .7em 1em .7em 2em;
+	text-decoration: none;
+	color: #666;
+	position: relative;
+	background-color: #d5dce1;
+	background-image: linear-gradient(to right, #fff, #e9edf0);
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	font-size: .75rem;
+}
+
+.breadcrumb a,
+.breadcrumb a:visited {
+	color: #666;
+}
+
+.breadcrumb a:hover {
+	color: #4987C5;
+}
+
+.breadcrumb a:first-child,
+.breadcrumb div:first-child {
+	padding-left: 1em;
+	border-radius: .32em 0 0 .32em;
+	border-left: none;
+}
+
+.breadcrumb div:hover,
+.breadcrumb a:hover {
+	background: #fff;
+}
+
+.breadcrumb a:after,
+.breadcrumb div:after,
+.breadcrumb a:before,
+.breadcrumb div:before
+ {
+	content: " ";
+	position: absolute;
+	top: 50%;
+	margin-top: -1.5em;
+	border-top: 1.5em solid transparent;
+	border-bottom: 1.5em solid transparent;
+	border-left: 1.1em solid;
+	right: -1em;
+}
+
+.breadcrumb a:after,
+.breadcrumb div:after {
+	z-index: 2;
+	border-left-color: #e9edf0;
+}
+
+.breadcrumb a:before,
+.breadcrumb div:before {
+	border-left-color: #d5dce1;
+	right: -1.1em;
+	z-index: 1;
+}
+.breadcrumb a:hover:after,
+.breadcrumb div:hover:after {
+	border-left-color: #fff;
+}
+.breadcrumb .active {
+	font-weight: bold;
+	color: #7CA93A;
+}
+.breadcrumb .active:after {
+	border-left-color: #eee;
+}
+
+.breadcrumb a:last-child:after,
+.breadcrumb div:last-child:after,
+.breadcrumb a:last-child:before,
+.breadcrumb div:last-child:before {
+	content: normal;
+}
+
+.breadcrumb a:last-child,
+.breadcrumb div:last-child,
+.breadcrumb a:last-child,
+.breadcrumb div:last-child {
+	background: none;
+}
+
+.breadcrumb .highlight { 
+	color: #4174A6;
+	font-weight: bold;
+	display: none;
+}
+
+/* PRINT FRIENDLY PAGE BREADCUMB */
+
+.print_body .breadcrumb a:after, .print_body .breadcrumb div:after {
+	border-left-color: #e9edf0;
+	z-index: 2;
+}
+	
+.print_body .breadcrumb a, .print_body .breadcrumb div {
+	background-image: none;
+	background-color: transparent;
+	padding: 0.2em 0 0.2em 1.5em;
+	text-shadow: none;
+}
+
+.print_body .breadcrumb a:first-child, .print_body .breadcrumb div:first-child {
+	border-radius: 0;
+	padding-left: 0.5em;
+}
+
+.print_body .breadcrumb a:after, .print_body .breadcrumb div:after, .print_body .breadcrumb a:before, .print_body .breadcrumb div:before {
+	border-bottom: 1em solid transparent;
+	border-left: 0 solid;
+	border-top: 1em solid transparent;
+	content: "\00276d";
+	margin-top: -1.6em;
+	position: absolute;
+	right: -1em;
+	top: 50%;
+}
+
+.print_body .main .breadcrumb .active::after, .print_body .main .breadcrumb .active::before {
+	/* hide the final chevron at mobile widths */
+	content: none;
+}
+
+.print_body #header img {
+	max-height: 100px;
+}
+
+.print_body .listing_title {
+    margin: 0.5em 0;
+}
+
+.print_body h3 {
+    margin: 0.3em 0;
+}
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.tabList {
+	list-style: none;
+	margin: .31em 0 0 .62em;
+	padding: 0;
+	z-index: 2;
+	clear: both;
+}
+
+.tabList li {
+	background: #eaeaea;
+	border: thin solid #d4d4d4;
+	border-bottom: .31em solid #eaeaea;
+	padding: .62em 1em .5em 1em;
+	color: #818181;
+	text-decoration: none;
+	display: inline-block;
+	margin: 0 1px -5px;
+	cursor: pointer;
+	font-size: 11px;
+	font-weight: bold;
+	/* Give round corners on all modern updated browsers */
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+}
+
+.tabList li:hover {
+	background: #ffffff none repeat-x top left;
+	border: 1px solid #eaeaea;
+	border-bottom: none; /* required-primary */
+	padding-bottom: 13px;
+	color: #4987C5;
+}
+.tabList li.activeTab {
+	background: #ffffff; /* required-primary */
+	border: 2px solid #eaeaea; /* required-primary */
+	border-bottom: none; /* required-primary */
+	padding: 9px 14px 13px 14px;
+	color: #4987C5;
+	font-size: 1em;
+}
+
+.tabContents {
+	clear: both;
+	border: 5px solid #eaeaea;
+	padding: 5px;
+	z-index: 1;
+}
+
+.tabContents .listing_set.list .image {
+	/* Make things float around the image on the list view */
+	float: left;
+	border: thin solid #eee;
+	margin: 0 .3em .3em 0;
+	text-align: center;
+	min-width: 150px;
+	background-color: #FFF;
+}
+
+.browse-list-price-cntnr {
+	float: right; 
+	text-align: right;
+}
+
+@media only screen and (min-width: 34em) {
+	/* ==========================================================================
+	   Tabs Breakpoint - At around 34em it is wide enough to fit more things on
+	   the same line as the tabs, specifically for the browsing tabs.
+	   ========================================================================== */
+	.tabList {
+		clear: none;
+	}
+}
+
+/* ==========================================================================
+   My Account
+   ========================================================================== */
+
+.my-account ul
+{
+	margin: 0;
+	padding: 0 0 .1em 0;
+}
+
+.my-account ul li {
+	list-style: none;
+	text-align: left;
+}
+
+.my-account ul li a,
+.my-account ul li a:visited
+{
+	display: block;
+	padding: .63em .3em .63em 2.2em;
+	font-size: .75rem;
+	font-weight: bold;
+	background: #fefefe url('../images/backgrounds/bullet_list_arrow_1.gif') no-repeat left center;
+	border-top: thin solid #fff;
+	border-bottom: thin solid #f3f3f3;
+	text-decoration: none;
+	color: #666;
+}
+
+.my-account ul li a:hover
+{
+	display: block;
+	background: #f3f3f3 url('../images/backgrounds/bullet_list_arrow_2.gif') no-repeat left center;
+	border-bottom: thin solid #e5e5e5;
+	text-decoration: underline;
+}
+
+.my-account ul li a.obvious, .my-account ul li a.obvious:hover {
+	display: inline;
+	background: none;
+	border: none;
+	padding-left: 0;
+}
+/* ==========================================================================
+   Lightbox window
+   ========================================================================== */
+.gjLightbox {
+	/* This is for the overall box the lightbox contents load in, but note that
+	 * the lightUpBox may be used for more than just the lightbox slideshow.
+	 */
+	
+	border: .6em solid #eaeaea;
+	background-color: white;
+	border-radius: .32em;
+	
+	/* needs to be bigger than anything else on the page */
+	z-index: 2005;
+	
+	/* position needs to be absolute to be able to be moved on the page */
+	position: absolute;
+	
+	max-width: 95%; /* so it has a bit of side margins on small mobile screens */
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.gjLightboxOverlay {
+	/* This is the new overlay for the new jquery lightbox, most of these need
+	to be set to work. */
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* Change the background color for different looks for how back is faded */
+	background-color: #000;
+	width: 100%;
+	/* needs to be second largest z-index on the page, right below new lightbox */
+	z-index: 2004;
+}
+
+.lightUpBox_imageBox {
+	/* In the overall box, this is the div containing the image */
+	text-align: center;
+}
+
+.lightUpBox_imageBox img {
+	/* The actual image */
+	cursor: pointer;
+}
+
+img.lightUpBigImage {
+	/* This is a stand-alone image in the box, it's not wrapped by extra HTML,
+	this is used on image upload page as a "simpler" light up box without the
+	fancy slideshow. */
+	/* give it a pointer since when you click on it, it closes it. */
+	cursor: pointer;
+}
+
+.lightUpBox_navigation {
+	/* In the overall box, this is the div containing the navigation */
+	position: absolute;
+	top: .63em;
+	right: .63em;
+	padding: .31em;
+	text-align: center;
+	/* width: 80%; */
+	background-color: white;
+	border: .31em solid #eaeaea;
+	font-size: .75rem;
+}
+
+.lightUpBox_description {
+	/* In the overall box, this is the div containing the image description */
+	text-align: center;
+	padding: .44em .31em;
+	background: #f7f7f7;
+	font-size: .88rem;
+	font-weight: bold;
+}
+
+.lightUpMover,
+.lightUpTitle
+{
+	/* CSS for anything that can be used to "move" the lightbox. */
+	cursor: pointer;
+}
+
+.closeBoxX {
+	/* Used for red X to close the lightbox, used on "popup style" lightboxes */
+	
+	/* Not used for the slideshow, this is used when the lightbox is used
+		for a mini-popup such as a yes/no confirmation. */
+	position: absolute;
+	top: .31em;
+	right: .31em;
+	cursor: pointer;
+	padding-top: .31em;
+	padding-right: .31em;
+	width: 1em;
+	height: 1em;
+	background: url('../images/close.gif') no-repeat top left;
+}
+
+.closeBoxX:hover {
+	/* Shift the background, make it look "pushed down" when hovering. */
+	background: url('../images/close.gif') no-repeat 1px 1px;
+}
+
+/* ==========================================================================
+   Success / Error Messages
+   ========================================================================== */
+.success_box {
+	background: #E5F5DF;
+	border: thin solid #A3C894;
+	padding: .6em;
+	margin: .6em;
+	color: #5F6672;
+	font-size: .75rem;
+	line-height: 1.5em;
+	text-align: center;
+	font-weight: bold;
+}
+
+.ui-dialog .success_box {
+	background: none;
+	border: none;
+}
+
+.success_box h1 {
+	color: #17A400;
+	font-size: 1.4rem;
+	font-weight: normal;
+	margin: .6em 0;
+	padding: 0;
+}
+
+.error_message {
+    color: #980000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0 0.6em;
+    text-transform: uppercase;
+}			
+
+.error_box {
+	background: #FFFFE1;
+	border: thin solid #A9AFD4;
+	padding: .6em;
+	color: #5F6672;
+	font-size: .7rem;
+	font-weight: bold;
+	line-height: 1.1em;
+	text-align: center;
+}
+
+.field_error_box {
+	background: #fceaed;
+	border: thin solid #E68A9D;
+	padding: .6em;
+	color: #5F6672;
+	font-size: .7rem;
+	font-weight: bold;
+	margin: .6em;
+}
+
+.note_box {
+	background: #ecf4ff;
+	border: 1px solid #a9afd4;
+	padding: .6em;
+	color: #5f6672;
+	font-size: .7rem;
+	line-height: 1.1em;
+	text-align: center;
+	margin: .6em;
+}
+
+.no_results_box {
+	background: #ecf4ff;
+	border: thin solid #a9afd4;
+	padding: .6em;
+	color: #5f6672;
+	font-size: .7rem;
+	line-height: 1.1em;
+	font-weight: bold;
+	text-align: center;
+	margin: .6em;
+}
+
+.content_box.showcase .no_results_box {
+	/* When showing box in the showcase with the ribon going over the top, need
+		to add some more margin so the no results message does not hide behind
+		the ribbon */
+	margin-top: 2.5em;
+}
+
+/* ==========================================================================
+   Message Box (Usually loaded with Ajax)
+   ========================================================================== */
+
+#messageBox {
+	/* The container for messages displayed */
+	position: absolute;
+	border: thin dashed blue;
+	padding: .5em;
+	background-color: white;
+	left: 40%;
+	width: 22em;
+	max-width: 100%;
+	z-index: 1001;
+	font-weight: bold;
+	text-align: center;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.closeMessage {
+	/* The edit and delete image icons, used to make it clear you can click on them */
+	cursor: pointer;
+}
+.moveMessage {
+	/* specific for message move thingy */
+	cursor: move;
+	
+	/* make it hidden, as ability to move message is mainly to make it not fade */
+	color: white;
+	margin-right: .31em;
+}
+.messageBoxButtons {
+	/* Box for the buttons to delete or edit an image */
+	float: right;
+	margin-top: -.5em;
+	opacity: 0.6;
+}
+
+/* ==========================================================================
+   Dialog Boxes (jQuery-UI Overrides)
+   ========================================================================== */
+
+.ui-dialog {
+	/* jQuery ui dialog - max width of 95% to be mobile friendly */
+	max-width: 95%;
+}
+
+.ui-widget-content a.button,
+.ui-widget-content a.button:visited,
+.ui-widget-content a.cancel,
+.ui-widget-content a.cancel:visited {
+	/* jQuery UI likes to make buttons wrong color, fix that by getting closer
+		to the element with the selectors */
+	color: #ca0033;
+}
+
+/* ==========================================================================
+   Feedback "help box"
+   ========================================================================== */
+/* ######### FEEDBACK HELP BOX STYLES ######### */
+#help_info_column {
+	overflow: hidden;
+}
+
+#help_info_column ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+#help_info_column ul li {
+	list-style: none;
+	padding: .3em .3em 0 .6em;
+	float: left;
+	font-weight: bold;
+	display: block;
+}
+
+#help_info_column li.left {
+	clear: both;
+	color: #737373;
+	text-align: right;
+}
+
+#help_info_column li.right {
+	color: #777;
+}
+
+.feedback-header {
+	border-width:1px 0 1px 0;
+	border-style:dotted; 
+	border-color:#666; 
+	padding-top:5px; 
+	margin: 5px 3px;
+}
+
+/* ==========================================================================
+   Tabular data (tables) / headers / grid layout
+   ========================================================================== */
+
+.column_header {
+	background: #4174A6 url('../images/backgrounds/c_bar_primary.gif');
+	height: 1.5em;
+	color: #fff;
+	font-size: .7rem;
+	font-weight: bold;
+	margin: 0;
+	padding: .25em 0 0 .31em;
+	white-space: nowrap;
+}
+
+.column_header td {
+	white-space: nowrap;
+	padding: .2em .3em;
+}
+
+.column_header td.title {
+	width: 100%;
+}
+
+.results_column_header {
+	background: #eaeaea;
+	height: 1.5em;
+	color: #5f6672;
+	font-size: .7rem;
+	font-weight: bold;
+	margin: 0;
+	padding: .25em 0 0 .3em;
+}
+
+.results_column_header td {
+	white-space: nowrap;
+	text-align: center;
+	padding: .2em .3em;
+}
+
+.results_column_header td.title {
+	width: 100%;
+	text-align: left;
+}
+
+.results_column_header td.half {
+	width: 50%;
+}
+
+td.sorted_by {
+	background-color: #FFFFC3;
+}
+
+/* ==========================================================================
+   Lists of things
+   ========================================================================== */
+
+.checklist {
+	margin: 0.31em 0.6em 0.31em 4em;
+	padding: 0;
+	font-size: .75em;
+	color: #666;
+}
+
+.checklist li {
+	list-style: none;
+	background: url('../images/backgrounds/bullet_list_checkbox.png') no-repeat 0 .31em;
+	padding: 0.3em 0.3em 0.3em 1.5em;
+}
+
+.button_list {
+	margin: .3em 0;
+	padding: 0;
+}
+
+.button_list li {
+	list-style: none;
+	display: inline;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+.payment_options_list {
+	margin: 0;
+	padding: 0;
+}
+
+.payment_options_list li {
+	list-style: none;
+	display: inline-block;
+	/* Adjust this if any payment options are too "long" */
+	width: 12em;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+.option_list {
+	margin: 0;
+	padding: 0;
+	font-size: .75rem;
+}
+
+.option_list li {
+	list-style: none;
+	padding: 0;
+	font-weight: bold;
+}
+
+.option_list li a,
+.option_list li a:visited {
+	display: block;
+	border-bottom: thin solid #eaeaea;
+	padding: .3em;
+}
+
+.option_list li a:hover {
+	display: block;
+	border-bottom: thin solid #eaeaea;
+	background: #f4f3f3;
+	padding: .3em;
+}
+
+#checkbox ul {
+	margin: .42em -.42em .42em .42em;
+	padding: 0;
+	font-size: .75rem;
+	display: block;
+	float: left;
+}
+#checkbox ul li {
+	list-style: none;
+	background: url('../images/backgrounds/bullet_list_checkbox.png') no-repeat 0 .42em;
+	padding: .42em .42em .42em 1.25em;
+}
+
+.multiselect {
+	display: inline-block;
+}
+
+.multiselect ul {
+	margin: 0;
+	padding: 0;
+}
+
+.multiselect ul li {
+	list-style: none;
+	float: left;
+	padding: 0 .625em 0 0;
+}
+.multiselect .or_field {
+	text-align: right;
+}
+
+/* ==========================================================================
+   Extra Page List Styles
+   ========================================================================== */
+
+dl {
+	width: 21.8em;
+	max-width: 100%;
+}
+
+dd {
+	clear: right;
+	margin: 0 0 1.25em 2.5em;
+	font-size: 1rem;
+	color: #666;
+	font-family: Arial, Helvetica, sans-serif;
+}
+dd.image {
+	clear: none;
+	float: left;
+	margin: 0;
+}
+dt {
+	clear: left;
+	float: right;
+	width: 15.5em;
+	max-width: 100%;
+	overflow: auto;
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: #666;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.title2 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ==========================================================================
+   Cart / Listing Placement
+   ========================================================================== */
+
+/* General listing placement / input styles */
+.field_label,
+.required {
+	color: #666;
+	padding: .1em .3em;
+	width: 12.5em;
+	max-width: 90%;
+	clear: both;
+	display: inline-block;
+	font-weight: bold;
+	font-size: .75rem;
+	vertical-align: middle;
+}
+
+.extra-page-pricing .field_label {
+	width: 80%;
+}
+
+.required {
+	color: #4987C5;
+}
+
+.login_label {
+	color: #666;
+	padding: .1em .3em;
+	clear: both;
+	display: inline-block;
+	font-weight: bold;
+	font-size: .75rem;
+}
+
+.login_field {
+	/* need to specify width for these fields, or IE makes them look funny */
+	width: 8.6em;	
+}
+
+input.login_field {
+	box-sizing: inherit;
+}
+
+.login .link a {
+	font-size: 0.8em;
+}
+
+.login-bold input {
+	border-width: medium;
+	margin: 0;
+	font-size: 1.6em;
+	height: 2.4em;
+	width: 7.5em;
+}
+
+.form_field {
+	font-size: .75rem;
+	font-weight: bold;
+	color: #666;
+	padding: .25em;
+}
+
+.field, 
+.editor_field {
+    background: #fff url("../images/backgrounds/form_input.gif") repeat-x scroll left top;
+    border: thin solid #a3a3a3;
+    border-radius: 0.31em;
+    color: #666;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin: 0;
+    height: 30px;
+    padding: 0 0.38em;
+}
+
+.field:focus {
+	border-width: medium;
+	border-color: #4987c5;
+	margin: 0;
+}
+
+select.field {
+	display: inline-block;
+	color: #333333;
+}
+
+textarea.field {
+    height: 10em;
+    margin: 0;
+    padding: 5px;
+    vertical-align: middle;
+    width: 95%;
+}
+
+.usage_agreement {
+	width: 900px;
+	max-width: 100%;
+	height: 200px;
+}
+
+div.usage_agreement {
+	overflow: scroll;
+	border: 1px solid #b9b9b9;
+}
+
+.inline {
+	display: inline-block;
+	padding: 0 5px;
+	vertical-align: middle;
+}
+.sub_note {
+    color: #666;
+    font-size: 0.6rem;
+}
+
+.mini_note {
+	color: #666;
+	font-size: .57rem;
+}
+
+.editImageSort {
+	width: 96%;
+}
+
+/**
+ * Buyer Options
+ */
+
+.cost-option-box {
+	float: left;
+	border: thin solid #ddd;
+	border-radius: 1em;
+	margin: 1em;
+	padding: 1em;
+	background-color: white;
+	width: 24em;
+	max-width: 90%;
+	height: 13em;
+	overflow: auto;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.cost-options-group {
+	min-width: 100%;
+}
+
+.cost-option-group-label {
+	cursor: move;
+}
+
+.cost-option-combined-quantity-box {
+	background-color: white;
+	max-height: 20em;
+	overflow: auto;
+	display: inline-block;
+	vertical-align: top;
+	border: thin solid #ddd;
+	border-radius: 1em;
+}
+
+.cost-option-table thead tr {
+	border-bottom: thin solid #000;
+}
+
+.cost-option-table th {
+	padding-right: 1em;
+	white-space: nowrap;
+}
+
+.cost-options-sort-icon {
+	display: inline-block;
+}
+
+.cost-options-combined-quantity-label {
+	color: #aaa;
+	font-style: italic;
+	margin-left: 1em;
+}
+
+.cost-options-combined-option-sep {
+	font-weight: bold;
+}
+
+.buyer-option-image-box {
+	float: right;
+	border: thin solid #ddd;
+}
+
+
+/* Cart page */
+.cart_item {
+	border: .2em solid #eaeaea;
+	padding: .2em .625em;
+	margin: .3em;
+	font-weight: bold;
+	font-size: .75rem;
+	background: #f7f7f7 url('../images/backgrounds/cart_item_arrow_1.gif') no-repeat 2px center;
+	color: #4987C5;
+}
+
+.cart_item:hover {
+	background: #ffffe1 url('../images/backgrounds/cart_item_arrow_2.gif') no-repeat 2px center;
+}
+.cart_item_child,
+.cart_item_child_mini {
+	border: thin solid #eaeaea;
+	padding: .1em 1.25em;
+	margin: .2em .31em .2em 3.1em;
+	font-weight: bold;
+	font-size: .75rem;
+	color: #666;
+}
+
+.subtotal_cart_item,
+.cart_item_child_mini {
+	padding: .2em .63em;
+	background: #fff none repeat scroll 0 0;
+}
+
+.cart_item_child_mini ul {
+	margin: 0;
+	padding: 0;
+}
+
+.cart_item_child_mini ul li {
+	list-style: none;
+	color: #aaa;
+}
+
+
+.cart_item_child:hover {
+	background: #ffffe1;
+}
+
+.cart_item_subtotal {
+	background: #f7f7f7;
+	border: thin solid #eaeaea;
+	padding: .1em .63em;
+	margin: .31em .31em 1em 3.1em;
+	font-weight: bold;
+	font-size: .9rem;
+	text-align: right;
+}
+
+.subtotal_cart_item,
+.tax_cart_item {
+	border: thin solid #eaeaea;
+	color: #999;
+	float: right;
+	font-size: 0.9rem;
+	font-weight: bold;
+	margin: 0.31em;
+	padding: 0.1em 0.63em;
+	text-align: right;
+	width: 50%;
+}
+
+.total_cart_item,
+.total_order_item {
+	background: #f7f7f7;
+	border: thin solid #eaeaea;
+	padding: .1em .63em;
+	margin: .31em;
+	font-weight: bold;
+	font-size: 1rem;
+	text-align: right;
+	clear: both;
+	width: 50%;
+	float: right;
+}
+
+.listing_extra_item,
+.payment_item {
+	border: thin solid #eaeaea;
+	padding: .44em .63em;
+	margin: .31em;
+	font-weight: bold;
+	font-size: .75rem;
+	background: #f7f7f7;
+	color: #666;
+	display: block;
+	vertical-align: middle;
+}
+
+.listing_extra_item:hover,
+.payment_item:hover {
+	background: #ffffe1;
+}
+
+.listing_extra_item_child {
+	border: .1em solid #eaeaea;
+	padding: .1em .63em;
+	margin: .31em .31em 1em 3.1em;
+	font-weight: bold;
+	font-size: .9rem;
+	text-align: right;
+}
+
+.cart_item_cost,
+.listing_extra_cost {
+	float: right;
+	text-align: right;
+	padding: .2em 0;
+}
+
+.cart_item_buttons {
+	float: right;
+	padding: 0 .63em;
+}
+
+.cart_item_label {
+	float: left;
+	padding: .2em 0;
+}
+
+.cart_item div.cart_item_label {
+	padding-left: 1.56em;
+}
+
+#addToCartButton {
+	cursor: pointer;
+}
+
+
+#cart_buttons 
+{
+	text-align: center;
+	margin:.2em .2em .63em;
+	border: thin solid #CECECE;
+	padding: .63em;
+	clear: both;
+}
+#cart_buttons li {
+	list-style: none;
+	display: inline-block;
+	max-width: 100%;
+}
+#cart_buttons a {
+	width: 20em;
+	margin: .3em;
+	max-width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.disabled
+{
+	color: #ccc;
+}
+
+.checkout_button {
+	text-align: right;
+	padding: .31em;
+	clear: both;
+}
+
+/* NOTE: h2 a required to get "closer to" element than generic styling on links
+	within h2 titles */
+h2 a.show_instructions_button,
+h2 a.show_instructions_button:visited {
+	/* The instructions button for each section on media collection page */
+	color: #666;
+	display: inline-block;
+	margin: 0 0.1em;
+	padding: 0.2em 0.31em 0.1em;
+	text-decoration: none;
+}
+
+#cart_left_column {
+	float: left;
+	max-width: 100%;
+	width: 50%;
+}
+
+#cart_right_column, #cart_content_column {
+    overflow: hidden;
+    padding: 0;
+}
+
+#cart_right_column {
+    min-width: 45%;
+}
+
+.combined_step_section {
+	position: relative;
+}
+.combined_loading_overlay {
+	background-color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+	
+	z-index: 100;
+}
+.combined_loading_overlay img {
+	margin-top: 2.5em;
+}
+
+iframe.listing_preview {
+	width: 60em;
+	max-width: 100%;
+	height: 32em;
+	overflow: auto;
+	margin: 1em;
+	border: thin dashed #000;
+	border-radius: 0.5em;
+	-moz-border-radius: 0.5em; 
+	-webkit-border-radius: 0.5em;	
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.edit,
+.delete,
+.preview {
+	border: thin solid #cacbcc;
+	background: #e2e4e9 url('../images/backgrounds/button.gif') repeat-x center left;
+	color: #666;
+	padding: .2em .3em;
+	font-weight: bold;
+	font-size: .75rem;
+	text-decoration: none;
+	display: block;
+	float: left;
+	margin: 0 .1em;
+}
+
+.delete:hover {
+	border: thin solid #e4a0a2;
+	background: #f0b5b7 url('../images/backgrounds/button_cancel.gif') repeat-x center left;
+	color: #9e4144;
+	text-decoration: none;
+}
+
+.design2016 .button-compact, .design2016 .button-compact:visited,
+.design2016 .delete, .design2016 .delete:visited, 
+.design2016 .edit, .design2016 .edit:visited, 
+.design2016 .preview, .design2016 .preview:visited {
+    background: #fff none repeat scroll 0 0;
+    border: thin solid #4174a6;
+    border-radius: 1em;
+    box-shadow: none;
+    color: #4174a6;
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin: 0 0.3em;
+    padding: 0.2em 0.6em;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: uppercase;
+    transition-duration: 0.2s;
+    white-space: nowrap;
+}
+
+.design2016 .delete, .design2016 .delete:visited {
+	background: #fff none repeat scroll 0 0;
+	border-color: #ca0033;
+	color: #ca0033;
+}
+
+.design2016 .button-compact:hover,
+.design2016 a.preview:hover,
+.design2016 a.edit:hover {
+	background-color: #4174a6;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.design2016 .delete:hover {
+	border-color: #B9002F; /* required-primary */
+	background: #CE0034; /* required-primary */
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.mini-cart {
+	-moz-border-bottom-colors: #d5dce1;
+	-moz-border-left-colors: #d5dce1;
+	-moz-border-right-colors: #d5dce1;
+	-moz-border-top-colors: none;
+	border-color: #d5dce1;
+	border-radius: 0;
+	border-style: none solid solid;
+	border-width: 0 1px 1px;
+	margin: 0 auto;
+	width: 100%;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.mini-cart-progress {
+	background-color: #efefef; 
+	position: relative; 
+	float: right; 
+	width: 100%;
+}
+
+.mini-cart-progress a {
+	float: right;
+}
+
+.item-in-progress {
+	font-size: 0.8em;
+	color: #4987c5;
+}
+
+li.my_account_links_inactive ul li {
+    border-bottom: 1px dashed #64b3da;
+    color: #999;
+    padding: 5px;
+}
+
+.my_account_links_inactive h3 {
+    padding: 5px;
+}
+
+
+/* ==========================================================================
+   Cart - Media Upload
+   ========================================================================== */
+
+.media-upload-dropbox {
+    background: #fff url("../images/backgrounds/pic_icon.png") repeat-x scroll center top;
+    border: thin dashed #777;
+    box-sizing: border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    margin: 1em auto;
+    min-height: 4em;
+    padding: 1em;
+    width: 98%;
+}
+
+.media-container {
+	text-align: center;
+	margin: 1em;
+}
+
+.media-upload-dropbox {
+	text-align: left;
+}
+
+.media-preview {
+	background: rgba(255, 255, 255, 0.7) none repeat scroll 0 0;
+	border: thick solid #eaeaea;
+	border-radius: 0;
+	margin: 0.5em;
+	overflow: auto;
+	padding: 0.5em;
+	position: relative;
+}
+
+.media-preview-image {
+	border: thin solid #eaeaea;
+	margin: 5px auto;
+	min-height: 6.25em;
+	min-width: 6.25em;
+	overflow: hidden;
+	text-align: center;
+}
+
+.media-preview-image img {
+	margin: 10px 0 0 0;
+}
+
+.media-queue-progress {
+	float: right;
+}
+
+.media-queue-entry {
+	border: thin solid #777;
+	background-color: #eee;
+	margin: .3em;
+	padding: .5em;
+	border-radius: .5em;
+	font-size: .8em;
+}
+
+.media-progress-circle {
+	/* Special Case - uses JS to get the styles of this element, to use for
+		the progress bar, so that things like color and such are not set in JS
+		where they are hard to change. */
+	
+	/* This is the color of the bar (fgColor) */
+	color: #87CEEB;
+	
+	/* The background color for the entire progress bar (bgColor) */
+	background-color: #ddd;
+	
+	/* The width & height for circle - Recommend using fixed value */
+	width: 80px;
+	
+	/* This one is a little weird...  the height will controll the "thickness" of
+		the bar, divided by 100...  So if you want thickness of .3 you would set
+		height to 30px. */
+	height: 20px;
+	
+	
+	/* Keep this intact or you will have a sqare show on the page! */
+	position: absolute;
+	left: -1000px;
+}
+.queue-thumb {
+	float: left;
+	margin: .2em;
+	border: 1px solid #777;
+	/* NOTE : special case: need to do pixels here because canvas goes in here
+		which is only pixels */
+	min-width: 50px;
+	min-height: 50px;
+}
+
+/* This is mainly the title / label for images */
+.media-editable-label {
+    background-color: #ffffcc;
+    border: 1px dashed #bbb;
+    margin: 0.3em auto;
+    min-height: 1em;
+    overflow-x: auto;
+    padding: 0.2em;
+    white-space: nowrap;
+}
+.media-editable-label:hover,
+.media-editable-label:focus {
+	background: rgba(255,255,153,1);
+	border: thin dashed #0090d2;
+}
+.media-editable-saved {
+	opacity: 0;
+	transition-duration: 0.3s;
+	position: absolute;
+	bottom: .3em;
+	left: 1em;
+	background-color: white;
+	border: thin solid #777;
+	z-index: 5;
+}
+.media-editable-saved-show {
+	opacity: 1.0;
+}
+
+.slot-label {
+	cursor: move;
+}
+
+.media-delete {
+	display: block;
+	position: absolute;
+	right: 0.1em;
+	top: 0.1em;
+}
+
+.media-rotate {
+	position: absolute;
+	top:0.1em;
+	right: 2.0em
+}
+
+.media-runtime {
+	/* This styles a little bit of text on the uploader that helps debug when there
+		are problems...  Point is to not stand out, look kinda-official, and be
+		easy to read when people send screenshots.  */
+	position: absolute;
+	top: .5em;
+	right: 2em;
+	font-size: .7rem;
+	color: #999;
+	/* hasn't been a need to debug this in a while, so killing it */
+	display: none;
+}
+
+/* Specific to Offsite Video Upload */
+
+div.offsite_video_slot {
+	float: left;
+	width: 15.625em;
+	border: thick solid #EAEAEA;
+	margin: .31em;
+	padding: .31em .31em .75em .31em;
+	background: white;
+}
+
+div.offsite_video_box_title,
+div.offsite_video_box_title_empty,
+div.offsite_video_box_title_editing {
+	/* The styles used for the title of each image box */
+	border: none;
+	background-color: #4174a6;
+	color: white;
+	padding: .33em 0 0 .42em;
+	margin: -.42em -.42em .33em -.42em;
+	
+	height: 2em;
+	font-size: .75rem;
+	font-weight: bold;
+}
+
+div.offsite_video_box_title_empty {
+	background-color: #eaeaea;
+	color: #737373;
+}
+
+div.offsite_video_box_title {
+	background: #4174a6 url('../images/backgrounds/c_bar_primary.gif');
+	/* These boxes can be moved, so give title a cursor for moving */
+	cursor: move;
+}
+
+div.offsite_video_box_title_editing {
+	background: #7ca93a url('../images/backgrounds/c_bar_secondary.gif');
+}
+
+input.offsite_video_id_input {
+	width: 100%;
+}
+
+.offsite_video_box_title_buttons {
+	/* Box for the buttons to delete or edit an image */
+	float: right;
+	margin-top: -.5em;
+	opacity: 0.6;
+}
+.offsite_video_box_title_buttons:hover {
+	/* Make hove effect to make it look like button being held down */
+	padding-top: .19em;
+	opacity: 1;
+}
+
+.delete_offsite_video {
+	/* The edit and delete image icons, used to make it clear you can click on them */
+	cursor: pointer;
+}
+
+div.preview_offsite_video_box {
+	background: #f7f7f7 url("../images/backgrounds/youtube_bg.gif") no-repeat 50% 50%;
+	border: thin solid #eaeaea;
+    	height: 12.19em;
+    	padding: 0;
+    	width: 15em;
+    	margin: 0 auto;
+}
+
+.offsite_video_slot_label,
+.offsite_video_cost_label,
+.offsite_video_id_label {
+	font-weight: bold;
+}
+
+.offsite_video_id_label.required {
+	color: #4987C5;
+}
+
+.offsite_video_slot_value,
+.offsite_video_cost_value {
+	/* Able to specify CSS for values if desired. */
+	
+}
+
+.offsite_video_action_buttons {
+	text-align: center;
+	height: 1.25em;
+	margin: .625em 0 .31em;
+}
+
+div.offsite_video_loading_container {
+	float: left;
+}
+
+div#plopDropVideoHere {
+	/* 
+	 * this is the box that appears in the slot where an image will be moved
+	 * to.
+	 */
+	
+	/* position needs to be absolute in order to be in the correct location */
+	position: absolute;
+	padding: .31em;
+	margin: 0;
+	white-space: nowrap;
+	width: 15.31em;
+	height: 10.94em;
+	border: thin dashed gray;
+	background-color: #DFDFDF;
+	text-align: center;
+	padding-top: 10em;
+	font-weight: bold;
+}
+
+#offsite_video_instructions_box,
+#image_upload_instructions_box {
+	font-size: 0.8em;
+}
+
+
+@media only screen and (min-width: 25em) {
+	/* ==========================================================================
+	   Media Upload Breakpoint - This is when 2 columns start to fit on the page
+	   for the media preview boxes
+	   ========================================================================== */
+	
+	.media-preview {
+		float: left;
+		width: 10em;
+		height: 13em;
+		overflow: auto;
+		overflow-y: auto;
+	}
+	.recaptcha-adjust {
+		margin-left: 30px;
+	}
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+.pagination {
+	margin: .6em auto;
+	padding: 0;
+	text-align: center;
+}
+
+.pagination li {
+	color: #666;
+	list-style: none;
+	display: inline-block;
+	font-weight: bold;
+	font-size: .75rem;
+}
+
+.pagination .current {
+	color: #FFF;
+	padding: .1em .375em;
+	border-style: solid;
+	border-width: 0;
+	background: #777;
+	font-size: 1.0em;
+	border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px;
+	vertical-align: middle;
+}
+
+.pagination a,
+.pagination a:visited {
+	color: #666;
+	padding: .2em .375em;
+	border: thin solid #999;
+	background: #f7f7f7;
+	font-weight: bold;
+	font-size: .7rem;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px; 
+}
+
+.pagination a:hover,
+.pagination a:active {
+	color: #fff;
+	border: thin solid #777;
+	background: #888;
+}
+
+/* ==========================================================================
+   Listing Details
+   ========================================================================== */
+
+.listing_title {
+	padding: 0;
+	margin: 1em 0;
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.listing_title span {
+    color: #ff0000;
+    font-size: 0.875rem;
+    padding: 0.25em 0 0;
+    text-transform: uppercase;
+}
+
+.seller_username {
+	margin: .3em .1em;
+	padding: 0;
+	font-size: .75rem;
+	font-weight: bold;
+}
+
+.seller_username a,
+.seller_username a:visited {
+	font-size: 1.2rem;
+	text-decoration: none;
+}
+
+.extra-questions {
+	width: 100%;
+}
+.extra-questions td {
+    padding: 0.3em;
+    width: 50%;
+}
+/* #extra_questions: deprecated in 7.3.2 / for back-compatibility only */
+#extra_questions ul {
+	margin: 0;
+	padding: 0;
+	color: #666666;
+}
+
+#extra_questions li {
+	list-style: none;
+	padding: .3em;
+}
+
+#extra_questions div.label {
+	width: 28%;
+	display: inline-block;
+	float: left; /* for IE <= 7, which doesn't like inline-block */
+	white-space: nowrap;
+	font-weight: bold;
+}
+
+#extra_questions div.data {
+	width: 68%;
+	display: inline-block;
+}
+
+ul.optional_fields {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	text-align: center;
+}
+
+ul.optional_fields li {
+	list-style: none;
+	display: inline-block;
+	margin: 0;
+	padding: .3em 0 .3em 1em;
+	width: 26em;
+	text-align: left;
+}
+
+ul.optional_fields li label {
+	font-weight: bold;
+	display: inline-block;
+	white-space: nowrap;
+	width: 50%;
+}
+
+
+
+h1.listing_title span.price {
+	float: none;
+	font-size: 0.8em;
+}
+
+.content_box_1,
+.content_box_2,
+.content_box_3 {
+	/* Common styles for content boxes used on listing details */
+	margin-bottom: .625em;
+	border-style: solid;
+	border-width: thin;
+	min-height: 1.25em;
+}
+
+.content_box_1 {
+	/* Content box used on listing details, no background */
+	border-color: #DDD;
+	padding: .2em;
+}
+
+.content_box_1 img {
+	max-width: 100%;
+}
+.content_box_1 .map-container img {
+	/* undo the [.content_box_1 img] rule specifically for gmaps. otherwise it breaks the zoom controls */
+	max-width: none;
+}
+
+.content_box_2 {
+	/* Content box used on listing details, light background */
+	background-color: #F9FAFB;
+	border-color: #D5DCE1; 
+	padding: 0 .75em;
+}
+
+.content_box_3 {
+	/* Content box used on listing details, darker background */
+	background-color: #E9EDF0; 
+	border-color: #D5DCE1;
+	padding: .1em .75em;
+}
+
+
+.content_box_1 p,
+.content_box_2 p,
+.content_box_3 p {
+	/* Give paragraphs inside listing details content boxes a little margin */
+	margin: .1em 0;
+}
+
+.content_box_1 h3,
+.content_box_2 h3,
+.content_box_3 h3 {
+	font-size: 1.2em;
+	margin: 0 0 .75em;
+}
+
+p.content_section {
+	/* Give content section a border on the bottom */
+	padding: .2em .5em; 
+	border-bottom: thin solid #EAEAEA;
+}
+
+.listing_maincol .content_box_1 {
+	/* The content box gets more padding in the main column */
+	padding: .3em .75em;
+}
+
+.listing_maincol .content_box_3 {
+	/* Remove left/right padding so that videos title doesn't have space around it */
+	padding: .3em 0;
+}
+
+.bid_box {
+	text-align:center;
+	background-color: #FFF2B7; 
+	border:1px solid #FFF0A8;
+	border-radius: 0;
+	padding: .625em;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.design2016 .bid_box {
+	text-align:center;
+	border:1px solid #FFF0A8;
+	border-radius: 0;
+	padding: .625em;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-shadow: 10px 10px 0px -4px rgba(255,208,0,1);
+	-moz-box-shadow: 10px 10px 0px -4px rgba(255,208,0,1);
+	box-shadow: 10px 10px 0px -4px rgba(255,208,0,1);
+	background: #FFE877 url("../images/backgrounds/bg_box.png") repeat scroll 0 0;
+	margin: 0.625em auto;
+	width: 90%;
+}
+
+.bid_amount,
+.bid_button {
+	display: inline-block;
+	min-height: 2.5em;
+	vertical-align: middle;
+}
+
+.bid_amount {
+	background: transparent url("../images/icons/Auction-72_FFFFFF.png") no-repeat scroll center center;
+    	display: inline-block;
+    	max-width: 100%;
+}
+
+.bid_button {
+	max-width: 100%;
+	text-align: center;
+	padding-left: 0;
+	margin: 0 1em;
+}
+
+.bid_button a {
+    font-size: 1.2rem;
+    padding: 0.2em 2rem;
+}
+
+.bid_box_note {
+	background-color: #FBFBFB; 
+	border: thin solid #DDD; 
+	border-radius: .5em;
+	margin-top: .3em;
+	font-size: .6rem;
+	padding: .5em;
+}
+
+.buy_now_cntnr {
+	padding-top: 0.5em; 
+}
+
+.user-profile-cntnr {
+	border: 1px dotted #ff0000; 
+	padding:1em; 
+	margin: 10px 3px; 
+	font-size: .8em;
+}
+
+.member-since-cntnr {
+	border: 5px solid #DDD;
+	margin: 0 10px 10px 0;
+	float: left;
+	position: relative;
+	height: 90px;
+	width: 90px;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	background: url("../images/icons/User-Profile-68.png") no-repeat scroll 50% 50% transparent;
+}
+.member {
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 55px;
+	line-height: 1.1em;
+	position: relative;
+	text-align: center;
+	top: 17px;
+	width: auto;
+}
+.member span.date {
+	font-size: .8em; 
+	color: #000; 
+	font-weight: normal;
+}
+
+h1.title.rounded_top,
+h2.title.rounded_top,
+h3.title.rounded_top,
+.rounded_top {
+	border-radius: .43em .43em 0 0;
+    background: url('../images/backgrounds/bg_fade.png') repeat-x left top;
+	background-color: #E9EDF0; 
+	border: thin solid #D5DCE1; 
+	margin: 0 0 .1em 0;
+	padding: .43em .6em .3em;
+}
+
+h1.title.rounded_top,
+h2.title.rounded_top,
+h3.title.rounded_top {
+	color: #333;
+	font-size: 1.6rem;
+	font-weight: bold;
+	text-shadow: 1px 1px 0 #FFF, 2px 2px 0 #BBB;
+}
+
+h2.title.rounded_top {
+	font-size: 1.4rem;
+}
+
+h3.title.rounded_top {
+	font-size: 1.2rem;
+}
+
+h1.title.rounded_top a,
+h2.title.rounded_top a,
+h3.title.rounded_top a {
+	color: #111;
+	text-decoration: underline;
+	text-shadow: none;
+}
+
+.faded_top {
+	border-radius: 0;
+    background: url('../images/backgrounds/bg_fade.png') repeat-x left top;
+	background-color: #E9EDF0; 
+	border: thin solid #D5DCE1; 
+	margin: 0;
+	padding: .43em .6em .3em;
+}
+
+.price-listing-details {
+	font-weight:bold; 
+	font-size: 1.25em; 
+	display:inline;
+}
+
+/* ==========================================================================
+   design2016 Box Style Changes
+   ========================================================================== */
+
+.design2016 .content_box_1 h3, .design2016 .content_box_2 h3, .design2016 .content_box_3 h3 {
+    font-size: 1em;
+}
+.design2016 .content_box_3 {
+    background-color: #FFF;
+}
+.design2016 h2.title, .design2016 h1.title, .design2016 h3.title, .design2016 h4.title, .design2016 .rounded_top {
+    border-radius: 0;
+	padding-left: 10px;
+}
+.design2016 h3.title {
+	background: url("../images/backgrounds/c_bar_secondary.gif") repeat scroll 0 0 #86ae47;
+	color: #FFF;
+}
+
+.design2016 h4.title {
+   	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #545454;
+   	color: #fff;
+   	font-size: 1rem;
+  	font-weight: bold;
+    	margin: 0;
+    	vertical-align: middle;
+    	border-radius: 0;
+    	padding: 5px 0 5px 10px;
+}
+.design2016 h1.title.rounded_top, .design2016 h2.title.rounded_top, .design2016 h3.title.rounded_top {
+    	font-size: 1.2rem;
+	border-radius: 0;
+}
+
+a.listing_tag {
+	white-space: nowrap;
+}
+
+/* The google map container, this is what size the google map will be */
+.map-container {
+	position: relative;
+	width: 37em;
+	height: 25em;
+	max-width: 95%;
+	margin: 0 auto;
+}
+
+/* Listing Details - Images / Media */
+
+/* gallery view */
+.galleryContainer {
+	text-align: center;
+	clear: both;
+}
+.galleryThumbs {
+	width: 100%;
+	text-align: center;
+}
+
+.galleryThumbs ul {
+	list-style-type: none;
+	margin: 1em;
+	padding: 0;
+}
+
+.galleryThumbs ul li {
+	display: inline-block;
+	margin: .2em;
+}
+
+.galleryThumbs img.thumb,
+.ps-thumb {
+	cursor: pointer;
+}
+
+.galleryBigImage {
+	margin: .6em auto;
+	border: solid #eaeaea;
+	display: inline-block;
+	max-width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.galleryBigImage p,
+.content_shell .galleryBigImage p {
+	background: #f7f7f7;
+	border-top: thin solid #dddddd;
+	font-size: .875rem;
+	font-weight: bold;
+	margin: 0;
+	padding: .4em;
+	text-align: center;
+}
+
+.galleryBigImage img {
+	border: none;
+	max-width: 100%;
+}
+
+.galleryBigImage img:hover {
+	border: none;
+}
+
+/* Filmstrip View */
+
+.filmstrip_outer {
+	text-align: center;
+}
+
+.filmstrip_container {
+	clear: both;
+	text-align: center;
+	display: inline-block;
+	border: thin solid #eaeaea;
+	padding: .6em .6em 1.6em .6em;
+	margin: .6em;
+}
+
+
+div.filmstrip_container p.imageTitle {
+	padding: .6em;
+	margin: 0;
+}
+
+.filmstrip_strip_container {
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	border: thin solid #eaeaea;
+}
+
+.filmstrip_main {
+	display: inline-block;
+	/* make it float so that width is correct, even in stupid IE<=7 who doesn't like inline-block...
+		this will be un-done in JS once width is set correctly */
+	float: left;
+}
+.filmstrip_main_img {
+	margin: 1em;
+}
+.filmstrip_strip {
+	white-space: nowrap;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: auto;
+}
+
+.filmstrip_entry {
+	padding: 0;
+	display: inline-block;
+	float: none;
+	margin: 0;
+	vertical-align: middle;
+	cursor: pointer;
+	
+	margin: 0 0 0 .3em;
+}
+
+.filmstrip_main_img img {
+	border: solid white;
+}
+
+.filmstrip_entry img {
+	border: thin solid white;
+}
+
+.filmstripLeftScrollButton {
+	/*  Note:  position is moved by JS */
+	float: left;
+	width: 1.375em;
+	height: 6em;
+	background: white url('../images/buttons/filmstrip_scroll_left.png') no-repeat right top;
+}
+
+.filmstripLeftScrollButton:hover {
+	background: white url('../images/buttons/filmstrip_scroll_left.png') no-repeat left top;
+}
+
+.filmstripLeftScrollButton.no_hover {
+	/* no_hover class set using JS, this is so there is no hover effect when it is disabled */
+	background: white url('../images/buttons/filmstrip_scroll_left.png') no-repeat right top;
+}
+
+.filmstripRightScrollButton {
+	/*  Note:  position is moved by JS */
+	float: right;
+	width: 1.375em;
+	height: 6em;
+	background: white url('../images/buttons/filmstrip_scroll_right.png') no-repeat left top;
+}
+
+.filmstripRightScrollButton:hover {
+	background: white url('../images/buttons/filmstrip_scroll_right.png') no-repeat right top;
+}
+.filmstripRightScrollButton.no_hover {
+	/* no_hover class set using JS, this is so there is no hover effect when it is disabled */
+	background: white url('../images/buttons/filmstrip_scroll_right.png') no-repeat left top;
+}
+
+
+/*  Offsite Videos */
+
+
+div.offsite_videos_container {
+	text-align: center;
+	padding-bottom: 0.1em;
+}
+
+/* featured pics */
+.full_image_item {
+	background: #f7f7f7;
+	border: solid #eaeaea;
+	font-size: .875rem;
+	font-weight: bold;
+	margin: .35em auto;
+	padding: 0 0 .35em 0;
+	text-align: center;
+	display: inline-block;
+}
+
+.full_image_item img {
+	margin-bottom: .3em;
+}
+
+/* ==========================================================================
+   Listing Details Print Friendly
+   ========================================================================== */
+.print_title {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.print_body {
+	background: #ffffff;
+	font-size: .9rem;
+}
+
+.print_shell {
+	width: 43.75em;
+	margin: 0 auto;
+}
+
+.print_top_text {
+	padding: 2.2em 0 0 0;
+	font-weight: bold;
+	float: right;
+}
+
+h1.print_title {
+	background: #eaeaea;
+	font-size: .875rem;
+	font-weight: bold;
+	margin: .1em 0;
+	padding: .35em 0 .35em .2em;
+	border-top: thin solid #999;
+	border-bottom: thin solid #999;
+}
+
+#print_photo_column {
+	width: 15.625em;
+	display: block;
+	float: right;
+	text-align: center;
+}
+
+#print_photo_column img {
+	border: thick solid #eaeaea;
+	margin-bottom: .6em;
+	max-width: 100%;
+}
+
+#print_photo_column div {
+	text-align: left;
+}
+
+#print_listing_info_column {
+	overflow: hidden;
+	padding: 0 1em;
+	font-size: .75rem;
+}
+
+#print_listing_info_column ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+}
+
+#print_listing_info_column ul li {
+	list-style: none;
+	padding: .3em 0 .3em .6em;
+}
+
+#print_listing_info_column li.label {
+	display: block;
+	width: 12.5em;
+	float: left;
+	clear: both;
+	font-weight: bold;
+	color: #737373;
+}
+
+#print_listing_info_column li.value {
+	display: block;
+	width: 15.625em;
+	float: left;
+	color: #777;
+	font-weight: bold;
+}
+
+#print_listing_info_column li.price {
+	font-size: 1rem;
+	font-weight: bold;
+	padding: .6em 0 .6em .6em;
+}
+
+#print_listing_photos img {
+	border: .3em solid #eaeaea;
+}
+
+#print_extra_questions ul {
+	margin: 0;
+	padding: 0;
+	color: #666;
+}
+
+#print_extra_questions li {
+	list-style: none;
+	padding: .3em;
+}
+
+#print_extra_questions div.label {
+	display: inline-block;
+	font-weight: bold;
+	white-space: nowrap;
+	width: 40%;
+}
+
+#print_extra_questions div.data {
+	display: inline-block;
+	width: 59%;
+}
+
+#print_optional_fields {
+	margin: 0;
+	padding: 0;
+}
+
+#print_optional_fields li {
+	list-style: none;
+	padding: .3em;
+}
+
+#print_optional_fields label {
+	font-weight: bold;
+	display: inline-block;
+	white-space: nowrap;
+	width: 10.9em;
+}
+
+.print_half_column_left {
+	width: 21.9em;
+	float: left;
+}
+
+.print_half_column_right {
+	width: 21.56em;
+	padding: 0 0 0 .3em;
+	float: left;
+}
+
+.print {
+	background: none;
+}
+
+/* ==========================================================================
+   Category Navigation
+   ========================================================================== */
+
+
+.category_column {
+	float: left;
+}
+.category_column ul {
+	margin: 0;
+	padding: 0;
+}
+
+.category_column ul li.element {
+	list-style: none;
+	font-weight: bold;
+	padding: .3em 0;
+	margin: 0;
+}
+
+/* a couple of quick overrides for showing category selection in a lightbox popout */
+.cat-block-popout .category_column {
+	float: none;
+}
+.cat-block-popout .category_column li.element {
+	padding: 0.3em 0.5em;
+}
+
+.category_column ul li.element img {
+	/* Make category image line up good */
+	vertical-align: middle;
+}
+.main_classified_navigation ul li.element {
+	/* specific to main classified navigation */
+	padding: .3em;
+	background: #fefefe;
+	border-top: thin solid #fff;
+	border-bottom: thin solid #f3f3f3;
+}
+
+.category_column ul.sub_categories li.element {
+	/* specific to sub-categories */
+	font-weight: normal;
+	padding: .2em;
+	margin: 0 0 0 1.25em;
+}
+
+#listing_categories {
+	margin: 0;
+	padding: 0;
+}
+
+.priceplan_choose {
+	display: inline-block;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+#listing_categories li.element,
+.priceplan_choose li.element {
+	list-style: none;
+	font-size: .9rem;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+
+.priceplan_choose li.element {
+	margin: .6em;
+}
+
+#listing_categories li.clr {
+	clear: both;
+	list-style: none;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+}
+
+#listing_categories a,
+#listing_categories a:visited,
+.priceplan_choose label,
+.priceplan_choose a {
+	margin: 0;
+	padding: .6em 0;
+	display: inline-block;
+	width: 100%;
+	text-decoration: none;
+}
+
+.priceplan_choose label,
+.priceplan_choose a {
+	padding: .6em;
+}
+
+#listing_categories a:hover,
+.priceplan_choose a:hover,
+.priceplan_choose label:hover {
+	text-decoration: none;
+	background: #f7f7f7;
+}
+
+#listing_categories span {
+	padding: 0 .6em;
+}
+
+span.category_title {
+	font-weight: bold;
+	font-size: 1rem;
+}
+.category_column ul.sub_categories span.category_title {
+	/* Sub-categories are not bolded */
+	font-weight: normal;
+	font-size: .75rem;
+}
+
+p.category_description {
+	margin: 0;
+	padding: .1em 0 .1em 0;
+	font-size: .7rem;
+	color: #888;
+	font-weight: normal;
+}
+
+.category_block {
+	padding-left: 0.7em;
+}
+
+.categories div {
+	font-size: .7rem;
+	font-weight: bold;
+}
+
+.categories div.element {
+	float: left;
+	padding: .25em 0 .25em .3em;
+}
+
+.categories div a,
+.categories div a:visited {
+	font-weight: bold;
+	padding: 0 .1em;
+	color: #666;
+	text-decoration: none;
+}
+
+.categories div a:hover {
+	text-decoration: underline;
+}
+
+.sub_categories li.element a {
+	text-decoration: none;
+}
+
+.sub_categories li.element a:hover {
+	text-decoration: underline;
+}
+
+span.listing_counts {
+	font-size: .7rem;
+	color: #A3A3A3;
+}
+
+.cat-block-popout {
+	width: 25em;
+	max-width: 100%; 
+	max-height: 25.875em;
+	overflow-y: auto;
+}
+.cat-block-popout a {
+	text-decoration: none;
+}
+
+p.price-tag .price {
+	color: #FFF;
+	font-size: 1.2em;
+    font-weight: normal;
+}
+
+.price-tag { 
+    background: #7ca93a none repeat scroll 0 0;
+    color: white;
+    height: 20px;
+    letter-spacing: 0.1em;
+    padding: 0 5px 0 15px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    width: auto;
+} 
+.price-tag:after { 
+	content: ""; 
+	position: absolute; 
+	left: 0; 
+	bottom: 0; 
+	width: 0; 
+	height: 0; 
+	border-left: 6px solid #f7f7f7; 
+	border-top: 10px solid transparent; 
+	border-bottom: 10px solid transparent; 
+}
+
+/* ==========================================================================
+   Browsing Overall / Grid
+   ========================================================================== */
+
+.row_header {
+	background: #eaeaea;
+	font-size: .75rem;
+	font-weight: bold;
+	margin: .1em 0;
+	padding: .4em;
+	border-top: thin solid #ddd;
+	border-bottom: thin solid #ddd;
+	white-space: nowrap;
+}
+
+.row_even,
+.browsing_result_table_body_even,
+.seller_result_table_body_even {
+	padding: .6em .4em;
+	background: #f7f7f7;
+	font-size: .75rem;
+	color: #666;
+}
+
+.row_odd,
+.browsing_result_table_body_odd,
+.seller_result_table_body_odd {
+	padding: .6em .4em;
+	background: #fff;
+	font-size: .75rem;
+	color: #666;
+}
+
+.row_even_highlight,
+.browsing_result_table_body_even_bold,
+.seller_result_table_body_even_bold {
+	background: #ecf4ff;
+	color: #666;
+	font-weight: bold;
+	font-size: .75em;
+}
+
+.row_odd_highlight,
+.browsing_result_table_body_odd_bold,
+.seller_result_table_body_odd_bold {
+	background: #dfeaf9;
+	color: #666;
+	font-weight: bold;
+	font-size: .75em;
+}
+
+.browsing_result_table_body_odd h3,
+.browsing_result_table_body_even h3 {
+	margin: 0;
+	line-height: 1em;
+}
+
+.browsing_result_table_body_odd h3 a, 
+.browsing_result_table_body_even h3 a,
+.browsing_result_table_body_odd_bold h3 a, 
+.browsing_result_table_body_even_bold h3 a {
+	color: #4987c5;
+	font-size: 1.2em;
+	text-decoration: none;
+	line-height: 1.4em;
+}
+
+
+.row_even:hover,
+.browsing_result_table_body_even:hover,
+.seller_result_table_body_even:hover,
+.row_odd:hover,
+.browsing_result_table_body_odd:hover,
+.seller_result_table_body_odd:hover,
+.row_even_highlight:hover,
+.browsing_result_table_body_even_bold:hover,
+.seller_result_table_body_even_bold:hover,
+.row_odd_highlight:hover,
+.browsing_result_table_body_odd_bold:hover,
+.seller_result_table_body_odd_bold:hover,
+article.listing .article_inner:hover
+{
+	background: #ffffe1;
+}
+
+
+
+/* Results Cell Padding */
+.row_even td,
+.browsing_result_table_body_even td,
+.seller_result_table_body_even td,
+.row_odd td,
+.browsing_result_table_body_odd td,
+.seller_result_table_body_odd td,
+.row_even_highlight td,
+.browsing_result_table_body_even_bold td,
+.seller_result_table_body_even_bold td,
+.row_odd_highlight td,
+.browsing_result_table_body_odd_bold td,
+.seller_result_table_body_odd_bold td
+{
+	padding: .3em;
+}
+
+p.listing_results_description {
+	color: #888;
+	margin: .3em 0;
+	padding: 0;
+	font-size: .7rem;
+}
+
+.field_error_row {
+	background: #fceaed;
+	border-top: thin solid #E68A9D;
+	border-bottom: thin solid #E68A9D;
+	padding: .6em .45em;
+	margin: .1em 0;
+	color: #5F6672;
+	font-size: .7rem;
+	font-weight: bold;
+}
+
+.browse_mode_buttons {
+    float: right;
+    font-size: 0.75em;
+    margin: 0.2em;
+}
+
+.view_mode_link {
+	opacity: 0.4;
+	margin-left: .3em;
+}
+
+.view_mode_link img {
+	vertical-align: middle;
+}
+
+.browse_mode_buttons a:hover,
+.browse_mode_buttons a.active {
+	opacity: 1.0;
+}
+
+.browse_mode_buttons .active {
+	font-weight: bold;
+}
+
+.category-intro {
+	font-size: .75em; 
+	text-transform: uppercase;
+}
+
+article.listing .type img {
+	max-height: 20px;
+}
+
+.browse-vote {
+	float:left; 
+	margin: 0 0 0 5px;
+}
+
+/* ATTENTION GETTER POSITIONING */
+
+.attention-getter-position {
+	/* no overlay attention getters for old design */
+	display: none;
+}
+.design2016 .attention-getter-position {
+	position:absolute;
+	top: 0;
+	max-width: 100%;
+	z-index: 2;
+	display: block;
+}
+
+.attention-getter-wrapper {
+	position: relative;
+	min-height: 59px;
+}
+
+.design2016 .attention-getter-inline {
+	/* no inline attention getters for new design */
+	display: none;
+}
+
+#module_content_newest_ads_1 .image,
+#module_content_module_hottest_ads .image {
+    min-width: 75px;
+}
+
+#module_content_module_hottest_ads .attention-getter-position,
+#module_content_newest_ads_1 .attention-getter-position {
+	left: -0.9em;
+}
+
+#module_content_module_hottest_ads img.attention_getter_icon,
+#module_content_newest_ads_1 img.attention_getter_icon {
+	max-width: 70%;
+}
+
+/* BROWSING FILTERS */
+
+.browsing_filter_fieldName {
+	border-bottom: 1px solid #ddd;
+	font-weight: bold;
+	text-transform: uppercase;	
+}
+	
+.browsing_filter_selections {
+    margin: 0 0 0 5px;
+}
+
+.browsing_filter_count {
+    color: #aaa;
+    font-size: 0.8em;
+}
+	
+.browsing_filter_selections a {
+	color: #4987c5;
+}
+
+h1.browsing_filter_title {
+    background: #888 none repeat-x scroll 0 0;
+	font-size: 0.9em;
+}
+
+
+/* ==========================================================================
+   Browsing Gallery / List View
+   ========================================================================== */
+
+.listing_set.gallery {
+	overflow: hidden;
+	font-size: 0;
+}
+
+.gj_simple_carousel .listing_set.gallery {
+	white-space: nowrap;
+}
+
+.listing_set.gallery .gallery_row {
+	/* When a gallery row is not "full", center the ones that are there, and make
+	sure it fills up the row width */
+	text-align: center;
+	width: 100%;
+}
+
+.listing_set.gallery .gallery_inner {
+	position: relative;
+	width: auto;
+	text-align: center;
+}
+
+.listing_set.gallery article {
+	padding: 0;
+	margin: 0;
+	border: none;
+	font-size: .75rem;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.listing_set.gallery .article_inner,
+.listing_set.list article {
+	border: solid #eaeaea;
+	padding: .3em;
+	margin: .3em;
+	min-height: 50px;
+	/* restore wrapping */
+	white-space: normal;
+	position: relative;
+}
+
+.listing_set.gallery .article_inner {
+	/* Style specifically for the gallery */
+	text-align: center;
+	font-weight: bold;
+}
+
+.gallery_inner .article_inner .price {
+	font-size: 1.2em;
+}
+
+.listing_set.list .image {
+	/* Make things float around the image on the list view */
+	float: left;
+	border: thin solid #eee;
+	margin: 0 .3em .3em 0;
+	text-align: center;
+	min-width: 150px;
+	background-color: #FFF;
+}
+
+.listing_set.gallery .image {
+	/*  For gallery pics, image does not float or have border */
+	float: none;
+	border: none;
+	margin: auto;
+}
+
+.image img { 
+	max-width: 100%;
+}
+
+.listing_set article p {
+	margin: 0;
+}
+
+.listing_set article h1 {
+	margin: 0 0 .3em 0;
+	display: inline;
+	font-size: .9rem;
+}
+
+/* CSS for the Carousel display mode for the gallery view */
+.gj_simple_carousel .listing_set.gallery .gallery_row {
+	/* Make sure IE displays things like everyone else */
+	vertical-align: top;
+	/* This is needed to keep the carousel from "jumping" as it loads */
+	display: inline-block;
+}
+
+.listing_set.gallery .galleryScroll {
+	text-align: center;
+}
+
+.listing_set.gallery .galleryScroll img {
+	cursor: pointer;
+}
+
+.gallery_carousel_dot {
+	font-size: 1.2rem;
+	color: #9A9A9A;
+}
+
+.gallery_carousel_dot_active {
+	font-size: 1.3rem;
+	color: #4987C5;
+}
+
+.legend {
+    bottom: 0;
+    color: #999;
+    position: absolute;
+    width: 100%;
+}
+
+.legend div {
+	font-size: 0.9em;
+	height: 1.2em;
+	padding: 5px 0;
+	text-transform: uppercase;
+}
+
+.legend .time {
+	float:right; 
+	margin: 0 5px 0 0;
+}
+
+.gallery .type img {
+	max-width: 100%;
+}
+
+.legend-location {
+	float:left; 
+	margin: 0 0 0 5px; 
+	text-transform: uppercase;
+}
+
+.legend-vote {
+	float:left; 
+	margin: 0 0 0 5px;
+}
+
+.legend-time {
+	float:right; 
+	margin: 0 10px 0 5px; 
+	color: #999; 
+	font-size: 0.9em;
+}
+
+.legend-abs-space {
+	height: 1.5em;
+}
+
+.gallery-rwd .legend-abs-space {
+	display:none;
+}
+.gallery-rwd .legend {
+	position: relative;
+	margin: 0 auto;
+}
+.gallery-rwd .legend-vote,
+.gallery-rwd .legend-time,
+.gallery-rwd .legend-location {
+	float:none; 
+	margin: 0;
+}
+.gallery-rwd .legend div {
+	padding: 2px 0;
+}
+
+/* gallery styles for featured pic modules */
+
+.featured_items .listing_set article div.article_inner,
+.featured_browsing .listing_set article div.article_inner {
+	background: #fff url('../images/backgrounds/featured_item.gif') repeat-x bottom left;
+	padding: .5em;
+	margin: .3em;
+	border: .3em solid #eaeaea;
+}
+
+.featured_items .listing_set article div.article_inner:hover {
+	background: #ffffe1;
+}
+
+/* ==========================================================================
+   Featured Listing Browsing
+   ========================================================================== */
+
+.featured_items {
+	width: 100%;
+}
+
+.featured_items td.element {
+	background: #ffffff url('../images/backgrounds/featured_item.gif') repeat-x bottom left;
+	border: .3em solid #eaeaea;
+}
+
+.featured_items td.element:hover {
+	background: #ffffe1;
+}
+
+.featured_items span.featured_title {
+	color: #888888;
+	font-size: .75rem;
+	font-weight: bold;
+	padding: .1em 0 .3em 0;
+	margin: 0;
+	display: block;
+	width: 100%;
+}
+
+.featured_items span.price {
+	display: block;
+	white-space: nowrap;
+}
+
+/* ==========================================================================
+   Category Browsing Options module
+   ========================================================================== */
+
+/* Browsing Options Link Text */
+.browsing_options_links {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: .75rem;
+	font-style: normal;
+}
+/* Other links in Category Browsing Options */
+.browsing_options_not_selected {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: .75rem;
+	font-style: normal;
+	font-weight: normal;
+}
+/* Selected link in Category Browsing Options */
+.browsing_options_selected {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: .75rem;
+	font-style: normal;
+	font-weight: bold;
+}
+
+
+/* ==========================================================================
+   My Account Links module
+   ========================================================================== */
+
+.my_account_links_active {
+	background-color: #eee;
+}
+.my_account_links_inactive {
+	background-color: #fff;
+}
+
+.user_links { 
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: .75rem;
+	font-style: normal; 
+	font-weight: bold; 
+	color: #666;
+	text-align: left;
+}
+
+a.user_links {
+	text-decoration: underline; 
+}
+
+.icon_links_ie_fix {
+	/* otherwise IE tries to underline the icons... */
+	text-decoration: none;
+}
+
+.needs_attention {
+	color: #FF0000;
+}
+
+
+/* ==========================================================================
+   Search Box Module
+   ========================================================================== */
+   
+#search_box_1 {
+	float: right;
+}
+
+#search_box_1 ul {
+	margin: 0;
+	padding: 6px 5px 0 0;
+}
+
+#search_box_1 ul li {
+	list-style: none;
+	display: inline;
+}
+
+#search_box_1 input.keyword {
+	width: 200px;
+}
+
+/* ==========================================================================
+   Region Selectors 
+   ========================================================================== */
+.region_selector {
+	display: inline-block;
+}
+
+.region_label {
+	width: auto;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+
+.region_scalar_name {
+	height: 3.17em;
+	margin-top: 1em;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.onlyRegionOnLevel,
+.field_label.region_scalar_label,
+.region_scalar_name,
+select.field.onlyRegionOnLevel,
+#breadcrumb li.onlyRegionOnLevel
+{
+	display: none;
+}
+
+.region_selector_placeholders_geoRegion_user_location_multiline
+{
+	margin-left: 13.33em;
+}
+
+.region_selector.region_selector_block
+{
+	display: block;
+}
+
+/* ==========================================================================
+   Columns
+   ========================================================================== */
+
+.columns-1, .columns-2, .columns-3, .columns-4, .columns-5, .columns-6, .columns-7,
+.columns-8, .columns-9, .columns-10 {
+	/* Meant to have certain number of columns but that won't work in small width */
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+/* ==========================================================================
+   Storefront
+   ========================================================================== */
+.storefront-name-container {
+    background-color: #666;
+    border: 2px solid #555;
+    color: #fff;
+    margin: 0 auto;
+    max-width: 80%;
+    padding: 1px;
+    position: relative;
+    text-align: center;
+    top: -10px;
+    width: 380px;
+	text-transform: uppercase;
+	-webkit-box-shadow: 0px 0px 36px -9px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 36px -9px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 36px -9px rgba(0,0,0,0.75);
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	text-shadow: 0px 0px 13px rgba(255, 255, 255, 1);
+}
+
+.storefront-name-container .inner {
+    border: 1px solid #eee;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+    padding: 10px;
+}
+
+.store .listing_details_featured {
+	display: none;
+}
+
+.store-welcome-note h2 {
+	margin: 0 0;
+}
+
+.stores-list {
+	display: normal;
+}
+
+.store-logo-container {
+    margin: 15px auto 10px;
+    width: 100%;
+}
+
+.store-logo {
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    margin: 0 auto;
+    max-width: 70%;
+    position: relative;
+    top: -5px;
+    width: 300px;
+	padding: 20px;
+	-webkit-box-shadow: inset 0px 0px 43px -24px rgba(0,0,0,0.49);
+	-moz-box-shadow: inset 0px 0px 43px -24px rgba(0,0,0,0.49);
+	box-shadow: inset 0px 0px 43px -24px rgba(0,0,0,0.49);
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+}
+
+img.store-logo,
+.store-logo img {
+	max-width: 95%;
+}
+
+a.store-description {
+	text-decoration: none;
+}
+
+.canopy-black .store-logo-container {
+	background: transparent url("../images/addon/storefront/bg_store_canopy_black.png") repeat-x scroll center bottom;
+	border-top: 1px solid #ddd;
+}
+.canopy-black h2.title {
+    background: #1E1E1E none no-repeat scroll 0 0;
+}
+
+.canopy-blue .store-logo-container {
+	background: transparent url("../images/addon/storefront/bg_store_canopy_blue.png") repeat-x scroll center bottom;
+	border-top: 1px solid #ddd;
+}
+.canopy-blue h2.title {
+    background: #1E1E1E none no-repeat scroll 0 0;
+}
+
+.canopy-lite-blue .store-logo-container {
+	background: transparent url("../images/addon/storefront/bg_store_canopy_lt_blue.png") repeat-x scroll center bottom;
+	border-top: 1px solid #ddd;
+}
+.canopy-lite-blue h2.title {
+    background: #1E1E1E none no-repeat scroll 0 0;
+}
+
+.canopy-red .store-logo-container {
+	background: transparent url("../images/addon/storefront/bg_store_canopy_red.png") repeat-x scroll center bottom;
+	border-top: 1px solid #ddd;
+}
+.canopy-red h2.title {
+    background: #1E1E1E none no-repeat scroll 0 0;
+}
+
+.canopy-green .store-logo-container {
+	background: transparent url("../images/addon/storefront/bg_store_canopy_green.png") repeat-x scroll center bottom;
+	border-top: 1px solid #ddd;
+}
+.canopy-green h2.title {
+    background: #1E1E1E none no-repeat scroll 0 0;
+}
+
+.canopy-gray .store-logo-container {
+	background: transparent url("../images/addon/storefront/bg_store_canopy_gray.png") repeat-x scroll center bottom;
+	border-top: 1px solid #ddd;
+}
+.canopy-gray h2.title {
+    background: #1E1E1E none no-repeat scroll 0 0;
+}
+
+.skyline .store-logo-container {
+	background: transparent url("../images/addon/storefront/bg_store_skyline.gif") repeat-x scroll center bottom;
+}
+.skyline h2.title {
+    background: #1E1E1E none no-repeat scroll 0 0;
+}
+
+@media only screen and (min-width: 52em) {
+	/* ==========================================================================
+	   Columns Breakpoint
+	   ========================================================================== */
+	
+	.columns-2 {
+		width: 50%;
+	}
+	.columns-3 {
+		width: 33%;
+	}
+	.columns-4 {
+		width: 25%;
+	}
+	.columns-5 {
+		width: 20%;
+	}
+	.columns-6 {
+		width: 16%;
+	}
+	.columns-7 {
+		width: 14%;
+	}
+	.columns-8 {
+		width: 12.5%;
+	}
+	.columns-9 {
+		width: 11%;
+	}
+	.columns-10 {
+		width: 10%;
+	}
+	.listing_set.gallery {
+		white-space: nowrap;
+	}
+	.submenu-link,
+	.regions {
+		display: none;
+	}
+	#content_column_wide {
+		overflow: hidden;
+		padding-left: .7em;
+	}
+}
+
+@media only screen and (max-width: 52em) {
+	/* override specifically for Gallery view in mobile widths, to always show two columns instead of one */
+	.listing_set.gallery .listing.gallery-rwd {
+		width: 50%;
+	}
+	/* similarly, make gallery_row divs not linebreak between each, so that the above looks smooth */
+	.listing_set.gallery .gallery_row {
+		display: inline;
+	}
+}
+
+@media only screen and (min-width: 38em) {
+	/* ==========================================================================
+	   Columns Breakpoint
+	   ========================================================================== */
+	
+	.columns-3 {
+		width: 33%;
+	}
+}
+
+/* ======================================================================================
+Exception -- also do column widths specifically for the carousel, even on small screens
+========================================================================================= */
+
+	.gj_simple_carousel .columns-2 {
+		width: 50%;
+	}
+	.gj_simple_carousel .columns-3 {
+		width: 33%;
+	}
+	.gj_simple_carousel .columns-4 {
+		width: 25%;
+	}
+	.gj_simple_carousel .columns-5 {
+		width: 20%;
+	}
+	.gj_simple_carousel .columns-6 {
+		width: 16%;
+	}
+	.gj_simple_carousel .columns-7 {
+		width: 14%;
+	}
+	.gj_simple_carousel .columns-8 {
+		width: 12.5%;
+	}
+	.gj_simple_carousel .columns-9 {
+		width: 11%;
+	}
+	.gj_simple_carousel .columns-10 {
+		width: 10%;
+	}
+	
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+	* {
+		background: transparent;
+		color: #000; /* Black prints faster: h5bp.com/s */
+		box-shadow: none;
+		text-shadow: none;
+	}
+
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
+
+	pre,
+	blockquote {
+		border: 1px solid #999;
+		page-break-inside: avoid;
+	}
+
+	thead {
+		display: table-header-group; /* h5bp.com/t */
+	}
+
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	@page {
+		margin: 0.5cm;
+	}
+
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
+}
+
+/* ==========================================================================
+   The following max-width media classes added for use with smaller screens 
+   to limit effects on larger screens
+   ========================================================================== */
+   
+@media only screen and (max-width: 52em) {
+
+	.sell-button {
+		display: none;
+	}
+	.blurb {
+		display: none;
+	}
+	.user-welcome {
+		color: #fff;
+		max-width: 98%;
+	}
+	.menu-link {
+		display: block;
+		padding: .5em;
+		margin: .1em;
+		background: #FFF none repeat-x top left;
+		color: #535353;
+		text-decoration: none;
+		border-radius: .3em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.menu-link:hover {
+		background: none;
+		background-color: #DDD;
+	}
+	.submenu-link {
+		color: #999;
+		margin: 1px 5px 1px 2px;
+		font-size: 0.9em;
+	}
+	.logo-box {
+		text-align:center;
+	}
+	.language-links {
+		float: none;
+		top: 0;
+	}
+	.user-welcome .text_highlight {
+		color: #E1EDF7;
+	}
+	.login .half_column_right {
+		display: none;
+	}
+	.contact-info-right {
+		float: none;
+		padding-right: 0;
+		width: 100%;
+	}
+	
+	.rwd-hide {
+		display:none;
+	}
+	
+	.listing_set.gallery .article_inner, .listing_set.list article {
+		-moz-border-bottom-colors: none;
+		-moz-border-left-colors: none;
+		-moz-border-right-colors: none;
+		-moz-border-top-colors: none;
+		border-color: -moz-use-text-color -moz-use-text-color #eee;
+		border-image: none;
+		border-style: none none solid;
+		border-width: 0 0 1px;
+	}
+
+	.browsing_result_table_body_odd,
+	.browsing_result_table_body_even {
+		max-height: 100px;
+		height: 100px;
+		border-bottom: 1px solid #eee;
+	}
+	.listing_set.list article.browsing_result_table_body_odd,
+	.listing_set.list article.browsing_result_table_body_even,
+	.listing_set.gallery .article_inner.browsing_result_table_body_odd,
+	.listing_set.gallery .article_inner.browsing_result_table_body_even {
+		height: auto;
+		max-height: none;
+	}
+	.browsing_result_table_body_odd p.description,
+	.browsing_result_table_body_even p.description {
+		clear: right;
+	}
+
+	/* line-clamp limits text to a maximum number of lines
+		original code from: http://codepen.io/siiron/pen/jfBhy
+	 */
+	.line-clamp
+	{
+		display            : block;
+		display            : -webkit-box;
+		-webkit-box-orient : vertical;
+		position           : relative;
+
+		line-height        : 1.2;
+		overflow           : hidden;
+		text-overflow      : ellipsis;
+		padding            : 0 !important;
+	}
+	.line-clamp:after
+	{
+		/* this is the semi-transparent overlay used to make line-clamped text "fade" on non-webkit browsers */
+		content    : ' ';
+		text-align : right;
+		bottom     : 0;
+		right      : 0;
+		width      : 25%;
+		display    : block;
+		position   : absolute;
+		height     : calc(1em * 1.2);
+		 /* #ffffff background color used for odd rows; other row types overridden below */
+		background : linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 75%);
+	}
+	.browsing_result_table_body_even .line-clamp:after {
+		/* #f7f7f7 */
+		background : linear-gradient(to right, rgba(247, 247, 247, 0), rgba(247, 247, 247, 1) 75%);
+	}
+	.browsing_result_table_body_even_bold .line-clamp:after {
+		/* #ecf4ff */
+		background : linear-gradient(to right, rgba(236, 244, 255, 0), rgba(236, 244, 255, 1) 75%);
+	}
+	.browsing_result_table_body_odd_bold .line-clamp:after {
+		/* #dfeaf9 */
+		background : linear-gradient(to right, rgba(223, 234, 249, 0), rgba(223, 234, 249, 1) 75%);
+	}
+	.browsing_result_table_body_even:hover .line-clamp:after,
+	.browsing_result_table_body_odd:hover .line-clamp:after,
+	.browsing_result_table_body_even_bold:hover .line-clamp:after,
+	.browsing_result_table_body_odd_bold:hover .line-clamp:after {
+		/* #ffffe1 */
+		background : linear-gradient(to right, rgba(255, 255, 225, 0), rgba(255, 255, 225, 1) 75%);
+	}
+
+	@supports (-webkit-line-clamp: 1)
+	{
+		.line-clamp:after
+		{
+			display : none !important;
+		}
+	}
+	.line-clamp-1
+	{
+		-webkit-line-clamp : 1;
+		height             : calc(1em * 1.2 * 1);
+	}
+	.line-clamp-2
+	{
+		-webkit-line-clamp : 2;
+		height             : calc(1em * 1.2 * 2);
+	}
+	.line-clamp-3
+	{
+		-webkit-line-clamp : 3;
+		height             : calc(1em * 1.2 * 3);
+	}
+	.line-clamp-4
+	{
+		-webkit-line-clamp : 4;
+		height             : calc(1em * 1.2 * 4);
+	}
+	.line-clamp-5
+	{
+		-webkit-line-clamp : 5;
+		height             : calc(1em * 1.2 * 5);
+	}
+	.mini-cart,
+	.category_navigation_box {
+		-moz-border-bottom-colors: #64b3da;
+		-moz-border-left-colors: #64b3da;
+		-moz-border-right-colors: #64b3da;
+		-moz-border-top-colors: none;
+		border-color: #64b3da;
+		background: url("../images/backgrounds/Location-Marker.png") no-repeat scroll 50% 50% #f4f9ff;
+		border-radius: 0 0 10px 10px;
+		border-style: none solid solid;
+		border-width: 0 1px 1px;
+		margin: 0 auto;
+		width: 97%;
+		-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+		-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+		box-sizing: border-box;         /* Opera/IE 8+ */
+		position: relative;
+	}	
+	
+	.mini-cart {
+		background: none no-repeat scroll 50% 50% #FFF;
+	}
+	.item-in-progress {
+	    	font-size: 0.7rem;
+	}
+	.thumbnail_td img,
+	.rwd-image img {
+		max-width: 90px;
+		max-height: 70px;
+		width: auto;
+	}
+	.showcase.search .inner {
+		min-height: 20px;
+	}
+	.lead_pic_1 {
+		display: none;
+	}
+	.regions h2.title{
+		padding-top: 8px;
+	}
+	.regions h2.title,
+	.my-account h2.title {
+		background: #64B3DA none repeat-x scroll 0 0;
+		padding-top: 8px;
+	}
+	.store_icon {
+		display: none;
+	}
+	.tabContents .listing_set.list .image {
+		min-width: 90px;
+	}
+	.listing_set.list .image {
+		min-width: 90px;
+	}
+	.listing_results_description {
+		display:none;
+	}
+	.rwd-center {
+		text-align: center;
+	}
+	.store-logo-container {
+		margin: 15px auto 10px;
+	}
+	.fb-profile-pic {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 38em) {
+	.search_title,
+	.search_fade_box {
+		display: none;
+	}
+	.search-box-container {
+    	width: 100%;
+	}
+	.form-wrapper {
+    	width: 95%;
+	}
+	.cssgradients .content_box.showcase .inner {
+		background-image: none;
+	}
+	.content_box.showcase {
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+		margin-bottom: 0;
+		padding: 0;
+	}
+	.mainbody-home {
+		display: none;
+	}
+	nav.footer a {
+		color: #FFF;
+		background-color: #535353;
+	}
+	.browse_mode_buttons {
+		margin: 0.3em 0 0.5em 0;
+		text-align: center;
+		width: 100%;
+	}
+	.header-links-rwd {
+	    	top: 7px;
+	}
+	.header-links-rwd a {
+	    	font-size: 0.8em;
+	}
+	
+	.listing_title {
+		font-size: 1.1rem;
+	}
+	.galleryThumbs ul {
+		margin: 0;
+	}
+	.gallery_inner .article_inner .price {
+		font-size: 1em;
+	}
+	.listing_maincol .content_box_3 {
+		/* Remove padding in mobile mode */
+		padding: 0;
+	}
+	.galleryBigImage {
+		margin: 0 auto;
+	}
+	#cart_left_column {
+		width: 100%;
+	}
+	.price-listing-details {
+		font-size: 1.1em; 
+	}
+}
+
+@media only screen and (max-width: 32em) {
+	
+	.breadcrumb a:after, .breadcrumb div:after {
+		border-left-color: #e9edf0;
+		z-index: 2;
+	}
+	
+	.breadcrumb a, .breadcrumb div {
+		background-image: none;
+		background-color: transparent;
+		padding: 0.2em 0 0.2em 1.5em;
+		text-shadow: none;
+	}
+	
+	.breadcrumb a:first-child, .breadcrumb div:first-child {
+		border-radius: 0;
+		padding-left: 0.5em;
+	}
+	
+	.breadcrumb a:after, .breadcrumb div:after, .breadcrumb a:before, .breadcrumb div:before {
+		border-bottom: 1em solid transparent;
+		border-left: 0 solid;
+		border-top: 1em solid transparent;
+		content: "\00276d";
+		margin-top: -1.6em;
+		position: absolute;
+		right: -1em;
+		top: 50%;
+	}
+	
+	.main .breadcrumb .active::after, .main .breadcrumb .active::before {
+		/* hide the final chevron at mobile widths */
+		content: none;
+	}
+	
+	.nav-tabs > li > a {
+		font-size: 0.8rem;
+	}
+	p.price-tag .price {
+		font-size: 1em;
+	}
+	.price-tag { 
+		height: 16px;
+		padding: 0 5px 0 15px;
+	} 	
+	.price-tag:after { 
+		border-top: 8px solid transparent; 
+		border-left: 6px solid #f7f7f7; 
+		border-bottom: 8px solid transparent; 
+	}
+	.browsing_result_table_body_odd h3 a, .browsing_result_table_body_even h3 a,
+	.browsing_result_table_body_odd_bold h3 a, .browsing_result_table_body_even_bold h3 a {
+		font-size: 1em;
+		line-height: 1.2em;
+	}
+	.checklist {
+		margin: 0.31em 0.6em 0.31em 1em;
+	}
+	.region_selector {
+		margin: 0 0 0 0.5em;
+	}
+	.region_label {
+		padding: 10px 0 0 0;
+	}
+	#catQuestions input[type="text"],
+	.multiselect {
+		margin: 0 0 0 10px;
+	}
+	#combined_auction-details .field_label,	
+	#combined_classified-details .field_label {
+		width: 100%;
+	}
+	.label-fix-rwd {
+		width: 100%;
+	}
+	.value-fix-rwd {
+		margin: 0 0 0 4px;
+	}
+	.recentButtons .button {
+	    padding: 0.5em 0.2em;
+	}
+}
+
+@media only screen and (max-width: 25em) {
+	.form-wrapper {
+    		width: 90%;
+	}
+	.browsing_result_table_body_odd h3 a,
+	.browsing_result_table_body_even h3 a,
+	.browsing_result_table_body_odd_bold h3 a, 
+	.browsing_result_table_body_even_bold h3 a {
+		font-size: 1em;
+	}
+	.tabContents {
+		padding: 2px 1px 1px 1px;
+	}
+	#registration_form .field_label {
+		width: 100%;
+	}
+	span.stores-list-welcome {
+		display: none;
+	}
+	.stores-list-logo img {
+		max-width: 50px;
+	}
+	.storefront-name-container {
+		font-size: 0.8em;
+	}
+	.contact-form .field_label {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 18em) {
+	.header-links-rwd .list {
+		display: none;
+	}
+	.header-links-rwd {
+		left: 50%;
+		min-width: 100px;
+		margin: 0 0 0 -45px;
+	}
+	.logo-box .logo img {
+		max-width: 90%;
+	}
+	.times-viewed {
+		display:none;
+	}
+	.tab-title {
+		display: none;
+	}
+	.recaptcha-fix {
+		transform:scale(0.65);
+		-webkit-transform:scale(0.65);
+	}
+}
+
+/* ALTERNATE FRONT PAGE TEMPLATES */
+
+.traditional .three-column .main,
+.traditional .three-column .sidebar {
+    left: 0;
+}
+
+.traditional .cz-categories {
+	display: block;
+}
+
+@media only screen and (max-width: 52em) {
+	.clean-categories .cz-categories {
+		display: block;
+	}
+	.clean-categories .newest-ads-links {
+		display: none;
+	}
+}

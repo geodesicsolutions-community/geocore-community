@@ -1,0 +1,44 @@
+/* 7.5.3-36-gea36ae7 */
+
+.geographicAddonExpand {
+	cursor: pointer;
+	float: left;
+	text-align: center;
+	vertical-align: middle;
+	overflow: hidden;
+	margin-right: 3px;
+}
+.geographicAddonExpand img {
+	vertical-align: middle;
+}
+
+.demo {
+	float: right;
+	display: block;
+}
+
+ul.regionList {
+	padding-left: 5px;
+	list-style: none;
+}
+ul.regionList li {
+	padding-left: 1px;
+	padding-bottom: 1px;
+	border-left: 1px dotted gray;
+	border-bottom: 1px dotted gray;
+	white-space: nowrap;
+}
+
+.regionField {
+	
+}
+
+.deleteRegionForm {
+	display: inline;
+}
+
+.regionNameHook {
+	/* These are movable around */
+	cursor: pointer;
+	vertical-align: middle;
+}

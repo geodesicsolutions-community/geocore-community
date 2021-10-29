@@ -1,0 +1,523 @@
+/* 16.09.0-79-gb63e5d8 */
+
+
+/* Editor CSS */
+
+select.templateDropdown {
+	/*width: 200px;*/
+	font-size: 10px;
+}
+
+.actionButtons {
+	float: right;
+}
+
+.editConfirmBox form {
+	display: block;
+	margin: 15px;
+}
+
+span#fileExtension {
+	/* This is the extension span in the new file dialog */
+	font-family: monospace;
+}
+
+#editTemplateButtons img,
+#editTemplateButtons input {
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid white;
+}
+
+#editTemplateButtons img:hover,
+#editTemplateButtons input:hover {
+	background-color: #CCFFFF;
+	border: 1px solid #006699;
+}
+
+#editTemplateButtons div.buttonSeperator {
+	border-left: 1px solid gray;
+	display:inline;
+	height: 18px;
+	vertical-align: middle;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.closeBoxButton {
+	float: right;
+	color: red;
+	cursor: pointer;
+	font-weight: bold;
+	padding-top: 8px;
+	padding-right: 8px;
+	font-size: 14px;
+}
+
+.templateTool {
+	position: absolute;
+	border: 2px solid black;
+	z-index: 100;
+	background-color: white;
+}
+.templateToolContents{
+	margin: 15px;
+	white-space: nowrap;
+}
+.templateToolContents .page_note {
+	white-space: normal;
+}
+
+.templateToolContents select {
+	width: 200px;
+}
+
+.templateToolContents hr {
+	width: 50%;
+}
+
+.templateToolButtons {
+	/* The submit and cancel buttons */
+	float: right;
+	margin-top: 5px;
+}
+
+.templateToolTitlebar {
+	/* The title bar (which is used as handle for dragging) */
+	cursor: pointer;
+	text-align: left;
+}
+.templateToolTitlebar img {
+	/* The title bar icon (which is used as handle for dragging) */
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+#tplContents {
+	width: 100%;
+	height: 600px;
+}
+
+
+.templatePageAttachments td {
+	white-space: nowrap;
+	padding-right: 5px;
+}
+.templatePageAttachments {
+	background-color: white;
+}
+
+
+/**
+ * 
+ * Design > Manager Styles
+ * 
+ */
+
+/* Top Info/Tool Box */
+div#designTopInfo {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: middle;
+	background-color: #FFFFFF;
+}
+
+div#designTopInfo div#designTopInfoSub {
+	float: left;
+}
+
+div#designTopInfo div#designTopInfoCreateNew {
+	float: right;
+	vertical-align: middle;
+	padding: 3px;
+	padding-bottom: 15px;
+	height: 40px;
+}
+div#designTopInfo div#designTopInfoCreateNew a img {
+	vertical-align: middle;
+}
+
+/* Left Menu */
+
+div#designLeftMenu {
+/*
+	float: left;
+	padding-bottom: 50px;
+*/
+}
+div#designLeftMenu .infoBox {
+	border: 4px solid #eaeaea;
+	width: 200px;
+	margin-bottom: 10px;
+	padding: 5px;
+	padding-bottom: 15px;
+	background-color: #FFF;
+}
+@media (max-width: 1500px) {
+	div#designLeftMenu .infoBox {
+		width: 100%;
+	}
+}
+div#designLeftMenu .infoBox h2.title {
+	background: #EEE; 
+	padding: 5px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #666;
+	white-space: nowrap;
+	vertical-align: middle;
+	margin: -3px;
+	margin-bottom: 15px;
+	
+}
+div#designLeftMenu ul {
+	padding: 0px;
+	list-style: none;
+	margin: 0px;
+	padding-top: 0px;
+}
+
+div#designLeftMenu ul li {
+	font-size: 12px;
+	margin-left: 2px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+div#designLeftMenu ul li:hover {
+	background: #FFEA78 url('../admin_images/design/folder_bg.gif') repeat-x top left;
+}
+
+div#designLeftMenu ul li.current {
+	font-weight: bold;
+	background: #FFEA78 url('../admin_images/design/folder_bg.gif') repeat-x top left;
+}
+
+div#designLeftMenu ul li a {
+	margin-bottom: 2px;
+	margin-left: 5px;
+	overflow: hidden;
+	text-decoration: none;
+	font-size: 12px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+div#designLeftMenu ul li a img {
+	vertical-align: middle;
+	padding-right: 3px;
+}
+
+div#designLeftMenu div.foldersInTsetName {
+	/* Box for the t-set name that is right below the "Folders In:" text */
+	text-align: left;
+	font-size: 14px;
+	padding-left: 5px;
+	padding-bottom: 8px;
+	padding-top: 5px;
+	color: #26B99A;
+}
+
+/* preview window in left menu */
+
+div#designPreviewBox {
+	position: relative;
+}
+
+div#designPreviewBox div#designPreviewLoading {
+	position: absolute;
+	left: 30px;
+	top: 10px;
+	vertical-align: middle;
+	background-color: white;
+	border: 1px solid black;
+	padding: 5px;
+	z-index: 20;
+	font-weight: bold;
+	font-size: 14px;
+}
+div#designPreviewBox div#designPreviewLoading img {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+}
+
+div#designLeftMenu div.designPreviewWindow,
+div#mainPreviewWindowLargeContents {
+	height: 115px;
+	border: 2px solid #006699;
+	padding: 2px;
+	margin-left: 0;
+	margin-bottom: 10px;
+	vertical-align: middle;
+	overflow: hidden;
+	white-space: pre;
+	display: relative;
+	cursor: pointer;
+	font-size: 20%;
+}
+
+div#mainPreviewWindowLargeContents {
+	max-width: 800px;
+	max-height: 600px;
+	
+	min-width: 200px;
+	min-height: 200px;
+	
+	margin: 10px;
+	
+	width: auto;
+	height: auto;
+	cursor: default;
+	overflow: auto;
+	font-size: 12px;
+}
+
+div#designLeftMenu div.designPreviewWindow.empty {
+	cursor: default;
+	background: #DDDDDD url('../admin_images/design/preview_none.gif') no-repeat top center;
+}
+
+div#designPreviewBox .fileInfoName {
+	margin-top: -5px;
+	color: #006699;
+	font-weight: bold;
+	
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+div#designPreviewBox div.designPreviewFileInfo div.fileInfoEntry {
+	text-indent: -10px;
+	padding-left: 10px;
+	margin-bottom: 4px;
+}
+
+div#designPreviewBox div.designPreviewFileInfo div.fileInfoEntry span {
+	color: #888;
+}
+div#designPreviewBox div.fileInfoPreviewType {
+	background-color: #006699;
+	color: #fff;
+	font-size: 11px;
+	padding: 2px;
+	text-indent: 0px;
+	border: 2px solid #006699;
+	text-align: center;
+	font-weight: bold;
+	margin-left: 0;
+	overflow: hidden;
+}
+
+/* Main Window */
+div#designMainWindow {
+	/*border: 1px solid #2A3F54;
+	margin-left: 227px;
+	background-color: white;
+	position: relative;*/
+}
+
+
+/* File List in Main Window */
+
+div#designFileList {
+	vertical-align: middle;
+	position: relative;
+	max-height: 400px;
+	overflow: auto;
+}
+
+div#designFileList table.fileListTable {
+	width: 100%;
+}
+
+div#designFileList table.fileListTable th a {
+	/*text-decoration: none;
+	padding: 1px;
+	border-bottom: 1px dashed #fff;*/
+}
+
+div#designFileList table.fileListTable td {
+	overflow: hidden;
+	border-right: 0 solid gray;
+	/* border-top: none; */
+	border-bottom: none;
+	padding: 3px;
+}
+div#designFileList table.fileListTable td div {
+	white-space: nowrap;
+	/* So that the TD can collapse to be as small as 200px if it needs to */
+	width: 10px;
+}
+
+
+div#designFileList table.fileListTable td,
+div#designFileList table.fileListTable td img {
+	vertical-align: middle;
+}
+
+div#designFileList td.fileColumn,
+div#designFileList td.fileColumn *,
+div#designFileList td.checkboxColumn {
+	vertical-align: middle;
+}
+
+div#designFileList table.fileListTable td.fileColumn div {
+	width: 125px; 
+}
+
+div#designFileList td.checkboxColumn {
+	width: 10px;
+}
+
+div#designFileList td.attachmentsColumn {
+	width: 50px;
+}
+
+div#designFileList td.sizeColumn {
+	width: 100px;
+}
+div#designFileList td.typeColumn {
+	width: 50px;
+	white-space: nowrap;
+}
+div#designFileList td.modifyColumn {
+	width: 210px;
+}
+div#designFileList td.permissionsColumn {
+	width: 75px;
+	text-align: center;
+}
+
+div#designFileList td.fileColumn a {
+	text-decoration: none;
+}
+div#designFileList td.fileColumn a:hover {
+	text-decoration: underline;
+}
+div#designFileList td.emptyFolder {
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.rowSelected {
+	background: #BBDFFA none repeat-x top left;
+}
+
+div#designFileList tr.fileEntry:hover {
+	cursor: default;
+}
+
+div#designFileList tr.cutFileRow {
+	background: #FFABC0 none repeat-x top left;
+	color: #CC0033;
+}
+
+/* The refresh box in file list */
+
+div#refreshFilelistBox {
+	position: absolute;
+	left: 10px;
+	top: 40px;
+	vertical-align: middle;
+	background-color: white;
+	border: 1px solid black;
+	padding: 5px;
+	z-index: 20;
+	font-weight: bold;
+	font-size: 14px;
+}
+div#refreshFilelistBox img {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+}
+
+/* Bottom Tools in Main Window */
+
+div#designBottomTools {
+	border-top: 1px solid #2A3F54;
+	padding: 5px;
+	background-color: #2A3F54;
+	color: white;
+}
+
+
+/* "with selected" buttons in bottom tools */
+div#designBottomTools div#designBottomTools_selected {
+	border-bottom: 1px solid white;
+}
+
+
+div#designBottomTools div#designBottomTools_selected ul {
+	display: inline;
+	padding: 10px;
+	
+	
+}
+div#designBottomTools div#designBottomTools_selected ul li {
+	display: inline;
+	margin: 0px;
+	padding: 3px;
+	border: 1px solid transparent;
+	color: black;
+}
+div#designBottomTools div#designBottomTools_selected ul li.active {
+	color: white;
+	cursor: pointer;
+}
+
+div#designBottomTools div#designBottomTools_selected ul li.active:hover {
+	background-color: #005C8A;
+	border: 1px solid white;
+}
+div.clearToolsBox {
+	clear: right;
+}
+
+
+/* Clip-board in main window */
+div#designClipboard {
+	border-top: 0px solid #006699;
+	padding: 5px;
+	background: #FFF2AA none repeat-x top left;
+	color: #666666;
+}
+
+div#designClipboard div#clearclipboard {
+	float: right;
+}
+
+div#designClipboard div#designClipboard_files {
+	margin-left: 10px;
+}
+
+/* CodeMirror */
+div.CodeMirror {
+	border: 1px solid black;
+	background: #FFF none repeat-x top left;
+}
+
+div.CodeMirror {
+	height: 600px;	
+}
+
+.leftCss, .rightCss {
+	float: left;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	padding: .5em;
+}
+.leftCss {
+	width: 60%;
+}
+.rightCss {
+	width: 40%;
+}
+#tset_jump_box h2 {
+	white-space: normal;
+}

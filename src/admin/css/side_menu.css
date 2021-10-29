@@ -1,0 +1,160 @@
+@CHARSET "UTF-8";
+
+#menuControlButtons
+{
+	position: absolute;
+	right: 3px;
+	top: 0px;
+}
+
+#sideMenuExpand
+{
+	cursor: se-resize;
+}
+
+#sideMenuDock
+{
+	cursor:pointer;
+}
+
+#menuTop
+{
+	font-size: 9pt;
+	font-weight: bold;
+	background-color: #0073AA;
+	white-space: nowrap;
+	padding: 0;
+	width: 200px;
+	overflow: hidden;
+}
+.sideMenuUndocked
+{
+	/*border: 1px solid #006699;*/
+	padding: 0px 0px 0px 0px; 
+	background-color: #FF0000;
+}
+fieldset#AdminSideMenu
+{
+	padding: 1px;
+}
+fieldset#AdminSideMenu legend
+{
+	margin: 0px;
+}
+
+.menu_category,
+.menu_category_current
+{
+	cursor: pointer;
+	margin-top: 2px;
+	white-space: nowrap;
+	color: #fff;
+	background-color: #3E4043;
+	padding: 3px 0 3px 10px;
+}
+.cat_level0
+{
+	/* Admin Home */
+	color: #fff;
+	font-size: 10pt;
+	background: #0073AA url(../admin_images/design/side_menu_home.gif) no-repeat scroll 0 0;
+	text-transform: uppercase;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 7px 0 7px 10px;
+}
+.cat_level1
+{
+	color: #fff;
+	background-color: #339DC1;
+	text-transform: uppercase;
+	border-right: 4px solid #006594;
+	margin-left: 5px;
+}
+.cat_level2
+{
+	color: #fff;
+	background-color: #50B1D1;
+	font-size: 8pt;
+	margin-bottom: 1px;
+	margin-top: 1px;
+	margin-left: 10px;
+	border-right: 8px solid #006594;
+}
+.cat_level3
+{
+	color: #fff;
+	background-color: #3E4043;
+}
+
+.cat_level4
+{
+	color: #fff;
+	background-color: #3E4043;
+}
+
+.cat_level5
+{
+	color: #fff;
+	background-color: #3E4043;
+}
+
+.cat_level6
+{
+	color: #fff;
+	background-color: #3E4043;
+}
+/* if more levels are needed, add them here and to js/side_menu.js */
+
+.menu_category_current a
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+.menu_category_contents
+{
+	padding-right: 5px;
+	white-space: nowrap;
+	width: 100%
+}
+#menuTop .menu_category_contents .menu_category_contents
+{
+	margin-left: 4px;
+}
+.menu_category_current,
+.menu_page_current
+{
+	font-weight: bold;
+}
+.menu_page a,
+.menu_page_current a
+{
+	color: #FFF;
+	background: url('../admin_images/design/arrowbullet_menu.gif') no-repeat 4px 4px;
+	text-decoration: none;
+	padding: 3px 0 1px 19px;
+	margin-bottom: 1px;
+	font-family: Arial;
+	font-size: 8pt;
+	display: block;
+	background-color: #77C2DB;
+	border-right: 8px solid #006594;
+	margin-left: 10px;
+}
+.menu_page_current a
+{
+	background: url('../admin_images/design/arrowbullet_menu_sel.gif') no-repeat 4px 4px;
+	background-color: #FFF;
+	border-right: 8px solid #40A5FF;
+	color: #006594;
+}
+
+.menu_page a:hover,
+.menu_page_current a:hover
+{
+	background: url('../admin_images/design/arrowbullet_menu_sel.gif') no-repeat 4px 4px;
+	background-color: #FFF;
+	border-right: 8px solid #40A5FF;
+        color: #006594;
+}
