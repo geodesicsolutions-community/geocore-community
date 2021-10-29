@@ -1,17 +1,11 @@
 <?php
 
 //user_management_ad_filters.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    17.07.0-12-g183f06e
+## 
+##    17.07.0-12-g183f06e
 ##
 ##################################
 

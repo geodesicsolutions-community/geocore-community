@@ -1,13 +1,6 @@
 <?php
 
 //order_items/account_balance.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########SVN Build Data##########
 ##                              ##
 ## This File's Revision:        ##

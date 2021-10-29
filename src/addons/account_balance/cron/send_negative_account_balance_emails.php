@@ -1,17 +1,11 @@
 <?php
 
 //send_negative_account_balance_emails.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    7.4.0-34-gae530f5
+## 
+##    7.4.0-34-gae530f5
 ##
 ##################################
 

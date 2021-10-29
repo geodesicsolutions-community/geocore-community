@@ -1,16 +1,10 @@
 <?php
 //requirement_check_php_fail.tpl.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ## 
 ## File Changed In GIT Commit:
-## ##    16.03.0-3-gb5f334d
+## 
+##    16.03.0-3-gb5f334d
 ## 
 ##################################
 

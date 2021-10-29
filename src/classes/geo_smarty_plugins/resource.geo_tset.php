@@ -1,16 +1,10 @@
 <?php
 //resource.geo_tset.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ## 
 ## File Changed In GIT Commit:
-## ##    7.6.2-9-gc357aa9
+## 
+##    7.6.2-9-gc357aa9
 ## 
 ##################################
 

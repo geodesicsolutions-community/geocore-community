@@ -1,17 +1,11 @@
 <?php
 
 //send_new_listing_alert_emails.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    7.6.3-18-g45cfbcb
+## 
+##    7.6.3-18-g45cfbcb
 ##
 ##################################
 

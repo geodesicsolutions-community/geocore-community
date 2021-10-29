@@ -1,17 +1,11 @@
 <?php
 
 //module_display_subscategory_navigation_1.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    7.0.2-4-gf4d2a43
+## 
+##    7.0.2-4-gf4d2a43
 ##
 ##################################
 

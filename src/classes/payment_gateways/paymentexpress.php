@@ -1,17 +1,11 @@
 <?php
 
 //payment_gateways/paymentexpress.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    7.4.6-19-ga99ec3d
+## 
+##    7.4.6-19-ga99ec3d
 ##
 ##################################
 

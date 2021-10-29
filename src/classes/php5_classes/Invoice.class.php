@@ -6,17 +6,11 @@
  * @package System
  * @since Version 4.0.0
  */
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ## 
 ## File Changed In GIT Commit:
-## ##    16.05.0-1-g0816868
+## 
+##    16.05.0-1-g0816868
 ## 
 ##################################
 

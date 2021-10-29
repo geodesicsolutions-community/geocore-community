@@ -1,17 +1,11 @@
 <?php
 
 //order_items/_site_class_temp.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    17.04.0-5-ge04db22
+## 
+##    17.04.0-5-ge04db22
 ##
 ##################################
 

@@ -5,17 +5,11 @@
  * @package System
  * @since Version 2.0.6b (just showing, addons have been around since then, although not as powerful as they are now)
  */
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ## 
 ## File Changed In GIT Commit:
-## ##    7.6.3-90-g91832a9
+## 
+##    7.6.3-90-g91832a9
 ## 
 ##################################
 

@@ -1,17 +1,11 @@
 <?php
 
 // admin_price_plan_management_class.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    17.03.0-15-gd359131
+## 
+##    17.03.0-15-gd359131
 ##
 ##################################
 

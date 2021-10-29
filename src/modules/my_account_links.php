@@ -1,17 +1,11 @@
 <?php
 
 //my_account_links.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    17.01.0-38-g6ec678f
+## 
+##    17.01.0-38-g6ec678f
 ##
 ##################################
 

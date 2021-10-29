@@ -1,17 +1,11 @@
 <?php
 
 //send_ad_expiration_emails.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    16.07.0-82-g6d34ec1
+## 
+##    16.07.0-82-g6d34ec1
 ##
 ##################################
 

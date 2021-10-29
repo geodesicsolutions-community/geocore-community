@@ -1,17 +1,11 @@
 <?php
 
 //system/admin/getRevenueReport.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    7.3beta4-55-g4f44a5e
+## 
+##    7.3beta4-55-g4f44a5e
 ##
 ##################################
 

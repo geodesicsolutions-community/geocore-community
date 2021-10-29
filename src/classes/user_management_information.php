@@ -1,17 +1,11 @@
 <?php
 
 //user_management_information.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    17.10.0-20-g9ae085a
+## 
+##    17.10.0-20-g9ae085a
 ##
 ##################################
 

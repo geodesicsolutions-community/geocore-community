@@ -1,17 +1,11 @@
 <?php
 
 // admin_registration_configuration_class.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    17.12.0-12-g1fa40c1
+## 
+##    17.12.0-12-g1fa40c1
 ##
 ##################################
 
@@ -460,7 +454,8 @@ class Registration_configuration extends Admin_site
 
             //secure ssl url
                 $this->body .= "
-						<div class='form-group'>
+
+						<div class='form-group'>
 							<label class='control-label col-md-5 col-sm-5 col-xs-12'>SSL URL of register.php file: " . $this->show_tooltip(7, 1) . " </label>
 							<div class='col-md-6 col-sm-6 col-xs-12'><input type=text name=b[registration_ssl_url] class='form-control col-md-7 col-xs-12' value=\""
                                 . $show_configuration["registration_ssl_url"] . "\">

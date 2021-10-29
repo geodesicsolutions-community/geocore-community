@@ -1,17 +1,11 @@
 <?php
 
 //payment_gateways/paypal_pro.php
-/**************************************************************************
-Geodesic Classifieds & Auctions Platform 18.02
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
 ##########GIT Build Data##########
 ##
 ## File Changed In GIT Commit:
-## ##    7.4.4-28-g2f5cc34
+## 
+##    7.4.4-28-g2f5cc34
 ##
 ##################################
 
