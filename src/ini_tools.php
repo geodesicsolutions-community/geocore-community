@@ -1,8 +1,5 @@
 <?php
 
-//ini_tools.php
-
-
 /*
  * These tools are not complete yet.  This file is to create the means to easily change
  * ini settings, and in future versions, implement feature from fogbugz #507

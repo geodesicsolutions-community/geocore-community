@@ -1,8 +1,5 @@
 <?php
 
-// admin_wysiwyg_config.php
-
-
 class wysiwyg_configuration
 {
     //list of valid codemirror themes, UPDATE this when new versions of codemirror

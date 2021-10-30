@@ -1,7 +1,5 @@
 <?php
 
-//session_handler.php
-
 /*
 
 Due to the massive amounts of potential data, the bulk uploader requires a more optimized version of the geoRegistry construct

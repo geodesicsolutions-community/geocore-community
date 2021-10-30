@@ -1,8 +1,5 @@
 <?php
 
-//clean_inputs.php
-
-
 //list of keys to NOT filter.
 #READ BELOW FOR NOTE ON 3RD PARTY FIELDS
 $no_filter_list = array (

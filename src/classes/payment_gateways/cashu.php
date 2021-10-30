@@ -1,8 +1,5 @@
 <?php
 
-//cashu.php
-
-
 # CashU Payment Gateway
 # see https://www.cashu.com
 

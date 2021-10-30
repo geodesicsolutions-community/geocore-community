@@ -1,7 +1,4 @@
 <?php
-//config_tools.php
-
-
 /**
  * For help with updating the config.php file.
  */

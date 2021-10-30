@@ -1,8 +1,5 @@
 <?php
 
-//my_account_links.php
-
-
 /*  With the new design changes, this module can potentially be called 3+ times on a page for different output, but with the same basic data
     This dummy class is just an easy way to cache the back-end processing for that and only do it once per pageload
     The "ifdef" makes sure the class itself is only added once ;) */

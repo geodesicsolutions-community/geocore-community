@@ -1,8 +1,5 @@
 <?php
 
-// admin_user_account_settings.php
-
-
 /**
  * Switches, toggles, and the like for options relating to the User Account Home Page.
  *

@@ -1,8 +1,5 @@
 <?php
 
-//expire_groups_and_plans.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

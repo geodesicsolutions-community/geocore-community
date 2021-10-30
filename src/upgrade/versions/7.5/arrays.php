@@ -1,8 +1,4 @@
 <?php
-//arrays.php
-
-
-
 $upgrade_array = array (
 	# start
 	array (10203, 502292, 1, 'ePay'),

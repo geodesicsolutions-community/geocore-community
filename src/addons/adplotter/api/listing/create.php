@@ -1,8 +1,5 @@
 <?php
 
-//create.php
-
-
 if (!defined('IN_GEO_API')) {
     exit('No access.');
 }

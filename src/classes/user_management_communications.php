@@ -1,8 +1,5 @@
 <?php
 
-//user_management_communications.php
-
-
 class User_management_communications extends geoSite
 {
     var $debug_comm = 0;

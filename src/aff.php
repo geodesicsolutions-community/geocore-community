@@ -1,8 +1,5 @@
 <?php
 
-//aff.php
-
-
 define('IN_AFF', 1);
 
 //initialize everything.

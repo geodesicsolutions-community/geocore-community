@@ -1,8 +1,5 @@
 <?php
 
-//recurring_billing.php
-
-
 class RecurringBillingManagement
 {
     public function display_recurring_billing_list()

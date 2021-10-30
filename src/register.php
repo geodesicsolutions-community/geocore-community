@@ -1,7 +1,5 @@
 <?php
 
-//register.php
-
 //use special app top, for the register.php page.
 require_once('app_top.register.php');
 

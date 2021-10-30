@@ -1,8 +1,5 @@
 <?php
 
-//admin_pages_class.php
-
-
 class Admin_pages extends Admin_site
 {
 

@@ -1,8 +1,5 @@
 <?php
 
-// admin_price_plan_management_class.php
-
-
 class Price_plan_management extends Admin_site
 {
 

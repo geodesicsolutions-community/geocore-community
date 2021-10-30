@@ -1,8 +1,5 @@
 <?php
 
-//browse_display_ad_full_images.php
-
-
 class Display_ad_full_images extends geoBrowse
 {
     var $subcategory_array = array();

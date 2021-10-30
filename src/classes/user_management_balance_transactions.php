@@ -1,8 +1,5 @@
 <?php
 
-//user_management_balance_transactions.php
-
-
 class User_management_balance extends geoSite
 {
     var $debug_balance = 0;

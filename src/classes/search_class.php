@@ -1,8 +1,5 @@
 <?php
 
-//search_class.php
-
-
 class Search_classifieds extends geoBrowse
 {
     var $category_name;

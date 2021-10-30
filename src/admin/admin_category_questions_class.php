@@ -1,9 +1,5 @@
 <?php
 
-//admin_category_questions_class.php
-
-
-
 class Admin_category_questions extends Admin_site
 {
 

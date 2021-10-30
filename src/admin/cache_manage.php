@@ -1,6 +1,5 @@
 <?php
 
-//cache_manage.php
 /**
  * This is the Geo file cache system.
  *

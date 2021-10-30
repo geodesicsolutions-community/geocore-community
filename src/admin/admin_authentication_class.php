@@ -1,8 +1,5 @@
 <?php
 
-//authenticate_class.php
-
-
 class Admin_auth extends Admin_site
 {
 

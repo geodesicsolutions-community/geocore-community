@@ -1,8 +1,5 @@
 <?php
 
-//browse_notify_friend.php
-
-
 class Notify_friend extends geoBrowse
 {
     var $subcategory_array = array();

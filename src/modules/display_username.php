@@ -1,8 +1,5 @@
 <?php
 
-//display_username.php
-
-
 $user_id = $page->userid;
 $tpl_vars = array();
 //to allow easier customizing at the template level, let template know what

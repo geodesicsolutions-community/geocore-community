@@ -1,8 +1,5 @@
 <?php
 
-//changelogs.php
-
-
 /**
  * Generates a list of changelogs
  */

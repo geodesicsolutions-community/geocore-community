@@ -1,8 +1,5 @@
 <?php
 
-//user_management_home.php
-
-
 class User_management_home extends geoSite
 {
     var $error_found;

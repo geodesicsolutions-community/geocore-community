@@ -1,8 +1,5 @@
 <?php
 
-//send_final_fees_emails.php
-
-
 //This one sends e-mails to anyone with a negative account balance.
 
 if (!defined('GEO_CRON_RUN')) {

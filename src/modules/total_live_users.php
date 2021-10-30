@@ -1,9 +1,5 @@
 <?php
 
-//module_total_live_users.php
-
-
-
 $sql = "SELECT count(*) counter FROM geodesic_sessions";
 $logged_result = $this->GetRow($sql);
 $count = (isset($logged_result['counter'])) ? $logged_result['counter'] : 0;

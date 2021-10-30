@@ -1,8 +1,5 @@
 <?php
 
-//user_management_current_ads.php
-
-
 class User_management_current_ads extends geoSite
 {
     var $debug_remove_ad = 0;

@@ -1,8 +1,5 @@
 <?php
 
-//extra_pages.php
-
-
 class extra_page extends geoSite
 {
 

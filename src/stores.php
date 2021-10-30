@@ -1,8 +1,5 @@
 <?php
 
-//__file__.php
-
-
 //something like:
 //index.php?a=ap&addon=storefront&page=???
 require 'app_top.common.php';

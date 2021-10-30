@@ -1,8 +1,5 @@
 <?php
 
-//payment_gateways.php
-
-
 class paymentGatewayManage
 {
     private $group_name;

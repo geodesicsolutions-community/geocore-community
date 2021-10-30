@@ -1,8 +1,5 @@
 <?php
 
-//fields_to_use.php
-
-
 class FieldsManage
 {
     public function display_fields_to_use()

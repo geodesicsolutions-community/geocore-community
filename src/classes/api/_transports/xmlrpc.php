@@ -1,8 +1,5 @@
 <?php
 
-//xmlrpc.php
-
-
 //XML RPC transport for API, this is the primary (and only) built-in transport currently
 
 /**

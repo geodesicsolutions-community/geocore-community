@@ -1,8 +1,5 @@
 <?php
 
-//search_text.php
-
-
 class SearchText
 {
     public function display_text_search()

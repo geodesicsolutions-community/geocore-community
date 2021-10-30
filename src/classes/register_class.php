@@ -1,8 +1,5 @@
 <?php
 
-//register_class.php
-
-
 require_once(CLASSES_DIR . 'site_class.php');
 
 class Register extends geoSite

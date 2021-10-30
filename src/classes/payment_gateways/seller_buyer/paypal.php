@@ -1,9 +1,5 @@
 <?php
 
-//paypal.php
-
-
-
 class paypalSellerBuyerGateway
 {
     //Main paypal server:

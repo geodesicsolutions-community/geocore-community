@@ -1,9 +1,5 @@
 <?php
 
-// admin_beta_settings.php
-
-
-
 class Beta_configuration
 {
 

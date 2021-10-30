@@ -1,8 +1,5 @@
 <?php
 
-//send_new_listing_alert_emails.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

@@ -1,6 +1,5 @@
 <?php
 
-//database_tables.php
 /**
  * Holds class geoTables, which holds database table names, used throughout the code.
  *

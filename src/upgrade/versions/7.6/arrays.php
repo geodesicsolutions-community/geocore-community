@@ -1,8 +1,4 @@
 <?php
-//arrays.php
-
-
-
 $upgrade_array = array (
 	# start
 	array (22, 502301, 1, 'Bump+to+Top+Of+Category+Browsing+Results'),

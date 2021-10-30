@@ -1,8 +1,5 @@
 <?php
 
-//admin_site_class.php
-
-
 if (!function_exists("array_combine")) {
     function array_combine($keys, $values)
     {

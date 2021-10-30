@@ -1,8 +1,5 @@
 <?php
 
-//rss_listings.php
-
-
 //do not modify the next 2 lines:
 require_once 'app_top.common.php';
 $feed = new geoListingFeed();

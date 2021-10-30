@@ -1,8 +1,5 @@
 <?php
 
-//recurring_process.php
-
-
 //Make sure that clean inputs only un-does magic quotes
 define('CLEAN_INPUTS_MAGIC_ONLY', 1);
 

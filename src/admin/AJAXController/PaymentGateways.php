@@ -1,8 +1,5 @@
 <?php
 
-//PaymentGateways.php
-
-
 if (class_exists('admin_AJAX') or die()) {
 }
 

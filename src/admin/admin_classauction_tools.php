@@ -1,8 +1,5 @@
 <?php
 
-//admin_classauction_tools.php
-
-
 class Admin_classauction_tools extends Admin_site
 {
     function display_admin_tools_license()

@@ -1,8 +1,5 @@
 <?php
 
-//module_total_live_users.php
-
-
     // Debug variables
     $filename = "module_total_registered_users.php";
     $function_name = "module_total_registered_users";

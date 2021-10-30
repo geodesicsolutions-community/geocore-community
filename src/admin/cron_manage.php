@@ -1,8 +1,5 @@
 <?php
 
-//cron_manage.php
-
-
 require_once(CLASSES_DIR . PHP5_DIR . 'Cron.class.php');
 
 class AdminCronManage

@@ -1,7 +1,5 @@
 <?php
 
-//account_balance.php
-
 require_once CLASSES_DIR . PHP5_DIR . 'PaymentGateway.class.php';
 
 # Cash payment gateway handler

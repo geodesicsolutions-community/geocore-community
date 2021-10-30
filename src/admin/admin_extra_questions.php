@@ -1,8 +1,5 @@
 <?php
 
-// admin_extra_questions.php
-
-
 /**
  * Gives access to extra questions and dropdowns
  *

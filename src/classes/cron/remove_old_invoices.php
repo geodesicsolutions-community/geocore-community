@@ -1,8 +1,5 @@
 <?php
 
-//remove_old_invoices.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

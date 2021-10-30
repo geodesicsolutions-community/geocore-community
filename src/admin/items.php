@@ -1,8 +1,5 @@
 <?php
 
-//items.php
-
-
 class OrderItemManagement
 {
     private static $_validStatusItem = array (

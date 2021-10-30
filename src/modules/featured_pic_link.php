@@ -1,8 +1,5 @@
 <?php
 
-//module_display_featured_pic_link.php
-
-
 if (geoPC::is_ent() || geoPC::is_premier() || geoPC::is_basic()) {
     $tpl_vars = array (
         'href' => $page->configuration_data['classifieds_file_name'] . "?a=8&amp;b=" . $page->site_category,

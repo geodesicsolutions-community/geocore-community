@@ -1,8 +1,5 @@
 <?php
 
-//user_management_list_bids.php
-
-
 class Auction_list_bids extends geoSite
 {
 

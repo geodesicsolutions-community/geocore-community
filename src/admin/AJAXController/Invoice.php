@@ -1,8 +1,5 @@
 <?php
 
-//Invoice.php
-
-
 // DON'T FORGET THIS
 if (class_exists('admin_AJAX') or die()) {
 }

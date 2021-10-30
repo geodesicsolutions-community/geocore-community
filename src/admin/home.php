@@ -1,8 +1,5 @@
 <?php
 
-//home.php
-
-
 class geoAdminHome
 {
     public function display_home()

@@ -1,8 +1,5 @@
 <?php
 
-//remove_old_order_data.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

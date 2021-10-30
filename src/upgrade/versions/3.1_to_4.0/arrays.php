@@ -1,7 +1,4 @@
 <?php
-//arrays.php
-
-
 $upgrade_array = array (
 	array (37, 500181, 1, 'Seller%2FBuyer+On-Site+Payments%0D%0A'),
 	array (37, 500182, 1, 'Seller%2FBuyer+On-Site+Payments+information+is+used+during+auctions%2C+to+allow+the+winning+bidder+of+one+of+your+auctions+to+pay+you+for+their+item+using+the+specified+%26quot%3Bpayment+handler%26quot%3B.%26nbsp%3B+Configure+the+settings+below+if+you+want+to+use+any+of+the+%26quot%3BOn-Site%26quot%3B+payment+handlers.%26nbsp%3B+Otherwise%2C+payments+made+from+the+winning+bidder+to+you+will+need+to+be+done+%26quot%3Bmanually%26quot%3B.%0D%0A'),

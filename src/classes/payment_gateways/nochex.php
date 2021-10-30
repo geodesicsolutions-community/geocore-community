@@ -1,8 +1,5 @@
 <?php
 
-//nochex.php
-
-
 # Nochex payment gateway handler
 
 class nochexPaymentGateway extends geoPaymentGateway

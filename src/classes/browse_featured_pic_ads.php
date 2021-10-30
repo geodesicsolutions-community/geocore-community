@@ -1,9 +1,5 @@
 <?php
 
-//browse_featured_pic_ads.php
-
-
-
 class Browse_featured_pic_ads extends geoBrowse
 {
     var $subcategory_array = array();

@@ -1,6 +1,4 @@
 <?php
-//config.php
-
 /*
  This file was auctomatically generated using the config.php upgrade script.
 */

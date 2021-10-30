@@ -1,8 +1,5 @@
 <?php
 
-//user_management_information.php
-
-
 require_once(CLASSES_DIR . 'site_class.php');
 
 class User_management_information extends geoSite

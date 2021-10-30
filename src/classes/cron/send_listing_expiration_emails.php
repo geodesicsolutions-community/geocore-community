@@ -1,8 +1,5 @@
 <?php
 
-//send_ad_expiration_emails.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

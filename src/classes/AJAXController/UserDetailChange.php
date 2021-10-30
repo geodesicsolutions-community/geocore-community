@@ -1,8 +1,5 @@
 <?php
 
-//UserDetailChange.php
-
-
 if (class_exists('classes_AJAX') or die('NO_ACCESS')) {
 }
 

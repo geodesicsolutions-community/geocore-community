@@ -1,7 +1,4 @@
 <?php
-//interactive.php
-
-
 /**
  * How this file works:
  * 

@@ -1,8 +1,5 @@
 <?php
 
-//worldpay.php
-
-
 /*//availabel settings ($this->get(setting_name); (handy)
 worldpay_installation_id
 worldpay_currency_type

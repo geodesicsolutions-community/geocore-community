@@ -1,8 +1,5 @@
 <?php
 
-//user_management_expired_ads.php
-
-
 class User_management_expired_ads extends geoSite
 {
     var $debug_expired = 0;

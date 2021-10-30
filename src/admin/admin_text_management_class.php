@@ -1,8 +1,5 @@
 <?php
 
-// admin_text_management_class.php
-
-
 class Text_management extends Admin_site
 {
 

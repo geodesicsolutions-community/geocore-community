@@ -1,8 +1,5 @@
 <?php
 
-//expire_inactive_carts.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

@@ -1,9 +1,5 @@
 <?php
 
-//browse_featured_text_ads.php
-
-
-
 class Browse_featured_text_ads extends geoBrowse
 {
     var $subcategory_array = array();

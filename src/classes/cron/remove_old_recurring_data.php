@@ -1,8 +1,5 @@
 <?php
 
-//remove_old_recurring_data.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

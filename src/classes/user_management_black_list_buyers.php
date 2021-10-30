@@ -1,8 +1,5 @@
 <?php
 
-//user_management_list_bids_auctions.php
-
-
 class Black_list_buyers extends geoSite
 {
 

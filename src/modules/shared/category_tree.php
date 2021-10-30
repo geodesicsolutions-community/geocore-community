@@ -1,8 +1,5 @@
 <?php
 
-//category_tree.php
-
-
 //Shared stuff that happens in all 3 category tree modules.
 
 if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {

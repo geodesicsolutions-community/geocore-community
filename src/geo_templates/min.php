@@ -1,7 +1,4 @@
 <?php
-//min.php
-
-
 /**
  * This file combines, reduces, and compresses the CSS / JS content of the page.
  * 

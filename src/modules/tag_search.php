@@ -1,8 +1,5 @@
 <?php
 
-//tag_search.php
-
-
 //tag search module, displays auto-complete tag search box
 
 if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {

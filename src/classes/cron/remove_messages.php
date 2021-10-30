@@ -1,8 +1,5 @@
 <?php
 
-//remove_messages.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

@@ -1,8 +1,5 @@
 <?php
 
-//seller_buyer_transactions.php
-
-
 class AdminSellerBuyerTransactions
 {
     function display_seller_buyer_config()

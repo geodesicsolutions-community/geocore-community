@@ -1,8 +1,5 @@
 <?php
 
-//app_top.php
-
-
 defined('GEO_BASE_DIR') or die('NO_ACCESS');
 
 

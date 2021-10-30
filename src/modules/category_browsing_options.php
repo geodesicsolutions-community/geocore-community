@@ -1,8 +1,5 @@
 <?php
 
-//module_display_browsing_options.php
-
-
 if (!$page->site_category) {
     //this only works on pages with a category!
     return false;

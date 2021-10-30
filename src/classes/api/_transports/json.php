@@ -1,8 +1,5 @@
 <?php
 
-//json.php
-
-
 //JSON transport for API. Currently experimental.
 
 

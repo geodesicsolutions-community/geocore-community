@@ -1,7 +1,4 @@
 <?php
-//setDefaultSettings.php
-
-
 #DEVELOPERS:  DO NOT ADD TO THIS WITHOUT READING DOCUMENTATION!!!
 
 $defaultSiteSettings = array (

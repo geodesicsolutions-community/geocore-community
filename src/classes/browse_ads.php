@@ -1,8 +1,5 @@
 <?php
 
-//browse_ads.php
-
-
 class Browse_ads extends geoBrowse
 {
     public $browsing_options = array();

@@ -1,8 +1,5 @@
 <?php
 
-//cart.php
-
-
 //File used for admin-side cart sessions
 
 class AdminCart

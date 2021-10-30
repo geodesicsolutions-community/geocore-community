@@ -1,8 +1,5 @@
 <?php
 
-//user_management_favorites.php
-
-
 class User_management_favorites extends geoSite
 {
     var $debug_favorites = 0;

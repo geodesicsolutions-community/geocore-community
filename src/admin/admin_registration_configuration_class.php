@@ -1,8 +1,5 @@
 <?php
 
-// admin_registration_configuration_class.php
-
-
 class Registration_configuration extends Admin_site
 {
 

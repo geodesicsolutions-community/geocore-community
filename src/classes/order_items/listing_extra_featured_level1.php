@@ -1,8 +1,5 @@
 <?php
 
-//listing_extrat_featured_ad.php
-
-
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';
 
 class listing_extra_featured_level1OrderItem extends geoOrderItem

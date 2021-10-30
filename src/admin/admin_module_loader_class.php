@@ -1,8 +1,5 @@
 <?php
 
-//admin_module_loader_class.php
-
-
 /**
  * This class used as a wrapper, to pull in older modules into the new admin page loader,
  * that have not yet been converted to use the new Addon system.

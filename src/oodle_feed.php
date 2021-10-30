@@ -1,8 +1,5 @@
 <?php
 
-//oodle_feed.php
-
-
 /**
  * set the next line to 1 to "turn on" the oodle feed.  By default it is set to
  * 0 since the oodle feed can get pretty big and potentially take up a lot of

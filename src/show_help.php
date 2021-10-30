@@ -1,8 +1,5 @@
 <?php
 
-//show_help.php
-
-
 include_once('app_top.common.php');
             //Formatting for help topics
 $tpl = new geoTemplate('system', 'other');

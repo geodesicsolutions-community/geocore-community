@@ -1,8 +1,5 @@
 <?php
 
-//module_display_zip_filters.php
-
-
 if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {
     //browsing disabled, do not show module contents
     return;

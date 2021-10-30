@@ -1,8 +1,5 @@
 <?php
 
-//get_external.php
-
-
 /**
  * This file figures out the URL based on the specified file, then do a re-direct
  * to that file.

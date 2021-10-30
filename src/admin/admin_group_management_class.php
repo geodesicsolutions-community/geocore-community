@@ -1,8 +1,5 @@
 <?php
 
-// admin_group_management_class.php
-
-
 class Group_management extends Admin_site
 {
 

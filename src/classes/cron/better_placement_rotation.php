@@ -1,8 +1,5 @@
 <?php
 
-//FILE_NAME.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

@@ -1,8 +1,5 @@
 <?php
 
-// admin_site_configuration_class.php
-
-
 class Site_configuration extends Admin_site
 {
 

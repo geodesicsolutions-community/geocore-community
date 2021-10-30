@@ -1,8 +1,5 @@
 <?php
 
-//site_fee.php
-
-
 require_once CLASSES_DIR . PHP5_DIR . 'PaymentGateway.class.php';
 
 # Internal gateway, used for adding charge transactions.

@@ -1,8 +1,5 @@
 <?php
 
-//authenticate_class.php
-
-
 require_once CLASSES_DIR . 'site_class.php';
 
 class Auth extends geoSite

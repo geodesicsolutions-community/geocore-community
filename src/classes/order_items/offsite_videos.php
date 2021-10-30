@@ -1,8 +1,5 @@
 <?php
 
-//offsite_videos.php
-
-
 //Order item that adds ability to have youtube videos
 
 class offsite_videosOrderItem extends geoOrderItem

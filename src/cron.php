@@ -1,6 +1,5 @@
 <?php
 
-//cron.php
 /**
  * This is the cron backend, a procedural "index" file (that should be accessed
  * directly) for running cron routines.
@@ -42,8 +41,6 @@
  * @package System
  * @since Version 3.1.0
  */
-
-
 
 //keep from redirecting
 if (!defined('IS_ROBOT')) {

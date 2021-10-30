@@ -1,8 +1,5 @@
 <?php
 
-//browse_newest_ads.php
-
-
 class Browse_newest_ads extends geoBrowse
 {
     var $subcategory_array = array();

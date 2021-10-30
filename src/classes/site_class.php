@@ -1,9 +1,5 @@
 <?php
 
-//site_class.php
-
-
-
 class geoSite
 {
     /**

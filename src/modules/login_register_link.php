@@ -1,8 +1,5 @@
 <?php
 
-//module_display_login_register.php
-
-
 $links = array();
 if ($page->classified_user_id) {
     $links[] = array (

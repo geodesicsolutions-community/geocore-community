@@ -1,8 +1,5 @@
 <?php
 
-//admin_user_management_class.php
-
-
 class Admin_user_management extends Admin_site
 {
     //used to keep track of what 'order by' the previous search took place in

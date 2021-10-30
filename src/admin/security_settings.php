@@ -1,8 +1,5 @@
 <?php
 
-//security_settings.php
-
-
 /**
  * Used for displaying/updating in the admin for security related stuff.
  */

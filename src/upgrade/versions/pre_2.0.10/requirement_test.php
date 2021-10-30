@@ -1,7 +1,4 @@
 <?php
-//requirement_test.php
-
-
 //tests all requirements of the new software.
 if (!(isset($no_show_tests) && $no_show_tests)){
 	//being run as standalone

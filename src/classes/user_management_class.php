@@ -1,8 +1,5 @@
 <?php
 
-//user_management_class.php
-
-
 class User_management extends geoSite
 {
     /**

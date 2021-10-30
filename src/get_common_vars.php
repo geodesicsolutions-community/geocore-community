@@ -1,8 +1,5 @@
 <?php
 
-//get_common_vars.php
-
-
 //Handy file that sets up common vars for you.
 //just make sure the var(s) you want to set up are
 //initialized, then include this file to have them

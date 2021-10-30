@@ -1,8 +1,5 @@
 <?php
 
-// addon_manage.php
-
-
 class Addon_Manage
 {
 

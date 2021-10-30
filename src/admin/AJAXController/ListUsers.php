@@ -1,8 +1,5 @@
 <?php
 
-//ListUsers.php
-
-
 /**
  * This file shows how to write server-side code for AJAX requests
  * Use this file as a template for new

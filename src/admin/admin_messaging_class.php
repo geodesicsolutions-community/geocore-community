@@ -1,8 +1,5 @@
 <?php
 
-//admin_messaging_class.php
-
-
 class Admin_messaging extends Admin_site
 {
 

@@ -1,8 +1,5 @@
 <?php
 
-//rss_news_reader.php
-
-
 class rss_reader
 {
     /*This class facilitates reading the geo news feed into the Admin home page

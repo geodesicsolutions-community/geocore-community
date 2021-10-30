@@ -1,8 +1,5 @@
 <?php
 
-// admin_email_config.php
-
-
 class Email_configuration
 {
 

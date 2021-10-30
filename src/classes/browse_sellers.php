@@ -1,8 +1,5 @@
 <?php
 
-//browse_sellers.php
-
-
 class Browse_sellers extends geoBrowse
 {
     var $subcategory_array = array();

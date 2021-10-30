@@ -1,8 +1,5 @@
 <?php
 
-// price_plan_items.php
-
-
 class PricePlanItemManage
 {
     public function getConfig($item, $price_plan, $category)

@@ -1,8 +1,5 @@
 <?php
 
-// admin_ad_configuration_class.php
-
-
 class Ad_configuration extends Admin_site
 {
 

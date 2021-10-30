@@ -1,8 +1,5 @@
 <?php
 
-//templatesExport.php
-
-
 //this is used within update as well
 require_once CLASSES_DIR . 'php5_classes/File.class.php';
 require_once CLASSES_DIR . 'php5_classes/String.class.php';

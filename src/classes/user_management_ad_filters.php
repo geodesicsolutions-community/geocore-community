@@ -1,8 +1,5 @@
 <?php
 
-//user_management_ad_filters.php
-
-
 class User_management_ad_filters extends geoSite
 {
 

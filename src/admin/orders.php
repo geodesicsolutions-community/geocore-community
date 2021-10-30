@@ -1,8 +1,5 @@
 <?php
 
-//orders.php
-
-
 class OrdersManagement
 {
     public function display_orders_list()

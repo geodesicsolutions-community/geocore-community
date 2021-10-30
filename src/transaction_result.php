@@ -1,8 +1,5 @@
 <?php
 
-//transaction_result.php
-
-
 /* This is a way to show the success or failure page for a given transaction without affecting anything else
     it only allows showing transactions belonging to the current user
     and should be used for display ONLY

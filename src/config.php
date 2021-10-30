@@ -1,8 +1,5 @@
 <?php
 
-//config.php
-
-
 /*
  Welcome to the Configuration File. This file is the link
  between the php files that run the functions of the software and your

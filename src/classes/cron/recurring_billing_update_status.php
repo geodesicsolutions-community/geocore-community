@@ -1,8 +1,5 @@
 <?php
 
-//recurring_billing_update_status.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

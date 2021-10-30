@@ -1,8 +1,5 @@
 <?php
 
-//browse_tag.php
-
-
 class Browse_tag extends geoBrowse
 {
     var $config = array();

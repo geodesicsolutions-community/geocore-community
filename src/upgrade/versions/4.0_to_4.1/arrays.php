@@ -1,7 +1,4 @@
 <?php
-//arrays.php
-
-
 $upgrade_array = array (
 	array (10203, 500656, 1, 'Your+payment+has+been+declined.+Please+verify+your+billing+and+payment+information+and+try+again.'),
 	array (10208, 500657, 1, 'no+active+subscription'),

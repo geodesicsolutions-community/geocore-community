@@ -1,8 +1,5 @@
 <?php
 
-//reset_admin_password.php
-
-
 # -------- ADMIN PASSWORD RESET TOOL -------- #
 
 /**

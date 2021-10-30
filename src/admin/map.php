@@ -1,9 +1,5 @@
 <?php
 
-//map.php
-
-
-
 class geoAdminMap
 {
     public function display_site_map()

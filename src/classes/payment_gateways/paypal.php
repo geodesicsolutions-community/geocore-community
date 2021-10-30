@@ -1,8 +1,5 @@
 <?php
 
-//paypal.php
-
-
 # Paypal payment gateway handler
 
 class paypalPaymentGateway extends geoPaymentGateway

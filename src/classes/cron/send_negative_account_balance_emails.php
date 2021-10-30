@@ -1,8 +1,5 @@
 <?php
 
-//send_negative_account_balance_emails.php
-
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }

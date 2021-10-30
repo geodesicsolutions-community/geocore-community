@@ -1,8 +1,5 @@
 <?php
 
-//auction_feedback_class.php
-
-
 class Auction_feedback extends geoSite
 {
     var $auction_id;

@@ -1,8 +1,5 @@
 <?php
 
-// admin_html_allowed_class.php
-
-
 class HTML_allowed extends Admin_site
 {
 

@@ -1,7 +1,4 @@
 <?php
-//arrays.php
-
-
 /**
  * SPECIAL PART:  This part is not standard, do not copy to new version.
  * 

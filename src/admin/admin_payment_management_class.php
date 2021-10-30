@@ -1,8 +1,5 @@
 <?php
 
-// admin_payment_management_class.php
-
-
 class Payment_management extends Admin_site
 {
     function currency_designation_form($db)

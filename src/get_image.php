@@ -1,9 +1,5 @@
 <?php
 
-//get_image.php
-
-
-
 require_once 'app_top.main.php';
 
 if (!isset($_REQUEST["id"]) || !(int)$_REQUEST['id']) {

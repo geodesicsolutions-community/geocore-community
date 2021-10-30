@@ -1,8 +1,5 @@
 <?php
 
-//module_title_auctions.php
-
-
 $display = "";
 
 $debug_title = 0;

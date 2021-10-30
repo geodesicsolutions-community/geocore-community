@@ -1,9 +1,5 @@
 <?php
 
-//module_hottest_ads.php
-
-
-
 $tpl_vars = array();
 
 $col_name = '';

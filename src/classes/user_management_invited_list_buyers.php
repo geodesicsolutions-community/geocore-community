@@ -1,8 +1,5 @@
 <?php
 
-//user_management_invited_list_buyers.php
-
-
 class Invited_list_buyers extends geoSite
 {
 

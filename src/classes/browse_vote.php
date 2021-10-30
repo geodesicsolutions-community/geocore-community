@@ -1,8 +1,5 @@
 <?php
 
-//browse_vote.php
-
-
 if (!geoPC::is_ent()) {
     return false;
 }

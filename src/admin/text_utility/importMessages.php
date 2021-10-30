@@ -1,8 +1,5 @@
 <?php
 
-//importMessages.php
-
-
 ##
 ## This file contains the nuts and bolts of the LEGACY text importer.
 ##

@@ -1,7 +1,5 @@
 <?php
 
-//session_handler.php
-
 # BulkUploader
 class geoBulkUploaderSessionHandler
 {
@@ -50,12 +48,12 @@ class geoBulkUploaderSessionHandler
         }
 
         if (isset($r['value'])) {
-            $sql = "UPDATE $this->sessionTable 
-			SET	`value` = ?, `time` = ? 
+            $sql = "UPDATE $this->sessionTable
+			SET	`value` = ?, `time` = ?
 			WHERE `name` = ? AND `id` = 'config'";
             $r = $this->db->Execute($sql, array($value, geoUtil::time(), $setting));
         } else {
-            $sql = "INSERT INTO $this->sessionTable 
+            $sql = "INSERT INTO $this->sessionTable
 			SET	`id` = 'config', `name` = ?, `value` = ?, `time` = ?";
             $r = $this->db->Execute($sql, array($setting, $value, geoUtil::time()));
         }
@@ -78,24 +76,24 @@ class geoBulkUploaderSessionHandler
     function set($name, $value, $valueId = 0)
     {
         $value = addslashes($value);
-        $sql = "SELECT id FROM " . $this->sessionTable . " WHERE 
+        $sql = "SELECT id FROM " . $this->sessionTable . " WHERE
 		id = '" . $this->id . "' AND name = '" . $name . "' AND vid = '" . $valueId . "'";
         $result = $this->db->Execute($sql);
         if (!$result) {
             return false;
         }
         if ($result->RecordCount() > 0) {
-            $sql = "UPDATE $this->sessionTable SET 
-			value = '$value' WHERE 
-			id = '$this->id' AND 
-			vid = '$valueId' AND 
+            $sql = "UPDATE $this->sessionTable SET
+			value = '$value' WHERE
+			id = '$this->id' AND
+			vid = '$valueId' AND
 			name = '$name'";
             $result = $this->db->Execute($sql);
             if (!$result) {
                 return false;
             }
         } else {
-            $sql = "insert into " . $this->sessionTable . " 
+            $sql = "insert into " . $this->sessionTable . "
 			(id,name,value,vid,time)
 			values
 			('" . $this->id . "','" . $name . "','" . $value . "','" . $valueId . "','" . time() . "')";
@@ -115,10 +113,10 @@ class geoBulkUploaderSessionHandler
      */
     function get($name, $valueId = 0)
     {
-        $sql_query = "select value from " . $this->sessionTable . " where 
-		id = '$this->id' and 
-		name = '$name' and 
-		vid = '$valueId' 
+        $sql_query = "select value from " . $this->sessionTable . " where
+		id = '$this->id' and
+		name = '$name' and
+		vid = '$valueId'
 		limit 1";
         $result = $this->db->Execute($sql_query);
         if (!$result) {
@@ -138,7 +136,7 @@ class geoBulkUploaderSessionHandler
     function getArray($name)
     {
         $sql = "SELECT * FROM {$this->sessionTable} WHERE
-		id = '$this->id' AND 
+		id = '$this->id' AND
 		name = '$name'
 		ORDER BY vid ASC";
         $r = $this->db->Execute($sql);
@@ -166,7 +164,7 @@ class geoBulkUploaderSessionHandler
         }
         if (func_num_args() > 0) {
             $arguments = func_get_args();
-            $sql = "delete from " . $this->sessionTable . " where 
+            $sql = "delete from " . $this->sessionTable . " where
 			id = '" . $this->id . "' and (";
             foreach ($arguments as $key => $value) {
                 $sql .= " name = '" . $value . "' or";
@@ -178,7 +176,7 @@ class geoBulkUploaderSessionHandler
                 return false;
             }
         } else {
-            $sql = "delete from " . $this->sessionTable . " where 
+            $sql = "delete from " . $this->sessionTable . " where
 			id = '" . $this->id . "'";
             $result = $this->db->Execute($sql);
             if (!$result) {
@@ -194,7 +192,7 @@ class geoBulkUploaderSessionHandler
             $id = $this->id;
         }
 
-        $sql = "delete from " . $this->sessionTable . " where 
+        $sql = "delete from " . $this->sessionTable . " where
 		id = '$id'";
         $result = $this->db->Execute($sql);
         if (!$result) {
@@ -211,8 +209,8 @@ class geoBulkUploaderSessionHandler
      */
     function update()
     {
-        $sql = "update " . $this->sessionTable . " set 
-		time = " . time() . " where 
+        $sql = "update " . $this->sessionTable . " set
+		time = " . time() . " where
 		id = '" . $this->id . "'";
         $result = $this->db->Execute($sql);
         if (!$result) {
@@ -228,7 +226,7 @@ class geoBulkUploaderSessionHandler
     function clear($id = null)
     {
 
-        $sql = "delete from " . $this->sessionTable . " where 
+        $sql = "delete from " . $this->sessionTable . " where
 		time < " . (time() - (60 * 60 * 24));
         if ($id != null) {
             $sql .= " AND id='$id'";

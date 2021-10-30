@@ -1,8 +1,5 @@
 <?php
 
-//UserRating.php
-
-
 if (class_exists('classes_AJAX') or die('NO ACCESS')) {
 }
 

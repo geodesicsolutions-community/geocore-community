@@ -1,8 +1,5 @@
 <?php
 
-//manual_payment.php
-
-
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 
 # Manual CC payment gateway handler

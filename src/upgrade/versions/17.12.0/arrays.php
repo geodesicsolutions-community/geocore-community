@@ -1,8 +1,4 @@
 <?php
-//arrays.php
-
-
-
 $upgrade_array = array (
 	# start
 

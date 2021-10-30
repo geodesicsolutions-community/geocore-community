@@ -1,8 +1,5 @@
 <?php
 
-//api.php
-
-
 require_once CLASSES_DIR . PHP5_DIR . 'API.class.php';
 
 class AdminAPIManage

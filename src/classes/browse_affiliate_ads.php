@@ -1,8 +1,5 @@
 <?php
 
-//browse_affiliate_ads.php
-
-
 class Browse_ads extends geoBrowse
 {
     var $subcategory_array = array();
