@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+input.textField {
+	width: 150px;
+}
+input.dateInput {
+	width: 75px;
+}
+
+input.extraShort {
+	width: 30px;
+}

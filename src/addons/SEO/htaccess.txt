@@ -1,0 +1,3 @@
+##### ---  NO LONGER USED!!!  HTACCESS IS NOW GENERATED FOR YOU IN ADMIN.  --- #####
+
+# See the user manual for more information.

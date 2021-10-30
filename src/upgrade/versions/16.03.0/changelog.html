@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Geodesic Solutions 16.03.0 Changelog</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+	<script>
+		//<![CDATA[
+		
+		var changeDiffMethod = function () {
+			var showclass = jQuery('.diffMethod:checked').prop('id');
+			var hideclass = jQuery('.diffMethod:not(:checked)').prop('id');
+			jQuery('.'+showclass).show();
+			jQuery('.'+hideclass).hide();
+		};
+		
+		jQuery(document).ready(function () {
+			jQuery('.diffMethod').click(changeDiffMethod);
+			if (jQuery('.diffMethod').length) {
+				//go ahead and do it now to start out
+				changeDiffMethod();
+			}
+			jQuery('ul.nav a').click(function () {
+				//make it scroll to the thingy
+				if (this.hash.length) {
+					var topOffset = jQuery(this.hash).offset().top - 5;
+					jQuery('html, body').animate({
+						scrollTop : topOffset
+					}, 1500);
+				}
+			});
+		});
+		
+		//]]>
+	</script>
+	
+	
+	<style>
+		
+		.toc, .code_legend {
+			float: left;
+			border-radius: 15px;
+			margin-bottom: 10px;
+		}
+		
+		.code {
+			width: 90%;
+			max-height: 500px;
+			white-space: pre;
+			border: 1px dashed black;
+			overflow: auto;
+			padding: 5px;
+		}
+		.code span:hover {
+			background-color: #eee;
+		}
+		.code span.rem {
+			background-color: #fdd;
+		}
+		.code span.rem:hover {
+			background-color: #fcc;
+		}
+		.code span.add {
+			background-color: #dfd;
+		}
+		.code span.add:hover {
+			background-color: #cfc;
+		}
+		fieldset.versions {
+			border-radius: 10px;
+			display: inline-block;
+			vertical-align: top;
+		}
+		ul.nav {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		ul.nav li {
+			display: inline-block;
+			padding: 0;
+			margin: 0;
+		}
+		ul.nav li a {
+			display: inline-block;
+			padding: 6px;
+			margin: 4px;
+			border: 1px solid #777;
+			border-radius: 5px;
+			text-decoration: none;
+			color: black;
+		}
+		ul.nav li a:hover {
+			background-color: #dfd;
+		}
+		
+	</style>
+	
+	<meta name="generator" content="SPBAS http://spbas.com" />
+</head>
+<body>
+<p>
+	This file is a technical summary of changes in the Geodesic Solutions Classifieds and Auctions software.
+	Each entry will link to the corresponding bug found in Bugzilla on our website (You will 
+	need current support contract to view, <a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,developers;bugzilla;start">more info here</a>). You can find release highlights on
+	<a href="http://geodesicsolutions.com">geodesicsolutions.com</a>.
+</p>
+<!-- 
+	This is auto-generated.  Can manually adjust order of things, just keep
+	any HTML comments that start with AUTO intact as those are used to modify
+	the changelog and/or auto-insert new changelog contents.
+ -->
+<fieldset class="versions">
+	<legend>Versions</legend>
+	<ul class="nav">
+		<!-- AUTO VERSIONS --><!-- AUTO version link 16.03.0 -->
+<li>
+	<a href="#milestone_16-03-0">16.03.0</a>
+</li>
+<!-- /AUTO version link 16.03.0 --><!-- AUTO version link 16.05.0 -->
+<li>
+	<a href="#milestone_16-05-0">16.05.0</a>
+</li>
+<!-- /AUTO version link 16.05.0 --><!-- /AUTO VERSIONS -->
+		<li><a href="../changelogs.php">More Versions</a>
+	</ul>
+</fieldset>
+<fieldset class="versions">
+	<legend>Template Change "Diff" Method</legend>
+	
+	Choose method to show template changes:<br />
+	<label><input type="radio" name="diffMethod" class="diffMethod" id="findReplace" checked="checked" /> Find &amp; Replace</label><br />
+	<label><input type="radio" name="diffMethod" class="diffMethod" id="inline" /> Inline</label>
+</fieldset>
+
+<!-- AUTO CHANGELOGS --><!-- AUTO changelog 16.03.0 -->
+<h3 id="milestone_16-03-0">16.03.0 (March 31, 2016)</h3>
+<ul class="nav">
+	<li><a href="#milestone_16-03-0_enhancements">Enhancements (1)</a></li>
+	<li><a href="#milestone_16-03-0_bugfix_secure">Security Fixes (1)</a></li>
+	<li><a href="#milestone_16-03-0_bugfix">Fixes/Maintenance (9)</a></li>
+	<li><a href="#milestone_16-03-0_templates">Template Changes (3)</a></li>
+</ul>
+<h4 id="milestone_16-03-0_enhancements">[Enhancements]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1656 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1656" onclick="window.open(this.href); return false;" id="bug_1656">1656</a> - New Beta Feature: Recurring Classifieds - <em>Sponsored</em>
+<br />
+</p>
+<h4 id="milestone_16-03-0_bugfix_secure">[Security Fixes]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1665 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1665" onclick="window.open(this.href); return false;" id="bug_1665">1665</a> - Removed an SQL injection vector - <em>Security</em>
+<br />
+</p>
+<h4 id="milestone_16-03-0_bugfix">[Fixes/Maintenance]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1675 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1675" onclick="window.open(this.href); return false;" id="bug_1675">1675</a> - MINIMUM PHP VERSION UPDATED TO 5.4<br />
+ 
+<!-- Log for bug # 1666 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1666" onclick="window.open(this.href); return false;" id="bug_1666">1666</a> - Fixed attention getters not appearing in the new design<br />
+ 
+<!-- Log for bug # 1667 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1667" onclick="window.open(this.href); return false;" id="bug_1667">1667</a> - Fixed archive_listings and expire_groups_and_plans crons not running ever<br />
+ 
+<!-- Log for bug # 1670 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1670" onclick="window.open(this.href); return false;" id="bug_1670">1670</a> - GeoNav: non-index pages will no longer trigger GeoNav filtering (fixes registration in subdomains)<br />
+ 
+<!-- Log for bug # 1674 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1674" onclick="window.open(this.href); return false;" id="bug_1674">1674</a> - Fixed auction renewal/copy ignoring new end time<br />
+ 
+<!-- Log for bug # 1668 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1668" onclick="window.open(this.href); return false;" id="bug_1668">1668</a> - Hid the streamlined category browse button when it would have no categories to write<br />
+ 
+<!-- Log for bug # 1669 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1669" onclick="window.open(this.href); return false;" id="bug_1669">1669</a> - Storefront: restored missing character to template names in user CP<br />
+ 
+<!-- Log for bug # 1671 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1671" onclick="window.open(this.href); return false;" id="bug_1671">1671</a> - Fixed an outside chance for memcache to not properly lock under high loads<br />
+ 
+<!-- Log for bug # 1672 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1672" onclick="window.open(this.href); return false;" id="bug_1672">1672</a> - Restored missing chevrons to pagination links in the admin<br />
+</p>
+<h4 id="milestone_16-03-0_templates">[Template Changes]</h4>
+<p style="font-style: italic;">
+	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
+	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
+	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	to find if you need to make any template changes during an update.
+</p>
+<fieldset class="code_legend">
+	<legend>Legend</legend>
+	<p>Note the following about highlighted lines you will see in this section.</p>
+	<pre class="code"><span class="add">This is a line that has been <strong>Added</strong></span>
+<span class="rem">This is a line that has been <strong>Removed</strong></span>
+<span>This is a line that has <strong>not changed</strong>.</span></pre>
+</fieldset>
+
+<ol style="clear: both;">
+			<li>
+							In file <strong>external/css/default.css</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 5370, <strong>FIND:</strong><br />
+							<pre class="code"><span>	top: 0;</span>
+<span>	max-width: 100%;</span>
+<span>	z-index: 2;</span>
+<span>}</span>
+<span></span>
+<span>.attention-getter-wrapper {</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>	top: 0;</span>
+<span>	max-width: 100%;</span>
+<span>	z-index: 2;</span>
+<span class="add">	display: block;</span>
+<span>}</span>
+<span></span>
+<span>.attention-getter-wrapper {</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 5370, make the following changes:
+							<pre class="code"><span>	top: 0;</span>
+<span>	max-width: 100%;</span>
+<span>	z-index: 2;</span>
+<span class="add">	display: block;</span>
+<span>}</span>
+<span></span>
+<span>.attention-getter-wrapper {</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>main_page/header.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 14, <strong>FIND:</strong><br />
+							<pre class="code"><span>		&lt;div class=&quot;content_box clearfix regions&quot;&gt;</span>
+<span>			&lt;h2 class=&quot;title section-collapser&quot;&gt;</span>
+<span>				&lt;span class=&quot;glyphicon glyphicon-map-marker&quot;&gt;&lt;/span&gt;&amp;nbsp;Region&amp;nbsp;&lt;span style=&quot;font-size: .8em; font-weight: normal;&quot;&gt;&lt;span style=&quot;font-size: .8em;&quot; class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt; {addon author='geo_addons' addon='geographic_navigation' tag='current_region'}&amp;nbsp;</span>
+<span class="rem">				{if $geographic_navigation_region}&amp;nbsp;[&amp;nbsp;&lt;a href=&quot;index.php?region=0&quot;&gt;clear&lt;/a&gt;&amp;nbsp;]{/if}&lt;/span&gt;</span>
+<span>			&lt;/h2&gt;</span>
+<span>			{addon author='geo_addons' addon='geographic_navigation' tag='navigation'} </span>
+<span>		&lt;/div&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>		&lt;div class=&quot;content_box clearfix regions&quot;&gt;</span>
+<span>			&lt;h2 class=&quot;title section-collapser&quot;&gt;</span>
+<span>				&lt;span class=&quot;glyphicon glyphicon-map-marker&quot;&gt;&lt;/span&gt;&amp;nbsp;Region&amp;nbsp;&lt;span style=&quot;font-size: .8em; font-weight: normal;&quot;&gt;&lt;span style=&quot;font-size: .8em;&quot; class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt; {addon author='geo_addons' addon='geographic_navigation' tag='current_region'}&amp;nbsp;</span>
+<span class="add">				{if $geographic_navigation_region}&amp;nbsp;[&amp;nbsp;&lt;a href=&quot;{$classifieds_url}?region=0&quot;&gt;clear&lt;/a&gt;&amp;nbsp;]{/if}&lt;/span&gt;</span>
+<span>			&lt;/h2&gt;</span>
+<span>			{addon author='geo_addons' addon='geographic_navigation' tag='navigation'} </span>
+<span>		&lt;/div&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 14, make the following changes:
+							<pre class="code"><span>		&lt;div class=&quot;content_box clearfix regions&quot;&gt;</span>
+<span>			&lt;h2 class=&quot;title section-collapser&quot;&gt;</span>
+<span>				&lt;span class=&quot;glyphicon glyphicon-map-marker&quot;&gt;&lt;/span&gt;&amp;nbsp;Region&amp;nbsp;&lt;span style=&quot;font-size: .8em; font-weight: normal;&quot;&gt;&lt;span style=&quot;font-size: .8em;&quot; class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt; {addon author='geo_addons' addon='geographic_navigation' tag='current_region'}&amp;nbsp;</span>
+<span class="rem">				{if $geographic_navigation_region}&amp;nbsp;[&amp;nbsp;&lt;a href=&quot;index.php?region=0&quot;&gt;clear&lt;/a&gt;&amp;nbsp;]{/if}&lt;/span&gt;</span>
+<span class="add">				{if $geographic_navigation_region}&amp;nbsp;[&amp;nbsp;&lt;a href=&quot;{$classifieds_url}?region=0&quot;&gt;clear&lt;/a&gt;&amp;nbsp;]{/if}&lt;/span&gt;</span>
+<span>			&lt;/h2&gt;</span>
+<span>			{addon author='geo_addons' addon='geographic_navigation' tag='navigation'} </span>
+<span>		&lt;/div&gt;</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>system/classes/Pagination/pagination.tpl</strong>
+								<br /><br /><ol style="list-style-type: upper-alpha;">											<li>						<div class="findReplace" style="display: none;">
+							Near line 7, <strong>FIND:</strong><br />
+							<pre class="code"><span>			{else}</span>
+<span>				&lt;a href=&quot;{$url}{$previousPage}{$postUrl}&quot;&gt;</span>
+<span>			{/if}</span>
+<span class="rem">			&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;</span>
+<span>			&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{elseif $moduleTag}</span>
+<span>		{* always show &quot;previous&quot; button for module navigation, so it doesn't &quot;jump around&quot; *}</span>
+<span>		&lt;li&gt;</span>
+<span class="rem">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{/if}</span>
+<span>	</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>			{else}</span>
+<span>				&lt;a href=&quot;{$url}{$previousPage}{$postUrl}&quot;&gt;</span>
+<span>			{/if}</span>
+<span class="add">			{if $skip_glyphs}&amp;lsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;{/if}</span>
+<span>			&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{elseif $moduleTag}</span>
+<span>		{* always show &quot;previous&quot; button for module navigation, so it doesn't &quot;jump around&quot; *}</span>
+<span>		&lt;li&gt;</span>
+<span class="add">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;{if $skip_glyphs}&amp;lsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;{/if}&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{/if}</span>
+<span>	</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 7, make the following changes:
+							<pre class="code"><span>			{else}</span>
+<span>				&lt;a href=&quot;{$url}{$previousPage}{$postUrl}&quot;&gt;</span>
+<span>			{/if}</span>
+<span class="rem">			&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;</span>
+<span class="add">			{if $skip_glyphs}&amp;lsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;{/if}</span>
+<span>			&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{elseif $moduleTag}</span>
+<span>		{* always show &quot;previous&quot; button for module navigation, so it doesn't &quot;jump around&quot; *}</span>
+<span>		&lt;li&gt;</span>
+<span class="rem">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;&lt;/a&gt;</span>
+<span class="add">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;{if $skip_glyphs}&amp;lsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;{/if}&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{/if}</span>
+<span>	</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 41, <strong>FIND:</strong><br />
+							<pre class="code"><span>			{else}</span>
+<span>				&lt;a href=&quot;{$url}{$nextPage}{$postUrl}&quot;&gt;</span>
+<span>			{/if}</span>
+<span class="rem">			&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;</span>
+<span>			&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{elseif $moduleTag}</span>
+<span>		{* always show &quot;next&quot; button for module navigation, so it doesn't &quot;jump around&quot; *}</span>
+<span>		&lt;li&gt;</span>
+<span class="rem">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{/if}</span>
+<span>&lt;/ul&gt;</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>			{else}</span>
+<span>				&lt;a href=&quot;{$url}{$nextPage}{$postUrl}&quot;&gt;</span>
+<span>			{/if}</span>
+<span class="add">			{if $skip_glyphs}&amp;rsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;{/if}</span>
+<span>			&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{elseif $moduleTag}</span>
+<span>		{* always show &quot;next&quot; button for module navigation, so it doesn't &quot;jump around&quot; *}</span>
+<span>		&lt;li&gt;</span>
+<span class="add">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;{if $skip_glyphs}&amp;rsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;{/if}&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{/if}</span>
+<span>&lt;/ul&gt;</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 41, make the following changes:
+							<pre class="code"><span>			{else}</span>
+<span>				&lt;a href=&quot;{$url}{$nextPage}{$postUrl}&quot;&gt;</span>
+<span>			{/if}</span>
+<span class="rem">			&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;</span>
+<span class="add">			{if $skip_glyphs}&amp;rsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;{/if}</span>
+<span>			&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{elseif $moduleTag}</span>
+<span>		{* always show &quot;next&quot; button for module navigation, so it doesn't &quot;jump around&quot; *}</span>
+<span>		&lt;li&gt;</span>
+<span class="rem">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;&lt;/a&gt;</span>
+<span class="add">			&lt;a href=&quot;#&quot; onclick=&quot;return false;&quot; style=&quot;opacity:0.5; cursor: default;&quot;&gt;{if $skip_glyphs}&amp;rsaquo;{else}&lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;{/if}&lt;/a&gt;</span>
+<span>		&lt;/li&gt;</span>
+<span>	{/if}</span>
+<span>&lt;/ul&gt;</span></pre>
+						</div>
+						</li>									</ol>					</li>
+	</ol>
+<!-- /AUTO changelog 16.03.0 --><!-- AUTO changelog 16.05.0 -->
+<h3 id="milestone_16-05-0">16.05.0 (May 26, 2016)</h3>
+<ul class="nav">
+	<li><a href="#milestone_16-05-0_enhancements">Enhancements (2)</a></li>
+	<li><a href="#milestone_16-05-0_bugfix_secure">Security Fixes (0)</a></li>
+	<li><a href="#milestone_16-05-0_bugfix">Fixes/Maintenance (5)</a></li>
+	<li><a href="#milestone_16-05-0_templates">Template Changes (9)</a></li>
+</ul>
+<h4 id="milestone_16-05-0_enhancements">[Enhancements]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1681 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1681" onclick="window.open(this.href); return false;" id="bug_1681">1681</a> - Listing Exporter: added Quantity and Remaining Quantity as data points that can be exported<br />
+ 
+<!-- Log for bug # 1683 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1683" onclick="window.open(this.href); return false;" id="bug_1683">1683</a> - Created a new Template Theme (Tempo) and added Tempo, Fusion, and Marquee to the main download<br />
+</p>
+<h4 id="milestone_16-05-0_bugfix_secure">[Security Fixes]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+- No Security fixes or patches for this release.
+</p>
+<h4 id="milestone_16-05-0_bugfix">[Fixes/Maintenance]</h4>
+<p style="margin-left: 10px; margin-top: 5px;">
+ 
+<!-- Log for bug # 1677 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1677" onclick="window.open(this.href); return false;" id="bug_1677">1677</a> - Fixed not being able to renew/upgrade listings<br />
+ 
+<!-- Log for bug # 1680 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1680" onclick="window.open(this.href); return false;" id="bug_1680">1680</a> - Fixed Export Users writing wrong data for Country/State fields<br />
+ 
+<!-- Log for bug # 1682 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1682" onclick="window.open(this.href); return false;" id="bug_1682">1682</a> - Fixed a case where new Attention Getter banners could appear twice<br />
+ 
+<!-- Log for bug # 1676 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1676" onclick="window.open(this.href); return false;" id="bug_1676">1676</a> - Fixed using the same module multiple times on the same page could show the wrong data<br />
+ 
+<!-- Log for bug # 1678 -->
+<a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1678" onclick="window.open(this.href); return false;" id="bug_1678">1678</a> - Fixed classified details appearing twice in admin Order Item summary page<br />
+</p>
+<h4 id="milestone_16-05-0_templates">[Template Changes]</h4>
+<p style="font-style: italic;">
+	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
+	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
+	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	to find if you need to make any template changes during an update.
+</p>
+<fieldset class="code_legend">
+	<legend>Legend</legend>
+	<p>Note the following about highlighted lines you will see in this section.</p>
+	<pre class="code"><span class="add">This is a line that has been <strong>Added</strong></span>
+<span class="rem">This is a line that has been <strong>Removed</strong></span>
+<span>This is a line that has <strong>not changed</strong>.</span></pre>
+</fieldset>
+
+<ol style="clear: both;">
+			<li>
+							In file <strong>main_page/browsing_sub/featured_gallery.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 49, <strong>FIND:</strong><br />
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span class="rem">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span class="add">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 49, make the following changes:
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span class="rem">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span class="add">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>main_page/browsing_sub/gallery.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 70, <strong>FIND:</strong><br />
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span class="rem">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span class="add">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 70, make the following changes:
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span class="rem">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span class="add">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>main_page/browsing_sub/grid.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 250, <strong>FIND:</strong><br />
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span class="rem">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span class="add">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 250, make the following changes:
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span class="rem">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span class="add">				{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>main_page/browsing_sub/list.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 95, <strong>FIND:</strong><br />
+							<pre class="code"><span>		{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span class="rem">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span>		{if $listing.icons.addon_icons}</span>
+<span>			{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>		{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span class="add">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span>		{if $listing.icons.addon_icons}</span>
+<span>			{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 95, make the following changes:
+							<pre class="code"><span>		{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span class="rem">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span class="add">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span>		{if $listing.icons.addon_icons}</span>
+<span>			{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>main_page/browsing_sub/show_all_fields/gallery.tpl</strong>
+								<br /><br /><ol style="list-style-type: upper-alpha;">											<li>						<div class="findReplace" style="display: none;">
+							Near line 48, <strong>FIND:</strong><br />
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				</span>
+<span class="rem">				{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				</span>
+<span class="add">				{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 48, make the following changes:
+							<pre class="code"><span>				{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				</span>
+<span class="rem">				{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span class="add">				{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>				</span>
+<span>				{if $listing.icons.addon_icons}</span>
+<span>					{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 64, <strong>FIND:</strong><br />
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span class="rem">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span class="add">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 64, make the following changes:
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span class="rem">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span class="add">			{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						</li>									</ol>					</li>
+			<li>
+							In file <strong>main_page/browsing_sub/show_all_fields/list.tpl</strong>
+								<br /><br /><ol style="list-style-type: upper-alpha;">											<li>						<div class="findReplace" style="display: none;">
+							Near line 37, <strong>FIND:</strong><br />
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			</span>
+<span class="rem">			{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			</span>
+<span class="add">			{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 37, make the following changes:
+							<pre class="code"><span>			{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			</span>
+<span class="rem">			{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span class="add">			{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>			</span>
+<span>			{if $listing.icons.addon_icons}</span>
+<span>				{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 53, <strong>FIND:</strong><br />
+							<pre class="code"><span>		{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span class="rem">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span>		{if $listing.icons.addon_icons}</span>
+<span>			{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>		{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span class="add">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span>		{if $listing.icons.addon_icons}</span>
+<span>			{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 53, make the following changes:
+							<pre class="code"><span>		{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span class="rem">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span class="add">		{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>		</span>
+<span>		{if $listing.icons.addon_icons}</span>
+<span>			{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						</li>									</ol>					</li>
+			<li>
+							In file <strong>system/browsing/common/gallery_view.tpl</strong>
+								<br /><br /><ol style="list-style-type: upper-alpha;">											<li>						<div class="findReplace" style="display: none;">
+							Near line 47, <strong>FIND:</strong><br />
+							<pre class="code"><span>									{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									</span>
+<span class="rem">									{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									</span>
+<span>									{if $listing.icons.addon_icons}</span>
+<span>										{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>									{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									</span>
+<span class="add">									{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									</span>
+<span>									{if $listing.icons.addon_icons}</span>
+<span>										{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 47, make the following changes:
+							<pre class="code"><span>									{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									</span>
+<span class="rem">									{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span class="add">									{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>									</span>
+<span>									{if $listing.icons.addon_icons}</span>
+<span>										{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						</li>											<li>						<div class="findReplace" style="display: none;">
+							Near line 63, <strong>FIND:</strong><br />
+							<pre class="code"><span>								{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								</span>
+<span class="rem">								{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								</span>
+<span>								{if $listing.icons.addon_icons}</span>
+<span>									{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>								{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								</span>
+<span class="add">								{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								</span>
+<span>								{if $listing.icons.addon_icons}</span>
+<span>									{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 63, make the following changes:
+							<pre class="code"><span>								{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;div&gt;&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								</span>
+<span class="rem">								{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span class="add">								{if $listing.icons.attention_getter}&lt;div&gt;&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;{/if}</span>
+<span>								</span>
+<span>								{if $listing.icons.addon_icons}</span>
+<span>									{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						</li>									</ol>					</li>
+			<li>
+							In file <strong>system/browsing/common/grid_view.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 261, <strong>FIND:</strong><br />
+							<pre class="code"><span>								{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								</span>
+<span class="rem">								{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								</span>
+<span>								{if $listing.icons.addon_icons}</span>
+<span>									{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>								{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								</span>
+<span class="add">								{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								</span>
+<span>								{if $listing.icons.addon_icons}</span>
+<span>									{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 261, make the following changes:
+							<pre class="code"><span>								{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								</span>
+<span class="rem">								{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span class="add">								{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>								</span>
+<span>								{if $listing.icons.addon_icons}</span>
+<span>									{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+																				</li>
+			<li>
+							In file <strong>system/browsing/common/list_view.tpl</strong>
+																										<br /><br />
+												<div class="findReplace" style="display: none;">
+							Near line 57, <strong>FIND:</strong><br />
+							<pre class="code"><span>						{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						</span>
+<span class="rem">						{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						</span>
+<span>						{if $listing.icons.addon_icons}</span>
+<span>							{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+							<br />
+							<strong>Replace With:</strong>
+							<pre class="code"><span>						{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						</span>
+<span class="add">						{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						</span>
+<span>						{if $listing.icons.addon_icons}</span>
+<span>							{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+						<div class="inline" style="display: none;">
+							Near line 57, make the following changes:
+							<pre class="code"><span>						{if $listing.icons.reserve_not_met &amp;&amp; $cfg.icons.reserve_not_met}&lt;img src=&quot;{$cfg.icons.reserve_not_met}&quot; class=&quot;reserve_not_met_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						{if $listing.icons.no_reserve &amp;&amp; $cfg.icons.no_reserve}&lt;img src=&quot;{$cfg.icons.no_reserve}&quot; class=&quot;no_reserve_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						</span>
+<span class="rem">						{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span class="add">						{if $listing.icons.attention_getter}&lt;img src=&quot;{$listing.attention_getter_url}&quot; class=&quot;attention_getter_icon attention-getter-inline&quot; alt=&quot;&quot; /&gt;{/if}</span>
+<span>						</span>
+<span>						{if $listing.icons.addon_icons}</span>
+<span>							{foreach $listing.icons.addon_icons as $addon =&gt; $icon}</span></pre>
+						</div>
+																				</li>
+	</ol>
+<!-- /AUTO changelog 16.05.0 --><!-- /AUTO CHANGELOGS -->
+
+<a href="../changelogs.php">Other Changelogs</a>
+</body>
+</html> 

@@ -1,0 +1,22 @@
+/* 7.5.3-36-gea36ae7 */
+
+/*
+CSS specifically for category stuff
+*/
+
+.cat-attached-icons {
+	float: right;
+	vertical-align: middle;
+}
+
+.cat-attached-icons img {
+	cursor: help;
+}
+
+.cat-icon-disabled {
+	opacity: 0.1;
+}
+
+.cat-name {
+	font-size: 14px;
+}

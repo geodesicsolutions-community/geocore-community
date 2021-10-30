@@ -1,0 +1,57 @@
+<? //config.php
+/*
+ Welcome to the Geodesic Software Configuration File. This file is the link 
+ between the php files that run the functions of the software and your 
+ database which stores all of the information. 
+
+We have organized the file in sections. Please follow the below carefully to 
+ensure a successful installation
+*/
+
+
+// STEP 1 ################### MySQL Database Settings #######################
+/*
+The information below is for the main installation. For configuring an instalation with the API
+see further below.
+*/
+
+$db_host = "your_database_hostname";//location of sql host - usually localhost
+$db_username = "your_database_user";//username used to connect to database
+$db_password = "database_user_password";//password used to connect to database
+$database = "your_database_name";//name of database
+
+//########################## MySQL Database Settings #######################
+
+// STEP 2 ################### Database Connection Type #######################
+/*
+OPTIONAL
+Uncomment the below line($persistent_connections = 1) if you want to use
+persistent database connections.
+Some hosts do not allow this so only do so if you are sure that you want
+to use this type of connection. To uncomment, remove the two slashes.
+*/
+
+//$persistent_connections = 1;
+
+############################# Database Connection Type #######################
+
+// STEP 3 ################### API MySQL Database Settings #######################
+/*
+ONLY COMPLETE IF USING THE API.
+The information below is for the installation of the API. For configuring an instalation with the API
+see further below.
+*/
+
+$api_db_host = ""; //location of sql host - usually localhost
+$api_db_username = ""; //username used to connect to database
+$api_db_password = ""; //password used to connect to database
+$api_database = ""; //name of database api tables are stored in
+
+//########################## API MySQL Database Settings #######################
+
+//////////////////////// DO NOT EDIT BELOW THIS LINE ////////////////////////
+
+$product_type = 1;
+$classauctions = 0;
+
+?>

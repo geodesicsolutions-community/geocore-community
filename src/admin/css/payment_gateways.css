@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+.head TR TD, .body TR TD {
+	text-align: center;
+}
+
+.body {
+	margin: 0px;
+	padding: 0px;
+}
+.body TD {
+	padding: 0px 5px;
+	vertical-align: middle;
+}
+
+.default_column {
+	width: 80px;	
+}
+
+.enabled_column {
+	width: 80px;	
+}
+
+.body .name_column {
+	/* fluid width */
+	text-align: left;
+	vertical-align: middle;
+}
+
+.order_column {
+	width: 80px;	
+}
+
+.action_column {
+	width: 150px;	
+}
+
+.configBox
+{
+	border: 1px solid #EAEAEA;
+	margin: 5px 5px 5px 8px;
+	background-color: white;
+}

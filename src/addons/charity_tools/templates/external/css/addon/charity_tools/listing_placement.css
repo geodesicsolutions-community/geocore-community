@@ -1,0 +1,14 @@
+/* 7.2beta1-41-gf0aeb76 */
+
+#charitable_badges {
+	margin: 0;
+	padding: 0;
+}
+
+#charitable_badges li {
+	list-style: none;
+	display: block;
+	width: 200px;
+	float: left;
+	text-align: left;
+}

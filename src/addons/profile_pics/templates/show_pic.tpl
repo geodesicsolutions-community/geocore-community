@@ -1,0 +1,1 @@
+<img src="{$pic_data}" alt="{$pic_name}" class="profile-pic" {if $width or $height}style="{if $width}width:{$width}px;{/if}{if $height}height:{$height}px;{/if}"{/if}/>

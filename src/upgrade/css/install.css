@@ -1,0 +1,437 @@
+@CHARSET "UTF-8";
+
+/* 7.5.3-36-gea36ae7 */
+
+body {
+	height: 100%;
+}
+
+#outerBox {
+	position: relative;
+	margin: 0 auto;
+	display: inline-block;
+}
+
+.body_txt1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none
+}
+
+.body_txt2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none
+}
+
+.congrats {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #0984FF;
+	text-decoration: none
+}
+
+.admin_login1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #000066;
+	text-decoration: none
+}
+
+.admin_login2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #000066;
+	text-decoration: none
+}
+
+.admin_login3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #000066;
+	text-decoration: none
+}
+
+.admin_login4 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none
+}
+
+.admin_login5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #007CF9;
+	text-decoration: none
+}
+
+.admin_login6 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #C3262D;
+	text-decoration: none
+}
+
+.admin_links {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: underline
+}
+
+.result {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #666;
+	text-decoration: none;
+	text-align: center;
+	border: 1px #888 solid;
+	border-right: none;
+	border-top: none;
+	margin: 0px;
+	padding: 2px;
+}
+
+.req {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #333;
+	text-decoration: none;
+	border: 1px #888 solid;
+	border-right: none;
+	border-top: none;
+	margin: 0px;
+	padding: 2px;
+}
+
+.setting {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #333;
+	text-decoration: none;
+	border: 1px #888 solid;
+	border-top: none;
+	margin: 0px;
+	padding: 2px;
+}
+
+.heading1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-style: normal;
+	font-weight: bold;
+	background: #EFF5F9 url('../images/bg_heading1.gif') repeat-x top left;
+	color: #FFF;
+	text-decoration: none;
+	padding: 3px;
+	border: 1px solid #006699;
+}
+
+.heading2,.heading2a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	background: #1382B7 url('../images/bg_heading2.gif') repeat-x top left;
+	color: #FFF;
+	text-decoration: none;
+	border: 1px solid #006699;
+	padding: 2px;
+}
+
+.heading2a {
+	border-right: 1px #006699 solid;
+}
+
+.heading3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	background: #1382B7 url('../images/bg_heading2.gif') repeat-x top left;
+	color: #FFF;
+	text-decoration: none;
+	border: 1px solid #006699;
+	padding: 3px;
+}
+
+.failed {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	color: #EA1D25;
+}
+
+.passed {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	color: green;
+}
+
+.not_needed {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}
+
+.requirementNotice {
+	background-color: #CCD9FF;
+	border: 2px dashed #3366FF;
+	padding: 10px;
+	margin: 10px;
+	vertical-align: middle;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+}
+
+body {
+	color: #333;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+	background-color: FFF;
+	text-align: center;
+}
+
+ul {
+	list-style-image: url(../images/arrowbullet_menu.gif);
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 2em;
+	font-weight: bold;
+	color: #FFF;
+	position: relative;
+	left: -12px;
+}
+
+ul li * {
+	position: relative;
+	top: -3px;
+}
+
+ul a {
+	color: #FFFFFF;
+}
+
+.login_error {
+	width: 580px;
+	margin-bottom: 5px;
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: #CC0033;
+	text-align: center;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a.login_link {
+	color: #0B709F;
+}
+
+a.login_link:active {
+	color: #0B709F;
+}
+
+a.login_link:visited {
+	color: #0B709F;
+}
+
+
+
+#login_box {
+	width: 800px;
+	border: 1px solid #006699;
+	padding: 2px;
+	padding-left: 0px;
+	background-repeat: repeat-x;
+}
+
+#login_sub {
+	z-index: 100;
+	background: #EFF5F9 url('../images/logo_license_screen.jpg') no-repeat 2px 0px;
+}
+
+#login_left { 
+	float: left;
+	width: 135px;
+}
+
+#login_left_list {
+	z-index: 10;
+	font-size: 14px;
+	color: #FFFFFF;
+	text-align: center;
+	padding-left: 8px;
+	margin-top: 80px;
+}
+
+#login_right {
+	background: #EFF5F9 url('../images/install_screen_bg_rt.jpg') repeat-x
+		top left;
+	width: 660px;
+	float: right;
+}
+
+#login_product_name {
+	margin: 0px;
+	font-size: 26px;
+	text-align: center;
+	color: #FFF;
+	padding-top: 5px;
+}
+
+#login_software_type {
+	margin: 0px;
+	font-size: 14px;
+	text-align: center;
+	color: #FFF;
+}
+
+#login_form_fields {
+	width: 570px;
+	margin-top: 20px;
+	text-align: center;
+	margin-left: 45px;
+}
+
+#login_username_block {
+	font-size: 14px;
+}
+
+#login_password_block {
+	margin-top: 5px;
+	font-size: 14px;
+}
+
+#login_copyright {
+	margin-top: 29px;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: center;
+	clear: both;
+}
+
+#license_tip {
+	width: 260px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	color: #000000;
+	text-align: center;
+}
+
+#license_help {
+	margin: 30px 5px 0 5px;
+	font-weight: normal;
+	font-size: 14px;
+	color: #000;
+	text-align: left;
+}
+
+#license_data {
+	margin: 10px 5px 0 5px;
+	border: 1px solid #000000;
+	padding: 5px;
+	text-align: left;
+	font-size: 12px;
+	color: #000000;
+}
+
+#login_bottom {
+	clear: both;
+}
+
+/*login button*/
+#submit_button {
+	margin-top: 5px;
+	text-align: center;
+}
+
+#submit_button a {
+	color: #FFF;
+	font-family: Arial, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;
+	width: 80px;
+	height: 24px;
+	padding: 0px;
+	display: inline-block;
+	background-image: url('../images/btn_login.jpg');
+	/*EDIT PER STYLESHEET*/
+	background-repeat: no-repeat;
+	background-position: center left;
+	font-size: 16px;
+}
+#license_agree {
+	margin: 10px 5px 0 5px;
+	border: 1px solid #000000;
+	padding: 5px;
+	text-align: left;
+	font-size: 12px;
+	color: #000000;
+	font-weight: normal;
+}
+#license_agree input {
+	width: auto;
+}
+
+#submit_button a:hover,#submit_button a:active {
+	background-position: top left;
+}
+
+#submit_button a:selected {
+	background-position: bottom left;
+}
+
+.interactiveBox {
+	border: 1px solid #000000;
+	margin: 10px;
+	padding: 15px;
+	text-align: left;
+}

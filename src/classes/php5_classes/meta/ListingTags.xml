@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListingTags>
+	<general>
+		<category_breadcrumb>
+			<type>tag</type>
+			<only></only>
+			<desc>
+				Displays a breadcrumb for the current category and parent categories this listing is in.
+			</desc>
+		</category_breadcrumb>
+		<category_tree>
+			<type>tag</type>
+			<only></only>
+			<desc>
+				The current category as well as links to parent categories this listing is in, seperated by >, useful
+				for places that do not have a lot of formatting.  Note that category_breadcrumb is recommended when
+				using this in a normal page.
+			</desc>
+		</category_tree>
+		<title>
+			<type>field</type>
+			<only></only>
+			<desc>The listing title.</desc>
+		</title>
+		<classified_id_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the listing id.</desc>
+		</classified_id_label>
+		<classified_id>
+			<type>field</type>
+			<only></only>
+			<desc>The listing ID data.</desc>
+		</classified_id>
+		<canonical_url>
+			<type>field</type>
+			<only></only>
+			<desc>The full canonical URL for the listing, typically used in canonical link tag in the head section for search engines.</desc>
+		</canonical_url>
+		<viewed_count_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the count of the number of times the listing has been viewed.</desc>
+		</viewed_count_label>
+		<viewed_count>
+			<type>field</type>
+			<only></only>
+			<desc>The data for the number of times the listing has been viewed.</desc>
+		</viewed_count>
+		<seller_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the sellers username field.</desc>
+		</seller_label>
+		<seller>
+			<type>tag</type>
+			<only></only>
+			<desc>Sellers username data.</desc>
+		</seller>
+		<verified_account>
+			<type>tag</type>
+			<only></only>
+			<desc>Shows the "Verified" icon if the seller uses a verified account.</desc>
+		</verified_account>
+		<member_since>
+			<type>field</type>
+			<only></only>
+			<desc>This is the date the seller first registered.</desc>
+		</member_since>
+		<date_started_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the date the listing was started.</desc>
+		</date_started_label>
+		<date_started>
+			<type>field</type>
+			<only></only>
+			<desc>Data for the date the listing was started.</desc>
+		</date_started>
+		<address_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the address.</desc>
+		</address_label>
+		<address_data>
+			<type>field</type>
+			<only></only>
+			<desc>Address data for this listing</desc>
+		</address_data>
+		<city_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the city.</desc>
+		</city_label>
+		<city_data>
+			<type>field</type>
+			<only></only>
+			<desc>City data for this listing.</desc>
+		</city_data>
+		<state_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the state.</desc>
+		</state_label>
+		<state_data>
+			<type>field</type>
+			<only></only>
+			<desc>State data for this listing.</desc>
+		</state_data>
+		<country_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the country.</desc>
+		</country_label>
+		<country_data>
+			<type>field</type>
+			<only></only>
+			<desc>Country data for this listing.</desc>
+		</country_data>
+		<zip_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the zip.</desc>
+		</zip_label>
+		<zip_data>
+			<type>field</type>
+			<only></only>
+			<desc>Zip data for this listing.</desc>
+		</zip_data>
+		<primary_region_tree>
+			<type>tag</type>
+			<only></only>
+			<desc>Displays the full primary region tree (breadcrumb) for the listing.</desc>
+		</primary_region_tree>
+		<additional_region_trees>
+			<type>tag</type>
+			<only></only>
+			<desc>Displays all the additional region trees (breadcrumbs) set for a listing not including the
+				primary region, each one separated by an HTML line break.</desc>
+		</additional_region_trees>
+		<all_region_trees>
+			<type>tag</type>
+			<only></only>
+			<desc>Combination of the primary region tree, and all additional region trees, each
+				tree (region breadcrumb) seperated by an HTML line break.</desc>
+		</all_region_trees>
+		<payment_options_label>
+			<type>label</type>
+			<only></only>
+			<desc>This is the label for the payment options the seller will accept for this listing.</desc>
+		</payment_options_label>
+		<payment_options>
+			<type>field</type>
+			<only></only>
+			<desc>This is the list of payment options the seller will accept for this listing.</desc>
+		</payment_options>
+		<price_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the price.</desc>
+		</price_label>
+		<price>
+			<type>field</type>
+			<only>classifieds</only>
+			<desc>Price and currency information for this listing.</desc>
+		</price>
+		<public_email_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the publically exposed email (if shown).</desc>
+		</public_email_label>
+		<public_email>
+			<type>field</type>
+			<only></only>
+			<desc>Publically exposed email data for this listing (if shown).</desc>
+		</public_email>
+		<phone_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the phone (if shown).</desc>
+		</phone_label>
+		<phone_data>
+			<type>field</type>
+			<only></only>
+			<desc>Phone data for this listing (if shown).</desc>
+		</phone_data>
+		<phone2_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the phone 2 (if shown).</desc>
+		</phone2_label>
+		<phone2_data>
+			<type>field</type>
+			<only></only>
+			<desc>Phone 2 data for this listing (if shown).</desc>
+		</phone2_data>
+		<fax_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the fax label (if shown).</desc>
+		</fax_label>
+		<fax_data>
+			<type>field</type>
+			<only></only>
+			<desc>Fax data for this ad (if shown).</desc>
+		</fax_data>
+		<url_link_1>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to link to the url within the data field.  The text (html,image) of the link is determined within the listing display page text administration.  The link the client inserts into the field while placing the listing will determine where the link goes to.</desc>
+		</url_link_1>
+		<url_link_1_href>
+			<type>field</type>
+			<only></only>
+			<desc>This is URL used for the URL link 1, without the extra HTML or the link text.  It is just the URL itself.</desc>
+		</url_link_1_href>
+		<url_link_2>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to link to the url within the data field.  The text (html,image) of the link is determined within the listing display page text administration.  The link the client inserts into the field while placing the listing will determine where the link goes to.</desc>
+		</url_link_2>
+		<url_link_2_href>
+			<type>field</type>
+			<only></only>
+			<desc>This is URL used for the URL link 2, without the extra HTML or the link text.  It is just the URL itself.</desc>
+		</url_link_2_href>
+		<url_link_3>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to link to the url within the data field.  The text (html,image) of the link is determined within the listing display page text administration.  The link the client inserts into the field while placing the listing will determine where the link goes to.</desc>
+		</url_link_3>
+		<url_link_3_href>
+			<type>field</type>
+			<only></only>
+			<desc>This is URL used for the URL link 3, without the extra HTML or the link text.  It is just the URL itself.</desc>
+		</url_link_3_href>
+		<description_label>
+			<type>label</type>
+			<only></only>
+			<desc>Label text for the description.</desc>
+		</description_label>
+		<description>
+			<type>field</type>
+			<only></only>
+			<desc>Description data for this listing.</desc>
+		</description>
+		<image_block>
+			<type>tag</type>
+			<only></only>
+			<desc>The images for this listing.  This is the block of all images attached to this listing.  You can configure the number of columns the images should be and the size of the images through the admin tool in listing configuration &gt; images configure.</desc>
+		</image_block>
+		<image_block_large>
+			<type>tag</type>
+			<only></only>
+			<desc>The full-sized images block for this listing.  Designed to be used in combination with the {$image_block_large_link} tag that you would place near the top of the template, then put this tag near the bottom.</desc>
+		</image_block_large>
+		<image_block_large_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This will display a link that looks similar to "See all ## Photos" where ## is automatically replaced with the number of images for the listing.  This is designed to be used right below the lead picture, then use the large photo block lower in the template somewhere.</desc>
+		</image_block_large_link>
+		<lead_picture>
+			<type>tag</type>
+			<only></only>
+			<desc>Placing this tag will display the first image attached to the listing by itself within the listing display template.</desc>
+		</lead_picture>
+		<offsite_videos_title>
+			<type>label</type>
+			<only></only>
+			<desc>Text message that can be used for the video section title.</desc>
+		</offsite_videos_title>
+		<offsite_videos_block>
+			<type>tag</type>
+			<only></only>
+			<desc>The Youtube videos for this listing.  This is the block of all the offsite (Youtube) videos attached to this listing.</desc>
+		</offsite_videos_block>
+		<notify_friend_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link allowing the client to send a notification to a friend about the current listing.</desc>
+		</notify_friend_link>
+		<message_to_seller_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link allowing the client to send a message to the seller of the listing.</desc>
+		</message_to_seller_link>
+		<favorites_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to add the current listing to their favorites list in their user home page.</desc>
+		</favorites_link>
+		<sellers_other_ads_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to view the current sellers other listings.</desc>
+		</sellers_other_ads_link>
+		<full_images_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to view all images at their full size on the same page.</desc>
+		</full_images_link>
+		<print_friendly_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to view the listing details page in a page that is more print friendly.</desc>
+		</print_friendly_link>
+		<image_slideshow_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link to view image slideshow for the listing, starting from image 1.</desc>
+		</image_slideshow_link>
+		<sponsored_by>
+			<type>tag</type>
+			<only></only>
+			<desc>This is where the sponsored by html is placed within sellers listings where that sellers group has "sponsered by" html has been placed.  If none of your groups use the sponsored by html fields this tag does not need to be placed within the listing display template.</desc>
+		</sponsored_by>
+		<previous_ad_link>
+			<type>tag</type>
+			<only></only>
+			<desc>Link that will display in the listing allowing the user to see the previous listing within the category.</desc>
+		</previous_ad_link>
+		<next_ad_link>
+			<type>tag</type>
+			<only></only>
+			<desc>Link that will display in the listing allowing the user to see the next listing within the category.</desc>
+		</next_ad_link>
+		<mapping_link>
+			<type>tag</type>
+			<only></only>
+			<desc>Google Maps link to create a map to the location entered for this listing.</desc>
+		</mapping_link>
+		<mapping_link_alternate>
+			<type>tag</type>
+			<only></only>
+			<desc>Same as mapping_link, but uses Mapquest instead of Google Maps (not recommended for non-US addresses)</desc>
+		</mapping_link_alternate>
+		<mapping_location>
+			<type>field</type>
+			<only></only>
+			<desc>Address used in Mapquest link to create a map to the location entered for this listing.</desc>
+		</mapping_location>
+		<additional_text_1>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_1>
+		<additional_text_2>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_2>
+		<additional_text_3>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_3>
+		<additional_text_4>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_4>
+		<additional_text_5>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_5>
+		<additional_text_6>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_6>
+		<additional_text_7>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_7>
+		<additional_text_8>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_8>
+		<additional_text_9>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_9>
+		<additional_text_10>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_10>
+		<additional_text_11>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_11>
+		<additional_text_12>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_12>
+		<additional_text_13>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_13>
+		<additional_text_14>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_14>
+		<additional_text_15>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_15>
+		<additional_text_16>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_16>
+		<additional_text_17>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_17>
+		<additional_text_18>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_18>
+		<additional_text_19>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_19>
+		<additional_text_20>
+			<type>label</type>
+			<only></only>
+			<desc>Additional text used to display information on your details templates.</desc>
+		</additional_text_20>
+		<vote_on_ad_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to vote and leave comments about the current listing.</desc>
+		</vote_on_ad_link>
+		<show_ad_vote_comments_link>
+			<type>tag</type>
+			<only></only>
+			<desc>This is the link text allowing the user to view the votes and comments attached to the current listing.</desc>
+		</show_ad_vote_comments_link>
+		<optional_field_1_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_1_label>
+		<optional_field_1>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_1>
+		<optional_field_2_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_2_label>
+		<optional_field_2>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_2>
+		<optional_field_3_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_3_label>
+		<optional_field_3>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_3>
+		<optional_field_4_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_4_label>
+		<optional_field_4>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_4>
+		<optional_field_5_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_5_label>
+		<optional_field_5>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_5>
+		<optional_field_6_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_6_label>
+		<optional_field_6>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_6>
+		<optional_field_7_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_7_label>
+		<optional_field_7>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_7>
+		<optional_field_8_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_8_label>
+		<optional_field_8>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_8>
+		<optional_field_9_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_9_label>
+		<optional_field_9>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_9>
+		<optional_field_10_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_10_label>
+		<optional_field_10>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_10>
+		<optional_field_11_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_11_label>
+		<optional_field_11>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_11>
+		<optional_field_12_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_12_label>
+		<optional_field_12>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_12>
+		<optional_field_13_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_13_label>
+		<optional_field_13>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_13>
+		<optional_field_14_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_14_label>
+		<optional_field_14>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_14>
+		<optional_field_15_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_15_label>
+		<optional_field_15>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_15>
+		<optional_field_16_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_16_label>
+		<optional_field_16>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_16>
+		<optional_field_17_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_17_label>
+		<optional_field_17>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_17>
+		<optional_field_18_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_18_label>
+		<optional_field_18>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_18>
+		<optional_field_19_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_19_label>
+		<optional_field_19>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_19>
+		<optional_field_20_label>
+			<type>label</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_20_label>
+		<optional_field_20>
+			<type>field</type>
+			<only></only>
+			<desc></desc>
+		</optional_field_20>
+		<voteSummary_votes>
+			<type>tag</type>
+			<only></only>
+			<desc>Number of votes in the leading vote category for this listing</desc>
+		</voteSummary_votes>
+		<voteSummary_total>
+			<type>tag</type>
+			<only></only>
+			<desc>Total number of votes in all vote categories for this listing</desc>
+		</voteSummary_total>
+		<voteSummary_percent>
+			<type>tag</type>
+			<only></only>
+			<desc>Number of votes in the leading vote category, expressed as a percentage of the total number of votes</desc>
+		</voteSummary_percent>
+		<voteSummary_text>
+			<type>tag</type>
+			<only></only>
+			<desc>Text (by default, a "thumbs up" or "thumbs down" image) used on the show votes page to describe the leading vote category</desc>
+		</voteSummary_text>
+		<listing_tags_links>
+			<type>tag</type>
+			<only></only>
+			<desc>
+				A list of all "listing tags", each one links to page showing listings that have that tag.
+			</desc>
+		</listing_tags_links>
+		<listing_tags_list>
+			<type>tag</type>
+			<only></only>
+			<desc>
+				A list of all "listing tags", without links.  This is suitable for use in META tags if desired.
+			</desc>
+		</listing_tags_list>
+		<user_rating>
+			<type>tag</type>
+			<only></only>
+			<desc>
+				Allows users to rate each other on a 5-star scale. Displays selected ratings, or a user's average rating from all users if not individually rated yet.
+			</desc>
+		</user_rating>
+	</general>
+	<auctions>
+		<bid_history_link>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the link text allowing the user to view the bid history of the current auction.  You can turn off and on the visibility of this link while the auction is live within the admin.  The link will be visible when the auction ends</desc>
+		</bid_history_link>
+		<reserve>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>This displays text for "reserve met" or "reserve not met".</desc>
+		</reserve>
+		<high_bidder_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for the high bidder.</desc>
+		</high_bidder_label>
+		<high_bidder>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the high bidder's username.</desc>
+		</high_bidder>
+		<winning_dutch_bidders_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for the winning bidder on a dutch auction.</desc>
+		</winning_dutch_bidders_label>
+		<winning_dutch_bidders>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the winning bidder's user id on a dutch auction.</desc>
+		</winning_dutch_bidders>
+		<num_bids>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the number of bids on the item.</desc>
+		</num_bids>
+		<num_bids_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for the number of bids.</desc>
+		</num_bids_label>
+		<quantity_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label for the item quantity.</desc>
+		</quantity_label>
+		<quantity>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the quantity of items.</desc>
+		</quantity>
+		<price_for_how_many>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>Display &quot;for each item&quot; if price is for a single item,
+				or there is only one item, or &quot;for lot of ##&quot; if the price
+				applies to the entire quantity, and there is more than one.  Designed
+				to be used directly after or below the current price, minimum bid,
+				buy now price, or any other prices like optional field prices that
+				add cost.</desc>
+		</price_for_how_many>
+		<auction_type_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for the auction type.</desc>
+		</auction_type_label>
+		<auction_type_data>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the auction type.</desc>
+		</auction_type_data>
+		<auction_type_help>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Help link for the auction types.</desc>
+		</auction_type_help>
+		<buy_now_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for buy now.</desc>
+		</buy_now_label>
+		<buy_now_data>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the buy now data.  Only shows base cost, does not include any buyer selected option costs.</desc>
+		</buy_now_data>
+		<buy_now_price_adjusted>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This shows the buy now price, and will adjust according to any buyer options selected (unlike buy_now_data which will show only base cost)</desc>
+		</buy_now_price_adjusted>
+		<buy_now_link>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the link to buy now.</desc>
+		</buy_now_link>
+		<date_ended_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for date ended.</desc>
+		</date_ended_label>
+		<date_ended>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the date ended and appears after the auction has been closed. Note that it would not work during browsing since browsing does not show closed auctions.</desc>
+		</date_ended>
+		<time_remaining_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for time left.</desc>
+		</time_remaining_label>
+		<time_remaining>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the time left in the current auction.</desc>
+		</time_remaining>
+		<minimum_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for minimum bid.</desc>
+		</minimum_label>
+		<minimum_bid>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the minimum bid.</desc>
+		</minimum_bid>
+		<starting_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for the starting bid.</desc>
+		</starting_label>
+		<starting_bid>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the starting bid.</desc>
+		</starting_bid>
+		<current_bid>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This is the current (most recently placed) bid.</desc>
+		</current_bid>
+		<seller_rating_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for the seller rating.</desc>
+		</seller_rating_label>
+		<seller_rating>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the seller rating.</desc>
+		</seller_rating>
+		<feedback_link>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the link to the feedback page.</desc>
+		</feedback_link>
+		<seller_number_rates_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Label text for the seller's feedback score.</desc>
+		</seller_number_rates_label>
+		<seller_number_rates>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This is the seller's feedback score.</desc>
+		</seller_number_rates>
+		<seller_rating_scale_explanation>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>Explanations of seller rating scale.</desc>
+		</seller_rating_scale_explanation>
+		<bid_start_date_label>
+			<type>label</type>
+			<only>auctions</only>
+			<desc>This displays label for the date the auction will start if there is a date set for this auction.</desc>
+		</bid_start_date_label>
+		<bid_start_date>
+			<type>field</type>
+			<only>auctions</only>
+			<desc>This displays the date the auction will start if there is a date set for this auction.</desc>
+		</bid_start_date>
+		<make_bid_link>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This displays the link to make a bid on the auction.  It is only displayed when the auction is live.</desc>
+		</make_bid_link>
+		<on_site_purchase_link>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This displays a link to "Pay Now" to the winning bidder.  This will only display something on auctions that are properly configured to use an on-site payment (such as Paypal), that are closed, and only to the winning bidder or admin user.  Note that it displays to the admin user so that the admin can see what it looks like, for design customization purposes.</desc>
+		</on_site_purchase_link>
+		<buyer_option_selections>
+			<type>tag</type>
+			<only>auctions</only>
+			<desc>This displays the buyer options if there are any set for the auction.  It will allow the visitor to choose the various options the seller has created for the item (for instance, if it was selling a shirt, there might be shirt sizes or color options).  This will let the visitor select the various options and it will update the price.</desc>
+		</buyer_option_selections>
+	</auctions>
+	<seller>
+		<seller_id>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's user ID # (or 0 if placed anonymously)</desc>
+		</seller_id>
+		<seller_username>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's Username</desc>
+		</seller_username>
+		<seller_first_name>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's first name pulled from sellers registration data.</desc>
+		</seller_first_name>
+		<seller_last_name>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's last name pulled from sellers registration data.</desc>
+		</seller_last_name>
+		<seller_url>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's url pulled from sellers registration data.</desc>
+		</seller_url>
+		<seller_address>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's address (line 1 and 2) pulled from sellers registration data.</desc>
+		</seller_address>
+		<seller_city>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's city pulled from sellers registration data.</desc>
+		</seller_city>
+		<seller_state>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's state pulled from sellers registration data.</desc>
+		</seller_state>
+		<seller_country>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's country pulled from sellers registration data.</desc>
+		</seller_country>
+		<seller_zip>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's zip pulled from sellers registration data.</desc>
+		</seller_zip>
+		<seller_phone>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's phone pulled from sellers registration data.</desc>
+		</seller_phone>
+		<seller_phone2>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's phone2 pulled from sellers registration data.</desc>
+		</seller_phone2>
+		<seller_fax>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's fax pulled from sellers registration data.</desc>
+		</seller_fax>
+		<seller_company_name>
+			<type>field</type>
+			<only></only>
+			<desc>Seller's company name pulled from sellers registration data.</desc>
+		</seller_company_name>
+		<verified_account>
+			<type>tag</type>
+			<only></only>
+			<desc>Shows the "Verified" icon if the seller uses a verified account.</desc>
+		</verified_account>
+		<seller_optional_1>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 1 pulled from sellers registration data.</desc>
+		</seller_optional_1>
+		<seller_optional_2>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 2 pulled from sellers registration data.</desc>
+		</seller_optional_2>
+		<seller_optional_3>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 3 pulled from sellers registration data.</desc>
+		</seller_optional_3>
+		<seller_optional_4>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 4 pulled from sellers registration data.</desc>
+		</seller_optional_4>
+		<seller_optional_5>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 5 pulled from sellers registration data.</desc>
+		</seller_optional_5>
+		<seller_optional_6>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 6 pulled from sellers registration data.</desc>
+		</seller_optional_6>
+		<seller_optional_7>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 7 pulled from sellers registration data.</desc>
+		</seller_optional_7>
+		<seller_optional_8>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 8 pulled from sellers registration data.</desc>
+		</seller_optional_8>
+		<seller_optional_9>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 9 pulled from sellers registration data.</desc>
+		</seller_optional_9>
+		<seller_optional_10>
+			<type>field</type>
+			<only></only>
+			<desc>Sellers optional 10 pulled from sellers registration data.</desc>
+		</seller_optional_10>
+	</seller>
+	<forms>
+		<contact_seller_form>
+			<type>tag</type>
+			<only></only>
+			<desc>Displays contact seller form that uses AJAX to send message.</desc>
+		</contact_seller_form>
+		<tell_a_friend_form>
+			<type>tag</type>
+			<only></only>
+			<desc>Displays tell a friend form that uses AJAX to send message.</desc>
+		</tell_a_friend_form>
+	</forms>
+	<questions>
+		<extra_question_name>
+			<type>tag</type>
+			<only></only>
+			<desc>The name attached to the data field. --DEPRECATED</desc>
+		</extra_question_name>
+		<extra_question_value>
+			<type>tag</type>
+			<only></only>
+			<desc>The data value saved in this data field. --DEPRECATED</desc>
+		</extra_question_value>
+		<extra_questions>
+			<type>tag</type>
+			<only></only>
+			<desc>The set of names and data for extra questions</desc>
+		</extra_questions>
+	</questions>
+	<checkboxes>
+		<extra_checkbox_name>
+			<type>tag</type>
+			<only></only>
+			<desc>The name attached to the data field.</desc>
+		</extra_checkbox_name>
+	</checkboxes>
+	<multi_level_fields>
+		<multi_level_field_ul>
+			<type>tag</type>
+			<only></only>
+			<desc>For each multi-level field in the listing, shows each level's label
+				and value, using &lt;ul&gt; (unordered list), with CSS class
+				of "info" like is used for other listing information.
+				
+				Can optionally show "only" values for specific field, by specifying
+				only_field=# (replace # with the multi-level field number).</desc>
+		</multi_level_field_ul>
+		<multi_level_field_breadcrumb>
+			<type>tag</type>
+			<only></only>
+			<desc>For each multi-level field in the listing, shows a breadcrumb.
+				
+				Can optionally show "only" values for specific field, by specifying
+				only_field=# (replace # with the multi-level field number).
+				
+				Can also specify alternative "seperator" for each value, default is
+				&gt;.  Can do that by specifying
+				bread_seperator='|' (replace | with what you want the seperator to be)</desc>
+		</multi_level_field_breadcrumb>
+	</multi_level_fields>
+	<stats>
+		<number_images>
+			<type>tag</type>
+			<only></only>
+			<desc>Displays the number of images for a listing.  This is the "real" count,
+				not the number purchased.</desc>
+		</number_images>
+		<number_videos>
+			<type>tag</type>
+			<only></only>
+			<desc>Displays the number of external videos for a listing. This is 
+				the "real" count, not the number purchased.</desc>
+		</number_videos>
+		<number_listing_tags>
+			<type>tag</type>
+			<only></only>
+			<desc>Displays the number of listing tags for a listing.</desc>
+		</number_listing_tags>
+	</stats>
+</ListingTags>

@@ -1,0 +1,1034 @@
+/**
+ * Old IE old_ie.css
+ *
+ * This file should hold all the "OLD IE" (Internet Explorer 8.0 and older) styles.
+ * This will account for CSS like using rem units, and using media queries, both
+ * of which do not work in IE8 and older.
+ *
+ * *** AUTO-GENERATED BASED ON 7.3.2 ***
+ * 
+ */
+
+.wrapper { width: 70em; }
+/* ==========================================================================
+   Headings / Titles
+   ========================================================================== */
+
+h2.title, h1.title{
+	font-size: 16px;
+}
+
+h1.subtitle{
+	font-size: 14px;
+}
+
+/* ==========================================================================
+   Paragraphs / Body Text
+   ========================================================================== */
+
+.page_instructions{
+	font-size: 12px;
+}
+
+/* ==========================================================================
+   Listing Details
+   ========================================================================== */
+
+.icon-link{
+	font-size: 16px;
+}
+
+ul.info li.price{
+	font-size: 16px;
+}
+
+/* ==========================================================================
+	   Shared Breakpoint 1: 52em is about size that 2 column layout will
+	   fit both columns side by side comfortably.
+	   
+	   Breakpoint For:	   Base Classes | Collapsable Sections
+	   ========================================================================== */
+	
+	/* Base Classes - switch to 2 columns */
+	.main,
+	.sidebar,
+	.sidebar2{
+	position: relative;
+	padding: .2em;
+}
+
+.two-column .main{
+	float: left;
+	left: 30%;
+	width: 70%;
+	padding: 0 .5em;
+}
+
+.two-column .sidebar{
+	float: left;
+	left: -70%;
+	width: 30%;
+}
+
+.half_column_left{
+	width: 50%;
+	float: left;
+}
+
+.half_column_right{
+	padding-left: 10px;
+}
+
+/* The overall login section of the page */
+	.login{
+	width: 75%;
+	margin: auto;
+	margin-top: 2em;
+}
+
+/* Sidebar collapse - this one is a little different than normal, it will
+		be "above" the main content, and is meant to have the bulk of the contents
+		collapsed by using the section-collapser class on the main heading.
+		
+		This works by simply floating to the left.  It should be used inside
+		the .main section. */
+	.sidebar-collapse{
+	float: left;
+	max-width: 20%;
+}
+
+#content_column_wide{
+	overflow: hidden;
+	padding-left: .7em;
+}
+
+/* Collapsable Sections - when in 2 column mode, no need to collaps any more */
+	.section-collapser{
+	cursor: auto;
+}
+
+.section-collapser:after{
+	content: '';
+}
+
+.section-collapser-expanded:after{
+	content: '';
+}
+
+.section-collapser + div{
+	max-height: none;
+}
+
+.section-collapser + div.expand{
+	max-height: none;
+}
+
+/* Things that need to be adjusted once in 2 column mode, and are such
+		that they are not over-written by the default CSS... */
+	
+	.showcase h1.title{
+	padding-top: 0;
+	height: 2.5em;
+	white-space: nowrap;
+	margin: 0 -.7em -2em -1.25em;
+	z-index: 5;
+	
+	line-height: 1.5em;
+	text-shadow: 0 .2em .2em #666;
+}
+
+/* Should no longer need to use scroll for horizontal overflow */
+	.content_box{
+	max-width: none;
+	overflow: visible;
+}
+
+/* Only add border radius on wider screens, looks weird to have radius on
+		items that span full width of the screen */
+	h2.title, h1.title{
+	border-radius: .3em;
+}
+
+/* ==========================================================================
+	   Shared Breakpoint 2: 59em is about size that 3 column layout will
+	   fit all the columns comfortably.
+	   
+	   Breakpoint For:	   Base Classes | Listing Details
+	   ========================================================================== */
+	
+	/* 3 column layout - 20% | 60% | 20% Layout */
+	.three-column .main{
+	float: left;
+	left: 20%;
+	width: 60%;
+}
+
+.three-column .sidebar{
+	float: left;
+	left: -60%;
+	width: 20%;
+}
+
+.three-column .sidebar2{
+	width: 20%;
+	float: right;
+}
+
+/* Listing details changes at this point */
+	.listing-prev-next-links{
+	display: block;
+	float: right;
+	margin-bottom: .33em;
+}
+
+.slogan{
+	font-size: 14px;	/* Only add shadow on larger displays, as it can look "fuzzy" when smaller */
+	text-shadow: 1px 1px 0 #DDD;
+}
+
+/* ==========================================================================
+	   Shared Breakpoint: 50em is about size that all "default" menu items fit
+	   		horizontally on the page, may need to adjust this for different
+	   		languages or if you have more / less menu items than default.
+	   
+	   Breakpoint For:	   Menu Bar | Logo
+	   ========================================================================== */
+	
+	/* Menu Bar Breakpoint - stop hiding menus, give fancy tabbed look */
+	.wrapper{
+	position: relative;
+}
+
+header.page{
+	margin-top: 0;
+	min-height: 6em;
+}
+
+.fixed-nav{
+	border-bottom: none;
+	position: relative;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: transparent;
+	z-index: 1;
+}
+
+.fixed-link{
+	/* Hide links to expand / collapse the menus */
+	display: none;
+}
+
+.fixed-menu{
+	width: auto;
+	display: inline-block;
+}
+
+.page-bar{
+	border: .32em solid #eaeaea;
+	border-radius: 0 1.8em 1.8em 0;
+	position: absolute;
+	top: 2.7em;
+	left: 0;
+	z-index: 1;
+	/* This gives it the white inner border without having to use an inner div */
+	box-shadow: inset 0 0 0 0.08em #fff;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	padding: .07em 0 .07em 26em;
+	background: #4987C5 url('../images/backgrounds/search_bar.gif') repeat-x top left;
+	text-align: center;
+	max-width: 100%;
+	width: 100%;
+}
+
+.menu-link{
+	/* reset some of the styles used at smaller sizes */
+	display: inline;
+}
+
+.page-bar .menu-link{
+	display: inline-block;
+	padding: 1em;
+	margin: 0;
+	background: #4987C5 url('../images/backgrounds/nav_tab.gif') repeat-x top left;
+	border-radius: 0;
+	height: auto;
+	/* May need to adjust this if there are a lot of menu items */
+	min-width: 12%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	/* Fix to align in FF properly */
+	vertical-align: middle;
+}
+
+.menu-link:hover{
+	color: white;
+	background: #356094 none;
+}
+
+.page-bar .extra{
+	/* These are redundant when menus are shown */
+	display: none;
+}
+
+nav.extra-links{
+	display: block;
+	float: right;
+	position: relative;
+	top: 1.2em;
+	z-index: 1;
+}
+
+nav.extra-links a{
+	color: #818181;
+	text-decoration: none;
+	padding: .32em
+}
+
+nav.extra-links a:hover{
+	color: #7CA93A;
+	text-decoration: underline;
+}
+
+/* user bar acts as the bar across the top */
+	.abs-space{
+	height: 6.1em;
+	clear: both;
+}
+
+.user-bar{
+	text-align: left;
+	float: none;
+	display: block;
+	clear: both;
+	padding: .5em .7em .85em;
+	max-width: none;
+}
+
+.user-welcome{
+	display: inline;
+}
+
+.user-links:before{
+	content: "(";
+}
+
+.user-links:after{
+	content: ")";
+}
+
+.user-links .menu-link{
+	/* Un-do the fancy menu CSS */
+	background: none;
+	padding: 0;
+	margin: 0;
+	color: #7CA93A;
+	/* Fix vertical alignment on FF */
+	vertical-align: bottom;
+}
+
+.user-links .menu-link:hover{
+	text-decoration: underline;
+}
+
+.user-links .menu-link:after{
+	/* Add | between each item */
+	content: '|';
+	padding: 0 .2em;
+	color: #666;
+}
+
+.user-links .menu-link:last-child:after{
+	/* Make sure NOT to add | after the end item */
+	content: '';
+	padding: 0;
+}
+
+/* Logo Breakpoint - Float on left, give it a background */
+	
+	.logo-box{
+	position: absolute;
+	z-index: 2;
+	background: transparent url('../images/logo_bg.png') no-repeat top right;
+	min-width: 350px;
+	min-height: 97px;
+	margin: 0;
+}
+
+.logo-box .logo{
+	line-height: 48px;
+	font-size: 38px;
+	text-shadow: 1px 1px 0 #EEE, 2px 2px 0 #CCC;
+	color: #7E7E7E;
+	font-style: italic;
+}
+
+.logo-box .logo img{
+	/* The actual logo image */
+	vertical-align: middle;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* ==========================================================================
+	   Footer Breakpoint 1: 37.5em is about size that all the footer links "fit"
+	   		when using 4 per row
+	   ========================================================================== */
+	
+	nav.footer{
+	border: 5px solid #EAEAEA;
+	border-radius: 10px;
+	background: url("../images/backgrounds/footer_bar.gif") repeat-x scroll left top #4987C5;
+	padding: 1.25em .9em;
+}
+
+nav.footer a{
+	width: 25%;
+	color: #fff;
+	font-weight: bold;
+	text-align: left;
+	border: none;
+	padding: .37em 0;
+	font-size: 12px;
+}
+
+nav.footer a:nth-of-type(2n+1){
+	border-right: none;
+}
+
+nav.footer a:hover{
+	text-decoration: underline;
+}
+
+.disclaimer{
+	font-size: 11px;
+	text-align: center;
+}
+
+/* ==========================================================================
+	   Footer Breakpoint 2: 54em is about size that all the footer links "fit"
+	   		with the contact us blurb on the right with default English text
+	   ========================================================================== */
+	
+	footer.page{
+	position: relative;
+	font-weight: bold;
+}
+
+footer.page:before{
+	/* Make room so the copyright and such shows */
+	content: "";
+	display: table;
+	height: 10em;
+	position: relative;
+}
+
+/* Position the footer navigation absolutely, allowing us to move the contact
+		us blurb up along side it on the right */
+	nav.footer{
+	position: absolute;
+	padding-right: 35%;
+	top: 0;
+	left: 0;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.blurb{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 35%;
+	color: #fff;
+	border-left: thin solid white;
+	margin: 2.5em 0 0 0;
+	padding: 0 1em 0 1.25em;
+}
+
+.blurb h3{
+	font-size: 14px;
+	margin: 0;
+	padding: 0 0 .31em;
+}
+
+.blurb p{
+	clear: both;
+	line-height: 1.1em;
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+
+.blurb a{
+	color: white;
+}
+
+.blurb a:hover{
+	color: white;
+	text-decoration: none;
+}
+
+.social-contacts{
+	text-align: right;
+	padding: .5em;
+}
+
+/* Create a simple hover effect that "brightens" the social icons */
+	.social-contacts a{
+	opacity: .7;
+	transition-duration: .6s;
+}
+
+.social-contacts a:hover{
+	opacity: 1;
+}
+
+.showcase h1.title{
+	font-size: 20px;
+}
+
+.showcase h1.search_title{
+	font-size: 19px;	font-size: 28px;
+	line-height: 2.75em;
+	text-shadow: .1em .1em 0 #FFF, .2em .2em 0 #CCC;
+	white-space: nowrap;
+}
+
+form.showcase input.keyword{
+	font-size: 13px;
+}
+
+/* ==========================================================================
+	   Showcase Breakpoint - 38em is about size that the showcase search box can
+	   		display well with all the extra fancy stuff
+	   ========================================================================== */
+	
+	.form-search{
+	max-width: 55%;
+}
+
+.search_fade_box{
+	display: block;
+	background:url('../images/backgrounds/showcase_img_fade.png') no-repeat right top;
+	background-size: 100%;
+	width: 35%;
+	height: 8.75em;
+	margin-top: -.3em;
+	margin-right: -.45em;
+	float: right;
+	overflow: visible;
+}
+
+.search_bullets{
+	display: block;
+	margin-top: 9.3em;
+	margin-left: 0;
+	padding: 0 .1em .1em;
+	text-align: center;
+}
+
+.search_bullets li{
+	list-style: none;
+	margin-bottom: .2em;
+	text-align: left;
+}
+
+.search_bullets li a{
+	display: block;
+	width: 13em;
+	max-width: 100%;
+	padding: 0.25em 0.5em 0.25em 0.75em;
+	border: thin solid #7CA93A;
+	border-left: 0.5em solid #648D25;
+	background-color: #7CA93A;
+	text-decoration: none;
+	border-radius: 0 .3em .3em 0;
+	font-weight: bold;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	transition-duration: 0.2s;
+	color: #fff;
+	margin: 0 auto;
+	
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.search_bullets li a:hover{
+	border: thin solid #648D25;
+	border-left: 0.5em solid #648D25;
+	background-color: #648D25;
+}
+
+.recent-listing-links a.button{
+	display: inline-block;
+	margin: .1em auto;
+	width: auto;
+	min-width: 5em;
+}
+
+.form_search_divider{
+	float: right;
+	width: .13em;
+	height: 10em;
+	margin: 0 1em 0 0;
+	background: url('../images/backgrounds/showcase-search-divider.gif') repeat-y left top;
+}
+
+.gj_image_fade{
+	position: relative;
+}
+
+.gj_image_fade div{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 8;
+	width: 100%;
+}
+
+.gj_image_fade div.active{
+	z-index: 10;
+}
+
+.gj_image_fade div.last_active{
+	z-index: 9;
+}
+
+.gj_image_fade img{
+	max-width: 100%;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+/* Big search button */
+
+input.button-large{
+	font-size: 22px;
+}
+
+/* Buttons used everywhere */
+
+.button,
+.button:visited,
+.cancel,
+.cancel:visited{
+	font-size: 12px;
+}
+
+/* Varient - orange button used on front page */
+.orange,
+.orange:visited{
+	font-size: 18px;
+}
+
+/* mini_* buttons use different light background to be suitable for use with images */
+.mini_button, .mini_cancel{
+	font-size: 12px;
+}
+
+.breadcrumb a,
+.breadcrumb div{
+	font-size: 12px;
+}
+
+/* ==========================================================================
+	   Tabs Breakpoint - At around 34em it is wide enough to fit more things on
+	   the same line as the tabs, specifically for the browsing tabs.
+	   ========================================================================== */
+	.tabList{
+	clear: none;
+}
+
+.my-account ul li a,
+.my-account ul li a:visited{
+	font-size: 12px;
+}
+
+.lightUpBox_navigation{
+	font-size: 12px;
+}
+
+.lightUpBox_description{
+	font-size: 14px;
+}
+
+/* ==========================================================================
+   Success / Error Messages
+   ========================================================================== */
+.success_box{
+	font-size: 12px;
+}
+
+.success_box h1{
+	font-size: 22px;
+}
+
+.error_message{
+	font-size: 12px;
+}
+
+.error_box{
+	font-size: 11px;
+}
+
+.field_error_box{
+	font-size: 11px;
+}
+
+.note_box{
+	font-size: 11px;
+}
+
+.no_results_box{
+	font-size: 11px;
+}
+
+/* ==========================================================================
+   Tabular data (tables) / headers / grid layout
+   ========================================================================== */
+
+.column_header{
+	font-size: 11px;
+}
+
+.results_column_header{
+	font-size: 11px;
+}
+
+.option_list{
+	font-size: 12px;
+}
+
+#checkbox ul{
+	font-size: 12px;
+}
+
+dd{
+	font-size: 16px;
+}
+
+dt{
+	font-size: 20px;
+}
+
+.title2{
+	font-size: 24px;
+}
+
+/* ==========================================================================
+   Cart / Listing Placement
+   ========================================================================== */
+
+/* General listing placement / input styles */
+.field_label,
+.required{
+	font-size: 12px;
+}
+
+.login_label{
+	font-size: 12px;
+}
+
+.form_field{
+	font-size: 12px;
+}
+
+.field,
+.editor_field{
+	font-size: 12px;
+}
+
+.sub_note{
+	font-size: 11px;
+}
+
+.mini_note{
+	font-size: 9px;
+}
+
+/* Cart page */
+.cart_item{
+	font-size: 12px;
+}
+
+.cart_item_child,
+.cart_item_child_mini{
+	font-size: 12px;
+}
+
+.cart_item_subtotal{
+	font-size: 14px;
+}
+
+.subtotal_cart_item,
+.tax_cart_item{
+	font-size: 16px;
+}
+
+.total_cart_item,
+.total_order_item{
+	font-size: 16px;
+}
+
+.listing_extra_item,
+.payment_item{
+	font-size: 12px;
+}
+
+.listing_extra_item_child{
+	font-size: 14px;
+}
+
+/* NOTE: h2 a required to get "closer to" element than generic styling on links
+	within h2 titles */
+h2 a.show_instructions_button,
+h2 a.show_instructions_button:visited{
+	font-size: 12px;
+}
+
+.edit,
+.delete,
+.preview{
+	font-size: 12px;
+}
+
+.media-runtime{
+	font-size: 11px;
+}
+
+div.offsite_video_box_title,
+div.offsite_video_box_title_empty,
+div.offsite_video_box_title_editing{
+	font-size: 12px;
+}
+
+/* ==========================================================================
+	   Media Upload Breakpoint - This is when 2 columns start to fit on the page
+	   for the media preview boxes
+	   ========================================================================== */
+	
+	.media-preview{
+	float: left;
+	width: 10em;
+	height: 13em;
+	overflow: auto;
+	overflow-y: auto;
+}
+
+.pagination li{
+	font-size: 12px;
+}
+
+.pagination a,
+.pagination a:visited{
+	font-size: 11px;
+}
+
+/* ==========================================================================
+   Listing Details
+   ========================================================================== */
+
+.listing_title{
+	font-size: 20px;
+}
+
+.listing_title span{
+	font-size: 14px;
+}
+
+.seller_username{
+	font-size: 12px;
+}
+
+.seller_username a,
+.seller_username a:visited{
+	font-size: 14px;
+}
+
+.bid_box_note{
+	font-size: 10px;
+}
+
+h1.title.rounded_top,
+h2.title.rounded_top,
+h3.title.rounded_top{
+	font-size: 26px;
+}
+
+h2.title.rounded_top{
+	font-size: 22px;
+}
+
+h3.title.rounded_top{
+	font-size: 19px;
+}
+
+.galleryBigImage p,
+.content_shell .galleryBigImage p{
+	font-size: 14px;
+}
+
+/* featured pics */
+.full_image_item{
+	font-size: 14px;
+}
+
+/* ==========================================================================
+   Listing Details Print Friendly
+   ========================================================================== */
+.print_body{
+	font-size: 14px;
+}
+
+h1.print_title{
+	font-size: 14px;
+}
+
+#print_listing_info_column{
+	font-size: 12px;
+}
+
+#print_listing_info_column li.price{
+	font-size: 16px;
+}
+
+#listing_categories li.element,
+.priceplan_choose li.element{
+	font-size: 14px;
+}
+
+span.category_title{
+	font-size: 16px;
+}
+
+.category_column ul.sub_categories span.category_title{
+	font-size: 12px;
+}
+
+p.category_description{
+	font-size: 11px;
+}
+
+.categories div{
+	font-size: 11px;
+}
+
+span.listing_counts{
+	font-size: 13px;
+}
+
+/* ==========================================================================
+   Browsing Overall / Grid
+   ========================================================================== */
+
+.row_header{
+	font-size: 12px;
+}
+
+.row_even,
+.browsing_result_table_body_even,
+.seller_result_table_body_even{
+	font-size: 12px;
+}
+
+.row_odd,
+.browsing_result_table_body_odd,
+.seller_result_table_body_odd{
+	font-size: 12px;
+}
+
+p.listing_results_description{
+	font-size: 11px;
+}
+
+.field_error_row{
+	font-size: 11px;
+}
+
+.listing_set.gallery article{
+	font-size: 12px;
+}
+
+.listing_set article h1{
+	font-size: 14px;
+}
+
+.gallery_carousel_dot{
+	font-size: 19px;
+}
+
+.gallery_carousel_dot_active{
+	font-size: 21px;
+}
+
+.featured_items span.featured_title{
+	font-size: 12px;
+}
+
+/* ==========================================================================
+   Category Browsing Options module
+   ========================================================================== */
+
+/* Browsing Options Link Text */
+.browsing_options_links{
+	font-size: 12px;
+}
+
+/* Other links in Category Browsing Options */
+.browsing_options_not_selected{
+	font-size: 12px;
+}
+
+/* Selected link in Category Browsing Options */
+.browsing_options_selected{
+	font-size: 12px;
+}
+
+.user_links{
+	font-size: 12px;
+}
+
+/* ==========================================================================
+	   Columns Breakpoint
+	   ========================================================================== */
+	
+	.columns-2{
+	width: 50%;
+}
+
+.columns-3{
+	width: 33%;
+}
+
+.columns-4{
+	width: 25%;
+}
+
+.columns-5{
+	width: 20%;
+}
+
+.columns-6{
+	width: 16%;
+}
+
+.columns-7{
+	width: 14%;
+}
+
+.columns-8{
+	width: 12.5%;
+}
+
+.columns-9{
+	width: 11%;
+}
+
+.columns-10{
+	width: 10%;
+}
+

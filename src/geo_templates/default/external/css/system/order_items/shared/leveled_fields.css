@@ -1,0 +1,84 @@
+/* 7.4.0-4-ge04614a */
+
+/* ****** Multi-Level Fields *********** */
+
+.leveled_level_box {
+	/* This is the overall box around each multi-level "level" */
+	margin: 2px 5px;
+	border: 1px solid #b9b9b9;
+	border-radius: 5px;
+	display: inline-block;
+	background-color: #f8f8f8;
+	vertical-align: top;
+	padding: 5px;
+	text-align: left;
+}
+
+.leveled_level_label {
+	margin-bottom: 3px;
+	display: inline-block;
+	color: #666666;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+ul.leveled_values {
+	/* Used for the box around the multi-level values */
+	height: 150px;
+	width: auto;
+	background-color: #fff;
+	border: 1px solid #b9b9b9;
+	overflow: auto;
+	
+	/* For most browsers, the below will make only the vertical scrolled */
+	overflow-y: auto;
+	overflow-x: hidden;
+	
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+li.leveled_value,
+li.leveled_value_empty {
+    color: #444;
+    font-size: 0.8em;
+    list-style: outside none none;
+    min-width: 180px;
+    padding: 2px 5px 2px 4px;
+    white-space: nowrap;
+}
+
+li.leveled_value {
+	cursor: pointer;
+}
+
+li.leveled_value.selected_value {
+	/* Style for the currently selected multi-level field value */
+	background-color: #ccc;
+	color: #fff;
+}
+
+li.leveled_value:hover {
+	/* Style for the hover on a value */
+	background-color: #ddd;
+	color: #111;
+}
+
+.leveledHiddenRadio {
+	/* This hides the radio button from showing */
+	position: absolute;
+	width:1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+input.leveled_radio {
+	/* makes sure to move the radio button out of view */
+	margin-left: -200px;
+}
+
+ul.leveled_pagination {
+	margin: 1px 5px 5px 5px;
+}

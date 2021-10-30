@@ -1,0 +1,163 @@
+/* 17.12.0-10-g8226874 */
+
+/* stats page */
+
+.unique_visits_legend,
+.unique_visits {
+	margin: 0.16667em;
+	border: thin solid #999;
+	background: #e2e4e9 url('../../../images/backgrounds/button.gif') repeat-x center left;
+	color: #666666;
+	font-weight: bold;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	float: left;
+}
+
+.unique_visits_legend {
+	margin: 0 10px 0 0;
+	padding: 3px;
+}
+
+.total_visits_legend,
+.total_visits {
+	border: thin solid #86ae47;
+	background: #DFEDCA url('../../../images/backgrounds/button_hover.gif') repeat-x center left;
+	color: #86ae47;
+	font-weight: bold;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	float: left;
+}
+
+.total_visits_legend {
+	padding: 3px;
+}
+
+.legend {
+	width: 8.3333em;
+}
+
+#storefront_stats strong {
+	display: block;
+	float: left;
+	padding-right: 3px;
+}
+
+#stats_controls {
+	margin: 0.83333em 0em 0em 1.8333em;
+}
+
+/* Categories and Pages lists */
+
+.sortable_list {
+	list-style: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.sortable_list div.item_name {
+	padding-top: 0.25em;
+}
+
+.sortable_item_controls {
+	float: right;
+	margin-top: 0.16667em;
+	cursor: pointer;
+}
+
+.storefront_sort_item {
+	border: medium solid #eaeaea;
+	padding: 0.33333em 0.83333em 0.5em 0.83333em;
+	margin: 0.41667em;
+	font-weight: bold;
+	font-size: 12px;
+	background: #f7f7f7;
+	color: #666666;
+	display: block;
+	height: auto;
+}
+
+.storefront_sort_item:hover {
+	background: #ffffe1;
+}
+
+.storefront_sort_item .glyphicon-move {
+	cursor: pointer;
+	font-size: 1.6em;
+}
+
+.button_green {
+	background: url("../../../images/backgrounds/button.gif") repeat-x scroll left center #E2E4E9;
+    border: thin solid #CACBCC;
+    color: #666666;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0.08333em;
+    padding: 0.25em 0.41667em 0.16667em;
+    text-decoration: none;
+}
+
+.button_green:hover, .button_green:active {
+	border: thin solid #7CA93A;
+	background: #EBF4DD url('../../../images/backgrounds/button_hover.gif') repeat-x center left;
+	color: #648D25;
+	text-decoration: none;
+}
+	
+.button_red {
+	background: url("../../../images/backgrounds/button.gif") repeat-x scroll left center #E2E4E9;
+    border: thin solid #CACBCC;
+    color: #666666;
+    font-size: 12px;
+    font-weight: bold;
+ 	margin: 0.08333em;
+    padding: 0.25em 0.41667em 0.16667em;
+    text-decoration: none;
+}
+
+.button_red:hover, .button_red:active {
+	border: thin solid #e4a0a2;
+	background: #f0b5b7 url('../../../images/backgrounds/button_cancel.gif') repeat-x center left;
+	color: #9e4144;
+	text-decoration: none;
+}
+
+.subcat_input_container {
+    background-color: #fff;
+    border-bottom: thin dashed #ddd;
+    clear: both;
+    margin: 0 1em;
+    padding: 5px 0 8px 5px;	
+}
+
+.subcat_divider {
+	width: 90%;
+	margin: 0.58333em auto;
+}
+
+.storefront_cp_nav, ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.storefront_cp_nav li, ul li {
+	text-align: left;
+}
+
+.storefront_cp_nav li a:link, .storefront_cp_nav li a:visited
+{
+	display: block;
+	padding: 0 0 0 1em;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.storefront_cp_nav li a:hover, .storefront_cp_nav li a:active
+{
+	text-decoration: underline;
+}

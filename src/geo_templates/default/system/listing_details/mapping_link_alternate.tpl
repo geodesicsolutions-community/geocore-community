@@ -1,0 +1,2 @@
+{* 7.0.3-304-gc6a7d24 *}
+<a href="http://www.mapquest.com/maps/map.adp?homesubmit=Get+Map&amp;address={$mapping_location}" onclick="window.open(this.href); return false;" class="mapping_link">{$messages.1624}</a>

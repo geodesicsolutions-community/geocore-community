@@ -1,0 +1,35 @@
+{
+    "name": "geodesicsolutions-community/geocore-community",
+    "description": "GeoCore Community edition, open source classifieds and auctions software",
+    "type": "project",
+    "keywords": ["classifieds", "auctions"],
+    "homepage": "https://geodesicsolutions.org",
+    "license": "MIT",
+    "support": {
+        "wiki": "https://geodesicsolutions.org/wiki"
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-mysqli": "*",
+        "ext-openssl": "*",
+        "stripe/stripe-php": "^7.67"
+	},
+	"config": {
+        "vendor-dir": "src/vendor"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "bash contrib/setup"
+        ],
+        "check": [
+            "@php-check"
+        ],
+        "php-check": "phpcs -s --standard=./contrib/phpcs-ruleset.xml",
+        "php-fix": "phpcbf --colors --standard=./contrib/phpcs-ruleset.xml"
+    }
+}

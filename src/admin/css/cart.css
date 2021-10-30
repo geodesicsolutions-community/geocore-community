@@ -1,0 +1,1114 @@
+/* 16.09.0-79-gb63e5d8 */
+/* Next line is for testing only...  remove /* to test cart styles used on client side */
+/*@import url('../../geo_templates/default/external/css/default.css');
+
+/* CSS taken from default.css, only the themes needed for cart display and
+   such.  Un-comment the line above to have the theme_styles.css imported to make
+   it easier to figure out if/when any more styles are needed to be copied
+   to this file.
+   
+   When copying CSS over, change any references to URL such as for BG images,
+   should be set in admin/templates/cart/index.tpl in the style section, so that
+   the {external ...} tag may be used.  Refer to other styles in that tpl file
+   for reference.
+   
+   */
+
+html {
+	font-size: 1em;
+}
+
+/* ==========================================================================
+   Cart - Media Upload
+   ========================================================================== */
+
+.media-container,
+.media-preview-container {
+	font-size: 1rem;
+}
+
+.media-upload-dropbox {
+	border: medium dashed #777;
+	width: 98%;
+	min-height: 4em;
+	margin: 1em auto;
+	padding: 1em;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+}
+
+.media-container {
+	text-align: center;
+	margin: 1em;
+}
+
+.media-upload-dropbox {
+	text-align: left;
+}
+
+.media-preview {
+	border: thin solid #777;
+	margin: .5em;
+	padding: .5em;
+	border-radius: 1em;
+	background: rgba(255,255,255,.7);
+	overflow: auto;
+	position: relative;
+	float: left;
+	width: 10em;
+	height: 13em;
+	overflow: auto;
+	overflow-y: auto;
+}
+
+.media-preview-image {
+	border: thin solid black;
+	margin: auto;
+	min-height: 6.25em;
+	min-width: 6.25em;
+	text-align: center;
+	overflow: hidden;
+}
+
+.media-queue-progress {
+	float: right;
+}
+
+.media-queue-entry {
+	border: thin solid #777;
+	background-color: #eee;
+	margin: .3em;
+	padding: .5em;
+	border-radius: .5em;
+	font-size: .8em;
+}
+
+.media-progress-circle {
+	/* Special Case - uses JS to get the styles of this element, to use for
+		the progress bar, so that things like color and such are not set in JS
+		where they are hard to change. */
+	
+	/* This is the color of the bar (fgColor) */
+	color: #87CEEB;
+	
+	/* The background color for the entire progress bar (bgColor) */
+	background-color: #ddd;
+	
+	/* The width & height for circle - Recommend using fixed value */
+	width: 80px;
+	
+	/* This one is a little weird...  the height will controll the "thickness" of
+		the bar, divided by 100...  So if you want thickness of .3 you would set
+		height to 30px. */
+	height: 20px;
+	
+	
+	/* Keep this intact or you will have a sqare show on the page! */
+	position: absolute;
+	left: -1000px;
+}
+.queue-thumb {
+	float: left;
+	margin: .2em;
+	border: 1px solid #777;
+	/* NOTE : special case: need to do pixels here because canvas goes in here
+		which is only pixels */
+	min-width: 50px;
+	min-height: 50px;
+}
+
+/* This is mainly the title / label for images */
+.media-editable-label {
+	margin: .3em .1em;
+	border: thin solid #ddd;
+	padding: .2em;
+	white-space: nowrap;
+	overflow-x: auto;
+	min-height: 1em;
+}
+.media-editable-label:hover,
+.media-editable-label:focus {
+	background: rgba(255,255,153,1);
+	border: thin dashed #0090d2;
+}
+.media-editable-saved {
+	opacity: 0;
+	transition-duration: 0.3s;
+	position: absolute;
+	bottom: .3em;
+	left: 1em;
+	background-color: white;
+	border: thin solid #777;
+	z-index: 5;
+}
+.media-editable-saved-show {
+	opacity: 1.0;
+}
+
+.slot-label {
+	cursor: move;
+}
+
+.media-delete {
+	display: block;
+	position: absolute;
+	top: -.1em;
+	right: 0;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+	content: " "; /* 1 */
+	display: table; /* 2 */
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+	*zoom: 1;
+}
+
+/* ==========================================================================
+   Breadcrumbs
+   ========================================================================== */
+.breadcrumb {
+	margin: .5em 0;
+	padding: 0;
+	list-style: none;
+	background: #eee;
+	border-width: thin;
+	border-style: solid;
+	border-color: #f5f5f5 #e5e5e5 #ccc;
+	border-radius: .5em;
+	box-shadow: 0 0 2px rgba(0,0,0,.2);
+	overflow: hidden;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	font-size: 1rem;
+}
+
+.breadcrumb a,
+.breadcrumb div {
+	float: left;
+	display: block;
+	
+	padding: .7em 1em .7em 2em;
+	text-decoration: none;
+	color: #666;
+	position: relative;
+	background-color: #ddd;
+	background-image: linear-gradient(to right, #f5f5f5, #ddd);
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	font-size: .75rem;
+}
+
+.breadcrumb a,
+.breadcrumb a:visited {
+	color: #666;
+}
+
+.breadcrumb a:hover {
+	color: #4987C5;
+}
+
+.breadcrumb a:first-child,
+.breadcrumb div:first-child {
+	padding-left: 1em;
+	border-radius: .32em 0 0 .32em;
+	border-left: none;
+}
+
+.breadcrumb div:hover,
+.breadcrumb a:hover {
+	background: #fff;
+}
+
+.breadcrumb a:after,
+.breadcrumb div:after,
+.breadcrumb a:before,
+.breadcrumb div:before
+ {
+	content: " ";
+	position: absolute;
+	top: 50%;
+	margin-top: -1.5em;
+	border-top: 1.5em solid transparent;
+	border-bottom: 1.5em solid transparent;
+	border-left: 1.1em solid;
+	right: -1em;
+}
+
+.breadcrumb a:after,
+.breadcrumb div:after {
+	z-index: 2;
+	border-left-color: #ddd;
+}
+
+.breadcrumb a:before,
+.breadcrumb div:before {
+	border-left-color: #ccc;
+	right: -1.1em;
+	z-index: 1;
+}
+.breadcrumb a:hover:after,
+.breadcrumb div:hover:after {
+	border-left-color: #fff;
+}
+.breadcrumb .active {
+	font-weight: bold;
+	background: none;
+	color: #7CA93A;
+}
+.breadcrumb .active:after {
+	border-left-color: #eee;
+}
+
+.breadcrumb a:last-child:after,
+.breadcrumb div:last-child:after,
+.breadcrumb a:last-child:before,
+.breadcrumb div:last-child:before {
+	content: normal;
+}
+
+.breadcrumb a:last-child,
+.breadcrumb div:last-child,
+.breadcrumb a:last-child,
+.breadcrumb div:last-child {
+	background: none;
+}
+
+.breadcrumb .highlight { 
+	color: #4174A6;
+	font-weight: bold;
+}
+
+.button_list {
+	margin: 5px 0px 5px 0px;
+	padding: 0px;
+}
+
+.button_list li {
+	list-style: none;
+	display: inline;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+.left_cart_content_box {
+	border: 5px solid #eaeaea;
+	padding: 1px;
+}
+
+#content_column_wide {
+	overflow: hidden;
+	padding: 0 3px 0 10px;
+}
+
+.content_box {
+	border: 5px solid #eaeaea;
+	padding: 1px;
+}
+
+.content_box .center {
+	padding: 10px;
+}
+
+.alignright {
+	float: right;
+	padding-right: 5px;
+}
+
+.price {
+	color: #7ca93a;
+	font-weight: bold;
+}
+
+.text_highlight {
+	color: #4987c5;
+}
+
+h1.title,
+div.body_html h1.title {
+	height: 24px;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 4px 0px 0px 5px;
+	border: none;
+}
+
+h2.title,
+div.body_html h2.title {
+	height: 24px;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 4px 0px 0px 5px;
+	border: none;
+}
+
+h1.subtitle,
+div.body_html h1.subtitle {
+	background: #eaeaea;
+	color: #4987c5;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 1px 0px;
+	padding: 5px 0px 5px 3px;
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-left: none;
+	border-right: none;
+}
+
+h1.title a:link,
+h1.title a:visited {
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+h1.title a:hover
+h1.title a:active {
+	color: #ffffff;
+	text-decoration: underline;
+	font-size: 12px;
+}
+
+h2.title a:link,
+h2.title a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+h2.title a:hover,
+h2.title a:active {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+.highlight_links a:link,
+.highlight_links a:visited {
+	color: #4987c5;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.highlight_links a:hover,
+.highlight_links a:active {
+	color: #7daa3b;
+	text-decoration: underline;
+}
+
+p.page_instructions,
+div.page_instructions {
+	color: #666;
+	margin: 10px 5px 15px 5px;
+	padding: 0px;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.payment_options_list {
+	margin: 0;
+	padding: 0;
+	width: 700px;
+}
+
+.payment_options_list li {
+	list-style: none;
+	display: inline-block;
+	width: 125px;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+.mini_note {
+	color: #666666;
+	font-size: 9px;
+}
+
+/* ######### FORM STYLES ######### */
+label.field_label {
+	color: #666666;
+	padding: 2px 5px;
+	width: 200px;
+	clear: both;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+label.required {
+	color: #4987c5;
+	padding: 2px 5px;
+	width: 200px;
+	clear: both;
+	display: block;
+	font-weight: bold;
+	float: left;
+	font-size: 12px;
+}
+
+label.login_label {
+	color: #666666;
+	padding: 2px 5px;
+	width: 100px;
+	clear: both;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+input.login_field {
+	/* need to specify width for these fields, or IE makes them look funny */
+	width: 138px;	
+}
+
+.form_field {
+	font-size: 11px;
+	font-weight: bold;
+	color: #666666;
+	padding: 4px;
+}
+
+input.field,
+textarea.field,
+select.field,
+div.field, input.editor_field {
+	padding: 6px;
+	border: 1px solid #b9b9b9;
+	color: #666666;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 4px;
+}
+
+input.field:focus,
+textarea.field:focus,
+select.field:focus {
+	padding: 6px;
+	border: 5px solid #4987c5;
+	margin: 0;
+}
+
+select.field {
+	display: inline-block;
+}
+
+textarea.field {
+	/* this aligns text on the textarea's row with the middle of the textarea */
+	vertical-align: middle;
+}
+
+.row_even
+{
+	padding: 7px 5px;
+	background: #f7f7f7;
+	font-size: 12px;
+	color: #666666;
+}
+
+.row_odd
+{
+	padding: 7px 5px;
+	background: #ffffff;
+	font-size: 12px;
+	color: #666666;
+}
+
+.row_even:hover,
+.row_odd:hover
+{
+	background: #ffffe1;
+}
+
+.field_error_row {
+	background-color: #FCEAED;
+	border-top: 1px solid #E68A9D;
+	border-bottom: 1px solid #E68A9D;
+	padding: 7px 5px;
+	margin: 1px 0px;
+	color: #5F6672;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.usage_agreement {
+	width: 900px;
+	height: 200px;
+}
+
+div.usage_agreement {
+	overflow: scroll;
+	border: 1px solid #b9b9b9;
+}
+
+button {
+	padding: 4px 5px;
+}
+
+textarea {
+	font-family: arial;
+}
+
+.inline {
+	display: inline-block;
+	padding: 0 5px;
+	vertical-align: middle;
+}
+
+
+/* ######### CATEGORIES STYLES ######### */
+#listing_categories {
+	margin: 0;
+	padding: 0;
+}
+
+#listing_categories li.element {
+	list-style: none;
+	color: #4987c5;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	float: left;
+}
+
+#listing_categories li.clr {
+	clear: both;
+	list-style: none;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+}
+
+#listing_categories a:link,
+#listing_categories a:visited {
+	margin: 0;
+	padding: 10px 0;
+	display: inline-block;
+	float: left;
+	width: 100%;
+	color: #666666;
+	text-decoration: none;
+}
+
+#listing_categories a:hover,
+#listing_categories a:active {
+	text-decoration: none;
+	background: #f7f7f7;
+	color: #000000;
+}
+
+#listing_categories span {
+	padding: 0 10px;
+}
+
+#listing_categories span.category_title,
+div.category_column ul span.category_title
+{
+	font-weight: bold;
+	font-size: 16px;
+	color: #4987c5;
+}
+
+/* ######### USER ACCOUNT & LEFT COLUMN STYLES ######### */
+.order_left_column {
+	/* now done with bootstrap responsive grid
+	width: 250px;
+	float: left;
+	margin-right: 10px;
+	*/
+}
+
+.order_left_column ul {
+	margin: 0px;
+	padding: 0px 0px 1px 0px;
+}
+
+.order_left_column ul li {
+	list-style: none;
+	text-align: left;
+	margin-left: 0px;
+}
+
+.order_left_column ul li a:link,
+.order_left_column ul li a:visited
+{
+	display: block;
+	padding: 10px 5px 10px 35px;
+	font-size: 12px;
+	font-weight: bold;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #f3f3f3;
+	text-decoration: none;
+}
+
+.order_left_column ul li a:hover,
+.order_left_column ul li a:active
+{
+	display: block;
+	padding: 10px 5px 10px 35px;
+	font-size: 12px;
+	font-weight: bold;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #e5e5e5;
+	text-decoration: underline;
+}
+
+/* ######### CART STYLES ######### */
+.cart_item {
+	border: 3px solid #eaeaea;
+	padding: 3px 10px;
+	margin: 5px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #4987c5;
+}
+
+.cart_item_child {
+	border: 2px solid #eaeaea;
+	padding: 2px 10px;
+	margin: 3px 5px 3px 50px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #666666;
+	/*height: 21px;*/
+}
+
+.cart_item_child_mini {
+	border: 2px solid #eaeaea;
+	padding: 3px 10px;
+	margin: 3px 5px 3px 50px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #666666;
+}
+
+.cart_item_child_mini ul {
+	margin: 0;
+	padding: 0;
+}
+
+.cart_item_child_mini ul li {
+	list-style: none;
+	color: #aaaaaa;
+}
+
+.cart_item_child:hover {
+	background: #ffffe1;
+}
+
+.cart_item_subtotal {
+	background: #f7f7f7;
+	border: 2px solid #eaeaea;
+	padding: 2px 10px;
+	margin: 5px 5px 15px 50px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #7daa3b;
+	text-align: right;
+}
+
+.subtotal_cart_item,
+.tax_cart_item {
+	border: 2px solid #eaeaea;
+	padding: 2px 10px;
+	margin: 5px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #666666;
+	text-align: right;
+	width: 50%;
+	float: right;
+}
+
+.subtotal_cart_item label,
+.tax_cart_item label {
+	font-weight: bold;
+	font-size: 16px;
+	color: #666666;
+	text-align: right;
+}
+.total_cart_item,
+.total_order_item {
+	background: #f7f7f7;
+	border: 2px solid #eaeaea;
+	padding: 2px 10px;
+	margin: 5px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #7daa3b;
+	text-align: right;
+	clear: both;
+	width: 50%;
+	float: right;
+}
+
+.listing_extra_item,.payment_item {
+	border: 5px solid #eaeaea;
+	padding: 7px 10px;
+	margin: 5px;
+	font-weight: bold;
+	font-size: 12px;
+	background: #f7f7f7;
+	color: #666666;
+	display: block;
+	vertical-align: middle;
+}
+
+.listing_extra_item:hover,.payment_item:hover {
+	background: #ffffe1;
+}
+
+.listing_extra_item_child {
+	border: 2px solid #eaeaea;
+	padding: 2px 10px;
+	margin: 5px 5px 15px 50px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #7daa3b;
+	text-align: right;
+}
+
+.cart_item_cost,.listing_extra_cost {
+	float: right;
+	text-align: right;
+	padding: 3px 0;
+}
+
+.cart_item_buttons {
+	float: right;
+	padding: 0 10px;
+}
+
+.cart_item_label {
+	float: left;
+	padding: 3px 0;
+}
+
+.cart_item div.cart_item_label {
+	padding-left: 25px;
+}
+
+#addToCartButton {
+	float: right;
+	padding-right: 3px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#addToCartButton:hover {
+	text-decoration: underline;
+	color: #ff9900;
+}
+
+#cart_buttons 
+{
+	text-align: center;
+	font-size: medium;
+	margin:3px 3px 10px;
+	border: 1px solid #CECECE;
+	padding: 10px;
+	clear: both;
+}
+
+.disabled
+{
+	color: #cccccc;
+}
+
+.checkout_button {
+	text-align: right;
+	padding: 5px;
+	clear: both;
+}
+
+#cart_left_column {
+	width: 400px;
+	float: left;
+}
+
+#cart_right_column {
+	overflow: hidden;
+	padding: 0 0 0 10px;
+}
+
+/* ######### PAYMENT SELECTION STYLES ######### */
+label.payment_label {
+	padding: 2px 5px;
+	width: 200px;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.payment_text
+{
+	margin-left:65px;
+	font-weight:lighter;
+}
+.payment_choices
+{
+	position:relative;
+	border-style:solid;
+	border-color:#CCE8FF;
+	border-width:1px;
+	padding-top:15px;
+	padding-bottom:5px;
+	width:370px;
+	height:auto;
+	margin:2px;
+}
+
+
+.agreement_text_box
+{
+	/* Used for "box" around payment gateway agreement text */
+	border: thin solid black;
+	overflow: auto;
+	width: 80%;
+	height: 250px;
+	padding: 5px;
+}
+
+/* ######### CART STEP STYLES ######### */
+#cart_steps {
+	margin: 0;
+	padding: 0;
+	height: 40px;
+}
+
+#cart_steps li {
+	list-style: none;
+	display: block;
+	float: left;
+	height: 40px;
+	padding: 13px 40px 0 20px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666666;
+}
+
+#cart_steps li.current {
+	color: #4076b1;
+	font-size: 16px;
+	padding: 9px 40px 0 20px;
+}
+
+/* ######### ERROR AND SUCCESS STYLES ######### */
+.success_box {
+	background: #E5F5DF;
+	border: 1px solid #A3C894;
+	padding: 10px;
+	margin: 10px;
+	color: #5F6672;
+	font-size: 12px;
+	line-height: 24px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.success_box h1 {
+	color: #17A400;
+	font-size: 22px;
+	font-weight: normal;
+	margin: 10px 0;
+	padding: 0;
+}
+
+.error_message {
+	color: #980000;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+.error_box {
+	background: #FFFFE1;
+	border: 1px solid #A9AFD4;
+	padding: 10px;
+	color: #5F6672;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 18px;
+	text-align: center;
+}
+
+.field_error_box {
+	background: #fceaed;
+	border: 1px solid #E68A9D;
+	padding: 10px;
+	color: #5F6672;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.note_box {
+	background: #ecf4ff;
+	border: 1px solid #a9afd4;
+	padding: 10px;
+	color: #5f6672;
+	font-size: 11px;
+	line-height: 18px;
+	text-align: left;
+	margin: 10px;
+}
+
+.no_results_box {
+	background: #ecf4ff;
+	border: 1px solid #a9afd4;
+	padding: 10px;
+	color: #5f6672;
+	font-size: 11px;
+	line-height: 18px;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px;
+}
+
+/* ######### AUTO COMPLETE STYLES ######### */
+
+div#tag_search_column {
+	width: 215px;
+	float: right;
+}
+
+div#tag_search_column input.field {
+	width: 120px;
+}
+
+div.autocomplete_choices {
+	position:absolute;
+	width: 250px;
+	border: none;
+	margin: -3px 0px 0px 0px;
+	text-align: left;
+}
+
+div.autocomplete_choices ul {
+	list-style-type:none;
+	margin : 0px 2px;
+	padding:0px;
+	/* Set the border on the UL since setting it on surrounding div messes
+		with the overall width, making it too wide */
+	border : 3px solid #4987C5;
+}
+
+div.autocomplete_choices ul li {
+	list-style-type:none;
+	display:block;
+	margin:0;
+	padding: 7px 5px;
+	cursor:pointer;
+	vertical-align: middle;
+	font-size: 12px;
+}
+
+div.autocomplete_choices ul li.row_even {
+	background: #f1f1f1;
+}
+
+div.autocomplete_choices ul li.row_odd {
+	background: #ffffff;
+	color: #666666;
+}
+div.autocomplete_choices ul li.selected {
+	background-color: #ffb;
+}
+
+/* Make image debug display properly in admin */
+#SWFUpload_Console {
+	position: absolute;
+	top: 1005px;
+	right: 10px;
+}
+
+/* Style information for my_account_links module admin adaptation */
+
+li.my_account_links_active {
+	background-color: #eeeeee;
+}
+li.my_account_links_inactive {
+	background-color: #ffffff;
+}
+
+img.help_icon,
+input.pre_approve_checkbox
+{
+	vertical-align: middle;
+}
+
+.combined_step_section {
+	position: relative;
+}
+.combined_loading_overlay {
+	background-color: white;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	
+	z-index: 100;
+}
+.combined_loading_overlay img {
+	margin-top: 40px;
+}
+
+iframe.listing_preview {
+	width: 800px;
+	height: 500px;
+	overflow: auto;
+	margin: 15px;
+	border: 2px dashed #777;
+	border-radius: 15px;
+}
+
+textarea.field {
+	/* this aligns text on the textarea's row with the middle of the textarea */
+	vertical-align: middle;
+	width: 95%;
+	height: 10em;
+}
+
+.media-rotate {
+	position: absolute;
+	top:0.1em;
+	right: 2.0em
+}
+.media-runtime {
+	/* This styles a little bit of text on the uploader that helps debug when there
+		are problems...  Point is to not stand out, look kinda-official, and be
+		easy to read when people send screenshots.  */
+	position: absolute;
+	top: .5em;
+	right: 2em;
+	font-size: .7rem;
+	color: #999;
+}
