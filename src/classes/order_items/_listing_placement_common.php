@@ -2,7 +2,6 @@
 
 //order_items/_listing_placement_common.php
 
-
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';
 
 abstract class _listing_placement_commonOrderItem extends geoOrderItem
@@ -383,7 +382,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
                 //made sure we don't do infinite loop
                 return $cart->displayStep();
             }
-            //should not get here unless weird error.. this just fallback so use doesn't see blank page
+            //should not get here unless weird error.. this just fallback so user doesn't see blank page
             if (!$cart->isCombinedStep()) {
                 return self::categoryDisplay();
             }
@@ -713,7 +712,6 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
         $tpl_vars['title2'] = $cart->site->messages[83];
 
         $recurringClassPricePlan = ($onlyRecurringClassifieds) ? $cart->price_plan['price_plan_id'] : false;
-
         //TODO: add setting to let it use dropdowns even when not combined
         if ($cart->isCombinedStep()) {
             //set it up for dropdowns...
@@ -724,7 +722,6 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
                 $cat_ids[] = $parent_category;
                 $parent_category = (int)$cart->db->GetOne("SELECT `parent_id` FROM " . geoTables::categories_table . " WHERE `category_id`=?", array($parent_category));
             }
-
             $externalPre = (defined('IN_ADMIN')) ? '../' : '';
             //we now have array of $cat_ids with "top level" at bottom.. so just loop and pop top one off list each time
             $entry = array();
@@ -743,7 +740,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
                 $page = (isset($cart->site->session_variables['leveled_page']['cat'][$i])) ? (int)$cart->site->session_variables['leveled_page']['cat'][$i] : 1;
                 //failsafe make sure it's at least one
                 $page = max($page, 1);
-                $value_info = geoCategory::getCategoryLeveledValues($prevParent, $listing_types_allowed, $selected, $page, null, $i, $recurringClassPricePlan);
+                $value_info = geoCategory::getCategoryLeveledValues($prevParent, $listing_types_allowed, $selected, $page, null, $i, $recurringClassPricePlan, $cart->item->getPricePlan());
                 if (count($value_info['values']) < 1) {
                     //no values at this level
                     break;
@@ -785,7 +782,6 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             $parent_category = (int)$cart->item->get('parent_category');
 
             $categories = self::getCategories($parent_category, $listing_types_allowed, $recurringClassPricePlan);
-
             $colspan = $cart->db->get_site_setting('sell_category_column_count');
             if (!$colspan) {
                 $colspan = 1;
@@ -886,6 +882,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
     public static function getCategories($parent_category, $listing_types_allowed, $recurringClassPricePlan = false)
     {
         $cart = geoCart::getInstance();
+        $db = DataAccess::getInstance();
 
         //get the categories in a geoTableSelect query, so we can pass it to an addon hook
         $catTbl = geoTables::categories_table;
@@ -910,9 +907,32 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
         } else {
             $listingType = false;
         }
+
+        $categories_to_exclude = array();
         if ($listingType) {
             //we only want categories that DO NOT have an exclusion for this listing type
-            $query->where("NOT EXISTS(SELECT `category_id` FROM $exclusionTbl WHERE $exclusionTbl.`category_id` = $catTbl.`category_id` AND $exclusionTbl.`listing_type` = '$listingType')");
+            $sql = "SELECT `category_id` FROM " . $exclusionTbl . " WHERE " . $exclusionTbl . ".`category_id` = " . $catTbl . ".`category_id` AND " . $exclusionTbl . ".`listing_type` = " . $listingType;
+            $listing_type_excluded_result = $db->Execute($sql);
+            foreach ($listing_type_excluded_result as $line) {
+                array_push($categories_to_exclude, $line['category_id']);
+            }
+
+            //$query->where(" NOT EXISTS()");
+        }
+
+        if ($parent_category == 0) {
+            //if this is a main category check the price plan specific feature that bans
+            //placement within specific main categories on a price plan by price plan basis
+            //check to see if there are banned categories
+
+            $categories_to_exclude = geoCategory::getExcludedCategoriesByPricePlan(0, $cart->item->getPricePlan(), $categories_to_exclude);
+
+            //$query->where(" NOT EXISTS(SELECT `main_category_id_banned` as `category_id` FROM ".$pricePlanCategoryBanTbl." WHERE ".$pricePlanCategoryBanTbl.".`price_plan_id` = ".$cart->item->getPricePlan().") ");
+        }
+
+        if (count($categories_to_exclude) > 0) {
+            //put these category id into an array
+            $query->where("$catTbl.category_id NOT IN (" . implode(',', $categories_to_exclude) . ")", 'categories_to_exclude');
         }
 
         if ($recurringClassPricePlan) {
@@ -922,16 +942,16 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             }
         }
 
+
+
         $query->where("$catTbl.`enabled` = 'yes'")
             ->order($order_by);
 
         //kick the query over to any addons that care to modify which categories are shown
         geoAddon::triggerDisplay('filter_listing_placement_category_query', $query, geoAddon::FILTER);
 
-
         $sub_result = $cart->db->Execute('' . $query);
         if (!$sub_result) {
-            //echo $sql." is the query<br />\n";
             trigger_error('ERROR SQL CART: Sql: ' . $sql . ' Error Msg: ' . $cart->db->ErrorMsg());
             $cart->site->error_message = $cart->site->messages[57];
             return false;
@@ -1285,7 +1305,9 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             $sql = "SELECT * FROM " . geoTables::auction_payment_types_table . " ORDER BY `display_order`";
             $tpl_vars['payment_options'] = $cart->db->GetAll($sql);
 
-            if (!is_array($cart->site->session_variables["payment_options"])) {
+            if (is_array($cart->site->session_variables["payment_options_from_form"])) {
+                $cart->site->session_variables["payment_options"] = $cart->site->session_variables["payment_options_from_form"];
+            } elseif (!is_array($cart->site->session_variables["payment_options"])) {
                 $cart->site->session_variables["payment_options"] = $tpl_vars['session_variables']['payment_options'] = explode("||", $cart->site->session_variables["payment_options"]);
             }
         }
@@ -1763,9 +1785,10 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
         trigger_error('DEBUG TRANSACTION: classified - length of ad: ' . $length_of_ad . " current time: " . $current_time);
         $live = ($newStatus == 'active') ? 1 : 0;
 
-        if (!$this->get('listing_id')) {
-            //FAILSAFE: weird, listing ID not set so listing not created yet
-            //(this is not typical)... Go ahead and create it now
+        if (!$this->get('listing_id') || !$session_variables['seller']) {
+            // FAILSAFE: weird, listing ID not set so listing not created yet
+            // OR seller not set somehow.  Let _insertListing do the work of making sure
+            // listing is inserted with an ID and that seller is set correctly
             $this->set('session_variables', $session_variables);
             self::_insertListing($this, (($this->getType() == 'classified') ? 1 : 2));
             $session_variables = $this->get('session_variables');
@@ -1975,10 +1998,10 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             }
         }
 
-        if (!$new_session_variables['payment_options'] && $old_session_variables['payment_options']) {
+        if (!$new_session_variables['payment_options_from_form'] && $old_session_variables['payment_options']) {
             //special case: explicity set payment options to blank if they've all been removed.
             $diff['payment_options'] = '';
-        } elseif ($new_session_variables['payment_options'] === true) {
+        } elseif (($new_session_variables['payment_options_admin'] === true) && ($new_session_variables['payment_options_admin'] != 1)) {
             //special case on the special case. this is coming from "listing change admin," so there's never any need to jack with payment options
             unset($diff['payment_options']);
         }
@@ -2181,14 +2204,13 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
         if (!$listing_id) {
             //This is a new listing (not an update of a previously-tried one),
             //so set up id and session vars
-
             $order_item->set('listing_id', $new_id);
             $cart->site->classified_id = $cart->site->session_variables['classified_id'] = $cart->site->session_variables['listing_id'] = $new_id;
-            //make sure the new listing ID is saved, to prevent instances where a new listing is created
-            //but an error prevents it from getting to the step where it remembers the listing id
-            $order_item->set('session_variables', $cart->site->session_variables);
-            $order_item->save();
         }
+        // make sure the new listing ID is saved, along with any other changes, to prevent instances where a new
+        // listing is created but an error prevents it from getting to the step where it remembers the listing id
+        $order_item->set('session_variables', $cart->site->session_variables);
+        $order_item->save();
 
         if (geoPC::is_ent()) {
             //TODO: Will need to make this work with the new system
@@ -2523,6 +2545,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
     private static $_sessionVarsFromListing = array();
     protected static function _getSessionVarsFromListing($listing_id, $allow_archive = true, $force_refresh = false)
     {
+        trigger_error('DEBUG CART: to of _getSessionVarsFromListing with listing_id: ' . $listing_id . ', allow_archive: ' . $allow_archive . ', force_refresh: ' . $force_refresh);
         $allow_archive = intval($allow_archive);
         $listing_id = intval($listing_id);
         if (!$listing_id) {
@@ -2530,14 +2553,17 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             trigger_error('ERROR CART: Listing ID not specified, cant get session vars for listing.');
             return false;
         }
+        //trigger_error('DEBUG CART: self::_sessionVarsFromListing[listing_id][allow_archive]:'.var_dump(self::$_sessionVarsFromListing[$listing_id][$allow_archive]));
         if (!$force_refresh && isset(self::$_sessionVarsFromListing[$listing_id][$allow_archive])) {
             //so it can be called multiple times, and only do it once
+            trigger_error('DEBUG CART: returning allow_archive');
             return self::$_sessionVarsFromListing[$listing_id][$allow_archive];
         }
         $db = DataAccess::getInstance();
 
         $listing = geoListing::getListing($listing_id, true, $allow_archive);
         //get the listing data
+        trigger_error('DEBUG CART: got listing:' . $listing_id);
 
         if (!$listing) {
             trigger_error('ERROR CART: Error getting listing details!');
@@ -2549,6 +2575,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
         $itemTest = ($item_id) ? geoOrderItem::getOrderItem($item_id) : false;
         if (!$itemTest || $item_id == 0 || ($itemTest && $itemTest->getType() == 'listing_renew_upgrade')) {
             //Legacy listing, create a new order item based on legacy settings
+            trigger_error('DEBUG CART: no item test..._createItemForLegacyListing');
             $item_id = self::_createItemForLegacyListing($listing_id, $allow_archive);
         }
         if (!$item_id) {
@@ -2558,7 +2585,9 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
         $session_variables = array();
 
         $all_items = $listing->getAllOrderItems();
+
         $first = true;
+        //trigger_error('DEBUG CART: all_items: <pre>'.var_dump($all_items)."</pre>");
         foreach ($all_items as $row) {
             if (!$first && $row == $item_id) {
                 //first item managed to get itself in there twice, probably an artifact of order item
@@ -2581,6 +2610,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             $first = false;
         }
         self::$_sessionVarsFromListing[$listing_id][$allow_archive] = $session_variables;
+        //trigger_error('DEBUG CART: bottom of _getSessionVarsFromListing - session_variables: <pre>'.var_dump($session_variables)."</pre>");
         return $session_variables;
     }
 
@@ -3670,7 +3700,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
                 $changes = true;
             } else {
                 //already set group ID so just make sure all the stuff is updated
-                $sql = "UPDATE " . geoTables::listing_cost_option_group . " SET 
+                $sql = "UPDATE " . geoTables::listing_cost_option_group . " SET
 						`listing`=?, `label`=?, `quantity_type`=?, `display_order`=? WHERE `id`=?";
                 //NOTE: label is already db-encoded
                 $query_data = array($listingId, $group['label'], $group['quantity_type'],
@@ -3705,7 +3735,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
                     //there were changes to the session vars that need to be saved into session vars
                     $changes = true;
                 } else {
-                    $sql = "UPDATE " . geoTables::listing_cost_option . " SET 
+                    $sql = "UPDATE " . geoTables::listing_cost_option . " SET
 							`label`=?, `cost_added`=?, `file_slot`=?, `ind_quantity_remaining`=?, `display_order`=? WHERE `id`=?";
                     //NOTE: label is already db-encoded
                     $query_data = array ($option['label'], $option['cost_added'],
@@ -3730,7 +3760,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             if (!$isCopy) { //don't remove old values if we're copying this to a new listing!
                 $db->Execute("DELETE FROM " . geoTables::listing_cost_option_quantity . " WHERE `listing`=?", array($listingId));
                 $db->Execute("DELETE FROM " . geoTables::listing_cost_option_q_option . " WHERE NOT EXISTS
-						(SELECT * FROM " . geoTables::listing_cost_option_quantity . " 
+						(SELECT * FROM " . geoTables::listing_cost_option_quantity . "
 						WHERE " . geoTables::listing_cost_option_quantity . ".`id`=" . geoTables::listing_cost_option_q_option . ".`combo_id`)");
             }
 

@@ -3,69 +3,69 @@ CodeMirror.defineMode("apl", function() {
     ".": "innerProduct",
     "\\": "scan",
     "/": "reduce",
-    "???": "reduce1Axis",
-    "???": "scan1Axis",
-    "??": "each",
-    "???": "power"
+    "⌿": "reduce1Axis",
+    "⍀": "scan1Axis",
+    "¨": "each",
+    "⍣": "power"
   };
   var builtInFuncs = {
     "+": ["conjugate", "add"],
-    "???": ["negate", "subtract"],
-    "??": ["signOf", "multiply"],
-    "??": ["reciprocal", "divide"],
-    "???": ["ceiling", "greaterOf"],
-    "???": ["floor", "lesserOf"],
-    "???": ["absolute", "residue"],
-    "???": ["indexGenerate", "indexOf"],
+    "−": ["negate", "subtract"],
+    "×": ["signOf", "multiply"],
+    "÷": ["reciprocal", "divide"],
+    "⌈": ["ceiling", "greaterOf"],
+    "⌊": ["floor", "lesserOf"],
+    "∣": ["absolute", "residue"],
+    "⍳": ["indexGenerate", "indexOf"],
     "?": ["roll", "deal"],
-    "???": ["exponentiate", "toThePowerOf"],
-    "???": ["naturalLog", "logToTheBase"],
-    "???": ["piTimes", "circularFuncs"],
+    "⋆": ["exponentiate", "toThePowerOf"],
+    "⍟": ["naturalLog", "logToTheBase"],
+    "○": ["piTimes", "circularFuncs"],
     "!": ["factorial", "binomial"],
-    "???": ["matrixInverse", "matrixDivide"],
+    "⌹": ["matrixInverse", "matrixDivide"],
     "<": [null, "lessThan"],
-    "???": [null, "lessThanOrEqual"],
+    "≤": [null, "lessThanOrEqual"],
     "=": [null, "equals"],
     ">": [null, "greaterThan"],
-    "???": [null, "greaterThanOrEqual"],
-    "???": [null, "notEqual"],
-    "???": ["depth", "match"],
-    "???": [null, "notMatch"],
-    "???": ["enlist", "membership"],
-    "???": [null, "find"],
-    "???": ["unique", "union"],
-    "???": [null, "intersection"],
-    "???": ["not", "without"],
-    "???": [null, "or"],
-    "???": [null, "and"],
-    "???": [null, "nor"],
-    "???": [null, "nand"],
-    "???": ["shapeOf", "reshape"],
+    "≥": [null, "greaterThanOrEqual"],
+    "≠": [null, "notEqual"],
+    "≡": ["depth", "match"],
+    "≢": [null, "notMatch"],
+    "∈": ["enlist", "membership"],
+    "⍷": [null, "find"],
+    "∪": ["unique", "union"],
+    "∩": [null, "intersection"],
+    "∼": ["not", "without"],
+    "∨": [null, "or"],
+    "∧": [null, "and"],
+    "⍱": [null, "nor"],
+    "⍲": [null, "nand"],
+    "⍴": ["shapeOf", "reshape"],
     ",": ["ravel", "catenate"],
-    "???": [null, "firstAxisCatenate"],
-    "???": ["reverse", "rotate"],
-    "???": ["axis1Reverse", "axis1Rotate"],
-    "???": ["transpose", null],
-    "???": ["first", "take"],
-    "???": [null, "drop"],
-    "???": ["enclose", "partitionWithAxis"],
-    "???": ["diclose", "pick"],
-    "???": [null, "index"],
-    "???": ["gradeUp", null],
-    "???": ["gradeDown", null],
-    "???": ["encode", null],
-    "???": ["decode", null],
-    "???": ["format", "formatByExample"],
-    "???": ["execute", null],
-    "???": ["stop", "left"],
-    "???": ["pass", "right"]
+    "⍪": [null, "firstAxisCatenate"],
+    "⌽": ["reverse", "rotate"],
+    "⊖": ["axis1Reverse", "axis1Rotate"],
+    "⍉": ["transpose", null],
+    "↑": ["first", "take"],
+    "↓": [null, "drop"],
+    "⊂": ["enclose", "partitionWithAxis"],
+    "⊃": ["diclose", "pick"],
+    "⌷": [null, "index"],
+    "⍋": ["gradeUp", null],
+    "⍒": ["gradeDown", null],
+    "⊤": ["encode", null],
+    "⊥": ["decode", null],
+    "⍕": ["format", "formatByExample"],
+    "⍎": ["execute", null],
+    "⊣": ["stop", "left"],
+    "⊢": ["pass", "right"]
   };
 
-  var isOperator = /[\.\/???????????]/;
-  var isNiladic = /???/;
-  var isFunction = /[\+???????????????????\??????????!???<???=>??????????????????????????????????????????,???????????????????????????????????????????????????]/;
-  var isArrow = /???/;
-  var isComment = /[???#].*$/;
+  var isOperator = /[\.\/⌿⍀¨⍣]/;
+  var isNiladic = /⍬/;
+  var isFunction = /[\+−×÷⌈⌊∣⍳\?⋆⍟○!⌹<≤=>≥≠≡≢∈⍷∪∩∼∨∧⍱⍲⍴,⍪⌽⊖⍉↑↓⊂⊃⌷⍋⍒⊤⊥⍕⍎⊣⊢]/;
+  var isArrow = /←/;
+  var isComment = /[⍝#].*$/;
 
   var stringEater = function(type) {
     var prev;
@@ -112,7 +112,7 @@ CodeMirror.defineMode("apl", function() {
         state.prev = false;
         return "niladic";
       }
-      if (/[??\d]/.test(ch)) {
+      if (/[¯\d]/.test(ch)) {
         if (state.func) {
           state.func = false;
           state.prev = false;
@@ -145,7 +145,7 @@ CodeMirror.defineMode("apl", function() {
         stream.skipToEnd();
         return "comment";
       }
-      if (ch === "???" && stream.peek() === ".") {
+      if (ch === "∘" && stream.peek() === ".") {
         stream.next();
         return "function jot-dot";
       }

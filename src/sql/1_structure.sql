@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_addons` (
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY  (`name`),
   KEY `enabled` (`enabled`)
-);
+) ENGINE = MYISAM;
 
 -- --------------------------------------------------------
 
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_addon_registry` (
   KEY `index_key` (`index_key`),
   KEY `addon` (`addon`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE = MYISAM;
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_addon_text` (
   KEY `addon` (`addon`),
   KEY `text_id` (`text_id`),
   KEY `language_id` (`language_id`)
-);
+) ENGINE = MYISAM;
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_ad_filter` (
   PRIMARY KEY  (`filter_id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`)
-)  AUTO_INCREMENT=11 ;
+)  ENGINE = MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_ad_filter_categories` (
   `filter_id` int(11) NOT NULL default '0',
   `category_id` int(11) NOT NULL default '0',
   KEY `filter_id` (`filter_id`)
-);
+) ENGINE = MYISAM;
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_autobids` (
   `cost_options` varchar(255) NOT NULL,
   KEY `auction_id` (`auction_id`),
   KEY `bidder` (`bidder`)
-);
+) ENGINE = MYISAM;
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_bids` (
   KEY `auction_id` (`auction_id`),
   KEY `bidder` (`bidder`),
   KEY `time_of_bid` (`time_of_bid`)
-);
+) ENGINE = MYISAM;
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_blacklisted_users` (
   `user_id` int(11) NOT NULL default '0',
   KEY `seller_id` (`seller_id`),
   KEY `user_id` (`user_id`)
-);
+) ENGINE = MYISAM;
 
 -- --------------------------------------------------------
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_feedbacks` (
   KEY `auction_id` (`auction_id`),
   KEY `rated_user_id` (`rated_user_id`),
   KEY `rater_user_id` (`rater_user_id`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1 , ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_feedback_icons` (
   KEY `icon_num` (`icon_num`),
   KEY `begin` (`begin`),
   KEY `end` (`end`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_final_fee_price_increments` (
   KEY `price_plan_id` (`price_plan_id`),
   KEY `low` (`low`),
   KEY `high` (`high`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_increments` (
   `low` double(16,2) default NULL,
   `increment` double(16,2) default NULL,
   KEY `low` (`low`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_auctions_invited_users` (
   `seller_id` int(11) NOT NULL default '0',
   `user_id` int(11) NOT NULL default '0',
   KEY `seller_id` (`seller_id`,`user_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_banned_ips` (
   `ip_id` int(11) NOT NULL auto_increment,
   `ip` varchar(25) NOT NULL default '',
   PRIMARY KEY  (`ip_id`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 --
 -- Table structure for table `geodesic_browsing_filters`
@@ -237,13 +237,13 @@ CREATE TABLE IF NOT EXISTS `geodesic_banned_ips` (
 DROP TABLE IF EXISTS `geodesic_browsing_filters`;
 CREATE TABLE IF NOT EXISTS `geodesic_browsing_filters` (
   `session_id` varchar(32) NOT NULL,
-  `target` varchar(255) NOT NULL,
-  `value_scalar` varchar(255) DEFAULT NULL,
+  `target` varchar(200) NOT NULL,
+  `value_scalar` varchar(250) DEFAULT NULL,
   `value_range_low` double(10,2) DEFAULT NULL,
   `value_range_high` double(10,2) DEFAULT NULL,
   `category` int(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`session_id`,`target`)
-);
+) ENGINE=MYISAM;
 
 --
 -- Table structure for table `geodesic_browsing_filters_settings`
@@ -251,12 +251,12 @@ CREATE TABLE IF NOT EXISTS `geodesic_browsing_filters` (
 DROP TABLE IF EXISTS `geodesic_browsing_filters_settings`;
 CREATE TABLE IF NOT EXISTS `geodesic_browsing_filters_settings` (
 	`category` int(14) NOT NULL DEFAULT '0',
-	`field` varchar(255) NOT NULL,
+	`field` varchar(240) NOT NULL,
 	`enabled` tinyint(1) NOT NULL DEFAULT '0',
 	`dependency` varchar(255) NOT NULL DEFAULT '',
 	`display_order` int(1) NOT NULL DEFAULT '0',
 	PRIMARY KEY  (`category`,`field`)
-);
+) ENGINE=MYISAM;
 
 --
 -- Table structure for table `geodesic_browsing_filters_settings_languages`
@@ -264,11 +264,11 @@ CREATE TABLE IF NOT EXISTS `geodesic_browsing_filters_settings` (
 DROP TABLE IF EXISTS `geodesic_browsing_filters_settings_languages`;
 CREATE TABLE IF NOT EXISTS `geodesic_browsing_filters_settings_languages` (
 	`category` int(14) NOT NULL DEFAULT '0',
-	`field` varchar(255) NOT NULL,
+	`field` varchar(220) NOT NULL,
 	`language` int(14) NOT NULL DEFAULT '1',
 	`name` varchar(255) NOT NULL DEFAULT '',
 	PRIMARY KEY  (`category`,`field`,`language`)
-);
+) ENGINE=MYISAM;
 
 --
 -- Table structure for table `geodesic_cart`
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_cart` (
   KEY `order_item` (`order_item`),
   KEY `user_id` (`user_id`),
   KEY `admin_id` (`admin_id`)
-)  AUTO_INCREMENT=28 ;
+)  AUTO_INCREMENT=28, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -310,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_cart_registry` (
   KEY `index_key` (`index_key`),
   KEY `cart` (`cart`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -344,7 +344,19 @@ CREATE TABLE IF NOT EXISTS `geodesic_categories` (
   KEY `which_head_html` (`which_head_html`),
   KEY `level` (`level`),
   KEY `enabled` (`enabled`)
-) AUTO_INCREMENT=304 ;
+) AUTO_INCREMENT=304, ENGINE=MYISAM ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `geodesic_categories_excluded_per_price_plan`
+--
+
+DROP TABLE IF EXISTS `geodesic_categories_excluded_per_price_plan`;
+CREATE TABLE IF NOT EXISTS `geodesic_categories_excluded_per_price_plan` (
+  `price_plan_id` int(11) NOT NULL,
+  `main_category_id_banned` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -375,7 +387,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_categories_languages` (
   `seller_cache_expire` int(11) NOT NULL DEFAULT '0',
   KEY `category_id` (`category_id`),
   KEY `language_id` (`language_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -388,7 +400,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_category_exclude_list_types` (
   `category_id` int(11) NOT NULL,
   `listing_type` varchar(128) NOT NULL,
   PRIMARY KEY (`category_id`,`listing_type`)
-);
+) ENGINE=MYISAM;
 
 --
 -- Table structure for table `geodesic_chain_payments`
@@ -407,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_chain_payments`(
 	`status` varchar(255) NOT NULL DEFAULT 'INITIATED',
 	PRIMARY KEY (`id`),
 	KEY `payKey` (`payKey`)
-);
+) ENGINE=MYISAM;
 
 
 --
@@ -425,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_choices` (
   `language_id` int(11) NOT NULL default '1',
   PRIMARY KEY  (`choice_id`),
   KEY `language_id` (`language_id`)
-)  AUTO_INCREMENT=620 ;
+)  AUTO_INCREMENT=620, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -556,7 +568,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds` (
   KEY `viewed` (`viewed`),
   KEY `date` (`date`),
   KEY `language_id` (`language_id`)
-)  AUTO_INCREMENT=111 ;
+)  AUTO_INCREMENT=111, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -575,7 +587,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_ads_extra` (
   `group_id` int(11) NOT NULL default '0',
   `display_order` int(11) NOT NULL default '0',
   KEY `classified_id` (`classified_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -631,7 +643,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_ad_configuration` (
   `editable_bid_start_time_field` int(11) NOT NULL default '0',
   `clientside_image_uploader_view` tinyint(4) NOT NULL default '0',
   `image_uploader_default` tinyint(4) NOT NULL default '0'
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -846,7 +858,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_configuration` (
   `storefront_url` tinytext NOT NULL,
   `member_since_date_configuration` varchar(20) NOT NULL default 'F Y',
   `popup_image_while_browsing` int(11) NOT NULL default '0'
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -863,7 +875,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_credit_choices` (
   `amount` double(5,2) NOT NULL default '0.00',
   PRIMARY KEY  (`credit_id`),
   KEY `price_plan_id` (`price_plan_id`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 
 -- --------------------------------------------------------
@@ -883,7 +895,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_expirations` (
   PRIMARY KEY  (`expiration_id`),
   KEY `type_id` (`type_id`),
   KEY `user_id` (`user_id`)
-)  AUTO_INCREMENT=3 ;
+)  AUTO_INCREMENT=3, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -960,7 +972,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_expired` (
   KEY `date` (`date`),
   KEY `ad_ended` (`ad_ended`),
   KEY `order_item_id` (`order_item_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -991,7 +1003,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_images_urls` (
   PRIMARY KEY  (`image_id`),
   KEY `classified_id` (`classified_id`),
   KEY `display_order` (`display_order`)
-)  AUTO_INCREMENT=88 ;
+)  AUTO_INCREMENT=88, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1007,7 +1019,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_messages_form` (
   `subject` varchar(100) NOT NULL default '',
   `content_type` varchar(20) NOT NULL default 'text/plain',
   PRIMARY KEY  (`message_id`)
-)  AUTO_INCREMENT=8 ;
+)  AUTO_INCREMENT=8, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1025,7 +1037,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_messages_past` (
   `subject` varchar(100) NOT NULL default '',
   `content_type` varchar(20) NOT NULL default 'text/plain',
   PRIMARY KEY  (`message_id`)
-)  AUTO_INCREMENT=21 ;
+)  AUTO_INCREMENT=21, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1039,7 +1051,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_messages_past_recipients` (
   `message_id` int(11) NOT NULL default '0',
   KEY `user_id` (`user_id`),
   KEY `message_id` (`message_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1058,7 +1070,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_price_increments` (
   `item_type` int(11) NOT NULL default '1',
   KEY `price_plan_id` (`price_plan_id`),
   KEY `category_id` (`category_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1113,7 +1125,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_price_plans` (
   `applies_to` int(1) NOT NULL default '0',
   `delayed_start_auction` int(11) NOT NULL default '0',
   PRIMARY KEY  (`price_plan_id`)
-)  AUTO_INCREMENT=23 ;
+)  AUTO_INCREMENT=23, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1150,7 +1162,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_price_plans_categories` (
   PRIMARY KEY  (`category_price_plan_id`),
   KEY `price_plan_id` (`price_plan_id`),
   KEY `category_id` (`category_id`)
-)  AUTO_INCREMENT=4 ;
+)  AUTO_INCREMENT=4, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1165,7 +1177,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_price_plans_extras` (
   `description` tinytext NOT NULL,
   `cost` decimal(10,2) NOT NULL default '0.00',
   KEY `price_plan_id` (`price_plan_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1186,7 +1198,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_sell_questions` (
   PRIMARY KEY  (`question_id`),
   KEY `category_id` (`category_id`),
   KEY `group_id` (`group_id`)
-) AUTO_INCREMENT=167 ;
+) AUTO_INCREMENT=167, ENGINE=MYISAM ;
 
 
 
@@ -1205,7 +1217,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_sell_question_choices` (
   PRIMARY KEY  (`value_id`),
   KEY `type_id` (`type_id`),
   KEY `display_order` (`display_order`)
-) AUTO_INCREMENT=273 ;
+) AUTO_INCREMENT=273, ENGINE=MYISAM ;
 
 --
 -- Table structure for table `geodesic_classifieds_sell_questions_languages`
@@ -1220,7 +1232,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_sell_questions_languages` (
   `choices` varchar(40) NOT NULL,
   `search_as_numbers` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`question_id`,`language_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1234,7 +1246,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_sell_question_types` (
   `type_name` varchar(50) NOT NULL default '',
   `explanation` tinytext NOT NULL,
   PRIMARY KEY  (`type_id`)
-) AUTO_INCREMENT=36 ;
+) AUTO_INCREMENT=36, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1251,7 +1263,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_subscription_choices` (
   `amount` double(11,2) NOT NULL default '0.00',
   PRIMARY KEY  (`period_id`),
   KEY `price_plan_id` (`price_plan_id`)
-)  AUTO_INCREMENT=28 ;
+)  AUTO_INCREMENT=28, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1271,7 +1283,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_user_subscriptions` (
   KEY `price_plan_id` (`price_plan_id`),
   KEY `user_id` (`user_id`),
   KEY `recurring_billing` (`recurring_billing`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1288,7 +1300,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_user_subscriptions_holds` (
   `storefront` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`renewal_id`),
   KEY `user_id` (`user_id`)
-)  AUTO_INCREMENT=4 ;
+)  AUTO_INCREMENT=4, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1309,7 +1321,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_classifieds_votes` (
   PRIMARY KEY (`vote_id`),
   KEY `classified_id` (`classified_id`),
   KEY `user_id` (`user_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1326,7 +1338,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_combined_css_list` (
   PRIMARY KEY (`id`),
   KEY `version` (`version`),
   KEY `resource_hash` (`resource_hash`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1343,7 +1355,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_combined_js_list` (
   PRIMARY KEY (`id`),
   KEY `version` (`version`),
   KEY `resource_hash` (`resource_hash`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1403,7 +1415,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_confirm` (
   `terminal_region_id` int(11) NOT NULL default '0',
   `feeshareattachment` int(11) NOT NULL DEFAULT '0',
   KEY `id` (`id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1418,7 +1430,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_confirm_email` (
   `mdhash` varchar(100) default NULL,
   `date` int(14) NOT NULL default '0',
   KEY `id` (`id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1436,7 +1448,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_countries` (
   `tax` double NOT NULL default '0',
   `tax_type` int(11) NOT NULL default '0',
   PRIMARY KEY  (`country_id`)
-)  AUTO_INCREMENT=9 ;
+)  AUTO_INCREMENT=9, ENGINE=MYISAM ;
 
 --
 -- Table structure for table `geodesic_cron`
@@ -1451,7 +1463,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_cron` (
   `interval` int(14) NOT NULL,
   PRIMARY KEY  (`task`),
   KEY `interval` (`interval`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1468,7 +1480,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_currency_types` (
   `conversion_rate` double NOT NULL default '1',
   `display_order` int(11) NOT NULL default '0',
   UNIQUE KEY `type_id` (`type_id`)
-)  AUTO_INCREMENT=10 ;
+)  AUTO_INCREMENT=10, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1481,7 +1493,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_email_domains` (
   `serial_id` mediumint(9) NOT NULL auto_increment,
   `domain` tinytext NOT NULL,
   PRIMARY KEY  (`serial_id`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 
 -- --------------------------------------------------------
@@ -1504,7 +1516,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_email_queue` (
   PRIMARY KEY (`email_id`),
   KEY `status` (`status`),
   KEY `sent` (`sent`)
-) AUTO_INCREMENT=1;
+) AUTO_INCREMENT=1, ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1527,7 +1539,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_favorites` (
   KEY `auction_id` (`auction_id`),
   KEY `expiration_notice` (`expiration_notice`),
   KEY `expiration_last_sent` (`expiration_last_sent`)
-)  AUTO_INCREMENT=9 ;
+)  AUTO_INCREMENT=9, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1551,7 +1563,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_fields` (
   KEY `is_enabled` (`is_enabled`),
   KEY `is_required` (`is_required`),
   KEY `can_edit` (`can_edit`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1566,7 +1578,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_field_locations` (
   `field_name` varchar(128) NOT NULL,
   `display_location` varchar(128) NOT NULL,
   KEY `group_id` (`group_id`,`category_id`,`field_name`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1583,7 +1595,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_file_types` (
   `icon_to_use` tinytext NOT NULL,
   `extension` tinytext NOT NULL,
   PRIMARY KEY  (`file_type_id`)
-)  AUTO_INCREMENT=7 ;
+)  AUTO_INCREMENT=7, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1611,7 +1623,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_groups` (
   `what_fields_to_use` enum('site','own') NOT NULL default 'site',
   PRIMARY KEY  (`group_id`),
   KEY `what_fields_to_use` (`what_fields_to_use`)
-)  AUTO_INCREMENT=12 ;
+)  AUTO_INCREMENT=12, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1628,7 +1640,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_group_attached_price_plans` (
   `applies_to` int(1) NOT NULL default '0',
   KEY `group_id` (`group_id`),
   KEY `price_plan_id` (`price_plan_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1647,7 +1659,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_html_allowed` (
   `strongly_recommended` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`tag_id`),
   KEY `tag_name` (`tag_name`)
-)  AUTO_INCREMENT=61 ;
+)  AUTO_INCREMENT=61, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1667,7 +1679,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_invoice` (
   KEY `order` (`order`),
   KEY `created` (`created`),
   KEY `due` (`due`)
-)  AUTO_INCREMENT=194 ;
+)  AUTO_INCREMENT=194, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1685,7 +1697,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_invoice_registry` (
   KEY `index_key` (`index_key`),
   KEY `invoice` (`invoice`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 --
@@ -1694,10 +1706,10 @@ CREATE TABLE IF NOT EXISTS `geodesic_invoice_registry` (
 
 DROP TABLE IF EXISTS `geodesic_jit_confirmations`;
 CREATE TABLE IF NOT EXISTS `geodesic_jit_confirmations` (
-	`email` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(230) NOT NULL,
 	`code` VARCHAR(10) NOT NULL,
 	PRIMARY KEY (`email`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1711,7 +1723,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_leveled_field_level` (
   `leveled_field` int(11) NOT NULL,
   `always_show` enum('yes','no') NOT NULL DEFAULT 'no',
   PRIMARY KEY (`level`,`leveled_field`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1726,7 +1738,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_leveled_field_level_labels` (
   `language_id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`level`,`leveled_field`,`language_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1748,7 +1760,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_leveled_field_value` (
   KEY `level` (`level`),
   KEY `enabled` (`enabled`),
   KEY `display_order` (`display_order`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1762,7 +1774,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_leveled_field_value_languages` (
   `language_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`language_id`)
-) ;
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1775,7 +1787,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_leveled_fields` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `label` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1792,7 +1804,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_license_log` (
   `need_attention` tinyint(3) NOT NULL default '1',
   PRIMARY KEY  (`log_id`),
   KEY `time` (`time`,`log_type`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1810,7 +1822,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listingextra_duration_prices` (
 	`price` double(10,2) NOT NULL DEFAULT 0.00,
 	PRIMARY KEY(`id`),
 	KEY (`extra_type`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1824,7 +1836,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listingextra_duration_languages` (
 	`language_id` int(1) NOT NULL,
 	`label` tinytext NOT NULL DEFAULT '',
 	PRIMARY KEY(`id`, `language_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1835,10 +1847,10 @@ CREATE TABLE IF NOT EXISTS `geodesic_listingextra_duration_languages` (
 DROP TABLE IF EXISTS `geodesic_listingextra_expirations`;
 CREATE TABLE IF NOT EXISTS `geodesic_listingextra_expirations` (
 	`listing_id` int(1) NOT NULL,
-	`extra_type` varchar(255) NOT NULL DEFAULT '',
+	`extra_type` varchar(240) NOT NULL DEFAULT '',
 	`expires` int(1) NOT NULL DEFAULT 0 COMMENT 'unix timestamp',
 	PRIMARY KEY (`listing_id`, `extra_type`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1858,7 +1870,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_categories` (
   KEY `level` (`level`),
   KEY `category_order` (`category_order`),
   KEY `is_terminal` (`is_terminal`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1878,7 +1890,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_cost_option_group` (
   KEY `listing` (`listing`),
   KEY `seller` (`seller`),
   KEY `display_order` (`display_order`)
-) AUTO_INCREMENT=14 ;
+) AUTO_INCREMENT=14, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1898,7 +1910,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_cost_option` (
   PRIMARY KEY (`id`),
   KEY `group` (`group`),
   KEY `display_order` (`display_order`)
-) AUTO_INCREMENT=16 ;
+) AUTO_INCREMENT=16, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1912,7 +1924,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_cost_options_q_option` (
   `option_id` int(11) NOT NULL,
   PRIMARY KEY (`combo_id`,`option_id`),
   KEY `combo_id` (`combo_id`)
-) ;
+) ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1927,7 +1939,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_cost_options_quantity` (
   `quantity_remaining` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `listing` (`listing`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -1944,7 +1956,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_leveled_fields` (
   `default_name` varchar(255) NOT NULL,
   PRIMARY KEY (`listing`,`leveled_field`,`field_value`),
   KEY `level` (`level`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1964,7 +1976,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_regions` (
   KEY `region_order` (`region_order`),
   KEY `listing` (`listing`),
   KEY `region` (`region`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1978,7 +1990,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_subscription` (
   `listing_id` int(1) NOT NULL,
   PRIMARY KEY (`recurring_id`),
   KEY `listing_id` (`listing_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -1997,7 +2009,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_subscription_lengths` (
   PRIMARY KEY (`id`),
   KEY `price_plan` (`price_plan`),
   KEY `category` (`category`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2010,7 +2022,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_tags` (
   `listing_id` int(11) NOT NULL,
   `tag` varchar(128) NOT NULL,
   PRIMARY KEY  (`listing_id`,`tag`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2030,7 +2042,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_logins` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `api_token` (`api_token`)
-)  AUTO_INCREMENT=49 ;
+)  AUTO_INCREMENT=49, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2043,7 +2055,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_master` (
   `setting` varchar(128) NOT NULL,
   `switch` enum('on','off') NOT NULL DEFAULT 'off',
   PRIMARY KEY (`setting`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2067,7 +2079,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_order` (
   KEY `seller` (`seller`),
   KEY `admin` (`admin`),
   KEY `created` (`created`)
-) AUTO_INCREMENT=152 ;
+) AUTO_INCREMENT=152, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2099,7 +2111,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_order_item` (
   KEY `created` (`created`),
   KEY `parent` (`parent`),
   KEY `process_order` (`process_order`)
-) AUTO_INCREMENT=186 ;
+) AUTO_INCREMENT=186, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2117,7 +2129,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_order_item_registry` (
   KEY `index_key` (`index_key`),
   KEY `order_item` (`order_item`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2135,7 +2147,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_order_registry` (
   KEY `index_key` (`index_key`),
   KEY `order` (`order`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2238,7 +2250,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_pages` (
   KEY `section_id` (`section_id`),
   KEY `module` (`module`),
   KEY `module_replace_tag` (`module_replace_tag`)
-) AUTO_INCREMENT=10210 ;
+) AUTO_INCREMENT=10210, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2256,7 +2268,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_pages_languages` (
   `charset` enum('ISO-8859-1','ISO-8859-15','UTF-8','cp866','cp1251','cp1252','KOI8-R','BIG5','GB2312','BIG5-HKSCS','Shift_JIS','EUC-JP') NOT NULL default 'ISO-8859-1',
   PRIMARY KEY  (`language_id`),
   KEY `default_language` (`default_language`)
-)  AUTO_INCREMENT=24 ;
+)  AUTO_INCREMENT=24, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2279,7 +2291,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_pages_messages` (
   KEY `page_id` (`page_id`),
   KEY `type` (`type`),
   KEY `display_order` (`display_order`)
-)  AUTO_INCREMENT=500217 ;
+)  AUTO_INCREMENT=500217, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2296,7 +2308,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_pages_messages_languages` (
   KEY `page_id` (`page_id`),
   KEY `text_id` (`text_id`),
   KEY `language_id` (`language_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2314,7 +2326,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_pages_modules_sections` (
   PRIMARY KEY  (`section_id`),
   KEY `parent_section` (`parent_section`),
   KEY `display_order` (`display_order`)
-)  AUTO_INCREMENT=17 ;
+)  AUTO_INCREMENT=17, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2334,7 +2346,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_pages_sections` (
   KEY `parent_section` (`parent_section`),
   KEY `display_order` (`display_order`),
   KEY `applies_to` (`applies_to`)
-)  AUTO_INCREMENT=15 ;
+)  AUTO_INCREMENT=15, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2356,7 +2368,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_payment_gateway` (
   KEY `enabled` (`enabled`),
   KEY `default` (`default`),
   KEY `group` (`group`)
-) ;
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2374,7 +2386,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_payment_gateway_registry` (
   KEY `index_key` (`index_key`),
   KEY `payment_gateway` (`payment_gateway`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2388,11 +2400,11 @@ CREATE TABLE IF NOT EXISTS `geodesic_payment_types` (
   `type_name` tinytext NOT NULL,
   `display_order` int(11) NOT NULL default '0',
   KEY `type_id` (`type_id`)
-)  AUTO_INCREMENT=13 ;
+)  AUTO_INCREMENT=13, ENGINE=MYISAM ;
 
 DROP TABLE IF EXISTS `geodesic_plan_item`;
 CREATE TABLE IF NOT EXISTS `geodesic_plan_item` (
-  `order_item` varchar(255) NOT NULL,
+  `order_item` varchar(200) NOT NULL,
   `price_plan` int(11) NOT NULL,
   `category` int(11) NOT NULL,
   `process_order` int(14) NOT NULL,
@@ -2401,7 +2413,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_plan_item` (
   PRIMARY KEY  (`order_item`,`price_plan`,`category`),
   KEY `process_order` (`process_order`),
   KEY `enabled` (`enabled`)
-) ;
+) ENGINE=MYISAM ;
 
 DROP TABLE IF EXISTS `geodesic_plan_item_registry`;
 CREATE TABLE IF NOT EXISTS `geodesic_plan_item_registry` (
@@ -2413,7 +2425,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_plan_item_registry` (
   KEY `index_key` (`index_key`),
   KEY `plan_item` (`plan_item`),
   KEY `val_string` (`val_string`)
-) ;
+) ENGINE=MYISAM;
 
 --
 -- Table structure for table `geodesic_price_plan_ad_lengths`
@@ -2429,7 +2441,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_price_plan_ad_lengths` (
   `length_charge` double(8,2) NOT NULL default '0.00',
   `renewal_charge` double(8,2) NOT NULL default '0.00',
   UNIQUE KEY `length_id` (`length_id`)
-)  AUTO_INCREMENT=19 ;
+)  AUTO_INCREMENT=19, ENGINE=MYISAM ;
 
 DROP TABLE IF EXISTS `geodesic_recurring_billing`;
 CREATE TABLE IF NOT EXISTS `geodesic_recurring_billing` (
@@ -2452,7 +2464,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_recurring_billing` (
   KEY `status` (`status`),
   KEY `user_id` (`user_id`),
   KEY `item_type` (`item_type`)
-) AUTO_INCREMENT=27 ;
+) AUTO_INCREMENT=27, ENGINE=MYISAM ;
 
 DROP TABLE IF EXISTS `geodesic_recurring_billing_registry`;
 CREATE TABLE IF NOT EXISTS `geodesic_recurring_billing_registry` (
@@ -2464,7 +2476,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_recurring_billing_registry` (
   KEY `index_key` (`index_key`),
   KEY `recurring_billing` (`recurring_billing`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2489,7 +2501,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_region` (
   KEY `enabled` (`enabled`),
   KEY `unique_name` (`unique_name`),
   KEY `display_order` (`display_order`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2503,7 +2515,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_region_languages` (
   `language_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`language_id`)
-) ;
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2518,7 +2530,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_region_level` (
   `use_label` enum('yes','no') NOT NULL DEFAULT 'no',
   `always_show` enum('yes','no') NOT NULL DEFAULT 'no',
   PRIMARY KEY (`level`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2532,7 +2544,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_region_level_labels` (
   `language_id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
   PRIMARY KEY (`level`,`language_id`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2654,7 +2666,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_registration_configuration` (
   `registration_optional_8_field_name` varchar(50) NOT NULL default 'Reg Optional Field 8',
   `registration_optional_9_field_name` varchar(50) NOT NULL default 'Reg Optional Field 9',
   `registration_optional_10_field_name` varchar(50) NOT NULL default 'Reg Optional Field 10'
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2669,7 +2681,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_registration_question_choices` (
   `value` tinytext NOT NULL,
   `display_order` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`value_id`)
-)  AUTO_INCREMENT=6 ;
+)  AUTO_INCREMENT=6, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2683,7 +2695,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_registration_question_types` (
   `type_name` varchar(50) NOT NULL default '',
   `explanation` tinytext NOT NULL,
   PRIMARY KEY  (`type_id`)
-)  AUTO_INCREMENT=101 ;
+)  AUTO_INCREMENT=101, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2735,7 +2747,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_registration_session` (
   `registration_code` tinytext NOT NULL,
   `feeshareattachment` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`session`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2757,7 +2769,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_sessions` (
   KEY `user_id` (`user_id`),
   KEY `last_time` (`last_time`),
   KEY `admin_session` (`admin_session`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2775,7 +2787,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_sessions_registry` (
   KEY `index_key` (`index_key`),
   KEY `sessions` (`sessions`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2785,10 +2797,10 @@ CREATE TABLE IF NOT EXISTS `geodesic_sessions_registry` (
 
 DROP TABLE IF EXISTS `geodesic_site_settings`;
 CREATE TABLE IF NOT EXISTS `geodesic_site_settings` (
-  `setting` varchar(255) NOT NULL,
+  `setting` varchar(250) NOT NULL,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY  (`setting`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2798,10 +2810,10 @@ CREATE TABLE IF NOT EXISTS `geodesic_site_settings` (
 
 DROP TABLE IF EXISTS `geodesic_site_settings_long`;
 CREATE TABLE IF NOT EXISTS `geodesic_site_settings_long` (
-  `setting` varchar(255) NOT NULL,
+  `setting` varchar(250) NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY  (`setting`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2823,7 +2835,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_states` (
   KEY `abbreviation` (`abbreviation`),
   KEY `display_order` (`display_order`),
   KEY `parent_id` (`parent_id`)
-)  AUTO_INCREMENT=168 ;
+)  AUTO_INCREMENT=168, ENGINE=MYISAM ;
 
 
 -- --------------------------------------------------------
@@ -2839,7 +2851,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_text_badwords` (
   `badword_replacement` varchar(30) NOT NULL default '',
   `entire_word` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`badword_id`)
-)  AUTO_INCREMENT=3 ;
+)  AUTO_INCREMENT=3, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2867,7 +2879,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_transaction` (
   KEY `status` (`status`),
   KEY `invoice` (`invoice`),
   KEY `recurring_billing` (`recurring_billing`)
-)  AUTO_INCREMENT=220 ;
+)  AUTO_INCREMENT=220, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -2885,7 +2897,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_transaction_registry` (
   KEY `index_key` (`index_key`),
   KEY `transaction` (`transaction`),
   KEY `val_string` (`val_string`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -2978,7 +2990,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_userdata` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `email` (`email`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -3022,7 +3034,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_userdata_history` (
   PRIMARY KEY  (`history_id`),
   KEY `id` (`id`),
   KEY `username` (`username`)
-)  AUTO_INCREMENT=20 ;
+)  AUTO_INCREMENT=20, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -3047,7 +3059,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_user_communications` (
   `sender_deleted` TINYINT(1) NOT NULL DEFAULT '0',
   `receiver_deleted` TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`message_id`)
-)  AUTO_INCREMENT=7 ;
+)  AUTO_INCREMENT=7, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -3062,7 +3074,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_user_groups_price_plans` (
   `price_plan_id` int(11) NOT NULL default '1',
   `auction_price_plan_id` int(11) NOT NULL default '5',
   PRIMARY KEY  (`id`)
-)  AUTO_INCREMENT=49 ;
+)  AUTO_INCREMENT=49, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -3076,7 +3088,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_user_ratings` (
 	`from` int(1) NOT NULL,
 	`rating` int(1) NOT NULL,
 	PRIMARY KEY (`about`, `from`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -3090,7 +3102,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_user_ratings_averages` (
 	`average` double(3,2) NOT NULL,
 	`notified` int(1) NOT NULL DEFAULT 0,
 	PRIMARY KEY (`about`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -3106,7 +3118,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_user_regions` (
   `default_name` varchar(255) NOT NULL,
   PRIMARY KEY (`user`,`region`),
   KEY `level` (`level`)
-);
+) ENGINE=MYISAM;
 
 -- --------------------------------------------------------
 
@@ -3123,7 +3135,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_user_tokens` (
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`),
   KEY `expire` (`expire`)
-)  AUTO_INCREMENT=2 ;
+)  AUTO_INCREMENT=2, ENGINE=MYISAM ;
 
 -- --------------------------------------------------------
 
@@ -3134,7 +3146,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_user_tokens` (
 DROP TABLE IF EXISTS `geodesic_version`;
 CREATE TABLE IF NOT EXISTS `geodesic_version` (
   `db_version` tinytext NOT NULL
-);
+) ENGINE=MYISAM;
 
 --
 -- Table structure for table `geodesic_listing_offsite_videos`
@@ -3152,7 +3164,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_listing_offsite_videos` (
   PRIMARY KEY (`id`),
   KEY `listing_id` (`listing_id`),
   KEY `slot` (`slot`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 --
 -- Table structure for table `geodesic_print_publications`
@@ -3166,7 +3178,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_print_publication` (
   PRIMARY KEY (`id`),
   KEY `sort_order` (`sort_order`),
   KEY `status` (`status`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 
 --
 -- Table structure for table `geodesic_print_publications_languages`
@@ -3179,7 +3191,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_print_publication_languages` (
   `label` varchar(128) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`,`language_id`)
-) ;
+) ENGINE=MYISAM;
 
 --
 -- Table structure for table `geodesic_print_publish_days`
@@ -3197,5 +3209,5 @@ CREATE TABLE IF NOT EXISTS `geodesic_print_publish_days` (
   KEY `publication_id` (`publication_id`),
   KEY `status` (`status`),
   KEY `sort_order` (`sort_order`)
-) AUTO_INCREMENT=1 ;
+) AUTO_INCREMENT=1, ENGINE=MYISAM ;
 

@@ -75,7 +75,7 @@ class addon_google_maps_util extends addon_google_maps_info
         }
 
         $location = urlencode($location);
-        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$location";
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $location . "&key=" . $googleApiKey;
 
         $response = geoPC::urlGetContents($url);
         $this->adminGoogleResponse = $response;
@@ -114,8 +114,8 @@ class addon_google_maps_util extends addon_google_maps_info
             $latitude = str_replace(",", ".", $latitude);
         }
 
+        //$this->coordinates = 'lat:'.$latitude.',lng:'.$longitude;
         $this->coordinates = $latitude . ',' . $longitude;
-
         return $this->coordinates;
     }
 

@@ -1,7 +1,6 @@
 <?php
 
 //addons/social_connect/util.php
-
 # Facebook Connect
 
 require_once ADDON_DIR . 'social_connect/info.php';
@@ -28,13 +27,12 @@ class addon_social_connect_util extends addon_social_connect_info
         $redirect_uri = '';
         if ($encode) {
             //generate redirect URI, add c to allow re-directing to wherever it should.
-            $base = geoFilter::getBaseHref() . DataAccess::getInstance()->get_site_setting('classifieds_file_name');
-            $redirect_uri = $base . '?c=' . urlencode($encode);
+            //$base = geoFilter::getBaseHref().DataAccess::getInstance()->get_site_setting('classifieds_file_name');
+            $redirect_uri_end = '?c=' . urlencode($encode);
         }
-
         geoView::getInstance()->addCssFile("addons/social_connect/facebook_button.css");
         $tpl = new geoTemplate(geoTemplate::ADDON, $this->name);
-        $tpl->assign('loginUrl', $this->loginUrl($redirect_uri));
+        $tpl->assign('loginUrl', $this->loginUrl() . $redirect_uri_end);
         $tpl->assign('msgs', geoAddon::getText($this->auth_tag, $this->name));
         return $tpl->fetch('core_events/login_bottom.tpl');
     }
@@ -240,7 +238,7 @@ class addon_social_connect_util extends addon_social_connect_info
                 setcookie('IEFIX_UIFB', '', time() - 100000, '/');
             }
         }
-
+        trigger_error("DEBUG FACEBOOK:  including fb");
         //use FB php-sdk library
         require_once ADDON_DIR . 'social_connect/fb.php';
 
@@ -254,6 +252,7 @@ class addon_social_connect_util extends addon_social_connect_info
 
         // Get User ID
         $this->user = $this->facebook->getUser();
+        trigger_error("DEBUG FACEBOOK:  after getUser");
 
         // We may or may not have this data based on whether the user is logged in.
         //
@@ -262,6 +261,7 @@ class addon_social_connect_util extends addon_social_connect_info
         // token is invalid if the user logged out of Facebook.
 
         if ($this->user) {
+            trigger_error("DEBUG FACEBOOK:  there is a user");
             try {
                 // Proceed knowing you have a logged in user who's authenticated.
                 $this->user_profile = $this->facebook->api('/me/?fields=email,name,first_name,last_name,locale');
@@ -298,6 +298,8 @@ class addon_social_connect_util extends addon_social_connect_info
         $session = geoSession::getInstance();
         $session_id = $session->initSession();
 
+        trigger_error("DEBUG FACEBOOK:  after initsession");
+
         //figure out user ID
         $user_id = $session->getUserId();
         if ($user_id == 1) {
@@ -308,7 +310,7 @@ class addon_social_connect_util extends addon_social_connect_info
         }
 
         $db = DataAccess::getInstance();
-
+        trigger_error("DEBUG FACEBOOK:  user_id: " . $user_id);
         if ($user_id) {
             //if user ID for this session, get the user info for that USER ID and see if
             //the facebook ID is set for that user.
@@ -372,6 +374,7 @@ class addon_social_connect_util extends addon_social_connect_info
         $row = $db->GetRow("SELECT * FROM " . geoTables::logins_table . " WHERE `facebook_id`=?", array($this->user_profile['id']));
         if ($row) {
             //Scenario: Facebook is logged in, geo is not, log the user into the Geo system!
+            trigger_error('DEBUG FACEBOOK: Found user by facebook_id');
             return $this->userLogin($row['id'], $session_id);
         }
 
@@ -380,6 +383,7 @@ class addon_social_connect_util extends addon_social_connect_info
         $row = $db->GetRow("SELECT `id` FROM " . geoTables::userdata_table . " WHERE `email`=?", array($this->user_profile['email']));
         if ($row) {
             //imagine that...  e-mail matched up, go ahead and set that user
+            trigger_error('DEBUG FACEBOOK: found user by email');
             if (!$this->setFacebookId($this->user_profile['id'], $row['id'])) {
                 //that didn't work...
                 return;
@@ -393,7 +397,10 @@ class addon_social_connect_util extends addon_social_connect_info
         $user_id = $this->userRegister();
         if ($user_id) {
             //log that user in!
+            trigger_error('DEBUG FACEBOOK: registered new user, logging them in');
             $this->userLogin($user_id, $session_id);
+        } else {
+            trigger_error('DEBUG FACEBOOK: register user failed so could not log them in');
         }
         //and, we're done!
     }
@@ -573,8 +580,9 @@ class addon_social_connect_util extends addon_social_connect_info
     public function userRegister()
     {
         trigger_error("DEBUG FACEBOOK:  Top of user register.");
-        if (!$this->user || !$this->user_profile || !$this->user_profile['email']) {
+        if (!$this->user || !$this->user_profile || empty($this->user_profile['email'])) {
             //nothing to register by
+            trigger_error('DEBUG FACEBOOK: nothing to register by, need email.');
             $this->user = $this->user_profile = null;
             return false;
         }
@@ -683,7 +691,7 @@ class addon_social_connect_util extends addon_social_connect_info
             $user_info['lastname'], $user_info['country'], geoUtil::time(), $user_info['communication_setting'],
             geoUtil::time(), $user_info['last_login_ip'], $account_balance . ''
         );
-        $userdata_result = $db->Execute("INSERT INTO " . geoTables::userdata_table . " SET 
+        $userdata_result = $db->Execute("INSERT INTO " . geoTables::userdata_table . " SET
 			`id`=?, `username`=?, `email`=?, `firstname`=?, `lastname`=?, `country`=?,
 			`date_joined`=?, `communication_type`=?, `last_login_time`=?, `last_login_ip`=?, `account_balance`=?", $userdata_data);
 
@@ -796,7 +804,9 @@ class addon_social_connect_util extends addon_social_connect_info
 
     public function loginUrl($redirect_uri = '')
     {
+        trigger_error("DEBUG FACEBOOK: top of loginUrl in util");
         if (!$this->facebook) {
+            trigger_error("DEBUG FACEBOOK: no facebook instance in util");
             //no fb to get login from
             return '';
         }
@@ -806,13 +816,14 @@ class addon_social_connect_util extends addon_social_connect_info
             $var_name = 'fb_' . $this->facebook->getAppId() . '_IE_UA';
             geoSession::getInstance()->set($var_name, $_SERVER['HTTP_USER_AGENT']);
         }
-        if ($redirect_uri) {
+        /*if ($redirect_uri) {
             //specified a return address, manually get this one
-            return $this->facebook->getLoginUrl(array('scope' => 'email','redirect_uri' => $redirect_uri));
-        }
-        if (!isset($this->_loginUrl)) {
-            $this->_loginUrl = $this->facebook->getLoginUrl(array('scope' => 'email'));
-        }
+            return $this->facebook->getLoginUrl(array('scope'=>'email','redirect_uri'=>$redirect_uri));
+        }*/
+        //if (!isset($this->_loginUrl)) {
+        //$this->_loginUrl = $this->facebook->getLoginUrl(array('scope'=>'email'));
+        $this->_loginUrl = $this->facebook->getLoginUrl(['scope' => 'email']);
+        //}
         return $this->_loginUrl;
     }
 

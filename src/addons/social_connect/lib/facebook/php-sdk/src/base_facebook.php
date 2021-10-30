@@ -852,7 +852,9 @@ abstract class BaseFacebook
             );
         } catch (FacebookApiException $e) {
           // most likely that user very recently revoked authorization.
-          // In any event, we don't have an access token, so say so.
+            // In any event, we don't have an access token, so say so.
+            // GEO MOD - adding message so problem is not silent
+            trigger_error('ERROR FACEBOOK: ' . $e->getMessage());
             return false;
         }
 

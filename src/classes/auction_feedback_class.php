@@ -14,7 +14,7 @@ class Auction_feedback extends geoSite
     var $function_name;
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    function Auction_feedback($db, $language_id, $auction_user_id, $page = 0, $product_configuration = 0)
+    function __construct($db, $language_id, $auction_user_id, $page = 0, $product_configuration = 0)
     {
         parent::__construct();
         $this->auction_user_id = $auction_user_id;

@@ -3,17 +3,17 @@
 class Admin_category_questions extends Admin_site
 {
 
-
-
     var $category_name = "";
     var $returned_value = "";
     var $debug_questions = 0;
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    function Admin_category_questions($db, $product_configuration = 0)
+    public function __construct()
     {
         //constructor
         parent::__construct();
+
         $this->messages["5500"] = "wrong count in return - either category does not exist or too many returns";
         $this->messages["5501"] = "internal db error";
         $this->messages["5502"] = "The subcategories of ";
@@ -33,11 +33,11 @@ class Admin_category_questions extends Admin_site
     function check_if_group($db, $group_id = 0)
     {
         if ($group_id) {
-//check to see if this number is even a category
+            //check to see if this number is even a category
             $this->sql_query = "select * from " . $this->classified_groups_table . " where group_id = " . $group_id;
             $result = $db->Execute($this->sql_query);
             if (!$result) {
-            //echo $this->sql_query." is the query<br>\n";
+                //echo $this->sql_query." is the query<br>\n";
                 $this->error_message = $this->messages[5501];
                 return false;
             } elseif ($result->RecordCount() == 1) {
@@ -73,17 +73,20 @@ class Admin_category_questions extends Admin_site
 			Text[4] = [\"Display \\\"Other\\\" Box\", \"Here, you can opt to give the classified seller an \\\"other\\\" box if one of the choices you give in the dropdown box does not fit the product or service they are selling. The \\\"other\\\" box will only appear if a dropdown box has been chosen in the \\\"choices\\\" field above. If \\\"just blank input box\\\" is selected in the \\\"choices\\\" field above this value will have no effect.\"]\n
 			Text[5] = [\"Display Order\", \"Choose the order in the existing group questions that this question appears in the group question list.\"]\n";
         $this->body .= "</script>";
+
         if ($question_id) {
-        //get the question data from the database
+            //get the question data from the database
             $input = array( $question_id );
+
             $this->sql_query = "select * from " . $this->sell_questions_table . "
 				where question_id = ? ";
+
             $question_result = $db->Execute($this->sql_query, $input);
             if ($this->debug_questions) {
                 echo $this->sql_query . "<br>\n";
             }
             if (!$question_result) {
-        //echo $this->sql_query." is the query<br>\n";
+                //echo $this->sql_query." is the query<br>\n";
                 $this->error_message = $this->messages[5501];
                 echo $this->db->ErrorMsg() . " is the sql error<br>\n";
                 return false;
@@ -101,7 +104,7 @@ class Admin_category_questions extends Admin_site
 					<legend>User Group Question</legend>
 					<div class='x_content'>";
 
-                $this->body .= "
+                    $this->body .= "
 						<div class='form-group'>
 						<label class='control-label col-md-4 col-sm-4 col-xs-12'>Display \"Other\" Box: " . $this->show_tooltip(4, 1) . "</label>
 						  <div class='col-md-6 col-sm-6 col-xs-12'>
@@ -109,15 +112,16 @@ class Admin_category_questions extends Admin_site
                 if ($question_data["other_input"] == 1) {
                     $this->body .= " checked ";
                 }
-                                $this->body .= "> Yes<br><input type=radio name=b[other_input_box] value=0 ";
+                                    $this->body .= "> Yes<br><input type=radio name=b[other_input_box] value=0 ";
                 if ($question_data["other_input"] == 0) {
                     $this->body .= " checked ";
                 }
-                        $this->body .= "> No
+                            $this->body .= "> No
 						  </div>
 						</div>
 						";
-                $this->body .= "
+
+                        $this->body .= "
 						<div class='form-group'>
 						<label class='control-label col-md-4 col-sm-4 col-xs-12'>Display Order: " . $this->show_tooltip(5, 1) . "</label>
 						  <div class='col-md-6 col-sm-6 col-xs-12'>
@@ -129,10 +133,11 @@ class Admin_category_questions extends Admin_site
                     }
                     $this->body .= ">" . $i . "\n\t";
                 } // end of for
-                        $this->body .= "</select>
+                            $this->body .= "</select>
 						  </div>
 						</div>
 						";
+
                 $this->sql_query = "select * from " . $this->pages_languages_table;
                 $language_result = $db->Execute($this->sql_query);
                 if (!$language_result) {
@@ -147,24 +152,28 @@ class Admin_category_questions extends Admin_site
                             return false;
                         } elseif ($result->RecordCount() == 1) {
                             $show_language_question = $result->FetchRow();
-                        //display the current quesions attached this category
+
+                            //display the current quesions attached this category
                             $this->body .= "<div class='header-color-primary-mute' style='margin:5px 0;'>Question in <span style='text-transform:uppercase;'>" . $language_id["language"] . "</span> Language</div>";
+
                             $this->body .= "<div class='form-group'>";
                             $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Name: " . $this->show_tooltip(1, 1) . "</label>";
                             $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 									<input type=text name=b[question_name][" . $language_id["language_id"] . "] class='form-control col-md-7 col-xs-12' value=\"" . $show_language_question["name"] . "\">";
                             $this->body .= "</div>";
                             $this->body .= "</div>";
+
                             $this->body .= "<div class='form-group'>";
                             $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Explanation: " . $this->show_tooltip(2, 1) . "</label>";
                             $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 									<textarea name=b[question_explanation][" . $language_id["language_id"] . "] class='form-control'>" . geoString::specialChars($show_language_question["explanation"]) . "</textarea>";
                             $this->body .= "</div>";
                             $this->body .= "</div>";
+
                             $this->body .= "<div class='form-group'>";
                             $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Choices: " . $this->show_tooltip(3, 1) . "</label>";
                             $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>";
-                            $this->body .= "<select name=b[question_choices][" . $language_id["language_id"] . "] class='form-control col-md-7 col-xs-12'>";
+                                $this->body .= "<select name=b[question_choices][" . $language_id["language_id"] . "] class='form-control col-md-7 col-xs-12'>";
                             $this->body .= "<option value=none ";
                             if ($show_language_question["choices"] == "none") {
                                 $this->body .= "selected";
@@ -187,18 +196,18 @@ class Admin_category_questions extends Admin_site
                             $this->body .= ">Url Field</option>";
                             $this->sql_query = "select * from " . $this->sell_choices_types_table;
                             $types_result = $db->Execute($this->sql_query);
-    //echo $this->sql_query." is the query<br>";
-                            if (!$types_result) {
                             //echo $this->sql_query." is the query<br>";
+                            if (!$types_result) {
+                                //echo $this->sql_query." is the query<br>";
                                 $this->error_message = $this->messages[5501];
                                 $this->site_error($db->ErrorMsg());
                                 return false;
                             } elseif ($types_result->RecordCount() > 0) {
                                 while ($show_type = $types_result->FetchRow()) {
-            //show questions as drop down box
+                                    //show questions as drop down box
                                     $this->body .= "<option value=" . $show_type["type_id"];
                                     if ($show_type["type_id"] == $show_language_question["choices"]) {
-                                                        $this->body .= " selected";
+                                        $this->body .= " selected";
                                     }
                                     $this->body .= ">Pre-Valued Dropdown: " . $show_type["type_name"] . "\n\t";
                                 } //end of while
@@ -215,7 +224,7 @@ class Admin_category_questions extends Admin_site
         } elseif ($group_id) {
             $group_name = $this->get_group_name($db, $group_id);
             $some_group = $group_id;
-        //this is a new attached to this category
+            //this is a new attached to this category
             if (!$this->admin_demo()) {
                 $this->body .= "<form action=index.php?mc=users&page=users_group_questions_new&c=" . $group_id . " class='form-horizontal form-label-left' method=post>";
             } else {
@@ -242,7 +251,8 @@ class Admin_category_questions extends Admin_site
 					  </div>
 					</div>
 					";
-            $this->body .= "
+
+                    $this->body .= "
 					<div class='form-group'>
 					<label class='control-label col-md-4 col-sm-4 col-xs-12'>Display Order: " . $this->show_tooltip(5, 1) . "</label>
 					  <div class='col-md-6 col-sm-6 col-xs-12'>
@@ -266,66 +276,70 @@ class Admin_category_questions extends Admin_site
                 return false;
             } elseif ($language_result->RecordCount() > 0) {
                 while ($language_id = $language_result->FetchRow()) {
-        //display the current quesions attached this category
+                            //display the current quesions attached this category
 
                             $this->body .= "<div class='col_hdr' style='margin:5px 0;'>Question in " . $language_id["language"] . " language</div>";
-                    $this->body .= "<div class='form-group'>";
-                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Name: " . $this->show_tooltip(1, 1) . "</label>";
-                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
+
+                            $this->body .= "<div class='form-group'>";
+                            $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Name: " . $this->show_tooltip(1, 1) . "</label>";
+                            $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 									<input type=text name=b[question_name][" . $language_id["language_id"] . "] class='form-control col-md-7 col-xs-12' value=\"" . $show_question["name"] . "\">";
-                    $this->body .= "</div>";
-                    $this->body .= "</div>";
-                    $this->body .= "<div class='form-group'>";
-                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Explanation: " . $this->show_tooltip(2, 1) . "</label>";
-                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
+                            $this->body .= "</div>";
+                            $this->body .= "</div>";
+
+                            $this->body .= "<div class='form-group'>";
+                            $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Explanation: " . $this->show_tooltip(2, 1) . "</label>";
+                            $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 									<textarea name=b[question_explanation][" . $language_id["language_id"] . "] class='form-control'>" . geoString::specialChars($show_question["explanation"]) . "</textarea>";
-                    $this->body .= "</div>";
-                    $this->body .= "</div>";
-                    $this->body .= "<div class='form-group'>";
-                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Choices: " . $this->show_tooltip(3, 1) . "</label>";
-                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>";
-                    $this->body .= "<select name=b[question_choices][" . $language_id["language_id"] . "] class='form-control col-md-7 col-xs-12'>";
-                    $this->body .= "<option value=none ";
+                            $this->body .= "</div>";
+                            $this->body .= "</div>";
+
+                            $this->body .= "<div class='form-group'>";
+                            $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Choices: " . $this->show_tooltip(3, 1) . "</label>";
+                            $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>";
+
+                                $this->body .= "<select name=b[question_choices][" . $language_id["language_id"] . "] class='form-control col-md-7 col-xs-12'>";
+                                $this->body .= "<option value=none ";
                     if ($show_question["choices"] == "none") {
                         $this->body .= "selected";
                     }
                                 $this->body .= ">Blank Input Field</option>";
-                    $this->body .= "<option value=check ";
+                                $this->body .= "<option value=check ";
                     if ($show_question["choices"] == "check") {
                         $this->body .= "selected";
                     }
                                 $this->body .= ">Check Box</option>";
-                    $this->body .= "<option value=textarea ";
+                                $this->body .= "<option value=textarea ";
                     if ($show_question["choices"] == "textarea") {
                         $this->body .= "selected";
                     }
                                 $this->body .= ">Blank Textarea Box</option>";
-                    $this->body .= "<option value=url ";
+                                $this->body .= "<option value=url ";
                     if ($show_question["choices"] == "url") {
                         $this->body .= "selected";
                     }
                                 $this->body .= ">Url Field</option>";
-                    $this->sql_query = "select * from " . $this->sell_choices_types_table;
-                    $types_result = $db->Execute($this->sql_query);
-        //echo $this->sql_query." is the query<br>";
+                                $this->sql_query = "select * from " . $this->sell_choices_types_table;
+                                $types_result = $db->Execute($this->sql_query);
+                                //echo $this->sql_query." is the query<br>";
                     if (!$types_result) {
-                //echo $this->sql_query." is the query<br>";
+                        //echo $this->sql_query." is the query<br>";
                         $this->error_message = $this->messages[5501];
                         $this->site_error($db->ErrorMsg());
                         return false;
                     } elseif ($types_result->RecordCount() > 0) {
                         while ($show_type = $types_result->FetchRow()) {
-                    //show questions as drop down box
+                            //show questions as drop down box
                             $this->body .= "<option value=" . $show_type["type_id"];
                             if ($show_type["type_id"] == $show_question["choices"]) {
-                                    $this->body .= " selected";
+                                $this->body .= " selected";
                             }
                             $this->body .= ">Pre-Valued Dropdown: " . $show_type["type_name"] . "\n\t";
                         } //end of while
                     }
                                 $this->body .= "</select>";
-                    $this->body .= "</div>";
-                    $this->body .= "</div>";
+                            $this->body .= "</div>";
+                            $this->body .= "</div>";
                 } // end of while
             }
         } else {
@@ -341,8 +355,10 @@ class Admin_category_questions extends Admin_site
         $this->body .= "</div></fieldset>";
 
         $this->body .= ($this->admin_demo()) ? '</div>' : '</form>';
+
         $this->body .= "<div><a href=index.php?mc=users&page=users_group_questions&d=" . $some_group . " class='back_to'>
 		<i class='fa fa-backward'> </i> Back to " . $group_name . " Questions</a></div>";
+
         return true;
     } //end of function sell_question_form
 
@@ -357,6 +373,7 @@ class Admin_category_questions extends Admin_site
         }
         if (($question_id) && ($info)) {
             $info["question_reference"] = str_replace(" ", "_", $info["question_reference"]);
+
             $this->sql_query = "UPDATE " . $this->sell_questions_table . " set
 				name = \"" . $info["question_name"][1] . "\",
 				explanation = \"" . $info["question_explanation"][1] . "\",
@@ -364,6 +381,7 @@ class Admin_category_questions extends Admin_site
 				other_input = " . $info["other_input_box"] . ",
 				display_order = " . $info["question_display_order"] . "
 				where question_id = " . $question_id;
+
             if ($this->debug_questions) {
                 echo $this->sql_query . " is the query<br>\n";
             }
@@ -395,7 +413,7 @@ class Admin_category_questions extends Admin_site
 						choices = \"" . $info["question_choices"][$language_id["language_id"]] . "\"
 						where question_id = " . $question_id . " and language_id = " . $language_id["language_id"];
                     if ($this->debug_questions) {
-                            echo $this->sql_query . "<br>\n";
+                        echo $this->sql_query . "<br>\n";
                     }
                     $result = $db->Execute($this->sql_query);
                     if (!$result) {
@@ -429,15 +447,17 @@ class Admin_category_questions extends Admin_site
             $input = array( $group_id, $info["question_name"][1],
                             $info["question_explanation"][1], $info["question_choices"][1],
                             $info["other_input_box"], $info["question_display_order"] );
+
             $this->sql_query = "insert into " . $this->sell_questions_table . "
 				(group_id, name, explanation, choices, other_input, display_order)
 				values (?,?,?,?,?,?)";
+
             $result = $db->Execute($this->sql_query, $input);
             if ($this->debug_questions) {
                 echo $this->sql_query . "<br>\n";
             }
             if (!$result) {
-//echo $this->sql_query." is the query<br>\n";
+                //echo $this->sql_query." is the query<br>\n";
                 $this->error_message = $this->messages[5501];
                 echo $this->db->ErrorMsg() . " is the sql error<br>\n";
                 return false;
@@ -445,13 +465,14 @@ class Admin_category_questions extends Admin_site
 
             //get id created from insert
             $insert_id = $this->db->Insert_ID();
+
             $this->sql_query = "select * from " . $this->pages_languages_table;
             if ($this->debug_questions) {
                 echo $this->sql_query . "<br>\n";
             }
             $language_result = $db->Execute($this->sql_query);
             if (!$language_result) {
-            //echo $this->sql_query." is the query<br>\n";
+                //echo $this->sql_query." is the query<br>\n";
                 $this->error_message = $this->messages[5501];
                 return false;
             } elseif ($language_result->RecordCount() > 0) {
@@ -463,10 +484,10 @@ class Admin_category_questions extends Admin_site
 						values (?,?,?,?,?)";
                     $insert_result = $db->Execute($this->sql_query, $input);
                     if ($this->debug_questions) {
-                                echo $this->sql_query . "<br>\n";
+                        echo $this->sql_query . "<br>\n";
                     }
                     if (!$insert_result) {
-        //echo $this->sql_query." is the query<br>\n";
+                        //echo $this->sql_query." is the query<br>\n";
                         if ($this->debug_questions) {
                             echo $db->ErrorMsg() . " is the error<br>\n";
                             echo $insert_id . " is \$insert_id<br>\n";
@@ -534,10 +555,12 @@ class Admin_category_questions extends Admin_site
 					<td class=col_hdr align=center>Display Order</td>
 					<td class=col_hdr width=200 align=center> </td>
 				</tr></thead><tbody>";
+
+
         if ($result->RecordCount() > 0) {
             $this->row_count = 0;
             while ($show_current_questions = $result->FetchRow()) {
-        //show the current questions by row
+                //show the current questions by row
                 $this->body .= "
 				<tr class=" . $this->get_row_color() . ">
 					<td valign=top class=medium_font>" . $show_current_questions["name"] . "</td>
@@ -585,7 +608,7 @@ class Admin_category_questions extends Admin_site
             }// end of while
         } //end of if
         else {
-//say there are no questions in this category
+            //say there are no questions in this category
             $this->body .= "
 				</tbody><tr><td colspan=6 align=center><div class='page_note_error'>There are no questions attached to this group.</div></td></tr>";
         }
@@ -595,10 +618,12 @@ class Admin_category_questions extends Admin_site
 				<div class='center'><a href=index.php?mc=users&page=users_group_questions_new&b=" . $group_id . " class=mini_button>" . $this->messages["5509"] . "</a></div>
 				<div class='center'><a href=index.php?mc=users&page=dropdowns class=mini_button>View Current Pre-Valued Dropdowns</a></div>
 				";
+
         $this->body .= "
 			<div style='padding: 5px;'><a href=index.php?mc=users&page=users_group_edit&c=" . $group_id . " class='back_to'>
 			<i class='fa fa-backward'></i> Back to " . $group_name . " Details</a></div>
 			";
+
         return true;
     } //end of function show_current_questions
 
@@ -633,6 +658,7 @@ class Admin_category_questions extends Admin_site
 Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in 3 places:<br /><br />- <strong>Optional Site Wide Fields</strong><br />- <strong>Category Specific Questions</strong><br />- <strong>Group Questions</strong> (Group questions are Enterprise Only)<br />"]
 
 </script>';
+
         $this->body .= $menu_loader->getUserMessages();
         $this->body .= "
 			<fieldset id='PreValDropdowns'>
@@ -666,9 +692,9 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
 					<td>
 				</tr>
 			</table></fieldset>";
-/*
-        * REMOVED FOR SHARED FUNCTION USE
-      * <tr><td><a href=index.php?mc=users&page=users_groups class=medium_font>back to groups home</span></a></td></tr>
+        /*
+         * REMOVED FOR SHARED FUNCTION USE
+         * <tr><td><a href=index.php?mc=users&page=users_groups class=medium_font>back to groups home</span></a></td></tr>
          */
         return true;
     } //end of function show_all_dropdowns
@@ -682,7 +708,7 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
         }
 
         $this->body .= "<table cellpadding=2 cellspacing=0 border=0>\n";
-//$this->title = "Add a new Sell question Dropdown Form";
+        //$this->title = "Add a new Sell question Dropdown Form";
         $this->description = "Use this form to add a new dropdown to
 			the dropdowns usable as a question.  Type the name below and click \"enter\".  You will then be able to add values to
 			the dropdown you have just created.";
@@ -707,7 +733,7 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
 					(\"" . $information["dropdown_label"] . "\")";
                 $result = $db->Execute($this->sql_query);
                 if (!$result) {
-        //echo $this->sql_query."<br>\n";
+                    //echo $this->sql_query."<br>\n";
                     return false;
                 }
                 $id = $db->Insert_ID();
@@ -741,7 +767,7 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
                 $this->body .= $menu_loader->getUserMessages();
                 return false;
             } elseif ($result->RecordCount() == 1) {
-            //this dropdown exists
+                //this dropdown exists
                 $show_dropdown = $result->FetchRow();
                 $this->sql_query = "select * from " . $this->classified_sell_choices_table . " where type_id = " . $dropdown_id . " order by display_order";
                 $result = $db->Execute($this->sql_query);
@@ -749,24 +775,25 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
                     return false;
                 }
                 $this->body .= $menu_loader->getUserMessages();
-            //show the form to edit this dropdown
+                //show the form to edit this dropdown
                 if (!$this->admin_demo()) {
                     $this->body .= "<form action=index.php?mc=" . $this->category_name . "&page=edit_dropdown&c=" . $dropdown_id . " method=post>\n";
                 }
                 $this->body .= "<fieldset id='EditPreValDropdown'>
 				<legend>Edit a Pre-Valued Dropdown</legend><table cellpadding=2 cellspacing=0 border=0 width=\"100%\">\n";
-            //$this->title = "Edit Sell question Dropdown Form";
+                //$this->title = "Edit Sell question Dropdown Form";
                 $this->description = "Use this form to add or delete values
 					appearing in the category question dropdowns.  Insert a new value by typing the value and then choosing a value for
 					display order.  The display order value determines the order the values appear in the dropdown.  Otherwise the order is
 					alphabetically.";
+
                 $this->body .= "<tr>\n\t<td>\n\t<table cellpadding=2 cellspacing=0 border=0>\n\t";
                 $this->body .= "<tr>\n\t\t<td class=col_hdr_left>\n\tValue \n\t\t</td>\n\t\t";
                 $this->body .= "<td class=col_hdr>\n\tDisplay Order \n\t\t</td>\n\t\t";
                 $this->body .= "<td class=col_hdr>\n\t&nbsp; \n\t\t</td>\n\t</tr>\n\t";
                 if ($result->RecordCount() > 0) {
-    //this dropdown exists
-                //show the value in a list
+                    //this dropdown exists
+                    //show the value in a list
                     $this->row_count = 0;
                     while ($show = $result->FetchRow()) {
                         $this->body .= "<tr class=" . $this->get_row_color() . ">\n\t\t<td class=medium_font>\n\t" . $show["value"] . " \n\t\t</td>\n\t\t";
@@ -786,8 +813,8 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
                 }
 
                 /*
-               * REMOVED FOR SHARED FUNCTION USE
-              * $this->body .= "<tr class=row_color_red>\n\t<td><a href=index.php?mc=users&page=users_groups><span class=medium_font_light>Group Home</span></a></td>\n</tr>\n";
+                 * REMOVED FOR SHARED FUNCTION USE
+                 * $this->body .= "<tr class=row_color_red>\n\t<td><a href=index.php?mc=users&page=users_groups><span class=medium_font_light>Group Home</span></a></td>\n</tr>\n";
                  */
                 $this->body .= "</table>\n\t</td>\n</tr>\n";
                 $this->body .= "<tr>\n\t<td align=center><a href=index.php?mc=" . $this->category_name . "&page=all_dropdowns><span class=medium_font><strong>Show All Dropdowns</strong></span></a></td>\n</tr>\n";
@@ -863,29 +890,32 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
                     $this->body .= "<form action=index.php?mc=" . $this->category_name . "&page=delete_dropdown&d=" . $dropdown_id . " method=post>\n";
                 }
                 $this->body .= "<table cellpadding=2 cellspacing=0 border=0 width=\"100%\">\n";
-            //$this->title = "Delete Sell question Dropdown Form (verification)";
+                //$this->title = "Delete Sell question Dropdown Form (verification)";
                 $this->description = "If the sell question dropdown you are trying to delete
 					is attached to existing categories you will be given a choice to push those category questions to other dropdowns (if any).
 					Or just remove the sell questions attached (if any) to this dropdown as well as the dropdown itself.";
+
                 $show_dropdown = $result->FetchRow();
                 $this->sql_query = "select * from " . $this->sell_questions_table . " where choices = " . $dropdown_id;
                 $result = $db->Execute($this->sql_query);
                 if (!$result) {
                     return false;
                 } elseif ($result->RecordCount() > 0) {
-    //there are sell questions attached to this
+                    //there are sell questions attached to this
                     $attached = 1;
-    //show attached categories
+
+                    //show attached categories
                     $this->body .= "<tr>\n\t<td>\n\t";
                     $this->body .= "<table cellpadding=2 cellspacing=0 border=0>\n";
                     $this->body .= "<tr class=row_color_black>\n\t<td class=medium_font_light>\n\tcategories attached to<br>
 						this question dropdown \n\t</td>\n</tr>\n";
                     $this->row_count = 1;
                     while ($show_categories = $result->FetchRow()) {
-                                $this->body .= "<tr class=" . $this->get_row_color() . ">\n\t<td class=medium_font>" . $this->get_category_name($db, $show_categories["category_id"]) . " \n\t</td>\n</tr>\n";
-                                $this->row_count++;
+                        $this->body .= "<tr class=" . $this->get_row_color() . ">\n\t<td class=medium_font>" . $this->get_category_name($db, $show_categories["category_id"]) . " \n\t</td>\n</tr>\n";
+                        $this->row_count++;
                     }
                     $this->body .= "</td>\n\t</tr>\n";
+
                     $this->sql_query = "select * from " . $this->sell_choices_types_table . " where type_id = " . $dropdown_id;
                     $dropdown_result = $db->Execute($this->sql_query);
                     if (!$dropdown_result) {
@@ -900,21 +930,22 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
                         $this->body .= " \n\t</td>\n</tr>\n";
                     }
                     if (!$this->admin_demo()) {
-                                $this->body .= "<tr class=row_color_black>\n\t<td class=medium_font_light>\n\t<input type=submit name=z[type_of_submit]
+                        $this->body .= "<tr class=row_color_black>\n\t<td class=medium_font_light>\n\t<input type=submit name=z[type_of_submit]
 							value=\"change and delete\"> \n\t</td>\n</tr>\n";
-                                $this->body .= "<tr>\n\t<td align=center class=medium_font>\n\t<input type=submit name=z[type_of_submit]
+                        $this->body .= "<tr>\n\t<td align=center class=medium_font>\n\t<input type=submit name=z[type_of_submit]
 							value=\"delete all references\"> \n\t</td>\n</tr>\n";
                     }
-                                    $this->body .= "</table>\n";
+                        $this->body .= "</table>\n";
                 } else {
                     $this->body .= "<tr>\n\t<td class=medium_font align=center>\n\t";
                     if (!$this->admin_demo()) {
-                                $this->body .= "<input type=submit name=z[type_of_submit] value=\"delete all references\"> \n\t";
+                        $this->body .= "<input type=submit name=z[type_of_submit] value=\"delete all references\"> \n\t";
                     }
                     $this->body .= "</td>\n</tr>\n";
                 }
                 $this->body .= "</table>\n";
-//show the delete from db (and everywhere else
+
+                //show the delete from db (and everywhere else
                 return true;
             } else {
                 return false;
@@ -930,24 +961,24 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
     {
         //echo "hello from delete dropdown<br>\n";
         if (($dropdown_id) && ($information)) {
-//echo $information["type_of_submit"]." delete<br>\n";
+            //echo $information["type_of_submit"]." delete<br>\n";
             if ($information["type_of_submit"] == "delete all references") {
                 $this->sql_query = "delete from " . $this->sell_questions_table . " where choices = " . $dropdown_id;
-//echo $this->sql_query."<br>\n";
+                //echo $this->sql_query."<br>\n";
                 $result = $db->Execute($this->sql_query);
                 if (!$result) {
                     return false;
                 }
 
                 $this->sql_query = "delete from " . $this->classified_sell_choices_table . " where type_id = " . $dropdown_id;
-//echo $this->sql_query."<br>\n";
+                //echo $this->sql_query."<br>\n";
                 $result = $db->Execute($this->sql_query);
                 if (!$result) {
                     return false;
                 }
 
                 $this->sql_query = "delete from " . $this->sell_choices_types_table . " where type_id = " . $dropdown_id;
-//echo $this->sql_query."<br>\n";
+                //echo $this->sql_query."<br>\n";
                 $result = $db->Execute($this->sql_query);
                 if (!$result) {
                     return false;
@@ -958,14 +989,14 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
                     $this->sql_query = "update " . $this->sell_questions_table . " set
 						choices = " . $information["new_dropdown"] . "
 						where choices = " . $dropdown_id;
-        //echo $this->sql_query."<br>\n";
+                    //echo $this->sql_query."<br>\n";
                     $result = $db->Execute($this->sql_query);
                     if (!$result) {
-                            return false;
+                        return false;
                     }
                 }
                 $this->sql_query = "delete from " . $this->classified_sell_choices_table . "," . $this->sell_choices_types_table . " where type_id = " . $dropdown_id;
-            //echo $this->sql_query."<br>\n";
+                //echo $this->sql_query."<br>\n";
                 $result = $db->Execute($this->sql_query);
                 if (!$result) {
                     return false;
@@ -975,7 +1006,7 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
                 return false;
             }
         } else {
-        //echo "not enough info<br>\n";
+            //echo "not enough info<br>\n";
             return false;
         }
     } //end of function delete_dropdown
@@ -1142,6 +1173,7 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
             $menu_loader =& geoAdmin::getInstance();
         }
         $this->body .= $menu_loader->getUserMessages();
+
         if ($_GET['mc']) {
             $this->category_name = $_GET['mc'];
         }
@@ -1204,6 +1236,7 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
             $menu_loader =& geoAdmin::getInstance();
         }
         $this->body .= $menu_loader->getUserMessages();
+
         if ($_GET['mc']) {
             $this->category_name = $_GET['mc'];
         }
@@ -1223,6 +1256,7 @@ Text[1] = ["Current Pre-Valued Dropdowns","Dropdowns created here can be used in
             $menu_loader =& geoAdmin::getInstance();
         }
         $this->body .= $menu_loader->getUserMessages();
+
         if ($_GET['mc']) {
             $this->category_name = $_GET['mc'];
         }

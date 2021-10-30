@@ -330,10 +330,15 @@
 			<desc>Google Maps link to create a map to the location entered for this listing.</desc>
 		</mapping_link>
 		<mapping_link_alternate>
+		<type>tag</type>
+		<only></only>
+		<desc>Same as mapping_link, but uses Mapquest instead of Google Maps (not recommended for non-US addresses)</desc>
+		</mapping_link_alternate>
+		<mapping_direction_link_google>
 			<type>tag</type>
 			<only></only>
-			<desc>Same as mapping_link, but uses Mapquest instead of Google Maps (not recommended for non-US addresses)</desc>
-		</mapping_link_alternate>
+			<desc>Same as mapping_link, but links to Google's directions page with the current listings mapping address included</desc>
+		</mapping_direction_link_google>
 		<mapping_location>
 			<type>field</type>
 			<only></only>

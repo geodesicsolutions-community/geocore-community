@@ -1,8 +1,4 @@
 <?php
-//app_top.common.php
-
-
-
 //set the error handler
 set_error_handler('geo_default_debug_error_handler');
 
@@ -100,6 +96,9 @@ if (!defined('PHP5_DIR') && version_compare('5.2.0', phpversion()) < 1) {
 
 require "config.default.php";
 
+// autoload for newer libraries - done after php5 check
+require_once GEO_BASE_DIR . 'vendor/autoload.php';
+
 //Make sure that the script doesn't just stop in the middle
 //if user hits stop or refreshes or something, set to false to
 //turn this feature off.
@@ -161,8 +160,9 @@ if (!defined('IN_UPGRADE')){
 		require_once (ADDON_DIR . $addon_name . '/app_top.php');
 	}
 	//make sure to take care of banned ips
-	if (!defined('IN_ADMIN'))
+	if (!defined('IN_ADMIN')) {
 		$db->checkBannedIp();
+	}
 }
 
 trigger_error('DEBUG STATS: Start of App (core addon events loaded, db object created)');

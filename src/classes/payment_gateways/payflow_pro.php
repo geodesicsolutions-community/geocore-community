@@ -2,7 +2,6 @@
 
 //payment_gateways/payflow_pro.php
 
-
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 
 # Payflow Pro gateway handler
@@ -279,7 +278,7 @@ class payflow_proPaymentGateway extends _ccPaymentGateway
         // By default, Verbosity is set to LOW. A LOW setting causes PayPal to normalize the transaction result values.
         // Normalizing the values limits them to a standardized set of values and simplifies the process of integrating
         // the Payflow SDK.
-        // By setting Verbosity to MEDIUM, you can view the processor????????s raw response values. This setting is more ???????verbose????????
+        // By setting Verbosity to MEDIUM, you can view the processorâ€™s raw response values. This setting is more â€œverboseâ€�
         // than the LOW setting in that it returns more detailed, processor-specific information.
         // Review the chapter in the Developer's Guides regarding VERBOSITY and the INQUIRY function for more details.
         // Set the transaction verbosity to MEDIUM.

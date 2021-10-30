@@ -1,26 +1,24 @@
 <?php
-//OrderItem.class.php
 /**
  * Holds the geoOrderItem class.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
 
-
 /**
  * The class that all order items must extend.
- * 
+ *
  * This has a lot of "default" methods
  * that the order items will inherit and can overwrite if needed, along with some
  * abstract methods that each order item is forced to implement.
- * 
+ *
  * This extends an interface so that there are also static methods added by
  * the interface that must also be implemented by each order item.  Failure to
  * implement any of the stuff will result in a PHP fatal error.
- * 
+ *
  * This also has a few final static methods that are used system-wide.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
@@ -32,19 +30,19 @@ abstract class geoOrderItem implements iOrderItem
 	 * @var int
 	 */
 	protected $id;
-	
+
 	/**
 	 * Status of order item, built-in ones used by system:
 	 * - active
 	 * - pending
 	 * - pending_admin
-	 * 
+	 *
 	 * All rest are treated as pending.
 	 *
 	 * @var string
 	 */
 	protected $status;
-	
+
 	/**
 	 * Order this item is attached to.
 	 *
@@ -53,7 +51,7 @@ abstract class geoOrderItem implements iOrderItem
 	protected $order;
 	/**
 	 * Parent order item, or null if this is main order item.
-	 * 
+	 *
 	 * @var geoOrderItem object
 	 */
 	protected $parent;
@@ -69,21 +67,21 @@ abstract class geoOrderItem implements iOrderItem
 	 * @var float
 	 */
 	protected $cost;
-	
+
 	/**
 	 * Date this item was added to order.
 	 *
 	 * @var int unix timestamp
 	 */
 	protected $created;
-	
+
 	/**
 	 * This will be set according to the process order set by the plan item.
 	 *
 	 * @var int
 	 */
 	protected $processOrder = 0;
-	
+
 	/**
 	 * This should be set by each order item type.  It is used when initially creating
 	 * the plan order item to set the default process order for that plan item.
@@ -91,14 +89,14 @@ abstract class geoOrderItem implements iOrderItem
 	 * @var int
 	 */
 	protected $defaultProcessOrder = 5;
-	
+
 	/**
 	 * This is the price plan this item is created under.
 	 *
 	 * @var int
 	 */
 	protected $pricePlan;
-	
+
 	/**
 	 * This is the category this item was created under, or 0 if
 	 * no category.
@@ -106,28 +104,28 @@ abstract class geoOrderItem implements iOrderItem
 	 * @var int
 	 */
 	protected $category = 0;
-	
+
 	/**
 	 * This is the user id used in the shared fee feature to note who will collect shared fees on this order it
 	 *
 	 * @var int
 	 */
-	protected $paidOutTo = 0;	
-	
+	protected $paidOutTo = 0;
+
 	/**
 	 * Array of settings to handle all the "misc" stuff for this order item.
 	 *
 	 * @var array
 	 */
 	protected $registry;
-	
+
 	/**
 	 * Static array of all the order items that have been unserialized (or newly created)
 	 *
 	 * @var array
 	 */
 	private static $orderItems;
-	
+
 	/**
 	 * Used internally to remember whether there has been changes to the order since it was last
 	 *  serialized.  If there is not changes, when serialize is called, nothing will be done.  This is
@@ -136,25 +134,25 @@ abstract class geoOrderItem implements iOrderItem
 	 * @var boolean
 	 */
 	protected $_pendingChanges;
-	
+
 	/**
 	 * Associative array of order types, that follows this syntax:
 	 * $name => array( 'class_name' => $order_type_class_name, 'parents' => array( $array_of_parent_order_item_types)
 	 * //TODO: add it so that these are added in order of processOrder.
-	 * 
-	 * Where $name is the name, that would be used in the db and would be the file-name, and 
+	 *
+	 * Where $name is the name, that would be used in the db and would be the file-name, and
 	 * class name (value) is going to be $name.'OrderItem'.
 	 *
 	 * @var array
 	 */
 	private static $orderTypes;
-	
+
 	/**
 	 * Used to store ID's and whether they exist or not.
 	 * @var array
 	 */
 	private static $_itemsExist = array();
-	
+
 	/**
 	 * Constructor, initializes stuff.
 	 *
@@ -163,15 +161,15 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		$this->id = 0;
 		$this->created = geoUtil::time();
-		
+
 		//brand new, at this point, this order has not been serialized or restored from db.
 		$this->_pendingChanges = true;
-		
+
 		//set up blank registry
 		$this->registry = new geoRegistry();
 		$this->registry->setName('order_item');
 	}
-	
+
 	/**
 	 * Gets the id for this order item.
 	 *
@@ -181,7 +179,7 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return $this->id;
 	}
-	
+
 	/**
 	 * Sets the id for this order item, only used internally.
 	 *
@@ -192,7 +190,7 @@ abstract class geoOrderItem implements iOrderItem
 		$this->touch(); //there are new pending changes
 		$this->id = $val;
 	}
-	
+
 	/**
 	 * Gets the status of this order item.
 	 *
@@ -202,7 +200,7 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return $this->status;
 	}
-	
+
 	/**
 	 * Set the status of the order item.
 	 * @param string $status
@@ -216,7 +214,7 @@ abstract class geoOrderItem implements iOrderItem
 		$this->touch();
 		$this->status = $status;
 	}
-	
+
 	/**
 	 * Gets the geoOrder object this order item is attached to.
 	 *
@@ -249,10 +247,10 @@ abstract class geoOrderItem implements iOrderItem
 			return;
 		}
 		$this->touch(); //there are new pending changes
-		
+
 		$this->order = $val;
 	}
-	
+
 	/**
 	 * Gets the geoOrderItem object for the parent order item this is attached to, or null if not attached.
 	 *
@@ -285,10 +283,10 @@ abstract class geoOrderItem implements iOrderItem
 			return;
 		}
 		$this->touch(); //there are new pending changes
-		
+
 		$this->parent = $val;
 	}
-	
+
 	/**
 	 * Get the cost for this item.
 	 *
@@ -313,7 +311,7 @@ abstract class geoOrderItem implements iOrderItem
 		$val = round(floatval($val), 4);//force cost to be float, 4 decimal places
 		$this->cost = $val;
 	}
-	
+
 	/**
 	 * Gets the date this order item was created, as unix timestamp
 	 *
@@ -338,7 +336,7 @@ abstract class geoOrderItem implements iOrderItem
 		$val = intval($val);//it should be an int
 		$this->created = $val;
 	}
-	
+
 	/**
 	 * Gets the paid_out_to for this order item, user id of user paid out to
 	 *
@@ -362,8 +360,8 @@ abstract class geoOrderItem implements iOrderItem
 		$this->touch(); //there are new pending changes
 		$val = intval($val);//it should be an int
 		$this->paidOutTo = $val;
-	}	
-	
+	}
+
 	/**
 	 * Gets the type of order item
 	 *
@@ -373,7 +371,7 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return $this->type;
 	}
-	
+
 	/**
 	 * Title displayed in the admin
 	 * @return string
@@ -382,7 +380,7 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return ucwords(str_replace('_',' ',$this->getType()));
 	}
-	
+
 	/**
 	 * Sets the type of orderitem this is
 	 *
@@ -396,7 +394,7 @@ abstract class geoOrderItem implements iOrderItem
 		$this->touch(); //there are new pending changes
 		$this->type = $val;
 	}
-	
+
 	/**
 	 * Gets the price plan
 	 *
@@ -406,7 +404,7 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return $this->pricePlan;
 	}
-	
+
 	/**
 	 * Sets the price plan.  This will also validate the price plan (if not setting to 0 to reset) to make
 	 * sure the specified price plan exists.  If it does not exist, it will attempt to find and set the
@@ -444,7 +442,7 @@ abstract class geoOrderItem implements iOrderItem
 				return;
 			}
 		}
-		
+
 		if (!isset($this->pricePlan) || !$this->pricePlan) {
 			//The price plan attempting to set to is not valid, and the current price
 			//plan is not set yet, so set the price plan to be the default one for the
@@ -475,7 +473,7 @@ abstract class geoOrderItem implements iOrderItem
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets the category (will be 0 if no category)
 	 *
@@ -498,8 +496,8 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		$this->touch(); //there are new pending changes
 		$this->category = intval($val);
-	}	
-	
+	}
+
 	/**
 	 * Gets the order in which this order item is to be processed.  Note that the process order
 	 * only applies to other process orders at the same "level" as this one.
@@ -514,11 +512,11 @@ abstract class geoOrderItem implements iOrderItem
 			return $this->defaultProcessOrder;
 		}
 	}
-	
+
 	/**
 	 * Gets the geoPlanItem for this order item according to the order item's
 	 * currently set price plan and category.
-	 * 
+	 *
 	 * @return geoPlanItem
 	 */
 	public function getPlanItem ()
@@ -526,7 +524,7 @@ abstract class geoOrderItem implements iOrderItem
 		//NOTE: Function not final, to allow order items to customize this if they need.
 		$pricePlan = $this->getPricePlan();
 		$category = $this->getCategory();
-		
+
 		//just to be sure, validate the price plan ID
 		if (!$pricePlan || !geoPlanItem::isValidPricePlan($pricePlan)) {
 			$order = $this->getOrder();
@@ -544,11 +542,11 @@ abstract class geoOrderItem implements iOrderItem
 				$pricePlan = $pricePlanId;
 			}
 		}
-		
+
 		$planItem = geoPlanItem::getPlanItem($this->getType(), $pricePlan, $category);
 		return $planItem;
 	}
-	
+
 	/**
 	 * Gets the specified item from the registry, or if item is one of the "main" items it gets
 	 *  that instead.
@@ -566,7 +564,7 @@ abstract class geoOrderItem implements iOrderItem
 		$this->initRegistry();
 		return $this->registry->get($item, $default);
 	}
-	
+
 	/**
 	 * Sets the given item to the given value.  If item is one of built-in items, it sets that instead
 	 *  of something from the registry.
@@ -589,12 +587,12 @@ abstract class geoOrderItem implements iOrderItem
 		$this->initRegistry();
 		return $this->registry->set($item, $value);
 	}
-	
+
 	/**
 	 * Gets the order item specified by the ID and returns the order item object (either
 	 * this class, or a class specific for that order item that extends this class) for
 	 * that order, or a new blank order item if the id is 0 or not a valid ID.
-	 * 
+	 *
 	 * Should be called statically (like geoOrderItem::getOrderItem($id) )
 	 *
 	 * @param mixed $id If 0 or invalid ID, Object returned is for a new blank order item. If string, returns empty order item whos type matches string, if it is valid order item type
@@ -612,9 +610,9 @@ abstract class geoOrderItem implements iOrderItem
 				return $item;
 			}
 		}
-		
+
 		$id = intval($id); //id should be integer.
-		
+
 		if ($id == 0) {
 			//error: not valid id.  TODO: turn this into throwing an exception
 			return null;
@@ -622,16 +620,16 @@ abstract class geoOrderItem implements iOrderItem
 		if (!is_array(geoOrderItem::$orderItems)) {
 			geoOrderItem::$orderItems = array();
 		}
-		
+
 		//see if order exists in array of orders.
-		
+
 		foreach (geoOrderItem::$orderItems as $p_order => $items) {
 			if (isset($items[$id])) {
 				//found object, this item has already been retrieved this page load..
 				return $items[$id];
 			}
 		}
-		
+
 		//this is different from others, because each order item type should over-load this class,
 		//so this function can be used to get any order item type, and an object of that order item
 		//type will be returned.
@@ -648,11 +646,11 @@ abstract class geoOrderItem implements iOrderItem
 			return null;
 		}
 		geoOrderItem::loadTypes(); //load all available types
-		
+
 		$row = $result->FetchRow();
-		
+
 		$type = $row['type'];
-		
+
 		//sanity check, make sure if it is supposed to have a parent, the parent is alive and kicking
 		if (!$skipParentCheck && $row['parent'] && !self::itemExists($row['parent'])) {
 			//NOT good, parent could not be retrieved!  This is an orphaned order
@@ -660,7 +658,7 @@ abstract class geoOrderItem implements iOrderItem
 			trigger_error("ERROR CART TRANSACTION: Order item #$id supposed to have parent #{$row['parent']} but parent not found!  Not killing order item, but not putting it into action either.");
 			return null;
 		}
-		
+
 		//see if type is valid.
 		if (isset(geoOrderItem::$orderTypes[$type])) {
 			//it is valid!
@@ -670,18 +668,18 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		$orderItem = new $className ();
 		$orderItem->unSerialize($id);
-		
-		
-		
+
+
+
 		return $orderItem;
 	}
-	
-	
+
+
 	/**
 	 * Quick way to see if an item with a specified ID exists or not, without
 	 * all the overhead of creating a new object and all that just to check
 	 * to see if the item exists.
-	 * 
+	 *
 	 * @param int $id
 	 * @return bool
 	 * @since Version 4.0.9
@@ -710,10 +708,10 @@ abstract class geoOrderItem implements iOrderItem
 		self::$_itemsExist[$id] = false;
 		return false;
 	}
-	
+
 	/**
 	 * Gets an associative array of all the different order item types found in the system.
-	 * 
+	 *
 	 * @param bool $onlyParents If true, will only return order item types that
 	 *   do not have any parent item types themselves, meaning they are parent item
 	 *   types.  {@since Version 7.2.0}
@@ -722,7 +720,7 @@ abstract class geoOrderItem implements iOrderItem
 	public static function getOrderItemTypes ($onlyParents = false)
 	{
 		self::loadTypes();
-		
+
 		if ($onlyParents) {
 			//only return types with no parents
 			$types = array();
@@ -736,13 +734,13 @@ abstract class geoOrderItem implements iOrderItem
 		//return all types
 		return self::$orderTypes;
 	}
-	
+
 	/**
 	 * Way to get a specific type of child already attached to a parent.  If you have a specific order item, and
 	 * want to get a child of that order item of a specific type, this is the function to use.
-	 * 
+	 *
 	 * If parent's type is the type attempting to find, will just return the parent.
-	 * 
+	 *
 	 * If not found, returns null.
 	 *
 	 * @param geoOrderItem|int $parent Either the parent order item, the item already matching the type, or the id of the parent order item.
@@ -762,7 +760,7 @@ abstract class geoOrderItem implements iOrderItem
 				return null;
 			}
 		}
-		
+
 		if ($parent->getType() == $item_type){
 			return ($parent);
 		}
@@ -786,11 +784,11 @@ abstract class geoOrderItem implements iOrderItem
 		//so sad, item not found :(
 		return null;
 	}
-	
+
 	/**
 	 * The "new" way to get parent types for a given order item, you should not
 	 * call the getParentTypes static method directly.
-	 * 
+	 *
 	 * @param string $itemType
 	 * @return array The array of parent types, or an empty array if anything wrong
 	 *   or if item has no parents (is a parent itself)
@@ -803,25 +801,25 @@ abstract class geoOrderItem implements iOrderItem
 			//sanity check, return empty array since expects to always return array
 			return array();
 		}
-		
+
 		//make sure the types are loaded
 		self::loadTypes();
-		
+
 		//make sure the requested item is real
 		if (!isset(self::$orderTypes[$itemType])) {
 			//can't tell what the parent types are if item type not known
 			return array();
 		}
-		
+
 		//all of the parent types will be set in there, if that key is set.
 		return self::$orderTypes[$itemType]['parents'];
 	}
-	
+
 	/**
 	 * Add a parent type to the given "child" order item.  Note that a parent can
 	 * only be added to a "child" order item that already has at least 1 parent
 	 * order item.
-	 * 
+	 *
 	 * @param string $childType The item type to add the parent type to
 	 * @param string $parentType The parent type to be added to the list of parent types
 	 * @return bool returns true if parent was added successfully, false otherwise.
@@ -831,18 +829,18 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		$childType = trim($childType);
 		$parentType = trim($parentType);
-		
+
 		if (!$childType || !$parentType || $childType == $parentType) {
 			//are we sane today?
 			return false;
 		}
-		
+
 		self::loadTypes();
 		if (!isset(self::$orderTypes[$childType],self::$orderTypes[$parentType])) {
 			//the parent or the item is not valid
 			return false;
 		}
-		
+
 		if (count(self::$orderTypes[$childType]['parents']) == 0) {
 			//no parents to start out with?  Block ability to specify a parent to
 			//an item that wants to be a parent itself.
@@ -857,6 +855,41 @@ abstract class geoOrderItem implements iOrderItem
 		self::$orderTypes[$childType]['parents'][] = $parentType;
 		return true;
 	}
+
+
+	/**
+	 * Remove a parent type to the given "child" order item.
+	 *
+	 * @param string $childType The item type to add the parent type to
+	 * @param string $parentType The parent type to be added to the list of parent types
+	 * @return bool returns true if parent was added successfully, false otherwise.
+	 * @since Version 20
+	 */
+	final public static function removeParentTypeFor ($childType, $parentType)
+	{
+		$childType = trim($childType);
+		$parentType = trim($parentType);
+
+		if (!$childType || !$parentType || $childType === $parentType) {
+			// are we sane today?
+			return false;
+		}
+		static::loadTypes();
+		if (!isset(static::$orderTypes[$childType], static::$orderTypes[$parentType])) {
+			// the parent or the item is not valid
+			return false;
+		}
+		foreach (static::$orderTypes[$childType]['parents'] as $i => $item) {
+			if ($item === $parentType) {
+				unset(static::$orderTypes[$childType]['parents'][$i]);
+				// fix gap in array indexing
+				static::$orderTypes[$childType]['parents'] = array_values(static::$orderTypes[$childType]['parents']);
+				break;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Initialize the registry for the order item
 	 */
@@ -871,13 +904,13 @@ abstract class geoOrderItem implements iOrderItem
 		$this->registry->setId($this->id);
 		$this->registry->unSerialize();
 	}
-	
+
 	/**
 	 * Serializes the current order item (saves changes in the database, or creates new order item if the
 	 *  id is not set.  If it is a new order, it will set the order item ID after it has been
 	 *  inserted into the database.
-	 * 
-	 * Also automatically serializes any objects attached to it that are not already serialized. 
+	 *
+	 * Also automatically serializes any objects attached to it that are not already serialized.
 	 *
 	 */
 	public function serialize ()
@@ -903,7 +936,7 @@ abstract class geoOrderItem implements iOrderItem
 		if (!$processOrder && $this->defaultProcessOrder > 0) {
 			$processOrder = intval($this->defaultProcessOrder);
 		}
-		
+
 		$share_fees = geoAddon::getUtil('share_fees');
 		if ($share_fees->active) {
 			//get types of fees shared from db
@@ -926,7 +959,7 @@ abstract class geoOrderItem implements iOrderItem
 						$paid_out = 0;
 						$paid_out_to = intval($this->paidOutTo);
 					}
-		
+
 				} else {
 					//leave as null but set paidoutto
 					$paid_out = null;
@@ -940,8 +973,8 @@ abstract class geoOrderItem implements iOrderItem
 		} else {
 			$paid_out = null;
 			$paid_out_to = null;
-		}		
-		
+		}
+
 		if (isset($this->id) && $this->id > 0){
 			//update info
 			$sql = "UPDATE ".$db->geoTables->order_item." SET `status` = ?, `order` = ?, `parent` = ?, `type` = ?, `price_plan` = ?, `category` = ?, `cost` = ?, `created` = ?, `process_order` = ?, `paid_out` = ?, `paid_out_to` = ? WHERE `id` = ? LIMIT 1";
@@ -966,11 +999,11 @@ abstract class geoOrderItem implements iOrderItem
 			}
 		} else {
 			//Insert into DB
-			$sql = "INSERT INTO ".$db->geoTables->order_item." (`id`, `status`, `order`, `parent`, `type`, `price_plan`, `category`, `cost`, `created`, `process_order`, `paid_out`, `paid_out_to`) 
+			$sql = "INSERT INTO ".$db->geoTables->order_item." (`id`, `status`, `order`, `parent`, `type`, `price_plan`, `category`, `cost`, `created`, `process_order`, `paid_out`, `paid_out_to`)
 					VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			
+
 			$query_data = array($status, $order, $parent, $type, $price_plan, $category, $cost, $created, $processOrder, $paid_out, $paid_out_to);
-			
+
 			$result = $db->Execute($sql, $query_data);
 			if (!$result){
 				trigger_error('ERROR SQL: Error with query when serialize object to db.  Error msg: '.$db->ErrorMsg());
@@ -983,18 +1016,18 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		//add it to the array of items that exist
 		self::$_itemsExist[$this->id] = true;
-		
+
 		//Serialize order item registry
 		if (is_object($this->registry)) {
 			$this->registry->setId($this->id);
 			$this->registry->setName('order_item');
 			$this->registry->serialize();//serialize registry
 		}
-		
+
 		//we just serialized, so there are no longer pending changes.
 		$this->_pendingChanges = false;
 	}
-	
+
 	/**
 	 * Unserializes the object for the given ID and applies parameters to this object.
 	 *
@@ -1011,9 +1044,9 @@ abstract class geoOrderItem implements iOrderItem
 			//can't unserialize without an id!
 			return;
 		}
-		
+
 		$db = DataAccess::getInstance();
-		
+
 		//Get the main data
 		$sql = "SELECT * FROM ".$db->geoTables->order_item." WHERE `id`=$id LIMIT 1";
 		$result = $db->Execute($sql);
@@ -1055,30 +1088,30 @@ abstract class geoOrderItem implements iOrderItem
 			//something went wrong with unserializing main values
 			return ;
 		}
-		
+
 		//add it to array of orders we have
 		geoOrderItem::$orderItems[$this->processOrder][$this->id] = $this;
-		
+
 		//also add it ot the array if items that exist
 		self::$_itemsExist[$this->id] = true;
-		
+
 		//we just serialized, so there are no longer pending changes.
 		$this->_pendingChanges = false;
 	}
-	
+
 	/**
 	 * Alias of geoOrderItem::serialize()
-	 * 
+	 *
 	 */
 	public function save()
 	{
 		return $this->serialize();
 	}
-	
-	
+
+
 	/**
 	 * Loads order item types.
-	 * 
+	 *
 	 * @param string $dirname Usually leave this blank, it will load system and
 	 *   addon order item types on it's own
 	 */
@@ -1108,7 +1141,7 @@ abstract class geoOrderItem implements iOrderItem
 			$dirname = CLASSES_DIR.'order_items/';
 			$firstCall = true;
 		}
-		
+
 		//echo 'Adding dir: '.$dirname.'<br />';
 		$dir = opendir($dirname);
 		$skip = array('.','..');
@@ -1133,7 +1166,7 @@ abstract class geoOrderItem implements iOrderItem
 				//double check make sure file exists, which I guess it does not
 				continue;
 			}
-			
+
 			$name = str_replace('.php','',$filename);
 			$class_name = $name.'OrderItem';
 			if (strlen(trim($name)) == 0 || isset(geoOrderItem::$orderTypes[$name])){
@@ -1151,7 +1184,7 @@ abstract class geoOrderItem implements iOrderItem
 					$parents = array ();
 				}
 				$item = new $class_name();
-				
+
 				$processOrder = $item->getProcessOrder();
 				//add to array of types
 				geoOrderItem::$orderTypes['ordered_items'][$processOrder][$name] = array (
@@ -1179,12 +1212,12 @@ abstract class geoOrderItem implements iOrderItem
 		if ($firstCall) {
 			//give order items a standard place to make calls to "addParentTypeFor" (get it?)
 			self::callUpdate('geoOrderItem_loadTypes_adoptions');
-			
+
 			//give order items a standard place to make calls to "unregisterItemType" (get it?)
 			self::callUpdate('geoOrderItem_loadTypes_obituary');
 		}
 	}
-	
+
 	/**
 	 * Re-orders the order item types by the given price plan and category settings
 	 * as set in plan Item.  Note that this can be "expensive" where there are a lot
@@ -1202,7 +1235,7 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		//first, make sure the types are loaded to begin with
 		self::loadTypes();
-		
+
 		//now re-order them
 		$ordered = array();
 		foreach (self::$orderTypes as $name => $settings) {
@@ -1225,14 +1258,14 @@ abstract class geoOrderItem implements iOrderItem
 			}
 		}
 	}
-	
+
 	/**
 	 * unregisters the specified order item type as a valid type for the
 	 * remainder of the page load.  Perfect place to call this from is order
 	 * item call to geoOrderItem_loadTypes as that happens directly after all
 	 * the different types have been loaded, so one type can be removed right
 	 * away.
-	 * 
+	 *
 	 * @param string $itemType The item type to unregister.
 	 * @return bool Returns true if removal of item type was successful, false otherwise.
 	 * @since Version 4.1.0
@@ -1247,11 +1280,11 @@ abstract class geoOrderItem implements iOrderItem
 		unset (self::$orderTypes[$itemType]);
 		return true;
 	}
-	
+
 	/**
 	 * Removes an order item as specified by ID, and also recursively
 	 * removes everything attached to it. (this includes child orders items, etc).
-	 * 
+	 *
 	 * If the order item no longer exists, but there are still "orphaned" child items attached
 	 * to this order item, this function will kill those poor orphans that no longer have
 	 * their parents.  This is a very morbid method, really.
@@ -1269,9 +1302,9 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		$db = DataAccess::getInstance();
 		if ($remove_attached) {
-			//remove all stuff attached to this first, so they have access to parent if 
+			//remove all stuff attached to this first, so they have access to parent if
 			//they need it to remove themselves.
-			
+
 			//first, remove all child order items
 			$sql = 'SELECT `id` FROM '.geoTables::order_item.' WHERE `parent` = ?';
 			$result = $db->Execute($sql, array($id));
@@ -1295,7 +1328,7 @@ abstract class geoOrderItem implements iOrderItem
 				}
 			}
 		}
-		
+
 		$item = geoOrderItem::getOrderItem($id);
 		if (is_object($item)) {
 			if (!$item->processRemove()) {
@@ -1318,7 +1351,7 @@ abstract class geoOrderItem implements iOrderItem
 				unset(self::$orderItems[$processOrder][$id]);
 			}
 		}
-		
+
 		if ($remove_attached) {
 			//last, remove all registry for this order
 			//Do NOT move this to happen earlier, it must be done last
@@ -1327,7 +1360,7 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Works just like geoOrderItem::remove() except this will only affect order item data, not
 	 * affect anything live like the listing itself, for example if a listing lasts more than a
@@ -1346,9 +1379,9 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		$db = DataAccess::getInstance();
 		if ($remove_attached) {
-			//remove all stuff attached to this first, so they have access to parent if 
+			//remove all stuff attached to this first, so they have access to parent if
 			//they need it to remove themselves.
-			
+
 			//first, remove all child order items
 			$sql = 'SELECT `id` FROM '.geoTables::order_item.' WHERE `parent` = ?';
 			$result = $db->Execute($sql, array($id));
@@ -1372,7 +1405,7 @@ abstract class geoOrderItem implements iOrderItem
 				}
 			}
 		}
-		
+
 		$item = geoOrderItem::getOrderItem($id);
 		if (is_object($item)) {
 			if (!$item->processRemoveData()) {
@@ -1382,7 +1415,7 @@ abstract class geoOrderItem implements iOrderItem
 			}
 			unset($item);
 		}
-		
+
 		if ($remove_attached) {
 			//first, remove all registry for this order
 			geoRegistry::remove('order_item', $id);
@@ -1400,19 +1433,19 @@ abstract class geoOrderItem implements iOrderItem
 				unset(self::$orderItems[$processOrder][$id]);
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Statically calls the specified display function for the order item specified, or all of
-	 * the different order items with no parents if no specific order item is specified, and 
+	 * the different order items with no parents if no specific order item is specified, and
 	 * seperates the returned responses from each of the order items by $separator
-	 * 
+	 *
 	 * IMPORTANT: This leaves it up to each order item to make sure that order item is turned
 	 * on and all that, and that input is cleaned, and that all "child" order items are called
 	 * if needed.
-	 * 
+	 *
 	 * This is similar to the addon method {@link geoAddon::triggerDisplay()} but this one is
 	 * a little more simple.
 	 *
@@ -1424,7 +1457,7 @@ abstract class geoOrderItem implements iOrderItem
 	 *  bool_true: if any return true, then return true.  otherwise return false. (strict match)
 	 *  bool_false: if any return false, then return false.  otherwise return true. (strict match)
 	 *  not_null: if any return a non-null (strict match) value, that value is returned.
-	 * @param string|array $item_type Either a string of the specific item type to call, or an 
+	 * @param string|array $item_type Either a string of the specific item type to call, or an
 	 *  array of item types.
 	 * @param bool $run_children If true, will also run children order items (items that have a parent)
 	 * @return mixed Usually a string of each result seperated by separator, or if separator
@@ -1458,7 +1491,7 @@ abstract class geoOrderItem implements iOrderItem
 				//item type must have been recently unregistered.
 				continue;
 			}
-			
+
 			if (method_exists(self::$orderTypes[$key]['class_name'],$call_name) && ($run_children || count(self::$orderTypes[$key]['parents']) == 0)) {
 				//call it statically
 				trigger_error('DEBUG CART: calling order item display, calling '.self::$orderTypes[$key]['class_name'].'::'.$call_name);
@@ -1468,38 +1501,38 @@ abstract class geoOrderItem implements iOrderItem
 						if (is_array($this_html) && count($this_html) > 0){
 							//do a strict check for array return, this should
 							//be an array return.
-							$parts[$key] = $this_html;	
+							$parts[$key] = $this_html;
 						}
 						break;
-						
+
 					case 'string_array':
 						if (strlen($this_html) > 0) {
-							$parts[$key] = $this_html;	
+							$parts[$key] = $this_html;
 						}
 						break;
-						
+
 					case 'bool_true':
 						//bool_true special case: if any results are true, return true
 						if ($this_html === true) {
 							return true;
 						}
 						break;
-						
+
 					case 'bool_false':
 						//bool_false special case: if any results are true, return true
 						if ($this_html === false) {
 							return false;
 						}
 						break;
-						
+
 					case 'not_null':
-						//not_null special case: if any results are something besides 
+						//not_null special case: if any results are something besides
 						//null (strict), return those results.
 						if ($this_html !== null) {
 							//is a non-null value, so return that.
 							return $this_html;
 						}
-						
+
 					default:
 						//Normal, treat return as a string that will
 						//be glued together with other returned strings later.
@@ -1517,22 +1550,22 @@ abstract class geoOrderItem implements iOrderItem
 			case 'string_array':
 				$return = $parts;
 				break;
-				
+
 			case 'bool_true':
 				//none returned true, so return false
 				$return = false;
 				break;
-				
+
 			case 'bool_false':
 				//none returned false, so return true
 				$return = true;
 				break;
-				
+
 			case 'not_null':
 				//none returned a non-null value, so return null
 				$return = null;
 				break;
-				
+
 			default:
 				//default (normal) case, treat separator as a separator
 				if (count($parts) > 0) {
@@ -1542,13 +1575,13 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * Calls the specified update function for the order item specified, or all of the order
 	 * item types with no parents, if no specific order item type is specified.
-	 * 
+	 *
 	 * IMPORTANT: This leaves it up to each order item to make sure that order item is being used and
-	 *  turned on on and all that, and that input is cleaned, and that all "child" order items are 
+	 *  turned on on and all that, and that input is cleaned, and that all "child" order items are
 	 *  called if needed.
 	 *
 	 * @param string $call_name
@@ -1595,7 +1628,7 @@ abstract class geoOrderItem implements iOrderItem
 			}
 		}
 	}
-	
+
 	/**
 	 * Use this to get all children types of the specified order item type, to be used
 	 *  to allow recursively calling children.  Even if type name is not valid, will
@@ -1617,20 +1650,20 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		return $children;
 	}
-	
+
 	/**
 	 * Use when this object, or one of it's child objects, has been changed, so that when it
 	 * is serialized, it will know there are changes that need to be serialized.
-	 * 
+	 *
 	 * This also recursevly touches all "parent" objects that this one is attached to.
-	 * 
+	 *
 	 * Note that this is automatically called internally when any of the set functions are used.
 	 *
 	 */
 	public function touch ()
 	{
 		$this->_pendingChanges = true; //there are now pending changes
-		
+
 		//touch anything this object is "attached" to
 		if (is_object($this->order)){
 			$this->order->touch();
@@ -1639,7 +1672,7 @@ abstract class geoOrderItem implements iOrderItem
 			$this->parent->touch();
 		}
 	}
-	
+
 	/**
 	 * Changes the status on an order item.  Built-in statuses are active, pending, and
 	 * pending_alter.  Recommended to overwrite this function if the item needs to
@@ -1666,18 +1699,18 @@ abstract class geoOrderItem implements iOrderItem
 					$item->processStatusChange($newStatus, $sendEmailNotices, $updateCategoryCount);
 				}
 			}
-			
+
 			return;
 		}
 		//remember to set the status on the item!
 		$this->setStatus($newStatus);
 		//make sure changes to item are saved, in case there are errors that happen after this time
 		$this->save();
-		
+
 		//call any children
 		$order = $this->getOrder();
 		$all_items = $order->getItem();
-		
+
 		foreach ($all_items as $item){
 			if (is_object($item) && is_object($item->getParent()) && $item->getParent()->getId() == $this->getId()){
 				//this is child of mine, call it
@@ -1685,7 +1718,7 @@ abstract class geoOrderItem implements iOrderItem
 			}
 		}
 	}
-	
+
 	/**
 	 * Overload this function if anything needs to be done at the time this order item is being
 	 * removed from the system. Note that the static function remove() does all the normal
@@ -1698,29 +1731,29 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return true;
 	}
-	
+
 	/**
 	 * Overload this function if anything extra needs to be done at the time the order item's data
 	 * is being removed.  This should NOT affect anything "live", all that is happening here is
 	 * the order item's data is being removed because it is getting old and needs to be cleared
 	 * out to make room.
-	 * 
-	 * 
+	 *
+	 *
 	 * @return bool true to finish removing the item's data, or false to force the item to stay put.
 	 */
 	public function processRemoveData ()
 	{
 		return true;
 	}
-	
+
 	/**
 	 * Use this to display info about each main item, in the e-mail sent saying the
 	 * order has been approved.  To keep consistent, use this format:
-	 * 
+	 *
 	 * ITEM TITLE [STATUS] - $COST
-	 * 
+	 *
 	 * (cost including sub-items of this)
-	 * 
+	 *
 	 * @param string $overrideTitle Can be used by individual order item to let
 	 *  super class do most of the work, but allow order item to specify the title,
 	 *  in the order item would return parent::geoOrder_processStatusChange_emailItemInfo('my title')
@@ -1745,21 +1778,21 @@ abstract class geoOrderItem implements iOrderItem
 		}
 		trigger_error('DEBUG EMAIL: title is '.$title);
 		return "$title $status - ".geoString::displayPrice($cost);
-		
+
 	}
-	
+
 	/**
 	 * Whether or not the current session is anonymous or not.  Note that is is
 	 * IF current session is anonymous, NOT if anonymous is allowed, for that see
 	 * {@link _templateOrderItem::anonymousAllowed()}
-	 * 
+	 *
 	 * @return bool
 	 */
 	final public static function isAnonymous ()
 	{
 		return (geoCart::getInstance()->user_data['id'] == 0);
 	}
-	
+
 	/**
 	 * If anonymous not allowed for the main type, and current session is
 	 * anonymous, shows the login form and returns true to allow caller to
@@ -1767,28 +1800,28 @@ abstract class geoOrderItem implements iOrderItem
 	 * already been displayed and everything, the only thing left to do is
 	 * any special cleanup (such as removing an item from the cart if needed),
 	 * and then exit.
-	 * 
+	 *
 	 * If this returns false, that means everything is OK and it is OK to proceed.
-	 * 
+	 *
 	 * So, TRUE = non-anon enforment required, need to exit, and FALSE = ok to proceed.
 	 *
 	 * @param string|null $itemType If set, will check item specified for anonymousAllowed().
 	 *  If null or empty string, will assume anonymous is NOT allowed.
 	 * @param string $loginFormParam IF user needs to log in and login form is called,
 	 *  this will be passed as the 4th param to the {@link Auth::login_form()} call.
-	 * @return bool FALSE: no enforcement needed, it is OK to proceed. 
+	 * @return bool FALSE: no enforcement needed, it is OK to proceed.
 	 *  TRUE: user not logged in, and anonymous is not allowed, so we just did some
 	 *  enforcing by displaying the login page.  Now it is your turn to EXIT.
 	 */
 	public static function enforceAnonymous ($itemType = null, $loginFormParam = 'a*is*cart')
 	{
 		trigger_error('DEBUG ANON: enforce anonymous top');
-		
+
 		$anonAllowed = false;
 		if ($itemType) {
 			$anonAllowed = self::callDisplay('anonymousAllowed',null,'bool_true',$itemType);
 		}
-		
+
 		if (self::isAnonymous() && !$anonAllowed) {
 			if (defined('IN_ADMIN')) {
 				//Don't do anything here, just let caller figure it out
@@ -1797,21 +1830,21 @@ abstract class geoOrderItem implements iOrderItem
 				//this is anonymous session and anonymous not allowed
 				trigger_error('DEBUG ANON: User not logged in, and anonymous not allowed, so showing
 				 login form and returning true.');
-				
+
 				//show login page
 				include_once(CLASSES_DIR."authenticate_class.php");
 				$auth = new Auth(0,DataAccess::getInstance()->getLanguage(),geoPC::getInstance());
 				$auth->login_form(0, "", "", $loginFormParam);
-				
+
 				//return false, meaning some enforcing was just done.
 				return true;
 			}
 		}
-		trigger_error('DEBUG ANON: User is logged in, OR not but anonymous is allowed, so 
+		trigger_error('DEBUG ANON: User is logged in, OR not but anonymous is allowed, so
 		no enforcing needed, returning false.');
 		return false;
 	}
-	
+
 	/**
 	 * Optional, used in admin to show which upgrades are attached to a Listing Renewal item
 	 * (superclass fallback, so things don't break if a new upgrade type doesn't have a friendlyName)
@@ -1822,22 +1855,22 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return 'Unknown Type';
 	}
-	
+
 	/**
 	 * Optional, this is used as an easy way to identify items that are Listing
 	 * parent items (i.e. classified and auction items).
-	 * 
+	 *
 	 * This is the superclass, and returns false,
 	 * items that directly represent listings need a copy of this function that
 	 * returns true.
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function isListingItem ()
 	{
 		return false;
 	}
-	
+
 	/**
 	 * Optional, if method not implemented in individual order item the method
 	 * in this superclass will return false by default, so order items that
@@ -1846,7 +1879,7 @@ abstract class geoOrderItem implements iOrderItem
 	 * recurring billing, this will not matter much.  Also if an item is recurring,
 	 * it should not only return true for this method, but also return true
 	 * for {@link iOrderItem::geoCart_initItem_forceOutsideCart(}}.
-	 * 
+	 *
 	 * @return bool return true if this order item is recurring, false otherwise.
 	 * @since Version 4.1.0
 	 */
@@ -1858,7 +1891,7 @@ abstract class geoOrderItem implements iOrderItem
 	 * Optional, but required if isRecurring() returns true, otherwise it will
 	 * default to 0 (basically recurring being off).  This needs to return the
 	 * interval for the recurring billing, in seconds.
-	 * 
+	 *
 	 * @return int The recurring interval in seconds.
 	 * @since Version 4.1.0
 	 */
@@ -1870,7 +1903,7 @@ abstract class geoOrderItem implements iOrderItem
 	 * Optional, but required if isRecurring() returns true, otherwise it will
 	 * default to 0 (basically recurring being off).  This needs to return the
 	 * price for the recurring billing.
-	 * 
+	 *
 	 * @return int The recurring interval in seconds.
 	 * @since Version 4.1.0
 	 */
@@ -1878,29 +1911,29 @@ abstract class geoOrderItem implements iOrderItem
 	{
 		return 0.00;
 	}
-	
+
 	/**
 	 * Optional, but required if isRecurring() returns true, otherwise the recurring
 	 * charge will have no dscription in the payment gateway.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getRecurringDescription ()
 	{
 		return 'Recurring Item';
 	}
-	
+
 	/**
 	 * Optional, used if isRecurring() returns true, if order item does not implement
 	 * the current time will always be returned.
-	 * 
+	 *
 	 * @return int Unix timestamp for when recurring start date should be.
 	 */
 	public function getRecurringStartDate ()
 	{
 		return geoUtil::time();
 	}
-	
+
 	/**
 	 * Optional, should return non-zero for child items such as Listing Extras that can add their cost to a recurring item (instead of creating a recurring cost on their own)
 	 * @return float the added cost
@@ -1911,14 +1944,14 @@ abstract class geoOrderItem implements iOrderItem
 		//typically, Listing Extras return their price for one subscription period, while other items return 0
 		return 0.00;
 	}
-	
+
 	/**
 	 * Required.
 	 * Used: By payment gateways to see what types of items are in the order affecting price.
-	 * 
+	 *
 	 * Note that for backwards compatibility with older order items, this is implemented
 	 * in the parent geoOrderItem class, so if you leave it off it will "work".
-	 * It is still highly recommended to implement anyways in each order item, 
+	 * It is still highly recommended to implement anyways in each order item,
 	 * simply because it's role will be much more important when the ability to
 	 * use the cart between users is implemented down the road.  Most would use
 	 * the implementation from the template order item.
@@ -1949,17 +1982,17 @@ abstract class geoOrderItem implements iOrderItem
 		//to maintain backwards compatibility with older custom order items.
 		return false;
 	}
-	
+
 	/**
 	 * Required, should return true or false, whether or not to display
 	 * this order item in the admin.  Most will return true, only special
 	 * cases, like "sub total" should return false.
 	 *
-	 * @return bool True if this item should be displayed in the admin, false 
+	 * @return bool True if this item should be displayed in the admin, false
 	 *  otherwise.
 	 */
 	abstract public function displayInAdmin();
-	
+
 	/**
 	 * Used to get display details about item, and any child items as well, both in the main
 	 * cart view, and other places where the order details are displayed, including within
@@ -1977,7 +2010,7 @@ abstract class geoOrderItem implements iOrderItem
 	 * 							//being the item's ID, and the contents being associative array like
 	 * 							//this one.  Careful not to get into any infinite loops...
 	 * )
-	 * 
+	 *
 	 * @param bool $inCart True if this is being called from inside the cart, false otherwise. Note: do NOT
 	 *  try to use the geoCart object if $inCart is false.
 	 * @return array|bool Either an associative array as documented above, or boolean false to hide this
@@ -1989,7 +2022,7 @@ abstract class geoOrderItem implements iOrderItem
 /**
  * You cannot have abstract static functions, so instead need to have an interface to force the given
  * static functions to be defined.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
@@ -1997,34 +2030,34 @@ interface iOrderItem
 {
 	/**
 	 * Required, even if it just returns an empty array.
-	 * 
+	 *
 	 * @param bool $allPossible If true, should initialize ALL steps that are possible
 	 *   considering the current "site-wide" settings.
 	 */
 	public static function geoCart_initSteps($allPossible=false);
-	
+
 	/**
 	 * Whether or not a seperate cart can be initialized just for this order item or not.
-	 * 
+	 *
 	 * @return boolean True to force creating "parellel" cart just for this item, if another cart is already started,
 	 *  false otherwise.
 	 */
 	public static function geoCart_initItem_forceOutsideCart();
-	
+
 	/**
 	 * Used to determine whether or not to display the other details step.  Should also check the
 	 * children items of the item.
-	 * 
+	 *
 	 * @return bool true to add the other_details step, false otherwise.
 	 */
 	public static function geoCart_initSteps_addOtherDetails();
-	
+
 	/**
 	 * Used from different locations, this should return an array of the different order items that this
 	 * order item is a child of.  If this is a main order item type, it should return an empty array.
-	 * 
+	 *
 	 * @return array
 	 */
 	public static function getParentTypes();
-	
+
 }

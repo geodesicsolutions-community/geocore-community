@@ -871,7 +871,7 @@
                 <div class="region-ind">
                   <h6 id="denmark"><a href="http://denmark.{$url}">Denmark</a></h6>
                     <ul>
-		      <li><a href="http://kbenhavn.denmark.{$url}">K??benhavn</a></li>
+		      <li><a href="http://kbenhavn.denmark.{$url}">København</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -892,7 +892,7 @@
 		       <li><a href="http://bordeaux.france.{$url}">Bordeaux</a></li>
 		       <li><a href="http://bretagne.france.{$url}">Bretagne</a></li>
 		       <li><a href="http://corse.france.{$url}">Corse</a></li>
-		       <li><a href="http://departements-doutre-me.france.{$url}">D??partements D'outre Mer</a></li>
+		       <li><a href="http://departements-doutre-me.france.{$url}">Départements D'outre Mer</a></li>
 		       <li><a href="http://grenoble.france.{$url}">Grenoble</a></li>
 		       <li><a href="http://lille.france.{$url}">Lille</a></li>
 		       <li><a href="http://loire.france.{$url}">Loire</a></li>
@@ -913,7 +913,7 @@
 		       <li><a href="http://berlin.germany.{$url}">Berlin</a></li>
 		       <li><a href="http://bodensee.germany.{$url}">Bodensee</a></li>
 		       <li><a href="http://bremen.germany.{$url}">Bremen</a></li>
-		       <li><a href="http://duesseldorf.germany.{$url}">D??sseldorf</a></li>
+		       <li><a href="http://duesseldorf.germany.{$url}">Düsseldorf</a></li>
 		       <li><a href="http://dortmund.germany.{$url}">Dortmund</a></li>
 		       <li><a href="http://dresden.germany.{$url}">Dresden</a></li>
 		       <li><a href="http://essen.germany.{$url}">Essen</a></li>
@@ -924,15 +924,15 @@
 		       <li><a href="http://heidelberg.germany.{$url}">Heidelberg</a></li>
 		       <li><a href="http://kaiserslautern.germany.{$url}">Kaiserslautern</a></li>
 		       <li><a href="http://karlsruhe.germany.{$url}">Karlsruhe</a></li>
-		       <li><a href="http://koeln.germany.{$url}">K??ln</a></li>
+		       <li><a href="http://koeln.germany.{$url}">Köln</a></li>
 		       <li><a href="http://kiel.germany.{$url}">Kiel</a></li>
-		       <li><a href="http://luebeck.germany.{$url}">L??beck</a></li>
+		       <li><a href="http://luebeck.germany.{$url}">Lübeck</a></li>
 		       <li><a href="http://leipzig.germany.{$url}">Leipzig</a></li>
 		       <li><a href="http://mannheim.germany.{$url}">Mannheim</a></li>
-		       <li><a href="http://munchen.germany.{$url}">M??nchen</a></li>
-		       <li><a href="http://nurnberg.germany.{$url}">N??rnberg</a></li>
+		       <li><a href="http://munchen.germany.{$url}">München</a></li>
+		       <li><a href="http://nurnberg.germany.{$url}">Nürnberg</a></li>
 		       <li><a href="http://rostock.germany.{$url}">Rostock</a></li>
-		       <li><a href="http://saarbrucken.germany.{$url}">Saarbr??cken</a></li>
+		       <li><a href="http://saarbrucken.germany.{$url}">Saarbrücken</a></li>
 		       <li><a href="http://schwerin.germany.{$url}">Schwerin</a></li>
 		       <li><a href="http://stuttgart.germany.{$url}">Stuttgart</a></li>
                     </ul>
@@ -953,7 +953,7 @@
                 <div class="region-ind">
                   <h6 id="iceland"><a href="http://iceland.{$url}">Iceland</a></h6>
                     <ul>
-		      <li><a href="http://reykjavik.iceland.{$url}">Reykjav??k</a></li>
+		      <li><a href="http://reykjavik.iceland.{$url}">Reykjavík</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1032,7 +1032,7 @@
                 <div class="region-ind">
                   <h6 id="poland"><a href="http://poland.{$url}">Poland</a></h6>
                     <ul>
-		      <li><a href="http://krakow.poland.{$url}">Krak??w</a></li>
+		      <li><a href="http://krakow.poland.{$url}">Kraków</a></li>
 		      <li><a href="http://poznan.poland.{$url}">Poznan</a></li>
 		      <li><a href="http://warszawa.poland.{$url}">Warszawa</a></li>
                     </ul>
@@ -1085,7 +1085,7 @@
 		      <li><a href="http://gothenburg.sweden.{$url}">Gothenburg</a></li>
 		      <li><a href="http://malmo.sweden.{$url}">Malmo</a></li>
 		      <li><a href="http://stockholm.sweden.{$url}">Stockholm</a></li>
-		      <li><a href="http://umea.sweden.{$url}">Ume??</a></li>
+		      <li><a href="http://umea.sweden.{$url}">Umeå</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1095,7 +1095,7 @@
 		      <li><a href="http://bern.switzerland.{$url}">Bern</a></li>
 		      <li><a href="http://genf.switzerland.{$url}">Genf</a></li>
 		      <li><a href="http://lausanne.switzerland.{$url}">Lausanne</a></li>
-		      <li><a href="http://zurich.switzerland.{$url}">Z??rich</a></li>
+		      <li><a href="http://zurich.switzerland.{$url}">Zürich</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1361,7 +1361,7 @@
                 <div class="region-ind">
                   <h6 id="guam"><a href="http://guam.{$url}">Guam</a></h6>
                     <ul>
-                      <li><a href="http://hagatna.guam.{$url}">Hag??t??a</a></li>
+                      <li><a href="http://hagatna.guam.{$url}">Hagåtña</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1418,7 +1418,7 @@
 		      <li><a href="http://porto-alegre.brazil.{$url}">Porto Alegre</a></li>
 		      <li><a href="http://recife.brazil.{$url}">Recife</a></li>
 		      <li><a href="http://rio-de-janeiro.brazil.{$url}">Rio de Janeiro</a></li>
-		      <li><a href="http://sao-paulo.brazil.{$url}">S??o Paulo</a></li>
+		      <li><a href="http://sao-paulo.brazil.{$url}">São Paulo</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1459,7 +1459,7 @@
                 <div class="region-ind">
                   <h6 id="costa_rica"><a href="http://costa-rica.{$url}">Costa Rica</a></h6>
                     <ul>
-                      <li><a href="http://san-jose.costa-rica.{$url}">San Jos??</a></li>
+                      <li><a href="http://san-jose.costa-rica.{$url}">San José</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1500,21 +1500,21 @@
                       <li><a href="http://acapulco.mexico.{$url}">Acapulco</a></li>
 		      <li><a href="http://baja-california.mexico.{$url}">Baja California</a></li>
 		      <li><a href="http://chihuahua.mexico.{$url}">Chihuahua</a></li>
-		      <li><a href="http://ciudad-juarez.mexico.{$url}">Ciudad Ju??rez</a></li>
+		      <li><a href="http://ciudad-juarez.mexico.{$url}">Ciudad Juárez</a></li>
 		      <li><a href="http://guadalajara.mexico.{$url}">Guadalajara</a></li>
 		      <li><a href="http://guanajuato.mexico.{$url}">Guanajuato</a></li>
 		      <li><a href="http://hermosillo.mexico.{$url}">Hermosillo</a></li>
 		      <li><a href="http://hidalgo.mexico.{$url}">Hidalgo</a></li>
-		      <li><a href="http://mazatlan.mexico.{$url}">Mazatl??n</a></li>
+		      <li><a href="http://mazatlan.mexico.{$url}">Mazatlán</a></li>
 		      <li><a href="http://mexico-city.mexico.{$url}">Mexico City</a></li>
 		      <li><a href="http://monterrey.mexico.{$url}">Monterrey</a></li>
 		      <li><a href="http://oaxaca.mexico.{$url}">Oaxaca</a></li>
 		      <li><a href="http://puebla.mexico.{$url}">Puebla</a></li>
 		      <li><a href="http://puerto-vallarta.mexico.{$url}">Puerto Vallarta</a></li>
-		      <li><a href="http://san-luis-potosi.mexico.{$url}">San Luis Potos??</a></li>
+		      <li><a href="http://san-luis-potosi.mexico.{$url}">San Luis Potosí</a></li>
 		      <li><a href="http://tijuana.mexico.{$url}">Tijuana</a></li>
 		      <li><a href="http://vera-cruz.mexico.{$url}">Vera Cruz</a></li>
-		      <li><a href="http://yucatan.mexico.{$url}">Yucat??n</a></li>
+		      <li><a href="http://yucatan.mexico.{$url}">Yucatán</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1532,7 +1532,7 @@
                 <div class="region-ind">
                   <h6 id="paraguay"><a href="http://paraguay.{$url}">Paraguay</a></h6>
                     <ul>
-                      <li><a href="http://asuncion.paraguay.{$url}">Asunci??n</a></li>
+                      <li><a href="http://asuncion.paraguay.{$url}">Asunción</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">
@@ -1574,7 +1574,7 @@
                 <div class="region-ind"> 
                   <h6 id="cameroon"><a href="http://cameroon.{$url}">Cameroon</a></h6>
                     <ul>
-                      <li><a href="http://yaounde.cameroon.{$url}">Yaound??</a></li>
+                      <li><a href="http://yaounde.cameroon.{$url}">Yaoundé</a></li>
                     </ul>
                 </div>
                 <div class="region-ind">

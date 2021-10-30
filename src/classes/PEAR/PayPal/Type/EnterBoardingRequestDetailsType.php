@@ -43,7 +43,7 @@ class EnterBoardingRequestDetailsType extends XSDSimpleType
     var $MarketingCategory;
 
     /**
-     * Information about the merchant ???s business
+     * Information about the merchant ’s business
      */
     var $BusinessInfo;
 

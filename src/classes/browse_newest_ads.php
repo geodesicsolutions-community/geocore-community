@@ -6,10 +6,11 @@ class Browse_newest_ads extends geoBrowse
     var $notify_data = array();
     var $sort_type;
     var $lookback;
+    var $days_to_display;
 
 //########################################################################
 
-    public function __construct($category_id = 0, $page = 0, $browse_type = 0)
+    public function __construct($category_id = 0, $page = 0, $browse_type = 0, $days_to_display = 0)
     {
         $this->site_category = (int)$category_id;
 
@@ -19,6 +20,8 @@ class Browse_newest_ads extends geoBrowse
 
         $this->page_result = ($page) ? (int)$page : 1;
         $this->browse_type = (int)$browse_type;
+
+        $this->days_to_display = $days_to_display;
 
         parent::__construct();
     } //end of function Browse_newest_ads
@@ -42,29 +45,34 @@ class Browse_newest_ads extends geoBrowse
 
         $classTable = geoTables::classifieds_table;
 
-        switch ($this->lookback) {
-            case 2:
-                //last 2 weeks
-                $cutoff_time = (geoUtil::time() - (86400 * 14));
-                break;
+        if ($this->days_to_display == 0) {
+            //no specific number of days passed in...do the normal thing
+            switch ($this->lookback) {
+                case 2:
+                    //last 2 weeks
+                    $cutoff_time = (geoUtil::time() - (86400 * 14));
+                    break;
 
-            case 3:
-                //last 3 weeks
-                $cutoff_time = (geoUtil::time() - (86400 * 21));
-                break;
+                case 3:
+                    //last 3 weeks
+                    $cutoff_time = (geoUtil::time() - (86400 * 21));
+                    break;
 
-            case 4:
-                //last 24 hours
-                $cutoff_time = (geoUtil::time() - 86400);
-                break;
+                case 4:
+                    //last 24 hours
+                    $cutoff_time = (geoUtil::time() - 86400);
+                    break;
 
-            case 1:
-                //break ommitted on purpose
+                case 1:
+                    //break ommitted on purpose
 
-            default:
-                //last 1 week
-                $cutoff_time = (geoUtil::time() - (86400 * 7));
-                break;
+                default:
+                    //last 1 week
+                    $cutoff_time = (geoUtil::time() - (86400 * 7));
+                    break;
+            }
+        } else {
+            $cutoff_time = (geoUtil::time() - (86400 * (int)$this->days_to_display));
         }
 
         //add to original (instead of copy like normal), so that category counts dynamically retrieved,

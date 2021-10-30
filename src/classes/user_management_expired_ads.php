@@ -6,7 +6,7 @@ class User_management_expired_ads extends geoSite
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    function User_management_expired_ads($db, $language_id, $classified_user_id = 0, $page = 0, $product_configuration = 0)
+    function __construct($db, $language_id, $classified_user_id = 0, $page = 0, $product_configuration = 0)
     {
         parent::__construct();
 

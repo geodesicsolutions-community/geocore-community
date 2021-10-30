@@ -1249,6 +1249,7 @@ class offsite_videosOrderItem extends geoOrderItem
 
             //Make sure it is valid youtube video, if not continue and add error for slot.
             $details = self::_getYoutubeData($videoId);
+
             if (!$details) {
                 $slotErrors[$slotId] = $msgs[500932];
                 continue;
@@ -1402,10 +1403,15 @@ class offsite_videosOrderItem extends geoOrderItem
         /*********************************************************************************************
          the API we were using to verify video data is deprecated / no longer exists as of 5/7/15
          until a replacement can be written, this is a dirty hack to just assume everything is correct and jam the data in
+         *
+         * youtube forces you to create an api key so that you can verify the video.
+         * we'll assume the video url is valid as the seller would be doing damage to their own add without verifying
+         *
          TODO: FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          *********************************************************************************************/
+
         $data = array(
-                'media_content_url' => "//www.youtube.com/v/{$videoId}",
+                'media_content_url' => "{$videoId}",
                 'media_content_type' => 'application/x-shockwave-flash',
                 'video_id' => $videoId,
                 'video_type' => 'youtube'

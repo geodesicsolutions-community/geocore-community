@@ -791,6 +791,7 @@ class addon_storefront_util extends addon_storefront_info
         $index = $db->get_site_setting('classifieds_file_name');
         $text = geoAddon::getText('geo_addons', 'storefront');
         $price_plans_with_free_storefronts = $this->getPricePlansWithFreeStorefronts();
+
         $user = geoUser::getUser($user_id);
         if (!$user) {
             return false;
@@ -853,7 +854,6 @@ class addon_storefront_util extends addon_storefront_info
         $reg = geoAddon::getRegistry('storefront');
         $admin_switch = $reg->get('my_account_show_storefront', 1);
         $storefrontBox['display'] = ($this->exposeStore($user_id) && $admin_switch) ? true : false;
-
         return $storefrontBox;
     }
 
@@ -909,17 +909,24 @@ class addon_storefront_util extends addon_storefront_info
      */
     public function exposeStore($user_id)
     {
-        if ($this->userHasCurrentSubscription($user_id) > 0) {
+        $price_plans_with_free_storefronts = $this->getPricePlansWithFreeStorefronts();
+
+        $user = geoUser::getUser($user_id);
+        if (!$user) {
+            return false;
+        }
+        $pricePlanId = (geoMaster::is('classifieds')) ? $user->price_plan_id : $user->auction_price_plan_id;
+        if (in_array($pricePlanId, $price_plans_with_free_storefronts)) {
+            return true;
+        } elseif ($this->userHasCurrentSubscription($user_id) > 0) {
             //user has a current subscription -- need to provide access to it
             return true;
-        }
-
-        if ($this->canBuyMoreStore($user_id)) {
+        } elseif ($this->canBuyMoreStore($user_id)) {
             return true;
+        } else {
+            //got this far and nothing to show yet, so return false
+            return false;
         }
-
-        //got this far and nothing to show yet, so return false
-        return false;
     }
 
     /**
@@ -992,22 +999,25 @@ class addon_storefront_util extends addon_storefront_info
                 return 0;
             }
         }
-        $sql = "SELECT * FROM geodesic_addon_storefront_subscriptions WHERE user_id=? LIMIT 1";
-        $result = $db->Execute($sql, array($user_id));
-        if (!$result || $result->RecordCount() != 1) {
-            //check if price plan attached to user has storefronts free
-            $user = geoUser::getUser($user_id);
-            $price_plans_with_free_storefronts = $this->getPricePlansWithFreeStorefronts();
-            $pricePlanId = (geoMaster::is('classifieds')) ? $user->price_plan_id : $user->auction_price_plan_id;
-            if (in_array($pricePlanId, $price_plans_with_free_storefronts)) {
-                //return an expiration of current time plus one
-                return 1;
+        //check if free storefronts first
+        $user = geoUser::getUser($user_id);
+        $price_plans_with_free_storefronts = $this->getPricePlansWithFreeStorefronts();
+        $pricePlanId = (geoMaster::is('classifieds')) ? $user->price_plan_id : $user->auction_price_plan_id;
+        if (in_array($pricePlanId, $price_plans_with_free_storefronts)) {
+            //yes....has free storefronts...return 1
+            return 1;
+        } else {
+            //no free storefronts here...check if there is a storefront subscription
+            $sql = "SELECT * FROM geodesic_addon_storefront_subscriptions WHERE user_id=? LIMIT 1";
+            $result = $db->Execute($sql, array($user_id));
+            if ($result && $result->RecordCount() == 1) {
+                //There is a current subscription...return it's expiration
+                $line = $result->FetchRow();
+                return $line["expiration"];
             } else {
                 return 0;
             }
         }
-        $line = $result->FetchRow();
-        return $line["expiration"];
     }
 
     /**

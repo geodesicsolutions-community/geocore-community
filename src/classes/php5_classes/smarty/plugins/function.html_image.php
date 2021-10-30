@@ -108,7 +108,7 @@ function smarty_function_html_image($params, $template)
 
     if (isset($template->smarty->security_policy)) {
         if ($protocol) {
-            // remote resource (or php stream, ???)
+            // remote resource (or php stream, …)
             if (!$template->smarty->security_policy->isTrustedUri($params['file'])) {
                 return;
             }
@@ -149,7 +149,7 @@ function smarty_function_html_image($params, $template)
     if (isset($params['dpi'])) {
         if (strstr($_SERVER['HTTP_USER_AGENT'], 'Mac')) {
             // FIXME: (rodneyrehm) wrong dpi assumption
-            // don't know who thought this up??? even if it was true in 1998, it's definitely wrong in 2011.
+            // don't know who thought this up… even if it was true in 1998, it's definitely wrong in 2011.
             $dpi_default = 72;
         } else {
             $dpi_default = 96;

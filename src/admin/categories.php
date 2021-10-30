@@ -2,7 +2,6 @@
 
 //admin/leveled_fields.php
 
-
 class CategoriesManage
 {
     public function display_category_config()
@@ -2068,7 +2067,7 @@ class CategoriesManage
      * @param int $value_id
      * @param int $level
      */
-    private function fixLevel($value_id, $level, $leveled_field)
+    private function fixLevel($value_id, $level)
     {
         $db = DataAccess::getInstance();
 

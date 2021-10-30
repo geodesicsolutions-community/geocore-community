@@ -17,7 +17,7 @@ class Invited_list_buyers extends geoSite
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    function Invited_list_buyers()
+    function __construct()
     {
         parent::__construct();
         $this->user_id = geoSession::getInstance()->getUserId();

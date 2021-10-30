@@ -207,7 +207,8 @@ class geoAdminHome
         $user_stats['registrations'] = $db->GetOne($sql);
 
         //sessions active within the last half-hour
-        $sql = "SELECT COUNT(`classified_session`) FROM `geodesic_sessions` WHERE `admin_session` = 'No' AND `last_time` >= " . (geoUtil::time() - 1800);
+        $current_time_to_use = (geoUtil::time() - 1800) + (3600 * $db->get_site_setting('time_shift'));
+        $sql = "SELECT COUNT(`classified_session`) FROM `geodesic_sessions` WHERE `admin_session` = 'No' AND `last_time` >= " . $current_time_to_use;
         $user_stats['current'] = $db->GetOne($sql);
 
         //number of new registrations in last 1/7/30 days

@@ -1,4 +1,4 @@
-{* 7.6.3-149-g881827a *}
+{* @git-info@ *}
 {include file='control_panel/header.tpl'}
 	{* header.tpl starts a div for main column *}
 	{if $show_newsletter}
@@ -34,7 +34,7 @@
 						<label class="field_label">	
 							{$msgs.usercp_news_settings_remselect}
 						</label>
-						<select style="vertical-align: top;" name='data[removeThese][]' id='subscriberEmail' multiple='multiple' size='5' class="field">
+						<select style="vertical-align: top; height:100px;" name='data[removeThese][]' id='subscriberEmail' multiple='multiple' size='5' class="field">
 							{foreach from=$emails item='email'}
 								<option value="{$email}">{$email}</option>
 							{/foreach}

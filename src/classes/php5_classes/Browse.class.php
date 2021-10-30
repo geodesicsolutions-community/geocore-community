@@ -1,12 +1,10 @@
 <?php
-//Browse.class.php
 /**
  * Holds the geoBrowse class.
  * 
  * @package System
  * @since Version 4.0.0
  */
-
 
 require_once CLASSES_DIR.'site_class.php';
 
@@ -690,7 +688,7 @@ class geoBrowse extends geoSite
 				lang.category_image, lang.category_image_alt, lang.seo_url_contents, cat.auction_category_count, cat.category_count, cat.parent_id
 				FROM ".geoTables::categories_table." as cat, ".geoTables::categories_languages_table." as lang where
 				cat.parent_id = ".$this->site_category." and cat.category_id = lang.category_id and lang.language_id = ".$this->language_id."
-				and cat.enabled='yes' ".(($isHomePage)?" and cat.front_page_display='yes' ":"")." order by cat.display_order, lang.category_name";
+				and cat.enabled='yes' order by cat.display_order, lang.category_name";
 			
 
 			$category_result = $this->db->Execute($sql);

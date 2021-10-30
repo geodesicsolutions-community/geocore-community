@@ -80,6 +80,50 @@ class geoFacebook extends BaseFacebook
         }
     }
 
+    public function getLoginUrl($params = array())
+    {
+        trigger_error("DEBUG FACEBOOK: top of getLoginUrl in fb");
+        $this->establishCSRFTokenState();
+        $currentUrl = $this->getCurrentUrl();
+
+        $redirect_uri = '';
+        $base = geoFilter::getBaseHref() . DataAccess::getInstance()->get_site_setting('classifieds_file_name');
+        $post_login_config = DataAccess::getInstance()->get_site_setting('post_login_page');
+        if ($post_login_config == 0) {
+            //goes to my account page
+            $redirect_uri = $base . '?a=4';
+        } elseif ($post_login_config == 1) {
+            //goes to the home page
+            $redirect_uri = $base;
+        } elseif ($post_login_config == 2) {
+            //goes to specifically set url
+            $redirect_uri = DataAccess::getInstance()->get_site_setting('post_login_url');
+        } else {
+            //somethings jacked up...go to the my account home page
+            $redirect_uri = $base . '?a=4';
+        }
+
+        //if 'scope' is passed as an array, convert to comma separated list
+        $scopeParams = isset($params['scope']) ? $params['scope'] : null;
+        if ($scopeParams && is_array($scopeParams)) {
+            $params['scope'] = implode(',', $scopeParams);
+        }
+
+        return $this->getUrl(
+            'www',
+            'dialog/oauth',
+            array_merge(
+                array(
+                    'client_id' => $this->getAppId(),
+                    'redirect_uri' => $redirect_uri, // possibly overwritten
+                    'state' => $this->state,
+                    'sdk' => 'php-sdk-' . self::VERSION
+                ),
+                $params
+            )
+        );
+    }
+
     protected function constructSessionVariableName($key)
     {
         //This was originally intended for saving in PHP session so it uses following

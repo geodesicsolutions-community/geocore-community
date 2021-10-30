@@ -28,7 +28,7 @@ if ($type === 'text') {
             //something wrong with this one
             continue;
         }
-        $textInfo = $addonAdmin->init_text();
+        $textInfo = $addonAdmin->init_text($lang);
         foreach ($text as $textI => $val) {
             $line = array (
                 'addon.' . $info->name . '.' . $info->auth_tag,

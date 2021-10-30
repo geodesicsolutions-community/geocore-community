@@ -48,7 +48,7 @@ GNU LESSER GENERAL PUBLIC LICENSE
 ---------------------------------
 
 _Version 2.1, February 1999_
-_Copyright ?? 1991, 1999 Free Software Foundation, Inc._
+_Copyright © 1991, 1999 Free Software Foundation, Inc._
 _51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA_
 
 Everyone is permitted to copy and distribute verbatim copies
@@ -126,7 +126,7 @@ entire combination fits its criteria of freedom.  The Lesser General
 Public License permits more lax criteria for linking other code with
 the library.
 
-We call this license the ???Lesser??? General Public License because it
+We call this license the “Lesser” General Public License because it
 does Less to protect the user's freedom than the ordinary General
 Public License.  It also provides other free software developers Less
 of an advantage over competing non-free programs.  These disadvantages
@@ -156,7 +156,7 @@ that program using a modified version of the Library.
 
 The precise terms and conditions for copying, distribution and
 modification follow.  Pay close attention to the difference between a
-???work based on the library??? and a ???work that uses the library???.  The
+“work based on the library” and a “work that uses the library”.  The
 former contains code derived from the library, whereas the latter must
 be combined with the library in order to run.
 
@@ -165,22 +165,22 @@ be combined with the library in order to run.
 **0.** This License Agreement applies to any software library or other
 program which contains a notice placed by the copyright holder or
 other authorized party saying it may be distributed under the terms of
-this Lesser General Public License (also called ???this License???).
-Each licensee is addressed as ???you???.
+this Lesser General Public License (also called “this License”).
+Each licensee is addressed as “you”.
 
-A ???library??? means a collection of software functions and/or data
+A “library” means a collection of software functions and/or data
 prepared so as to be conveniently linked with application programs
 (which use some of those functions and data) to form executables.
 
-The ???Library???, below, refers to any such software library or work
-which has been distributed under these terms.  A ???work based on the
-Library??? means either the Library or any derivative work under
+The “Library”, below, refers to any such software library or work
+which has been distributed under these terms.  A “work based on the
+Library” means either the Library or any derivative work under
 copyright law: that is to say, a work containing the Library or a
 portion of it, either verbatim or with modifications and/or translated
 straightforwardly into another language.  (Hereinafter, translation is
-included without limitation in the term ???modification???.)
+included without limitation in the term “modification”.)
 
-???Source code??? for a work means the preferred form of the work for
+“Source code” for a work means the preferred form of the work for
 making modifications to it.  For a library, complete source code means
 all the source code for all modules it contains, plus any associated
 interface definition files, plus the scripts used to control compilation
@@ -282,17 +282,17 @@ compelled to copy the source along with the object code.
 
 **5.** A program that contains no derivative of any portion of the
 Library, but is designed to work with the Library by being compiled or
-linked with it, is called a ???work that uses the Library???.  Such a
+linked with it, is called a “work that uses the Library”.  Such a
 work, in isolation, is not a derivative work of the Library, and
 therefore falls outside the scope of this License.
 
-However, linking a ???work that uses the Library??? with the Library
+However, linking a “work that uses the Library” with the Library
 creates an executable that is a derivative of the Library (because it
-contains portions of the Library), rather than a ???work that uses the
-library???.  The executable is therefore covered by this License.
+contains portions of the Library), rather than a “work that uses the
+library”.  The executable is therefore covered by this License.
 Section 6 states terms for distribution of such executables.
 
-When a ???work that uses the Library??? uses material from a header file
+When a “work that uses the Library” uses material from a header file
 that is part of the Library, the object code for the work may be a
 derivative work of the Library even though the source code is not.
 Whether this is true is especially significant if the work can be
@@ -312,7 +312,7 @@ Any executables containing that work also fall under Section 6,
 whether or not they are linked directly with the Library itself.
 
 **6.** As an exception to the Sections above, you may also combine or
-link a ???work that uses the Library??? with the Library to produce a
+link a “work that uses the Library” with the Library to produce a
 work containing portions of the Library, and distribute that work
 under terms of your choice, provided that the terms permit
 modification of the work for the customer's own use and reverse
@@ -330,8 +330,8 @@ of these things:
 machine-readable source code for the Library including whatever
 changes were used in the work (which must be distributed under
 Sections 1 and 2 above); and, if the work is an executable linked
-with the Library, with the complete machine-readable ???work that
-uses the Library???, as object code and/or source code, so that the
+with the Library, with the complete machine-readable “work that
+uses the Library”, as object code and/or source code, so that the
 user can modify the Library and then relink to produce a modified
 executable containing the modified Library.  (It is understood
 that the user who changes the contents of definitions files in the
@@ -354,8 +354,8 @@ specified materials from the same place.
 * **e)** Verify that the user has already received a copy of these
 materials or that you have already sent this user a copy.
 
-For an executable, the required form of the ???work that uses the
-Library??? must include any data and utility programs needed for
+For an executable, the required form of the “work that uses the
+Library” must include any data and utility programs needed for
 reproducing the executable from it.  However, as a special exception,
 the materials to be distributed need not include anything that is
 normally distributed (in either source or binary form) with the major
@@ -455,7 +455,7 @@ but may differ in detail to address new problems or concerns.
 
 Each version is given a distinguishing version number.  If the Library
 specifies a version number of this License which applies to it and
-???any later version???, you have the option of following the terms and
+“any later version”, you have the option of following the terms and
 conditions either of that version or of any later version published by
 the Free Software Foundation.  If the Library does not specify a
 license version number, you may choose any version ever published by
@@ -475,7 +475,7 @@ and reuse of software generally.
 **15.** BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
 WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
 EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR
-OTHER PARTIES PROVIDE THE LIBRARY ???AS IS??? WITHOUT WARRANTY OF ANY
+OTHER PARTIES PROVIDE THE LIBRARY “AS IS” WITHOUT WARRANTY OF ANY
 KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
 IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
 PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE

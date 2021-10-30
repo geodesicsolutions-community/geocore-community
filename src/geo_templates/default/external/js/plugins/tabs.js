@@ -46,13 +46,13 @@ call to populate that tab.
  * by hand.  When initializing, there is one valid option, localStoragePersist.
  * Note that can force a group of tabs to "not persist" by adding the class ignoreActiveStored
  * to the UL element.  Or alternatively can pass in value of false for localStoragePersist, like this:
- * 
+ *
  * jQuery('ul.tab_class_name').gjTabs({localStoragePersist : false});
- * 
+ *
  * Note that having the class name ignoreActiveStored will overwrite any options
  * passed in during initialization.  Also note that it will always be false on
  * older browsers that do not support local storage.
- * 
+ *
  */
 
 /*
@@ -64,9 +64,9 @@ jQuery('#tabId').gjTabs('onActive',function () {});
  should be the function.  Note that this is the only instance where calling gjTabls
  for an individual tab will work, initialization requires calling it for the parent
  <ul> element containing the tab li items.
- 
+
  It must also be done AFTER the tabs are initialized, or it will not work.
- 
+
 Callback example: (this snippet would be done inside JS script run when window
  is done loading):
 
@@ -77,16 +77,31 @@ jQuery('#funny').gjTabs('onActive', function () {
 	//would populate the tab's contents.  Text search (in admin) uses this.
 });
 
+jQuery('#tabIdOrSelector').gjTabs('canUseLocalStorage',function () {return true});
+
+ Callback should return bool value, true to allow using local storage, false to prevent it.
+
+ It is called at time that the local storage would be used.  This can be useful to prevent using local storage to
+ comply with GDPR or other compliance restrictions.
+
+Callback example: (this snippet would be done inside JS script run when window is done loading, if your site is using
+	the popular "cookiebot" 3rd party service):
+
+// Do not save in local storage unless cookiebot (3rd party vendor) is loaded and user has consented to preferences
+jQuery('ul.tabList').gjTabs('canUseLocalStorage', function () {
+	return Cookiebot && Cookiebot.consent.preferences;
+});
+
  */
 
 (function (jQuery) {
 	var internal = {};
-	
+
 	internal.tabCallbacks = {};
-	
+
 	internal.tabClick = function (action) {
 		var $this = jQuery(this);
-		
+
 		var data = $this.closest('ul').data('gjTabs');
 		if (!data) {
 			//not initialized!
@@ -114,18 +129,18 @@ jQuery('#funny').gjTabs('onActive', function () {
 			}
 			jQuery('#'+elemId+'Contents').hide();
 		});
-		
+
 		tab.addClass('activeTab');
 		jQuery('#'+tabId+'Contents').show();
-		
+
 		if (typeof internal.tabCallbacks[tabId] === 'function') {
 			internal.tabCallbacks[tabId](action);
 		}
-		
-		if (data.localStoragePersist) {
+
+		if (data.localStoragePersist && internal.canUseLocalStorage()) {
 			localStorage.setItem(storageName, tabId);
 		}
-		
+
 		//re-do the gallery height calculations for any that were initially hidden (no effect if no galleries present)
 		gjUtil.initGallery();
 	};
@@ -136,24 +151,32 @@ jQuery('#funny').gjTabs('onActive', function () {
 		}
 		return true;
 	};
-	
+
+	/**
+	 * Additional check run at time of using storage for whether should use local storage, this is in addition to normal
+	 * browser and config checks.  Useful to prevent storage for GDPR consent reasons.
+	 */
+	internal.canUseLocalStorage = function() {
+		return true;
+	};
+
 	var methods = {
 		init : function (options) {
 			return this.each(function(){
 				var $this=jQuery(this),
 					data = $this.data('gjTabs');
-				
+
 				if (!data) {
 					var defaultPersist = !(typeof(Storage)==='undefined' || $this.hasClass('ignoreActiveCookie') || $this.hasClass('ignoreActiveStored'));
-					
+
 					$this.data('gjTabs',$this.extend({
 						localStoragePersist : defaultPersist
 					}, options));
 					data = $this.data('gjTabs');
 				}
-				
+
 				//do init stuff here
-				
+
 				var storageName = 'activeTab';
 				var activeTab = null;
 				$this.find('li').each (function() {
@@ -181,23 +204,24 @@ jQuery('#funny').gjTabs('onActive', function () {
 						activeTab = activeStored;
 					}
 				}
-				
+
 				if (activeTab && jQuery('#'+activeTab).length) {
 					internal.activateTab(activeTab, data);
 				}
 			});
 		},
-		
+
 		onActive : function (callback) {
 			if (typeof callback !== 'function') {
 				//invalid callback!
 				return this;
 			}
-			
+
 			return this.each(function () {
 				internal.tabCallbacks[jQuery(this).attr('id')] = callback;
 			});
 		},
+
 		/**
 		 * This is a way to overwrite the internal precheck, use with caution!
 		 */
@@ -212,9 +236,26 @@ jQuery('#funny').gjTabs('onActive', function () {
 			}
 			internal.precheck=callback;
 			return this;
+		},
+
+		/**
+		 * Callback to determine if local storage should be used to save values, in addition to internal checks and
+		 * properties
+		 */
+		canUseLocalStorage : function (callback) {
+			if (typeof callback === 'undefined') {
+				//return the current callback
+				return internal.precheck;
+			}
+			if (typeof callback !== 'function') {
+				//not a function
+				return;
+			}
+			internal.canUseLocalStorage = callback;
+			return this;
 		}
 	};
-	
+
 	jQuery.fn.gjTabs = function (method) {
 		//Method calling logic
 		if (methods[method]) {

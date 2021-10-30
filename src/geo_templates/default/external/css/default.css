@@ -1,10 +1,10 @@
-/* 17.05.0-22-g4435795 */
+/* @git-info@ */
 
-/** 
+/**
  * default.css file - this file should remain in the default template set only.
  * For a full explanation, see the design tutorials in the user manual.  Below
- * is a brief explanation for how to get started. 
- * 
+ * is a brief explanation for how to get started.
+ *
  * The CSS in this file is over-written by CSS from custom.css which is created
  * for you when using the "create main template set" tool.
  *
@@ -18,12 +18,12 @@
 
 
 /**
- * 
+ *
  * NOTE: This started from HTML5 Boilerplate but has been greatly adapted.
  * More info at:
- * 
+ *
  * http://html5boilerplate.com/
- * 
+ *
  */
 
 
@@ -134,7 +134,7 @@ input[type="checkbox"], input[type="radio"] {
     height: auto;
 }
 
-/* also have a way to make sure images stay inside their containers 
+/* also have a way to make sure images stay inside their containers
 	note: not applying this to ALL images (at least not yet) since there are lots that specify their own dimensions explicitly/directly
 */
 img.max-90 {
@@ -237,7 +237,7 @@ h1.my_account {
 	color: #535353;
 }
 .my_account_links_inactive h1.subtitle, h2.subtitle, h3.subtitle {
-	margin: 0;	
+	margin: 0;
 }
 
 h2.title a,
@@ -273,8 +273,8 @@ h2.title a:hover {
     text-align: center;
     text-decoration: none;
     transition-duration: 0.2s;
-	border-radius: 4px; 
-	-moz-border-radius: 4px; 
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border: thin solid #FFFFFF;
 }
@@ -429,9 +429,9 @@ a {
 	display: block;
 	margin-left: 1.7em;
 	height: 1.5em;
-	border: thin solid #D5DCE1; 
-	background-color: #F9FAFB; 
-	border-radius: 0 .31em .31em 0; 
+	border: thin solid #D5DCE1;
+	background-color: #F9FAFB;
+	border-radius: 0 .31em .31em 0;
 	padding: 0 .31em;
 	text-decoration: none;
 }
@@ -512,19 +512,19 @@ ul.info li.price {
 }
 
 .seller-rating-box {
-	border: 1px solid #d5dce1; 
-	background-color:#FFF; 
+	border: 1px solid #d5dce1;
+	background-color:#FFF;
 	margin-bottom: 5px;
 }
 
 .seller-profile-links {
-	margin: 5px; 
-	position:relative; 
+	margin: 5px;
+	position:relative;
 	float:left;
 }
 
 .times-viewed {
-	font-size: 0.8rem; 
+	font-size: 0.8rem;
 	font-weight: normal;
 }
 
@@ -552,7 +552,7 @@ ul.info li.price {
 }
 
 .buyer-options {
-	white-space: normal; 
+	white-space: normal;
 	padding: 5px;
 }
 
@@ -599,7 +599,7 @@ ul.info li.price {
 }
 
 .date-time-labels div div {
-    white-space: nowrap; 
+    white-space: nowrap;
 	display:inline-block;
 }
 
@@ -783,17 +783,17 @@ input#mapping_location {
 }
 
 #tab-contact .label {
-	min-width: 35%; 
-	display:inline-block; 
+	min-width: 35%;
+	display:inline-block;
 	padding: 0 5px;
 	font-weight: bold;
 }
 
 #tab-contact .title {
-	font-size: 1.2em; 
-	border-bottom: 1px dashed #bbb; 
-	margin: 0 0 10px; 
-	padding: 5px; 
+	font-size: 1.2em;
+	border-bottom: 1px dashed #bbb;
+	margin: 0 0 10px;
+	padding: 5px;
 	font-weight: bold;
 }
 
@@ -812,7 +812,7 @@ input#mapping_location {
 
 .cf{
     zoom:1;
-}    
+}
 
 /* Form wrapper styling */
 .form-wrapper {
@@ -860,7 +860,7 @@ input#mapping_location {
     color: #999;
     font-weight: normal;
     font-style: italic;
-}    
+}
 
 /* Form submit button */
 .form-wrapper button {
@@ -878,16 +878,16 @@ input#mapping_location {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
     width: 15%;
-}  
-  
-.form-wrapper button:hover{		
+}
+
+.form-wrapper button:hover{
     background: #FF8811;
-}	
-  
+}
+
 .form-wrapper button:active,
-.form-wrapper button:focus{   
+.form-wrapper button:focus{
     background: #FF8811;
-	outline: 0;   
+	outline: 0;
 }
 
 .form-wrapper button:before { /* left arrow */
@@ -907,12 +907,12 @@ input#mapping_location {
 .form-wrapper button:focus:before,
 .form-wrapper button:active:before{
         border-right-color: #FF8811;
-}      
+}
 
 .form-wrapper button::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
     border: 0;
     padding: 0;
-} 
+}
 
 #by_zip_code {
     max-width: 5em;
@@ -938,14 +938,14 @@ input#mapping_location {
 }
 
 .design2016 input.buy_now_link,
-.design2016 .make_bid_link, 
+.design2016 .make_bid_link,
 .design2016 .buy_now_link {
     border: medium solid #4174a6;
     font-size: 1rem;
 }
 
 .design2016 input.buy_now_link:hover,
-.design2016 a.make_bid_link:hover, 
+.design2016 a.make_bid_link:hover,
 .design2016 a.buy_now_link:hover {
     border: medium solid #4174a6;
 }
@@ -1072,8 +1072,8 @@ input#mapping_location {
 	padding: 0 35px 0 5px;
 	text-overflow: "";
 	border-radius: 0.31em;
-	-moz-border-radius: 0.31em; 
-	-webkit-border-radius: 0.31em;	
+	-moz-border-radius: 0.31em;
+	-webkit-border-radius: 0.31em;
 }
 
 .browse_mode_buttons select {
@@ -1085,7 +1085,7 @@ input#mapping_location {
 .search_content_box select::-ms-expand,
 .browse_mode_buttons select::-ms-expand,
 .zipbox select::-ms-expand {
-	display: none; 
+	display: none;
 }
 
 .row_odd select option,
@@ -1261,14 +1261,14 @@ nav.extra-links {
 }
 
 #update_response .field {
-    padding: 5px; 
+    padding: 5px;
 }
 
 .advertise {
-	margin-bottom: 10px; 
+	margin-bottom: 10px;
 	text-align: center;
 }
-		
+
 .advertise div {
 	margin-bottom: 5px;
 }
@@ -1324,10 +1324,10 @@ nav.extra-links {
 	/* ==========================================================================
 	   Shared Breakpoint 1: 52em is about size that 2 column layout will
 	   fit both columns side by side comfortably.
-	   
+
 	   Breakpoint For:	   Base Classes | Collapsable Sections
 	   ========================================================================== */
-	
+
 	/* Base Classes - switch to 2 columns */
 	.main,
 	.sidebar,
@@ -1359,64 +1359,64 @@ nav.extra-links {
 		margin: auto;
 		margin-top: 2em;
 	}
-	
+
 	/* Sidebar collapse - this one is a little different than normal, it will
 		be "above" the main content, and is meant to have the bulk of the contents
 		collapsed by using the section-collapser class on the main heading.
-		
+
 		This works by simply floating to the left.  It should be used inside
 		the .main section. */
 	.sidebar-collapse {
 		float: left;
 		max-width: 20%;
 	}
-	
+
 	#content_column_wide {
 		overflow: hidden;
 		padding-left: 0;
 	}
-	
+
 	/* Collapsable Sections - when in 2 column mode, no need to collaps any more */
 	.section-collapser {
 		cursor: auto;
 	}
-	
+
 	.section-collapser:after {
 		content: '';
 	}
-	
+
 	.section-collapser-expanded:after {
 		content: '';
 	}
-	
+
 	.section-collapser + div {
 		max-height: none;
 	}
-	
+
 	.section-collapser + div.expand {
 		max-height: none;
 	}
-	
+
 	/* Things that need to be adjusted once in 2 column mode, and are such
 		that they are not over-written by the default CSS... */
-	
+
 	.showcase h1.title {
 		padding-top: 0;
 		height: 2.5em;
 		white-space: nowrap;
 		margin: 0 -.7em -2em -1.25em;
 		z-index: 5;
-		
+
 		line-height: 1.5em;
 		text-shadow: 0 .2em .2em #666;
 	}
-	
+
 	/* Should no longer need to use scroll for horizontal overflow */
 	.content_box {
 		max-width: none;
 		overflow: visible;
 	}
-	
+
 	/* Only add border radius on wider screens, looks weird to have radius on
 		items that span full width of the screen */
 	h2.title, h1.title, h3.title {
@@ -1441,10 +1441,10 @@ nav.extra-links {
 	/* ==========================================================================
 	   Shared Breakpoint 2: 59em is about size that 3 column layout will
 	   fit all the columns comfortably.
-	   
+
 	   Breakpoint For:	   Base Classes | Listing Details
 	   ========================================================================== */
-	
+
 	/* 3 column layout - 20% | 60% | 20% Layout */
 	.three-column .main {
 		float: left;
@@ -1460,7 +1460,7 @@ nav.extra-links {
 		width: 20%;
 		float: right;
 	}
-	
+
 	/* Listing details changes at this point */
 	.listing-prev-next-links {
 		display: block;
@@ -1551,7 +1551,7 @@ header.page {
 	background: #4987C5 url('../images/backgrounds/nav_tab.gif') repeat-x top left;
 	color: white;
 	text-decoration: none;
-	border-radius: .3em;	
+	border-radius: .3em;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1591,7 +1591,7 @@ nav.extra-links {
 }
 
 .logo-box img {
-	
+
 }
 
 .logo-box .logo img {
@@ -1620,10 +1620,10 @@ nav.extra-links {
 	   Shared Breakpoint: 52em is about size that all "default" menu items fit
 	   		horizontally on the page, may need to adjust this for different
 	   		languages or if you have more / less menu items than default.
-	   
+
 	   Breakpoint For:	   Menu Bar | Logo
 	   ========================================================================== */
-	
+
 	/* Menu Bar Breakpoint - stop hiding menus, give fancy tabbed look */
 	.wrapper {
 		position: relative;
@@ -1632,7 +1632,7 @@ nav.extra-links {
 		margin-top: 0;
 		min-height: 6em;
 	}
-	
+
 	.fixed-nav {
 		border-bottom: none;
 		position: relative;
@@ -1641,17 +1641,17 @@ nav.extra-links {
 		background-color: transparent;
 		z-index: 1;
 	}
-	
+
 	.fixed-link {
 		/* Hide links to expand / collapse the menus */
 		display: none;
 	}
-	
+
 	.fixed-menu {
 		width: auto;
 		display: inline-block;
 	}
-	
+
 	.page-bar {
 		background: #4987c5 url("../images/backgrounds/search_bar.gif") repeat-x scroll left top;
 		border: 0.4em solid #eaeaea;
@@ -1672,7 +1672,7 @@ nav.extra-links {
 		/* reset some of the styles used at smaller sizes */
 		display: inline;
 	}
-	
+
 	.page-bar .menu-link {
 		background: #4987c5 url("../images/backgrounds/nav_tab.gif") repeat-x scroll left top;
 		border-radius: 0;
@@ -1684,7 +1684,7 @@ nav.extra-links {
 		padding: 1em;
 		vertical-align: middle;
 	}
-	
+
 	.design2016 .page-bar {
 		padding: 0;
 		text-align: right;
@@ -1702,12 +1702,12 @@ nav.extra-links {
 		color: white;
 		background: #356094 none;
 	}
-	
+
 	.page-bar .extra {
 		/* These are redundant when menus are shown */
 		display: none;
 	}
-	
+
 	nav.extra-links {
 		display: block;
 		float: right;
@@ -1718,14 +1718,14 @@ nav.extra-links {
 	nav.extra-links a {
 		color: #818181;
 		text-decoration: none;
-		padding: .32em 
+		padding: .32em
 	}
-	
+
 	nav.extra-links a:hover {
 		color: #7CA93A;
 		text-decoration: underline;
 	}
-	
+
 	/* user bar acts as the bar across the top */
 	.abs-space {
 		height: 4.1em;
@@ -1745,7 +1745,7 @@ nav.extra-links {
 	.user-welcome {
 		display: inline;
 	}
-	
+
 	.user-links:before {
 		content: "(";
 	}
@@ -1761,11 +1761,11 @@ nav.extra-links {
 		/* Fix vertical alignment on FF */
 		vertical-align: bottom;
 	}
-	
+
 	.user-links .menu-link:hover {
 		text-decoration: underline;
 	}
-	
+
 	.user-links .menu-link:after {
 		/* Add | between each item */
 		content: '|';
@@ -1777,9 +1777,9 @@ nav.extra-links {
 		content: '';
 		padding: 0;
 	}
-	
+
 	/* Logo Breakpoint - Float on left, give it a background */
-	
+
 	.logo-box {
 		position: absolute;
 		z-index: 2;
@@ -1788,19 +1788,19 @@ nav.extra-links {
 		min-height: 97px;
 		margin: 0;
 	}
-	
+
 	.logo-box .logo {
 		line-height: 48px;
 		font-size: 38px;
 		text-shadow: 1px 1px 0 #EEE, 2px 2px 0 #CCC;
-		color: #7E7E7E; 
+		color: #7E7E7E;
 		font-style: italic;
 	}
 	.slogan {
 		/* Only add shadow on larger displays, as it can look "fuzzy" when smaller */
 		text-shadow: 1px 1px 0 #DDD;
 	}
-	
+
 	.field_label.spacer {
 		/* used mainly on the search page, to add uniform left spacing to unlabeled fields */
 		display: inline-block;
@@ -1862,7 +1862,7 @@ nav.footer a:nth-of-type(2n+1) {
 	   Footer Breakpoint 1: 37.5em is about size that all the footer links "fit"
 	   		when using 4 per row
 	   ========================================================================== */
-	
+
 	nav.footer {
 		border: 5px solid #EAEAEA;
 		border-radius: 10px;
@@ -1891,7 +1891,7 @@ nav.footer a:nth-of-type(2n+1) {
 	   Footer Breakpoint 2: 54em is about size that all the footer links "fit"
 	   		with the contact us blurb on the right with default English text
 	   ========================================================================== */
-	
+
 	footer.page {
 		position: relative;
 		font-weight: bold;
@@ -1903,7 +1903,7 @@ nav.footer a:nth-of-type(2n+1) {
 		height: 8em;
 		position: relative;
 	}
-	
+
 	/* Position the footer navigation absolutely, allowing us to move the contact
 		us blurb up along side it on the right */
 	nav.footer {
@@ -1915,7 +1915,7 @@ nav.footer a:nth-of-type(2n+1) {
 		box-sizing: border-box;
 		-moz-box-sizing:border-box; /* Firefox */
 	}
-	
+
 	.blurb {
 		position: absolute;
 		top: 0;
@@ -1945,7 +1945,7 @@ nav.footer a:nth-of-type(2n+1) {
 		color: white;
 		text-decoration: none;
 	}
-	
+
 	.social-contacts {
 		text-align: right;
 		padding: .5em;
@@ -2116,11 +2116,11 @@ a.button:hover {
 
 /*
  * Easily center contents of element:
- * 
+ *
  * cntr - only center the contents
  * center - center contents and add a little top/bottom padding
  */
- 
+
 .cntr, .center {
 	text-align: center;
 }
@@ -2176,8 +2176,8 @@ a.button:hover {
 	background-repeat: no-repeat;
 	background-position: top left;
 	background-color: transparent;
-	
-	
+
+
 	text-align: center;
 	font-family: Geneva, Arial, Helvetica, sans-serif;
 	font-size: 1.25rem;
@@ -2201,12 +2201,12 @@ a.button:hover {
 .content_box.showcase .forsale_text {
 	background: url('../images/backgrounds/car_silhouette.png') no-repeat left top;
 	width: 125px;
-	
+
 	color: black;
-	font-family: Geneva, Arial, Helvetica, sans-serif; 
-	font-size: 16px; 
-	line-height: 32px; 
-	font-weight: bold; 
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 32px;
+	font-weight: bold;
 	text-shadow: 2px 2px 0 #FFF;
 	text-align: center;
 	margin-top: -0.5em;
@@ -2275,7 +2275,7 @@ form.showcase input.keyword {
 	background: #f1f1f1;
 	border-radius: 50px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);
-	
+
 	font-weight: normal;
 	font-size: .81rem;
 	font-family: 'trebuchet MS', arial, helvetica;
@@ -2327,7 +2327,7 @@ form.showcase input.keyword:-ms-input-placeholder {
 	   Showcase Breakpoint - 38em is about size that the showcase search box can
 	   		display well with all the extra fancy stuff
 	   ========================================================================== */
-	
+
 	.form-search {
 		max-width: 55%;
 	}
@@ -2353,7 +2353,7 @@ form.showcase input.keyword:-ms-input-placeholder {
 		margin-bottom: .2em;
 		text-align: left;
 	}
-	
+
 	.search_bullets li a {
 		display: block;
 		width: 13em;
@@ -2369,31 +2369,31 @@ form.showcase input.keyword:-ms-input-placeholder {
 		transition-duration: 0.2s;
 		color: #fff;
 		margin: 0 auto;
-		
+
 		box-sizing: border-box;
 		-moz-box-sizing:border-box; /* Firefox */
 	}
-	
+
 	.search_bullets li a:hover {
 		border: thin solid #648D25;
 		border-left: 0.5em solid #648D25;
 		background-color: #648D25;
 	}
-	
+
 	.recent-listing-links a.button {
 		display: inline-block;
 		margin: .1em auto;
 		width: auto;
 		min-width: 5em;
 	}
-	
+
 	.showcase h1.search_title {
 	    font-size: 1.75rem;
 	    line-height: 2em;
 	    text-shadow: 0.05em 0.05em 0 #fff, 0.1em 0.1em 0 #ccc;
 	    white-space: nowrap;
 	}
-	
+
 	.form_search_divider {
 	    background: rgba(0, 0, 0, 0) url("../images/backgrounds/showcase-search-divider.gif") repeat-y scroll left top;
 	    float: right;
@@ -2401,11 +2401,11 @@ form.showcase input.keyword:-ms-input-placeholder {
 	    margin: 0 1em 0 0;
 	    width: 0.13em;
 	}
-	
+
 	.gj_image_fade {
 		position: relative;
 	}
-	
+
 	.gj_image_fade div {
 		position: absolute;
 		top: 0px;
@@ -2413,11 +2413,11 @@ form.showcase input.keyword:-ms-input-placeholder {
 		z-index: 8;
 		width: 100%;
 	}
-	
+
 	.gj_image_fade div.active {
 		z-index: 10;
 	}
-	
+
 	.gj_image_fade div.last_active {
 		z-index: 9;
 	}
@@ -2626,7 +2626,7 @@ input.button-large:hover {
 	border-color: #F58905;
 	background: #F9961E;
 	white-space: nowrap;
-	
+
 	font-size: 1.125rem;
 	font-weight: bold;
 	padding: .5em 1.5em;
@@ -2807,7 +2807,7 @@ input.mini_cancel
 	background: none;
 }
 
-.breadcrumb .highlight { 
+.breadcrumb .highlight {
 	color: #4174A6;
 	font-weight: bold;
 	display: none;
@@ -2819,7 +2819,7 @@ input.mini_cancel
 	border-left-color: #e9edf0;
 	z-index: 2;
 }
-	
+
 .print_body .breadcrumb a, .print_body .breadcrumb div {
 	background-image: none;
 	background-color: transparent;
@@ -2923,7 +2923,7 @@ input.mini_cancel
 }
 
 .browse-list-price-cntnr {
-	float: right; 
+	float: right;
 	text-align: right;
 }
 
@@ -2987,17 +2987,17 @@ input.mini_cancel
 	/* This is for the overall box the lightbox contents load in, but note that
 	 * the lightUpBox may be used for more than just the lightbox slideshow.
 	 */
-	
+
 	border: .6em solid #eaeaea;
 	background-color: white;
 	border-radius: .32em;
-	
+
 	/* needs to be bigger than anything else on the page */
 	z-index: 2005;
-	
+
 	/* position needs to be absolute to be able to be moved on the page */
 	position: absolute;
-	
+
 	max-width: 95%; /* so it has a bit of side margins on small mobile screens */
 	box-sizing: border-box;
 	-moz-box-sizing:border-box; /* Firefox */
@@ -3065,7 +3065,7 @@ img.lightUpBigImage {
 
 .closeBoxX {
 	/* Used for red X to close the lightbox, used on "popup style" lightboxes */
-	
+
 	/* Not used for the slideshow, this is used when the lightbox is used
 		for a mini-popup such as a yes/no confirmation. */
 	position: absolute;
@@ -3118,7 +3118,7 @@ img.lightUpBigImage {
     font-weight: bold;
     padding: 0 0.6em;
     text-transform: uppercase;
-}			
+}
 
 .error_box {
 	background: #FFFFE1;
@@ -3198,7 +3198,7 @@ img.lightUpBigImage {
 .moveMessage {
 	/* specific for message move thingy */
 	cursor: move;
-	
+
 	/* make it hidden, as ability to move message is mainly to make it not fade */
 	color: white;
 	margin-right: .31em;
@@ -3262,9 +3262,9 @@ img.lightUpBigImage {
 
 .feedback-header {
 	border-width:1px 0 1px 0;
-	border-style:dotted; 
-	border-color:#666; 
-	padding-top:5px; 
+	border-style:dotted;
+	border-color:#666;
+	padding-top:5px;
 	margin: 5px 3px;
 }
 
@@ -3497,7 +3497,7 @@ dt {
 
 .login_field {
 	/* need to specify width for these fields, or IE makes them look funny */
-	width: 8.6em;	
+	width: 8.6em;
 }
 
 input.login_field {
@@ -3523,7 +3523,7 @@ input.login_field {
 	padding: .25em;
 }
 
-.field, 
+.field,
 .editor_field {
     background: #fff url("../images/backgrounds/form_input.gif") repeat-x scroll left top;
     border: thin solid #a3a3a3;
@@ -3540,6 +3540,45 @@ input.login_field {
 	border-width: medium;
 	border-color: #4987c5;
 	margin: 0;
+}
+
+.stripe-inputs {
+	display: inline-flex;
+	flex-wrap: wrap;
+	vertical-align: middle;
+}
+
+.stripe-inputs__input {
+	display: flex;
+	flex-direction: column;
+}
+
+.stripe-inputs__input label {
+	font-size: .75rem;
+	margin-left: .3rem;
+}
+
+.field--stripe-number,
+.field--stripe-cvc,
+.field--stripe-expiry {
+	height: 2.2rem;
+	box-sizing: border-box;
+	display: inline-block;
+	padding-top: .5rem;
+	vertical-align: middle;
+	margin: .1rem;
+}
+
+.field--stripe-number {
+	min-width: 20rem;
+}
+
+.field--stripe-cvc {
+	min-width: 5rem;
+}
+
+.field--stripe-expiry {
+	min-width: 10rem;
 }
 
 select.field {
@@ -3786,7 +3825,7 @@ div.usage_agreement {
 }
 
 
-#cart_buttons 
+#cart_buttons
 {
 	text-align: center;
 	margin:.2em .2em .63em;
@@ -3854,7 +3893,7 @@ h2 a.show_instructions_button:visited {
 	top: 0;
 	left: 0;
 	text-align: center;
-	
+
 	z-index: 100;
 }
 .combined_loading_overlay img {
@@ -3869,8 +3908,8 @@ iframe.listing_preview {
 	margin: 1em;
 	border: thin dashed #000;
 	border-radius: 0.5em;
-	-moz-border-radius: 0.5em; 
-	-webkit-border-radius: 0.5em;	
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
 	box-sizing: border-box;
 	-moz-box-sizing:border-box; /* Firefox */
 }
@@ -3898,8 +3937,8 @@ iframe.listing_preview {
 }
 
 .design2016 .button-compact, .design2016 .button-compact:visited,
-.design2016 .delete, .design2016 .delete:visited, 
-.design2016 .edit, .design2016 .edit:visited, 
+.design2016 .delete, .design2016 .delete:visited,
+.design2016 .edit, .design2016 .edit:visited,
 .design2016 .preview, .design2016 .preview:visited {
     background: #fff none repeat scroll 0 0;
     border: thin solid #4174a6;
@@ -3956,9 +3995,9 @@ iframe.listing_preview {
 }
 
 .mini-cart-progress {
-	background-color: #efefef; 
-	position: relative; 
-	float: right; 
+	background-color: #efefef;
+	position: relative;
+	float: right;
 	width: 100%;
 }
 
@@ -4046,22 +4085,22 @@ li.my_account_links_inactive ul li {
 	/* Special Case - uses JS to get the styles of this element, to use for
 		the progress bar, so that things like color and such are not set in JS
 		where they are hard to change. */
-	
+
 	/* This is the color of the bar (fgColor) */
 	color: #87CEEB;
-	
+
 	/* The background color for the entire progress bar (bgColor) */
 	background-color: #ddd;
-	
+
 	/* The width & height for circle - Recommend using fixed value */
 	width: 80px;
-	
+
 	/* This one is a little weird...  the height will controll the "thickness" of
 		the bar, divided by 100...  So if you want thickness of .3 you would set
 		height to 30px. */
 	height: 20px;
-	
-	
+
+
 	/* Keep this intact or you will have a sqare show on the page! */
 	position: absolute;
 	left: -1000px;
@@ -4155,7 +4194,7 @@ div.offsite_video_box_title_editing {
 	color: white;
 	padding: .33em 0 0 .42em;
 	margin: -.42em -.42em .33em -.42em;
-	
+
 	height: 2em;
 	font-size: .75rem;
 	font-weight: bold;
@@ -4219,7 +4258,7 @@ div.preview_offsite_video_box {
 .offsite_video_slot_value,
 .offsite_video_cost_value {
 	/* Able to specify CSS for values if desired. */
-	
+
 }
 
 .offsite_video_action_buttons {
@@ -4233,11 +4272,11 @@ div.offsite_video_loading_container {
 }
 
 div#plopDropVideoHere {
-	/* 
+	/*
 	 * this is the box that appears in the slot where an image will be moved
 	 * to.
 	 */
-	
+
 	/* position needs to be absolute in order to be in the correct location */
 	position: absolute;
 	padding: .31em;
@@ -4263,7 +4302,7 @@ div#plopDropVideoHere {
 	   Media Upload Breakpoint - This is when 2 columns start to fit on the page
 	   for the media preview boxes
 	   ========================================================================== */
-	
+
 	.media-preview {
 		float: left;
 		width: 10em;
@@ -4300,8 +4339,8 @@ div#plopDropVideoHere {
 	border-width: 0;
 	background: #777;
 	font-size: 1.0em;
-	border-radius: 4px; 
-	-moz-border-radius: 4px; 
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	vertical-align: middle;
 }
@@ -4316,9 +4355,9 @@ div#plopDropVideoHere {
 	font-size: .7rem;
 	text-align: center;
 	text-decoration: none;
-	border-radius: 3px; 
-	-moz-border-radius: 3px; 
-	-webkit-border-radius: 3px; 
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 .pagination a:hover,
@@ -4448,13 +4487,13 @@ h1.listing_title span.price {
 .content_box_2 {
 	/* Content box used on listing details, light background */
 	background-color: #F9FAFB;
-	border-color: #D5DCE1; 
+	border-color: #D5DCE1;
 	padding: 0 .75em;
 }
 
 .content_box_3 {
 	/* Content box used on listing details, darker background */
-	background-color: #E9EDF0; 
+	background-color: #E9EDF0;
 	border-color: #D5DCE1;
 	padding: .1em .75em;
 }
@@ -4476,7 +4515,7 @@ h1.listing_title span.price {
 
 p.content_section {
 	/* Give content section a border on the bottom */
-	padding: .2em .5em; 
+	padding: .2em .5em;
 	border-bottom: thin solid #EAEAEA;
 }
 
@@ -4492,7 +4531,7 @@ p.content_section {
 
 .bid_box {
 	text-align:center;
-	background-color: #FFF2B7; 
+	background-color: #FFF2B7;
 	border:1px solid #FFF0A8;
 	border-radius: 0;
 	padding: .625em;
@@ -4541,8 +4580,8 @@ p.content_section {
 }
 
 .bid_box_note {
-	background-color: #FBFBFB; 
-	border: thin solid #DDD; 
+	background-color: #FBFBFB;
+	border: thin solid #DDD;
 	border-radius: .5em;
 	margin-top: .3em;
 	font-size: .6rem;
@@ -4550,13 +4589,13 @@ p.content_section {
 }
 
 .buy_now_cntnr {
-	padding-top: 0.5em; 
+	padding-top: 0.5em;
 }
 
 .user-profile-cntnr {
-	border: 1px dotted #ff0000; 
-	padding:1em; 
-	margin: 10px 3px; 
+	border: 1px dotted #ff0000;
+	padding:1em;
+	margin: 10px 3px;
 	font-size: .8em;
 }
 
@@ -4583,8 +4622,8 @@ p.content_section {
 	width: auto;
 }
 .member span.date {
-	font-size: .8em; 
-	color: #000; 
+	font-size: .8em;
+	color: #000;
 	font-weight: normal;
 }
 
@@ -4594,8 +4633,8 @@ h3.title.rounded_top,
 .rounded_top {
 	border-radius: .43em .43em 0 0;
     background: url('../images/backgrounds/bg_fade.png') repeat-x left top;
-	background-color: #E9EDF0; 
-	border: thin solid #D5DCE1; 
+	background-color: #E9EDF0;
+	border: thin solid #D5DCE1;
 	margin: 0 0 .1em 0;
 	padding: .43em .6em .3em;
 }
@@ -4628,15 +4667,15 @@ h3.title.rounded_top a {
 .faded_top {
 	border-radius: 0;
     background: url('../images/backgrounds/bg_fade.png') repeat-x left top;
-	background-color: #E9EDF0; 
-	border: thin solid #D5DCE1; 
+	background-color: #E9EDF0;
+	border: thin solid #D5DCE1;
 	margin: 0;
 	padding: .43em .6em .3em;
 }
 
 .price-listing-details {
-	font-weight:bold; 
-	font-size: 1.25em; 
+	font-weight:bold;
+	font-size: 1.25em;
 	display:inline;
 }
 
@@ -4799,7 +4838,7 @@ div.filmstrip_container p.imageTitle {
 	margin: 0;
 	vertical-align: middle;
 	cursor: pointer;
-	
+
 	margin: 0 0 0 .3em;
 }
 
@@ -5186,7 +5225,7 @@ span.listing_counts {
 
 .cat-block-popout {
 	width: 25em;
-	max-width: 100%; 
+	max-width: 100%;
 	max-height: 25.875em;
 	overflow-y: auto;
 }
@@ -5200,7 +5239,7 @@ p.price-tag .price {
     font-weight: normal;
 }
 
-.price-tag { 
+.price-tag {
     background: #7ca93a none repeat scroll 0 0;
     color: white;
     height: 20px;
@@ -5210,17 +5249,17 @@ p.price-tag .price {
     text-align: center;
     text-transform: uppercase;
     width: auto;
-} 
-.price-tag:after { 
-	content: ""; 
-	position: absolute; 
-	left: 0; 
-	bottom: 0; 
-	width: 0; 
-	height: 0; 
-	border-left: 6px solid #f7f7f7; 
-	border-top: 10px solid transparent; 
-	border-bottom: 10px solid transparent; 
+}
+.price-tag:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border-left: 6px solid #f7f7f7;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
 }
 
 /* ==========================================================================
@@ -5280,9 +5319,9 @@ p.price-tag .price {
 	line-height: 1em;
 }
 
-.browsing_result_table_body_odd h3 a, 
+.browsing_result_table_body_odd h3 a,
 .browsing_result_table_body_even h3 a,
-.browsing_result_table_body_odd_bold h3 a, 
+.browsing_result_table_body_odd_bold h3 a,
 .browsing_result_table_body_even_bold h3 a {
 	color: #4987c5;
 	font-size: 1.2em;
@@ -5370,7 +5409,7 @@ p.listing_results_description {
 }
 
 .category-intro {
-	font-size: .75em; 
+	font-size: .75em;
 	text-transform: uppercase;
 }
 
@@ -5379,7 +5418,7 @@ article.listing .type img {
 }
 
 .browse-vote {
-	float:left; 
+	float:left;
 	margin: 0 0 0 5px;
 }
 
@@ -5427,9 +5466,9 @@ article.listing .type img {
 .browsing_filter_fieldName {
 	border-bottom: 1px solid #ddd;
 	font-weight: bold;
-	text-transform: uppercase;	
+	text-transform: uppercase;
 }
-	
+
 .browsing_filter_selections {
     margin: 0 0 0 5px;
 }
@@ -5438,7 +5477,7 @@ article.listing .type img {
     color: #aaa;
     font-size: 0.8em;
 }
-	
+
 .browsing_filter_selections a {
 	color: #4987c5;
 }
@@ -5522,7 +5561,7 @@ h1.browsing_filter_title {
 	margin: auto;
 }
 
-.image img { 
+.image img {
 	max-width: 100%;
 }
 
@@ -5577,7 +5616,7 @@ h1.browsing_filter_title {
 }
 
 .legend .time {
-	float:right; 
+	float:right;
 	margin: 0 5px 0 0;
 }
 
@@ -5586,20 +5625,20 @@ h1.browsing_filter_title {
 }
 
 .legend-location {
-	float:left; 
-	margin: 0 0 0 5px; 
+	float:left;
+	margin: 0 0 0 5px;
 	text-transform: uppercase;
 }
 
 .legend-vote {
-	float:left; 
+	float:left;
 	margin: 0 0 0 5px;
 }
 
 .legend-time {
-	float:right; 
-	margin: 0 10px 0 5px; 
-	color: #999; 
+	float:right;
+	margin: 0 10px 0 5px;
+	color: #999;
 	font-size: 0.9em;
 }
 
@@ -5617,7 +5656,7 @@ h1.browsing_filter_title {
 .gallery-rwd .legend-vote,
 .gallery-rwd .legend-time,
 .gallery-rwd .legend-location {
-	float:none; 
+	float:none;
 	margin: 0;
 }
 .gallery-rwd .legend div {
@@ -5707,17 +5746,17 @@ h1.browsing_filter_title {
 	background-color: #fff;
 }
 
-.user_links { 
-	font-family: Arial, Helvetica, sans-serif; 
+.user_links {
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: .75rem;
-	font-style: normal; 
-	font-weight: bold; 
+	font-style: normal;
+	font-weight: bold;
 	color: #666;
 	text-align: left;
 }
 
 a.user_links {
-	text-decoration: underline; 
+	text-decoration: underline;
 }
 
 .icon_links_ie_fix {
@@ -5733,7 +5772,7 @@ a.user_links {
 /* ==========================================================================
    Search Box Module
    ========================================================================== */
-   
+
 #search_box_1 {
 	float: right;
 }
@@ -5753,7 +5792,7 @@ a.user_links {
 }
 
 /* ==========================================================================
-   Region Selectors 
+   Region Selectors
    ========================================================================== */
 .region_selector {
 	display: inline-block;
@@ -5938,7 +5977,7 @@ a.store-description {
 	/* ==========================================================================
 	   Columns Breakpoint
 	   ========================================================================== */
-	
+
 	.columns-2 {
 		width: 50%;
 	}
@@ -5994,7 +6033,7 @@ a.store-description {
 	/* ==========================================================================
 	   Columns Breakpoint
 	   ========================================================================== */
-	
+
 	.columns-3 {
 		width: 33%;
 	}
@@ -6031,7 +6070,7 @@ Exception -- also do column widths specifically for the carousel, even on small 
 	.gj_simple_carousel .columns-10 {
 		width: 10%;
 	}
-	
+
 
 /* ==========================================================================
    Print styles.
@@ -6088,10 +6127,10 @@ Exception -- also do column widths specifically for the carousel, even on small 
 }
 
 /* ==========================================================================
-   The following max-width media classes added for use with smaller screens 
+   The following max-width media classes added for use with smaller screens
    to limit effects on larger screens
    ========================================================================== */
-   
+
 @media only screen and (max-width: 52em) {
 
 	.sell-button {
@@ -6143,11 +6182,11 @@ Exception -- also do column widths specifically for the carousel, even on small 
 		padding-right: 0;
 		width: 100%;
 	}
-	
+
 	.rwd-hide {
 		display:none;
 	}
-	
+
 	.listing_set.gallery .article_inner, .listing_set.list article {
 		-moz-border-bottom-colors: none;
 		-moz-border-left-colors: none;
@@ -6275,8 +6314,8 @@ Exception -- also do column widths specifically for the carousel, even on small 
 		-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 		box-sizing: border-box;         /* Opera/IE 8+ */
 		position: relative;
-	}	
-	
+	}
+
 	.mini-cart {
 		background: none no-repeat scroll 50% 50% #FFF;
 	}
@@ -6365,7 +6404,7 @@ Exception -- also do column widths specifically for the carousel, even on small 
 	.header-links-rwd a {
 	    	font-size: 0.8em;
 	}
-	
+
 	.listing_title {
 		font-size: 1.1rem;
 	}
@@ -6386,29 +6425,29 @@ Exception -- also do column widths specifically for the carousel, even on small 
 		width: 100%;
 	}
 	.price-listing-details {
-		font-size: 1.1em; 
+		font-size: 1.1em;
 	}
 }
 
 @media only screen and (max-width: 32em) {
-	
+
 	.breadcrumb a:after, .breadcrumb div:after {
 		border-left-color: #e9edf0;
 		z-index: 2;
 	}
-	
+
 	.breadcrumb a, .breadcrumb div {
 		background-image: none;
 		background-color: transparent;
 		padding: 0.2em 0 0.2em 1.5em;
 		text-shadow: none;
 	}
-	
+
 	.breadcrumb a:first-child, .breadcrumb div:first-child {
 		border-radius: 0;
 		padding-left: 0.5em;
 	}
-	
+
 	.breadcrumb a:after, .breadcrumb div:after, .breadcrumb a:before, .breadcrumb div:before {
 		border-bottom: 1em solid transparent;
 		border-left: 0 solid;
@@ -6419,26 +6458,26 @@ Exception -- also do column widths specifically for the carousel, even on small 
 		right: -1em;
 		top: 50%;
 	}
-	
+
 	.main .breadcrumb .active::after, .main .breadcrumb .active::before {
 		/* hide the final chevron at mobile widths */
 		content: none;
 	}
-	
+
 	.nav-tabs > li > a {
 		font-size: 0.8rem;
 	}
 	p.price-tag .price {
 		font-size: 1em;
 	}
-	.price-tag { 
+	.price-tag {
 		height: 16px;
 		padding: 0 5px 0 15px;
-	} 	
-	.price-tag:after { 
-		border-top: 8px solid transparent; 
-		border-left: 6px solid #f7f7f7; 
-		border-bottom: 8px solid transparent; 
+	}
+	.price-tag:after {
+		border-top: 8px solid transparent;
+		border-left: 6px solid #f7f7f7;
+		border-bottom: 8px solid transparent;
 	}
 	.browsing_result_table_body_odd h3 a, .browsing_result_table_body_even h3 a,
 	.browsing_result_table_body_odd_bold h3 a, .browsing_result_table_body_even_bold h3 a {
@@ -6458,7 +6497,7 @@ Exception -- also do column widths specifically for the carousel, even on small 
 	.multiselect {
 		margin: 0 0 0 10px;
 	}
-	#combined_auction-details .field_label,	
+	#combined_auction-details .field_label,
 	#combined_classified-details .field_label {
 		width: 100%;
 	}
@@ -6479,7 +6518,7 @@ Exception -- also do column widths specifically for the carousel, even on small 
 	}
 	.browsing_result_table_body_odd h3 a,
 	.browsing_result_table_body_even h3 a,
-	.browsing_result_table_body_odd_bold h3 a, 
+	.browsing_result_table_body_odd_bold h3 a,
 	.browsing_result_table_body_even_bold h3 a {
 		font-size: 1em;
 	}

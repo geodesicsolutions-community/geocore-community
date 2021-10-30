@@ -306,7 +306,6 @@ class Notify_friend extends geoBrowse
                     'mailto' => $mailto,
                     'senders_name' => $info["senders_name"],
                     'senders_email' => $info["senders_email"],
-                    'seller' => $seller,
                     'listing' => $listing
                 );
                 $overload = geoAddon::triggerDisplay('overload_Notify_friend_notify_friend_sendMail', $addon_info, geoAddon::OVERLOAD);

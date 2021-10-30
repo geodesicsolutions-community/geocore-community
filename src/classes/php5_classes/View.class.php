@@ -1,20 +1,18 @@
 <?php
-//View.class.php
 /**
  * Holds the geoView class, which is responsible for (part of) the process of
  * rendering the page.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
-
 
 /**
  * As the name implies, this is used for creating the page view.  It does take
  * a little setup (like any class), the setup is normally done in the
  * display_page method in geoSite, or display_page in geoAdmin if displaying a
  * page in the admin.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
@@ -26,17 +24,17 @@ class geoView implements Iterator
 	 * @internal
 	 */
 	protected static $_instance;
-	
+
 	/**
 	 * Used internally
 	 * @internal
 	 */
-	protected $_viewVars = array(), $_modules, $_page, $_language, $_category, 
+	protected $_viewVars = array(), $_modules, $_page, $_language, $_category,
 		$_template, $_script_files, $_script_files_libs, $_script_files_top, $_script_files_libs_top,
 		$_css_files, $_css_files_libs, $_forceTemplateAttachment = false,
 		$_isRendered = false, $_onlyNewVars = false, $_alwaysShowTemplateError = false,
 		$useFooterJs;
-	
+
 	/**
 	 * This is an array of info about different JS libraries
 	 * @var array
@@ -61,7 +59,7 @@ class geoView implements Iterator
 			'version' => '1.11.0',
 		),
 		'lib_jquery_ui' => array(
-			//NOTE: bundled version is not the full version provided in google 
+			//NOTE: bundled version is not the full version provided in google
 			//api, either option will work though
 			'local' => 'jquery-ui.min.js',
 			'combine' => true,
@@ -81,24 +79,29 @@ class geoView implements Iterator
 			'version' => '1.10.0',
 			),
 		);
-	
+
 	const JS_LIB_PROTOTYPE = 'lib_prototype';
-	
+
 	const JS_LIB_SCRIPTACULOUS = 'lib_scriptaculous';
-	
+
 	const JS_LIB_JQUERY = 'lib_jquery';
-	
+
 	const JS_LIB_JQUERY_UI = 'lib_jquery_ui';
-	
+
+	/**
+	 * Unlike others, this does some magic loading so can't be combined and there is no local version
+	 */
+	const JS_LIB_TINYMCE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js';
+
 	const CSS_LIB_JQUERY_UI = 'lib_jquery_ui_css';
-	
+
 	/**
 	 * Template
 	 *
 	 * @var geoTemplate
 	 */
 	protected $_tpl;
-	
+
 	/**
 	 * Get an instance of the geoView object.  Uses singleton method.
 	 *
@@ -108,15 +111,15 @@ class geoView implements Iterator
 	{
 		if (!isset(self::$_instance) || !is_object(self::$_instance)) {
 			$c = __CLASS__;
-			self::$_instance = new $c; 
+			self::$_instance = new $c;
 		}
 		return self::$_instance;
 	}
-	
+
 	/**
 	 * Privately declared to prevent creating geoView class directly, instead use
 	 * singleton geoView::getInstance() method to get view class.
-	 * 
+	 *
 	 * @since Version 7.2.0
 	 */
 	private function __construct()
@@ -124,7 +127,7 @@ class geoView implements Iterator
 		$db = DataAccess::getInstance();
 		$this->useFooterJs = !defined('IN_ADMIN') && !geoAjax::isAjax() && $db->get_site_setting('useFooterJs');
 	}
-	
+
 	/**
 	 * Lock the ability to set view variables to only allow setting variables that are not already
 	 * set.  Usefull to allow addons to set a var and then block the main software from over-writting
@@ -136,7 +139,7 @@ class geoView implements Iterator
 		$this->_onlyNewVars = true;
 		return $this;
 	}
-	
+
 	/**
 	 * Un-lock the lock done by {@link geoView::lockSetNewOnly()}
 	 *
@@ -146,11 +149,11 @@ class geoView implements Iterator
 		$this->_onlyNewVars = false;
 		return $this;
 	}
-	
+
 	/**
 	 * Clears all head html, css and js files to be added to head AND/OR to the
 	 * footer since the footer contents are linked to the head contents.
-	 * 
+	 *
 	 * @return geoView
 	 * @since Version 7.3.0
 	 */
@@ -158,32 +161,32 @@ class geoView implements Iterator
 	{
 		//The HTML contents added using addTop() or addBottom()
 		$this->_head_html = $this->_footer_html = '';
-		
+
 		//The CSS files added using addCssFile()
 		$this->_css_files = $this->_css_files_libs = array();
-		
+
 		//The JS Scripts added using addJScript()
 		$this->_script_files = $this->_script_files_libs = array();
 		//Same, but for the ones "forced" to be on the top
 		$this->_script_files_top = $this->_script_files_libs_top = array();
-		
+
 		//also clear anything added by {add_footer_html} block
 		$this->_add_footer_html = '';
-		
+
 		//allow chaining
 		return $this;
 	}
-	
+
 	/**
 	 * Deprecated, do not use!  USe clearHeadHtml() instead!
-	 * 
+	 *
 	 * @deprecated in version 7.3.0 (June 25, 2013) - use clearHeadHtml() instead
 	 */
 	public function clearHeaderHtml ()
 	{
 		return $this->clearHeadHtml();
 	}
-	
+
 	/**
 	 * Add stuff to the head of the page.  Note that if the text contains a script
 	 * and $forceTop is false (the default value), it will actually be added using
@@ -216,15 +219,15 @@ class geoView implements Iterator
 		//echo 'adding to head: <pre>'.geoString::specialChars($html).'</pre>';
 		return $this;
 	}
-	
+
 	/**
 	 * Add stuff to the footer of the page in {footer_html}, or if it is set to
 	 * not use {footer_html} it will insert at the bottom of the {head_html}
 	 * generated contents.
-	 * 
+	 *
 	 * Note that if admin settings are not set to use {footer_html} this will
 	 * act like an alias to addTop()
-	 * 
+	 *
 	 * @param string $html
 	 * @return geoView
 	 * @since Version 7.3.0
@@ -245,7 +248,7 @@ class geoView implements Iterator
 		//echo 'adding to footer: <pre>'.geoString::specialChars($html).'</pre>';
 		return $this;
 	}
-	
+
 	/**
 	 * Add stuff to the boyd of the page
 	 *
@@ -257,10 +260,10 @@ class geoView implements Iterator
 		if($html) $this->body_html .= $html;
 		return $this;
 	}
-	
+
 	/**
 	 * Add to a module's body HTML
-	 * 
+	 *
 	 * It is recommended to instead use a template.
 	 *
 	 * @param string $module
@@ -274,12 +277,12 @@ class geoView implements Iterator
 		$this->modules = $vars;
 		return $this;
 	}
-	
+
 	/**
 	 * Add to an addon's body HTML
-	 * 
+	 *
 	 * It is recommended to instead use a template.
-	 * 
+	 *
 	 * @param string $author The auth_tag
 	 * @param string $addon
 	 * @param string $tag
@@ -293,20 +296,20 @@ class geoView implements Iterator
 		$this->addons = $vars;
 		return $this;
 	}
-	
+
 	/**
 	 * Set the page for the view
-	 * 
+	 *
 	 * @param mixed $page
 	 */
 	public function setPage($page)
 	{
 		$this->_page = $page;
 	}
-	
+
 	/**
 	 * Set the language ID for the page
-	 * 
+	 *
 	 * @param int $language_id
 	 */
 	public function setLanguage($language_id)
@@ -316,20 +319,20 @@ class geoView implements Iterator
 			$this->_language = 1;
 		}
 	}
-	
+
 	/**
 	 * Set the category ID for the current page.
-	 * 
+	 *
 	 * @param int $category_id
 	 */
 	public function setCategory($category_id)
 	{
 		$this->_category = (int)$category_id;
 	}
-	
+
 	/**
 	 * Gets the category as previously set using $view->setCategory().
-	 * 
+	 *
 	 * @return int
 	 * @since Version 6.0.0
 	 */
@@ -337,13 +340,13 @@ class geoView implements Iterator
 	{
 		return (int)$this->_category;
 	}
-	
+
 	/**
 	 * Gets the language as previously set using $view->setLanguage().  This is
 	 * for completeness only as it will not be set until fairly late in the page
 	 * load, normally you would use getLanguage method in session
 	 * or DataAccess class.
-	 * 
+	 *
 	 * @return int
 	 * @since Version 6.0.0
 	 */
@@ -351,11 +354,11 @@ class geoView implements Iterator
 	{
 		return (int)$this->_language;
 	}
-	
+
 	/**
 	 * Gets the page set by $view->setPage(), which will be either null if not
 	 * set yet, or a class that extends geoSite class or the geoSite class itself.
-	 * 
+	 *
 	 * @return geoSite
 	 * @since Version 6.0.0
 	 */
@@ -363,10 +366,10 @@ class geoView implements Iterator
 	{
 		return $this->_page;
 	}
-	
+
 	/**
 	 * Renders the page.
-	 * 
+	 *
 	 * @param int|string $page_id
 	 * @param bool $return If true, will return the rendered template instead
 	 *  of outputing it to the page.
@@ -375,7 +378,7 @@ class geoView implements Iterator
 	public function render ($page_id = null, $return = false)
 	{
 		$this->setRendered(true);
-		
+
 		if (!isset($this->_tpl)) {
 			if ($this->_category) {
 				geoTemplate::setCategory($this->_category);
@@ -397,14 +400,14 @@ class geoView implements Iterator
 				$this->_tpl->loadFilter('output','listing_preview_admin');
 			}
 		}
-		
+
 		if ($page_id == 'admin') {
 			$this->_tpl->setAdmin();
 			$this->_template = 'index';
 		} else if ($page_id !== null) {
 			$this->_tpl->setMainPage($page_id);
 		}
-		
+
 		//pre-process any auto add head stuff
 		$this->_preProcessAddons($this->_tpl->createTemplate($this->_template));
 		if ($this->geo_inc_files['body_html'] && !$this->geo_inc_files['body_html_addon'] && !$this->geo_inc_files['body_html_system']) {
@@ -415,10 +418,10 @@ class geoView implements Iterator
 		if (count($this->_modules)) {
 			geoAddon::triggerUpdate('notify_modules_preload', $this->_modules);
 		}
-		
+
 		$this->_head_html = $this->getCssHtml() . $this->getJsHtmlTop() . $this->_head_html;
 		$this->_footer_html = $this->getJsHtml() . $this->_footer_html;
-		
+
 		//echo 'head html: <pre>'.geoString::specialChars($this->_head_html).'</pre>';
 		$this->_tpl->assign($this->_viewVars);
 		try {
@@ -428,7 +431,7 @@ class geoView implements Iterator
 			$this->_tpl->display($this->_template);
 		} catch (Exception $e) {
 			$message = $this->_errorCaught($e);
-			
+
 			if ($return) {
 				return $message;
 			}
@@ -436,38 +439,38 @@ class geoView implements Iterator
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Pass caught template errors to this to have them handled.
-	 * 
+	 *
 	 * @param Exception $e
 	 * @return string A string to display to the site
 	 */
 	private function _errorCaught ($e)
 	{
 		$db = DataAccess::getInstance();
-		
+
 		$email = $db->get_site_setting('site_email');
-		
+
 		$message = geoString::specialCharsDecode($e->getMessage());
 		$parts = explode('"',$message);
-			
+
 		$path = '';
 		if (count($parts)>4 && strpos($parts[1],'geo_tset')!==false) {
 			//convert to something that can be read!
 			$fparts = explode(':',$parts[1]);
-		
+
 			$path = "<strong>Template Set:</strong> {$fparts[1]}<br />
 				<strong>Template Type:</strong> {$fparts[2]}<br />
 				<strong>File:</strong> {$fparts[3]}".(($fparts[4])? '/'.$fparts[4]:'')."<br />
 				<strong>Line:</strong> ".preg_replace('/[^0-9]*/','',$parts[2])."<br />
 				<strong>Template Code:</strong> <br /><div style='border: 1px solid gray; padding: 5px; white-space: pre; height: 50px; overflow: auto; font-size: 12px;'>{$parts[3]}</div>";
 		}
-			
+
 		$box = "<div style='padding: 10px; border: 3px solid red;'>";
-			
+
 		$url = $this->selfUrl();
-		
+
 		$emailMessage = "You are receiving this because a template error was generated on your site:<br />
 					<strong>".$db->get_site_setting('classifieds_url')."</strong>
 					<br /><br />See below for template error details:<br /><br />
@@ -485,14 +488,14 @@ class geoView implements Iterator
 \$_GET = ".var_export($_GET,true)./* //DO NOT INCLUDE post vars, may contain sensitive data like CC info
 "\$_POST = ".var_export($_POST,true).*/"
 \$_COOKIE = ".var_export($_COOKIE,true)."</pre>";
-		
+
 		if (!defined('IN_ADMIN')&&!geoPC::is_trial()&&!geoPC::is_adplotter()) {
 			//only bother sending e-mail if not in admin... if in admin we're just
 			//going to display the error.
 			geoEmail::sendMail($email, 'Automated Admin Notice: TEMPLATE ERROR!', $emailMessage,
 				0, 0, 0, 'text/html');
 		}
-					
+
 		$message = "
 		$box
 			<strong>Oops! Template Error!</strong>  Please pardon our dust as we work to update the site.  We could not display the page due to a template error, sorry about that!<br /><br />
@@ -505,25 +508,25 @@ class geoView implements Iterator
 		}
 		return $message;
 	}
-	
+
 	/**
 	 * Gets the current full URL including query string for the currently viewed
 	 * page.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function selfUrl ()
 	{
 		$url = geoFilter::getBaseHref().basename($_SERVER['SCRIPT_NAME']);
-		
+
 		//add GET parameters
 		if (count($_GET)) {
 			$url .= '?'.http_build_query($_GET);
 		}
-		
+
 		return $url;
 	}
-	
+
 	/**
 	 * Pre-load template, used internally
 	 * @param geoTemplate $template
@@ -535,7 +538,7 @@ class geoView implements Iterator
 		if (!$template->compiled->exists || ($template->smarty->force_compile && !$template->compiled->isCompiled)) {
 			$template->compileTemplateSource();
 		}
-			
+
 		if (!$template->compiled->loaded) {
 			$_smarty_tpl = $template;
 			include($template->compiled->filepath);
@@ -564,16 +567,16 @@ class geoView implements Iterator
 			return;
 		}
 		$tags = $_tpl->used_tags;
-		
+
 		if(!$tags) {
 			//no tags found -- nothing to do here
 			return;
 		}
-		
+
 		foreach ($tags['module'] as $module) {
 			$this->_modules[$module] = $module;
 		}
-		
+
 		//pre-process addons (main reason for this)
 		foreach ($tags['addon'] as $vars) {
 			$info = geoAddon::getInfoClass($vars['addon']);
@@ -588,11 +591,11 @@ class geoView implements Iterator
 				}
 			}
 		}
-		
+
 		//make sure included templates are processed as well
 		foreach ($tags['include'] as $vars) {
 			$_incTpl = $_tpl->createTemplate($vars['file'], $_tpl);
-			
+
 			if ($vars['g_type']) {
 				$_incTpl->gType($vars['g_type']);
 			}
@@ -603,10 +606,10 @@ class geoView implements Iterator
 			unset($incTpl);
 		}
 	}
-	
+
 	/**
 	 * Whether or not the given filename has already been added.
-	 * 
+	 *
 	 * @param string $filename
 	 * @return bool
 	 */
@@ -614,11 +617,11 @@ class geoView implements Iterator
 	{
 		return (in_array($filename,$this->_css_files));
 	}
-	
+
 	/**
 	 * Whether or not the given filename has already been added to the head or
 	 * footer.
-	 * 
+	 *
 	 * @param string $filename
 	 * @return bool
 	 */
@@ -632,11 +635,11 @@ class geoView implements Iterator
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Gets the HTML to insert into the page for all CSS files added.  Meant to
 	 * be used by display page directly, inserted as part of {head_html}.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getCssHtml()
@@ -647,14 +650,14 @@ class geoView implements Iterator
 			//add libraries first
 			$combined = (!defined('IN_ADMIN') && $db->get_site_setting('minifyEnabled'));
 			$libCombined = ($combined && $db->get_site_setting('minifyLibs'));
-			
+
 			$append = $this->_getResourceAppend();
 			foreach ($this->_css_files_libs as $filename) {
 				if (substr($filename,-4) === ".css") {
 					//only append to CSS files that don't already have query strings
 					$filename = $filename."?_=$append";
 				}
-				
+
 				if ($combined && !$libCombined) {
 					//Do NOT combine any css libraries
 					$entries[] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"$filename\" />";
@@ -663,7 +666,7 @@ class geoView implements Iterator
 				}
 			}
 		}
-		
+
 		if (!defined('IN_ADMIN')) {
 			//Now add the CSS files that are always part of each page load...
 			$css_files [] = geoTemplate::getUrl('css','normalize.css',true);
@@ -676,10 +679,10 @@ class geoView implements Iterator
 					$css_files[] = $url;
 				}
 			}
-			
+
 			//basically, always load library files first, then normalize and default,
 			//then any "system loaded" (non-library), then theme files, then custom last.
-			
+
 			$css_files [] = geoTemplate::getUrl('css','theme1.css',true);
 			$css_files [] = geoTemplate::getUrl('css','theme2.css',true);
 			$css_files [] = geoTemplate::getUrl('css','custom.css',true);
@@ -689,13 +692,13 @@ class geoView implements Iterator
 				$css_files[] = $url;
 			}
 		}
-		
+
 		if (!defined('IN_ADMIN') && $css_files && $db->get_site_setting('minifyEnabled')) {
 			$comboList = geoCombineResources::getListInstance($css_files, geoCombineResources::TYPE_CSS);
-			
+
 			if ($comboList && $comboList->getResourceId()) {
 				$pre = $db->get_site_setting('external_url_base').GEO_TEMPLATE_LOCAL_DIR;
-				
+
 				if ($db->get_site_setting('tplHtaccess') && $db->get_site_setting('tplHtaccess_rewrite')) {
 					$pre .= ".min/css/";
 				} else {
@@ -721,25 +724,25 @@ class geoView implements Iterator
 				$entries[] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"$filename\" />";
 			}
 		}
-		
+
 		return implode("\n",$entries);
 	}
-	
+
 	/**
 	 * Gets the HTML to insert into the page for all JS files added.  Meant to
 	 * be used by display page directly, inserted as part of {footer_html}.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getJsHtml ()
 	{
 		$entries = array();
-		
+
 		$db = DataAccess::getInstance();
-		
+
 		$combined = (!defined('IN_ADMIN') && $db->get_site_setting('minifyEnabled'));
 		$libCombined = ($combined && $db->get_site_setting('minifyLibs'));
-		
+
 		if (!$libCombined && $this->_script_files_libs) {
 			//load libraries first
 			$append = $this->_getResourceAppend();
@@ -751,11 +754,11 @@ class geoView implements Iterator
 				$entries[] = "<script src=\"$filename\"></script>";
 			}
 		}
-		
+
 		$js_files = $this->_script_files;
 		if ($combined) {
 			$comboList = geoCombineResources::getListInstance($js_files, geoCombineResources::TYPE_JS);
-			
+
 			if ($comboList && $comboList->getResourceId()) {
 				$pre = $db->get_site_setting('external_url_base').GEO_TEMPLATE_LOCAL_DIR;
 				if ($db->get_site_setting('tplHtaccess') && $db->get_site_setting('tplHtaccess_rewrite')) {
@@ -788,10 +791,10 @@ class geoView implements Iterator
 				$entries[] = "<script src=\"$filename\"></script>";
 			}
 		}
-		
+
 		return implode("\n",$entries)."\n";
 	}
-	
+
 	/**
 	 * Gets the HTML to insert into the page for all JS files added.  Meant to
 	 * be used by display page directly, inserted as part of {head_html}.
@@ -801,11 +804,11 @@ class geoView implements Iterator
 	public function getJsHtmlTop ()
 	{
 		$entries = array();
-	
+
 		$db = DataAccess::getInstance();
 		$combined = (!defined('IN_ADMIN') && $db->get_site_setting('minifyEnabled'));
 		$libCombined = ($combined && $db->get_site_setting('minifyLibs'));
-		
+
 		if (!$libCombined && $this->_script_files_libs_top) {
 			//load libraries first
 			$append = $this->_getResourceAppend();
@@ -817,11 +820,11 @@ class geoView implements Iterator
 				$entries[] = "<script src=\"$filename\"></script>";
 			}
 		}
-	
+
 		$js_files = $this->_script_files_top;
 		if ($combined) {
 			$comboList = geoCombineResources::getListInstance($js_files, geoCombineResources::TYPE_JS);
-				
+
 			if ($comboList && $comboList->getResourceId()) {
 				$pre = $db->get_site_setting('external_url_base').GEO_TEMPLATE_LOCAL_DIR;
 				if ($db->get_site_setting('tplHtaccess') && $db->get_site_setting('tplHtaccess_rewrite')) {
@@ -843,7 +846,7 @@ class geoView implements Iterator
 				$entries[] = "<script src=\"$filename\"></script>";
 			}
 		}
-		
+
 		if ($libCombined && $this->_script_files_libs_top) {
 			//load libraries first
 			$append = $this->_getResourceAppend();
@@ -855,10 +858,10 @@ class geoView implements Iterator
 				$entries[] = "<script src=\"$filename\"></script>";
 			}
 		}
-	
+
 		return implode("\n",$entries)."\n";
 	}
-	
+
 	/**
 	 * Gets a string that is suitable for appending to the query string of js/css resources to prevent stale-caching across updates.
 	 * For security, hashes in the site URL (that way, each site has a unique string, so there's no way to google for all sites running a specific version)
@@ -869,7 +872,7 @@ class geoView implements Iterator
 	{
 		return substr(sha1(DataAccess::getInstance()->get_site_setting('classifieds_url').geoPC::getVersion()),0,5);
 	}
-	
+
 	/**
 	 * Sets a variable that will be local in scope to the body_html template.
 	 * This works similar to smarty->assign() function.
@@ -880,7 +883,7 @@ class geoView implements Iterator
 	 */
 	public function setBodyVar ($var1, $var2 = null)
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$body_vars = $this->body_vars;
 		if (isset($var2)) {
@@ -892,7 +895,7 @@ class geoView implements Iterator
 		$this->body_vars = $body_vars;
 		return $this;
 	}
-	
+
 	/**
 	 * Deprecated!  Use setHeadVar() instead!
 	 * @param string|mixed $var1
@@ -904,7 +907,7 @@ class geoView implements Iterator
 	{
 		return $this->setHeadVar($var1,$var2);
 	}
-	
+
 	/**
 	 * Sets a variable that will be local in scope to the head_html template.
 	 * This works similar to smarty->assign() function.
@@ -916,7 +919,7 @@ class geoView implements Iterator
 	 */
 	public function setHeadVar ($var1, $var2 = null)
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$vars = $this->head_vars;
 		if ($var2 !== null) {
@@ -928,7 +931,7 @@ class geoView implements Iterator
 		$this->head_vars = $vars;
 		return $this;
 	}
-	
+
 	/**
 	 * Sets a variable that will be local in scope to the footer_html template.
 	 * This works similar to smarty->assign() function.  If using footer_html
@@ -945,8 +948,8 @@ class geoView implements Iterator
 		if (!$this->useFooterJs) {
 			return $this->setHeadVar($var1, $var2);
 		}
-		
-		//don't use this->_viewVars directly to avoid possible 
+
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$vars = $this->footer_vars;
 		if ($var2 !== null) {
@@ -958,7 +961,7 @@ class geoView implements Iterator
 		$this->footer_vars = $vars;
 		return $this;
 	}
-	
+
 	/**
 	 * Sets a variable that will be local in scope to a module template.
 	 * This works similar to smarty->assign() function.
@@ -970,10 +973,10 @@ class geoView implements Iterator
 	 */
 	public function setModuleVar ($module_name, $var1, $var2 = null)
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$modules = $this->module_vars;
-		
+
 		if (isset($var2)) {
 			$modules [$module_name][$var1] = $var2;
 		} else if (is_array($var1)) {
@@ -983,7 +986,7 @@ class geoView implements Iterator
 		$this->module_vars = $modules;
 		return $this;
 	}
-	
+
 	/**
 	 * Sets a variable that will be local in scope to a addon template.
 	 * This works similar to smarty->assign() function.
@@ -997,7 +1000,7 @@ class geoView implements Iterator
 	 */
 	public function setAddonVar ($author_tag, $addon_name, $tag, $var1, $var2 = null)
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$addons = $this->addon_vars;
 		if (isset($var2)) {
@@ -1009,7 +1012,7 @@ class geoView implements Iterator
 		$this->addon_vars = $addons;
 		return $this;
 	}
-	
+
 	/**
 	 * Sets the template file that will be included for the body_html in the
 	 * template.
@@ -1023,7 +1026,7 @@ class geoView implements Iterator
 	 */
 	public function setBodyTpl($tpl_file, $addon_name = '', $system_resource = '')
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$geo_inc_files = (isset($this->_viewVars['geo_inc_files']))? $this->_viewVars['geo_inc_files']: array();
 		if (!is_array($geo_inc_files)) {
@@ -1058,7 +1061,7 @@ class geoView implements Iterator
 	{
 		return $this->setHeadTpl($tpl_file, $addon_name, $system_resource);
 	}
-	
+
 	/**
 	 * Sets the template file that will be included for the head_html in the
 	 * template.
@@ -1073,7 +1076,7 @@ class geoView implements Iterator
 	 */
 	public function setHeadTpl ($tpl_file, $addon_name = '', $system_resource = '')
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$geo_inc_files = $this->_viewVars['geo_inc_files'];
 		if (!is_array($geo_inc_files)) {
@@ -1088,11 +1091,11 @@ class geoView implements Iterator
 		$this->_viewVars['geo_inc_files'] = $geo_inc_files;
 		return $this;
 	}
-	
+
 	/**
 	 * Sets the template file that will be included for the footer_html in the
 	 * template.  If using footer_html is disabled, this will pass it along to
-	 * the setHeadTpl() instead.  Note that you CANNOT use both a head template 
+	 * the setHeadTpl() instead.  Note that you CANNOT use both a head template
 	 * and a different footer template for this reason, whichever is set last
 	 * would get precedence when the footer_html is turned off.
 	 *
@@ -1123,7 +1126,7 @@ class geoView implements Iterator
 		$this->_viewVars['geo_inc_files'] = $geo_inc_files;
 		return $this;
 	}
-	
+
 	/**
 	 * Sets the template file that will be included for a specific
 	 * module.
@@ -1134,18 +1137,18 @@ class geoView implements Iterator
 	 */
 	public function setModuleTpl($module_tag, $tpl_file)
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$geo_inc_files = (isset($this->_viewVars['geo_inc_files']))? $this->_viewVars['geo_inc_files']: array();
 		if (!is_array($geo_inc_files)) {
 			$geo_inc_files = array();
 		}
-		
+
 		$geo_inc_files['modules'][$module_tag] = $tpl_file;
 		$this->_viewVars['geo_inc_files'] = $geo_inc_files;
 		return $this;
 	}
-	
+
 	/**
 	 * Sets the template file that will be included for a specific
 	 * addon.
@@ -1158,7 +1161,7 @@ class geoView implements Iterator
 	 */
 	public function setAddonTpl($auth_tag, $addon_name, $tag, $tpl_file)
 	{
-		//don't use this->_viewVars directly to avoid possible 
+		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.
 		$geo_inc_files = $this->_viewVars['geo_inc_files'];
 		if (!is_array($geo_inc_files)) {
@@ -1168,11 +1171,11 @@ class geoView implements Iterator
 		$this->_viewVars['geo_inc_files'] = $geo_inc_files;
 		return $this;
 	}
-	
+
 	/**
 	 * Force the overall page to use a specific template file instead of determining which
 	 * template to use by looking at the templates to page file.
-	 * 
+	 *
 	 * This is handy to use in situations where what template to use is determined by other
 	 * factors than the current language, category, and page.
 	 *
@@ -1186,13 +1189,13 @@ class geoView implements Iterator
 		$this->_forceTemplateAttachment = true;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the template attached to the specified "page id", which can actually
 	 * be an integer or a string, but typically it's just an integer that goes with
 	 * a specific page.  You would use a string when there are multiple templates other
 	 * than the main one, for instance a classified details template.
-	 * 
+	 *
 	 * Note that this function relies on setCategory and setLanguage to be called prior, in
 	 * order to get the attachment specific for the current language and category.  If none
 	 * specific to the language or category are found, the default for lang 1 cat 0 is returned.
@@ -1219,10 +1222,10 @@ class geoView implements Iterator
 			if ($lang) {
 				geoTemplate::setLanguage($lang);
 			}
-			
+
 			$this->_tpl = new geoTemplate;
 		}
-		
+
 		if ($languageId !== null || $categoryId !== null || !$this->_forceTemplateAttachment) {
 			if ($languageId === null) {
 				$languageId = $this->_language;
@@ -1244,11 +1247,11 @@ class geoView implements Iterator
 				//this takes precedence, check to see if there is an affiliate
 				//group-specific setting
 				$gId = (int)$this->affiliate_group_id;
-				
+
 				if ($gId && isset($templates['affiliate_group'][$languageId][$gId])) {
 					$lang_id = $languageId;
 				}
-				
+
 				if ($gId && isset($templates['affiliate_group'][$lang_id][$gId])) {
 					//we found the attachment!
 					return $templates['affiliate_group'][$lang_id][$gId];
@@ -1264,7 +1267,7 @@ class geoView implements Iterator
 				//template is set for specific category, so use that template assignment
 				$cat_id = $categoryId;
 			}
-			
+
 			if (!isset($templates[$lang_id][$cat_id])) {
 				//Error: the template was not specified, this would only happen if
 				//there is no template assignment for even the default of lang 1 category 0.
@@ -1275,10 +1278,10 @@ class geoView implements Iterator
 			return $this->_template;
 		}
 	}
-	
+
 	/**
 	 * Get all the template attachments for the specified page ID.
-	 * 
+	 *
 	 * @param string|int $page_id
 	 * @param bool $strict If false, will simply return false or empty array when
 	 *   template assignment could not be determined.  Default is to display
@@ -1296,7 +1299,7 @@ class geoView implements Iterator
 		}
 		return $templates;
 	}
-	
+
 	/**
 	 * Gets all of the variables set so far.
 	 *
@@ -1306,11 +1309,11 @@ class geoView implements Iterator
 	{
 		return $this->_viewVars;
 	}
-	
+
 	/**
 	 * Gets all the assigned body vars set so far:: vars that are assigned using
 	 * {@link geoView::setBodyVar()}
-	 * 
+	 *
 	 * @return array The array of vars set so far, or an empty array if no body
 	 *   vars have been set yet.
 	 * @since Version 5.0.0
@@ -1319,11 +1322,11 @@ class geoView implements Iterator
 	{
 		return isset($this->_viewVars['body_vars'])? $this->_viewVars['body_vars'] : array();
 	}
-	
+
 	/**
 	 * Gets all the assigned addon vars set so far:: vars that are assigned using
 	 * {@link geoView::setAddonVar()}
-	 * 
+	 *
 	 * @param string $author_tag
 	 * @param string $addon_name
 	 * @param string $tag
@@ -1335,10 +1338,10 @@ class geoView implements Iterator
 	{
 		return isset($this->_viewVars['addon_vars'][$author_tag][$addon_name][$tag])? $this->_viewVars['addon_vars'][$author_tag][$addon_name][$tag] : array();
 	}
-	
+
 	/**
 	 * Deprecated!  Use getAssignedHeadVars instead!
-	 * 
+	 *
 	 * @return array
 	 * @since Version 5.0.0
 	 * @deprecated in version 7.3.0 (June 25, 2013) - use getAssignedHeadVars() instead!
@@ -1347,11 +1350,11 @@ class geoView implements Iterator
 	{
 		return $this->getAssignedHeadVars();
 	}
-	
+
 	/**
 	 * Gets all the assigned head vars set so far:: vars that are assigned using
 	 * {@link geoView::setHeadVar()}
-	 * 
+	 *
 	 * @return array The array of vars set so far, or an empty array if no head
 	 *   vars have been set yet.
 	 * @since Version 7.3.0 (previously named getAssignedHeaderVars)
@@ -1360,11 +1363,11 @@ class geoView implements Iterator
 	{
 		return isset($this->_viewVars['head_vars'])? $this->_viewVars['head_vars'] : array();
 	}
-	
+
 	/**
 	 * Gets all the assigned module vars set so far for the specified module::
 	 * vars that are assigned using {@link geoView::setModuleVar()}
-	 * 
+	 *
 	 * @param string $module_name
 	 * @return array The array of vars set so far, or an empty array if no module
 	 *   vars have been set yet for the specified module.
@@ -1374,7 +1377,7 @@ class geoView implements Iterator
 	{
 		return isset($this->_viewVars['module_vars'][$module_name])? $this->_viewVars['module_vars'][$module_name] : array();
 	}
-	
+
 	/**
 	 * Loads the template attachment, then loads all the modules attached to that
 	 * template, all according to the page id specified, the language set using
@@ -1391,7 +1394,7 @@ class geoView implements Iterator
 	{
 		//Get the template attached
 		if ($load_extra_mainbody) {
-			
+
 			$settings_file = geoTemplate::getFilePath('main_page','attachments',"templates_to_page/{$page_id}.php");
 			$settings = require ($settings_file);
 			//load attachment for either the current language, or if that is
@@ -1408,10 +1411,10 @@ class geoView implements Iterator
 	 * @internal
 	 */
 	private $_useGoogleLibs = null;
-	
+
 	/**
 	 * Loads the js library
-	 * 
+	 *
 	 * @param string $lib
 	 * @param bool $ignoreAdmin
 	 * @return string
@@ -1422,17 +1425,17 @@ class geoView implements Iterator
 			//not a known lib
 			return $lib;
 		}
-		
+
 		if (defined('IN_ADMIN') && !$ignoreAdmin) {
 			return '../'.GEO_JS_LIB_LOCAL_DIR.$this->_jsLibraries[$lib]['local'];
 		}
 		if ($this->_useGoogleLibs === null) {
 			//figure out if we should use google libs or not
 			$db = DataAccess::getInstance();
-			
+
 			$this->_useGoogleLibs = $db->get_site_setting('useGoogleLibApi');
 		}
-		
+
 		if ($this->_useGoogleLibs && $this->_jsLibraries[$lib]['googleAPI']!==null) {
 			return $this->_jsLibraries[$lib]['googleAPI'];
 		}
@@ -1440,10 +1443,10 @@ class geoView implements Iterator
 		$pre = (defined('IN_ADMIN'))? '' : DataAccess::getInstance()->get_site_setting('external_url_base');
 		return $pre.GEO_JS_LIB_LOCAL_DIR.$this->_jsLibraries[$lib]['local'];
 	}
-	
+
 	/**
 	 * Loads the CSS library
-	 * 
+	 *
 	 * @param string $lib
 	 * @param bool $ignoreAdmin
 	 * @return string
@@ -1455,36 +1458,36 @@ class geoView implements Iterator
 			//not a known lib
 			return $lib;
 		}
-		
+
 		if (defined('IN_ADMIN') && !$ignoreAdmin) {
 			return '../'.geoTemplate::getUrl('',$this->_cssLibraries[$lib]['local'], true, true);
 		}
 		if ($this->_useGoogleLibs === null) {
 			//figure out if we should use google libs or not
 			$db = DataAccess::getInstance();
-				
+
 			$this->_useGoogleLibs = $db->get_site_setting('useGoogleLibApi');
 		}
-		
+
 		if ($this->_useGoogleLibs && $this->_cssLibraries[$lib]['googleAPI']!==null) {
 			return $this->_cssLibraries[$lib]['googleAPI'];
 		}
 		//use the local location
 		return geoTemplate::getUrl('',$this->_cssLibraries[$lib]['local']);
 	}
-	
+
 	/**
 	 * Adds a javascript file to be added to the page once it is rendered.
-	 * 
+	 *
 	 * NOTE: When admin settings are set to combine JS and also combine
 	 * libraries, any libraries not able to be combined will be loaded after
 	 * the combined JS.  So such libraries need to work when loaded after the
 	 * rest of the JS.
-	 * 
+	 *
 	 * HINT: Anything that can't be combined, make sure the JS
 	 * that "uses" the non-combined JS is loaded inside a function that is
 	 * delayed until the DOM loads.
-	 * 
+	 *
 	 * ANOTHER HINT: Test any JS with setting turned on for combining
 	 * libraries, and test with it turned off.
 	 *
@@ -1505,12 +1508,12 @@ class geoView implements Iterator
 	public function addJScript ($script_urls, $order='append', $ignoreAdmin = false, $forceTop = false, $canCombine = true)
 	{
 		if (!is_array($script_urls)) $script_urls = array($script_urls);
-		
+
 		//trim/clean all of them
 		$cleaned = array();
 		$combined = (!defined('IN_ADMIN') && DataAccess::getInstance()->get_site_setting('minifyEnabled'));
 		$libCombined = ($combined && DataAccess::getInstance()->get_site_setting('minifyLibs'));
-		
+
 		if (!$this->useFooterJs) {
 			//do not use footer, so force top always
 			$forceTop = true;
@@ -1520,10 +1523,10 @@ class geoView implements Iterator
 		} else {
 			$_script_files = ($forceTop)? '_script_files_top' : '_script_files';
 		}
-		
+
 		foreach ($script_urls as $url) {
 			$url = trim($url);
-			
+
 			if ($url && isset($this->_jsLibraries[$url])) {
 				if ($combined && (!$libCombined || !$this->_jsLibraries[$url]['combine'])) {
 					//libraries are not combined with rest of the page...
@@ -1552,7 +1555,7 @@ class geoView implements Iterator
 					}
 					$this->$_script_files = $script_urls;
 					break;
-					
+
 				case 'append':
 					//break ommited on purpose
 				default:
@@ -1569,7 +1572,7 @@ class geoView implements Iterator
 		//allow chaining
 		return $this;
 	}
-	
+
 	/**
 	 * Adds a css file or files to be added to the page once it is rendered.
 	 *
@@ -1584,9 +1587,9 @@ class geoView implements Iterator
 	public function addCssFile ($css_urls, $order='append', $ignoreAdmin = false)
 	{
 		if (!is_array($css_urls)) $css_urls = array($css_urls);
-		
+
 		$_css_files = '_css_files';
-		
+
 		//trim/clean all of them
 		$cleaned = array();
 		foreach ($css_urls as $url) {
@@ -1618,7 +1621,7 @@ class geoView implements Iterator
 					}
 					$this->$_css_files = $css_urls;
 					break;
-					
+
 				case 'append':
 					//break ommited on purpose
 				default:
@@ -1635,7 +1638,7 @@ class geoView implements Iterator
 		//allow chaining
 		return $this;
 	}
-	
+
 	/**
 	 * Gets an instance of the template object that is going to be used to
 	 * render the page.  Make sure the category and language are set in
@@ -1655,12 +1658,12 @@ class geoView implements Iterator
 			if ($this->_language) {
 				geoTemplate::setLanguage($this->_language);
 			}
-			
+
 			$this->_tpl = new geoTemplate;
 		}
 		return $this->_tpl;
 	}
-	
+
 	/**
 	 * Whether or not the page has been rendered or not.
 	 *
@@ -1670,11 +1673,11 @@ class geoView implements Iterator
 	{
 		return $this->_isRendered;
 	}
-	
+
 	/**
 	 * Sets whether the page has been rendered.  If set to true, when it gets time
-	 * to auto render the page (on pages that are auto rendered), it won't auto 
-	 * render.  This is handy if you need to display the page in a non-standard 
+	 * to auto render the page (on pages that are auto rendered), it won't auto
+	 * render.  This is handy if you need to display the page in a non-standard
 	 * way, like if you just want to echo something out..
 	 *
 	 * @param bool $is_rendered
@@ -1694,10 +1697,10 @@ class geoView implements Iterator
 	{
 		throw new Exception ('Error: Cloning of geoView object not permitted.');
 	}
-	
+
 	/**
 	 * Magic method, get view template var
-	 * 
+	 *
 	 * @param string $name
 	 * @return mixed
 	 */
@@ -1708,7 +1711,7 @@ class geoView implements Iterator
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Magic method, set view template var
 	 *
@@ -1735,7 +1738,7 @@ class geoView implements Iterator
 	{
 		return isset($this->_viewVars[$name]);
 	}
-	
+
 	/**
 	 * Magic method to unset given view variable
 	 * @param string $name
@@ -1786,7 +1789,7 @@ class geoView implements Iterator
 	}
 	/**
 	 * Basically this will render the page.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function toString()
@@ -1808,7 +1811,7 @@ class geoView implements Iterator
 			if ($this->_language) {
 				geoTemplate::setLanguage($this->_language);
 			}
-			
+
 			$this->_tpl = new geoTemplate;
 		}
 		if (!isset($this->_template)) {
@@ -1823,7 +1826,7 @@ class geoView implements Iterator
 	/**
 	 * Magic method, basically if you echo out the view object, it will render
 	 * the page.  Magical isn't it?  This actually calls {@see geoView::toString()}
-	 * 
+	 *
 	 * @return string
 	 */
 	public function __toString ()

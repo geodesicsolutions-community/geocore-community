@@ -1639,7 +1639,7 @@ Maximum string length: 255 single-byte characters Input mask: ?@?.??
 							</xs:element>
 							<xs:element name="Street" type="xs:string" minOccurs="1" maxOccurs="1">
 								<annotation>
-									<documentation>First line of buyer???s billing or shipping street address to be verified. 
+									<documentation>First line of buyer’s billing or shipping street address to be verified. 
 <br/>
 										<br/>
 										<b>Required</b>
@@ -1647,7 +1647,7 @@ Maximum string length: 255 single-byte characters Input mask: ?@?.??
 										<br/>For verification, input value of street address must match the first three single-byte characters of the street address on file for the PayPal account.
 <br/>
 										<br/>
-Maximum string length: 35 single-byte characters Alphanumeric plus - , . ??? # \ Whitespace and case of input value are ignored.
+Maximum string length: 35 single-byte characters Alphanumeric plus - , . ‘ # \ Whitespace and case of input value are ignored.
 </documentation>
 								</annotation>
 							</xs:element>
@@ -1724,7 +1724,7 @@ Unmatched: The street address does not match the street address on file at PayPa
 							</xs:element>
 							<xs:element name="PayPalToken" type="xs:string" minOccurs="0" maxOccurs="1">
 								<annotation>
-									<documentation>The token prevents a buyer from using any street address other than the address on file at PayPal during additional purchases he might make from the merchant. It contains encrypted information about the user???s street address and email address. You can pass the value of the token with the Buy Now button HTML address_api_token variable so that PayPal prevents the buyer from using any street address or email address other than those verified by PayPal. The token is valid for 24 hours. 
+									<documentation>The token prevents a buyer from using any street address other than the address on file at PayPal during additional purchases he might make from the merchant. It contains encrypted information about the user’s street address and email address. You can pass the value of the token with the Buy Now button HTML address_api_token variable so that PayPal prevents the buyer from using any street address or email address other than those verified by PayPal. The token is valid for 24 hours. 
 								<br/>
 Character length and limitations: 94 single-byte characters
 								</documentation>
@@ -2233,15 +2233,15 @@ Character length and limitations: 20 single-byte characters
 				<table>
 				<tr><th>AVS Code</th><th>Meaning</th><th>Matched Details</th></tr> 
 <tr><td>A </td><td>Address</td><td>Address only (no ZIP) </td></tr> 
-<tr><td>B </td><td>International ???A???</td><td>Address only (no ZIP)</td></tr>  
-<tr><td>C</td><td>International ???N???</td><td> None </td></tr> 
-<tr><td>D</td><td>International ???X??? </td><td>Address and Postal Code</td></tr>  
+<tr><td>B </td><td>International “A”</td><td>Address only (no ZIP)</td></tr>  
+<tr><td>C</td><td>International “N”</td><td> None </td></tr> 
+<tr><td>D</td><td>International “X” </td><td>Address and Postal Code</td></tr>  
 <tr><td>E </td><td>Not allowed for MOTO (Internet/Phone) transactions </td><td>Not applicable</td></tr> 
-<tr><td>F </td><td>UK-specific ???X???</td><td>Address and Postal Code </td></tr> 
+<tr><td>F </td><td>UK-specific “X”</td><td>Address and Postal Code </td></tr> 
 <tr><td>G </td><td>Global Unavailable</td><td> Not applicable </td></tr>
 <tr><td>I </td><td>International Unavailable</td><td>Not applicable </td></tr> 
 <tr><td>N </td><td>No</td><td>None</td></tr>  
-<tr><td>P</td><td>Postal (International ???Z???)</td><td>Postal Code only (no Address) </td></tr>  
+<tr><td>P</td><td>Postal (International “Z”)</td><td>Postal Code only (no Address) </td></tr>  
 <tr><td>R</td><td>Retry</td><td>Not applicable</td></tr>   
 <tr><td>S </td><td>Service not Supported </td><td>Not applicable </td></tr>
 <tr><td>U </td><td>Unavailable</td><td>Not applicable </td></tr> 
@@ -2557,7 +2557,7 @@ Character length and limits: 19 single-byte characters
 						<xs:sequence>
 							<xs:element name="TransactionID" type="xs:string" minOccurs="1" maxOccurs="1">
 								<annotation>
-									<documentation>The value of the order???s transaction identification number returned by a PayPal product. 
+									<documentation>The value of the order’s transaction identification number returned by a PayPal product. 
 <br/>
 										<br/>
 										<b>Required</b>

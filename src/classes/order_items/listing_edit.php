@@ -2,7 +2,6 @@
 
 //order_items/listing_edit.php
 
-
 require_once CLASSES_DIR . 'order_items/_listing_placement_common.php';
 
 class listing_editOrderItem extends _listing_placement_commonOrderItem
@@ -174,20 +173,23 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
      */
     public function geoCart_initItem_restore()
     {
+        trigger_error('DEBUG CART: top of geoCart_initItem_restore in listing_edit');
         $cart = geoCart::getInstance();
         parent::$_type = self::type;
         $cart->site->classified_id = $cart->site->listing_id = $this->get('listing_id');
+        trigger_error('DEBUG CART: the classified_id/listing_id: ' . $cart->site->classified_id);
 
         $cart->setPricePlan($this->getPricePlan(), $this->getCategory());
-
+        trigger_error('DEBUG CART: price plan set');
         //merge session vars with our changes
         $cart->site->session_variables = array_merge(parent::_getSessionVarsFromListing($this->get('listing_id')), $this->get('session_variables'));
-
+        //trigger_error('DEBUG CART: cart->site->session_variables<pre>'.var_dump($cart->site->session_variables)."</pre>");
         $cart->site->classified_user_id = $cart->user_data['id'];
         $cart->site->category_id = $this->getCategory();
         $cart->site->price_plan_id = $cart->price_plan['price_plan_id'];
-
+        trigger_error('DEBUG CART: isEditable: ' . $this->isEditable());
         if (!$this->isEditable()) {
+            trigger_error('DEBUG CART: about to get listing : ' . $cart->site->listing_id);
             $listing = geoListing::getListing($cart->site->listing_id);
             if (is_object($listing)) {
                 $listing->setLocked(false);
@@ -200,6 +202,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
                 return false;
             }
         }
+        trigger_error('DEBUG CART: bottom of geoCart_initItem_restore in listing_edit');
         return true;
     }
 
@@ -212,6 +215,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
      */
     public function geoCart_initItem_new($item_type = null)
     {
+        trigger_error('DEBUG CART: top of geoCart_initItem_new in listing_edit. listing_id: ' . $_REQUEST['listing_id']);
         $cart = geoCart::getInstance();
         //listing id we want to edit
         $listingID = intval($_REQUEST['listing_id']);
@@ -225,30 +229,35 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
 
         //get listing and its vars
         $listing = geoListing::getListing($listingID);
+        //trigger_error('DEBUG CART: getting listing details. listingID: '.var_dump($listing));
+
 
         //make sure it's a good listing
         if (!is_object($listing) || $listingID !== $listing->id) {
             //not valid listing
             $cart->addErrorMsg('listing_edit', $cart->site->messages[500607]);
+            trigger_error('DEBUG CART: listingID did not return a good object');
             return false;
         }
         //check for locks on this listing
         if ($listing->isLocked()) {
             //already altering listing, can't edit
             $cart->addErrorMsg('listing_edit', $cart->site->messages[500610]);
-
+            trigger_error('DEBUG CART: already in a listing edit');
             return false;
         }
 
         //not locked so save listing ID
         $this->set('listing_id', $listing->id);
         $this->save();
+        trigger_error('DEBUG CART: listingID is a good object...saved it');
 
         //make sure user can edit this listing
         if (!$this->isEditable()) {
             $cart->addErrorMsg('listing_edit', $cart->site->messages[500608]);
             return false;
         }
+        trigger_error('DEBUG CART: listingID is editable');
 
         //did admin choose to allow user-editing of live auctions?
         //NOTE: cart->item->get('adminEdit') is set during this->isEditable() above, when appropriate
@@ -274,14 +283,16 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
 
         //lock listing
         $listing->setLocked();
+        trigger_error('DEBUG CART: locking listing');
 
         //get original session vars
         $cart->site->session_variables = parent::_getSessionVarsFromListing($listing->id, false, true);
-
+        trigger_error('DEBUG CART: got original session variables');
 
 
         //save listing data
         $this->setCategory($listing->category);
+        trigger_error('DEBUG CART: saved category');
 
         $price_plan = (int)$listing->price_plan_id;
         if ($price_plan && !geoPlanItem::isValidPricePlanFor($listing->seller, $price_plan)) {
@@ -294,6 +305,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
             $price_plan = (int)$cart->user_data[$setting];
         }
         $this->setPricePlan($price_plan);
+        trigger_error('DEBUG CART: saved price plan');
 
         $this->set('original_category', $listing->category);
         $this->set('live', $listing->live);
@@ -320,7 +332,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
         $cart->site->category_id = $this->getCategory();
         $cart->site->price_plan_id = $cart->price_plan['price_plan_id'];
         $this->save();
-
+        trigger_error('DEBUG CART: bottom of geoCart_initItem_new');
         return true;
     }
 
@@ -358,6 +370,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
      */
     public static function geoCart_initSteps($allPossible = false)
     {
+        trigger_error('DEBUG CART: top of getCart_initSteps in listing_edit');
         $cart = geoCart::getInstance();
 
         $anon = geoAddon::getUtil('anonymous_listing');
@@ -426,6 +439,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
         $cart->addStep(self::type . ':select');
 
         $cart->item->save();
+        trigger_error('DEBUG CART: bottom of getCart_initSteps in listing_edit');
     }
 
     /**
@@ -579,7 +593,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
      *
      */
 
-    public static function categoryDisplay($listing_types_allowed = null)
+    public static function categoryDisplay($listing_types_allowed = null, $onlyRecurringClassifieds = false)
     {
         $cart = geoCart::getInstance();
         $id = $cart->item->get('listing_id');
@@ -699,6 +713,9 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
             $tpl_vars['force_single_quantity'] = true;
         }
 
+        $tpl_vars['session_variables']['payment_options'] = $cart->site->session_variables["payment_options"];
+
+
         //500365 = Edit My Listing
         $tpl_vars['txt1'] = $cart->site->messages[500365];
         //500366 = "Listing Details"
@@ -710,7 +727,7 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
         //500369 = Cancel Edit image
         $tpl_vars['cancel_txt'] = $cart->site->messages[500369];
         $tpl_vars['listing_process_count_columns'] = $cart->db->get_site_setting('listing_process_count_columns');
-
+        //trigger_error('DEBUG CART: tpl_vars just before page display: <pre>'.var_dump($tpl_vars).'</pre>');
         $view->setBodyTpl('listing_edit/listing_collect_details.tpl', '', 'order_items')
             ->setBodyVar($tpl_vars);
         self::fixStepLabels();
@@ -1756,7 +1773,9 @@ class listing_editOrderItem extends _listing_placement_commonOrderItem
             //otherwise, if $new['leveled'] is blank, nothing has changed, so preserve current values
             if ($new['leveled']) {
                 //but if it has things, merge them into existing and set as the total value
-                geoLeveledField::setListingValues($listing_id, array_merge($old['leveled'], $new['leveled']));
+                //why merge the old and new if editing...leaving this line here in case there's something missed.
+                //geoLeveledField::setListingValues($listing_id, array_merge($old['leveled'],$new['leveled']));
+                geoLeveledField::setListingValues($listing_id, $new['leveled']);
             }
             //TODO: there's not a good way to completely clear a value by editing, once set
             //      this is, I think, a weakness of the way the "diff" values are saved -- there's nothing in the data we have here that indicates that case

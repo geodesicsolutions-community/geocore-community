@@ -1,4 +1,4 @@
-{* 17.10.0-23-g40dab80 *}
+{* @git-info@ *}
 {$errors}
 <style>
 
@@ -33,6 +33,15 @@
 				<label class='control-label col-xs-12 col-sm-5'>Google API key</label>
 				<div class="col-xs-12 col-sm-6">
 					<input type="text" name="googleApiKey" value="{$googleApiKey}" class='form-control' />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class='control-label col-xs-12 col-sm-5'>Google Map API Setup</label>
+				<div class="col-xs-12 col-sm-6 vertical-form-fix">
+					You must setup a Google Map API Key to use this feature within your https://console.developers.google.com
+					Google Console.  You will need to add restrictions to this api.  Add
+					'Maps Javascript API' and 'Geocoding API' to this API key as this feature
+					needs access to those features to operate.
 				</div>
 			</div>
 			{if $googleApiKey}

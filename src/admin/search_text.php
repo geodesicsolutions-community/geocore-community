@@ -251,7 +251,7 @@ class SearchText
                 //addon not enabled or something
                 continue;
             }
-            $textInfo = $addonAdmin->init_text();
+            $textInfo = $addonAdmin->init_text($row['language_id']);
             $addonInfo = $addon->getInfoClass($row['addon']);
             if (!is_object($addonInfo)) {
                 //something wrong with this one
@@ -261,7 +261,7 @@ class SearchText
             $row['label'] = $textInfo[$row['text_id']]['name'];
             $row['language'] = (isset($languages[$row['language_id']])) ? $languages[$row['language_id']] : $row['language_id'];
 
-            $row['text'] = $this->_highlightResult($row['text'], $search_terms, $show_first);
+            $row['text'] = $this->_highlightResult(geoString::fromDB($row['text']), $search_terms, $show_first);
 
             $results[] = $row;
         }

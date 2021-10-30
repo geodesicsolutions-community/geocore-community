@@ -66,6 +66,30 @@ class addon_social_connect_admin extends addon_social_connect_info
         $tpl_vars['groups'] = $db->GetAll("SELECT `group_id`, `name`, `default_group` FROM " . geoTables::groups_table . " ORDER BY `default_group`, `group_id`");
         $tpl_vars['fb_logout'] = $reg->get('fb_logout');
 
+        $redirect_uri = '';
+        $base = geoFilter::getBaseHref() . DataAccess::getInstance()->get_site_setting('classifieds_file_name');
+        $post_login_config = DataAccess::getInstance()->get_site_setting('post_login_page');
+        if ($post_login_config == 0) {
+            //goes to my account page
+            $redirect_uri = $base . '?a=4';
+        } elseif ($post_login_config == 1) {
+            //goes to the home page
+            $redirect_uri = $base;
+        } elseif ($post_login_config == 2) {
+            //goes to specifically set url
+            $redirect_uri = DataAccess::getInstance()->get_site_setting('post_login_url');
+        } else {
+            //somethings jacked up...go to the my account home page
+            $redirect_uri = $base . 'a=4';
+        }
+
+        $tpl_vars['redirect_uri'] = $redirect_uri;
+        $tooltip = geoHTML::showTooltip('Facebook Redirect Url', "To improve security Facebook now forces you to set a specific 
+                redirect url to return to after logging into Facebook using this feature.  That url is fixed within the Geo system to the URI
+                to the right.  This url is where the client will be directed after logging in at the facebook.com site.  If you do not set this redirect 
+                url as one of the \"Valid OAuth Redirect URIs\" within your facebook login > settings of your Facebook App within Facebook 
+                developers admin tool this feature will not work.");
+        $tpl_vars['tooltip'] = $tooltip;
         $view = geoView::getInstance();
         $view->setBodyTpl('admin/settings.tpl', $this->name)
             ->setBodyVar($tpl_vars);

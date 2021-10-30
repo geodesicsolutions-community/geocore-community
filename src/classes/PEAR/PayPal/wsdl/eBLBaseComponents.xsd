@@ -11070,7 +11070,7 @@ Character length and limitations: 2,048 alphanumeric characters</documentation>
 			<element name="BusinessInfo" type="ns:BusinessInfoType" minOccurs="0">
 				<annotation>
 					<documentation>
-			Information about the merchant???s business</documentation>
+			Information about the merchant’s business</documentation>
 				</annotation>
 			</element>
 			<element name="OwnerInfo" type="ns:BusinessOwnerInfoType" minOccurs="0">
@@ -11142,13 +11142,13 @@ Character length and limitations: 75 alphanumeric characters</documentation>
 			<element name="Address" type="ns:AddressType" minOccurs="0">
 				<annotation>
 					<documentation>
-			Merchant???s business postal address</documentation>
+			Merchant’s business postal address</documentation>
 				</annotation>
 			</element>
 			<element name="WorkPhone" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Business???s primary telephone number
+			Business’s primary telephone number
 <br/>
 						<br/>
 Character length and limitations: 20 alphanumeric characters</documentation>
@@ -11316,13 +11316,13 @@ Character length and limitations: 20 alphanumeric characters</documentation>
 			<element name="BusinessEstablished" type="xs:dateTime" minOccurs="0">
 				<annotation>
 					<documentation>
-			Date the merchant???s business was established</documentation>
+			Date the merchant’s business was established</documentation>
 				</annotation>
 			</element>
 			<element name="CustomerServiceEmail" type="ns:EmailAddressType" minOccurs="0">
 				<annotation>
 					<documentation>
-			Email address to contact business???s customer service
+			Email address to contact business’s customer service
 <br/>
 						<br/>
 Character length and limitations: 127 alphanumeric characters</documentation>
@@ -11331,7 +11331,7 @@ Character length and limitations: 127 alphanumeric characters</documentation>
 			<element name="CustomerServicePhone" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Telephone number to contact business???s customer service
+			Telephone number to contact business’s customer service
 <br/>
 						<br/>Character length and limitations: 32 alphanumeric characters</documentation>
 				</annotation>
@@ -11864,7 +11864,7 @@ Character length and limitations: 127 alphanumeric characters</documentation>
 			<element name="HomePhone" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Business owner???s home telephone number
+			Business owner’s home telephone number
 <br/>
 						<br/>Character length and limitations: 32 alphanumeric characters</documentation>
 				</annotation>
@@ -11872,7 +11872,7 @@ Character length and limitations: 127 alphanumeric characters</documentation>
 			<element name="MobilePhone" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Business owner???s mobile telephone number
+			Business owner’s mobile telephone number
 <br/>
 						<br/>
 Character length and limitations: 32 alphanumeric characters</documentation>
@@ -11881,7 +11881,7 @@ Character length and limitations: 32 alphanumeric characters</documentation>
 			<element name="SSN" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Business owner???s social security number
+			Business owner’s social security number
 <br/>
 						<br/>
 Character length and limitations: 9 alphanumeric characters</documentation>
@@ -11914,7 +11914,7 @@ Character length and limitations: 9 alphanumeric characters</documentation>
 			<element name="RoutingNumber" type="xs:string">
 				<annotation>
 					<documentation>
-			Merchant???s bank routing number
+			Merchant’s bank routing number
 <br/>
 						<br/>
 Character length and limitations: 23 alphanumeric characters</documentation>
@@ -11923,7 +11923,7 @@ Character length and limitations: 23 alphanumeric characters</documentation>
 			<element name="AccountNumber" type="xs:string">
 				<annotation>
 					<documentation>
-			Merchant???s bank account number
+			Merchant’s bank account number
 <br/>
 						<br/>
 Character length and limitations: 256 alphanumeric characters</documentation>
@@ -11969,13 +11969,13 @@ Character length and limitations: 256 alphanumeric characters</documentation>
 			<element name="LastUpdated" type="xs:dateTime">
 				<annotation>
 					<documentation>
-			Date the merchant???s status or progress was last updated</documentation>
+			Date the merchant’s status or progress was last updated</documentation>
 				</annotation>
 			</element>
 			<element name="Reason" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Reason for merchant???s cancellation of sign-up.
+			Reason for merchant’s cancellation of sign-up.
 <br/>
 						<br/>
 Character length and limitations: 1,024 alphanumeric characters</documentation>
@@ -12007,7 +12007,7 @@ Character length and limitations: 1,024 alphanumeric characters</documentation>
 			<element name="Credentials" type="ns:APICredentialsType" minOccurs="0">
 				<annotation>
 					<documentation>
-			Merchant???s PayPal API credentials</documentation>
+			Merchant’s PayPal API credentials</documentation>
 				</annotation>
 			</element>
 			<element name="ConfigureAPIs" type="xs:string" minOccurs="0">
@@ -12081,21 +12081,21 @@ SetExpressCheckout,GetExpressCheckoutDetails,DoExpressCheckoutPayment
 			<element name="Username" type="xs:string">
 				<annotation>
 					<documentation>
-			Merchant???s PayPal API username
+			Merchant’s PayPal API username
 Character length and limitations: 128 alphanumeric characters</documentation>
 				</annotation>
 			</element>
 			<element name="Password" type="xs:string">
 				<annotation>
 					<documentation>
-			Merchant???s PayPal API password
+			Merchant’s PayPal API password
 Character length and limitations: 40 alphanumeric characters</documentation>
 				</annotation>
 			</element>
 			<element name="Signature" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Merchant???s PayPal API signature, if one exists.
+			Merchant’s PayPal API signature, if one exists.
 <br/>
 						<br/>Character length and limitations: 256 alphanumeric characters</documentation>
 				</annotation>
@@ -12103,7 +12103,7 @@ Character length and limitations: 40 alphanumeric characters</documentation>
 			<element name="Certificate" type="xs:string" minOccurs="0">
 				<annotation>
 					<documentation>
-			Merchant???s PayPal API certificate in PEM format, if one exists
+			Merchant’s PayPal API certificate in PEM format, if one exists
 			<br/>
 						<br/>
 			The certificate consists of two parts: the private key (2,048 bytes) and the certificate proper (4,000 bytes).
@@ -12115,7 +12115,7 @@ Character length and limitations: 40 alphanumeric characters</documentation>
 			<element name="Type" type="ns:APIAuthenticationType">
 				<annotation>
 					<documentation>
-			Merchant???s PayPal API authentication mechanism.
+			Merchant’s PayPal API authentication mechanism.
 			<br/>
 						<br/>
 Auth-None: no authentication mechanism on file

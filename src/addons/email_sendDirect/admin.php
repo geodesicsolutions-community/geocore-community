@@ -2,6 +2,7 @@
 
 //addons/email_sendDirect/admin.php
 
+
 # Email Send Direct Addon (Main email sender)
 
 class addon_email_sendDirect_admin extends addon_email_sendDirect_info
@@ -185,7 +186,7 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
 							jQuery("#smtp-settings").show();
 						}
 					});
-					
+
 					jQuery(".sec-type").click(function() {
 						var method = jQuery(this).val();
 						if(method == "standard") {
@@ -194,7 +195,7 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
 							jQuery("#email-credentials-wrapper").show();
 						}
 					});
-					
+
 					jQuery("#email-auth").click(function() {
 						if(jQuery("#email-auth").prop("checked")) {
 							jQuery("#email-credentials").show();
@@ -202,7 +203,7 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
 							jQuery("#email-credentials").hide();
 						}
 					});
-					
+
 					jQuery(document).ready(function() {
 						jQuery(".mail-method:checked").click();
 						jQuery(".sec-type:checked").click();
@@ -228,7 +229,7 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
 		<div class='page_note'>
 			Available format: <strong>Friendly Name &lt;actual address&gt;</strong> :: Example: \"Widgets-R-Us &lt;widgets@example.com&gt;\"
 		</div>
-		
+
 		<div class='form-group'>
 		<label class='control-label col-md-5 col-sm-5 col-xs-12'>Admin Communication Reply-to Address:" . $this->admin_site->show_tooltip(4, 1) . "</label>
 		  <div class='col-md-6 col-sm-6 col-xs-12'><input type=text name=\"site_email\"  class=\"form-control col-md-7 col-xs-12\" size=30 value=\"" . $db->get_site_setting("site_email") . "\">
@@ -302,6 +303,28 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
 		  </div>
 		</div>";
 
+        //sender header for all emails
+        $row = ($row == 'row_color1') ? 'row_color2' : 'row_color1';
+        $tooltip = geoHTML::showTooltip('Include "Sender:" header using this address:', '
+		<strong>Affects:</strong> All emails sent by the system<br />
+		<strong>Used:</strong> On all emails sent by the system.
+		<br /><br />
+		If <strong>left blank</strong>, this header will not be included in any emails sent by the system.  Some hosts include their own if you do not include one within emails sent from your site.  That
+		    email they include may not be one you want exposed within emails sent (it is attached to your hosting account or a general one for the host itself)
+		    so to provide better control over the emails sent by your site this is included.
+		<br /><br />
+		<strong>This is not a required header by most hosts</strong> but may affect spam scores for a specific email from <em>your domain name</em>.
+		<br /><br />
+		<strong>More Info:</strong>
+		This header may not stop your host from including their own sender header because they are actual sender of the email but may help improve spam scores for emails sent by your site.  But does notify others
+		    your site does generate emails for clients using your site.');
+        $html .= "
+		<div class='form-group'>
+		<label class='control-label col-md-5 col-sm-5 col-xs-12'>Include this \"Sender:\" email header with all emails: $tooltip<br><span class=\"small_font\">(Use this to avoid DMARC bouncebacks)</span></label>
+		  <div class='col-md-6 col-sm-6 col-xs-12'><input type=text name=\"sender_email_header\" class=\"form-control col-md-7 col-xs-12\" size='30' value=\"" . geoString::specialChars($db->get_site_setting('sender_email_header')) . "\" />
+		  </div>
+		</div>";
+
         //BCC email address for all email sent, for testing
         $row = ($row == 'row_color1') ? 'row_color2' : 'row_color1';
         $bcc_all_email = $db->get_site_setting('bcc_all_email');
@@ -309,6 +332,31 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
 		<div class='form-group'>
 		<label class='control-label col-md-5 col-sm-5 col-xs-12'>BCC For ALL Email Sent:" . $this->admin_site->show_tooltip(10, 1) . "<br><span class=\"small_font\">(For Testing purposes)</span></label>
 		  <div class='col-md-6 col-sm-6 col-xs-12'><input type=text name=\"bcc_all_email\" class=\"form-control col-md-7 col-xs-12\" size=30 value=\"$bcc_all_email\">
+		  </div>
+		</div>";
+
+        //Add reply-to headers to email created within contact seller and notify friend features
+        $row = ($row == 'row_color1') ? 'row_color2' : 'row_color1';
+        $reply_to_client_emails = $db->get_site_setting('reply_to_client_emails');
+        $tooltip = geoHTML::showTooltip('Send all outbound mail as "From:" this address:', '
+		<strong>Affects:</strong>ReplyTo: field within contact/notify seller feature<br />
+		<strong>Used:</strong> On all emails sent by the system to the seller when someone tries to use the contact/notify seller feature within the listing details page.
+		<br /><br />
+		If <strong>checked</strong>, this will insert a "replyto:" header along with the already included "from:" header within the contact seller email feature.  The replyto header will
+		have the same value as the from header which is the one contacting the seller.
+		<br /><br />
+		<strong>This is to help ensure delivery of emails</strong> to the seller as well as ensuring the seller is able to hit the reply button and respond directly to the one
+		sending the question to them from within their chosen email parser/reader.
+		<br /><br />
+		<strong>More Info:</strong>
+		If used, there is no different value set.  Whatever value is within the from header will be set here.  This feature was added to ensure a quick reply to could be done by the seller and their response go to the one contacting them.
+		We also seen where some host include their own headers which will override the from field and including the reply to ensures the replyto works for the seller to easily respond.');
+        $html .= "
+		<div class='form-group'>
+		<label class='control-label col-md-5 col-sm-5 col-xs-12'>Add Reply-to Header to Notify Seller Emails:" . $tooltip . "<br></label>
+		  <div class='col-md-6 col-sm-6 col-xs-12'>
+		    <input type='radio' name='reply_to_client_emails' value='1' " . (($reply_to_client_emails) ? ' checked' : '') . " /> Yes&nbsp;&nbsp;
+			<input type='radio' name='reply_to_client_emails' value='0' " . ((!$reply_to_client_emails) ? ' checked' : '') . " /> No
 		  </div>
 		</div>";
 
@@ -387,6 +435,7 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
      */
     public function update_email_general_config()
     {
+
         //get the instance of the db.
         $db = $admin = 1;
         include GEO_BASE_DIR . 'get_common_vars.php';
@@ -457,6 +506,8 @@ class addon_email_sendDirect_admin extends addon_email_sendDirect_info
         $db->set_site_setting('site_email_footer', $_POST['site_email_footer'], 1);
         $salutation = (isset($_POST['salutation'])) ? (int)$_POST['salutation'] : 1;
         $db->set_site_setting('email_salutation_type', $salutation);
+        $db->set_site_setting('sender_email_header', trim($_POST['sender_email_header']));
+        $db->set_site_setting('reply_to_client_emails', ((isset($_POST['reply_to_client_emails']) && trim($_POST['reply_to_client_emails'])) ? 1 : false));
 
         //update the client side email address.
         $sql = 'UPDATE ' . $db->geoTables->userdata_table . ' SET email=? WHERE id=1';

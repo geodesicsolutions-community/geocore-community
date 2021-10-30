@@ -17,7 +17,7 @@ class Black_list_buyers extends geoSite
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    function Black_list_buyers($db, $language_id, $auction_user_id, $production_configuration = 0)
+    function __construct($db, $language_id, $auction_user_id, $production_configuration = 0)
     {
         parent::__construct();
         $this->auction_user_id = $auction_user_id;

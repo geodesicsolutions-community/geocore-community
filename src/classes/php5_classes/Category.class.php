@@ -1,12 +1,10 @@
 <?php
-//Category.class.php
 /**
  * Holds the geoCategory class.
  * 
  * @package System
  * @since Version 4.0.0
  */
-
 
 /**
  * Utility class that holds various methods to do stuff with categories in the system.
@@ -989,7 +987,7 @@ class geoCategory
 	 * @return boolean|array The array of values as needed to show in multi-level
 	 *   selection format, or false on error
 	 */
-	public static function getCategoryLeveledValues ($parent, $listing_types_allowed, $selected = 0, $page='all', $language_id=null, $level=null, $recurringClassPricePlan=false)
+	public static function getCategoryLeveledValues ($parent, $listing_types_allowed, $selected = 0, $page='all', $language_id=null, $level=null, $recurringClassPricePlan=false, $price_plan=0)
 	{
 		$db = DataAccess::getInstance();
 		$parent = (int)$parent;
@@ -1042,6 +1040,10 @@ class geoCategory
 		} else {
 			$exclusions = array();
 		}
+
+		//add category exclusions from exclude by price plan feature
+		$exclusions = self::getExcludedCategoriesByPricePlan($parent, $price_plan, $exclusions);
+
 		if($exclusions) {
 			$excludeCats = "$catTbl.category_id NOT IN (".implode(',',$exclusions).')';
 		}
@@ -1183,6 +1185,22 @@ class geoCategory
 		$result = $db->GetOne($sql, array($category, $listingType));
 		return (bool)$result;
 	}
+
+    public static function getExcludedCategoriesByPricePlan($parent=0, $price_plan=0, $exclusions=array())
+    {
+        if (($parent == 0) && ($price_plan != 0)) {
+            $db = DataAccess::getInstance();
+
+            $pricePlanCategoryBanTbl = geoTables::categories_exclude_per_price_plan_table;
+            //check to see if there are banned categories
+            $sql = "SELECT `main_category_id_banned` FROM ".$pricePlanCategoryBanTbl." WHERE `price_plan_id` = ".$price_plan;
+            $result = $db->Execute($sql);
+            foreach ($result as $line) {
+                array_push($exclusions,$line['main_category_id_banned']);
+            }
+        }
+        return $exclusions;
+    }
 	
 	
 	/**

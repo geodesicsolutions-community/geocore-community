@@ -901,9 +901,9 @@ testCM("verticalMovementCommandsWrapping", function(cm) {
     lineWrapping: true});
 
 testCM("rtlMovement", function(cm) {
-  forEach(["??????", "????abc??????", "ab??????????cd", "ab??de", "ab????2342??1????", "??1??2????3??x??",
-           "????cd", "1????cd", "abcde??1??", "?????????????? ??????!"], function(line) {
-    var inv = line.charAt(0) == "??";
+  forEach(["خحج", "خحabcخحج", "abخحخحجcd", "abخde", "abخح2342خ1حج", "خ1ح2خح3حxج",
+           "خحcd", "1خحcd", "abcdeح1ج", "خمرحبها مها!"], function(line) {
+    var inv = line.charAt(0) == "خ";
     cm.setValue(line + "\n"); cm.execCommand(inv ? "goLineEnd" : "goLineStart");
     var cursor = byClassName(cm.getWrapperElement(), "CodeMirror-cursor")[0];
     var prevX = cursor.offsetLeft, prevY = cursor.offsetTop;
@@ -926,13 +926,13 @@ testCM("rtlMovement", function(cm) {
 // Verify that updating a line clears its bidi ordering
 testCM("bidiUpdate", function(cm) {
   cm.setCursor({line: 0, ch: 2});
-  cm.replaceSelection("??????", "start");
+  cm.replaceSelection("خحج", "start");
   cm.execCommand("goCharRight");
   eqPos(cm.getCursor(), {line: 0, ch: 4});
 }, {value: "abcd\n"});
 
 testCM("movebyTextUnit", function(cm) {
-  cm.setValue("????????????????\n??e??e??e\n");
+  cm.setValue("בְּרֵאשִ\ńéée\n");
   cm.execCommand("goLineEnd");
   for (var i = 0; i < 4; ++i) cm.execCommand("goCharRight");
   eqPos(cm.getCursor(), {line: 0, ch: 0});

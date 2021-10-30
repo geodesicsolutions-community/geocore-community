@@ -1,4 +1,4 @@
-{* 16.09.0-96-gf3bd8a1 *}
+{* @git-info@ *}
 {$admin_msgs}
 
 <form action="" method="post" class='form-horizontal form-label-left'>
@@ -36,6 +36,17 @@
 				</select>
 			  </div>
 			</div>
+
+			<div class='form-group'>
+				<label class='control-label col-md-5 col-sm-5 col-xs-12'>Valid OAuth Redirect URI: {$tooltip}</label>
+				<div class='col-md-6 col-sm-6 col-xs-12'>
+                    {$redirect_uri}
+					<br><span class="small_font">The Facebook App you will need a fixed url to forward the returning
+					client back to on your site.  Within your Facebook App configuration set the above url within the
+					'Valid OAuth Redirect URIs' configuration.  Facebook now only allows https within any interaction
+					with your site so the above url and the page the user directs from should be https.</span>
+				</div>
+			</div>
 			
 			<div class='form-group'>
 			<label class='control-label col-md-5 col-sm-5 col-xs-12'></label>
@@ -43,8 +54,7 @@
 			    <input type="checkbox" name="fb_logout" value="1"{if $fb_logout} checked="checked"{/if} />&nbsp;
 			   Logout of Facebook <br><span class="small_font">(causes endless redirect on some sites when logging out)</span>
 			  </div>
-			</div>	
-
+			</div>
 		</div>
 	</fieldset>
 	

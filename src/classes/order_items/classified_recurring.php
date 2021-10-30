@@ -2,7 +2,6 @@
 
 //order_items/classified.php
 
-
 //TODO for future version: include a way to turn off "normal" classifieds and only allow Recurring ones to be created
 
 require_once CLASSES_DIR . 'order_items/classified.php';
@@ -69,12 +68,12 @@ class classified_recurringOrderItem extends classifiedOrderItem
         return true;
     }
 
-    public static function geoCart_initSteps($allPossible = false)
+    public static function geoCart_initSteps($allPossible = false, $subtype = null)
     {
         parent::geoCart_initSteps($allPossible, self::type);
     }
 
-    public function geoCart_initItem_new($item_type = null)
+    public function geoCart_initItem_new($item_type = null, $subtype = null)
     {
         return parent::geoCart_initItem_new(1, self::type);
     }
@@ -84,7 +83,7 @@ class classified_recurringOrderItem extends classifiedOrderItem
         return parent::geoCart_initItem_restore();
     }
 
-    public static function detailsDisplay()
+    public static function detailsDisplay($delayRender = false)
     {
         $cart = geoCart::getInstance();
         $cart->site->recurring_classified_details = true; //let the parent item know not to create a duration dropdown, since this has its own options
@@ -99,7 +98,7 @@ class classified_recurringOrderItem extends classifiedOrderItem
         return $tpl_vars; //because prior art does...this probably doesn't actually go anywhere
     }
 
-    public static function detailsProcess()
+    public static function detailsProcess($noSetCost = false)
     {
         $cart = geoCart::getInstance();
         $cart->item->set('is_recurring', 1);
@@ -115,13 +114,13 @@ class classified_recurringOrderItem extends classifiedOrderItem
         return parent::detailsProcess(true);
     }
 
-    public static function categoryDisplay($listing_type_allowed = null)
+    public static function categoryDisplay($listing_type_allowed = null, $onlyRecurringClassifieds = false)
     {
         //just a slight modification to the parent call so that it knows to look at only those cats that have recurring enabled
         return parent::categoryDisplay(1, true);
     }
 
-    public static function geoCart_other_detailsDisplay()
+    public static function geoCart_other_detailsDisplay($subtype = null)
     {
         $return = parent::geoCart_other_detailsDisplay(self::type);
         //here we want to show the price of just the listing, with no children extras figured in
@@ -130,22 +129,22 @@ class classified_recurringOrderItem extends classifiedOrderItem
         return $return;
     }
 
-    public static function geoCart_other_detailsCheckVars()
+    public static function geoCart_other_detailsCheckVars($subtype = null)
     {
         return parent::geoCart_other_detailsCheckVars(self::type);
     }
 
-    public static function geoCart_other_detailsProcess()
+    public static function geoCart_other_detailsProcess($subtype = null)
     {
         return parent::geoCart_other_detailsProcess(self::type);
     }
 
-    public static function adminItemDisplay($item_id)
+    public static function adminItemDisplay($item_id, $subtype = null)
     {
         return parent::adminItemDisplay($item_id, self::type);
     }
 
-    public static function geoCart_payment_choicesProcess($sell_type = null)
+    public static function geoCart_payment_choicesProcess($sell_type = null, $subtype = null)
     {
         return parent::geoCart_payment_choicesProcess(1, self::type);
     }

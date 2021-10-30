@@ -28,12 +28,12 @@ class BusinessInfoType extends XSDSimpleType
     var $Name;
 
     /**
-     * Merchant ???s business postal address
+     * Merchant ’s business postal address
      */
     var $Address;
 
     /**
-     * Business ???s primary telephone number
+     * Business ’s primary telephone number
      */
     var $WorkPhone;
 
@@ -74,17 +74,17 @@ class BusinessInfoType extends XSDSimpleType
     var $RevenueFromOnlineSales;
 
     /**
-     * Date the merchant ???s business was established
+     * Date the merchant ’s business was established
      */
     var $BusinessEstablished;
 
     /**
-     * Email address to contact business ???s customer service
+     * Email address to contact business ’s customer service
      */
     var $CustomerServiceEmail;
 
     /**
-     * Telephone number to contact business ???s customer service
+     * Telephone number to contact business ’s customer service
      */
     var $CustomerServicePhone;
 

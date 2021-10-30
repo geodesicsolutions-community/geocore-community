@@ -3,7 +3,7 @@
 class extra_page extends geoSite
 {
 
-    function extra_page($db, $page_id, $language_id, $user_id, $product_configuration)
+    function __construct($db, $page_id, $language_id, $user_id, $product_configuration)
     {
         $this->page_id = (int)$page_id;
         parent::__construct();

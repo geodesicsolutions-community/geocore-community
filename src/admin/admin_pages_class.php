@@ -2233,7 +2233,7 @@ class Admin_pages extends Admin_site
     }
     function update_modules_page()
     {
-        return $this->update_module_specifics($this->db, $_REQUEST["b"], $_REQUEST["c"]);
+        return $this->update_module_specifics($this->db, $_REQUEST["b"], $_REQUEST["c"], '');
     }
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     function display_modules_show()

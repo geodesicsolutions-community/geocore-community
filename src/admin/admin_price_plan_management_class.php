@@ -1012,6 +1012,7 @@ class Price_plan_management extends Admin_site
 
     function update_price_plan_specifics($db, $price_plan_id = 0, $price_plan_info = 0)
     {
+        echo "TOP OF UPDATE_PRICE_PLAN_SPECIFICS<BR>\n";
         if ($this->debug_price_plan) {
             echo "TOP OF UPDATE_PRICE_PLAN_SPECIFICS<BR>\n";
         }
@@ -1841,6 +1842,47 @@ class Price_plan_management extends Admin_site
             $this->row_count++;
         }
         $this->body .= "</div></fieldset>\n";
+
+        if (!$category_id) {
+            //this is not a category specific price plan...pull the main categories to allow banning
+            //within this price plan
+            $this->body .= "<fieldset id='MainCategoryBan'><legend>Main Categories To Ban From Placement</legend>";
+            $this->body .= "<div class=page_note>For the main categories checked below users placing a listing using this price plan will NOT be able to place a listing.  To save your changes for this feature you must click the 'save' button at the bottom of this page to commit your changes</div>";
+            $this->body .= "<div id='banmaincategories' class='x_content'><table valign = center cellspacing = 0 cellpadding = 3 width = \"100%\">\n";
+            //get the main categories to list here
+            $catTbl = geoTables::categories_table;
+            $langTbl = geoTables::categories_languages_table;
+            $sql = "select * from " . $catTbl . " as categories JOIN " . $langTbl . " as cat_lang ON categories.category_id = cat_lang.category_id WHERE categories.parent_id = 0 AND cat_lang.language_id = 1";
+            $result = $this->db->Execute($sql);
+            if ($result) {
+                //display the main categories the client can ban
+                //also get the main categories already banned into an array
+                $banned_category_sql = "select main_category_id_banned from " . $this->db->geoTables->categories_exclude_per_price_plan_table . " WHERE price_plan_id = " . $price_plan_id;
+                $banned_category_result = $this->db->Execute($banned_category_sql);
+                $currently_banned_categories = array();
+                while ($this_banned_category = $banned_category_result->FetchRow()) {
+                    //add these to the currently_banned_categories array
+                    array_push($currently_banned_categories, $this_banned_category ["main_category_id_banned"]);
+                }
+                while ($this_main_category = $result->FetchRow()) {
+                    $this->row_count++;
+                    //check to see if this main category is already banned...if so check that box
+                    if (in_array($this_main_category['category_id'], $currently_banned_categories)) {
+                        $current_is_checked = "checked";
+                    } else {
+                        $current_is_checked = "";
+                    }
+                    $this->body .= "<tr class=" . $this->get_row_color() . ">\n\t
+                    <td class=medium_font align=right>\n\t<input type='checkbox' name='h[main_category_ban][" . $this_main_category['category_id'] . "]' " . $current_is_checked . ">\n\t</td>\n\t
+					<td class=medium_font align=left>\n\t" . geoString::fromDB($this_main_category["category_name"]) . " \n\t</td>\n\t
+					</tr>\n";
+                }
+            } else {
+                //there are no categories in the system...something bad has happened
+            }
+
+            $this->body .= "</table></div></fieldset>\n";
+        }
         $this->body .= "<fieldset id='PPExtras'><legend>Listing Extras - Fees and Settings</legend><div>
 		<div class=page_note>Relies on settings in <a href='?page=listing_extras'>Listing Setup > Listing Extras</a></div>
 		<div class='x_content'><table valign=center cellspacing=0 cellpadding=3 width=\"100%\">\n";
@@ -2181,6 +2223,7 @@ class Price_plan_management extends Admin_site
 
     function update_category_specific_price_plan($db, $category_price_plan_id = 0, $info = 0, $category_specific = 1)
     {
+
         if ($category_specific && !(geoPC::is_ent() || geoPC::is_premier())) {
             return false;
         }
@@ -2307,8 +2350,40 @@ class Price_plan_management extends Admin_site
                         return false;
                     }
                 }
-                return true;
             }
+            if (!$category_specific) {
+                //add the categories to be banned here
+                //first clear the current settings
+                $sql = "DELETE FROM " . $this->db->geoTables->categories_exclude_per_price_plan_table . " WHERE price_plan_id = " . $category_price_plan_id;
+                $clean_banned_result = $this->db->Execute($sql);
+                if (!$clean_banned_result) {
+                    $this->error_message = $this->internal_error_message;
+                    if ($this->debug_cat_price_plan) {
+                        echo "<BR>ERROR LINE - " . __LINE__;
+                        echo '<BR>Query - <pre>' . $sql . '<br />Error: ' . $this->db->ErrorMsg() . '</pre><br />';
+                    }
+                    return false;
+                }
+                //then add categories that are currently banned
+                if (count($info['main_category_ban']) > 0) {
+                    foreach ($info['main_category_ban'] as $ban_key => $ban_value) {
+                        $sql = "INSERT INTO " . $this->db->geoTables->categories_exclude_per_price_plan_table . " 
+                            (price_plan_id,main_category_id_banned)
+                             VALUES 
+                             (" . $category_price_plan_id . "," . $ban_key . ")";
+                        $insert_banned_result = $this->db->Execute($sql);
+                        if (!$insert_banned_result) {
+                            $this->error_message = $this->internal_error_message;
+                            if ($this->debug_cat_price_plan) {
+                                echo "<BR>ERROR LINE - " . __LINE__;
+                                echo '<BR>Query - <pre>' . $sql . '<br />Error: ' . $this->db->ErrorMsg() . '</pre><br />';
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         } else {
             if ($this->debug_cat_price_plan) {
                 echo "<BR>ERROR LINE - " . __LINE__;

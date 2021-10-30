@@ -28,12 +28,12 @@ class BankAccountDetailsType extends XSDSimpleType
     var $Type;
 
     /**
-     * Merchant ???s bank routing number
+     * Merchant ’s bank routing number
      */
     var $RoutingNumber;
 
     /**
-     * Merchant ???s bank account number
+     * Merchant ’s bank account number
      */
     var $AccountNumber;
 
