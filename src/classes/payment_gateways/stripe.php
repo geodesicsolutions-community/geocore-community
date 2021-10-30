@@ -2,11 +2,17 @@
 
 //payment_gateways/stripe.php
 
+use Stripe\Charge;
+use Stripe\Exception\ApiErrorException;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 
 class stripePaymentGateway extends _ccPaymentGateway
 {
+    const PAYMENT_INTENT_ID = 'stripe_payment_intent_id';
+
     /**
      * Required, the name of this gateway, should be the same as the file name without the .php
      *
@@ -159,7 +165,7 @@ class stripePaymentGateway extends _ccPaymentGateway
             "PHP" => "Philippine Peso",
             "PKR" => "Pakistani Rupee",
             "PLN" => "Polish Zloty",
-            "PYG" => "Paraguayan Guaran??",
+            "PYG" => "Paraguayan Guaraní",
             "QAR" => "Qatari Riyal",
             "RUB" => "Russian Ruble",
             "SAR" => "Saudi Riyal",
@@ -260,6 +266,51 @@ class stripePaymentGateway extends _ccPaymentGateway
     }
 
     /**
+     * Specific to stripe...  Because stripe needs this for SCA compliant stuff
+     *
+     * @return string
+     */
+    public function getClientSecret()
+    {
+        static::initVendorLibrary();
+        $cart = geoCart::getInstance();
+        $invoice = $cart->order->getInvoice();
+        // If there is invoice, use the total from that as it may include partial payments not in cart total
+        $total = $invoice ? (-1 * $invoice->getInvoiceTotal()) : $cart->getCartTotal();
+        if ($total <= 0) {
+            // nothing to charge, no need for client secret.
+            return '';
+        }
+        // keep using same intent ID if one was already created
+        $existingIntentId = $cart->order->get(static::PAYMENT_INTENT_ID);
+        if ($existingIntentId) {
+            try {
+                $intent = PaymentIntent::retrieve($existingIntentId);
+                $intent->amount = $this->vendorAmount($total);
+                $intent->save();
+                return '' . $intent->client_secret;
+            } catch (ApiErrorException $e) {
+                trigger_error('ERROR STRIPE: Error using existing payment intent, will try creating new.');
+            }
+        }
+        try {
+            $intent = PaymentIntent::create([
+                'amount' => $this->vendorAmount($total),
+                // API expects currency to be in all lowercase for payment intent
+                'currency' => strtolower($this->get('currency_type', 'USD')),
+                // Verify your integration in this guide by including this parameter
+                'metadata' => ['integration_check' => 'accept_a_payment'],
+            ]);
+            $cart->order->set(static::PAYMENT_INTENT_ID, $intent->id);
+            $cart->order->save();
+            return '' . $intent->client_secret;
+        } catch (ApiErrorException $e) {
+            trigger_error('ERROR STRIPE: Error trying to get intent client secret: ' . $e->getMessage());
+            return '';
+        }
+    }
+
+    /**
      * Required.
      * Used: in geoCart::payment_choicesDisplay()
      *
@@ -303,11 +354,10 @@ class stripePaymentGateway extends _ccPaymentGateway
      */
     public static function geoCart_payment_choicesProcess()
     {
-
         //get the cart
         $cart = geoCart::getInstance();
 
-        //get the gateway since this is a static function
+        /** @var stripePaymentGateway $gateway */
         $gateway = geoPaymentGateway::getPaymentGateway(self::gateway_name);
 
         //get invoice on the order
@@ -318,10 +368,7 @@ class stripePaymentGateway extends _ccPaymentGateway
             //DO NOT PROCESS!  Nothing to process, no charge (or returning money?)
             return ;
         }
-
-        //add Stripe API files
-        require_once(CLASSES_DIR . 'payment_gateways/includes/stripe/init.php');
-
+        static::initVendorLibrary();
         //create initial transaction
         try {
             $transaction = self::_createNewTransaction($cart->order, $gateway, $info);
@@ -336,31 +383,59 @@ class stripePaymentGateway extends _ccPaymentGateway
             return;
         }
 
-        //act entirely on the "token" created by stripe.js
-        $token = $_POST['stripeToken'];
+        //act entirely on the "payment intent ID" created by stripe.js
+        $paymentIntentId = $cart->order->get(static::PAYMENT_INTENT_ID);
+        if (!$paymentIntentId) {
+            // should not normally happen...
+            trigger_error('ERROR STRIPE: No stripe payment intent ID set on the order, cannot proceed');
+            return static::_failure($transaction, static::FAIL_GENERAL_ERROR, 'Internal error: stripe not initialized');
+        }
 
-        //use secret API key
-        $apiKey = $gateway->get('api_key');
-        \Stripe\Stripe::setApiKey($apiKey);
-
-        //send amount in "cents" for most currencies, but not for certain zero-decimal currencies
-        $amountToCharge = $gateway->get('currency_type_zero_decimal') ? $transaction->getAmount() : $transaction->getAmount() * 100;
-
-        //process the charge
         try {
-            $charge = \Stripe\Charge::create(array(
-                "amount" => (int)$amountToCharge,
-                "currency" => $gateway->get('currency_type', 'usd'),
-                "source" => $token,
-            ));
-        } catch (\Stripe\Error\Card $e) {
-            // The card has been declined
-            trigger_error('DEBUG TRANSACTION: Stripe transaction failed with message: ' . $e->getMessage());
-            return self::_failure($transaction, $e->getStripeCode(), $e->getMessage());
+            $paymentIntent = PaymentIntent::retrieve($paymentIntentId);
+        } catch (ApiErrorException $e) {
+            trigger_error('ERROR STRIPE TRANSACTION: Error getting payment intent: ' . $e->getStripeCode() . ' : ' . $e->getMessage());
+            return static::_failure($transaction, $e->getStripeCode(), $e->getMessage());
+        }
+        // set the payment intent ID on transaction so it can be looked up in admin
+        $transaction->setGatewayTransaction($paymentIntent->id);
+
+        if ($paymentIntent->status !== PaymentIntent::STATUS_SUCCEEDED) {
+            // status not succeeded...
+            // todo: possibly handle different statuses
+            trigger_error('ERROR STRIPE TRANSACTION: Payment intent status not succeeded, it is: ' . $paymentIntent->status);
+            return static::_failure($transaction, static::FAIL_GENERAL_ERROR);
         }
 
         //if we got here, the charge is OK
-        trigger_error('DEBUG TRANSACTION: Stripe Transaction approved');
+        trigger_error('DEBUG STRIPE TRANSACTION: Stripe Transaction approved');
         return self::_success($cart->order, $transaction, $gateway);
+    }
+
+    /**
+     * Initialize the vendor library
+     *
+     * @return void
+     */
+    private static function initVendorLibrary()
+    {
+        $gateway = geoPaymentGateway::getPaymentGateway(static::gateway_name);
+        //use secret API key
+        $apiKey = $gateway->get('api_key');
+        Stripe::setApiKey($apiKey);
+    }
+
+    /**
+     * Vendor expects amount in certain format
+     *
+     * @param number $amount
+     * @return integer
+     */
+    private function vendorAmount($amount)
+    {
+        //send amount in "cents" for most currencies, but not for certain zero-decimal currencies
+        $multiplier = $this->get('currency_type_zero_decimal') ? 1 : 100;
+
+        return (int)($amount * $multiplier);
     }
 }

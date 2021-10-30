@@ -10,8 +10,6 @@
  * @since Version 4.0.0
  */
 
-
-
 /**
  * This extends the _ccPaymentGateway class, so need to include that file.
  */
@@ -242,6 +240,7 @@ class beanstreamPaymentGateway extends _ccPaymentGateway
 
         $params = array();
         $params['merchant_id'] = $merchantId;
+        $params['passcode'] = $passcode;
         $params['order_number'] = $cart->order->getId();
         $params['amount'] = number_format($transaction->getAmount(), 2, '.', '');
         $params['payment_method'] = 'card';
@@ -252,6 +251,8 @@ class beanstreamPaymentGateway extends _ccPaymentGateway
             'expiry_year' => substr($info['exp_year'], 2),
             'cvd' => $info["cvv2_code"]
         );
+        $params['username'] = 'thisisausername';
+        $params['password'] = 'thisisapassword';
         if ($info['firstname']) {
             $params['billing']['name'] = $info['firstname'];
         }

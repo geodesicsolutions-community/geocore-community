@@ -358,7 +358,14 @@ class Notify_seller extends geoBrowse
         $tpl->assign('senderIP', $ip);
         $tpl->assign('senderHost', $host);
 
+        $reply_to_client_emails = $db->get_site_setting('reply_to_client_emails');
         $from = $info["senders_email"];
+        if ($reply_to_client_emails) {
+            $reply_to = $from;
+        } else {
+            $reply_to = 0;
+        }
+
         $tpl->assign('sendersEmail', $from);
         $tpl->assign('sendersEmailLabel', $this->messages[502194]);
 
@@ -426,13 +433,13 @@ class Notify_seller extends geoBrowse
         }
 
         if (strlen(trim($force_contact_seller_to_email)) > 0) {
-            geoEmail::sendMail($force_contact_seller_to_email, $message["subject"], $message["message"], $from, 0, 0, 'text/html');
+            geoEmail::sendMail($force_contact_seller_to_email, $message["subject"], $message["message"], $from, $reply_to, 0, 'text/html');
         } else {
-            geoEmail::sendMail($mailto, $message["subject"], $message["message"], $from, 0, 0, 'text/html');
+            geoEmail::sendMail($mailto, $message["subject"], $message["message"], $from, $reply_to, 0, 'text/html');
         }
 
         if (strlen(trim($db->get_site_setting('admin_email_bcc'))) > 0 && geoPC::is_ent()) {
-            geoEmail::sendMail($db->get_site_setting('admin_email_bcc'), $message["subject"], $message["message"], $from, 0, 0, 'text/html');
+            geoEmail::sendMail($db->get_site_setting('admin_email_bcc'), $message["subject"], $message["message"], $from, $reply_to, 0, 'text/html');
         }
 
         $this->insert_favorite($db, $classified_id);

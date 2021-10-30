@@ -172,10 +172,10 @@
     font-size: 22px;
 }
 .cr-rotate-l i:before {
-    content: '???';
+    content: '↺';
 }
 .cr-rotate-r i:before {
-    content: '???';
+    content: '↻';
 }
 
 /*****************/

@@ -1,7 +1,4 @@
 <?php
-//function.csv_line.php
-
-
 //This fella takes care of {csv_line} to output a CSV line inside a template file
 
 function smarty_function_csv_line ($params, $smarty)
@@ -30,7 +27,7 @@ function smarty_function_csv_line ($params, $smarty)
 		foreach ($row['images'] as $data) {
 			$imgs[] = $data['url'];
 		}
-		$row['images'] = implode("\n",$imgs);
+		$row['images'] = implode(",",$imgs);
 	}
 	if (isset($row['questions'])) {
 		$questions = array();

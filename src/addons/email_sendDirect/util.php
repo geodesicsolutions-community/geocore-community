@@ -158,6 +158,13 @@ class addon_email_sendDirect_util
                 $message_data['replyto'] = $from;
             }
         }
+
+        //see if sender header has been set for the site
+        $sender_header = trim($db->get_site_setting('sender_email_header'));
+        if ($sender_header) {
+            $message_data['sender'] = $sender_header;
+        }
+
         trigger_error('DEBUG SENDMAIL: Message data used after all processing: ' . print_r($message_data, 1));
         //add to queue
         $this->queue[] = $message_data;
@@ -198,6 +205,10 @@ class addon_email_sendDirect_util
 
                     if ($messageData['encoding']) {
                         $message->setEncoding($messageData['encoding']);
+                    }
+
+                    if ($messageData['sender']) {
+                        $message->setSender($messageData['sender']);
                     }
 
                     if (isset($messageData['replyto']) && $messageData['replyto']) {

@@ -1,7 +1,4 @@
 <?php
-//resource.geo_tset.php
-
-
 /**
  * This handy resource is responsible for figuring out just "where" a resource
  * is located, by looking through the active template sets, etc. etc.
@@ -157,7 +154,7 @@ class Smarty_Resource_Geo_tset extends Smarty_Resource
 	 * @param string $resource_name resource_name to make unique
 	 * @return string unique resource name
 	 */
-	protected function buildUniqueResourceName (Smarty $smarty, $resource_name)
+	protected function buildUniqueResourceName (Smarty $smarty, $resource_name, $is_config = false)
 	{
 		return get_class($this) . '#' . $smarty->joined_template_dir . '#' . $smarty->gType() . '#' . $smarty->gResource() . '#' . $resource_name;
 	}

@@ -2,7 +2,6 @@
 
 //order_items/listing_change_admin.php
 
-
 require_once CLASSES_DIR . 'order_items/_listing_placement_common.php';
 
 class listing_change_adminOrderItem extends _listing_placement_commonOrderItem
@@ -103,7 +102,7 @@ class listing_change_adminOrderItem extends _listing_placement_commonOrderItem
 
         //special case workaround for the workaround for clearing payment_options on listing edits
         //to make it not wipe payment options during an admin listing change
-        $session_variables['payment_options'] = true;
+        $session_variables['payment_options_admin'] = true;
 
         //save the differences only, for easy "undoing"
         parent::_saveSessionVarsDiff($item, $session_variables);

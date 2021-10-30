@@ -355,7 +355,7 @@ class OrderItemManagement
             $sql = "SELECT oi.id, u.username, u.id as user_id, o.created, o.status as order_status FROM " . geoTables::order_item . " as oi, " . geoTables::logins_table . " as u, " . geoTables::order . " as o
 				WHERE
 				$whereClauses
-			GROUP BY oi.id DESC
+			GROUP BY oi.id
 			$orderBy
 			LIMIT $start, $num_results";
 

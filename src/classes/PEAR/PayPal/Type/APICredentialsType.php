@@ -18,29 +18,29 @@ require_once 'PayPal/Type/XSDSimpleType.php';
 class APICredentialsType extends XSDSimpleType
 {
     /**
-     * Merchant ???s PayPal API username Character length and limitations: 128
+     * Merchant ’s PayPal API username Character length and limitations: 128
      * alphanumeric characters
      */
     var $Username;
 
     /**
-     * Merchant ???s PayPal API password Character length and limitations: 40
+     * Merchant ’s PayPal API password Character length and limitations: 40
      * alphanumeric characters
      */
     var $Password;
 
     /**
-     * Merchant ???s PayPal API signature, if one exists.
+     * Merchant ’s PayPal API signature, if one exists.
      */
     var $Signature;
 
     /**
-     * Merchant ???s PayPal API certificate in PEM format, if one exists
+     * Merchant ’s PayPal API certificate in PEM format, if one exists
      */
     var $Certificate;
 
     /**
-     * Merchant ???s PayPal API authentication mechanism.
+     * Merchant ’s PayPal API authentication mechanism.
      */
     var $Type;
 

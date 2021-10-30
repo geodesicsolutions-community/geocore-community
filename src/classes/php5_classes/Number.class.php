@@ -1,5 +1,4 @@
 <?php
-//Number.class.php
 /**
  * This has a class in it.  Classes are usefull for schooling purposes.  If you
  * couldn't guess, it has to do with manipulating numbers.
@@ -7,7 +6,6 @@
  * @package System
  * @since Version 4.0.0
  */
-
 
 
 /**
@@ -46,7 +44,7 @@ class geoNumber
 	public static function lat2 ($lat1, $long1, $distance, $deg, $units = self::UNITS_MILES)
 	{
 		//The formula we will be using to find the second latitude point:
-		//lat2 = asin(sin(lat1)*cos(d/R) + cos(lat1)*sin(d/R)*cos(??))
+		//lat2 = asin(sin(lat1)*cos(d/R) + cos(lat1)*sin(d/R)*cos(θ))
 		//Where R is radius of the earth in the unit of measurment desired
 		
 		//needs to be in radians
@@ -78,7 +76,7 @@ class geoNumber
 	public static function long2 ($lat1, $long1, $distance, $deg, $units = self::UNITS_MILES)
 	{
 		//To calculate long2, using the following formula:
-		//lon2 = lon1 + atan2(sin(??)*sin(d/R)*cos(lat1), cos(d/R)???sin(lat1)*sin(lat2))
+		//lon2 = lon1 + atan2(sin(θ)*sin(d/R)*cos(lat1), cos(d/R)−sin(lat1)*sin(lat2))
 		
 		$d = $distance;
 		$R = ($units==self::UNITS_KM)? self::EARTH_RADIUS_KM : self::EARTH_RADIUS_M;
@@ -109,7 +107,7 @@ class geoNumber
 	public static function distanceBetweenPoints ($lat1, $long1, $lat2, $long2, $units = self::UNITS_MILES)
 	{
 		//we'll use the spherical law of cosines to figure out the distance, the formula:
-		//d = acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(long2???long1))*R
+		//d = acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(long2−long1))*R
 		
 		$R = ($units==self::UNITS_KM)? self::EARTH_RADIUS_KM : self::EARTH_RADIUS_M;
 		

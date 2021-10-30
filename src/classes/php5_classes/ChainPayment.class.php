@@ -7,7 +7,6 @@
  * @since Version 16.05.0
  */
 
-
 /**
  * geoChainPayment is a structure to support creating and processing Chain Payments via Paypal's Adaptive Payments API.
  * A chain payment has one main recipient, along with one or more secondary recipients who are essentially invisible to the payer.
@@ -187,6 +186,7 @@ class geoChainPayment
 		$params = array();
 		$params['actionType'] = 'PAY'; //use PAY_PRIMARY to delay secondary payments until manually approved (at paypal.com by the primary recipient)
 		$params['clientDetails.applicationId'] = $appId;
+		$params['partnerName'] = $db->get_site_setting('pp_chain_partner');
 		
 		//this is used in the example in the docs, but no mention of WHICH ip address it's supposed to be (server? buyer?)
 		//so far, it seems to work okay without this, so probably not needed at all
@@ -401,13 +401,13 @@ class geoChainPayment
 		$cp->save(); //save status to db...can move this to later if other data winds up needing to be changed in this function
 		/*
 		 * The status of the payment. Possible values are:
-		    CREATED ? The payment request was received; funds will be transferred once the payment is approved
-		    COMPLETED ? The payment was successful
-		    INCOMPLETE ? Some transfers succeeded and some failed for a parallel payment or, for a delayed chained payment, secondary receivers have not been paid
-		    ERROR ? The payment failed and all attempted transfers failed or all completed transfers were successfully reversed
-		    REVERSALERROR ? One or more transfers failed when attempting to reverse a payment
-		    PROCESSING ? The payment is in progress
-		    PENDING ? The payment is awaiting processing
+		    CREATED � The payment request was received; funds will be transferred once the payment is approved
+		    COMPLETED � The payment was successful
+		    INCOMPLETE � Some transfers succeeded and some failed for a parallel payment or, for a delayed chained payment, secondary receivers have not been paid
+		    ERROR � The payment failed and all attempted transfers failed or all completed transfers were successfully reversed
+		    REVERSALERROR � One or more transfers failed when attempting to reverse a payment
+		    PROCESSING � The payment is in progress
+		    PENDING � The payment is awaiting processing
 		 */
 		
 		//if this had a secondary Final Fees target, mark that Order and Order Item as active/paid

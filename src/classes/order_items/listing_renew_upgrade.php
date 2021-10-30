@@ -2,7 +2,6 @@
 
 //order_items/listing_renew_upgrade.php
 
-
 require_once CLASSES_DIR . 'order_items/_listing_placement_common.php';
 
 class listing_renew_upgradeOrderItem extends _listing_placement_commonOrderItem
@@ -628,6 +627,8 @@ class listing_renew_upgradeOrderItem extends _listing_placement_commonOrderItem
             }
 
             $new = array_merge($old, $this->get('session_variables'));
+
+            $new['payment_options'] = $new['payment_options_from_form'];
 
             if ($activate) {
                 //this is a special case where we update session vars during

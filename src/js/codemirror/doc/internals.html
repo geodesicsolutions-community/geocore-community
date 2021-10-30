@@ -42,7 +42,7 @@ mind-bending process of implementing (what would become) CodeMirror 1.
 This one describes the internals of CodeMirror 2, a complete rewrite
 and rethink of the old code base. I wanted to give this piece another
 Hunter Thompson copycat subtitle, but somehow that would be out of
-place???the process this time around was one of straightforward
+place—the process this time around was one of straightforward
 engineering, requiring no serious mind-bending whatsoever.</p>
 
 <p>So, what is wrong with CodeMirror 1? I'd estimate, by mailing list
@@ -58,7 +58,7 @@ or <code>contentEditable</code> (depending on the browser). Neither of
 these are well specified (HTML5 tries
 to <a href="http://www.w3.org/TR/html5/editing.html#contenteditable">specify</a>
 their basics), and, more importantly, they tend to be one of the more
-obscure and buggy areas of browser functionality???CodeMirror, by using
+obscure and buggy areas of browser functionality—CodeMirror, by using
 this functionality in a non-typical way, was constantly running up
 against browser bugs. WebKit wouldn't show an empty line at the end of
 the document, and in some releases would suddenly get unbearably slow.
@@ -78,7 +78,7 @@ prevent getting tripped up by domain restrictions, they don't
 initialize synchronously, behave strangely in response to the back
 button, and, on several browsers, can't be moved around the DOM
 without having them re-initialize. They did provide a very nice way to
-namespace the library, though???CodeMirror 1 could freely pollute the
+namespace the library, though—CodeMirror 1 could freely pollute the
 namespace inside the frame.</p>
 
 <p>Finally, working with an editable document means working with
@@ -94,7 +94,7 @@ code.</p>
 <p>And that brings us to the main issue with the CodeMirror 1
 code base: The proportion of browser-bug-workarounds to real
 application code was getting dangerously high. By building on top of a
-few dodgy features, I put the system in a vulnerable position???any
+few dodgy features, I put the system in a vulnerable position—any
 incompatibility and bugginess in these features, I had to paper over
 with my own code. Not only did I have to do some serious stunt-work to
 get it to work on older browsers (as detailed in the
@@ -169,7 +169,7 @@ CodeMirror is catching those events and handling them itself.</p>
 <h2 id="selection">Selection</h2>
 
 <p>Getting and setting the selection range of a textarea in modern
-browsers is trivial???you just use the <code>selectionStart</code>
+browsers is trivial—you just use the <code>selectionStart</code>
 and <code>selectionEnd</code> properties. On IE you have to do some
 insane stuff with temporary ranges and compensating for the fact that
 moving the selection by a 'character' will treat \r\n as a single
@@ -189,7 +189,7 @@ every editing component built in the past twenty years.</p>
 <p>Great. So when someone creates an 'upside-down' selection, the next
 time CodeMirror has to update the textarea, it'll re-create the
 selection as an 'upside-up' selection, with the anchor at the top, and
-the next cursor motion will behave in an unexpected way???our second
+the next cursor motion will behave in an unexpected way—our second
 up-arrow press in the example above will not do anything, since it is
 interpreted in exactly the same way as the first.</p>
 
@@ -252,7 +252,7 @@ intact. We can then compare this map with the part of the document
 that's currently visible (based on scroll offset and editor height) to
 determine whether something needs to be updated.</p>
 
-<p>CodeMirror uses two update algorithms???a full refresh, where it just
+<p>CodeMirror uses two update algorithms—a full refresh, where it just
 discards the whole part of the DOM that contains the edited text and
 rebuilds it, and a patch algorithm, where it uses the information
 about changed and intact ranges to update only the out-of-date parts
@@ -311,7 +311,7 @@ managing some twenty lines in each 50-millisecond time slice it got. It
 was reading its input from the DOM, and updating the DOM as it went
 along, which any experienced JavaScript programmer will immediately
 spot as a recipe for slowness. In CodeMirror 2, the parser usually
-finishes the whole document in a single 100-millisecond time slice???it
+finishes the whole document in a single 100-millisecond time slice—it
 manages some 1500 lines during that time on Chrome. All it has to do
 is munge strings, so there is no real reason for it to be slow
 anymore.</p>
@@ -372,7 +372,7 @@ below.</p>
 <h2 id="btree">Content Representation</h2>
 
 <p>The original implementation of CodeMirror 2 represented the
-document as a flat array of line objects. This worked well???splicing
+document as a flat array of line objects. This worked well—splicing
 arrays will require the part of the array after the splice to be
 moved, but this is basically just a simple <code>memmove</code> of a
 bunch of pointers, so it is cheap even for huge documents.</p>
@@ -414,7 +414,7 @@ down the tree once to find where it should go, insert them all in one
 shot, and then break up the node if needed. This breaking up might
 involve breaking up nodes further up, but only requires a single pass
 back up the tree. For deletion, I'm somewhat lax in keeping things
-balanced???I just collapse nodes into a leaf when their child count goes
+balanced—I just collapse nodes into a leaf when their child count goes
 below a given number. This means that there are some weird editing
 patterns that may result in a seriously unbalanced tree, but even such
 an unbalanced tree will perform well, unless you spend a day making
@@ -469,7 +469,7 @@ to functions.</p>
 <p>The hidden textarea now only holds the current selection, with no
 extra characters around it. This has a nice advantage: polling for
 input becomes much, much faster. If there's a big selection, this text
-does not have to be read from the textarea every time???when we poll,
+does not have to be read from the textarea every time—when we poll,
 just noticing that something is still selected is enough to tell us
 that no new text was typed.</p>
 

@@ -102,7 +102,7 @@ if (!class_exists('CJAX')) {
     abstract class CJAX extends CJAX_FRAMEWORK
     {
 
-        function CJAX()
+        function __construct()
         {
             return self::initciate();
         }

@@ -1,52 +1,52 @@
 <?php
 /**
  * This file combines, reduces, and compresses the CSS / JS content of the page.
- * 
+ *
  * Since there can be different CSS/JS files loaded depending on what part of the page
  * is being used, or even based on different options for the viewer..  The main
  * page load saves all of the software-loaded CSS and JS in the database using a reference
  * token.  Then it calls this file, passing in that reference token.  This file
  * looks up what CSS or JS files should be loaded based on that reference token.
- * 
+ *
  * @since Version 7.3.0
  * @package System
  */
 
 ###############################################################################
-## 
+##
 ## Stand-Alone Capable
-## 
+##
 ## Note that it is not typical, but the geo_templates folder can be run from
 ## a stand-alone location.  The minimal requirements to run in stand-alone mode:
-## 
+##
 ## - Able to run PHP scripts, and connect to the same database used for the software
-## 
-## - Copy the follow folders and ALL contents of each respective folder, 
+##
+## - Copy the follow folders and ALL contents of each respective folder,
 ##   preserving the folder structure:
-##   
+##
 ##   classes/adodb/ (Required to make connection to the database)
 ##   classes/php5_classes/minify/ (3rd party library used to minify CSS and JS)
 ##   geo_templates/
 ##   addons/ (some addons have their own CSS or JS files to load)
 ##   js/
-## 
+##
 ## - Enter the settings correctly below (in this file) in the stand-alone
 ##   setting section.
-## 
+##
 ## - When the software is updated, you may need to apply changes to this script
 ##   if there are changes in the geo_templates/min.php within the new version of
 ##   the software.  You will also need to re-copy the files and folders noted
 ##   above.  There will be a reminder about this if you follow the "full update
 ##   instructions" on our website (which is highly recommended for any update).
-## 
+##
 ## - Note that the software will still determine which template set to load resources
 ##   from based on the "local" geo_templates files.  For this reason, make sure that
 ##   any changes in the stand-alone location are mirrored in the main installation's
 ##   files and visa versa.  Also note that this means you cannot simply delete
 ##   the files from the main installation when using this feature as they are still
 ##   used for some circumstances.
-##    
-## 
+##
+##
 ###############################################################################
 
 
@@ -68,7 +68,7 @@ $strict_mode = 0;
 //NOTE: should not change this one
 $db_type = "mysqli";
 
-//  - Folder Settings - need to set each of these.  If you stick everything in 
+//  - Folder Settings - need to set each of these.  If you stick everything in
 //    the same folder as this file, set each to "./".  Note that it should be fine
 //    to set them to the absolute location for the main software if on the same
 //    server.
@@ -128,22 +128,24 @@ class Combine
 	private $_type, $_resource_id, $_contents, $_content_filename, $_working_path, $_charset, $_externalDomain,
 		$_externalPath, $_external_url_base;
 	private $_files = array();
-	
+
 	private $_cssInHack;
-	
-	
+
+
 	public $db;
-	
-	public $noMinifyJs, $noMinifyCss; //just a couple of settings that need to be held here 
-	
+
+	public $noMinifyJs, $noMinifyCss; //just a couple of settings that need to be held here
+
 	private $_content_types = array (
 		'css' => 'text/css',
 		'js' => 'application/javascript',
 		);
-	
+
+	private $cacheBuster;
+
 	/**
 	 * Main constructor.
-	 * 
+	 *
 	 * @param string $resource_type Either js or css
 	 * @param int $resource_id
 	 * @param int $charset
@@ -155,6 +157,7 @@ class Combine
 		}
 		$this->_resource_id = (int)$resource_id;
 		$this->_charset = trim($charset);
+		$this->cacheBuster = sha1(time());
 	}
 	/**
 	 * This sends the common headers to use.
@@ -163,14 +166,14 @@ class Combine
 	{
 		//TODO: make this a setting somewhere
 		$expires = 60*60*24*365;
-		
+
 		$content_type = $this->_content_types[$this->_type];
-		
+
 		header ("Content-Type: $content_type; charset: $this->_charset");
 		header("Cache-Control: maxage=$expires");
 		header("Expires: ".gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 	}
-	
+
 	/**
 	 * Add a list (array) of files to the list.
 	 * @param array $file_list
@@ -185,7 +188,7 @@ class Combine
 		if (!$file_list || !is_array($file_list)) {
 			return false;
 		}
-		
+
 		foreach ($file_list as $filename) {
 			//this way makes sure to preserve the file order
 			if (!in_array($filename, $this->_files)) {
@@ -202,14 +205,14 @@ class Combine
 	{
 		return $this->_files;
 	}
-	
+
 	/**
 	 * Main function, this processes the list of files and echo's the contents.
 	 */
 	public function echoContents ()
 	{
 		//Note: we work on $this->_contents so we don't have to pass stuff around a bunch
-	
+
 		foreach ($this->_files as $filename) {
 			$this->_working_path = $this->_content_filename = '';
 			if ($this->_type === 'js') {
@@ -218,14 +221,14 @@ class Combine
 			} else {
 				//have to fix the paths for each individual file
 				$contents = trim($this->_getContents($filename));
-				
+
 				if (!strlen($contents)) {
 					//nothing in this one...
 					continue;
 				}
 				$this->_content_filename = $filename;
 				$this->_working_path = dirname($filename);
-				
+
 				//fix URL's
 				$this->_contents .= $this->fixCssUrls($contents);
 			}
@@ -239,7 +242,7 @@ class Combine
 	 * This parses the contents for any url(...) statements, and adjusts them to
 	 * account for the CSS being used from a different location than the original
 	 * file.
-	 * 
+	 *
 	 * @param string $contents
 	 * @return string
 	 */
@@ -247,10 +250,10 @@ class Combine
 	{
 		return preg_replace_callback('/url[\s]*\([\s\'"]*[^\'")]*[\'"\s]*\)/', array($this, '_fixCssUrl'), $contents);
 	}
-	
+
 	/**
 	 * Minifies the contents.  The contents must be retrieved prior to calling this.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function minify ()
@@ -262,7 +265,7 @@ class Combine
 	}
 	/**
 	 * Use to set the external URL settings to use
-	 * 
+	 *
 	 * @param string $external_url_base
 	 * @param string $classifieds_url
 	 */
@@ -285,11 +288,11 @@ class Combine
 			$this->_externalDomain .= ':'.$info['port'];
 		}
 		$this->_externalPath = '/'.trim($info['path'],'/').'/';
-	
+
 		//store them so we got em
 		$this->_external_url_base = $external_url_base;
 	}
-	
+
 	public function getSetting ($db, $setting, $checkOld = false)
 	{
 		$return = $db->GetOne("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='{$setting}'");
@@ -316,17 +319,17 @@ class Combine
 		$path = trim($path);
 		//just in case there are wrong slashes in there...
 		$path = str_replace('\\', '/', $path);
-	
+
 		$start = (substr($path,0,1) == '/')? '/' : '';
-	
+
 		$end = (substr($path, -1) == '/')? '/' : '';
-	
+
 		$parts = array_filter(explode('/', $path), 'strlen');
 		$absolutes = array();
 		foreach ($parts as $part) {
 			//TODO: Check to make sure this works on different charset encoding!
 			if ($part == '.') continue;
-	
+
 			if ($part == '..' && (!$saveUpDots || !empty($absolutes))) {
 				array_pop($absolutes);
 			} else {
@@ -339,7 +342,7 @@ class Combine
 			//prevent returning "//" force it to return only start.
 			return $start;
 		}
-	
+
 		return $start.implode('/', $absolutes).$end;
 	}
 	/**
@@ -362,7 +365,7 @@ class Combine
 		}
 		return !strncmp($haystack, $needle, strlen($needle));
 	}
-	
+
 	private function _minifyJs ()
 	{
 		if($this->noMinifyJs) {
@@ -373,7 +376,7 @@ class Combine
 		set_time_limit(60);
 		$this->_contents = JSMinPlus::minify($this->_contents);
 	}
-	
+
 	/**
 	 * Addapted from the 3rd party minify library
 	 */
@@ -385,27 +388,27 @@ class Combine
 		}
 		//make sure it only uses newlines, none of that windows stuff
 		$this->_contents = str_replace("\r\n", "\n", $this->_contents);
-		
+
 		// preserve empty comment after '>'
 		// http://www.webdevout.net/css-hacks#in_css-selectors
 		$this->_contents = preg_replace('@>/\\*\\s*\\*/@', '>/*keep*/', $this->_contents);
-		
+
 		// preserve empty comment between property and value
 		// http://css-discuss.incutio.com/?page=BoxModelHack
 		$this->_contents = preg_replace('@/\\*\\s*\\*/\\s*:@', '/*keep*/:', $this->_contents);
 		$this->_contents = preg_replace('@:\\s*/\\*\\s*\\*/@', ':/*keep*/', $this->_contents);
-		
+
 		// apply callback to all valid comments (and strip out surrounding ws
 		$this->_contents = preg_replace_callback('@\\s*/\\*([\\s\\S]*?)\\*/\\s*@'
 				,array($this, '_cssRemoveComments'), $this->_contents);
-		
+
 		// remove ws around { } and last semicolon in declaration block
 		$this->_contents = preg_replace('/\\s*{\\s*/', '{', $this->_contents);
 		$this->_contents = preg_replace('/;?\\s*}\\s*/', '}', $this->_contents);
-		
+
 		// remove ws surrounding semicolons
 		$this->_contents = preg_replace('/\\s*;\\s*/', ';', $this->_contents);
-		
+
 		// remove ws around urls
 		$this->_contents = preg_replace('/
                 url\\(      # url(
@@ -414,7 +417,7 @@ class Combine
                 \\s*
                 \\)         # )
             /x', 'url($1)', $this->_contents);
-		
+
 		// remove ws between rules and colons
 		$this->_contents = preg_replace('/
                 \\s*
@@ -426,7 +429,7 @@ class Combine
                 \\s*
                 (\\b|[#\'"-])        # 3 = first character of a value
             /x', '$1$2:$3', $this->_contents);
-		
+
 		// remove ws in selectors
 		$this->_contents = preg_replace_callback('/
                 (?:              # non-capture
@@ -440,34 +443,34 @@ class Combine
                 {                # open declaration block
             /x'
 				,array($this, '_cssSelectorWhitespace'), $this->_contents);
-		
+
 		// minimize hex colors
 		$this->_contents = preg_replace('/([^=])#([a-f\\d])\\2([a-f\\d])\\3([a-f\\d])\\4([\\s;\\}])/i'
 				, '$1#$2$3$4$5', $this->_contents);
-		
+
 		// remove spaces between font families
 		$this->_contents = preg_replace_callback('/font-family:([^;}]+)([;}])/'
 				,array($this, '_cssFontFamilyWS'), $this->_contents);
-		
+
 		// replace any ws involving newlines with a single newline
 		$this->_contents = preg_replace('/[ \\t]*\\n+\\s*/', "\n", $this->_contents);
-		
+
 		// separate common descendent selectors w/ newlines (to limit line lengths)
 		$this->_contents = preg_replace('/([\\w#\\.\\*]+)\\s+([\\w#\\.\\*]+){/', "$1\n$2{", $this->_contents);
-		
+
 		// Use newline after 1st numeric value (to limit line lengths).
 		$this->_contents = preg_replace('/
             ((?:padding|margin|border|outline):\\d+(?:px|em)?) # 1 = prop : 1st numeric value
             \\s+
             /x'
 				,"$1\n", $this->_contents);
-		
+
 		// prevent triggering IE6 bug: http://www.crankygeek.com/ie6pebug/
 		$this->_contents = preg_replace('/:first-l(etter|ine)\\{/', ':first-l$1 {', $this->_contents);
-		
+
 		$this->_contents = trim($this->_contents);
 	}
-	
+
 	/**
 	 * Addapted from the 3rd party minify library
 	 */
@@ -546,40 +549,40 @@ class Combine
 		}
 		return $out . $matches[2];
 	}
-	
+
 	/**
 	 * This is the companion to a preg match in fixCssUrls().
-	 * 
+	 *
 	 * @param array $matches
 	 * @return string
 	 */
 	private function _fixCssUrl ($matches)
 	{
 		$full = $matches[0];
-	
+
 		//figure out the URL part of it...
-	
+
 		//start by taking off the beginning url
 		$url = substr($full, 3);
-	
+
 		//trim off the outside stuff
 		$url = trim($url, " \t\n\r\0\x0B()'\"");
-	
+
 		if (false) {
 			//Debug what URL is generated...
 			$full = '/* '.$url.' */ '.$full;
 			return $full;
 		}
-	
+
 		if ($this->_looksLikeFullUrl($url)) {
 			//already uses absolute URL...  Don't change
 			return $full;
 		}
-		
+
 		if ($this->_looksLikeFullUrl($this->_working_path)) {
 			//the working path is absolute URL...  That means the CSS file is a
 			//remote file on some other website.
-			
+
 			if ($this->startsWith($url,'/')) {
 				//stick it
 				$url = $this->_getDomain($this->_working_path).$this->cleanRelativeUrl($url);
@@ -597,32 +600,32 @@ class Combine
 		if ($url) {
 			return "url('$url')";
 		}
-		
+
 		return $full;
 	}
-	
+
 	private function _looksLikeFullUrl ($url)
 	{
 		return $this->startsWith($url, array('//', 'http://','https://'));
 	}
-	
+
 	private function _getFullUrl ($filename)
 	{
 		if (strpos($filename, '//')===0) {
 			//starts with // so add protocol
 			$filename = 'http:'.$filename;
 		}
-		
+
 		if (!$this->startsWith($filename,array('http://','https://'))) {
 			//must be a relative URL
 			$filename = $this->cleanRelativeUrl($filename, true);
-			
+
 			$pathIsUrl = $this->_looksLikeFullUrl($this->_working_path);
-			
+
 			if ($this->startsWith($filename,'/')) {
 				//called absolutely.  So strip down URL to just the base.
 				$domain = ($pathIsUrl)? $this->_getDomain($this->_working_path) : $this->_getDomain($this->_externalDomain);
-				
+
 				$filename = $domain.$filename;
 			} else {
 				//filename is relative...  put it together
@@ -638,23 +641,23 @@ class Combine
 				$filename = $domain.$this->cleanRelativeUrl($path.$filename);
 			}
 		}
-		
+
 		return $filename;
 	}
-	
+
 	private function _getDomain ($url)
 	{
 		$info = parse_url($url);
 		$scheme = (isset($info['scheme']))? $info['scheme'].':' : '';
 		return $scheme.'//'.$info['host'];
 	}
-	
+
 	private function _getPath ($url)
 	{
 		$info = parse_url($url);
 		return (isset($info['path']))? $info['path'] : '/';
 	}
-	
+
 	/**
 	 * Used to get the contents of the given filename
 	 * @param string $filename
@@ -666,14 +669,14 @@ class Combine
 		if (!$filename) {
 			return '';
 		}
-		
+
 		return $this->_urlGetContents($filename);
 	}
-	
+
 	/**
 	 * Gets the URL contents.  Note that this gets the file contents "locally"
 	 * if the URL looks like it is for the normal location.
-	 * 
+	 *
 	 * @param string $url
 	 * @return string
 	 */
@@ -682,14 +685,14 @@ class Combine
 		if (stripos($url, $this->_externalDomain.$this->_externalPath) === 0) {
 			//starts with the external domain (this one)...
 			$base = dirname(__FILE__);
-			
+
 			//first get rid of the domain and path...
 			$filename = substr($url, strlen($this->_externalDomain.$this->_externalPath));
-			
+
 			//now then... this file should be inside geo_templates or whatever it is
 			//so take that part off then pass it through the relative URL fixer thingy...
 			$filename = $this->cleanRelativeUrl($base.'/../'.$filename);
-			
+
 			if ($filename && file_exists($filename)) {
 				//we found it!
 				return file_get_contents($filename);
@@ -697,15 +700,18 @@ class Combine
 			//if filename does not exist, fall through to the normal stuff that
 			//gets it over the net
 		}
-		
+
 		if (!function_exists('curl_init')) {
 			//they don't have curl, OR this isn't a URL...
 			//Checks for making sure it doesn't escape the folder should be done
 			//prior to calling this...
-			
+
 			return file_get_contents($url);
 		}
-		
+		// bust cache
+		if (strpos($url, '?') === false) {
+			$url .= '?cacheBuster=' . $this->cacheBuster;
+		}
 		$link = curl_init();
 		curl_setopt($link, CURLOPT_URL, $url);
 		curl_setopt($link, CURLOPT_HEADER, 0);
@@ -719,21 +725,21 @@ class Combine
 		curl_setopt($link, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($link, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($link, CURLOPT_CONNECTTIMEOUT, 30);
-		
+
 		$response = curl_exec($link);
-		
+
 		curl_close($link);
 		return $response;
 	}
-	
+
 	/**
 	 * Writes the given contents to the given file, making checks along the way
 	 * in case there are problems, so that an accurate error message can be
 	 * shown in the case of a problem.
-	 * 
+	 *
 	 * The path in this method must be inside the current "jailed" directory,
 	 * or the operation will fail and an admin error thrown. {@link geoFile::jailTo()}
-	 * 
+	 *
 	 * @param string $file Either absolute location, or relative to the
 	 *   current "jailed" directory.
 	 * @param string $contents
@@ -748,12 +754,12 @@ class Combine
 			return false;
 		}
 		//write the file
-		
+
 		if (file_exists($file) && !is_writable($file)) {
 			$this->error('Could not edit the existing file ('.$file.'), not able to write the file.');
 			return false;
 		}
-		
+
 		if (!$handle = fopen($file,'w')) {
 			$this->error('An error occurred when attempting to write the file ('.$file.'), check file permissions (CHMOD 777) and try again.');
 			return false;
@@ -781,7 +787,7 @@ class Combine
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Makes the given directory (parents as well).
 	 *
@@ -797,7 +803,7 @@ class Combine
 	{
 		//make sure the dir ends in a / so it doesn't fail inJail check
 		if (substr($dir,-1,1) != '/') $dir .= '/';
-		
+
 		//see if the dir exists first, we might not need to create it
 		if (is_dir($dir) && is_writable($dir)) {
 			return true;
@@ -806,10 +812,10 @@ class Combine
 			//change umask if needed
 			umask(0);
 		}
-		
+
 		//recursively create directory, setting the chmod as we go
 		mkdir ($dir, 0777, true);
-		
+
 		//see if the dir exists now
 		if (is_dir($dir) && is_writable($dir)) {
 			return true;
@@ -818,7 +824,7 @@ class Combine
 		$this->error('Error creating directory ('.$dir.') - cannot continue with action.  Check file/directory permissions and try again. (Failed post creation "exists" and "writable" checks)');
 		return false;
 	}
-	
+
 	public function error($msg)
 	{
 		$msg = str_replace('*/', '*  /',$msg);
@@ -894,7 +900,7 @@ if ($resource_type === 'js') {
 
 try {
 	$db = ADONewConnection($db_type);
-	
+
 	if (isset($persistent_connections)&&$persistent_connections) {
 		if (!$db->PConnect($db_host, $db_username, $db_password, $database)) {
 			echo 'Could not connect to database. (err1)';
@@ -954,10 +960,10 @@ ob_start();
 ?>/**
  * Auto Combined / Minified / Compressed <?php echo $resource_type; ?>, do NOT attempt to edit
  * this file directly, see user manual for tips.
- * 
- * Contains files: 
+ *
+ * Contains files:
  * <?php echo implode(' | ', $combo->getFiles())."\n"; ?>
- * 
+ *
  */
 <?php
 //now let the class do the work

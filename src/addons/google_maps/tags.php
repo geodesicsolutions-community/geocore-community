@@ -23,10 +23,10 @@ class addon_google_maps_tags extends addon_google_maps_info
     public function listing_map_auto_add_head()
     {
         //add needed head stuff
-        if (geoSession::isSSL()) {
+        //if(geoSession::isSSL()) {
             //gmaps are non-https only. leave an error message here to make diagnosis easier if somebody tries doing it anyway
-            trigger_error('ERROR SSL GOOGLE_MAPS: Trying to use GMaps over SSL/HTTPS! This will likely trigger a mixed-type browser error.');
-        }
+        //  trigger_error('ERROR SSL GOOGLE_MAPS: Trying to use GMaps over SSL/HTTPS! This will likely trigger a mixed-type browser error.');
+        //}
 
         $util = geoAddon::getUtil($this->name);
         $util->initHead();

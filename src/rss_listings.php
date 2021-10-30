@@ -196,7 +196,7 @@ $feed->descriptionCharLimit = 0;
  * Clean description of possible "character based issues" within the description
  *
  * One of the things this setting does is tell the software to exchange some
- * characters (like ?, ?,...etc) for their html entity equivalents
+ * characters (like �, �,...etc) for their html entity equivalents
  *
  */
 $feed->clean_description = true;

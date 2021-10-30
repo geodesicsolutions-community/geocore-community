@@ -200,7 +200,7 @@ class OrdersManagement
 		FROM " . geoTables::order . " AS o," . geoTables::invoice . " AS i,
 			" . geoTables::order_registry . " as o_r, " . geoTables::logins_table . " as u
 		WHERE $whereClauses
-		GROUP BY o.id DESC
+		GROUP BY o.id
 		$orderBy
 		LIMIT $start, $num_results";
 

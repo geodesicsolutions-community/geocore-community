@@ -55,6 +55,10 @@ class paypalSellerBuyerGateway
 		<div id="chainSettings" ' . (!$checked ? 'style="display: none;"' : '') . '>
 			<div class="page_note" style="text-align: center;">This requires at least a Paypal Business account, and special configuration/approval from Paypal. Most sites will not need to use this.</div>
 			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-5">Partner Name<br><small>You will not have this until your account is fully approved by paypal but you can still test using the settings below</small></label>
+				<div class="col-xs-12 col-sm-6"><input type="text" name="pp_chain_partner" class="form-control col-md-7 col-xs-12" value="' . $db->get_site_setting('pp_chain_partner') . '" /></div>
+			</div>
+			<div class="form-group">
 				<label class="control-label col-xs-12 col-sm-5">Developer Username</label>
 				<div class="col-xs-12 col-sm-6"><input type="text" name="pp_chain_username" class="form-control col-md-7 col-xs-12" value="' . $db->get_site_setting('pp_chain_username') . '" /></div>
 			</div>
@@ -118,10 +122,12 @@ class paypalSellerBuyerGateway
         $db->set_site_setting('paypal_allow_sb', $go_ahead);
 
         $db->set_site_setting('pp_chain_enable', $_POST['pp_chain_enable']);
+        $db->set_site_setting('pp_chain_partner', $_POST['pp_chain_partner']);
         $db->set_site_setting('pp_chain_username', $_POST['pp_chain_username']);
         $db->set_site_setting('pp_chain_password', $_POST['pp_chain_password']);
         $db->set_site_setting('pp_chain_signature', $_POST['pp_chain_signature']);
         $db->set_site_setting('pp_chain_appid', $_POST['pp_chain_appid']);
+
 
         $sitePP = $_POST['pp_chain_site_recipient'];
         if ($sitePP && !$sb->getUserSetting($sitePP, 'paypal_id')) {

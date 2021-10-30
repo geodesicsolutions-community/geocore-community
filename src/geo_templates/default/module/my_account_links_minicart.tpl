@@ -1,4 +1,4 @@
-{* 16.07.0-97-g71f11f7 *}
+{* @git-info@ *}
 <h2 class="title section-collapser">
 	{if !$allFree}
 		<span class="alignright">{$cartTotal|displayPrice:false:false:'cart'}</span>
@@ -19,7 +19,9 @@
 			{if $cartItems}
 				<ul>
 					{foreach from=$cartItems item='item'}
-						<li class="{cycle values='row_odd,row_even'}">{$item.title} <span class="alignright">{$item.cost}</span></li>
+						<li class="{cycle values='row_odd,row_even'}">
+							{$item.title} {if !$allFree}<span class="alignright">{$item.cost}</span>{/if}
+						</li>
 					{/foreach}
 				</ul>
 			{/if}

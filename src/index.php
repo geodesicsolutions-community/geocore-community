@@ -2,7 +2,6 @@
 
 //root file(index)
 
-
 //main loader
 
 //set a constant to show that we've started from the main entry point
@@ -886,7 +885,7 @@ switch ($_REQUEST["a"]) {
         //b will contain the category id
         include_once(CLASSES_DIR . "browse_newest_ads.php");
         $b = (isset($_REQUEST['b'])) ? (int)$_REQUEST['b'] : 0;
-        $browse = new Browse_newest_ads($b, $_REQUEST["page"], $_REQUEST["c"]);
+        $browse = new Browse_newest_ads($b, $_REQUEST["page"], $_REQUEST["c"], $_REQUEST["days"]);
 
         if (!$browse->browse($_REQUEST["c"], $_REQUEST["d"])) {
                 $browse->browse_error();

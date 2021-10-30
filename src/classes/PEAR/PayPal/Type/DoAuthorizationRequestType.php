@@ -16,7 +16,7 @@ require_once 'PayPal/Type/AbstractRequestType.php';
 class DoAuthorizationRequestType extends AbstractRequestType
 {
     /**
-     * The value of the order ???s transaction identification number returned by a
+     * The value of the order ’s transaction identification number returned by a
      * PayPal product.
      */
     var $TransactionID;

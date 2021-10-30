@@ -2,7 +2,6 @@
 
 //order_items/auction.php
 
-
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';
 require_once CLASSES_DIR . 'order_items/_listing_placement_common.php';
 
@@ -271,7 +270,7 @@ class auctionOrderItem extends _listing_placement_commonOrderItem
     }
 
 
-    public static function categoryDisplay($listing_types_allowed = null)
+    public static function categoryDisplay($listing_types_allowed = null, $onlyRecurringClassifieds = false)
     {
         if (!geoMaster::is('auctions')) {
             return;

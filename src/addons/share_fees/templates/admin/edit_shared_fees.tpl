@@ -1,4 +1,4 @@
-{* 16.09.0-103-gbd4ee83 *}
+{* @git-info@ *}
 
 {$admin_msgs}
 <fieldset id="user_attachment_type_edit">
@@ -10,9 +10,12 @@
 		if (document.forms['attachment_form_type_1']['attachment_active_checkbox'].checked) {
 			if (document.getElementById('fee_share').value==0){ alert ('You must enter a value for the percentage of fees to share'); return false; }
 		
-			if (document.getElementById('group_attach_from').value == document.getElementById('group_attach_to').value) { alert ('User group to attach from cannot match user group to attach to.'); return false; } return true;
+			if (document.getElementById('group_attach_from').value == document.getElementById('group_attach_to').value) { alert ('User group to attach from cannot match user group to attach to.'); return false; }
+
 		}
+        return true;
 	}
+
 	</script>
 		
 	<form name="attachment_form_type_1" class="form-horizontal form-label-left" action="" method="post">
@@ -90,12 +93,13 @@
 			<div class="form-group">
 				<label class='control-label col-sm-5 col-xs-12'>Auction Final Fees</label>
 				<div class="col-sm-6 col-xs-12">
-					<input id=attachment_types_final_fee type="checkbox" name="fee_types_shared[auction_final_fees]"  value="auction_final_fees"  {if $attachment_data.fee_types_list.auction_final_fees == 1} checked="checked"{/if} /></div>
+					<input id=attachment_types_final_fee type="checkbox" name="fee_types_shared[auction_final_fees]"  value="auction_final_fees"  {if $attachment_data.fee_types_list.auction_final_fees == 1} checked="checked"{/if} />
 				</div>
+
 			</div>					
 		</div>	
 		<div class="center">
-			<input type="submit" name="auto_save" value="{if $new}Add Category{else}Apply Changes{/if}" class="mini_button" onClick="javascript:return (validate_inputs());"/>
+			<input type="submit" name="auto_save" value="{if $new}Add Category{else}Apply Changes{/if}" class="mini_button" onClick="javascript:return (validate_inputs()); return true;"/>
 		</div>
 		
 	{else}

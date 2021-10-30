@@ -26,12 +26,12 @@ class GetBoardingDetailsResponseDetailsType extends XSDSimpleType
     var $StartDate;
 
     /**
-     * Date the merchant ???s status or progress was last updated
+     * Date the merchant ’s status or progress was last updated
      */
     var $LastUpdated;
 
     /**
-     * Reason for merchant ???s cancellation of sign-up.
+     * Reason for merchant ’s cancellation of sign-up.
      */
     var $Reason;
 
@@ -58,7 +58,7 @@ class GetBoardingDetailsResponseDetailsType extends XSDSimpleType
     var $AccountOwner;
 
     /**
-     * Merchant ???s PayPal API credentials
+     * Merchant ’s PayPal API credentials
      */
     var $Credentials;
 

@@ -103,7 +103,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
 
         case 'hex':
             // escape every byte into hex
-            // Note that the UTF-8 encoded character ?? will be represented as %c3%a4
+            // Note that the UTF-8 encoded character ä will be represented as %c3%a4
             $return = '';
             $_length = strlen($string);
             for ($x = 0; $x < $_length; $x ++) {

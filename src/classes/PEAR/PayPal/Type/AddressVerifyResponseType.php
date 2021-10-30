@@ -40,7 +40,7 @@ class AddressVerifyResponseType extends AbstractResponseType
     /**
      * The token prevents a buyer from using any street address other than the address
      * on file at PayPal during additional purchases he might make from the merchant.
-     * It contains encrypted information about the user ???s street address and email
+     * It contains encrypted information about the user ’s street address and email
      * address. You can pass the value of the token with the Buy Now button HTML
      * address_api_token variable so that PayPal prevents the buyer from using any
      * street address or email address other than those verified by PayPal. The token

@@ -6,7 +6,7 @@ class User_management_current_ads extends geoSite
     var $debug_current = 0;
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    function User_management_current_ads($db, $language_id, $classified_user_id = 0, $page = 0, $product_configuration = 0)
+    function __construct($db, $language_id, $classified_user_id = 0, $page = 0, $product_configuration = 0)
     {
         parent::__construct();
         $page = (int)$page;

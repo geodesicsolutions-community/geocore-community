@@ -21,7 +21,7 @@ class AddressVerifyRequestType extends AbstractRequestType
     var $Email;
 
     /**
-     * First line of buyer ???s billing or shipping street address to be verified.
+     * First line of buyer ’s billing or shipping street address to be verified.
      */
     var $Street;
 

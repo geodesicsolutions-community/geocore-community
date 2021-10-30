@@ -1,12 +1,10 @@
 <?php
-//ListingDisplay.class.php
 /**
  * Holds the geoListingDisplay object.
  * 
  * @package System
  * @since Version 7.1.0
  */
-
 
 /**
  * This is basically a container that is responsible for helping to display {listing ...} tags.
@@ -667,31 +665,59 @@ class geoListingDisplay
 	}
 	
 	/**
-	 * Same as mapping_link, but uses Mapquest instead of Google Maps (not recommended for non-US addresses)
-	 *
-	 * @category general
-	 * @param geoListing $listing Listing object
-	 * @param array $params Array of parameters passed in smarty tag
-	 * @param Smarty_Internal_Template $smarty
-	 * @return string
-	 */
-	public static function mapping_link_alternate (geoListing $listing, $params, $smarty)
-	{
-		$mapping_location = trim(geoString::fromDB($listing->mapping_location));
-		if (!$mapping_location) {
-			//no mapping location set
-			return '';
-		}
-		//url encode it
-		$mapping_location = urlencode($mapping_location);
-	
-		$tpl_vars = array (
-			'mapping_location' => $mapping_location,
-			'messages' => DataAccess::getInstance()->get_text(true, 1),
-		);
-		return geoTemplate::loadInternalTemplate($params, $smarty, 'mapping_link_alternate.tpl',
-				geoTemplate::SYSTEM, 'listing_details', $tpl_vars);
-	}
+ * Same as mapping_link, but uses Mapquest instead of Google Maps (not recommended for non-US addresses)
+ *
+ * @category general
+ * @param geoListing $listing Listing object
+ * @param array $params Array of parameters passed in smarty tag
+ * @param Smarty_Internal_Template $smarty
+ * @return string
+ */
+    public static function mapping_link_alternate (geoListing $listing, $params, $smarty)
+    {
+        $mapping_location = trim(geoString::fromDB($listing->mapping_location));
+        if (!$mapping_location) {
+            //no mapping location set
+            return '';
+        }
+        //url encode it
+        $mapping_location = urlencode($mapping_location);
+
+        $tpl_vars = array (
+            'mapping_location' => $mapping_location,
+            'messages' => DataAccess::getInstance()->get_text(true, 1),
+        );
+        return geoTemplate::loadInternalTemplate($params, $smarty, 'mapping_link_alternate.tpl',
+            geoTemplate::SYSTEM, 'listing_details', $tpl_vars);
+    }
+
+    /**
+     * Same as mapping_link, but links to the directions feature at google with the current listings mapping address
+     * info passed in as one address to get directions
+     *
+     * @category general
+     * @param geoListing $listing Listing object
+     * @param array $params Array of parameters passed in smarty tag
+     * @param Smarty_Internal_Template $smarty
+     * @return string
+     */
+    public static function mapping_direction_link_google (geoListing $listing, $params, $smarty)
+    {
+        $mapping_location = trim(geoString::fromDB($listing->mapping_location));
+        if (!$mapping_location) {
+            //no mapping location set
+            return '';
+        }
+        //url encode it
+        $mapping_location = urlencode($mapping_location);
+
+        $tpl_vars = array (
+            'mapping_location' => $mapping_location,
+            'messages' => DataAccess::getInstance()->get_text(true, 1),
+        );
+        return geoTemplate::loadInternalTemplate($params, $smarty, 'mapping_directions_link_google.tpl',
+            geoTemplate::SYSTEM, 'listing_details', $tpl_vars);
+    }
 	
 	/**
 	 * This is the link text allowing the user to vote and leave comments about the current listing.
@@ -2290,4 +2316,40 @@ class geoListingDisplay
 			$view->$tag = self::$tag($listing, array(), $tpl);
 		}
 	}
+
+    /**
+     * Shows the charity name the current seller is sharing fees with.  The charity name will
+     * link to the url the charity setup
+     *
+     * {listing field='share_fees_with_this_charity_link'}
+     *
+     * @category general
+     * @param geoListing $listing Listing object
+     * @param array $params Array of parameters passed in smarty tag
+     * @param Smarty_Internal_Template $smarty
+     * @return string
+     */
+    public static function share_fees_with_this_charity_link (geoListing $listing, $params, $smarty)
+    {
+        $share_fees = geoAddon::getUtil('share_fees');
+        if (($share_fees) && ($share_fees->active)) {
+            //select the id for the user (charity) this storefront owner is attached to so that user's
+            //details can be displayed within the storefront
+
+            $db = DataAccess::getInstance();
+
+            $sql = "SELECT `attached_to` FROM `geodesic_addon_share_fees_attachments` WHERE `attached_user` = ?";
+            $charity_id = $db->GetOne($sql, array($listing->seller));
+            $charity = geoUser::getUser($charity_id);
+
+            if ($charity) {
+                $charity_link = "<a href=".$charity->url.">this is the charity".$charity->optional_field_10."</a>";
+            } else {
+                //no charity found....return nothing
+                $charity_link = '';
+            }
+        }
+        return $charity_link;
+
+    }
 }

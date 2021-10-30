@@ -22,7 +22,7 @@ class mpgGlobals
 
 // 'MONERIS_HOST' => 'esqa.moneris.com',
 
-    function mpgGlobals()
+    function __construct()
     {
      // default
     }
@@ -47,7 +47,7 @@ class mpgHttpsPost
     var $mpgResponse;
     var $debug_email = "";
 
-    function mpgHttpsPost($store_id, $api_token, $mpgRequestOBJ)
+    function __construct($store_id, $api_token, $mpgRequestOBJ)
     {
 
         $this->store_id = $store_id;
@@ -152,7 +152,7 @@ class mpgResponse
 
     var $ACSUrl;
 
-    function mpgResponse($xmlString)
+    function __construct($xmlString)
     {
 
         $this->p = xml_parser_create();
@@ -462,7 +462,7 @@ class mpgRequest
                     );
     var $txnArray;
 
-    function mpgRequest($txn)
+    function __construct($txn)
     {
 
         if (is_array($txn)) {
@@ -553,7 +553,7 @@ class mpgCustInfo
     var $email;
     var $instructions;
 
-    function mpgCustInfo($custinfo = 0, $billing = 0, $shipping = 0, $items = 0)
+    function __construct($custinfo = 0, $billing = 0, $shipping = 0, $items = 0)
     {
         if ($custinfo) {
             $this->setCustInfo($custinfo);
@@ -654,7 +654,7 @@ class mpgRecur
     var $params;
     var $recurTemplate = array('recur_unit','start_now','start_date','num_recurs','period','recur_amount');
 
-    function mpgRecur($params)
+    function __construct($params)
     {
         $this->params = $params;
 
@@ -686,7 +686,7 @@ class mpgTransaction
     var $cvdInfo = null;
     var $recur = null;
 
-    function mpgTransaction($txn)
+    function __construct($txn)
     {
 
         $this->txn = $txn;
@@ -744,7 +744,7 @@ class mpgAvsInfo
     var $params;
     var $avsTemplate = array('avs_street_number','avs_street_name','avs_zipcode');
 
-    function mpgAvsInfo($params)
+    function __construct($params)
     {
         $this->params = $params;
     }
@@ -769,7 +769,7 @@ class mpgCvdInfo
     var $params;
     var $cvdTemplate = array('cvd_indicator','cvd_value');
 
-    function mpgCvdInfo($params)
+    function __construct($params)
     {
         $this->params = $params;
     }

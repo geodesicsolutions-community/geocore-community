@@ -2943,6 +2943,7 @@ class Admin_user_management extends Admin_site
 
     function update_users_restart_ad()
     {
+        trigger_error('DEBUG ADMIN: top of update_users_restart_ad');
         if (!isset($_REQUEST['b']) || !isset($_REQUEST['c'])) {
             return false;
         }

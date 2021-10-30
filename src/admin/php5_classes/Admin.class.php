@@ -1,5 +1,4 @@
 <?php
-//Admin.class.php
 /**
  * Handles loading the page for the admin side.
  *
@@ -10,7 +9,6 @@
  * @package Admin
  * @since Version 4.0.0 (Renamed, used to be AdminPageAutoload.php)
  */
-
 
 //the new page and menu auto loader.
 
@@ -690,7 +688,7 @@ class geoAdmin {
 		$jsScripts[] = geoView::JS_LIB_PROTOTYPE;
 		//see if need to add wysiwyg
 		if ($view->editor && $db->get_site_setting('use_admin_wysiwyg') == 'TinyMCE') {
-			$jsScripts[] = "//cdn.tinymce.com/4/tinymce.min.js";
+			$jsScripts[] = geoView::JS_LIB_TINYMCE_URL;
 		}
 		$jsScripts[] = geoView::JS_LIB_SCRIPTACULOUS;
 		//load the main.js file from default template set only

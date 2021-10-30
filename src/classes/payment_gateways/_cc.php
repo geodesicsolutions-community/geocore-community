@@ -10,8 +10,6 @@
  * @since Version 4.0.0
  */
 
-
-
 /**
  * Needs the {@link geoPaymentGateway} class.
  */
@@ -108,7 +106,7 @@ abstract class _ccPaymentGateway extends geoPaymentGateway
      */
     public static function geoCart_payment_choicesProcess()
     {
-        throw new Exception('Error: geoCart_payment_choicesProcess() needs to be implemented for 
+        throw new Exception('Error: geoCart_payment_choicesProcess() needs to be implemented for
 		every CC gateway.');
     }
 
@@ -205,6 +203,9 @@ abstract class _ccPaymentGateway extends geoPaymentGateway
         $tpl = new geoTemplate('system', 'payment_gateways');
         $tpl->assign('use_cvv2', $use_cvv2);
         $tpl->assign('error_msgs', $cart->getErrorMsgs());
+        if ($gateway instanceof static) {
+            $tpl->assign('client_secret', $gateway->getClientSecret());
+        }
 
         if ($gateway->getName() === 'stripe') {
             //some special overrides for Stripe, because it does things a bit funny
@@ -217,7 +218,19 @@ abstract class _ccPaymentGateway extends geoPaymentGateway
         return $return;
     }
 
-
+    /**
+     * Optional.
+     * Used: in geoCart::geoCart_payment_choicesDisplay()
+     *
+     * Used by stripe, or any payment gateway that needs to do some pre-setup on the back end and use some single
+     * use client secret when displaying payment options.  Most do not need this.
+     *
+     * @return string
+     */
+    public function getClientSecret()
+    {
+        return '';
+    }
 
     /**
      * Optional.

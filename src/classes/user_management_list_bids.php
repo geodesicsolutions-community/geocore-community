@@ -15,7 +15,7 @@ class Auction_list_bids extends geoSite
     var $debug_bids = 0;
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    function Auction_list_bids($db = null, $language_id = null, $auction_user_id = null, $production_configuration = null)
+    function __construct($db = null, $language_id = null, $auction_user_id = null, $production_configuration = null)
     {
         parent::__construct();
         $this->auction_user_id = geoSession::getInstance()->getUserId();

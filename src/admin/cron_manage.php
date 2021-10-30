@@ -50,7 +50,7 @@ class AdminCronManage
         }
         $cron_url = substr($db->get_site_setting('classifieds_url'), 0, strpos($db->get_site_setting('classifieds_url'), $db->get_site_setting('classifieds_file_name')));
         $cron_url .= 'cron.php?action=cron&cron_key=' . $cron_key;
-        $cron_command = 'cron.php --help';
+        $cron_command = $product_configuration->path_translated() . '/cron.php --help';
         $html = $menu_loader->getUserMessages() . "
 <div class=\"page_note_error\"><strong>Warning</strong>: Changing settings on this page can have drastic effects if your server
 is not configured correctly.  It is important that you <strong>consult the user manual</strong>, so that you may fully understand what is happening, before changing any settings on this page.</div>

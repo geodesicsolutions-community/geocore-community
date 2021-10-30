@@ -1,33 +1,19 @@
-{* 17.10.0-4-g98652d0 *}
+{* @git-info@ *}
 
-<span class="nowrap">
-	<label for="cc_number" class="inline">{$messages.500295}</label>
-	<input type="text" id="cc_number" data-stripe="number" size="20" class="field" autocomplete="off" />
-</span>
-
-{if $use_cvv2}
-	<span class="nowrap">
-		<label for="cvv2_code" class="inline"><a href="{external file='images/cvv2_code.gif'}" class="lightUpImg">{$messages.500296}</a></label>
-		<input type="text" id="cvv2_code" data-stripe="cvc" size="4" class="field" autocomplete="off" />
-	</span>
-{/if}
-
-<span class="nowrap">
-	<label class="inline">{$messages.500297}</label>
-	<select data-stripe="exp_month" class="field">
-		{section name='exp_month' loop='13' start='1'}
-			{$month = $smarty.section.exp_month.index|string_format:"%02d"}
-			<option value="{$month}"{if $smarty.now|date_format:"%m" == $month} selected="selected"{/if}>{$month}</option>
-		{/section}
-	</select> / <select data-stripe="exp_year" class="field">
-		{$startYear = $smarty.now|date_format:'%y'}
-		{section name='exp_year' loop=$startYear+13 start=$startYear}
-			{$year = $smarty.section.exp_year.index|string_format:"%02d"}
-			<option value="{$year}"{if $startYear == $year} selected="selected"{/if}>{$year}</option>
-		{/section}
-	</select>
-</span>
-
+<section class="stripe-inputs">
+	<div class="stripe-inputs__input">
+		<label for="stripe-card-number">{$messages.500295}</label>
+		<div id="stripe-card-number" class="field field--stripe-number"></div>
+	</div>
+	<div class="stripe-inputs__input">
+		<label for="stripe-card-cvc"><a href="{external file='images/cvv2_code.gif'}" class="lightUpImg">{$messages.500296}</a></label>
+		<div id="stripe-card-cvc" class="field field--stripe-cvc"></div>
+	</div>
+	<div class="stripe-inputs__input">
+		<label for="stripe-card-expiry">{$messages.500297}</label>
+		<div id="stripe-card-expiry" class="field field--stripe-expiry"></div>
+	</div>
+</section>
 
 {if $error_msgs.cc_result_message}
 	<div class="error_message">{$error_msgs.cc_result_message}</div>
@@ -45,21 +31,160 @@
 
 {add_footer_html}
 	{* use stripe.js to convert data from browser into a token -- this way, CC data never hits our server, so less worrying about PCI and stuff! *}
-	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-	<script type="text/javascript">	
-		Stripe.setPublishableKey('{$stripe_public_key}');
-	</script>
+	<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 	<script>
-		$trigger = jQuery('#stripe');
-		$form = jQuery('#payment-form');
 		jQuery(document).ready(function() {
-			jQuery("input[type=radio]").change(function() { //watch all radio buttons
-				if($trigger.prop('checked')) {
+			var $trigger = jQuery('#stripe');
+			var $form = jQuery('#payment-form');
+			var stripeInit = false;
+			var stripe = Stripe('{$stripe_public_key}');
+			var clientSecret = '{$client_secret}';
+			var cardNumber = null;
+
+			function initStripe() {
+				if (stripeInit) {
+					return;
+				}
+				stripeInit = true;
+				var elementStyles = {
+					base: {
+						color: '#32325D',
+						fontWeight: 500,
+						fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+						fontSize: '16px',
+						fontSmoothing: 'antialiased',
+						backgroundColor: 'transparent',
+
+						'::placeholder': {
+							color: '#CFD7DF',
+						},
+						':-webkit-autofill': {
+							color: '#e39f48',
+						},
+					},
+					invalid: {
+						color: '#E25950',
+
+						'::placeholder': {
+							color: '#FFCCA5',
+						},
+					},
+				};
+				var elementClasses = {
+					focus: 'focus',
+					empty: 'empty',
+					invalid: 'invalid',
+				};
+
+
+				var elements = stripe.elements({
+					locale: 'auto'
+				});
+				cardNumber = elements.create('cardNumber', {
+					style: elementStyles,
+					classes: elementClasses
+				});
+				cardNumber.mount('#stripe-card-number');
+
+				var cardExpiry = elements.create('cardExpiry', {
+					style: elementStyles,
+					classes: elementClasses,
+				});
+				cardExpiry.mount('#stripe-card-expiry');
+
+				var cardCvc = elements.create('cardCvc', {
+					style: elementStyles,
+					classes: elementClasses,
+				});
+				cardCvc.mount('#stripe-card-cvc');
+			}
+
+			function billingInfo() {
+				// stripe does not like "empty" values so trim everything and unset anything empty
+				var parseProperties = function(obj) {
+					Object.keys(obj).forEach(function(key) {
+						if (obj[key] && typeof obj[key] === 'object') {
+							parseProperties(obj[key]);
+							if (Object.keys(obj[key]).length === 0) {
+								delete obj[key];
+							}
+							return;
+						}
+						// handle falsish values like null or undefined
+						obj[key] = obj[key] || '';
+						// trim
+						obj[key] = obj[key].trim();
+						// delete if empty
+						if (!obj[key].length) {
+							delete obj[key];
+						}
+					});
+					return obj;
+				};
+				return parseProperties({
+					address: {
+						city: jQuery('#city').val(),
+						// relies on billing region using c for name...
+						country: jQuery('#c_country_ddl').val(),
+						line1: jQuery('#address').val(),
+						line2: jQuery('#address_2').val(),
+						postal_code: jQuery('#zip').val(),
+						// relies on billing region using c for name...
+						state: jQuery('#c_state_ddl').val()
+					},
+					name: jQuery('#firstname').val() + ' ' + jQuery('#lastname').val(),
+					email: jQuery('#email').val(),
+					phone: jQuery('#phone').val()
+				});
+			}
+
+			function showError(msg) {
+				jQuery('#async_result').text(msg).show();
+			}
+
+			function hideError() {
+				jQuery('#async_result').hide();
+			}
+
+			function disableSubmit() {
+				jQuery('input[type=submit]').prop('disabled',true);
+			}
+
+			function enableSubmit() {
+				jQuery('input[type=submit]').prop('disabled',false);
+			}
+
+			// watch all radio buttons
+			jQuery("input[type=radio]").change(function() {
+				if ($trigger.prop('checked')) {
 					//trigger button clicked -- modify form submission
+					initStripe();
 					$form.on('submit',function(){
-						jQuery('input[type=submit]').prop('disabled',true); //turn off submit button
-						Stripe.card.createToken($form, stripeResponseHandler); //make a Stripe token and pass it to the handler
-						return false; //prevent default form function
+						disableSubmit();
+						// if any errors still show, hide them to avoid confusion
+						hideError();
+						stripe.confirmCardPayment(clientSecret, {
+							payment_method: {
+								card: cardNumber,
+								billing_details: billingInfo()
+							}
+						}).then(function (response) {
+							if (response.error) {
+								// Show the errors on the form:
+								showError(response.error.message);
+								// Re-enable submission
+								enableSubmit();
+							} else {
+								// payment is good, submit to let back end record payment
+
+								// kill the async token-creator listener, because we now want to actually submit the form
+								$form.off('submit');
+								// submit the form
+								$form.submit();
+							}
+						});
+						// prevent default form function
+						return false;
 					});
 				} else {
 					//different gateway picked, so return the form submission to normal
@@ -68,23 +193,5 @@
 			});
 			$trigger.change(); //run once when page loads
 		});
-		
-		function stripeResponseHandler(status, response) {
-			var $form = jQuery('#payment-form');
-			if (response.error) {
-		  		// Show the errors on the form:
-		    	jQuery('#async_result').text(response.error.message).show();
-		    	jQuery('input[type=submit]').prop('disabled',false); // Re-enable submission
-			} else { 
-				//token is good
-		    	var token = response.id;
-		    	//append token to form data		
-		    	$form.append(jQuery('<input type="hidden" name="stripeToken">').val(token));
-				//kill the async token-creator listener, because we now want to actually submit the form
-				$form.off('submit');
-				//submit the form
-		        $form.submit();
-			}
-		};
 	</script>
 {/add_footer_html}

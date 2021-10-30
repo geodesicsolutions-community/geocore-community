@@ -7,7 +7,6 @@
  */
 
 
-
 /**
  * Used to hold database table names, used throughout the code.
  *
@@ -26,6 +25,7 @@ class geoTables
     const categories_table = "`geodesic_categories`";
     const categories_languages_table = "`geodesic_categories_languages`";
     const category_exclusion_list = "`geodesic_category_exclude_list_types`";
+    const categories_exclude_per_price_plan_table = "`geodesic_categories_excluded_per_price_plan`";
     const listing_categories = "`geodesic_listing_categories`";
     const logins_table = "`geodesic_logins`";
     const configuration_table = "`geodesic_configuration`";

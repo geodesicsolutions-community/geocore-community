@@ -13,7 +13,7 @@
  *
  * Switches on the best QP encoder implementation for current charset.
  *
- * @author Jean-Fran??ois Simon <jeanfrancois.simon@sensiolabs.com>
+ * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  */
 class Swift_Mime_ContentEncoder_QpContentEncoderProxy implements Swift_Mime_ContentEncoder
 {

@@ -2,6 +2,7 @@
 
 //addons/storefront/pages.php
 
+
 # Storefront Addon
 
 class addon_storefront_pages extends addon_storefront_info
@@ -113,6 +114,9 @@ class addon_storefront_pages extends addon_storefront_info
                     }
                 }
             }
+
+
+
             $msgs = $db->get_text(true, 1);
             $view->previous_ad_link = ($previous_link) ? '<a href="' . $previous_link . '" class="button">' . $msgs[787] . '</a>' : '';
             $view->next_ad_link = ($next_link) ? '<a href="' . $next_link . '" class="button">' . $msgs[786] . '</a>' : '';
@@ -201,15 +205,15 @@ class addon_storefront_pages extends addon_storefront_info
         foreach ($days as $day => $tvisits) {
             $uvisits = count($ips[$day]);
             $sql = "INSERT INTO $tables->traffic SET
-				owner=?,
-				time=?,
+				owner=?, 
+				time=?, 
 				uvisits=?,
 				tvisits=?";
             $r = $db->Execute($sql, array($store_id,$day,$uvisits,$tvisits));
         }
 
         $sql = "DELETE FROM $tables->traffic_cache
-		WHERE time < $currentDate AND
+		WHERE time < $currentDate AND 
 		owner = " . $store_id;
         $result = $db->Execute($sql);
         if (!$result) {
@@ -497,6 +501,29 @@ class addon_storefront_pages extends addon_storefront_info
 
         $view->display_newsletter = $util->display_newsletter;
 
+        $share_fees = geoAddon::getUtil('share_fees');
+        if (($share_fees) && ($share_fees->active)) {
+            //select the id for the user (charity) this storefront owner is attached to so that user's
+            //details can be displayed within the storefront
+            $store = $_REQUEST['store'];
+            $util = geoAddon::getUtil('storefront');
+            $store = $util->storeIdFromString($store);
+
+            $sql = "SELECT `attached_to` FROM `geodesic_addon_share_fees_attachments` WHERE `attached_user` = ?";
+            $charity_id = $db->GetOne($sql, array($store));
+
+
+            $charity = geoUser::getUser($charity_id);
+
+            if ($charity) {
+                $charity_link = "<a href=" . $charity->url . ">" . $charity->optional_field_10 . "</a>";
+                $view->share_fees_with_this_charity_link = $charity_link;
+            } else {
+                //no charity found....return nothing
+                $view->share_fees_with_this_charity_link = '';
+            }
+        }
+
         //{storefront_manager} is a special tag
         $tpl = $view->getTemplateObject();
         $tpl->registerPlugin('function', 'storefront_manager', array('addon_storefront_util','displayStorefrontManager'));
@@ -603,9 +630,9 @@ class addon_storefront_pages extends addon_storefront_info
         //NOTE: pay attention to the join order here, as it needs to include "price plan free" users who haven't visited their storefront at all yet
         //that is to say: LEFT JOIN the subscription tables at the end so that the rest of the query still operates for users where that table is missing a row
         $sql = "SELECT DISTINCT r.region
-				FROM " . geoTables::userdata_table . " as user
+				FROM " . geoTables::userdata_table . " as user				
 				INNER JOIN " . geoTables::user_regions . " as r ON user.id = r.user AND r.level = " . $stateLevel .
-                ($price_plans_with_free_storefronts ? " LEFT JOIN " . geoTables::user_groups_price_plans_table . " as ugpp ON user.id = ugpp.id " : '') . "
+                ($price_plans_with_free_storefronts ? " LEFT JOIN " . geoTables::user_groups_price_plans_table . " as ugpp ON user.id = ugpp.id " : '') . "  
 				LEFT JOIN " . $table->subscriptions . " as sub ON user.id = sub.user_id
 				WHERE " .
                 ($price_plans_with_free_storefronts ? "(sub.expiration > " . geoUtil::time() . " OR ugpp.`price_plan_id` in " . $in_statement . " OR ugpp.`auction_price_plan_id` in " . $in_statement . ")" : "sub.expiration > " . geoUtil::time()) .

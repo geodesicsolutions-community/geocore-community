@@ -23,17 +23,17 @@ class BusinessOwnerInfoType extends XSDSimpleType
     var $Owner;
 
     /**
-     * Business owner ???s home telephone number
+     * Business owner ’s home telephone number
      */
     var $HomePhone;
 
     /**
-     * Business owner ???s mobile telephone number
+     * Business owner ’s mobile telephone number
      */
     var $MobilePhone;
 
     /**
-     * Business owner ???s social security number
+     * Business owner ’s social security number
      */
     var $SSN;
 

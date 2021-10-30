@@ -305,7 +305,7 @@ class geoSite
             $tpl_vars['height'] = intval($this->db->get_site_setting('desc_wysiwyg_height'));
 
             //load tinymce js
-            $jsLibsNoCombine[] = "//cdn.tinymce.com/4/tinymce.min.js";
+            $jsLibsNoCombine[] = geoView::JS_LIB_TINYMCE_URL;
 
             if ($this->inAdminCart) {
                 $tpl_vars['inAdmin'] = true;
@@ -674,7 +674,7 @@ jQuery(window).load(gjUtil.load);
 				from " . $this->categories_table . "," . $this->categories_languages_table . "
 				where " . $this->categories_table . ".category_id = " . $this->categories_languages_table . ".category_id
 				and " . $this->categories_table . ".parent_id = " . $category_id . "
-				AND " . $this->categories_table . ".enabled = 'yes' 
+				AND " . $this->categories_table . ".enabled = 'yes'
 				and " . $this->categories_languages_table . ".language_id = " . $this->language_id . " order by " . $this->categories_table . ".display_order," . $this->categories_languages_table . ".category_name";
             $category_result =  $this->db->Execute($this->sql_query);
             if (!$category_result) {
