@@ -1,5 +1,6 @@
 # OS files
-.DS_Store
+**/.DS_Store
+**/Thumbs.db
 
 # Do not commit vendor libraries
 src/vendor/
