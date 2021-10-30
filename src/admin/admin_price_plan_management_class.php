@@ -1,13 +1,7 @@
 <?php
 
 // admin_price_plan_management_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.03.0-15-gd359131
-##
-##################################
+
 
 class Price_plan_management extends Admin_site
 {

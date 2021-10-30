@@ -6,13 +6,7 @@
  * @package System
  * @since Version 7.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-## 
-##################################
+
 
 /**
  * This is dedicated class for getting the value of, and setting, the various

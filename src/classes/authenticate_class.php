@@ -1,13 +1,7 @@
 <?php
 
 //authenticate_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.2-32-ga1cbed0
-##
-##################################
+
 
 require_once CLASSES_DIR . 'site_class.php';
 

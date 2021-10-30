@@ -25,25 +25,12 @@
  * @see geoAPI
  * @package ExampleAddon
  */
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2013 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    ccda4ac
-##
-##################################
 
 /**
  * Be sure to put this next part, to ensure the file is never called directly.
  * It must be processed through the Remote API system.
  */
+
 if (!defined('IN_GEO_API')) {
     exit('No access.');
 }

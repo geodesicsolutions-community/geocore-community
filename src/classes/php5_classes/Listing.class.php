@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.10.0-21-g33fd4d4
-## 
-##################################
+
 
 /**
  * A listing object, basically a container object for particular listing.

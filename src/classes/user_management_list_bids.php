@@ -1,13 +1,7 @@
 <?php
 
 //user_management_list_bids.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-23-g21d4eee
-##
-##################################
+
 
 class Auction_list_bids extends geoSite
 {

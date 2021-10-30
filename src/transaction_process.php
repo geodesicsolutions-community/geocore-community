@@ -1,13 +1,7 @@
 <?php
 
 //transaction_process.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 //Make sure that clean inputs only un-does magic quotes
 define('CLEAN_INPUTS_MAGIC_ONLY', 1);

@@ -1,13 +1,7 @@
 <?php
 
 //order_items/provider_fee.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.01.0-14-g07e2a62
-##
-##################################
+
 
 
 class provider_feeOrderItem extends geoOrderItem

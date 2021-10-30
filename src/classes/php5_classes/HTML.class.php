@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.09.0-106-ge989d1f
-## 
-##################################
+
 
 /**
  * Class to generate chunks of HTML that are very common, used the most in the

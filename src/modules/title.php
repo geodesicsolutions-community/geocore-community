@@ -1,13 +1,7 @@
 <?php
 
 //module_title_auctions.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.05.0-20-geaf1e2c
-##
-##################################
+
 
 $display = "";
 

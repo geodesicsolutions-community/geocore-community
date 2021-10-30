@@ -1,19 +1,6 @@
 <?php
 
 //addons/adplotter/info.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.09.0-92-gefaf632
-##
-##################################
 
 # Adplotter Link Addon
 

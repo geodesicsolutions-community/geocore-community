@@ -8,13 +8,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-73-gda0dfd6
-##
-##################################
+
 
 
 /**

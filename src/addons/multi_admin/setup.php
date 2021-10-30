@@ -1,19 +1,6 @@
 <?php
 
 //addons/multi_admin/setup.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    7.2beta3-72-g9718307
-##
-##################################
 
 # multi_admin Addon
 require_once ADDON_DIR . 'multi_admin/info.php';

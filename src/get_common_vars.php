@@ -1,13 +1,7 @@
 <?php
 
 //get_common_vars.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 //Handy file that sets up common vars for you.
 //just make sure the var(s) you want to set up are

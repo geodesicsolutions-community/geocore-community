@@ -1,13 +1,7 @@
 <?php
 
 //xmlrpc.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.07.0-25-g4508ebb
-##
-##################################
+
 
 //XML RPC transport for API, this is the primary (and only) built-in transport currently
 

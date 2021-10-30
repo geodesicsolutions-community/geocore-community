@@ -1,12 +1,6 @@
 <?php
 //function.footer_html.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.3beta2-116-g80e50ea
-## 
-##################################
+
 
 //This fella takes care of {footer_html}
 function smarty_function_footer_html ($params, Smarty_Internal_Template $smarty)

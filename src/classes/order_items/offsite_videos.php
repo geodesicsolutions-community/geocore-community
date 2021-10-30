@@ -1,13 +1,7 @@
 <?php
 
 //offsite_videos.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.12.0-8-g61232d7
-##
-##################################
+
 
 //Order item that adds ability to have youtube videos
 

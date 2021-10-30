@@ -1,13 +1,7 @@
 <?php
 
 //order_items/subtotal_display.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.1.2-36-g991a1d7
-##
-##################################
+
 
 
 class subtotal_displayOrderItem extends geoOrderItem

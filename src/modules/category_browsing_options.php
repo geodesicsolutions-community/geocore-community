@@ -1,13 +1,7 @@
 <?php
 
 //module_display_browsing_options.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 if (!$page->site_category) {
     //this only works on pages with a category!

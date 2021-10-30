@@ -1,12 +1,6 @@
 <?php
 //function.csv_line.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.4.4-10-g8576128
-## 
-##################################
+
 
 //This fella takes care of {csv_line} to output a CSV line inside a template file
 

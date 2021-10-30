@@ -1,12 +1,6 @@
 //price_plan_items.js
 /*
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.4.6-11-g316131f
-## 
-##################################
+
 */
 
 

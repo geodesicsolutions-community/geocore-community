@@ -1,13 +1,7 @@
 <?php
 
 //admin/listing_steps.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.2.1-6-g63ad625
-##
-##################################
+
 
 class listingStepsManage
 {

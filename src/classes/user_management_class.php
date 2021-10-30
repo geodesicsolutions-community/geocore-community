@@ -1,13 +1,7 @@
 <?php
 
 //user_management_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 class User_management extends geoSite
 {

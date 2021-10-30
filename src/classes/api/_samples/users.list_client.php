@@ -1,12 +1,6 @@
 <?php
 //_samples/users.list_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.users.list api call to get list of users
 

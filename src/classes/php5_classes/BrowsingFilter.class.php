@@ -6,13 +6,7 @@
  * @package System
  * @since Version 7.1.0
  */
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.05.0-12-g574c933
-##
-##################################
+
 /**
  * System for activating, storing, and deactivating browsing filters.
  *

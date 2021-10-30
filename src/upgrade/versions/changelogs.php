@@ -1,13 +1,7 @@
 <?php
 
 //changelogs.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.3.0
-##
-##################################
+
 
 /**
  * Generates a list of changelogs

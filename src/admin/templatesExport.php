@@ -1,13 +1,7 @@
 <?php
 
 //templatesExport.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-79-gb63e5d8
-##
-##################################
+
 
 //this is used within update as well
 require_once CLASSES_DIR . 'php5_classes/File.class.php';

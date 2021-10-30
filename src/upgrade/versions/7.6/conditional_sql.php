@@ -1,12 +1,6 @@
 <?php
 //conditional_sql.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.6.1-3-ge35b6e6
-## 
-##################################
+
 
 /*
  * This is where conditional queries go.

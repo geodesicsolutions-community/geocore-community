@@ -1,13 +1,7 @@
 <?php
 
 //oodle_feed.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.2.5-46-gb27fc43
-##
-##################################
+
 
 /**
  * set the next line to 1 to "turn on" the oodle feed.  By default it is set to

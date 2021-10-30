@@ -1,12 +1,6 @@
 <?php
 //resource.geo_tset.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.6.2-9-gc357aa9
-## 
-##################################
+
 
 /**
  * This handy resource is responsible for figuring out just "where" a resource

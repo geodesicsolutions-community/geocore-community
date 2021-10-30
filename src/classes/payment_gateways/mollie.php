@@ -1,13 +1,7 @@
 <?php
 
 //payment_gateways/mollie.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 /**
  * This requires the geoPaymentGateway class, so include it just to be on the

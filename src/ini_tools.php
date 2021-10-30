@@ -1,13 +1,7 @@
 <?php
 
 //ini_tools.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 /*
  * These tools are not complete yet.  This file is to create the means to easily change

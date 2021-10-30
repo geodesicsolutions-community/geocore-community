@@ -6,13 +6,7 @@
  * @package System
  * @since Version 7.1.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.07.0-17-gc2a3d8e
-## 
-##################################
+
 
 /**
  * This is basically a container that is responsible for helping to display {listing ...} tags.

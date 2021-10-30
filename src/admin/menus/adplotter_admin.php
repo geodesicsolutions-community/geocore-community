@@ -1,14 +1,5 @@
 <?php
 
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-84-g435bb22
-##
-##################################
-
 //Loads a simplified version of the admin menu for the AdPlotter Edition
 
 //make sure loading in admin

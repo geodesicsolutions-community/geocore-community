@@ -1,13 +1,7 @@
 <?php
 
 //transaction_process.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.1beta1-1217-g239397f
-##
-##################################
+
 
 /*
  * PaymentExpress can't handle parameters (like ?gateway=paymentexpress) in the return URL.

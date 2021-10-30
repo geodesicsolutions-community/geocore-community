@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-## 
-##################################
+
 
 /**
  * A container to hold settings for a particular order item type, according to

@@ -1,13 +1,7 @@
 <?php
 
 //get_external.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 /**
  * This file figures out the URL based on the specified file, then do a re-direct

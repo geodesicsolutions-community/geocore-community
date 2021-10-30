@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.09.0-29-g5c9d17a
-## 
-##################################
+
 
 require_once CLASSES_DIR.'site_class.php';
 

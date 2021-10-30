@@ -1,13 +1,7 @@
 <?php
 
 //Invoice.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 // DON'T FORGET THIS
 if (class_exists('admin_AJAX') or die()) {

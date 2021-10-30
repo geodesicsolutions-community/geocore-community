@@ -1,13 +1,7 @@
 <?php
 
 //order_items/classified.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.02.1-34-g43e3b3b
-##
-##################################
+
 
 //TODO for future version: include a way to turn off "normal" classifieds and only allow Recurring ones to be created
 

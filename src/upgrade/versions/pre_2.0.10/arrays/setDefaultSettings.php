@@ -1,12 +1,6 @@
 <?php
 //setDefaultSettings.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-## 
-##################################
+
 
 #DEVELOPERS:  DO NOT ADD TO THIS WITHOUT READING DOCUMENTATION!!!
 

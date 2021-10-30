@@ -1,13 +1,7 @@
 <?php
 
 //module_display_login_register.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 $links = array();
 if ($page->classified_user_id) {

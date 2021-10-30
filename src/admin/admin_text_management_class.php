@@ -1,13 +1,7 @@
 <?php
 
 // admin_text_management_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.12.0-5-g5a388b4
-##
-##################################
+
 
 class Text_management extends Admin_site
 {

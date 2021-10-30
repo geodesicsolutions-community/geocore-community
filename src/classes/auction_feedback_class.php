@@ -1,13 +1,7 @@
 <?php
 
 //auction_feedback_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-119-gad7ab10
-##
-##################################
+
 
 class Auction_feedback extends geoSite
 {

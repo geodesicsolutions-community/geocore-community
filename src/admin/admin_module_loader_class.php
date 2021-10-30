@@ -1,13 +1,7 @@
 <?php
 
 //admin_module_loader_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 /**
  * This class used as a wrapper, to pull in older modules into the new admin page loader,

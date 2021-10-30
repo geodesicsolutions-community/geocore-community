@@ -1,13 +1,7 @@
 <?php
 
 //admin_site_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.10.0-6-g0568961
-##
-##################################
+
 
 if (!function_exists("array_combine")) {
     function array_combine($keys, $values)

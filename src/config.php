@@ -1,13 +1,7 @@
 <?php
 
 //config.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.09.0-20-g94994d8
-##
-##################################
+
 
 /*
  Welcome to the Configuration File. This file is the link

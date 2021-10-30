@@ -6,13 +6,7 @@
  * @package System
  * @since Version 3.1.0 (I think)
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.3beta5-3-gbc1dc54
-## 
-##################################
+
 
 
 /**

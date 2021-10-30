@@ -6,13 +6,7 @@
  * @package System
  * @since Version 7.1.0
  */
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.3.6-12-ga7d9248
-##
-##################################
+
 
 /**
  * Class for doing common things with leveled fields.

@@ -1,13 +1,7 @@
 <?php
 
 //module_featured_ads_pic_1_level_5.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 $tpl_vars = array();
 $col_name = 'featured_ad_5';

@@ -1,13 +1,7 @@
 <?php
 
 //order_items/listing_extra_better_placement.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.02.1-12-g223ffae
-##
-##################################
+
 
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';
 

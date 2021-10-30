@@ -1,12 +1,6 @@
 <?php
 //arrays.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.02.1-18-gc83711d
-## 
-##################################
+
 
 
 $upgrade_array = array (

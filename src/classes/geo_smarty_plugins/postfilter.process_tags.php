@@ -1,12 +1,6 @@
 <?php
 //outputfilter.strip_forms.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.6.2-8-g19d7f00
-## 
-##################################
+
 
 //this fella makes it so that $template->used_tags is populated with just the info
 //we need, without having to re-compile templates every time.

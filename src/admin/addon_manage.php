@@ -1,13 +1,7 @@
 <?php
 
 // addon_manage.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-79-gb63e5d8
-##
-##################################
+
 
 class Addon_Manage
 {

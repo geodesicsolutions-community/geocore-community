@@ -1,12 +1,6 @@
 <?php
 //function.listing.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.4beta1-49-g34dd5bb
-## 
-##################################
+
 
 //This fella takes care of {module ...}
 

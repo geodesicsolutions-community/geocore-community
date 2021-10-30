@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.4
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.3beta5-46-gc123fc4
-## 
-##################################
+
 
 /**
  * Class that sends out e-mails.

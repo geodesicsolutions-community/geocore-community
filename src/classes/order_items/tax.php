@@ -1,13 +1,7 @@
 <?php
 
 //order_items/tax.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-73-gda0dfd6
-##
-##################################
+
 
 
 class taxOrderItem extends geoOrderItem

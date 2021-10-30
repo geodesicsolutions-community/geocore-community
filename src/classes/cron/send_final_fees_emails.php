@@ -1,13 +1,7 @@
 <?php
 
 //send_final_fees_emails.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 //This one sends e-mails to anyone with a negative account balance.
 

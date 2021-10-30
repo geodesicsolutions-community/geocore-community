@@ -1,13 +1,7 @@
 <?php
 
 //browse_display_ad.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.05.0-22-g4435795
-##
-##################################
+
 
 class Display_ad extends geoBrowse
 {

@@ -1,13 +1,7 @@
 <?php
 
 //admin_pages_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.12.0-7-ga1cc2dc
-##
-##################################
+
 
 class Admin_pages extends Admin_site
 {

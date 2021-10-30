@@ -1,13 +1,7 @@
 <?php
 
 //payment_gateways/paypal_pro.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4.4-28-g2f5cc34
-##
-##################################
+
 
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 

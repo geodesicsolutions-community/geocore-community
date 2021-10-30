@@ -1,12 +1,6 @@
 <?php
 //app_top.register.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-## 
-##################################
+
 
 //let rest of app know it's doing something with registration...
 define ('IN_REGISTRATION', 1);

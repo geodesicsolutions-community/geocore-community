@@ -1,12 +1,6 @@
 <?php
 //min.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.01.0-44-gde7a79c
-## 
-##################################
+
 
 /**
  * This file combines, reduces, and compresses the CSS / JS content of the page.

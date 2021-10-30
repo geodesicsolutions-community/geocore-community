@@ -1,12 +1,6 @@
 <?php
 //arrays.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 /**
  * SPECIAL PART:  This part is not standard, do not copy to new version.

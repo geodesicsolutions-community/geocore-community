@@ -6,13 +6,7 @@
  * @package System
  * @since Version 7.3.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.4beta1-139-g9f59375
-## 
-##################################
+
 
 
 

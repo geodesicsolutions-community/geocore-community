@@ -7,13 +7,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.1.0-23-gd52c4c7
-## 
-##################################
+
 
 # This is a wrapper class for the CJAX stuff, to make our lives easy
 if (defined('IN_ADMIN') && !defined('JSDIR')) {

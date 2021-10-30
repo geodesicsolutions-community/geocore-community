@@ -1,13 +1,7 @@
 <?php
 
 //modules/shared/browsing.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.10.0-11-g76731fa
-##
-##################################
+
 
 //This is a common file, since all featured modules work basically the same.
 if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {

@@ -1,12 +1,6 @@
 <?php
 //interactive.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.2.2-22-g673682e
-## 
-##################################
+
 
 /**
  * How this file works:

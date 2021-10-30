@@ -1,14 +1,5 @@
 <?php
 
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4.6-11-g316131f
-##
-##################################
-
 // DON'T FORGET THIS
 if (class_exists('admin_AJAX') or die()) {
 }

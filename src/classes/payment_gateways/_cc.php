@@ -10,17 +10,12 @@
  * @since Version 4.0.0
  */
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.05.0-2-g9d1bf0c
-##
-##################################
+
 
 /**
  * Needs the {@link geoPaymentGateway} class.
  */
+
 require_once CLASSES_DIR . PHP5_DIR . 'PaymentGateway.class.php';
 
 /**

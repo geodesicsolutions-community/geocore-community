@@ -1,12 +1,6 @@
 <?php
 
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 $redirectURL = 'aff.php';
 require_once ('app_top.main.php');

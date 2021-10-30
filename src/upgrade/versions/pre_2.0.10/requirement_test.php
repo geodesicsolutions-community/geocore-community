@@ -1,12 +1,6 @@
 <?php
 //requirement_test.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //tests all requirements of the new software.
 if (!(isset($no_show_tests) && $no_show_tests)){

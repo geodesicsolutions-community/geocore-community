@@ -1,20 +1,7 @@
 <?php
 
 //addons/geographic_navigation/info.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.10.0-5-g8bc0dc0
-##
-##################################
+
 
 class addon_geographic_navigation_info
 {
@@ -25,8 +12,8 @@ class addon_geographic_navigation_info
     public $core_version_minimum = '17.01.0';
     public $title = 'Geographic Navigation';
     public $author = "Geodesic Solutions LLC.";
-    public $description = 'This is a Geographic Navigation addon, it uses the 
-	geographic regions and "filters" the listings displayed on the site by the 
+    public $description = 'This is a Geographic Navigation addon, it uses the
+	geographic regions and "filters" the listings displayed on the site by the
 	selected region or sub-region.';
 
     public $auth_tag = 'geo_addons';

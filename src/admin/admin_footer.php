@@ -1,13 +1,5 @@
 <?php
 
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.0-16-gf5139d7
-##
-##################################
 defined('IN_ADMIN') || die('NO ACCESS');
 
 //include_once '../app_top.common.php';

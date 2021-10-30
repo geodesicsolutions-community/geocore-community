@@ -6,13 +6,7 @@
  * @package System
  * @since Version 7.4.0
  */
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 /**
  * Store, retrieve, and display inter-user ratings
  *

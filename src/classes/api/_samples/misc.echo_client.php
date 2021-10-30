@@ -1,12 +1,6 @@
 <?php
 //_samples/misc.echo_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.misc.echo api call to basically echo
 //whatever arguments are sent to it.  This is mainly used to make sure the API

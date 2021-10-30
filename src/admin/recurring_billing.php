@@ -1,13 +1,7 @@
 <?php
 
 //recurring_billing.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.05.0-18-ge8d97a2
-##
-##################################
+
 
 class RecurringBillingManagement
 {

@@ -9,13 +9,7 @@
  * @since Forever
  */
 
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.4.3-11-g745410f
-## 
-##################################
+
 
 /**
  * Singleton method class

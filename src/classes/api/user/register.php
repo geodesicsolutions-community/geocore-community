@@ -1,13 +1,7 @@
 <?php
 
 //edit.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-140-g8c431f6
-##
-##################################
+
 
 if (!defined('IN_GEO_API')) {
     exit('No access.');

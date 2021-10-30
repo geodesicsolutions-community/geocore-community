@@ -1,13 +1,7 @@
 <?php
 
 //admin/leveled_fields.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.2.5-4-g851c0a0
-##
-##################################
+
 
 class LeveledFieldsManage
 {

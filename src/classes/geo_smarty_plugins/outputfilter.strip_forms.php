@@ -1,12 +1,6 @@
 <?php
 //outputfilter.strip_forms.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.09.0-22-g019d772
-## 
-##################################
+
 
 //this smarty plugin is nice
 

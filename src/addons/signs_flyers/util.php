@@ -1,19 +1,6 @@
 <?php
 
 //addons/signs_flyers/util.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.07.0-92-g7985953
-##
-##################################
 
 # Signs & Flyers Addon
 

@@ -1,13 +1,7 @@
 <?php
 
 //payment_gateways/payscape.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.3beta2-102-g09573a0
-##
-##################################
+
 
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 

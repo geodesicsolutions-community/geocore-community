@@ -1,12 +1,6 @@
 <?php
 //_samples/listing.get_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.6.1-10-ge0b4d12
-## 
-##################################
+
 
 //Sample API client, that gets the details and images for a given listing
 

@@ -31,20 +31,6 @@
  * @package ExampleAddon
  */
 
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2013 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    ccda4ac
-##
-##################################
 
 # Example Addon
 
@@ -56,6 +42,7 @@ see license attached to distribution
  * (normal files do not need this, since most normal files use classes, nothing
  *  happens if one is called directly in the browser)
  */
+
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }
@@ -63,7 +50,7 @@ if (!defined('GEO_CRON_RUN')) {
 //this cron task does not do anything, but if it did, it would do it here.
 
 //lets "log" some info just to show how that is done.
-$this->log('Currently inside the example addon\'s cron task.  This task does 
+$this->log('Currently inside the example addon\'s cron task.  This task does
 not do anything, except if verbose is turned on, it displays this message.', __line__);
 
 //Don't forget to return true!  Or the cron task will run every single time, as

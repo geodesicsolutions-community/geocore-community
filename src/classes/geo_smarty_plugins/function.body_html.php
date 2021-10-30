@@ -1,12 +1,6 @@
 <?php
 //function.body_html.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.1.2-40-gd8b05fa
-## 
-##################################
+
 
 //This fella takes care of {body_html}
 function smarty_function_body_html ($params, Smarty_Internal_Template $smarty)

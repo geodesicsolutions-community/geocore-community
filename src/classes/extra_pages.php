@@ -1,13 +1,7 @@
 <?php
 
 //extra_pages.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 class extra_page extends geoSite
 {

@@ -1,13 +1,7 @@
 <?php
 
 //cart.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.09.0-79-gb63e5d8
-##
-##################################
+
 
 //File used for admin-side cart sessions
 

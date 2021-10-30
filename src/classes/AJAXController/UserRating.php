@@ -1,13 +1,7 @@
 <?php
 
 //UserRating.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4beta2-7-g76b5461
-##
-##################################
+
 
 if (class_exists('classes_AJAX') or die('NO ACCESS')) {
 }

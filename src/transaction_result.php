@@ -1,13 +1,7 @@
 <?php
 
 //transaction_result.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.09.0-4-g881ff72
-##
-##################################
+
 
 /* This is a way to show the success or failure page for a given transaction without affecting anything else
     it only allows showing transactions belonging to the current user

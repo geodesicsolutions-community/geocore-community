@@ -1,13 +1,7 @@
 <?php
 
 //category_tree.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4.2-10-g88f0ddf
-##
-##################################
+
 
 //Shared stuff that happens in all 3 category tree modules.
 

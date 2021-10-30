@@ -1,13 +1,7 @@
 <?php
 
 //payment_gateways/authorizenet.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-18-gdc2a17a
-##
-##################################
+
 
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 

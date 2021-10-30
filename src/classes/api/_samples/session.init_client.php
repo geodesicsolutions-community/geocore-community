@@ -1,12 +1,6 @@
 <?php
 //_samples/session.init_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.session.init api call to create or update
 //the session, and returns a session id to use.

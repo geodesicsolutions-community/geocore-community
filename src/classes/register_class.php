@@ -1,13 +1,7 @@
 <?php
 
 //register_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-33-g98df70b
-##
-##################################
+
 
 require_once(CLASSES_DIR . 'site_class.php');
 

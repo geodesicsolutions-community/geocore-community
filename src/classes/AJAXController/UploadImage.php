@@ -1,14 +1,5 @@
 <?php
 
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.12.0-9-ge80f84f
-##
-##################################
-
 if (class_exists('classes_AJAX') or die()) {
 }
 

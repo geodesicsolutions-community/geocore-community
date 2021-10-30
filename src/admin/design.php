@@ -1,13 +1,7 @@
 <?php
 
 //templates.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.10.0-22-g1a8f4fd
-##
-##################################
+
 
 class DesignManage
 {

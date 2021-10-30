@@ -1,13 +1,7 @@
 <?php
 
 //order_items/listing_renew_upgrade.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.12.0-4-gc32f69b
-##
-##################################
+
 
 require_once CLASSES_DIR . 'order_items/_listing_placement_common.php';
 

@@ -1,13 +1,7 @@
 <?php
 
 //user_management_invited_list_buyers.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 class Invited_list_buyers extends geoSite
 {

@@ -1,12 +1,6 @@
 <?php
 //function.header_html.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.3beta2-102-g09573a0
-## 
-##################################
+
 
 //This fella takes care of {header_html} - for backwards compatibility
 function smarty_function_header_html ($params, Smarty_Internal_Template $smarty)

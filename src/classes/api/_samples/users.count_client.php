@@ -1,12 +1,6 @@
 <?php
 //_samples/users.count_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that gets the total number of users in the system, minus
 //the admin user.

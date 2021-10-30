@@ -1,12 +1,6 @@
 <?php
 //_samples/session.destroy_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.session.destroy api call to kill a session
 //and log the user off, if the session is associated with a user.  As long as the

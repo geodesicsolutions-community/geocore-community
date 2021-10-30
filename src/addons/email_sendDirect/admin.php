@@ -1,19 +1,6 @@
 <?php
 
 //addons/email_sendDirect/admin.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    17.10.0-14-gb801f95
-##
-##################################
 
 # Email Send Direct Addon (Main email sender)
 

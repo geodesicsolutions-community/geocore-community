@@ -1,13 +1,5 @@
 <?php
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.3-36-gea36ae7
-##
-##################################
-
 class user_page_2_titleImportItem extends geoImportItem
 {
     private $_pageNum = 2;

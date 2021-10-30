@@ -1,13 +1,7 @@
 <?php
 
 //app_top.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.05.0-7-gd78f2fa
-##
-##################################
+
 
 defined('GEO_BASE_DIR') or die('NO_ACCESS');
 

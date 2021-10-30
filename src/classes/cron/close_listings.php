@@ -1,13 +1,7 @@
 <?php
 
 //close_listings.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.1-4-g0257fb3
-##
-##################################
+
 
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');

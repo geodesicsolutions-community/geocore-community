@@ -1,12 +1,6 @@
 <?php
 //config.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 /*
  This file was auctomatically generated using the config.php upgrade script.
 */

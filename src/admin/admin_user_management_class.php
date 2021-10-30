@@ -1,13 +1,7 @@
 <?php
 
 //admin_user_management_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.10.0-15-gf172108
-##
-##################################
+
 
 class Admin_user_management extends Admin_site
 {

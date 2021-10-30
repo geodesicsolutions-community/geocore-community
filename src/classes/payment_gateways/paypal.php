@@ -1,13 +1,7 @@
 <?php
 
 //paypal.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-69-g3e7263f
-##
-##################################
+
 
 # Paypal payment gateway handler
 

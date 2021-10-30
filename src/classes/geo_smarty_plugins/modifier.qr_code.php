@@ -1,12 +1,6 @@
 <?php
 //modifier.qr_code.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //this smarty plugin uses the Google Charts API to turn a string of text into a QR code
 

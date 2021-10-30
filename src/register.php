@@ -1,13 +1,7 @@
 <?php
 
 //register.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.3beta4-188-gdac6616
-##
-##################################
+
 //use special app top, for the register.php page.
 require_once('app_top.register.php');
 

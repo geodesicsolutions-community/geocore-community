@@ -1,13 +1,7 @@
 <?php
 
 //rss_listings.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-140-g86079db
-##
-##################################
+
 
 //do not modify the next 2 lines:
 require_once 'app_top.common.php';

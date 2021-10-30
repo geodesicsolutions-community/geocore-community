@@ -1,13 +1,7 @@
 <?php
 
 //payment_gateways/stripe.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-39-g2d19902
-##
-##################################
+
 
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 

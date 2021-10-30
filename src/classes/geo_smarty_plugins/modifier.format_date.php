@@ -1,12 +1,6 @@
 <?php
 //modifier.format_date.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //this smarty plugin is for displayPrice modifier
 

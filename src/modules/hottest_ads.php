@@ -1,13 +1,7 @@
 <?php
 
 //module_hottest_ads.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-304-g6ae40c9
-##
-##################################
+
 
 
 $tpl_vars = array();

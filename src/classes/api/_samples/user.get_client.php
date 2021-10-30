@@ -1,12 +1,6 @@
 <?php
 //_samples/user.get_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.user.get api call to
 //get array of user data, according to username OR e-mail (not both at once)

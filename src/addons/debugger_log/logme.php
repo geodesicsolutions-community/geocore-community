@@ -1,18 +1,6 @@
 <?php
 //addons/debugger_log/logme.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
 ##
-## File Changed In GIT Commit:
-## ##    6.0.7-2-gc953682
-##
-##################################
 //turn on logging for this user.
 
 //For use by Geo Support or advanced users
@@ -119,7 +107,7 @@ to technical support.
 // note that any fields can be added or removed as needed):
     ?>
 <h1>Log-In Trouble Report Form</h1>
-In order to help us find the cause of log-in problems, please fill out the form below as thoroughly as possible, and click "Start logging my sessions".  
+In order to help us find the cause of log-in problems, please fill out the form below as thoroughly as possible, and click "Start logging my sessions".
 <br /><br />Then return to the main site, and attempt to log in again, to have the log-in attempt logged so we can see what is happening.
 <br /><br />
 This will provide technical support with information to help troubleshoot the problem, and will turn on "session logging" for your computer.<br /><br />

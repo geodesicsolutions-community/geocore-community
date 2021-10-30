@@ -1,14 +1,5 @@
 <?php
 
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.0-16-gf5139d7
-##
-##################################
-
 require_once ADMIN_DIR . 'getting_started.php';
 
 class design_readDesignTutorial extends geoGettingStartedCheck

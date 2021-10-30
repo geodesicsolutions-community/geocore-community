@@ -1,11 +1,5 @@
 <?php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.0-13-g6eae54b
-## 
-##################################
+
 
 class geoImport
 {

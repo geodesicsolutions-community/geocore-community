@@ -1,20 +1,5 @@
 <?php
 
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    17.07.0-28-gd42e334
-##
-##################################
-
 require_once ADDON_DIR . 'geographic_navigation/info.php';
 
 class addon_geographic_navigation_util extends addon_geographic_navigation_info

@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.1.0-22-g58a63a7
-## 
-##################################
+
 
 /**
  * Class to use for encrypting information that needs to be able to be retrieved later.

@@ -1,13 +1,7 @@
 <?php
 
 //orders.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.05.0-3-g7b83013
-##
-##################################
+
 
 class OrdersManagement
 {

@@ -1,13 +1,7 @@
 <?php
 
 //shared/category_navigation.tpl
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-39-g2a9b929
-##
-##################################
+
 
 //Common code used for most of the category navigation modules
 

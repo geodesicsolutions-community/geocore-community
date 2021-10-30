@@ -1,12 +1,6 @@
 <?php
 //app_top.main.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.10.0
-## 
-##################################
+
 
 require_once "app_top.common.php";
 

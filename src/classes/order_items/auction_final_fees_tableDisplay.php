@@ -1,13 +1,7 @@
 <?php
 
 //order_items/auction_final_fees_tableDisplay.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-73-gda0dfd6
-##
-##################################
+
 
 
 class auction_final_fees_tableDisplayOrderItem extends geoOrderItem

@@ -1,12 +1,6 @@
 <?php
 //app_top.main.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.09.0-42-g0c0c953
-## 
-##################################
+
 
 header('Cache-Control: no-cache');
 header('Expires: -1');

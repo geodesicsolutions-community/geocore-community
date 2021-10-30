@@ -1,13 +1,7 @@
 <?php
 
 //user_management_current_ads.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.02.1-19-g1167771
-##
-##################################
+
 
 class User_management_current_ads extends geoSite
 {

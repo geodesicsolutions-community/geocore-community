@@ -1,13 +1,7 @@
 <?php
 
 //importMessages.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.07.0-13-g1b8edf9
-##
-##################################
+
 
 ##
 ## This file contains the nuts and bolts of the LEGACY text importer.

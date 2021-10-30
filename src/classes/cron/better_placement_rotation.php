@@ -1,13 +1,7 @@
 <?php
 
 //FILE_NAME.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4.2-17-g87440d1
-##
-##################################
+
 
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');

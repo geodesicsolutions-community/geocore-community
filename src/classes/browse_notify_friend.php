@@ -1,13 +1,7 @@
 <?php
 
 //browse_notify_friend.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 class Notify_friend extends geoBrowse
 {

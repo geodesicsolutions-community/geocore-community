@@ -1,13 +1,7 @@
 <?php
 
 //auction_bid_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.10.0-18-g80bd7ca
-##
-##################################
+
 
 class Auction_bid extends geoSite
 {

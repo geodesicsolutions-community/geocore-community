@@ -1,13 +1,7 @@
 <?php
 
 //worldpay.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-162-g43f8bd7
-##
-##################################
+
 
 /*//availabel settings ($this->get(setting_name); (handy)
 worldpay_installation_id

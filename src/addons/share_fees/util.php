@@ -8,13 +8,7 @@ All rights reserved
 http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.6.0-8-g4a60471
-##
-##################################
+
 
 # Share Fees Addon
 

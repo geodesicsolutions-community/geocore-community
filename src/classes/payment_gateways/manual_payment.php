@@ -1,13 +1,7 @@
 <?php
 
 //manual_payment.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4.2-2-g07b2c84
-##
-##################################
+
 
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 

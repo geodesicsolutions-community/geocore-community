@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.1.0-45-gd416b12
-## 
-##################################
+
 
 /**
  * Class for search utilities.

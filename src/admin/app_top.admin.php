@@ -1,11 +1,5 @@
 <?php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.02.1-5-gd0d9f7b
-## 
-##################################
+
 
 //Anything that needs to be initiallized, started, or whatever at the beginning needs to go in here.
 define ('IN_ADMIN',1);

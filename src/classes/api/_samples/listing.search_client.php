@@ -1,12 +1,6 @@
 <?php
 //_samples/listing.search_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that searches a selected category for a specified phrase
 //both parameters are optional -- leaving them out will return all results

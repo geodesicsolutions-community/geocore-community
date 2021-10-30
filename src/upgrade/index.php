@@ -1,14 +1,5 @@
 <?php
 
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.05.0-24-g2bb59c9
-##
-##################################
-
 //make sure errors are not shown.
 error_reporting(0);
 

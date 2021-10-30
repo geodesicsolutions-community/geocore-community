@@ -1,20 +1,5 @@
 <?php
 
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    7.4.4-10-g8576128
-##
-##################################
-
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');
 }
@@ -55,7 +40,7 @@ if (geoPC::is_ent()) {
 }
 
 $this->log('Deleting all storefront subscriptions that should be expired already.', __line__);
-$sql = "DELETE FROM `geodesic_addon_storefront_subscriptions` 
+$sql = "DELETE FROM `geodesic_addon_storefront_subscriptions`
 	WHERE `expiration` < " . (geoUtil::time() - $grace) . " AND `onhold_start_time` = 0";
 $expire_subscriptions_results = $this->db->Execute($sql, array((int)$planRow['price_plan_id']));
 

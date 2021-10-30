@@ -1,13 +1,7 @@
 <?php
 
 //module_display_category_navigation_2.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.0.2-4-gf4d2a43
-##
-##################################
+
 
 $tpl_vars = array();
 

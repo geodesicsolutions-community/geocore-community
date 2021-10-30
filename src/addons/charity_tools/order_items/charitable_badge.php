@@ -1,19 +1,6 @@
 <?php
 
 //addons/charity_tools/order_items/charitable_badge.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.02.1-12-g223ffae
-##
-##################################
 
 
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';

@@ -1,13 +1,7 @@
 <?php
 
 //site_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-59-g1cb1d15
-##
-##################################
+
 
 
 class geoSite

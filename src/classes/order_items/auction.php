@@ -1,13 +1,7 @@
 <?php
 
 //order_items/auction.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-74-g9a426ec
-##
-##################################
+
 
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';
 require_once CLASSES_DIR . 'order_items/_listing_placement_common.php';

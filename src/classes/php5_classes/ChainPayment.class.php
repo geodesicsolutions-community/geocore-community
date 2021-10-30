@@ -6,13 +6,7 @@
  * @package System
  * @since Version 16.05.0
  */
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.09.0-38-gf2ddb79
-##
-##################################
+
 
 /**
  * geoChainPayment is a structure to support creating and processing Chain Payments via Paypal's Adaptive Payments API.

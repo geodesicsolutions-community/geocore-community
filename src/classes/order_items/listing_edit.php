@@ -1,13 +1,7 @@
 <?php
 
 //order_items/listing_edit.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.07.0-6-gc04a964
-##
-##################################
+
 
 require_once CLASSES_DIR . 'order_items/_listing_placement_common.php';
 

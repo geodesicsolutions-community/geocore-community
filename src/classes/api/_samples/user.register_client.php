@@ -1,12 +1,6 @@
 <?php
 //_samples/user.register_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-## 
-##################################
+
 
 //Sample API client, that uses the core.user.edit api call to edit a user's info
 

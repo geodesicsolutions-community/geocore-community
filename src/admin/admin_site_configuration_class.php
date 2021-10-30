@@ -1,13 +1,7 @@
 <?php
 
 // admin_site_configuration_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.12.0-12-g1fa40c1
-##
-##################################
+
 
 class Site_configuration extends Admin_site
 {

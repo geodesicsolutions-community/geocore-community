@@ -1,19 +1,6 @@
 <?php
 
 //addons/storefront/setup.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    7.6.3-100-g1d1f4e9
-##
-##################################
 
 # storefront Addon
 require_once ADDON_DIR . 'storefront/info.php';

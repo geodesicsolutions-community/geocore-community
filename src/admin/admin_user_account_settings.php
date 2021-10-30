@@ -1,13 +1,7 @@
 <?php
 
 // admin_user_account_settings.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.01.0-31-gb28e09b
-##
-##################################
+
 
 /**
  * Switches, toggles, and the like for options relating to the User Account Home Page.

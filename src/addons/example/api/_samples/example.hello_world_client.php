@@ -3,9 +3,9 @@
 /**
  * This is a sample "hello world" stand-alone Remote API client script, that uses
  * the {@link hello_world.php}.
- * 
+ *
  * Note: This is intended for people that are familiar with editing PHP files.
- * 
+ *
  * Instructions for using this as a stand-alone API client:
  * 1.	Edit this file:  Look for the line that starts with "$xmlrpc_location".
  *  	Change it to:
@@ -21,24 +21,11 @@
  *   	classes/rpc/XMLRPC.class.php
  * 5.	In a web browser, visit the file you uploaded in step 3.  You should see
  * 	the results of the API call.
- * 
+ *
  * @author Geodesic Solutions, LLC
  * @package ExampleAddon
  */
 
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2013 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## ##    ccda4ac
-## 
-##################################
 
 // ---- Required settings ---- //
 
@@ -52,7 +39,7 @@ $xmlrpc_location = '../../../../classes/rpc/XMLRPC.class.php';
 
 /**
  * url of geo_api.php file, something like "https://mysite.com/geo_api.php"
- * Note: recommended to use https for a secure connection, but if your 
+ * Note: recommended to use https for a secure connection, but if your
  * server does not have SSL, you can use http instead.
  * @var string
  */

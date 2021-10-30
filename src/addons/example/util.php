@@ -13,20 +13,6 @@
  * @package ExampleAddon
  */
 
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2013 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    2.5.3-11-gbaacf2d
-##
-##################################
 
 # Example Addon
 
@@ -34,6 +20,7 @@ see license attached to distribution
  * It should already be included, but just to make sure since we extend the
  * example info class, require it here.
  */
+
 require_once ADDON_DIR . 'example/info.php';
 
 /**

@@ -1,13 +1,7 @@
 <?php
 
 //user_management_favorites.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.07.0-2-gffc3361
-##
-##################################
+
 
 class User_management_favorites extends geoSite
 {

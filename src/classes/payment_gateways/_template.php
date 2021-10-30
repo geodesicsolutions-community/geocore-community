@@ -9,18 +9,13 @@
  * @since Version 4.0.0
  */
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.2beta3-76-gc9a512f
-##
-##################################
+
 
 /**
  * This requires the geoPaymentGateway class, so include it just to be on the
  * safe side.
  */
+
 require_once CLASSES_DIR . PHP5_DIR . 'PaymentGateway.class.php';
 
 /**

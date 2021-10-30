@@ -1,13 +1,7 @@
 <?php
 
 // admin_beta_settings.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 
 class Beta_configuration

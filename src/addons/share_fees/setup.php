@@ -8,13 +8,7 @@ All rights reserved
 http://geodesicsolutions.com
 see license attached to distribution
 **************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.2-32-ga1cbed0
-##
-##################################
+
 
 # Shared Fees Addon
 require_once ADDON_DIR . 'share_fees/info.php';

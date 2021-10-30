@@ -1,20 +1,6 @@
 <?php
 
 //addons/example/info.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.09.0-96-gf3bd8a1
-##
-##################################
 
 # Bridge
 
@@ -812,7 +798,8 @@ of the files have been corrupted.', geoAdmin::NOTICE);
                 $default_val = (isset($install->setting_desc[$key]['value'])) ? '<br /><strong>Default Value: ' . geoString::specialChars($install->setting_desc[$key]['value']) . '</strong>' : '';
             }
             $html .= '
-
+
+
         	<div class="form-group">
 			<label class="control-label col-md-5 col-sm-5 col-xs-12">' . $install->setting_desc[$key]['name'] . ': <br /><span class="small_font" style="font-weight: normal;">' . $install->setting_desc[$key]['desc'] . $default_val . '</span></label>
 			  <div class="col-md-6 col-sm-6 col-xs-12">';

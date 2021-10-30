@@ -1,12 +1,6 @@
 <?php
 //Admin_Feedback.class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-79-gb63e5d8
-## 
-##################################
+
 
 if(!defined('FEEDBACK_ICON_MAX_VALUE')) {
 	define('FEEDBACK_ICON_MAX_VALUE', 2147483647);

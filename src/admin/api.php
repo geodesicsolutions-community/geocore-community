@@ -1,13 +1,7 @@
 <?php
 
 //api.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-83-g57c732f
-##
-##################################
+
 
 require_once CLASSES_DIR . PHP5_DIR . 'API.class.php';
 

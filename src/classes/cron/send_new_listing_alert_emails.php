@@ -1,13 +1,7 @@
 <?php
 
 //send_new_listing_alert_emails.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-18-g45cfbcb
-##
-##################################
+
 
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');

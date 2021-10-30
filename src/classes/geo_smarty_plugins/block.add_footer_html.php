@@ -1,12 +1,6 @@
 <?php
 //block.add_footer_html.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.3beta2-114-g74766f6
-## 
-##################################
+
 
 //This fella takes care of {add_footer_html}...{/add_footer_html}
 function smarty_block_add_footer_html ($params, $content, Smarty_Internal_Template $smarty, &$repeat)

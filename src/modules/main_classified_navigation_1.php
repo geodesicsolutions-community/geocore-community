@@ -1,13 +1,7 @@
 <?php
 
 //module_display_main_category_navigation_1.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 
 if (isset($page->category_configuration->CATEGORY_NAME)) {

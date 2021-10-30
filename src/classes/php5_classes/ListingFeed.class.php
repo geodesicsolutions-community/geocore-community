@@ -7,13 +7,7 @@
  * @package System
  * @since Version 5.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.05.0-17-g706b8bd
-## 
-##################################
+
 
 /**
  * Class that helps to render RSS or other types of feeds based on list of listings.

@@ -1,13 +1,7 @@
 <?php
 
 //cashu.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.07.0-20-g8d4acde
-##
-##################################
+
 
 # CashU Payment Gateway
 # see https://www.cashu.com

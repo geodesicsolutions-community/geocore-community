@@ -1,13 +1,7 @@
 <?php
 
 //cron_manage.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.09.0-79-gb63e5d8
-##
-##################################
+
 
 require_once(CLASSES_DIR . PHP5_DIR . 'Cron.class.php');
 

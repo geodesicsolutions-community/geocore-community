@@ -1,12 +1,6 @@
 <?php
 //_samples/user.getToken_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.user.getToken api call to get a user's
 //token, to be able to use with other user related api calls

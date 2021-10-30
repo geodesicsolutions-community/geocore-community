@@ -1,11 +1,5 @@
 <?php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.02.1-8-ge7a5654
-## 
-##################################
+
 /**
  * This class can be used to store and display global notifications
  * How it works:

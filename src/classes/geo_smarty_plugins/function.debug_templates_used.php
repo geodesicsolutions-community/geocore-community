@@ -1,12 +1,6 @@
 <?php
 //function.debug_templates_used.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //This fella takes care of {debug_templates_used ...}
 

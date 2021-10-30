@@ -1,12 +1,6 @@
 <?php
 //app_top.common.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.07.0-69-g6b76412
-##
-##################################
+
 
 
 //set the error handler

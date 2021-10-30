@@ -1,13 +1,7 @@
 <?php
 
 //module_display_featured_pic_link.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 if (geoPC::is_ent() || geoPC::is_premier() || geoPC::is_basic()) {
     $tpl_vars = array (

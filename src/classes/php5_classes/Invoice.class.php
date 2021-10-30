@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.05.0-1-g0816868
-## 
-##################################
+
 
 require_once CLASSES_DIR . PHP5_DIR . 'Order.class.php';
 require_once CLASSES_DIR . PHP5_DIR . 'Transaction.class.php';

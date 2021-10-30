@@ -7,13 +7,7 @@
  * @package System
  * @since Version 4.0.4
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.10.0-9-g499da68
-## 
-##################################
+
 
 /**
  * This class is responsible for a lot of the image processing, along with 

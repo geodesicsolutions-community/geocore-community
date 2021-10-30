@@ -7,13 +7,7 @@
  * @since Version 3.1.0
  */
 
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.02.1-22-g120279e
-## 
-##################################
+
 
 /**
  * A hard-coded setting, forget what it's for at the moment.

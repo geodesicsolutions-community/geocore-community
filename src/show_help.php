@@ -1,13 +1,7 @@
 <?php
 
 //show_help.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-4-g881ff72
-##
-##################################
+
 
 include_once('app_top.common.php');
             //Formatting for help topics

@@ -1,13 +1,7 @@
 <?php
 
 //PaymentGateways.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.2.1-8-ge4be188
-##
-##################################
+
 
 if (class_exists('admin_AJAX') or die()) {
 }

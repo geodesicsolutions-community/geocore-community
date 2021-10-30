@@ -1,13 +1,7 @@
 <?php
 
 //send_ad_expiration_emails.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.07.0-82-g6d34ec1
-##
-##################################
+
 
 if (!defined('GEO_CRON_RUN')) {
     die('NO ACCESS');

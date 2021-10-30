@@ -1,13 +1,7 @@
 <?php
 
 //my_account_links.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.01.0-38-g6ec678f
-##
-##################################
+
 
 /*  With the new design changes, this module can potentially be called 3+ times on a page for different output, but with the same basic data
     This dummy class is just an easy way to cache the back-end processing for that and only do it once per pageload

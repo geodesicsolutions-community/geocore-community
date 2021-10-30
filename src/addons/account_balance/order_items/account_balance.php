@@ -1,14 +1,6 @@
 <?php
 
 //order_items/account_balance.php
-##########SVN Build Data##########
-##                              ##
-## This File's Revision:        ##
-##  $Rev::                    $ ##
-## File last change date:       ##
-##  $Date::                   $ ##
-##                              ##
-##################################
 
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';
 
@@ -244,7 +236,7 @@ class account_balanceOrderItem extends geoOrderItem
             $c1 .= " disabled='disabled'";
         }
         $status .= "<br />
-		
+
 			<select name='account_balance[status]' class='form-control' onchange='document.forms.account_balance_status.submit()'>
 				<option value='0' $c0>Fully Active</option>
 				<option value='1' $c1>Freeze Draws, Allow Adding, Auto Activate</option>

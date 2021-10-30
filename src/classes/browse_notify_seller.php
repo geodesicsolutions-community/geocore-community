@@ -1,13 +1,7 @@
 <?php
 
 //browse_notify_seller.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.07.0-14-gb29c620
-##
-##################################
+
 
 class Notify_seller extends geoBrowse
 {

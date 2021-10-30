@@ -1,12 +1,6 @@
 <?php
 //arrays.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-## 
-##################################
+
 
 $upgrade_array = array (
 	array (10203, 500656, 1, 'Your+payment+has+been+declined.+Please+verify+your+billing+and+payment+information+and+try+again.'),

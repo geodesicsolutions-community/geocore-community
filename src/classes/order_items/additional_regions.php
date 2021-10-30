@@ -8,13 +8,7 @@
  * @package System
  * @since Version 7.1.0
  */
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.02.1-12-g223ffae
-##
-##################################
+
 
 
 /**

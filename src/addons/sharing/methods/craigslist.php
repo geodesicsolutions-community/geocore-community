@@ -1,20 +1,6 @@
 <?php
 
 //addons/sharing/methods/craigslist.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    7.5.3-36-gea36ae7
-##
-##################################
 
 //NOTE: for a list of valid HTML that can be used on craigslist, see:
 // http://www.craigslist.org/about/help/html_in_craigslist_postings/details

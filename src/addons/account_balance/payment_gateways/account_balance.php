@@ -1,14 +1,6 @@
 <?php
 
 //account_balance.php
-##########SVN Build Data##########
-##                              ##
-## This File's Revision:        ##
-##  $Rev::                    $ ##
-## File last change date:       ##
-##  $Date::                   $ ##
-##                              ##
-##################################
 
 require_once CLASSES_DIR . PHP5_DIR . 'PaymentGateway.class.php';
 

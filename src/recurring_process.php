@@ -1,13 +1,7 @@
 <?php
 
 //recurring_process.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 //Make sure that clean inputs only un-does magic quotes
 define('CLEAN_INPUTS_MAGIC_ONLY', 1);

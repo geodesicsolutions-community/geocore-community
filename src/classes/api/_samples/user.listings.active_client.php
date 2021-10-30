@@ -1,12 +1,6 @@
 <?php
 //_samples/user.listings.active_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.user.listings.active api call to get a
 //list of active listings for a specific user

@@ -1,12 +1,6 @@
 <?php
 //arrays.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-## 
-##################################
+
 
 $upgrade_array = array (
 	array (37, 500181, 1, 'Seller%2FBuyer+On-Site+Payments%0D%0A'),

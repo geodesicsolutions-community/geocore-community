@@ -1,13 +1,7 @@
 <?php
 
 //send_negative_account_balance_emails.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4.0-34-gae530f5
-##
-##################################
+
 
 //This one sends e-mails to anyone with a negative account balance.
 

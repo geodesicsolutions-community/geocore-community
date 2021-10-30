@@ -1,12 +1,6 @@
 <?php
 //function.addon.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.1beta1-1082-ge7cf0e5
-## 
-##################################
+
 
 //This fella takes care of {addon ...}
 

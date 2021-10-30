@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.07.0-99-g0fdd6c1
-## 
-##################################
+
 
 /**
  * Utility class that holds various methods to do stuff with categories in the system.

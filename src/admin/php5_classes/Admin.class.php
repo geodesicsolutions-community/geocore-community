@@ -11,13 +11,7 @@
  * @since Version 4.0.0 (Renamed, used to be AdminPageAutoload.php)
  */
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.09.0-105-ga458f5f
-##
-##################################
+
 //the new page and menu auto loader.
 
 

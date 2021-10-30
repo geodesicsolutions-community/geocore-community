@@ -1,13 +1,7 @@
 <?php
 
 // admin_wysiwyg_config.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-59-g1cb1d15
-##
-##################################
+
 
 class wysiwyg_configuration
 {

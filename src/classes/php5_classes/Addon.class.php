@@ -5,13 +5,7 @@
  * @package System
  * @since Version 2.0.6b (just showing, addons have been around since then, although not as powerful as they are now)
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.6.3-90-g91832a9
-## 
-##################################
+
 
 /**
  * This is the class that handles anything and everything to do with addons.

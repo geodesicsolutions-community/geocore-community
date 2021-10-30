@@ -1,20 +1,7 @@
 <?php
 
 //addons/bulk_uploader/tokenizer.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 /**
  * When a remote image URL is used in the Bulk Uploader, this class copies the image to a local folder and saves a "token" linking the remote URL to its local copy.

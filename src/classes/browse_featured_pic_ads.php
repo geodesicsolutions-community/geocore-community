@@ -1,13 +1,7 @@
 <?php
 
 //browse_featured_pic_ads.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 
 class Browse_featured_pic_ads extends geoBrowse

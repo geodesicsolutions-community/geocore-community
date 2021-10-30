@@ -1,13 +1,7 @@
 <?php
 
 //payment_gateways/twocheckout.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-165-g43d12fb
-##
-##################################
+
 
 require_once CLASSES_DIR . PHP5_DIR . 'PaymentGateway.class.php';
 

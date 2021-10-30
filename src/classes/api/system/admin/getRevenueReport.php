@@ -1,13 +1,7 @@
 <?php
 
 //system/admin/getRevenueReport.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.3beta4-55-g4f44a5e
-##
-##################################
+
 
 if (!defined('IN_GEO_API')) {
     //exit('No access.');

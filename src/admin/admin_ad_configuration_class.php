@@ -1,13 +1,7 @@
 <?php
 
 // admin_ad_configuration_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.05.0-22-g4435795
-##
-##################################
+
 
 class Ad_configuration extends Admin_site
 {

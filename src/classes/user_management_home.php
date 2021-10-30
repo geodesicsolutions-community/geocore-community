@@ -1,13 +1,7 @@
 <?php
 
 //user_management_home.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.01.0-31-gb28e09b
-##
-##################################
+
 
 class User_management_home extends geoSite
 {

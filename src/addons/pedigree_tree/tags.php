@@ -1,19 +1,6 @@
 <?php
 
 //addons/pedigree_tree/tags.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    7.1beta1-836-g9f10868
-##
-##################################
 
 # Pedigree Tree
 require_once ADDON_DIR . 'pedigree_tree/info.php';

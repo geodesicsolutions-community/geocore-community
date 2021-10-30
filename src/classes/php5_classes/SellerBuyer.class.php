@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.4
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.10.0-19-gb267b7b
-## 
-##################################
+
 
 /**
  * Handles back-end for the seller/buyer payment gateways, to allow the buyer

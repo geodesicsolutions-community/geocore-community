@@ -7,13 +7,7 @@
  * @package System
  */
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-142-g79032f3
-##
-##################################
+
 
 /**
  * Used to hold database table names, used throughout the code.

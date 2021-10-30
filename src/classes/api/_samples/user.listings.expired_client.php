@@ -1,12 +1,6 @@
 <?php
 //_samples/user.listings.expired_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 //Sample API client, that uses the core.user.listings.expired api call to get a
 //list of expired listings for a specific user.  This ONLY retrieves listings

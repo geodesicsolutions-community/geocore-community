@@ -15,13 +15,7 @@
  *  returned, or false if there was a cache miss or error reading cache.
  */
 
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-## 
-##################################
+
 
 /**
  * Used to include a cache file.  Before this file is included,

@@ -1,13 +1,7 @@
 <?php
 
 //search_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.03.0-32-gff2db1f
-##
-##################################
+
 
 class Search_classifieds extends geoBrowse
 {

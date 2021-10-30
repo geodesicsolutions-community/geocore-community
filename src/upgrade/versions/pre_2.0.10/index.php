@@ -1,11 +1,5 @@
 <?php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.09.0-22-g019d772
-## 
-##################################
+
 
 include_once('app_top.upgrade.php');
 

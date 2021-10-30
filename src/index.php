@@ -1,13 +1,7 @@
 <?php
 
 //root file(index)
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.02.1-1-gbb9ee07
-##
-##################################
+
 
 //main loader
 

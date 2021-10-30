@@ -1,19 +1,6 @@
 <?php
 
 //addons/profile_pics/admin.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.09.0-44-g833ba7b
-##
-##################################
 
 
 require_once ADDON_DIR . 'profile_pics/info.php';

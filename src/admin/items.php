@@ -1,13 +1,7 @@
 <?php
 
 //items.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.07.0-19-gb626e1d
-##
-##################################
+
 
 class OrderItemManagement
 {

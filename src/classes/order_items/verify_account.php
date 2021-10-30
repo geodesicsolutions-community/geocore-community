@@ -1,13 +1,7 @@
 <?php
 
 //order_items/verify_account.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-73-gda0dfd6
-##
-##################################
+
 
 
 class verify_accountOrderItem extends geoOrderItem

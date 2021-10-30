@@ -1,13 +1,7 @@
 <?php
 
 //order_items/listing_charge_by_word.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.03.0-1-g484722c
-##
-##################################
+
 
 
 class listing_charge_by_wordOrderItem extends geoOrderItem

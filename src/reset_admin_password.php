@@ -1,13 +1,7 @@
 <?php
 
 //reset_admin_password.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 # -------- ADMIN PASSWORD RESET TOOL -------- #
 

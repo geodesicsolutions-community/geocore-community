@@ -1,13 +1,7 @@
 <?php
 
 //admin_classauction_tools.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    16.09.0-110-geca9b0d
-##
-##################################
+
 
 class Admin_classauction_tools extends Admin_site
 {

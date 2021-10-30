@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.1.0-33-gc09304b
-## 
-##################################
+
 
 /**
  * This class is to store accented chars, to be used by {@link geoString::removeAccents()}, mainly to keep the String.class.php file

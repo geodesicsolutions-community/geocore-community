@@ -1,20 +1,6 @@
 <?php
 
 //addons/core_display/info.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.09.0-96-gf3bd8a1
-##
-##################################
 
 # Storefront Addon
 class addon_core_display_info

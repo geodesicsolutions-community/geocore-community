@@ -43,13 +43,7 @@
  * @since Version 3.1.0
  */
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-4-g881ff72
-##
-##################################
+
 
 //keep from redirecting
 if (!defined('IS_ROBOT')) {

@@ -1,13 +1,7 @@
 <?php
 
 //get_image.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.05.0-10-g42beced
-##
-##################################
+
 
 
 require_once 'app_top.main.php';

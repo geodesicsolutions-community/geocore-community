@@ -1,13 +1,5 @@
 <?php
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.5.3-36-gea36ae7
-##
-##################################
-
 class optional4ImportItem extends geoImportItem
 {
     protected $_name = "Registration Optional Field 4";

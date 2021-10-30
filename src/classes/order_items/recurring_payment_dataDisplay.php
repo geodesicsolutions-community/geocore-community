@@ -1,13 +1,7 @@
 <?php
 
 //order_items/recurring_payment_dataDisplay.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.02.1-12-g223ffae
-##
-##################################
+
 
 
 class recurring_payment_dataDisplayOrderItem extends geoOrderItem

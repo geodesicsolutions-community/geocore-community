@@ -1,13 +1,7 @@
 <?php
 
 //user_management_ad_filters.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.07.0-12-g183f06e
-##
-##################################
+
 
 class User_management_ad_filters extends geoSite
 {

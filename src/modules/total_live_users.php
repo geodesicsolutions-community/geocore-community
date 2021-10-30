@@ -1,13 +1,7 @@
 <?php
 
 //module_total_live_users.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 
 $sql = "SELECT count(*) counter FROM geodesic_sessions";

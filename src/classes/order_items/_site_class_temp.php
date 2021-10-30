@@ -1,13 +1,7 @@
 <?php
 
 //order_items/_site_class_temp.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.04.0-5-ge04db22
-##
-##################################
+
 
 require_once CLASSES_DIR . 'site_class.php';
 

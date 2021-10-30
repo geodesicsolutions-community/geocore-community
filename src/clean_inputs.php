@@ -1,13 +1,7 @@
 <?php
 
 //clean_inputs.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 //list of keys to NOT filter.
 #READ BELOW FOR NOTE ON 3RD PARTY FIELDS

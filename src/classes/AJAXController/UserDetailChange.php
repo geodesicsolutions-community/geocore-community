@@ -1,13 +1,7 @@
 <?php
 
 //UserDetailChange.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.0.1-18-g337b864
-##
-##################################
+
 
 if (class_exists('classes_AJAX') or die('NO_ACCESS')) {
 }

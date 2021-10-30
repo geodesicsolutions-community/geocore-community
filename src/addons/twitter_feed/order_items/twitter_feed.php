@@ -1,19 +1,6 @@
 <?php
 
 //order_items/twitter_feed.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.05.0-17-g5113ae1
-##
-##################################
 
 // used by the Twitter Feed addon to allow a user to specify a Twitter username to grab the feed for in a listing
 

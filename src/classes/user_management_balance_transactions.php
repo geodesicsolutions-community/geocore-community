@@ -1,13 +1,7 @@
 <?php
 
 //user_management_balance_transactions.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-116-gfc55207
-##
-##################################
+
 
 class User_management_balance extends geoSite
 {

@@ -1,19 +1,6 @@
 <?php
 
 //addons/debugger_log/admin.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    16.09.0-95-g905fba0
-##
-##################################
 
 # Debugger Log Addon - for debugging/logging messages to file
 

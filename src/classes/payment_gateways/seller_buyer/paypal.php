@@ -1,13 +1,7 @@
 <?php
 
 //paypal.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.10.0-19-gb267b7b
-##
-##################################
+
 
 
 class paypalSellerBuyerGateway

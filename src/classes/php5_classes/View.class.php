@@ -7,13 +7,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.6.2-5-g1f14b37
-## 
-##################################
+
 
 /**
  * As the name implies, this is used for creating the page view.  It does take

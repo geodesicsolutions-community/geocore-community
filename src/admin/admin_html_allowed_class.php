@@ -1,13 +1,7 @@
 <?php
 
 // admin_html_allowed_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 class HTML_allowed extends Admin_site
 {

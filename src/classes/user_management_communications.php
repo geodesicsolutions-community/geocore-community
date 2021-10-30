@@ -1,13 +1,7 @@
 <?php
 
 //user_management_communications.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.02.0-6-g8fe9772
-##
-##################################
+
 
 class User_management_communications extends geoSite
 {

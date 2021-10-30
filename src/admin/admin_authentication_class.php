@@ -1,13 +1,7 @@
 <?php
 
 //authenticate_class.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    16.09.0-109-g68fca00
-##
-##################################
+
 
 class Admin_auth extends Admin_site
 {

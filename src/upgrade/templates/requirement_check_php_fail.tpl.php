@@ -1,12 +1,6 @@
 <?php
 //requirement_check_php_fail.tpl.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    16.03.0-3-gb5f334d
-## 
-##################################
+
 
 /*
  * used when PHP requirement check failes.

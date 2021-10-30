@@ -1,13 +1,7 @@
 <?php
 
 //module_display_category_quick_navigation.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.6.3-76-ga85fd85
-##
-##################################
+
 
 if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {
     //browsing disabled, do not show module contents

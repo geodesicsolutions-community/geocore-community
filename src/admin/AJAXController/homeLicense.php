@@ -1,13 +1,7 @@
 <?php
 
 //homeLicense.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.05.0-9-g5a9e167
-##
-##################################
+
 
 // DON'T FORGET THIS
 if (class_exists('admin_AJAX') or die()) {

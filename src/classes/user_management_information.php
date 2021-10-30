@@ -1,13 +1,7 @@
 <?php
 
 //user_management_information.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.10.0-20-g9ae085a
-##
-##################################
+
 
 require_once(CLASSES_DIR . 'site_class.php');
 

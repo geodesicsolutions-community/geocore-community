@@ -1,13 +1,7 @@
 <?php
 
 //module_display_subscategory_navigation_6.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.0.2-4-gf4d2a43
-##
-##################################
+
 
 $tpl_vars = array();
 

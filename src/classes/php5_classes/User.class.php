@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.0.1-39-g41b262a
-## 
-##################################
+
 
 /**
  * An object representative of a certain user in the system.

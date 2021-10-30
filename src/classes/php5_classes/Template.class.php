@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    17.03.0-9-g25302a8
-## 
-##################################
+
 
 /**
  * Smarty could be included via the autoloader in app_top.common.php, but still

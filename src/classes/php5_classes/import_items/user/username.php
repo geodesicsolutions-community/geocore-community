@@ -1,13 +1,5 @@
 <?php
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    7.4.4-9-ga3c3711
-##
-##################################
-
 class usernameImportItem extends geoImportItem
 {
     protected $_name = "Username";

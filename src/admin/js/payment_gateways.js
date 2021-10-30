@@ -1,12 +1,6 @@
 //payment_gateways.php
 /*
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.3.3-31-gc54c7f1
-## 
-##################################
+
 */
 
 

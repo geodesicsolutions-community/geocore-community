@@ -1,13 +1,7 @@
 <?php
 
 //home.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.04.0-12-g03921c2
-##
-##################################
+
 
 class geoAdminHome
 {

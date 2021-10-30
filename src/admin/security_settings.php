@@ -1,13 +1,7 @@
 <?php
 
 //security_settings.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-##
-##    17.01.0-1-gd81d036
-##
-##################################
+
 
 /**
  * Used for displaying/updating in the admin for security related stuff.

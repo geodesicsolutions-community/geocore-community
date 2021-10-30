@@ -1,14 +1,5 @@
 <?php
 
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    17.07.0-13-g1b8edf9
-##
-##################################
-
 //make sure loading in admin
 defined('IN_ADMIN') or die('No Access.');
 

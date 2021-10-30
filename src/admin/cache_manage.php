@@ -8,13 +8,7 @@
  * @since Version 3.1.0
  */
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 /**
  * Manages the General cache settings

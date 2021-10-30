@@ -1,13 +1,7 @@
 <?php
 
 //order_items/idev_notify.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.1.2-36-g991a1d7
-##
-##################################
+
 
 class idev_notifyOrderItem extends geoOrderItem
 {

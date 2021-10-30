@@ -1,20 +1,6 @@
 <?php
 
 //addons/bridge/bridges/geo_all.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2018 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## ##    7.6.3-54-g2a04c6e
-##
-##################################
 
 # Bridge Installation Type - Used for connecting to any Geo product
 # 3.1 or higher, to share users.
@@ -1027,7 +1013,7 @@ for this bridge.  Debug info, ' . $this->db->ErrorMsg(), true);
         $sql = "insert into geodesic_userdata (id,username,email,email2,newsletter,level,company_name,
 			business_type,firstname,lastname,address,address_2,zip,city,state,country,phone,phone2,fax,url,date_joined,
 			communication_type,rate_sum,rate_num,optional_field_1,optional_field_2,optional_field_3,optional_field_4,
-			optional_field_5,optional_field_6,optional_field_7,optional_field_8,optional_field_9,optional_field_10) 
+			optional_field_5,optional_field_6,optional_field_7,optional_field_8,optional_field_9,optional_field_10)
 		values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $query_data = array(

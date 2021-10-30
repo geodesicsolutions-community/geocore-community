@@ -1,13 +1,7 @@
 <?php
 
 //payment_gateways/paymentexpress.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.4.6-19-ga99ec3d
-##
-##################################
+
 
 require_once CLASSES_DIR . PHP5_DIR . 'PaymentGateway.class.php';
 

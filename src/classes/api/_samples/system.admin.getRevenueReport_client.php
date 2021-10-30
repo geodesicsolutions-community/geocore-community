@@ -1,12 +1,6 @@
 <?php
 //_samples/system.admin.getRevenueReport_client.php
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    7.3beta4-55-g4f44a5e
-## 
-##################################
+
 
 //Sample API client, that uses the core.system.getSetting api call to get a
 //setting just as if calling $db->get_site_setting($setting) within Geo environment

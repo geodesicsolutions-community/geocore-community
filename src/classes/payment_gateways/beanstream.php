@@ -10,17 +10,12 @@
  * @since Version 4.0.0
  */
 
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    7.5.3-36-gea36ae7
-##
-##################################
+
 
 /**
  * This extends the _ccPaymentGateway class, so need to include that file.
  */
+
 require_once CLASSES_DIR . 'payment_gateways/_cc.php';
 
 /**

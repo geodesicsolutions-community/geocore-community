@@ -1,13 +1,7 @@
 <?php
 
 //module_display_newest_link_2_week.php
-##########GIT Build Data##########
-##
-## File Changed In GIT Commit:
-## 
-##    6.0.7-2-gc953682
-##
-##################################
+
 
 if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {
     //browsing disabled, do not show module contents

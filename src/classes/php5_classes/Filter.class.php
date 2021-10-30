@@ -6,13 +6,7 @@
  * @package System
  * @since Version 4.0.0
  */
-##########GIT Build Data##########
-## 
-## File Changed In GIT Commit:
-## 
-##    18.02.0
-## 
-##################################
+
 
 /**
  * A few utility methods, good for filtering stuff.
