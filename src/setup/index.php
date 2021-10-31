@@ -90,15 +90,6 @@ if (in_array($step, $redoneSteps)) {
         $product_type = 4;
     }
     switch ($step) {
-        case 'requirements':
-            /*  Start Checking requirements */
-            include_once('requirement_check.php');
-            $template_main = file_get_contents('requirement_check.html');
-            requirement_check($template_main);
-            $template = str_replace('(!MAINBODY!)', $template_main, $template);
-            /*  End Checking PHP Version info   */
-            break;
-
         case 'config.php':
             /*  Start Checking config.php info  */
             include_once("config_check.php");
@@ -161,10 +152,14 @@ if (in_array($step, $redoneSteps)) {
                 $template = str_replace(
                     "(!SUCCESS!)",
                     "Your information was saved successfully!<br /><br />" .
-                                                        "Please click the \"continue\" button to move on to the next step.",
+                    "Please click the \"continue\" button to move on to the next step.",
                     $template
                 );
-                $template = str_replace("(!CONTINUE!)", '<div id="submit_button"><a href="index.php?a=login" style="padding-top:.25em;">Continue</a></div>', $template);
+                $template = str_replace(
+                    "(!CONTINUE!)",
+                    '<div id="submit_button"><a href="index.php?a=login" style="padding-top:.25em;">Continue</a></div>',
+                    $template
+                );
             }
             /*  End saving site information */
             break;
@@ -192,11 +187,13 @@ if (in_array($step, $redoneSteps)) {
                 // Successfully saved
                 $template = str_replace(
                     "(!SUCCESS!)",
-                    "Successfully saved your image information.  All of your directory permissions seem to be in order.<br /><br />" .
-                                        "Please click the \"continue\"  button to move on to the next step.",
+                    "Successfully saved your image information.  All of your directory permissions seem to be in order.
+                    <br /><br />" .
+                    "Please click the \"continue\"  button to move on to the next step.",
                     $template
                 );
-                $template = str_replace("(!CONTINUE!)", '<div id="submit_button"><a href="index.php?a=registration" style="padding-top:.25em;">Continue</a></div>', $template);
+                $template = str_replace("(!CONTINUE!)", '<div id="submit_button"><a href="index.php?a=registration"
+                    style="padding-top:.25em;">Continue</a></div>', $template);
             }
             /*  End saving image information    */
             break;
@@ -227,7 +224,8 @@ if (in_array($step, $redoneSteps)) {
                                         "Please click the \"continue\"  button to move on to the next step.",
                     $template
                 );
-                $template = str_replace("(!CONTINUE!)", '<div id="submit_button"><a href="index.php?a=email" style="padding-top:.25em;">Continue</a></div>', $template);
+                $template = str_replace("(!CONTINUE!)", '<div id="submit_button"><a href="index.php?a=email"
+                    style="padding-top:.25em;">Continue</a></div>', $template);
             }
             /*  End saving registration information */
             break;
@@ -243,96 +241,36 @@ if (in_array($step, $redoneSteps)) {
             $file = file_get_contents("congrats.html");
             $template = str_replace("(!MAINBODY!)", $file, $template);
 
-            if ($product_type == 1) {
-                $manual = "<a href=\"http://www.geodesicsolutions.com/products/auctions/enterprise/pdfmanual/enterprise_manual.pdf\">
-                    GeoAuctions Enterprise Product Manual</a>\n";
+            // Check for auctions or classifieds
+            $sql_query = "select auctions_url from geodesic_auctions_configuration";
+            $result = $db->Execute($sql_query);
+
+            if ($result) {
+                // Auctions
+                $url = $result->FetchNextObject();
+
 
                 // (!SOFTWARE_LINK!)
-                $sql_query = "select auctions_url from geodesic_auctions_configuration";
-                $result = $db->Execute($sql_query);
-                $url = $result->FetchNextObject();
                 $url_replace = "<a href=\"" . $url->AUCTIONS_URL . "\">" . $url->AUCTIONS_URL . "</a>";
 
                 // (!ADMIN_LINK!)
                 $path_parts = pathinfo($url->AUCTIONS_URL);
                 $admin_path = $path_parts['dirname'] . "/admin/index.php";
                 $admin_path = "<a href=\"" . $admin_path . "\">" . $admin_path . "</a>";
-            } elseif ($product_type == 2) {
-                $manual = "<a href=\"http://www.geodesicsolutions.com/products/classifieds/enterprise/pdfmanual/enterprise_manual.pdf\">
-                    GeoClassifieds Enterprise Product Manual</a>\n";
-
-                // (!SOFTWARE_LINK!)
+            } else {
                 $sql_query = "select  classifieds_url from geodesic_classifieds_configuration";
                 $result = $db->Execute($sql_query);
                 $url = $result->FetchNextObject();
-                $url_replace = "<a href=\"" . $url->CLASSIFIEDS_URL . "\">" . $url->CLASSIFIEDS_URL . "</a>";
-
-                // (!ADMIN_LINK!)
-                $path_parts = pathinfo($url->CLASSIFIEDS_URL);
-                $admin_path = $path_parts['dirname'] . "/admin/index.php";
-                $admin_path = "<a href=\"" . $admin_path . "\">" . $admin_path . "</a>";
-            } elseif ($product_type == 3) {
-                // TODO change later
-                $manual = "";
-
-                $path_parts = pathinfo($_SERVER['PHP_SELF']);
-                $path_parts['dirname'] = str_replace("setup", "", $path_parts['dirname']);
-
-                $url_replace = "http://" . $_SERVER['HTTP_HOST'] . $path_parts['dirname'];
-                $url_replace = "<a href=\"" . $url_replace . "\">" . $url_replace . "</a>";
-
-                $admin_path = 'http://' . $_SERVER['HTTP_HOST'] . $path_parts['dirname'] . "admin/index.php";
-                $admin_path = "<a href=\"" . $admin_path . "\">" . $admin_path . "</a>";
-            } elseif ($product_type == 4) {
-                $manual = "<a href=\"http://www.geodesicsolutions.com/products/classifieds/enterprise/pdfmanual/enterprise_manual.pdf\">
-                    GeoClassAuctions Enterprise Product Manual</a>\n";
 
                 // (!SOFTWARE_LINK!)
-                $sql_query = "select classifieds_url from geodesic_classifieds_configuration";
-                $result = $db->Execute($sql_query);
-                $url = $result->FetchNextObject();
                 $url_replace = "<a href=\"" . $url->CLASSIFIEDS_URL . "\">" . $url->CLASSIFIEDS_URL . "</a>";
 
                 // (!ADMIN_LINK!)
                 $path_parts = pathinfo($url->CLASSIFIEDS_URL);
                 $admin_path = $path_parts['dirname'] . "/admin/index.php";
                 $admin_path = "<a href=\"" . $admin_path . "\">" . $admin_path . "</a>";
-            } elseif (($product_type == 5) || ($product_type == 6)) {
-                // Check for auctions or classifieds
-                $sql_query = "select auctions_url from geodesic_auctions_configuration";
-                $result = $db->Execute($sql_query);
-                if ($result) {
-                    // Auctions
-                    $url = $result->FetchNextObject();
-
-                    $manual = "<a href=\"http://www.geodesicsolutions.com/products/auctions/enterprise/pdfmanual/enterprise_manual.pdf\">
-                        GeoAuctions Enterprise Product Manual</a>\n";
-
-                    // (!SOFTWARE_LINK!)
-                    $url_replace = "<a href=\"" . $url->AUCTIONS_URL . "\">" . $url->AUCTIONS_URL . "</a>";
-
-                    // (!ADMIN_LINK!)
-                    $path_parts = pathinfo($url->AUCTIONS_URL);
-                    $admin_path = $path_parts['dirname'] . "/admin/index.php";
-                    $admin_path = "<a href=\"" . $admin_path . "\">" . $admin_path . "</a>";
-                } else {
-                    $sql_query = "select  classifieds_url from geodesic_classifieds_configuration";
-                    $result = $db->Execute($sql_query);
-                    $url = $result->FetchNextObject();
-
-                    $manual = "<a href=\"http://www.geodesicsolutions.com/products/classifieds/enterprise/pdfmanual/enterprise_manual.pdf\">
-                        GeoClassifieds Enterprise Product Manual</a>\n";
-
-                    // (!SOFTWARE_LINK!)
-                    $url_replace = "<a href=\"" . $url->CLASSIFIEDS_URL . "\">" . $url->CLASSIFIEDS_URL . "</a>";
-
-                    // (!ADMIN_LINK!)
-                    $path_parts = pathinfo($url->CLASSIFIEDS_URL);
-                    $admin_path = $path_parts['dirname'] . "/admin/index.php";
-                    $admin_path = "<a href=\"" . $admin_path . "\">" . $admin_path . "</a>";
-                }
             }
-            $template = str_replace("(!MANUAL!)", $manual, $template);
+
             //$template = str_replace("(!SOFTWARE_LINK!)", $url_replace, $template);
             $template = str_replace("(!ADMIN_LINK!)", $admin_path, $template);
 

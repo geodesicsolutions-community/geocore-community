@@ -107,7 +107,6 @@ if (!$mysql) {
 }
 
 ?>
-
 <form action="index.php?step=config.php" method="post" id="req_form">
 
 	<div style="border: 2px solid #1382B7; padding: 3px; background-color:#FFF;">

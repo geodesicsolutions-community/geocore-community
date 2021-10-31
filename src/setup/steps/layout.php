@@ -50,7 +50,7 @@ jQuery(function () {
 					<h1 id="login_product_name">&nbsp;</h1>
 					<h2 id="login_software_type">&nbsp;</h2>
 					<div id="login_form_fields">
-                        <?= require($step . '.php') ?>
+                        <?php require($step . '.php'); ?>
 					</div>
 				</div>
 				<div style="clear: both;"></div>
