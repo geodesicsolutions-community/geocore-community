@@ -1,0 +1,2 @@
+<?php
+// stop folder index
