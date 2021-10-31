@@ -4,3 +4,6 @@
 
 # Do not commit vendor libraries
 src/vendor/
+
+# Do not commit config.php
+src/config.php
