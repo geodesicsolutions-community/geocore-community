@@ -5,9 +5,15 @@ function sql($db, &$template)
     include("product.php");
     // Check for how many sql files are in the directory
     if ($handle = opendir('../sql/')) {
-        $file_array = array();
+        $file_array = [];
+        $ignore = [
+            '.',
+            '..',
+            '.htaccess',
+            'index.php',
+        ];
         while (false !== ($file = readdir($handle))) {
-            if ($file != "." && $file != ".." && preg_match("/^[a-z0-9_]+\.sql$/i", $file)) {
+            if (!in_array($file, $ignore) && preg_match("/^[a-z0-9_]+\.sql$/i", $file)) {
                 $file_array[] = '../sql/' . $file;
             }
         }
