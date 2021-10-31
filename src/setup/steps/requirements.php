@@ -4,11 +4,6 @@
  * Display the requirement step
  */
 
-function phpVersionCheck(&$version_num)
-{
-    return version_compare(phpversion(), "5.4.0") >= 0;
-}
-
 function mysqlCheck(&$text, $phpCheck)
 {
     if (!function_exists('mysql_connect') && !function_exists('mysqli_connect')) {
@@ -87,7 +82,8 @@ $continue = $continuePass;
 
 
 ////PHP VERSION CHECK
-$php = phpVersionCheck($version_num);
+$phpVersionText = phpversion();
+$php = version_compare($phpVersionText, "5.4.0") >= 0;
 $phpVersionResult = $php ? $passed : $failed;
 
 if (!$php) {
