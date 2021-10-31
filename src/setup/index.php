@@ -82,9 +82,6 @@ if (in_array($step, $redoneSteps)) {
 
     $template = file_get_contents("main.html");
 
-    //already done above, is this needed here for geocore?
-    //if(isset($_GET['step']))
-    //  $step = $_GET['step'];
     if (!isset($product_type) || $product_type != 3) {
         //ugly hack, need to re-do the setup process to not use product type...
         $product_type = 4;
@@ -117,6 +114,7 @@ if (in_array($step, $redoneSteps)) {
             break;
 
         case $_GET['step']:
+            // This one is odd but...
         case 'sql':
             /*  Start running sql statements    */
             include_once("sql.php");
