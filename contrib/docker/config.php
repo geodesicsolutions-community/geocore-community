@@ -1,5 +1,5 @@
 <?php
-// config.php version used for docker - automatically copied into place by docker build
+// config.php version used for docker - need to copy into src folder
 
 $db_host = 'db';
 $db_username = 'geocore-community';
