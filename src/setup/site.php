@@ -26,7 +26,7 @@ function site($db, $product, &$template, $error = 0)
     }
 
     $file = file_get_contents("site.html");
-    $file = "<form name=url_data action=" . INSTALL . "?a=site_save method=post>\n\t" .
+    $file = "<form name=url_data action=index.php?a=site_save method=post>\n\t" .
             $file .
             "</form>";
 
@@ -41,7 +41,7 @@ function site($db, $product, &$template, $error = 0)
         $template
     );
 
-    $url_path = str_replace("setup/" . INSTALL, "", $_SERVER["PHP_SELF"]);
+    $url_path = str_replace("setup/index.php", "", $_SERVER["PHP_SELF"]);
 
     // Application URL
     $template = str_replace("(!APP_URL_LABEL!)", "Application URL:", $template);

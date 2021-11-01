@@ -29,11 +29,11 @@ function registration($db, $product, &$template, $errors = 0, $config = 0)
     }
 
     $file = file_get_contents("registration.html");
-    $file = "<form name=url_data action=" . INSTALL . "?a=registration_save method=post>\n\t" .
+    $file = "<form name=url_data action=index.php?a=registration_save method=post>\n\t" .
             $file .
             "</form>";
 
-    $url_path = str_replace("setup/" . INSTALL, "", $_SERVER["PHP_SELF"]);
+    $url_path = str_replace("setup/index.php", "", $_SERVER["PHP_SELF"]);
 
     $template = str_replace("(!MAINBODY!)", $file, $template);
     $template = str_replace("(!BACK!)", "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">", $template);

@@ -14,7 +14,7 @@
 function image(&$template, $product_id, $error = 0)
 {
     $file = file_get_contents("image.html");
-    $file = "<form name=save action=" . INSTALL . "?a=image_save method=post>" . $file;
+    $file = "<form name=save action=index.php?a=image_save method=post>" . $file;
     $template = str_replace("(!MAINBODY!)", $file, $template);
     $template = str_replace("(!BACK!)", "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">", $template);
 
@@ -104,8 +104,7 @@ function image(&$template, $product_id, $error = 0)
     $template = str_replace("(!UPLOAD_SIZE!)", $string, $template);
 
     $template = str_replace("(!SUBMIT!)", "<div id='submit_button'><input type='submit' class='theButton' value='Save'></div>", $template);
-    //$template = str_replace("(!SKIP!)", "<form method=post action=\"".INSTALL."?a=registration\"><input type=submit value=\"Skip >>\"></form>", $template);
-    $template = str_replace("(!SKIP!)", "<a href=" . INSTALL . "?a=registration class='skip_link'>Skip this step</a></form>", $template);
+    $template = str_replace("(!SKIP!)", "<a href=index.php?a=registration class='skip_link'>Skip this step</a></form>", $template);
 
     return 0;
 }

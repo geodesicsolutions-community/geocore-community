@@ -6,15 +6,8 @@ error_reporting(0);
 define('MIN_MYSQL', '4.1.0');
 define('MIN_PHP', '5.4.0');
 
-//un-comment to see errors..
+// un-comment to see errors..
 //ini_set('display_errors','stdout');
-
-//Fix for stupid sites that have magic_quotes_runtime turned on...  Must turn it off!
-if (function_exists('set_magic_quotes_runtime') && get_magic_quotes_runtime()) {
-    //must check for function first, since function will be removed from PHP in
-    //future, along with ability to turn this stupid setting on.  Hooray!
-    set_magic_quotes_runtime(false);
-}
 
 //make sure we have enough memory to load the upgrade script, since it takes
 //more than normal.

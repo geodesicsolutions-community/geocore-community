@@ -26,7 +26,7 @@ function email($db, $product, &$template)
 
     // Replace (!MAINBODY!) with file template
     $file = file_get_contents("email.html");
-    $file = "<form name=save action=" . INSTALL . "?a=congrats method=post>" . $file . "</form>";
+    $file = "<form name=save action=\"index.php?a=congrats\" method=post>" . $file . "</form>";
     $template = str_replace("(!MAINBODY!)", $file, $template);
     $template = str_replace("(!BACK!)", "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">", $template);
 

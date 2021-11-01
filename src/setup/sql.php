@@ -1,23 +1,19 @@
 <?php
 
-/*
- *	Copyright (c) 2004 Geodesic Solutions, LLC
- *	GeoInstaller
- *	All rights reserved
- *	http://www.geodesicsolutions.com
- *
- *	Module:		SQL Module
- *	Filename:	sql.php
- */
-
 function sql($db, &$template)
 {
     include("product.php");
     // Check for how many sql files are in the directory
     if ($handle = opendir('../sql/')) {
-        $file_array = array();
+        $file_array = [];
+        $ignore = [
+            '.',
+            '..',
+            '.htaccess',
+            'index.php',
+        ];
         while (false !== ($file = readdir($handle))) {
-            if ($file != "." && $file != ".." && preg_match("/^[a-z0-9_]+\.sql$/i", $file)) {
+            if (!in_array($file, $ignore) && preg_match("/^[a-z0-9_]+\.sql$/i", $file)) {
                 $file_array[] = '../sql/' . $file;
             }
         }
@@ -44,8 +40,8 @@ function sql($db, &$template)
                 //echo is_string(current($file_array)).'<br>';
                 splitSqlFile(current($file_array), $db);
                 //redirect to self
-                $url_path = str_replace(INSTALL, "install_redirect.php", $_SERVER["PHP_SELF"]);
-                $redirect_url = "http://" . $_SERVER["HTTP_HOST"] . $url_path . "?key=" . ($key_to_files + 1) . "&install=" . INSTALL . "&total=" . (count($file_array));
+                $url_path = str_replace('index.php', "install_redirect.php", $_SERVER["PHP_SELF"]);
+                $redirect_url = "http://" . $_SERVER["HTTP_HOST"] . $url_path . "?key=" . ($key_to_files + 1) . "&total=" . (count($file_array));
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: no-cache');
                 header("Location: " . $redirect_url);
@@ -97,36 +93,24 @@ function splitSqlFile($filename, $db)
 
 function run_upgrade($template, $filename)
 {
-    //the upgrade step is no longer done!
-
     include("../config.php");
     include("product.php");
 
-    if (isset($product_type) && $product_type == 3 && file_exists("../" . $install[$product_type]["upgrade"]) && file_exists("../upgrade/index.php")) {
-        echo "Fatal Error: You must remove ../" . $install[$product_type]["upgrade"] . " or ../upgrade";
-        exit;
-    }
-
     $nextButton = "
-		<form action=\"" . INSTALL . "?a=site\" method=\"POST\">
+		<form action=\"index.php?a=site\" method=\"POST\">
 			<input type=\"submit\" name=\"continue\" value='Continue >>'>
 		</form>";
 
-    /* if(file_exists("../".$install[$product_type]["upgrade"])) {
-        $replace = array(
-            "(!MAINBODY!)" => file_get_contents("upgrade.html"),
-            "(!UPGRADE_IFRAME!)" => "<iframe src=\"".$filename."\" width=\"90%\"></iframe>",
-            "(!UPGRADE_MESSAGE!)" => "Your software is being upgraded.  Please wait for a completion message to appear in the box below before pressing continue.",
-            "(!CONTINUE!)" => $nextButton
-            );
-        return str_replace(array_keys($replace), array_values($replace), $template);
-    } else*/ if (file_exists("../upgrade/index.php")) {
+    if (file_exists("../upgrade/index.php")) {
         $embedUpgrade = true;
         include("../upgrade/index.php");
         $nextButton = "
-			<form action=" . INSTALL . "?a=site method=post>
+			<form action=\"index.php?a=site method=post>
 				<input type=submit name=continue value='Continue >>' id='nextButton' disabled>
 			</form>";
+        // @todo Figure out if/how this code is even reached... there is no Upgrade in the top upgrade/index.php but
+        // there is embedded in the pre_2.10.0...  Figure out if still used somehow and if so make this more
+        // clear what is happening.  But maybe this just "quiently fails"?
         $upgrade = new Upgrade("../upgrade/", $nextButton);
 
         $upgrade->doToCAELatest();
@@ -139,5 +123,5 @@ function run_upgrade($template, $filename)
             "(!MAINBODY!)" => $upgrade->body
             );
         return str_replace(array_keys($replace), array_values($replace), $template);
-}
+    }
 }
