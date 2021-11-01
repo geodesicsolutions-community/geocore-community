@@ -1,7 +1,8 @@
 <?php
 
-// GeoInstaller
-include("../config.php");
+if (file_exists('../config.php')) {
+    include("../config.php");
+}
 
 define('GEO_SETUP', 1);
 

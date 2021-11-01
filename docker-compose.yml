@@ -1,0 +1,32 @@
+version: "3.1"
+services:
+  web:
+    # we want to use the image which is build from our Dockerfile
+    build: .
+    ports:
+      - "8080:80"
+    # we depending on the mariadb backend
+    depends_on:
+      - db
+    # we mount the working dir into the container, handy for development
+    volumes:
+      - .:/var/www/html/
+      - ./contrib/docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: geocore-community
+      MYSQL_USER: geocore-community
+      MYSQL_PASSWORD: geocore-community
+    ports:
+      - "8089:3306"
+
+  # Set up easy way to admin mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8083:8080
