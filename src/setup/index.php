@@ -79,7 +79,6 @@ if (in_array($step, $redoneSteps)) {
     // Refactored step: does not bother with string replace, just uses things built in
     require 'steps/layout.php';
 } else {
-
     $template = file_get_contents("main.html");
 
     if (!isset($product_type) || $product_type != 3) {

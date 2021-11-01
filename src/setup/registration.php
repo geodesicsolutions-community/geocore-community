@@ -33,7 +33,7 @@ function registration($db, $product, &$template, $errors = 0, $config = 0)
             $file .
             "</form>";
 
-    $url_path = str_replace("setup/index.php" , "", $_SERVER["PHP_SELF"]);
+    $url_path = str_replace("setup/index.php", "", $_SERVER["PHP_SELF"]);
 
     $template = str_replace("(!MAINBODY!)", $file, $template);
     $template = str_replace("(!BACK!)", "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">", $template);

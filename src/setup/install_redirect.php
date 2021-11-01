@@ -11,7 +11,8 @@ if (!$_REQUEST["key"]) {
 $template = file_get_contents("main.html");
 
 // Generate URL paths
-function isSecure() {
+function isSecure()
+{
     return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443;
 }
 $http = isSecure() ? 'https' : 'http';

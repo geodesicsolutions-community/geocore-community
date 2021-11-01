@@ -6,8 +6,11 @@ function dbtest(&$template)
     $file = file_get_contents("dbtest.html");
     $file = "<form name=\"db_test\" action=\"index.php?a=sql\" method=\"post\">$file</form>";
     $template = str_replace("(!MAINBODY!)", $file, $template);
-    $template = str_replace("(!BACK!)", "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">",
-        $template);
+    $template = str_replace(
+        "(!BACK!)",
+        "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">",
+        $template
+    );
 
     if (!file_exists('../config.php')) {
         $template = str_replace("(!DRIVER_ERROR!)", "ERROR!!! No config.php file detected.
@@ -49,14 +52,17 @@ function dbtest(&$template)
                 ) {
                     $template = str_replace("(!VERSION_ERROR!)", "<br>The Wizard has detected that there is already an
                         older version of the software installed in the database.<br><br>", $template);
-                    $template = str_replace("(!SUCCESS!)", "Please either follow the
+                    $template = str_replace(
+                        "(!SUCCESS!)",
+                        "Please either follow the
                         <a href='https://geodesicsolutions.org/wiki/update/start' class='login_link'
                         target='_blank'> upgrade instructions</a> to preserve your old data
                         or manually remove the old tables from your database and restart this Wizard to continue with
                         a fresh install.<br /><br />If you are upgrading from an installation of GeoAuctions
                         Premier 2.0.4, GeoClassifieds Premier 2.0.4, or GeoClassifieds Basic 2.0.4 please
                         start the <a href='../pre_setup/' class='login_link'>pre-setup</a> routine.<br /><br />",
-                        $template);
+                        $template
+                    );
                     $errors++;
                     break;
                 }

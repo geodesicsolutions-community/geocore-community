@@ -105,33 +105,33 @@ if (!$mysql) {
 ?>
 <form action="index.php?step=config.php" method="post" id="req_form">
 
-	<div style="border: 2px solid #1382B7; padding: 3px; background-color:#FFF;">
-	  <table cellpadding="2" cellspacing="2">
-		<thead>
-			<tr>
-				<th class="heading1" colspan="3">Server Minimum Requirements Check</th>
-			</tr>
-			<tr>
-				<th width="12%" class="heading2">Req&nbsp;Met?</th>
-				<th width="30%" class="heading2">Requirement</th>
-				<th class="heading2a">Your Server's Settings:</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr style="background-color: #FFF;">
-				<td class="result"><?= $phpVersionResult ?></td>
-				<td class="req">PHP Version 7.4.0+</td>
-				<td class="setting"><?= $phpVersionText ?></td>
-			</tr>
-			<tr style="background-color: #FFF;">
-				<td class="result"><?= $mysqlResult ?></td>
-				<td class="req">MySQL Version 4.1.0+</td>
-				<td class="setting"><?= $mysqlText ?></td>
-			</tr>
-		</tbody>
-	  </table>
-	</div>
-	<br />
-	<?= $overall ?>
-	<?= $continue ?>
+    <div style="border: 2px solid #1382B7; padding: 3px; background-color:#FFF;">
+      <table cellpadding="2" cellspacing="2">
+        <thead>
+            <tr>
+                <th class="heading1" colspan="3">Server Minimum Requirements Check</th>
+            </tr>
+            <tr>
+                <th width="12%" class="heading2">Req&nbsp;Met?</th>
+                <th width="30%" class="heading2">Requirement</th>
+                <th class="heading2a">Your Server's Settings:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #FFF;">
+                <td class="result"><?= $phpVersionResult ?></td>
+                <td class="req">PHP Version 7.4.0+</td>
+                <td class="setting"><?= $phpVersionText ?></td>
+            </tr>
+            <tr style="background-color: #FFF;">
+                <td class="result"><?= $mysqlResult ?></td>
+                <td class="req">MySQL Version 4.1.0+</td>
+                <td class="setting"><?= $mysqlText ?></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <?= $overall ?>
+    <?= $continue ?>
 </form>

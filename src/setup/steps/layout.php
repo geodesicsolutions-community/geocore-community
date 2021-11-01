@@ -12,46 +12,46 @@
 
 <script>
 var moveMiddle = function () {
-	var divH = jQuery('#outerBox').innerHeight()/2;
-	var pageH = jQuery(window).innerHeight()/2;
-	jQuery('#outerBox').css({top: Math.max(0, (pageH-divH))});
+    var divH = jQuery('#outerBox').innerHeight()/2;
+    var pageH = jQuery(window).innerHeight()/2;
+    jQuery('#outerBox').css({top: Math.max(0, (pageH-divH))});
 }
 
 jQuery(window).on('resize', moveMiddle);
 
 jQuery(function () {
-	jQuery('#req_form').submit(function (e) {
-		if (!jQuery('#license').length || !jQuery('#license').prop('checked')) {
-			e.preventDefault();
-			alert('You must agree to the License Agreement to proceed.');
-		}
-	});
-	moveMiddle();
+    jQuery('#req_form').submit(function (e) {
+        if (!jQuery('#license').length || !jQuery('#license').prop('checked')) {
+            e.preventDefault();
+            alert('You must agree to the License Agreement to proceed.');
+        }
+    });
+    moveMiddle();
 });
 </script>
 
 </head>
 <body>
-	<div id="outerBox">
-		<div id="login_box">
-			<div id="login_sub">
-				<div id="login_left">
-					<div id="login_left_list"></div>
-					<ul>
-						<li style="list-style-image: none; list-style: none;">&nbsp;</li>
-						<li><a href="https://geodesicsolutions.com/wiki/" target="_blank">User Manual</a></li>
-					</ul>
-				</div>
-				<div id="login_right">
-					<h1 id="login_product_name">&nbsp;</h1>
-					<h2 id="login_software_type">&nbsp;</h2>
-					<div id="login_form_fields">
+    <div id="outerBox">
+        <div id="login_box">
+            <div id="login_sub">
+                <div id="login_left">
+                    <div id="login_left_list"></div>
+                    <ul>
+                        <li style="list-style-image: none; list-style: none;">&nbsp;</li>
+                        <li><a href="https://geodesicsolutions.com/wiki/" target="_blank">User Manual</a></li>
+                    </ul>
+                </div>
+                <div id="login_right">
+                    <h1 id="login_product_name">&nbsp;</h1>
+                    <h2 id="login_software_type">&nbsp;</h2>
+                    <div id="login_form_fields">
                         <?php require($step . '.php'); ?>
-					</div>
-				</div>
-				<div style="clear: both;"></div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
