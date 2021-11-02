@@ -190,10 +190,10 @@ class Upgrade {
 	 * @var bool
 	 */
 	var $ajax = false;
-	
+
 	/**
 	 * Use this to redirect where PHP headers cannot
-	 * 
+	 *
 	 * @var string
 	 */
 	var $redirect = "";
@@ -419,7 +419,7 @@ class Upgrade {
 			}
 		}
 	}
-	
+
 	/**
 	 * Execute multiple SQL queries
 	 * $sql should be a string of SQL queries, one per line, each line ending with a semicolon
@@ -438,7 +438,7 @@ class Upgrade {
 	}
 	/**
 	 * Connect the ADODB database at Upgrade::$db
-	 * 
+	 *
 	 * @uses DataAccess::getInstance now uses the data access class for all db access.
 	 */
 	function connectDB()
@@ -533,7 +533,7 @@ class Upgrade {
 	 * @uses Upgrade::$versionNumber
 	 * @uses Upgrade::addPricePlans()
 	 */
-	function doToCAELatest($type=1) 
+	function doToCAELatest($type=1)
 	{
 		$this->connectDB();
 
@@ -564,14 +564,14 @@ class Upgrade {
 		ALTER TABLE `geodesic_classifieds_configuration` ADD `email_server_type` ENUM( \"sendmail\", \"smtp_standard\", \"smtp_tls\", \"smtp_ssl\", \"smtp_auth_standard\", \"smtp_auth_tls\", \"smtp_auth_ssl\" ) NOT NULL DEFAULT '$default_type' AFTER `email_configuration` ;
 		ALTER TABLE `geodesic_classifieds_configuration` ADD `email_SMTP_port` INT( 5 ) NOT NULL DEFAULT '$default_smtp_port' AFTER `email_SMTP_server` ;
 "; //needs to end with ;\n or the last query will not work.
-		
+
 		if (!$this->db->get_site_setting('required_upgraded'))
-		{	
-			$this->db->set_site_setting('required_upgraded',1);		
+		{
+			$this->db->set_site_setting('required_upgraded',1);
 		}
-		
+
 		$pieces = array();
-		
+
 		$this->splitSqlFile($pieces, $sql_query);//>batchExecute($sql_query);
 		//var_dump($pieces);
 		//echo "<span class = nongreen>General updates to database - </span><span class = green>success!</span><br>\n";
@@ -694,7 +694,7 @@ class Upgrade {
 				}
 			}
 		}
-		
+
 		//storefront message tweaks
 		$sql_query = "update geodesic_pages_messages set
 			name = \"Please choose a main category\"
@@ -705,8 +705,8 @@ class Upgrade {
 			description = \"Used in the statement explaining that the category chosen has subcategories so would the user choose one of the subcategories or affirm placement in the current category.\"
 			where message_id = 463";
 		$update_result = $this->Execute($sql_query);
-		
-		
+
+
 		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		//ENSURE ALL TABLES CONTAINING CREDIT CARD NUMBERS ARE ENCRYPTED . . . IF NOT, EXTRACT, ENCRYPT
 		//AND THEN RE-INSERT BOTH THE ENCRYPTED CC_NUMBER AND IT'S DECRYPTION_KEY
@@ -1190,7 +1190,7 @@ class Upgrade {
 			$manual_create_result = $this->Execute($sql_query);
 			if ("calculating" !== $this->state && !$manual_create_result) echo "<br><font color=red>error in creating - geodesic_cc_manual_transactions</font><br>QUERY - $sql_query<BR>";
 		}
-		
+
 		////////add paymentexpress.com
 		//////////////////////
 		//add cc paypal payment processing
@@ -1276,7 +1276,7 @@ class Upgrade {
 				('', '', '', 'USD', '')";
 			$this->Execute($sql_query);
 		}
-		//echo "<br><b>Internet CC Paymentexress Installed<br>";		
+		//echo "<br><b>Internet CC Paymentexress Installed<br>";
 
 		// Check for feedback icons
 		$sql_query = "select * from geodesic_auctions_feedback_icons";
@@ -1304,10 +1304,10 @@ class Upgrade {
 		{
 			//icons already there...do not insert any
 		}
-		
+
 		//set default site wide settings.
 		$this->setDefaultSiteSettings();
-		
+
 		// Check for version number
 		//$sql_query = "select * from geodesic_version";
 		//$result = $this->Execute($sql_query);
@@ -1350,7 +1350,7 @@ class Upgrade {
 		if(!$this->fieldExists("geodesic_classifieds_configuration", "license"))
 			$this->addLicenseField();
 	} //end of doToCAELatest
-	
+
 	/**
 	 * Main function for Auctions to ClassAuctions upgrade
 	 *
@@ -1743,14 +1743,14 @@ class Upgrade {
 	 */
 	function Execute($query, $override=false) {
 		$this->connectDB();
-		
+
 		$bufferChar = $this->ajax ? "|" : ' ';
 		if ($this->state == 'calculating'){
 			$this->totalQueries = isset($this->totalQueries) ? ($this->totalQueries+1) : 1;
 		} else  {
 			$this->currentQuery = isset($this->currentQuery) ? ($this->currentQuery+1) : 1;
 		}
-		
+
 		if ($this->state != "calculating"){
 			// There has [NOT]been 1% progress
 			//$this->lastPercent = intval(($this->currentQuery/$this->totalQueries) * 100 );
@@ -1916,7 +1916,7 @@ class Upgrade {
 	    $string_start = '';
 	    $in_string    = FALSE;
 	    $time0        = time();
-		
+
 		for ($i = 0; $i < $sql_len; ++$i) {
 	        $char = $sql[$i];
 
@@ -2421,7 +2421,7 @@ class Upgrade {
 	function runUpgrades() {
 		$nextStageText = "Database updated to 2.0.10b.  <input type=\"submit\" onclick=\"javascript:location.href='../../index.php?run=continue'\" value=\"Next &gt;\" />";
 		$runUpgradesAgain = '<a href=\"index.php\"><strong>Run 2.0.10b Upgrades Again</strong></a>';
-		
+
 		$ajax_link = 'index.php?step=ajax&amp;upgrade=doToCAELatest&amp;totalQueries=2000';
 		$forceAjax = '<a href="'.$ajax_link.'"> &nbsp; </a>';
 		session_start();
@@ -2431,7 +2431,7 @@ class Upgrade {
 				<p  style='margin-left:25%;text-indent:-20px;text-align:left;'>
 					Goto:<br>
 						<a href='../admin/index.php'>Administration homepage</a><br>
-						<a href='../index.php'>Frontend homepage</a><br> 
+						<a href='../index.php'>Frontend homepage</a><br>
 						<a href='index.php'>Run pre-2.0.10b upgrades From Beginning</a><br />
 						<a href=\"../../index.php\"><strong>Continue to Main Upgrades</strong></a> -- Complete  once pre-2.0.10 upgrades complete successfully.
 				</p> -->";
@@ -2480,7 +2480,7 @@ class Upgrade {
 				$this->body .= "Upgrading software<br>
 					<em style='font-size: small;'>This may take a few minutes. Please be patient.</em><br>
 					".$this->addLoadingBar("", $this->totalQueries)."
-					<input type='button' value='Next' id='nextButton' onclick='javascript:location.href=\"index.php?step=doMainUpgrade\"' disabled>";//../../index.php?run=continue\"' disabled>"; 
+					<input type='button' value='Next' id='nextButton' onclick='javascript:location.href=\"index.php?step=doMainUpgrade\"' disabled>";//../../index.php?run=continue\"' disabled>";
 				break;
 
 			case "oldAEtoCAE":
@@ -2492,7 +2492,7 @@ class Upgrade {
 				$this->body .= "Upgrading software<br>
 					<em style='font-size: small;'>This may take a few minutes. Please be patient.</em><br>
 					".$this->addLoadingBar("doOldAEToCAE", $this->totalQueries)."
-					<input type='button' value='Next' id='nextButton' onclick='javascript:location.href=\"index.php?step=doMainUpgrade\"' disabled>";//index.php?run=continue\"' disabled>"; 
+					<input type='button' value='Next' id='nextButton' onclick='javascript:location.href=\"index.php?step=doMainUpgrade\"' disabled>";//index.php?run=continue\"' disabled>";
 				break;
 
 			case "removeOptional":
@@ -2534,7 +2534,7 @@ class Upgrade {
 		UNIQUE (`setting`))";
 		$this->Execute($sql, true);
 	}
-	
+
 	/**
 	 * First function called after construction and setting specific variables.
 	 *
@@ -2550,22 +2550,22 @@ class Upgrade {
 	 * @uses Upgrade::showTooltips()
 	 */
 	function init() {
-		
+
 		$step = (isset($_GET['step'])) ? $_GET['step'] : "";
-		
+
 		$nextStageText = "Database updated to 2.0.10b.  <input type=\"submit\" onclick=\"javascript:location.href='../../index.php?run=continue'\" value=\"Next &gt;\" />";
 		$runUpgradesAgain = '<a href=\"index.php\"><strong>Run 2.0.10b Upgrades Again</strong></a>';
-		
+
 		$ajax_link = 'index.php?step=ajax&amp;upgrade=doToCAELatest&amp;totalQueries=2000';
 		$forceAjax = '<a href="'.$ajax_link.'"> &nbsp; </a>';
-		
-		
-		switch($step) {				
+
+
+		switch($step) {
 			case "doMainUpgrade":
 				include('config_tools.php');
 				$config_tools = new config_tools();
 				$config_tools->update_beta_settings();
-				
+
 				// This case is recursively called as long as the user hits the "Next" button and
 				// there are elements in $_SESSION['upgradePath']
 
@@ -2616,8 +2616,8 @@ class Upgrade {
 				break;
 
 			default:
-				
-				
+
+
 				//check the config.php file to see if it is up to date.
 				include('config_tools.php');
 				$config_tools = new config_tools();
@@ -2625,11 +2625,11 @@ class Upgrade {
 				if (!$config_tools->check_config_file()){
 					$err_msg[] = 'Your config.php needs to be updated, please follow <a href="config_tools.php?update_config_instructions=true" target="_blank"> these instructions</a> carefully to proceed. (missing new variables)';
 				}
-				
+
 				if (!$config_tools->check_xss_compat()){
 					$err_msg[] = 'Make sure you do NOT include the file xss_filter_inputs.php, it is not compatible with this version.  This software has its own customized xss security fix.  Please follow <a href="config_tools.php?update_config_instructions=true" target="_blank"> these instructions</a> carefully to proceed.';
 				}
-				
+
 				//check the rest of the requirements.
 				$no_show_tests = true;
 				include_once ('requirement_test.php');
@@ -2643,13 +2643,13 @@ class Upgrade {
 				}
 				// Shows the main update/upgrade form.
 				$this->showTooltips();
-				
-				
+
+
 				$this->body = "
 					<script type='text/javascript'>
 						function showOptionals(mainUpgrade) {
 							if(mainUpgrade == 'CAEupgrade')
-							{ 
+							{
 								document.getElementById('changeToListing').style.display = 'none';
 								document.getElementById('doMapNewPages').style.display = 'none';
 								document.getElementById('changeToListingCB').disabled = true;
@@ -2674,8 +2674,8 @@ class Upgrade {
 						}
 					</script>
 					";
-				
-				
+
+
 				if (count($err_msg)>0)
 				{
 					$err_msg[] = 'Once you have made the changes needed above, come back to this page and hit "refresh" on your browser, to run the upgrade script.';
@@ -2710,15 +2710,15 @@ class Upgrade {
 										$this->body .= "<label><input type='radio' name='main' value='oldCAEtoCAE' onClick=\"showOptionals('CAEupgrade'); return true;\" checked='checked' \> Geodesic Software Update to 2.0.10b</label><br />";;
 										$this->onload .= ' javascript:showOptionals("CAEupgrade");';
 										break;
-										
+
 									default:
 										$this->body .= '<div class="err_msg" style="color:red; border:thin solid red; margin:5px; padding:5px;">The version you are attempting to update is not compatible with this update routine. Please contact the Geodesic Solutions Support Team.</div>';
 								}
-								
+
 					$this->body .= "
 						</p>
 						<p style='margin:0;'>";
-					
+
 					switch($validUpgrades)
 					{
 						case 1:
@@ -2848,19 +2848,19 @@ class Upgrade {
 		if($safeMode == "off" || !$safeMode)
 			set_time_limit($seconds);
 	}
-	
+
 	function DBError($line, $msg="") {
 		global $ignoredDBErrorCodes;
 		if(!in_array($this->db->MetaError(), $ignoredDBErrorCodes)) {
 			echo "<span style='color: red;'>Error: </span>".$this->db->ErrorMsg()."<br />";
 		}
 	}
-	
+
 	function showNotes() {
 		return "Database updated to 2.0.10b.  <input type=\"submit\" onclick=\"javascript:location.href='../../index.php?run=continue'\" value=\"Next &gt;\" />
-";	
+";
 	}
-	
+
 	/**
 	 * Sets the default site settings, but only for the old version to this one.
 	 * Add new default settings to setDefaultSettings.
@@ -2873,7 +2873,7 @@ class Upgrade {
 				//we have done all the needed default changes.
 				break;
 			}
-			
+
 			foreach ($settings as $setting => $value){
 				//manually add to counter since we aren't going through execute.
 				if ($this->state == 'calculating'){
@@ -2881,7 +2881,7 @@ class Upgrade {
 				} else  {
 					$this->currentQuery = isset($this->currentQuery) ? ($this->currentQuery+1) : 1;
 				}
-				
+
 				if ($this->state != "calculating"){
 					// There has [NOT]been 1% progress
 					//$this->lastPercent = intval(($this->currentQuery/$this->totalQueries) * 100 );
@@ -2889,7 +2889,7 @@ class Upgrade {
 					ob_flush();
 					flush();
 					$this->setTimeLimit(30);
-					
+
 					$this->db->set_site_setting($setting, $value, true);
 				}
 			}
@@ -2908,7 +2908,7 @@ class Upgrade {
 		return ($version['db_version']);
 	}
 
-	
+
 	function checkValidUpgrades()
 	/**
 	 * @return 0 if version incompatible with all upgrades
@@ -2919,11 +2919,11 @@ class Upgrade {
 	{
 		$oldVersion = $this->getOldVersion();
 		//$oldVersion = "2.0.8b";
-					
+
 		//detect Premiere, Basic, or Lite versions
 		if($this->tableExists("geodesic_classifieds_logins") || $this->tableExists("geodesic_auctions_logins"))
 			return 0;
-		
+
 		//detect auctions enterprise
 		if($this->tableExists("geodesic_auctions_filters"))
 		{
@@ -2934,7 +2934,7 @@ class Upgrade {
 			else
 				return 3; // version 1.0.7+
 		}
-		
+
 		//detect classifieds enterprise
 		if($this->tableExists("geodesic_classifieds") && $this->tableExists("geodesic_logins") && !$this->tableExists("geodesic_auctions_bids"))
 		{
@@ -2945,7 +2945,7 @@ class Upgrade {
 			else
 				return 3; // version 2.0.5.2+
 		}
-		
+
 		//detect classauctions
 		if($this->tableExists("geodesic_classifieds") && $this->tableExists("geodesic_logins") && $this->tableExists("geodesic_auctions_bids"))
 		{
@@ -2953,11 +2953,11 @@ class Upgrade {
 				return 3; // version 1.0.0+
 			else return 0;
 		}
-		
-		return 0; // no valid upgrades found		
+
+		return 0; // no valid upgrades found
 	}
-		
-	
+
+
 }
 
 /**
@@ -3066,7 +3066,7 @@ class AuctionsUpgrade extends Upgrade {
 		 * $map format:
 		 * 		Classauction ID => Auction ID
 		 */
-	
+
 		if(!file_exists("arrays/fontMap.php")) {
 			die("Couldn't find arrays/fontMap.php");
 		}
@@ -3113,7 +3113,7 @@ class AuctionsUpgrade extends Upgrade {
 		$row = $result->FetchRow();
 		$code = str_replace($userManagement["search"], $userManagement["replace"], $row["template_code"]);
 		$this->Execute("update geodesic_templates set template_code = '".addslashes($code)."' where template_id = 133");
-		
+
 		$query = "select template_id,template_code from geodesic_templates";
 		$result = $this->Execute($query, true) or $this->DBError(__LINE__);
 
@@ -3161,21 +3161,21 @@ class AuctionsUpgrade extends Upgrade {
 			} else {
 				$filename = preg_replace("/^(.*)_auctions\.php$/", "\\1.php", $filename);
 			}
-			
+
 			$logged_in = preg_replace_callback("/index\.php\?a=(1[0-9]{3})/", function($matches){
 				return "index.php?a=".($matches[1] > 1000 ? $matches[1] - 1000 : $matches[1]);
 			}, $logged_in);
 			$logged_in = preg_replace_callback("/index\.php\?a=28&b=(1[0-9]{4})/", function($matches){
 				return "index.php?a=28&b=".($matches[1] > 10000 ? $matches[1] - 10000 : $matches[1]);
 			}, $logged_in);
-			
+
 			$logged_out = preg_replace_callback("/index\.php\?a=(1[0-9]{3})/", function($matches){
 				return "index.php?a=".($matches[1] > 1000 ? $matches[1] - 1000 : $matches[1]);
 			}, $logged_out);
 			$logged_out = preg_replace_callback("/index\.php\?a=28&b=(1[0-9]{4})/", function($matches){
 				return "index.php?a=28&b=".($matches[1] > 10000 ? $matches[1] - 10000 : $matches[1]);
 			}, $logged_out);
-			
+
 
 			$query = "update geodesic_pages set module_replace_tag = '".$tag."', module_logged_in_html = \"".addslashes($logged_in)."\", module_logged_out_html = \"".addslashes($logged_out)."\", module_file_name = '".$filename."' where page_id = '".$row['page_id']."'";
 			$this->Execute($query) or $this->DBError(__LINE__);
@@ -3199,7 +3199,7 @@ class AuctionsUpgrade extends Upgrade {
 			$text = preg_replace_callback("/index\.php\?a=28&b=(1[0-9]{4})/", function($matches){
 				return "index.php?a=28&b=".($matches[1] > 10000 ? $matches[1] - 10000 : $matches[1]);
 			}, $text);
-			
+
 			$text = str_replace("index.php?a=4&b=15", "index.php?a=4&b=22", $text);
 			$text = str_replace("index.php?a=4&b=16", "index.php?a=4&b=21", $text);
 			$text = str_replace("index.php?a=4&b=17", "index.php?a=4&b=19", $text);
@@ -3283,7 +3283,7 @@ $upgrade = new Upgrade();
 
 //make sure it is not already updated.
 if ($upgrade->getOldVersion() == $upgrade->versionNumber){
-	
+
 }
 
 $upgrade->init();
@@ -3307,18 +3307,14 @@ $upgrade->init();
 					<div id="login_left_list"></div>
 					<ul>
 						<li style="list-style-image: none; list-style: none;">&nbsp;</li>
-						<li><a href="http://geodesicsolutions.com/support/wiki/" onclick="window.open(this.href); return false;">User Manual</a></li>
-						<li><a href="http://geodesicsolutions.com/geo_user_forum/index.php" onclick="window.open(this.href); return false;">User Forum</a></li>
-						<li><a href="http://geodesicsolutions.com/support/helpdesk/kb" onclick="window.open(this.href); return false;">Knowledgebase</a></li>
-						<li><a href="https://geodesicsolutions.com/geo_store/customers" onclick="window.open(this.href); return false;">Client Area</a></li>
-						<li><a href="http://geodesicsolutions.com/resources.html" onclick="window.open(this.href); return false;">Resources</a></li>
+						<li><a href="https://geodesicsolutions.org/wiki/" onclick="window.open(this.href); return false;">User Manual</a></li>
 					</ul>
 				</div>
 				<div id="login_right">
 					<h1 id="login_product_name">&nbsp;</h1>
 					<h2 id="login_software_type">&nbsp;</h2>
 					<div id="login_form_fields">
-<p class="failed" style="text-align:left; font-weight:normal;"><br><br>Be sure to read the update instructions in the <a href="http://geodesicsolutions.com/support/wiki/update/start" target="_blank">user manual</a>, for important additional steps after the upgrade wizard is finished.</p>
+<p class="failed" style="text-align:left; font-weight:normal;"><br><br>Be sure to read the update instructions in the <a href="https://geodesicsolutions.org/wiki/update/start" target="_blank">user manual</a>, for important additional steps after the upgrade wizard is finished.</p>
 <span style="text-align: left;"><?php echo $upgrade->body; ?></span>
 					</div>
 					<div id="login_copyright">Copyright 2001-2011. <a class="login_link" href="http://geodesicsolutions.com" onclick="window.open(this.href); return false;">Geodesic Solutions, LLC.</a><br />All Rights Reserved.</div>

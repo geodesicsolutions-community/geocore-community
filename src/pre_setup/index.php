@@ -157,7 +157,7 @@ class preSetup
 								<br />
 								<p style='margin:0;margin-top:10px;'>
 									<b>Beware:</b>
-									Please backup your database before allowing this script to alter your database. 
+									Please backup your database before allowing this script to alter your database.
 								</p>
 								<br />
 								<p style='text-align:center;'>
@@ -448,11 +448,7 @@ if (isset($_REQUEST["moveData"])) {
                     <div id="login_left_list"></div>
                     <ul>
                         <li style="list-style-image: none; list-style: none;">&nbsp;</li>
-                        <li><a href="http://geodesicsolutions.com/support/wiki/" onclick="window.open(this.href); return false;">User Manual</a></li>
-                        <li><a href="http://geodesicsolutions.com/geo_user_forum/index.php" onclick="window.open(this.href); return false;">User Forum</a></li>
-                        <li><a href="http://geodesicsolutions.com/support/helpdesk/kb" onclick="window.open(this.href); return false;">Knowledgebase</a></li>
-                        <li><a href="https://geodesicsolutions.com/geo_store/customers" onclick="window.open(this.href); return false;">Client Area</a></li>
-                        <li><a href="http://geodesicsolutions.com/resources.html" onclick="window.open(this.href); return false;">Resources</a></li>
+                        <li><a href="https://geodesicsolutions.org/wiki/" onclick="window.open(this.href); return false;">User Manual</a></li>
                     </ul>
                 </div>
                 <div id="login_right">

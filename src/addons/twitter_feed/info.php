@@ -12,7 +12,6 @@ class addon_twitter_feed_info
     public $description = 'Allows sellers to add Twitter "Embedabble Timelines" to their listings.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $tags = array('show_feed');
     public $listing_tags = array ('show_feed');

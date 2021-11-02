@@ -14,10 +14,10 @@ $software_name = "GeoCore";
 	{if !$white_label}
 	<div style='padding: 0.5em 0; background-color: #000066; text-align: right;'>
 		<div class='medium_font_light' style='float: left;'>
-			&nbsp;Created by <a href=http://www.geodesicsolutions.com class=medium_font_light style='color: white;'>Geodesic Solutions LLC</a>
+			&nbsp;Created by Geodesic Solutions LLC
 		</div>
 		<div class='medium_font_light' style=' text-align: right; white-space:nowrap;'>
-			" . $software_name . " DB Ver. " . geoPC::getVersion() . "&nbsp; [ <a href=\"http://geodesicsolutions.com/changelog\" class=\"medium_font_light\">Release Notes</a> ]&nbsp; 
+			" . $software_name . " DB Ver. " . geoPC::getVersion() . "&nbsp; [ <a href=\"https://geodesicsolutions.org/changelog\" class=\"medium_font_light\">Release Notes</a> ]&nbsp;
 		</div>
 	</div>
 	{/if}

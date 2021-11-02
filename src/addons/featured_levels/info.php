@@ -13,7 +13,6 @@ class addon_featured_levels_info
     public $description = 'Enables the use of Featured Listings levels 2-5.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 }
 
 /**

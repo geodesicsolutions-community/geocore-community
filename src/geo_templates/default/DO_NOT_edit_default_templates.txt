@@ -3,7 +3,7 @@ your templates will be over-written when you update.  See the page linked
 below for instructions on how to safely edit templates by creating your own
 template set:
 
-http://geodesicsolutions.com/support/wiki/tutorials/design_adv/start
+https://geodesicsolutions.org/wiki/tutorials/design_adv/start
 
 On this page will be tutorials that will walk you through the steps needed to
 safely modify templates.
@@ -11,8 +11,8 @@ safely modify templates.
 
 
 *** BROKEN LINK WARNING ***
-The link above may change over time.  If it does not work, go to 
-geodesicsolutions.com, browse to the user manual, then to the tutorial section
+The link above may change over time.  If it does not work, go to
+geodesicsolutions.org, browse to the user manual, then to the tutorial section
 of the user manual, and the tutorials for customizing templates should be there.
 At the time this file was created, the tutorials are located in the user manual
 at "Tutorials > Design - Advanced." If they are not there, then try searching the

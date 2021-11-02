@@ -1,15 +1,5 @@
 <?php
 
-//addons/share_fees/admin.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2014 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-
 # Share Fees Addon
 
 require_once ADDON_DIR . 'share_fees/info.php';

@@ -14,7 +14,6 @@ class addon_site_stats_info
     public $description = 'Allow users to place stats about users and listings within their site';
     public $author = 'Geodesic Solutions LLC';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $tags = array (
             'number_listings_all_types',

@@ -3,18 +3,18 @@
 /**
  * This class can be used to store and display global notifications
  * How it works:
- * 1. "Checks" are added to the Notification class using 
+ * 1. "Checks" are added to the Notification class using
  *	Notifications::addCheck()
- * 2. The Notifications::getNotifications() function is called and to 
- * 	check for notifications. An array of notifications is returned, or false if 
+ * 2. The Notifications::getNotifications() function is called and to
+ * 	check for notifications. An array of notifications is returned, or false if
  * 	there are none
  */
 
 class Notifications {
-	
+
 	private static $notifications = array();
 	private static $_default_notified = false;
-	
+
 	/**
 	 * adds a security alert
 	 *
@@ -31,7 +31,7 @@ class Notifications {
 			foreach($children as $var1 =>$var2) {
 				$i++;
 				$child[$i] = "<div style='text-indent: -10px; padding-left: 10px; margin-left: 3px; margin-top: 3px;'>";
-				
+
 				if(!is_numeric($var1)) {
 					$child[$i] .= $var1." --";
 				}
@@ -46,7 +46,7 @@ class Notifications {
 		}
 		self::add("<strong style='color: red;'>Security Alert:</strong> $alert ");
 	}
-	
+
 	public static function addNoticeAlert($notice,$children=array())
 	{
 		if (DataAccess::getInstance()->get_site_setting('developer_supress_notify')) {
@@ -56,7 +56,7 @@ class Notifications {
 			foreach($children as $var1 =>$var2) {
 				$child_var = "<strong>$var1</strong> --";
 				$child_var .=	" <em>$var2</em>";
-				
+
 				$child[] = "<div style='text-indent: -10px; padding-left: 10px; margin-left: 3px; margin-top: 3px;'>$child_var</div>";
 			}
 			$optional_reasons = implode($child);
@@ -66,7 +66,7 @@ class Notifications {
 		}
 		self::add("<strong style='color: #FF8000;'>Notice Alert:</strong> $notice ");
 	}
-	
+
 	public static function add ($n)
 	{
 		if (DataAccess::getInstance()->get_site_setting('developer_supress_notify')) {
@@ -75,7 +75,7 @@ class Notifications {
 		if(empty($n)) {
 			return true;
 		}
-		
+
 		if(is_array($n) && !empty($n)) {
 			foreach($n as $nChild) {
 				if(!is_array($nChild)) {
@@ -85,62 +85,58 @@ class Notifications {
 		}
 		self::$notifications[] = $n;
 	}
-	
+
 	public static function getArray ()
 	{
 		return self::$notifications;
 	}
-	
+
 	/**
 	 * Check these on every page load
 	 *
 	 */
 	public static function defaultChecks ()
 	{
-		//checks if default checks has already ran. 
+		//checks if default checks has already ran.
 		if(self::$_default_notified) {
 			return true;
 		}
-		
+
 		if(defined('DEMO_MODE')) {
 			Notifications::add("<span style='color: red'><strong>NOTICE:</strong> The forms in this demo will not submit.</span>");
 		}
-		
+
 		Notifications::add(Admin_site::securityCheck());
-		
+
 	//	Notifications::addCheck(array('Admin_site', 'securityCheck'));
-		
+
 		//Notifications::addCheck(array('Admin_template_management','checkTemplatesAndNotify'));
-		
+
 		if(geoMaster::is('auctions')) {
 			Notifications::addCheck(array('Ad_configuration', 'incrementExists'));
 		}
-		
+
 		if ( file_exists( GEO_BASE_DIR . 'xss_filter_inputs.php' ) ) {
-			Notifications::add('<strong>xss_filter_inputs.php</strong> still exists in your root directory. This file is no longer needed, so it is safe to remove.'); 
+			Notifications::add('<strong>xss_filter_inputs.php</strong> still exists in your root directory. This file is no longer needed, so it is safe to remove.');
 		}
-		
+
 		if ( is_dir( GEO_BASE_DIR . 'scopbin' ) ) {
 			Notifications::add('The <strong>scopbin</strong> directory still exists in your root directory. This is no longer needed, so it is safe to remove.');
 		}
-		
-		if(geoPC::geoturbo_status() && DataAccess::getInstance()->get_site_setting('gt_license_notify') == 1) {
-			Notifications::add('<strong style="color: red;">ATTENTION:</strong> Your license has been suspended for non-payment of hosting fees. Contact <a href="mailto:sales@geodesicsolutions.com">Geodesic Solutions</a> to re-activate.');
-		}
-	
+
 		self::$_default_notified = true;
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * Loop through all "checks" and return an array of all notifications
 	 *
 	 */
 	public static function getNotifications() {
 		$callbacks = Notifications::_checks();
-		
+
 		$notifications = array();
 		foreach($callbacks as $check) {
 			$notification = call_user_func($check);
@@ -164,7 +160,7 @@ class Notifications {
 		// Get the DB object
 		$db = true;
 		include GEO_BASE_DIR.'get_common_vars.php';
-		
+
 		$notifications = Notifications::getNotifications();
 		if(!(is_array($notifications) && count($notifications))) {
 			$notifications = '';
@@ -177,14 +173,14 @@ class Notifications {
 		}
 		return $notifications;
 	}
-	
+
 	/**
 	 * Specify a function to create a notification message if one is needed.
 	 * Because notifications will probably be displayed on every page of the
 	 * admin, class methods added here should be static (called without having to
 	 * instantiate an object).
-	 * @param mixed $callback Callback in the form of a string (for a global 
-	 * 	function) or a array -- in the form of array('Class', 'method') -- for 
+	 * @param mixed $callback Callback in the form of a string (for a global
+	 * 	function) or a array -- in the form of array('Class', 'method') -- for
 	 * 	static methods.
 	 */
 	public static function addCheck ($callback)
@@ -203,7 +199,7 @@ class Notifications {
 	}
 	private static $checks;
 	/**
-	 * Used to store callback functions 
+	 * Used to store callback functions
 	 *
 	 * @param callback $check
 	 * @return array

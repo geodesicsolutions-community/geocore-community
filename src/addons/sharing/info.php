@@ -12,7 +12,6 @@ class addon_sharing_info
     public $description = 'Provides a simple interface for users to share their listings across various websites.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $core_events = array(
         'my_account_links_add_link',

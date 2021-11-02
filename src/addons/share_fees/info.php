@@ -1,15 +1,5 @@
 <?php
 
-//addons/share_fees/info.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2014 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-
 # Share Fees Addon
 class addon_share_fees_info
 {
@@ -21,7 +11,6 @@ class addon_share_fees_info
     public $author = "Geodesic Solutions LLC.";
     public $description = 'This addon is used internally to share auction final fees paid by an auction seller to another user in the system';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $core_events = array (
             'registration_check_info',

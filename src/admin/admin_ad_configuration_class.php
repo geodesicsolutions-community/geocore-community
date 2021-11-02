@@ -279,7 +279,7 @@ class Ad_configuration extends Admin_site
 
         if (!$language_result) {
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.  Debug info:  DB error: " . $this->db->ErrorMsg() . ' in ' . __file__ . ' line ' . __line__);
+            $menu_loader->userError("Internal error. Debug info:  DB error: " . $this->db->ErrorMsg() . ' in ' . __file__ . ' line ' . __line__);
             $this->body .= $menu_loader->getUserMessages();
             return false;
         } elseif ($language_result->RecordCount() > 0) {
@@ -443,8 +443,9 @@ class Ad_configuration extends Admin_site
         $sql_query = "select * from " . $this->file_types_table . " ORDER BY `file_type_id`";
         $type_result = $this->db->Execute($sql_query);
         if (!$type_result) {
+            $menu_loader = geoAdmin::getInstance();
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
             return false;
         }
@@ -548,7 +549,7 @@ class Ad_configuration extends Admin_site
 
         if (!$result) {
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
             return false;
         }
@@ -1736,7 +1737,7 @@ class Ad_configuration extends Admin_site
 
         if (!$result) {
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
             return false;
         } elseif ($result->RecordCount() == 1) {
@@ -2079,7 +2080,7 @@ class Ad_configuration extends Admin_site
 
         if (!$type_result) {
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
             return false;
         } elseif ($type_result->RecordCount() > 0) {

@@ -12,11 +12,11 @@ class addon_debugger_log_info
     var $version = '1.0.1';
     var $title = 'Debugging Logger';
     var $author = "Geodesic Solutions LLC.";
-    var $description = 'This addon logs any debugging messages to the file 
+    var $description = 'This addon logs any debugging messages to the file
 log.php.  Once installed & enabled, the settings for what is logged are found in <strong>Admin Tools & Settings > Debug Log Settings</strong><br />
 <br />
-Like any logging addon, keeping this addon enabled will add some overhead to 
-every page load.  Once you no longer need to log debugging messages, you should disable this addon to increase site performance, 
+Like any logging addon, keeping this addon enabled will add some overhead to
+every page load.  Once you no longer need to log debugging messages, you should disable this addon to increase site performance,
 especially on a high traffic site.';
     //used in referencing tags, and maybe other uses in the future.
     var $auth_tag = 'geo_addons';
@@ -31,10 +31,6 @@ especially on a high traffic site.';
     //admin page.  Note that you can link to your own site, or to a relative page.
     //Keep in mind, if using a relative link, the link will not work when
     //the addon is disabled.
-    var $upgrade_url = 'http://geodesicsolutions.com/component/content/article/49-programming-trouble-shooting/73-debug-logging.html?directory=64'; //[ Check For Upgrades ] link
-    var $author_url = 'http://geodesicsolutions.com'; //[ Author's Site ] link
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/49-programming-trouble-shooting/73-debug-logging.html?directory=64'; //[ More Info ] link
-
     var $core_events = array (
     'errorhandle'
     );

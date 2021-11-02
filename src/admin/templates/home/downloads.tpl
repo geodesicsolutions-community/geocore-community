@@ -42,22 +42,9 @@
 		<a href="#" id="downloadToggle">See Options</a>
 		<div id="download_Links" style="display: none;">
 			<div style="margin-top: 15px;">
-				{if $stats.downloadLeft||$stats.downloadExpire=='never'}
-					<ul class="home_links center">
-						<li><a href="https://geodesicsolutions.com/client-area/task,my_downloads/" class="btn btn-default source">My Downloads</a></li>
-						{if $stats.packageId}
-							<li><a href="https://geodesicsolutions.com/client-area/task,my_package_details/package_id,{$stats.packageId}/category_id,370/tab,downloads/" class="btn btn-default source">Latest Release Downloads</a></li>
-							<li><br /><a href="https://geodesicsolutions.com/client-area/task,my_package_details/package_id={$stats.packageId}/category_id,372/tab,downloads/" class="btn btn-default source"><span style="color: red;">_Developer BETA</span> Release Downloads</a></li>
-						{/if}
-					</ul>
-				{else}
-					<ul class="home_links">
-						<li><a href="https://geodesicsolutions.com/client-area/{if $stats.packageId}task,product/product_id,73/package_id,{$stats.packageId}/{else}task,choose_parent/product_id,73/{/if}" {$extrnLink}>Extend Download Access</a></li>
-						{if $stats.packageId}
-							<li><a href="https://geodesicsolutions.com/client-area/task,my_package_details/package_id,{$stats.packageId}/category_id,371/tab,downloads/" {$extrnLink}><span class="text_blue">Previous</span> Release Downloads</a></li>
-						{/if}
-					</ul>
-				{/if}
+                <ul class="home_links center">
+                    <li><a href="https://github.com/geodesicsolutions-community/geocore-community/" class="btn btn-default source">Source Code</a></li>
+                </ul>
 			</div>
 			<div class="clr"></div>
 		</div>

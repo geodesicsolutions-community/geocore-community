@@ -1126,7 +1126,7 @@ class RegionsManagement
         $tpl_vars['levels'] = $region->getLevels();
         $tpl_vars['languages'] = $this->getLanguages();
         $tpl_vars['build_down'] = $db->get_site_setting('region_select_build_down');
-        $helpLink = 'http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,admin_menu;geographic_setup;levels;start#region_type_information';
+        $helpLink = 'https://geodesicsolutions.org/wiki/admin_menu/geographic_setup/levels/start#region_type_information';
         $tpl_vars['tooltips'] = array(
             'level' => geoHTML::showTooltip('Level', 'Levels are automatically created as you add new regions to the Regions menu.'),
             'sample' => geoHTML::showTooltip('Sample', 'The sample regions below were pulled from the Regions menu based on the Region with the deepest number of levels you have entered.'),

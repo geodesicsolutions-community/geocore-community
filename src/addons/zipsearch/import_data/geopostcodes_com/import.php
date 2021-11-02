@@ -94,7 +94,7 @@ class zipsearch_import_geopostcodes_com extends zipsearch_import_parent
 
     public function getTooltip($steps)
     {
-        $deleteOld = ($steps[1] === 'none') ? '' : '(If you are updating post code data and 
+        $deleteOld = ($steps[1] === 'none') ? '' : '(If you are updating post code data and
 		there are previously uploaded files in the folder, delete the old files and upload the new ones)';
         $updateSteps = '';
         if ($steps[1] !== 'none') {
@@ -124,9 +124,7 @@ class zipsearch_import_geopostcodes_com extends zipsearch_import_parent
 		that is capable of importing postal data purchased from that site.
 		<br /><br />
 		<strong>Warning:</strong>  <strong>Canada</strong> postal code data from geopostcodes.com is <strong>not compatible</strong>.
-		Most other countries should work, but not all countries have been tested.  If you run into
-		problems with imported data from this site, contact us at support@geodesicsolutions.com
-		or start a support ticket on http://geodesicsolutions.com.<br /><br />";
+		Most other countries should work, but not all countries have been tested.<br /><br />";
 
         return $label;
     }
@@ -174,7 +172,7 @@ class zipsearch_import_geopostcodes_com extends zipsearch_import_parent
 
         $file = geoFile::getInstance('zipsearch');
         if ($step === 'none') {
-            return "<br /><p class='page_note_error'><strong>No Data Found!</strong>  Upload any data files purchased from " . self::link . " 
+            return "<br /><p class='page_note_error'><strong>No Data Found!</strong>  Upload any data files purchased from " . self::link . "
 			to the folder <strong>addons/zipsearch/import_data/geopostcodes_com/data/</strong>, then
 			<strong>Refresh this page</strong> to import that data.<br /><br />
 			Note that the data purchased from " . self::link . " is purchased <strong>per-site</strong>,

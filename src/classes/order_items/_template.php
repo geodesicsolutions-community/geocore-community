@@ -463,7 +463,8 @@ class _templateOrderItem extends geoOrderItem
      *
      * **Used:** in geoCart::initSteps() (and possibly other locations)
      *
-     * NOTE: This is best viewed in the PHP API documentation to see all the markup, available on the geodesicsolutions.com website.
+     * NOTE: This is best viewed in the PHP API documentation to see all the markup, available on the
+     * geodesicsolutions.org website.
      *
      * If this order item has any of it's own steps it wants to display or process as
      * part of the sell process, it needs to add them to the cart here, by getting an

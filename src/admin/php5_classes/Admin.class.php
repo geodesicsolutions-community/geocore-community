@@ -886,7 +886,7 @@ class geoAdmin {
 	 */
 	public function userError( $str ) {
 		if( null === $str ) {
-			$str = "Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.";
+			$str = "Internal error.";
 		}
 		$this->_errors[] = $str;
 

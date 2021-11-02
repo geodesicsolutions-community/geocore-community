@@ -16,8 +16,7 @@ class module_loader extends Admin_site
             $menu_loader =& geoAdmin::getInstance();
         }
 
-        $menu_loader->userNotice('The Geo API has been replaced by the Bridge Addon.  Contact sales@geodesicsolutions.com if you do not have access to this
-		addon in the Client Area of our website.');
+        $menu_loader->userNotice('The Geo API has been replaced by the Bridge Addon.');
         $menu_loader->userNotice('These API installations are for <em>viewing only</em>.  The installations listed below are set in the old Geo API and are not used in 3.1 until you have created each installation in the Bridge Addon.');
         $menu_loader->userNotice('Note that any Geodesic Solutions product must be updated to 3.1 to allow linking to this one, as the bridge is only compatible with 3.1 or higher.  See user manual for more information.');
         ob_start();

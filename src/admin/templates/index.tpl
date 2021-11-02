@@ -216,11 +216,11 @@
 						<div class="pull-right">
 							<div id="footer-top">
 								<p>{if !$white_label}{$product_typeDisplay}{/if} DB Ver. {$product_version}
-								{if !$white_label}<span style="white-space:nowrap;">[ <a href="http://geodesicsolutions.com/changelog/" onclick="window.open(this.href); return false;">Changelog</a> ]</span>{/if} </p>
+								{if !$white_label}<span style="white-space:nowrap;">[ <a href="https://geodesicsolutions.org/changelog/" onclick="window.open(this.href); return false;">Changelog</a> ]</span>{/if} </p>
 							</div>
 							<div id="footer">
 								<div id="footer-inside">
-									<p>Copyright &copy;2001-2018 {if !$white_label}<a href="http://geodesicsolutions.com">Geodesic Solutions, LLC</a>{/if}</p>
+									<p>Copyright &copy;2001-2018</p>
 								</div>
 							</div>
 						</div>

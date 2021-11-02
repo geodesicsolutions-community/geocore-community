@@ -13,7 +13,6 @@ class addon_enterprise_pricing_info
     public $description = 'Enables advanced pricing structures, such as multiple user groups and price plans and category-specific price plans.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 }
 
 /**

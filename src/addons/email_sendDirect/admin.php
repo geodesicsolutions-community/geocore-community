@@ -589,7 +589,7 @@ Time Email Sent:  $date
         if ($convert_url) {
             $message .= "
 Test URL Link in email:
-http://geodesicsolutions.com
+https://geodesicsolutions.org
 ";
         }
         $message .= "

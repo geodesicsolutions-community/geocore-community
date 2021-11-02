@@ -4,4 +4,4 @@ To ensure you always have the most up to date and accurate
 information available, all installation and update instructions
 can now be found in our online user manual, at the link below:
 
-http://geodesicsolutions.com/support/wiki/upgrade/start
+https://geodesicsolutions.org/wiki/upgrade/start

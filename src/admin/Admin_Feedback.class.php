@@ -499,13 +499,6 @@ class Admin_Feedback {
 		if (PHP5_DIR) $menu_loader = geoAdmin::getInstance();
 		else $menu_loader =& geoAdmin::getInstance();
 
-
-		/*if (!$type_result) {
-			trigger_error("ERROR SQL: " . $db->ErrorMsg());
-			$menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
-			$this->body .= $menu_loader->getUserMessages();
-			return false;
-		}*/
 		$html .= $menu_loader->getUserMessages();
 		$html .= $body;
 		$this->description .= $description;

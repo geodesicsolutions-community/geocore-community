@@ -14,7 +14,6 @@ class addon_bridge_info
     var $icon_image = 'menu_bridge.gif';
     var $description = 'This addon gives the ability to link the users across different software applications.';
     var $auth_tag = 'geo_addons';
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/51-third-party-integrations/63-geoproducts-bridge.html?directory=64';
     var $tags = array ();
     var $core_events = array (
         'session_create',

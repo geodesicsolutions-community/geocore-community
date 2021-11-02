@@ -94,7 +94,7 @@ class zipsearch_import_geodatas_net extends zipsearch_import_parent
 
     public function getTooltip($steps)
     {
-        $deleteOld = ($steps[1] === 'none') ? '' : '(If you are updating post code data and 
+        $deleteOld = ($steps[1] === 'none') ? '' : '(If you are updating post code data and
 		there are previously uploaded files in the folder, delete the old files and upload the new ones)';
         $updateSteps = '';
         if ($steps[1] !== 'none') {
@@ -124,9 +124,7 @@ class zipsearch_import_geodatas_net extends zipsearch_import_parent
 		Note that we did not create, do not own, and are in no way affiliated with " . self::link . ", we just have an import routine
 		that is capable of importing postal data purchased from that site.
 		<br /><br />
-		<strong>Warning:</strong>  Not all countries available on the 3rd party site have been tested.  If you run into
-		problems with imported data from this site, contact us at support@geodesicsolutions.com
-		or start a support ticket at http://geodesicsolutions.com.<br /><br />";
+		<strong>Warning:</strong>  Not all countries available on the 3rd party site have been tested.<br /><br />";
 
         return $label;
     }
@@ -174,7 +172,7 @@ class zipsearch_import_geodatas_net extends zipsearch_import_parent
 
         $file = geoFile::getInstance('zipsearch');
         if ($step === 'none') {
-            return "<br /><p class='page_note_error'><strong>No Data Found!</strong>  Upload any CSV data files purchased from " . self::link . " 
+            return "<br /><p class='page_note_error'><strong>No Data Found!</strong>  Upload any CSV data files purchased from " . self::link . "
 			to the folder <strong>addons/zipsearch/import_data/geodatas_net/data/</strong>, then
 			<strong>Refresh this page</strong> to import that data.<br /><br />
 			Note that the data purchased from " . self::link . " is purchased <strong>per-site</strong>,

@@ -17,9 +17,6 @@ class addon_storefront_info
     var $auth_tag = 'geo_addons';
 
     var $icon_image = 'images/menu_storefront.gif';
-    var $upgrade_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/59-storefront.html?directory=64';
-    var $author_url = 'http://geodesicsolutions.com';
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/59-storefront.html?directory=64';
 
     var $core_events = array (
         'Browse_ads_display_browse_result_addHeader',

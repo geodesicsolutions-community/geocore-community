@@ -3,8 +3,8 @@
      IMPORTANT - TEXT ENTRIES ARE NO LONGER EDITED IN THIS TEMPLATE, UNLESS YOU ARE ADDING YOUR OWN TEXT. SYSTEM
      TEXT IS NOW LOCATED ENTIRELY IN THE PAGES MANAGEMENT MENU. ANY TEXT REFERENCES YOU SEE BELOW ARE SIMPLY
      "NOTES" AND ARE FOR INFORMATION PURPOSES ONLY TO HELP YOU IDENTIFY THE TEXT'S TAG IF YOU WANT TO MOVE IT.
-     MOST SYSTEM TEXT FOR THIS PARTICULAR TEMPLATE CAN BE FOUND AND EDITED AT THE FOLLOWING LOCATION: 
-     PAGES MANAGEMENT > GENERAL TEMPLATE TEXT > COMMON TEMPLATE TEXT 
+     MOST SYSTEM TEXT FOR THIS PARTICULAR TEMPLATE CAN BE FOUND AND EDITED AT THE FOLLOWING LOCATION:
+     PAGES MANAGEMENT > GENERAL TEMPLATE TEXT > COMMON TEMPLATE TEXT
 *}
 <html class="no-js design2016">
 	<head>
@@ -15,10 +15,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 		{head_html}
-		
+
 		<!--  This loads the RSS feed  -->
 		<link rel="alternate" type="application/rss+xml" title="Newest Listing Feed" href="rss_listings.php" />
-		
+
 		{include file='head_common.tpl'}
 		<script src="js/modernizr-2.6.2.min.js"></script>
 		<script>Modernizr.load({ test: Modernizr.mq('only all'),nope:'{external file="css/old_ie.css"}'});</script>
@@ -30,7 +30,7 @@
 				<!--[if lt IE 9]>
 					<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 				<![endif]-->
-	
+
 				<div class="front-page">
 					<!-- LEFT COLUMN BEGIN -->
 					<div class="sidebar rwd-categories">
@@ -40,9 +40,9 @@
 								<!-- CATEGORY DISPLAY BEGIN -->
 								{category_list}
 								<!-- CATEGORY DISPLAY END -->
-								
+
 							</div>
-							
+
 							<!-- START REGIONS -->
 							<div class="rwd-hide">
 							{if $enabledAddons.geographic_navigation}
@@ -52,39 +52,39 @@
 										<span class="glyphicon glyphicon-map-marker"></span>&nbsp;{$common_text.502402}<!-- Location -->:&nbsp;<span style="font-size: .8em; font-weight: normal;">{addon author='geo_addons' addon='geographic_navigation' tag='current_region'}&nbsp;
 										{if $geographic_navigation_region}&nbsp;[&nbsp;<a href="{$classifieds_url}?region=0" style="color: #FFF;">{$common_text.502401}<!-- clear --></a>&nbsp;]{/if}</span>
 									</h3>
-									{addon author='geo_addons' addon='geographic_navigation' tag='navigation'} 
+									{addon author='geo_addons' addon='geographic_navigation' tag='navigation'}
 								</div>
 							{/if}
 							</div>
 							<!-- END REGIONS -->
-							
+
 						</div>
-					</div>	
-					<!-- LEFT COLUMN END -->			
-					
-					<!-- MAIN COLUMN BEGIN -->				
+					</div>
+					<!-- LEFT COLUMN END -->
+
+					<!-- MAIN COLUMN BEGIN -->
 					<div class="main">
 						{module tag='module_featured_pic_1'}
 						<!-- FEATURED CAROUSEL BEGIN -->
 						<div class="clr"> </div>
 						<div class="content_box gj_simple_carousel border">
 							<h3 class="title"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;{$common_text.502419}<!-- Featured Listings --></h3>
-							{* 
+							{*
 								NOTE: In order to show the module in a way that will fit in
 								the layout for this page, the {module} tag
 								below includes a number of parameters that over-write the
 								module settings set in the admin.  You must change those
 								settings "in-line" below to change them.
-								
+
 								Or, you can remove the parameter(s) from the {module}
 								tag completely, and it will use the module settings
 								as set in the admin panel.
-								
+
 								See the user manual entry for the {module} tag for
 								a list of all parameters that can be over-written in
 								this way.
 							 *}
-							{module tag='module_featured_pic_1' dynamic_image_dims=1 gallery_columns=4 module_thumb_width=160}			
+							{module tag='module_featured_pic_1' dynamic_image_dims=1 gallery_columns=4 module_thumb_width=160}
 						</div>
 						<!-- FEATURED CAROUSEL END -->
 						<div style="width: 100%;">
@@ -95,7 +95,7 @@
 										{module tag='module_hottest_ads' browse_view='list' use_pagination=1}
 									</div>
 								</div>
-								
+
 								<div class="half_column_right recent_ads normal-whitespace">
 									<div class="content_box border">
 										<h3 class="title"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;{$common_text.502422}<!-- Recent Listings --></h3>
@@ -103,34 +103,34 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="content_box rwd-hide border">
 								{module tag='featured_ads_1'}
 							</div>
 						</div>
-						
+
 					</div>
-					<!-- MAIN COLUMN END -->	
-					
+					<!-- MAIN COLUMN END -->
+
 					<!-- RIGHT COLUMN BEGIN -->
 					<div class="sidebar2 cntr">
-						 
+
 						<div class="content_box">
 							<a href="index.php?a=1"><img src="{external file='images/buttons/place_listing.gif'}" alt="{$common_text.502439}" title="{$common_text.502439}" /></a><!-- Post a Listing -->
 						</div>
-												
+
 						<div class="content_box stats">
 							<h2 class="title">{$common_text.502437}<!-- Site Stats --></h2>
 							{module tag='module_total_live_users'}
 							<div style="display:inline-block;">{module tag='module_total_registered_users'}</div>
 						</div>
 						<h4 class="title">{$common_text.502438}<!-- Site Stats --></h4>
-						<div class="content_box_3 cntr banner">	
+						<div class="content_box_3 cntr banner">
 							<a href="http://www.kqzyfj.com/click-7066924-11191670" target="_blank"><img src="{external file='images/banners/1and1_300x100.jpg'}" alt="1and1 Hosting" title="1and1 Hosting" /></a>
 							<a href="http://www.hostmonster.com/track/geodesic/resources" target="_blank"><img src="{external file='images/banners/hostmonster_300x100.jpg'}" alt="HostMonster Hosting" title="HostMonster Hosting" /></a>
 							<a href="http://lunarpages.com/id/geodesic/goto/basic" target="_blank"><img src="{external file='images/banners/lunarpages_300x100.jpg'}" alt="Lunarpages.com Hosting" title="Lunarpages.com Hosting" /></a>
 						</div>
-						
+
 						<br />
 						<div class="content_box">
 							<h2 class="title">{$common_text.502418}<!-- Recent --></h2>
@@ -139,19 +139,19 @@
 							{module tag='newest_ads_link_2'}
 							{module tag='newest_ads_link_3'}
 						</div>
-						 
+
 						<br />
 						<div>
 							<!-- EDIT THE FOLLOWING LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE -->
-							<a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,startup_tutorial_and_checklist;design_configuration;adding_banner_management;google_adsense_placement/" onclick="window.open(this.href); return false;" rel="nofollow"><img src="{external file='images/banners/banner1_adsense_200x200.jpg'}" alt="Banner Example" title="Banner Example" width="200" height="200" /></a>
+							<a href="https://geodesicsolutions.org/wiki/startup_tutorial_and_checklist/design_configuration/adding_banner_management/google_adsense_placement/" onclick="window.open(this.href); return false;" rel="nofollow"><img src="{external file='images/banners/banner1_adsense_200x200.jpg'}" alt="Banner Example" title="Banner Example" width="200" height="200" /></a>
 							<!-- EDIT THE ABOVE LINE OF CODE WITH YOUR BANNER OR ADSENSE CODE -->
 						</div>
 					</div>
 					<!-- RIGHT COLUMN END -->
 				</div>
-	
+
 				{include file="footer.tpl"}
-				
+
 			</div>
 		</div>
 	</body>

@@ -1,15 +1,5 @@
 <?php
 
-//addons/share_fees/util.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2014 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-
 # Share Fees Addon
 
 require_once ADDON_DIR . 'share_fees/info.php';
@@ -181,12 +171,12 @@ class addon_share_fees_util
 					" . geoTables::user_groups_price_plans_table . ".id,
 					" . geoTables::userdata_table . ".username,
 					geodesic_addon_storefront_user_settings.storefront_name
-	
+
 				FROM
 					" . geoTables::user_groups_price_plans_table . "
 				INNER JOIN " . geoTables::userdata_table . " ON " . geoTables::user_groups_price_plans_table . ".id = " . geoTables::userdata_table . ".id
 				LEFT JOIN geodesic_addon_storefront_user_settings ON " . geoTables::userdata_table . ".id = geodesic_addon_storefront_user_settings.owner
-	
+
 				WHERE
 				 	" . geoTables::user_groups_price_plans_table . ".group_id = ?";
 

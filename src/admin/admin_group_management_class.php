@@ -14,7 +14,7 @@ class Group_management extends Admin_site
         $result = $this->db->Execute($this->sql_query);
         if ($result === false) {
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
             return false;
         }
@@ -1412,15 +1412,6 @@ function validate_inputs()
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     function new_group_form()
     {
-        if (!geoPC::is_ent() && !geoPC::is_premier()) {
-            $this->body .= "
-				<span class=medium_font>
-						The ability to create additional User Groups is not a feature included in this
-						edition of the software. If you determine that you are in need of additional
-						User Groups, please consider <a target=\"blank\" href=\"http://www.geodesicsolutions.com/products/index.htm\">upgrading</a> your software package.
-				</span>";
-            return true;
-        }
         //Lets remember any values entered, in case there was an error.
         if (isset($_POST['d'])) {
             foreach ($_POST['d'] as $key => $value) {

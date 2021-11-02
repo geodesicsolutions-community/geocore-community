@@ -13,7 +13,6 @@ class addon_SEO_info
     var $title = 'SEO';
     var $author = "Geodesic Solutions LLC.";
     var $icon_image = 'menu_seo.gif';
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/66-seo.html?directory=64';
     var $description = '
 		To use this addon for the first time, be sure to <strong style="color: red;">Read all instructions for this addon
 		in the user manual</strong>.

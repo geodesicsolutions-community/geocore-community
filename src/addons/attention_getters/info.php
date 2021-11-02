@@ -13,7 +13,6 @@ class addon_attention_getters_info
     var $title = 'Attention Getters';
     var $author = "Geodesic Solutions LLC.";
     var $icon_image = "menu_attn_getter.gif";
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/67-attention-getters.html?directory=64';
     var $description = 'This addon enables the use of attention getters.  This addon is compatible
 	with Geo 4.0+.';
     var $auth_tag = 'geo_addons';

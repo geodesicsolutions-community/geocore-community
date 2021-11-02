@@ -13,7 +13,6 @@ class addon_adplotter_info
     var $title = 'AdPlotter';
     var $author = "Geodesic Solutions LLC.";
     //var $icon_image = 'menu_anonymous.gif';
-    //var $info_url = 'http://geodesicsolutions.com/component/content/article/55-miscellaneous/77-anonymous-listing.html?directory=64';
     var $description = 'Registers your site with the adplotter.com network and allows adplotter users to create listings';
     var $auth_tag = 'geo_addons';
     var $core_events = array('sell_success_email_content');

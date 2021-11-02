@@ -1278,7 +1278,7 @@ class addon_example_util extends addon_example_info
          * Note on View Vars:  For help with manipulating view vars, see
          * the section linked below in our wiki:
          *
-         * http://geodesicsolutions.com/support/wiki/developers/geoclass/geoview/start
+         * https://geodesicsolutions.org/wiki/developers/geoclass/geoview/start
          * (That link is subject to change, if it is broken, in the user manual
          * navigate to Geo Classes Tips in the Developers section.
          *
@@ -2718,7 +2718,7 @@ class addon_example_util extends addon_example_info
         //This is an example of how to display news feed from specific RSS feed
 
         //Change this URL to the RSS feed URL you want to pull the news feed from.
-        $rss_url = 'http://geodesicsolutions.com/demo/rss_listings.php';
+        $rss_url = 'https://geodesicsolutions.org/latest/rss_listings.php';
 
         $reader = new rss_reader($rss_url);
 

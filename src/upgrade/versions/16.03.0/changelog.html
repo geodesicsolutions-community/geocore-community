@@ -4,17 +4,17 @@
 	<meta charset="utf-8" />
 	<title>Geodesic Solutions 16.03.0 Changelog</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	
+
 	<script>
 		//<![CDATA[
-		
+
 		var changeDiffMethod = function () {
 			var showclass = jQuery('.diffMethod:checked').prop('id');
 			var hideclass = jQuery('.diffMethod:not(:checked)').prop('id');
 			jQuery('.'+showclass).show();
 			jQuery('.'+hideclass).hide();
 		};
-		
+
 		jQuery(document).ready(function () {
 			jQuery('.diffMethod').click(changeDiffMethod);
 			if (jQuery('.diffMethod').length) {
@@ -31,19 +31,19 @@
 				}
 			});
 		});
-		
+
 		//]]>
 	</script>
-	
-	
+
+
 	<style>
-		
+
 		.toc, .code_legend {
 			float: left;
 			border-radius: 15px;
 			margin-bottom: 10px;
 		}
-		
+
 		.code {
 			width: 90%;
 			max-height: 500px;
@@ -94,19 +94,16 @@
 		ul.nav li a:hover {
 			background-color: #dfd;
 		}
-		
+
 	</style>
-	
+
 	<meta name="generator" content="SPBAS http://spbas.com" />
 </head>
 <body>
 <p>
 	This file is a technical summary of changes in the Geodesic Solutions Classifieds and Auctions software.
-	Each entry will link to the corresponding bug found in Bugzilla on our website (You will 
-	need current support contract to view, <a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,developers;bugzilla;start">more info here</a>). You can find release highlights on
-	<a href="http://geodesicsolutions.com">geodesicsolutions.com</a>.
 </p>
-<!-- 
+<!--
 	This is auto-generated.  Can manually adjust order of things, just keep
 	any HTML comments that start with AUTO intact as those are used to modify
 	the changelog and/or auto-insert new changelog contents.
@@ -128,7 +125,7 @@
 </fieldset>
 <fieldset class="versions">
 	<legend>Template Change "Diff" Method</legend>
-	
+
 	Choose method to show template changes:<br />
 	<label><input type="radio" name="diffMethod" class="diffMethod" id="findReplace" checked="checked" /> Find &amp; Replace</label><br />
 	<label><input type="radio" name="diffMethod" class="diffMethod" id="inline" /> Inline</label>
@@ -144,45 +141,45 @@
 </ul>
 <h4 id="milestone_16-03-0_enhancements">[Enhancements]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1656 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1656" onclick="window.open(this.href); return false;" id="bug_1656">1656</a> - New Beta Feature: Recurring Classifieds - <em>Sponsored</em>
 <br />
 </p>
 <h4 id="milestone_16-03-0_bugfix_secure">[Security Fixes]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1665 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1665" onclick="window.open(this.href); return false;" id="bug_1665">1665</a> - Removed an SQL injection vector - <em>Security</em>
 <br />
 </p>
 <h4 id="milestone_16-03-0_bugfix">[Fixes/Maintenance]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1675 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1675" onclick="window.open(this.href); return false;" id="bug_1675">1675</a> - MINIMUM PHP VERSION UPDATED TO 5.4<br />
- 
+
 <!-- Log for bug # 1666 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1666" onclick="window.open(this.href); return false;" id="bug_1666">1666</a> - Fixed attention getters not appearing in the new design<br />
- 
+
 <!-- Log for bug # 1667 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1667" onclick="window.open(this.href); return false;" id="bug_1667">1667</a> - Fixed archive_listings and expire_groups_and_plans crons not running ever<br />
- 
+
 <!-- Log for bug # 1670 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1670" onclick="window.open(this.href); return false;" id="bug_1670">1670</a> - GeoNav: non-index pages will no longer trigger GeoNav filtering (fixes registration in subdomains)<br />
- 
+
 <!-- Log for bug # 1674 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1674" onclick="window.open(this.href); return false;" id="bug_1674">1674</a> - Fixed auction renewal/copy ignoring new end time<br />
- 
+
 <!-- Log for bug # 1668 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1668" onclick="window.open(this.href); return false;" id="bug_1668">1668</a> - Hid the streamlined category browse button when it would have no categories to write<br />
- 
+
 <!-- Log for bug # 1669 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1669" onclick="window.open(this.href); return false;" id="bug_1669">1669</a> - Storefront: restored missing character to template names in user CP<br />
- 
+
 <!-- Log for bug # 1671 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1671" onclick="window.open(this.href); return false;" id="bug_1671">1671</a> - Fixed an outside chance for memcache to not properly lock under high loads<br />
- 
+
 <!-- Log for bug # 1672 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1672" onclick="window.open(this.href); return false;" id="bug_1672">1672</a> - Restored missing chevrons to pagination links in the admin<br />
 </p>
@@ -190,8 +187,7 @@
 <p style="font-style: italic;">
 	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
 	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
-	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
-	to find if you need to make any template changes during an update.
+	a list of changes everyone needs to follow.
 </p>
 <fieldset class="code_legend">
 	<legend>Legend</legend>
@@ -380,10 +376,10 @@
 </ul>
 <h4 id="milestone_16-05-0_enhancements">[Enhancements]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1681 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1681" onclick="window.open(this.href); return false;" id="bug_1681">1681</a> - Listing Exporter: added Quantity and Remaining Quantity as data points that can be exported<br />
- 
+
 <!-- Log for bug # 1683 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1683" onclick="window.open(this.href); return false;" id="bug_1683">1683</a> - Created a new Template Theme (Tempo) and added Tempo, Fusion, and Marquee to the main download<br />
 </p>
@@ -393,19 +389,19 @@
 </p>
 <h4 id="milestone_16-05-0_bugfix">[Fixes/Maintenance]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1677 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1677" onclick="window.open(this.href); return false;" id="bug_1677">1677</a> - Fixed not being able to renew/upgrade listings<br />
- 
+
 <!-- Log for bug # 1680 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1680" onclick="window.open(this.href); return false;" id="bug_1680">1680</a> - Fixed Export Users writing wrong data for Country/State fields<br />
- 
+
 <!-- Log for bug # 1682 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1682" onclick="window.open(this.href); return false;" id="bug_1682">1682</a> - Fixed a case where new Attention Getter banners could appear twice<br />
- 
+
 <!-- Log for bug # 1676 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1676" onclick="window.open(this.href); return false;" id="bug_1676">1676</a> - Fixed using the same module multiple times on the same page could show the wrong data<br />
- 
+
 <!-- Log for bug # 1678 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1678" onclick="window.open(this.href); return false;" id="bug_1678">1678</a> - Fixed classified details appearing twice in admin Order Item summary page<br />
 </p>
@@ -413,7 +409,7 @@
 <p style="font-style: italic;">
 	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
 	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
-	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	a list of changes everyone needs to follow.  Refer to the <a href="https://geodesicsolutions.org/update-instructions/">full update instructions</a>
 	to find if you need to make any template changes during an update.
 </p>
 <fieldset class="code_legend">
@@ -823,4 +819,4 @@
 
 <a href="../changelogs.php">Other Changelogs</a>
 </body>
-</html> 
+</html>

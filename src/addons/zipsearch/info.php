@@ -29,8 +29,6 @@ class addon_zipsearch_info
 <strong>Note:</strong>  Un-install this addon will remove the zip data from the system.  Installing the addon will add it back.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
-    public $info_url = 'http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/62-zip-postal-code.html?directory=64';
 }
 
 /**

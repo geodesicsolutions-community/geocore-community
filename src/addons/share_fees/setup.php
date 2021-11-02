@@ -1,15 +1,5 @@
 <?php
 
-//addons/share_fees/setup.php
-/**************************************************************************
-Addon Created by Geodesic Solutions, LLC
-Copyright (c) 2001-2014 Geodesic Solutions, LLC
-All rights reserved
-http://geodesicsolutions.com
-see license attached to distribution
-**************************************************************************/
-
-
 # Shared Fees Addon
 require_once ADDON_DIR . 'share_fees/info.php';
 
@@ -36,7 +26,7 @@ class addon_share_fees_setup extends addon_share_fees_info
 
 
 
-        $sql[] = "	
+        $sql[] = "
 		CREATE TABLE IF NOT EXISTS `geodesic_addon_share_fees_settings` (
 			`attachment_type_id` int(11) NOT NULL AUTO_INCREMENT,
 			`attachment_label` tinytext NOT NULL,

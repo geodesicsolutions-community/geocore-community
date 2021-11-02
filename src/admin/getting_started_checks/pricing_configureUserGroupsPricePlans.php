@@ -18,7 +18,7 @@ class pricing_configureUserGroupsPricePlans extends geoGettingStartedCheck
      * Descriptive text that explains the check and how to resolve it
      * @var String
      */
-    public $description = 'Configure your site\'s User Groups and Price Plans to your liking. Review the <a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,how_this_software_works;user_groups_price_plans;start/">User Groups / Price Plans Relationship</a> page in the user manual for more information';
+    public $description = 'Configure your site\'s User Groups and Price Plans to your liking. Review the <a href="https://geodesicsolutions.org/wiki/how_this_software_works/user_groups_price_plans/start/">User Groups / Price Plans Relationship</a> page in the user manual for more information';
 
     /**
      * Value that represents how important this check is towards final completion.

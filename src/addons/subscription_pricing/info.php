@@ -13,7 +13,6 @@ class addon_subscription_pricing_info
     public $description = 'Enables the use of subscription-based pricing and related features.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 }
 
 /**

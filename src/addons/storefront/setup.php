@@ -24,7 +24,7 @@ class addon_storefront_setup extends addon_storefront_info
 
 
 
-        $sql[] = "	
+        $sql[] = "
 		CREATE TABLE IF NOT EXISTS `geodesic_addon_storefront_user_settings` (
 		  `owner` int(11) NOT NULL,
 		  `logo` varchar(255) NOT NULL,
@@ -82,7 +82,7 @@ class addon_storefront_setup extends addon_storefront_info
 		  PRIMARY KEY  (`category_id`),
 		  KEY `owner` (`owner`),
 		  KEY `display_order` (`display_order`)
-		) ;	
+		) ;
 		";
 
 
@@ -411,8 +411,8 @@ class addon_storefront_setup extends addon_storefront_info
             case '1.9.3':
                 if (!geoPC::is_whitelabel()) {
                     geoAdmin::m(
-                        "Notice: a Recommended Template Change exists for this update. 
-					<a href='http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,designers;changes_to_note/#storefront_addon_main_pagestorefront_default_templatetpl_703' onclick='window.open(this.href); return false;'>More info</a>",
+                        "Notice: a Recommended Template Change exists for this update.
+					<a href='https://geodesicsolutions.org/wiki/designers/changes_to_note/#storefront_addon_main_pagestorefront_default_templatetpl_703' target=\"_blank\">More info</a>",
                         geoAdmin::NOTICE
                     );
                 }
@@ -422,7 +422,7 @@ class addon_storefront_setup extends addon_storefront_info
                     $location = 'browsing';
                     $cats = $db->Execute("SELECT `group_id`, `category_id` FROM " . geoTables::fields . " WHERE `field_name`='addon_storefront_display_link' AND `is_enabled`=1");
                     foreach ($cats as $row) {
-                        $sqls[] = "INSERT IGNORE INTO " . geoTables::field_locations . " (`group_id`,`category_id`,`field_name`,`display_location`) VALUES 
+                        $sqls[] = "INSERT IGNORE INTO " . geoTables::field_locations . " (`group_id`,`category_id`,`field_name`,`display_location`) VALUES
 								({$row['group_id']}, {$row['category_id']}, 'addon_storefront_display_link', 'browsing')";
                     }
                     $inserted_fields = true;

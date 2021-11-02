@@ -13,7 +13,6 @@ class addon_account_balance_info
     public $description = 'This addon contains the Account Balance payment gateway, useful for allowing sellers to hold a balance of funds for later use.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 }
 
 /**
