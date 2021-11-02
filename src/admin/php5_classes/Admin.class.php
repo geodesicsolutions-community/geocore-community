@@ -401,7 +401,7 @@ class geoAdmin {
 				$title = '<span>'.$title.'</span>';
 				$page_data->breadcrumb_title = $title.'<span> <i class="fa fa-chevron-right"> </i> </span>'.$page_data->breadcrumb_title;
 
-				$page_data->wiki_uri = $this->cleanWikiTitle($current_cat->title).';';
+				$page_data->wiki_uri = $this->cleanWikiTitle($current_cat->title).'/';
 			}
 
 			while(isset($current_cat->parent)){
@@ -425,7 +425,7 @@ class geoAdmin {
 					//make it so that it only wraps with "> title" at beginning of next line...
 					$page_data->breadcrumb_title = $title.'<span> <i class="fa fa-chevron-right"> </i> </span>'.$page_data->breadcrumb_title;
 
-					$page_data->wiki_uri = $this->cleanWikiTitle($current_cat->title).';'.$page_data->wiki_uri;
+					$page_data->wiki_uri = $this->cleanWikiTitle($current_cat->title).'/'.$page_data->wiki_uri;
 				}
 			}
 		}
@@ -618,7 +618,7 @@ class geoAdmin {
 					$view->breadcrumb_title = $page_data->breadcrumb_title.'<span>'.$page_data->title.$title.'</span>';
 				}
 
-				$page_data->wiki_uri .= $this->cleanWikiTitle($page_data->title).';start';
+				$page_data->wiki_uri .= $this->cleanWikiTitle($page_data->title).'/start';
 
 				$view->wiki_uri = $page_data->wiki_uri;
 				$view->page_title = $page_data->title.$title;
