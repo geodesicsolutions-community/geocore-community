@@ -422,49 +422,6 @@ class Addon_Manage
     {
         $count = 0;
 
-        //array of purchasable add-ons.  Should be index => title.
-        $purchase = array();
-        //$purchase['index'] = array('Addon Title','https://addon_url_link.com',## - product number this addon is included with as part of package);
-        /*
-         * product numbers:
-         * 1 Enterprise
-         * 2 Premier
-         * 4 Basic
-         * 8 Lite
-         * ------
-         * 16 Classifieds
-         * 32 Auctions
-         * 64 GeoCore
-         * 128 Print
-         */
-        $gtStatus = geoPC::geoturbo_status();
-
-        $purchase['anonymous_listing'] = array('Anonymous Listing', 'http://geodesicsolutions.com/component/content/article/55-miscellaneous/77-anonymous-listing.html?directory=64',1);
-        $purchase['attention_getters'] = array ('Attention Getters','http://geodesicsolutions.com/component/content/article/53-added-value/67-attention-getters.html?directory=64',1);
-        $purchase['bulk_uploader'] = array('Bulk Uploader', 'http://geodesicsolutions.com/component/content/article/52-importing-exporting/60-bulk-uploader.html?directory=64',0);
-        $purchase['discount_codes'] = array ('Discount Codes','http://geodesicsolutions.com/component/content/article/53-added-value/69-discount-codes.html?directory=64',1);
-        $purchase['google_maps'] = array('Google Maps','http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/78-google-maps.html?directory=64',0);
-        $purchase['multi_admin'] = array('Multi-Admin','http://geodesicsolutions.com/component/content/article/54-access-security/61-multi-admin.html?directory=64',0);
-        $purchase['pedigree_tree'] = array('Pedigree Tree','http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/79-pedigrees.html?directory=64',0);
-        $purchase['signs_flyers'] = array ('Signs & Flyers','http://geodesicsolutions.com/component/content/article/53-added-value/68-signs-flyers.html?directory=64',1);
-        $purchase['social_connect'] = array ('Social Connect (Facebook)', 'http://geodesicsolutions.com/component/content/article/51-third-party-integrations/340-social-connect-addon.html?directory=64');
-        if (!$gtStatus) {
-            $purchase['storefront'] = array ('Storefront Addon','http://geodesicsolutions.com/component/content/article/53-added-value/59-storefront.html?directory=64',1);
-        }
-        $purchase['SEO'] = array ('Search Engine Friendly URLs','http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/66-seo.html?directory=64',1);
-        if (!$gtStatus) {
-            $purchase['tokens'] = array ('Tokens', 'http://geodesicsolutions.com/component/content/article/53-added-value/341-tokens-add-on.html?directory=64',1);
-        }
-        $purchase['zipsearch'] = array('Zip/Postal Code Search','http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/62-zip-postal-code.html?directory=64',0);
-        $purchase['exporter'] = array('Listing Exporter','http://geodesicsolutions.com/component/content/article/52-importing-exporting/75-listing-export.html?directory=64',0);
-        $purchase['sharing'] = array('Sharing','http://geodesicsolutions.com/component/content/article/51-third-party-integrations/299-sharing-add-on.html?directory=64',0);
-        $purchase['social_connect'] = array('Social Connect','http://geodesicsolutions.com/component/content/article/51-third-party-integrations/340-social-connect-addon.html?directory=64',0);
-        $purchase['twitter_feed'] = array('Twitter Feed','http://geodesicsolutions.com/component/content/article/51-third-party-integrations/284-twitter-feed-add-on.html?directory=64',0);
-        if (!geoPC::is_whitelabel() && !$gtStatus) {
-            $purchase['mobile_api'] = array('Mobile API','http://geodesicsolutions.com/component/content/article/53-added-value/356-mobile-api-app.html?directory=64',0);
-        }
-
-        //used as an example..
         $addon_obj =& geoAddon::getInstance();
         $row_color = '';
 
@@ -512,49 +469,6 @@ class Addon_Manage
 			<td class=\"medium_font_light\">&nbsp;</td>
 			<td class=\"medium_font_light\">&nbsp;</td>
 			</tr>\n";
-        }
-        $message_body_p = 'Addon not found.  You can purchase this addon from <a href="http://geodesicsolutions.com">geodesicsolutions.com</a>.<br /><br />
-Once you have purchased, download the zip file for the addon under the order details page.  Then unzip, and follow the instructions for how to upload and install the addon.';
-        $message_body_u = 'Addon not found.  This addon should have been included with your product.  <strong>Make sure you upload all files.</strong><br /><br />
-Missing files for folder: ';
-        $install_u = 'Upload Files';
-        $status = '<span style="color:red; ">Not Found</span>';
-        $message_body_p = geoString::specialChars($message_body_p);
-        $message_body_u = geoString::specialChars($message_body_u);
-        foreach ($purchase as $name => $data) {
-            if (!key_exists($name, $this->addons) && !is_dir(ADDON_DIR . $name)) {
-                $count++;
-                if ($count == 1) {
-                    //first time, show top of table.
-                    //show enabled addons.
-                    $body .= $header;
-                }
-                $row_color = ($row_color == 'row_color1') ? 'row_color2' : 'row_color1';
-                //$i++;
-                $title = $data[0];
-                $url = $data[1];
-                //figure out if this is purchase, or just need to upload.
-
-                $message_body = $message_body_u . geoString::specialChars('<strong>addons/' . $name . '/</strong>');
-                $install = $install_u;
-
-                $body .= "<tr id='tr_$name' class=\"$row_color\">
-					<td class=\"medium_font\">&nbsp;</td>
-					<td class=\"medium_font\" style='text-align: center;'>$install</td>
-					<td class=\"medium_font\" tooltip=\"$message_body\">{$title}</td>
-					<td class=\"medium_font\" style='text-align: center;'>N/A</td>
-					" . (geoPC::is_whitelabel() ? "" : "<td class=\"medium_font\" tooltip=\"$message_body\">Geodesic Solutions LLC.</td>") . "
-					<td class=\"medium_font\" style='text-align: center;'>$status</td>
-					<td class=\"medium_font_light\">&nbsp;</td>
-					<td class=\"medium_font_light\">&nbsp;</td>
-					</tr>\n";
-            }
-        }
-
-        if (false && $count) {
-            //at least one shown, so output bottom of table.
-            $body .= '
-		</table>';
         }
     }
 

@@ -3,8 +3,8 @@
 <html>
 	<head>
 		<title>GeoCore | GeoCore Admin</title>
-			{if $charset}<me{* 
-				A spacer to get eclipse to stop 
+			{if $charset}<me{*
+				A spacer to get eclipse to stop
 				trying to open the file with "unknown charset
 				of {$charset}"  *}ta http-equiv="Content-Type" content="text/html; charset={$charset}" />{/if}
 
@@ -15,7 +15,7 @@
 			<link href="css/font-awesome.css" rel="stylesheet">
 
 			{head_html}
-    
+
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<script type="text/javascript">
@@ -98,7 +98,7 @@
 									<a id="menu_toggle"><i class="fa fa-bars"></i></a>
 								</div>
 								<div class="nav toggle site-name">{$site_name}
-									<a href="index.php?page=main_general_settings&mc=site_setup" title="Edit Site Name" alt="Edit Site Name"><i class="fa fa-pencil edit-pencil"></i></a>								
+									<a href="index.php?page=main_general_settings&mc=site_setup" title="Edit Site Name" alt="Edit Site Name"><i class="fa fa-pencil edit-pencil"></i></a>
 								</div>
 								<ul class="nav navbar-nav navbar-right">
 									<li>
@@ -113,12 +113,12 @@
 										</a>
 										<a href="#" onclick="logout(this); return false;" title="Logout">
 											<i class="fa fa-power-off"></i>
-										</a>		  
+										</a>
 									</li>
 								</ul>
 							</nav>
 						</div>
-					
+
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-search">
 							<form action="index.php?page=text_search" method="post" id="admin-top-search-form">
 								<div class="input-group">
@@ -138,7 +138,7 @@
 										<button type="button" class="btn btn-primary" onclick="jQuery('#admin-top-search-form').submit();"><i class="fa fa-search"></i></button>
 									</div>
 								</div>
-								
+
 								<input type="hidden" name="b[search_group]" value="0" />
 								<input type="hidden" name="b[search_type]" value="1" />
 								<input type="hidden" name="show_first" value="1" />
@@ -189,7 +189,8 @@
 									{if $image && !$image_fa}<img src="{$image}" alt="icon" />{/if}
 									<div style='clear:both'></div>
 									{if !$white_label}
-										<a class="page_help_button" title="Wiki Help for this Topic" href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,admin_menu;{$wiki_uri}" onclick="window.open(this.href); return false;"><i class="fa fa-book"> </i></a>
+										<a class="page_help_button" title="Wiki Help for this Topic"
+                                            href="https://geodesicsolutions.org/wiki/admin_menu/{$wiki_uri}" target="_blank"><i class="fa fa-book"> </i></a>
 									{/if}
 								</div>
 							</div>
@@ -204,7 +205,7 @@
 								{include file="notifications"}
 							</div>
 						{/if}
-				  
+
 						{body_html}
 
 					</div>
@@ -215,11 +216,11 @@
 						<div class="pull-right">
 							<div id="footer-top">
 								<p>{if !$white_label}{$product_typeDisplay}{/if} DB Ver. {$product_version}
-								{if !$white_label}<span style="white-space:nowrap;">[ <a href="http://geodesicsolutions.com/changelog/" onclick="window.open(this.href); return false;">Changelog</a> ]</span>{/if} </p>
+								{if !$white_label}<span style="white-space:nowrap;">[ <a href="https://geodesicsolutions.org/changelog/" onclick="window.open(this.href); return false;">Changelog</a> ]</span>{/if} </p>
 							</div>
 							<div id="footer">
 								<div id="footer-inside">
-									<p>Copyright &copy;2001-2018 {if !$white_label}<a href="http://geodesicsolutions.com">Geodesic Solutions, LLC</a>{/if}</p>
+									<p>Copyright &copy;2001-2018</p>
 								</div>
 							</div>
 						</div>

@@ -13,7 +13,6 @@ class addon_charity_tools_info
     public $author = 'Geodesic Solutions LLC.';
     public $icon_image = '';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $core_events = array(
         'Admin_site_display_user_data',

@@ -4,7 +4,7 @@
 {if $white_label}&nbsp;
 {else}
 	{if $is_latest}Up to date!
-	{else}<a href="http://geodesicsolutions.com/support/updates/?product=GeoCore&amp;version={$version}" onclick="window.open(this.href); return false;">{$latestVersion} is available</a>
+	{else}<a href="https://geodesicsolutions.org/update-instructions/?product=GeoCore&amp;version={$version}" target="_blank">{$latestVersion} is available</a>
 	{/if}
 {/if}
 </span>

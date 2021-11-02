@@ -4,17 +4,17 @@
 
 /*
  * used when PHP requirement check failes.
- * 
+ *
  * To re-generate the page, on a dev install that does meet min requirements:
- * 
+ *
  * 1. In index.php find: "var $regen_php_failed = false;" and change to true.
- * 2. View upgrade requirement check page in the browser. (Note that parts might 
+ * 2. View upgrade requirement check page in the browser. (Note that parts might
  *    look missing, if you view source you'll see those parts are echoed PHP)
  * 3. View source, and copy entire source contents.
  * 4. In this file, remove everything AFTER the first end PHP tag, and replace
  *    with contents you copied by view source.
  * 5. Remember to change $regen_php_failed back to false before committing changes.
- *   
+ *
  */
 
 
@@ -60,11 +60,7 @@ jQuery(function () {
 					<ul>
 						<li style="list-style-image: none; list-style: none;">&nbsp;</li>
 
-						<li><a href="http://geodesicsolutions.com/support/wiki/" onclick="window.open(this.href); return false;">User Manual</a></li>
-						<li><a href="http://geodesicsolutions.com/geo_user_forum/index.php" onclick="window.open(this.href); return false;">User Forum</a></li>
-						<li><a href="http://geodesicsolutions.com/support/helpdesk/kb" onclick="window.open(this.href); return false;">Knowledgebase</a></li>
-						<li><a href="https://geodesicsolutions.com/geo_store/customers" onclick="window.open(this.href); return false;">Client Area</a></li>
-						<li><a href="http://geodesicsolutions.com/resources.html" onclick="window.open(this.href); return false;">Resources</a></li>
+						<li><a href="https://geodesicsolutions.org/wiki/" onclick="window.open(this.href); return false;">User Manual</a></li>
 					</ul>
 
 				</div>
@@ -72,9 +68,9 @@ jQuery(function () {
 					<h1 id="login_product_name">&nbsp;</h1>
 					<h2 id="login_software_type">&nbsp;</h2>
 					<div id="login_form_fields">
-					
+
 <form action="index.php?run=show_upgrades" method="POST" id="req_form">
-<div style="border: 2px solid #1382B7; padding: 3px; background-color:#FFF;"> 
+<div style="border: 2px solid #1382B7; padding: 3px; background-color:#FFF;">
 <table cellpadding="2" cellspacing="2">
 	<thead>
 		<tr>
@@ -115,7 +111,7 @@ jQuery(function () {
 	<br /><br />NOTE: <?php if ($package=='both') { ?>Zend Optimizer and IonCube are<?php } else { ?>Ioncube is<?php } ?> FREELY available for your host to download and install on your server. There is NO COST to your host, since the version that needs to be installed is the
 	"decryption" version.
 	<br /><br />Hosting Trouble? Find our recommended hosting solutions by <a href="http://geodesicsolutions.com/resources.html" class="login_link" target="_blank">CLICKING HERE</a>.</span></div></p>
-	<p>Please refer to the <a href="http://geodesicsolutions.com/support/wiki/update/start" class="login_link" target="_blank">Geodesic Solutions User Manual</a>.</p>
+	<p>Please refer to the <a href="https://geodesicsolutions.org/wiki/update/start" class="login_link" target="_blank">Geodesic Solutions User Manual</a>.</p>
 
 </form>
 <form action="index.php" method="GET">

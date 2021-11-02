@@ -18,9 +18,6 @@ class addon_geographic_navigation_info
 
     public $auth_tag = 'geo_addons';
     public $icon_image = 'menu_geo_navigation.gif';
-    public $author_url = 'http://geodesicsolutions.com';
-    public $info_url = 'http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/76-geographic-navigation.html?directory=64';
-
     public $tags = array (
         'navigation',
         'navigation_top',

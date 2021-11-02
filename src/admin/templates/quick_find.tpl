@@ -10,12 +10,12 @@
 		vertical-align: middle;
 		padding: 15px 3px 15px 3px;
 		white-space: nowrap;
-		
+
 		font-size:8pt;
 		font-weight:bold;
 		height:100%;
 	}
-	
+
 	table.quickFind .img {
 		text-align: right;
 		/*width: 30%;*/
@@ -33,11 +33,11 @@
 	input.field {
 		width: 100px;
 	}
-	
+
 	form {
 		display: inline;
 	}
-	
+
 	{/literal}
 </style>
 
@@ -95,7 +95,7 @@
 		<td class="search">
 			<form action="index.php?page=orders_list_order_details" method="post" style="padding: 15px;">
 				<input type="hidden" name="page" value="orders_list_order_details" />
-				
+
 				<input type='text' name='invoiceId' class="field" />
 				<input type="submit" value="Get Order" />
 			</form>
@@ -107,7 +107,7 @@
 		<td class="search">
 			<form action="index.php?page=orders_list_order_details" method="post" style="padding: 15px;">
 				<input type="hidden" name="page" value="orders_list_order_details" />
-				
+
 				<input type='text' name='transactionId' class="field" />
 				<input type="submit" value="Get Order" />
 			</form>
@@ -128,37 +128,17 @@
 	{if !$white_label}
 		<tr>
 			<td colspan="3" class="page_note" style="text-align: center;">
-				<a href="http://geodesicsolutions.com">Geodesic Solutions</a> Searches
+				<a href="https://geodesicsolutions.org">Geodesic Solutions</a> Searches
 			</td>
 		</tr>
 		<tr class="{cycle values='row_color1,row_color2'}">
 			<td class="img"><img src="admin_images/design/icon_manual.png" alt="Search the User Manual" /></td>
-			<td class="txt"><a href="http://geodesicsolutions.com/wiki/">User Manual</a></td>
+			<td class="txt"><a href="https://geodesicsolutions.org/wiki/">User Manual</a></td>
 			<td class="search">
-				<form action="http://geodesicsolutions.com/wiki/" method="get" id="userManualSearch" style="padding: 15px;">
+				<form action="https://geodesicsolutions.org/wiki/" method="get" id="userManualSearch" style="padding: 15px;">
 					<input type="hidden" name="do" value="search" />
 					<input type="text" name="id" class="field" />
 					<input type="submit" value="Find Help &gt;&gt;" style="font-size: 8pt;" />
-				</form>
-			</td>
-		</tr>
-		<tr class="{cycle values='row_color1,row_color2'}">
-			<td class="img"><img src="admin_images/design/icon_addon.png" alt="Search for Addons" /></td>
-			<td class="txt"><a href="http://geodesicsolutions.com/software-addons.html">Software Addons</a></td>
-			<td class="search">
-				<form action="http://geodesicsolutions.com/software-addons.html" method="get" style="padding: 15px;">
-					<input name="search" type="text" class="field" /> 
-					
-					<!-- 
-					<select name="searchfield" class="field">
-						<option value="a.title">Title only</option>
-						<option value="a.introtext">Intro only</option>
-						<option value="" selected="selected">Title and intro</option>
-						<option value="a.fulltext">Content</option>
-						<option value="a.metakey">Keywords</option>
-					</select>
-					-->
-					<input name="Submit" value="Search for Addons" type="submit" /> 
 				</form>
 			</td>
 		</tr>

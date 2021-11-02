@@ -15,7 +15,6 @@ class addon_core_display_info
     public $auth_tag = 'geo_addons';
 
     //public $icon_image = 'images/menu_storefront.gif';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $tags = array (
         'display_browsing_filters',

@@ -12,7 +12,6 @@ class addon_price_drop_auctions_info
     public $author = 'Geodesic Solutions LLC.';
     public $icon_image = '';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $core_events = array (
         'listing_placement_moreDetailsPricing_append',

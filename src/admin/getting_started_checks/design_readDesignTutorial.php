@@ -18,7 +18,7 @@ class design_readDesignTutorial extends geoGettingStartedCheck
      * Descriptive text that explains the check and how to resolve it
      * @var String
      */
-    public $description = 'Many common configurations and settings are covered in the <a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,startup_tutorial_and_checklist;start/">Configuration and Startup Checklist</a> section of the User Manual. 
+    public $description = 'Many common configurations and settings are covered in the <a href="https://geodesicsolutions.org/wiki/startup_tutorial_and_checklist/start/">Configuration and Startup Checklist</a> section of the User Manual.
 							The User Manual is an excellent resource for answers to common questions relating to the GeoCore software. Take a few moments to read over and familiarize yourself with this section of the manual.';
 
     /**
@@ -41,7 +41,7 @@ class design_readDesignTutorial extends geoGettingStartedCheck
     {
         $this->isChecked = (bool)DataAccess::getInstance()->get_site_setting('gettingstarted_' . $this->name . '_isChecked');
         if (geoPC::is_whitelabel()) {
-            $this->description = 'Many common configurations and settings are covered in the User Manual. 
+            $this->description = 'Many common configurations and settings are covered in the User Manual.
 							The User Manual is an excellent resource for answers to common questions relating to the software. Take a few moments to read over and familiarize yourself with this section of the manual.';
         }
     }

@@ -4,17 +4,17 @@
 	<meta charset="utf-8" />
 	<title>Geodesic Solutions 17.04.0 Changelog</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	
+
 	<script>
 		//<![CDATA[
-		
+
 		var changeDiffMethod = function () {
 			var showclass = jQuery('.diffMethod:checked').prop('id');
 			var hideclass = jQuery('.diffMethod:not(:checked)').prop('id');
 			jQuery('.'+showclass).show();
 			jQuery('.'+hideclass).hide();
 		};
-		
+
 		jQuery(document).ready(function () {
 			jQuery('.diffMethod').click(changeDiffMethod);
 			if (jQuery('.diffMethod').length) {
@@ -31,19 +31,19 @@
 				}
 			});
 		});
-		
+
 		//]]>
 	</script>
-	
-	
+
+
 	<style>
-		
+
 		.toc, .code_legend {
 			float: left;
 			border-radius: 15px;
 			margin-bottom: 10px;
 		}
-		
+
 		.code {
 			width: 90%;
 			max-height: 500px;
@@ -94,19 +94,19 @@
 		ul.nav li a:hover {
 			background-color: #dfd;
 		}
-		
+
 	</style>
-	
+
 	<meta name="generator" content="SPBAS http://spbas.com" />
 </head>
 <body>
 <p>
 	This file is a technical summary of changes in the Geodesic Solutions Classifieds and Auctions software.
-	Each entry will link to the corresponding bug found in Bugzilla on our website (You will 
+	Each entry will link to the corresponding bug found in Bugzilla on our website (You will
 	need current support contract to view, <a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,developers;bugzilla;start">more info here</a>). You can find release highlights on
 	<a href="http://geodesicsolutions.com">geodesicsolutions.com</a>.
 </p>
-<!-- 
+<!--
 	This is auto-generated.  Can manually adjust order of things, just keep
 	any HTML comments that start with AUTO intact as those are used to modify
 	the changelog and/or auto-insert new changelog contents.
@@ -136,7 +136,7 @@
 </fieldset>
 <fieldset class="versions">
 	<legend>Template Change "Diff" Method</legend>
-	
+
 	Choose method to show template changes:<br />
 	<label><input type="radio" name="diffMethod" class="diffMethod" id="findReplace" checked="checked" /> Find &amp; Replace</label><br />
 	<label><input type="radio" name="diffMethod" class="diffMethod" id="inline" /> Inline</label>
@@ -152,13 +152,13 @@
 </ul>
 <h4 id="milestone_17-04-0_enhancements">[Enhancements]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1779 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1779" onclick="window.open(this.href); return false;" id="bug_1779">1779</a> - Social Connect: Facebook Login updated to match new Facebook API response<br />
- 
+
 <!-- Log for bug # 1782 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1782" onclick="window.open(this.href); return false;" id="bug_1782">1782</a> - Added display of &quot;Additional Fees&quot; to final bid confirmation page<br />
- 
+
 <!-- Log for bug # 1783 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1783" onclick="window.open(this.href); return false;" id="bug_1783">1783</a> - Added 10 blank &quot;Extra Text&quot; fields to Common Template Text page, for use in expanding translated templates<br />
 </p>
@@ -168,31 +168,31 @@
 </p>
 <h4 id="milestone_17-04-0_bugfix">[Fixes/Maintenance]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1773 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1773" onclick="window.open(this.href); return false;" id="bug_1773">1773</a> - Fixed Charge-By-Word not working in category-specific pricing<br />
- 
+
 <!-- Log for bug # 1774 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1774" onclick="window.open(this.href); return false;" id="bug_1774">1774</a> - Fixed Stripe checkout form sometimes not completing correctly<br />
- 
+
 <!-- Log for bug # 1775 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1775" onclick="window.open(this.href); return false;" id="bug_1775">1775</a> - Restored missing Storefront links to search results<br />
- 
+
 <!-- Log for bug # 1776 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1776" onclick="window.open(this.href); return false;" id="bug_1776">1776</a> - Fixed unresponsive &quot;Display Category/Subcategory Navigation&quot; admin settings<br />
- 
+
 <!-- Log for bug # 1778 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1778" onclick="window.open(this.href); return false;" id="bug_1778">1778</a> - Fixed an error case involving php7 and older templates<br />
- 
+
 <!-- Log for bug # 1781 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1781" onclick="window.open(this.href); return false;" id="bug_1781">1781</a> - Fixed multi-level fields being ignored in Advanced Search when also searching in a specific category<br />
- 
+
 <!-- Log for bug # 1784 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1784" onclick="window.open(this.href); return false;" id="bug_1784">1784</a> - Fixed admin Categories page including archived listings in category counts<br />
- 
+
 <!-- Log for bug # 1777 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1777" onclick="window.open(this.href); return false;" id="bug_1777">1777</a> - Fixed error when editing admin user's personal data<br />
- 
+
 <!-- Log for bug # 1780 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1780" onclick="window.open(this.href); return false;" id="bug_1780">1780</a> - More improvements to the way search text is handled<br />
 </p>
@@ -200,7 +200,7 @@
 <p style="font-style: italic;">
 	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
 	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
-	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	a list of changes everyone needs to follow.  Refer to the <a href="https://geodesicsolutions.org/update-instructions/">full update instructions</a>
 	to find if you need to make any template changes during an update.
 </p>
 <fieldset class="code_legend">
@@ -420,13 +420,13 @@
 </ul>
 <h4 id="milestone_17-05-0_enhancements">[Enhancements]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1785 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1785" onclick="window.open(this.href); return false;" id="bug_1785">1785</a> - Updated ADOdb to latest version 5.20.9<br />
- 
+
 <!-- Log for bug # 1786 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1786" onclick="window.open(this.href); return false;" id="bug_1786">1786</a> - Decreased memory footprint of new listing alert cron<br />
- 
+
 <!-- Log for bug # 1787 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1787" onclick="window.open(this.href); return false;" id="bug_1787">1787</a> - Improved session handling for high-traffic sites<br />
 </p>
@@ -436,16 +436,16 @@
 </p>
 <h4 id="milestone_17-05-0_bugfix">[Fixes/Maintenance]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1788 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1788" onclick="window.open(this.href); return false;" id="bug_1788">1788</a> - Fixed sometimes being unable to clear category-specific checkbox values during a listing copy or edit<br />
- 
+
 <!-- Log for bug # 1789 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1789" onclick="window.open(this.href); return false;" id="bug_1789">1789</a> - Listing Exporter: fixed start/end date entry fields not responding correctly<br />
- 
+
 <!-- Log for bug # 1790 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1790" onclick="window.open(this.href); return false;" id="bug_1790">1790</a> - Fixed broken admin switch for new listing notification email<br />
- 
+
 <!-- Log for bug # 1791 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1791" onclick="window.open(this.href); return false;" id="bug_1791">1791</a> - Remove browser tracking for &quot;Other,&quot; since that usually represents bot/crawler hits and clutters up the useful data<br />
 </p>
@@ -463,13 +463,13 @@
 </ul>
 <h4 id="milestone_17-07-0_enhancements">[Enhancements]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1793 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1793" onclick="window.open(this.href); return false;" id="bug_1793">1793</a> - Updated credit card type-checking to include the Mastercard &quot;Series 2&quot; range<br />
- 
+
 <!-- Log for bug # 1802 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1802" onclick="window.open(this.href); return false;" id="bug_1802">1802</a> - Sharing Addon: Added Facebook &quot;Share&quot; button to My Account &gt; Sharing page<br />
- 
+
 <!-- Log for bug # 1805 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1805" onclick="window.open(this.href); return false;" id="bug_1805">1805</a> - New Image Block type: PhotoSwipe adds responsiveness, swipe navigation, pinch-zoom, and more<br />
 </p>
@@ -479,37 +479,37 @@
 </p>
 <h4 id="milestone_17-07-0_bugfix">[Fixes/Maintenance]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1792 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1792" onclick="window.open(this.href); return false;" id="bug_1792">1792</a> - Fixed one more PHP7 compatibility thing that got missed earlier<br />
- 
+
 <!-- Log for bug # 1794 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1794" onclick="window.open(this.href); return false;" id="bug_1794">1794</a> - Fixed an SQL error on the admin's Manage Order/Items page<br />
- 
+
 <!-- Log for bug # 1795 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1795" onclick="window.open(this.href); return false;" id="bug_1795">1795</a> - Resolved CORS error relating to trying to use subdomain navigation with ajax requests on subdomainless pages<br />
- 
+
 <!-- Log for bug # 1796 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1796" onclick="window.open(this.href); return false;" id="bug_1796">1796</a> - Fixed inability to edit user email addresses in the admin<br />
- 
+
 <!-- Log for bug # 1797 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1797" onclick="window.open(this.href); return false;" id="bug_1797">1797</a> - Fixed Public Questions section of Listing Details page not being hidden when turned off<br />
- 
+
 <!-- Log for bug # 1800 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1800" onclick="window.open(this.href); return false;" id="bug_1800">1800</a> - Fixed Stripe payment gateway not playing well with others<br />
- 
+
 <!-- Log for bug # 1801 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1801" onclick="window.open(this.href); return false;" id="bug_1801">1801</a> - Fixed a case where category selection would incorrectly throw an error when selecting between multiple price plans in listing placement<br />
- 
+
 <!-- Log for bug # 1803 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1803" onclick="window.open(this.href); return false;" id="bug_1803">1803</a> - Fixed State and Country data not displaying in RSS feeds<br />
- 
+
 <!-- Log for bug # 1804 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1804" onclick="window.open(this.href); return false;" id="bug_1804">1804</a> - Fixed being unable to edit Cost Options attached to Bulk Uploaded listings<br />
- 
+
 <!-- Log for bug # 1806 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1806" onclick="window.open(this.href); return false;" id="bug_1806">1806</a> - Fixed inability to add new Buyer-Selected Cost Options when editing a listing<br />
- 
+
 <!-- Log for bug # 1799 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1799" onclick="window.open(this.href); return false;" id="bug_1799">1799</a> - Fixed username missing from Seller's Other Listings page title<br />
 </p>
@@ -517,7 +517,7 @@
 <p style="font-style: italic;">
 	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
 	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
-	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	a list of changes everyone needs to follow.  Refer to the <a href="https://geodesicsolutions.org/update-instructions/">full update instructions</a>
 	to find if you need to make any template changes during an update.
 </p>
 <fieldset class="code_legend">
@@ -1002,19 +1002,19 @@
 </ul>
 <h4 id="milestone_17-10-0_enhancements">[Enhancements]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1798 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1798" onclick="window.open(this.href); return false;" id="bug_1798">1798</a> - Add noindex tag to pages with active Browsing Filters<br />
- 
+
 <!-- Log for bug # 1816 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1816" onclick="window.open(this.href); return false;" id="bug_1816">1816</a> - re-implemented legacy language import tool<br />
- 
+
 <!-- Log for bug # 1821 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1821" onclick="window.open(this.href); return false;" id="bug_1821">1821</a> - On user request, added a column for Order Item ID to the admin's List Items table<br />
- 
+
 <!-- Log for bug # 1826 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1826" onclick="window.open(this.href); return false;" id="bug_1826">1826</a> - Added an option to easily turn on HTTPS for *all* pages<br />
- 
+
 <!-- Log for bug # 1828 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1828" onclick="window.open(this.href); return false;" id="bug_1828">1828</a> - PHP 7.1 compatibility<br />
 </p>
@@ -1024,55 +1024,55 @@
 </p>
 <h4 id="milestone_17-10-0_bugfix">[Fixes/Maintenance]</h4>
 <p style="margin-left: 10px; margin-top: 5px;">
- 
+
 <!-- Log for bug # 1808 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1808" onclick="window.open(this.href); return false;" id="bug_1808">1808</a> - Social Connect: Fixed a case where new users would sometimes not be placed in the correct User Group<br />
- 
+
 <!-- Log for bug # 1809 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1809" onclick="window.open(this.href); return false;" id="bug_1809">1809</a> - SEO addon: Corrected an issue that could prevent https URLs from being rewritten correctly<br />
- 
+
 <!-- Log for bug # 1810 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1810" onclick="window.open(this.href); return false;" id="bug_1810">1810</a> - Fixed category-specific and multi-level field data sometimes disappearing upon listing edit<br />
- 
+
 <!-- Log for bug # 1811 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1811" onclick="window.open(this.href); return false;" id="bug_1811">1811</a> - Fixed Buyer-Selected Cost Options being deleted from original listing when Copying to a new listing<br />
- 
+
 <!-- Log for bug # 1812 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1812" onclick="window.open(this.href); return false;" id="bug_1812">1812</a> - Storefront: fixed state filter dropdown sometimes not showing all available states<br />
- 
+
 <!-- Log for bug # 1813 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1813" onclick="window.open(this.href); return false;" id="bug_1813">1813</a> - Google Maps: Fixed maps sometimes not appearing when the server is using a non-US Locale<br />
- 
+
 <!-- Log for bug # 1814 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1814" onclick="window.open(this.href); return false;" id="bug_1814">1814</a> - Fixed subcategory navigation links sometimes being unclickable<br />
- 
+
 <!-- Log for bug # 1815 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1815" onclick="window.open(this.href); return false;" id="bug_1815">1815</a> - Fixed a couple edge cases in User Filter configuration<br />
- 
+
 <!-- Log for bug # 1818 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1818" onclick="window.open(this.href); return false;" id="bug_1818">1818</a> - Fixed a couple cases where Buyer Selected Cost Option data would be improperly double-encoded<br />
- 
+
 <!-- Log for bug # 1820 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1820" onclick="window.open(this.href); return false;" id="bug_1820">1820</a> - Storefront: Fixed a case where the first page of listings could be shown in the wrong order<br />
- 
+
 <!-- Log for bug # 1822 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1822" onclick="window.open(this.href); return false;" id="bug_1822">1822</a> - Cleaned up a couple display oddities relating to the CashU payment gateway<br />
- 
+
 <!-- Log for bug # 1827 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1827" onclick="window.open(this.href); return false;" id="bug_1827">1827</a> - Update XMLRPC api transport for PHP7 compatibility<br />
- 
+
 <!-- Log for bug # 1829 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1829" onclick="window.open(this.href); return false;" id="bug_1829">1829</a> - Fixed Duration selection being ignored during Preview Listing while Set Auction End Time is active<br />
- 
+
 <!-- Log for bug # 1830 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1830" onclick="window.open(this.href); return false;" id="bug_1830">1830</a> - Fixed a case where a user's Account Balance could be used to add funds to his Account Balance<br />
- 
+
 <!-- Log for bug # 1807 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1807" onclick="window.open(this.href); return false;" id="bug_1807">1807</a> - Remove extra Attention Getters from My Favorites page<br />
- 
+
 <!-- Log for bug # 1819 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1819" onclick="window.open(this.href); return false;" id="bug_1819">1819</a> - Fixed Contact Seller form from {listing} tag not showing the correct username for anonymous listings<br />
- 
+
 <!-- Log for bug # 1823 -->
 <a href="https://geodesicsolutions.com/bugzilla/show_bug.cgi?id=1823" onclick="window.open(this.href); return false;" id="bug_1823">1823</a> - Fixed the Address field populating with a single space character when info ommitted<br />
 </p>
@@ -1080,7 +1080,7 @@
 <p style="font-style: italic;">
 	<strong>Reference Purposes Only:</strong>  Like the rest of this changelog, the
 	template changes below are for reference purposes only, <strong>not</strong> (necessarily)
-	a list of changes everyone needs to follow.  Refer to the <a href="http://geodesicsolutions.com/support/updates/">full update instructions</a>
+	a list of changes everyone needs to follow.  Refer to the <a href="https://geodesicsolutions.org/update-instructions/">full update instructions</a>
 	to find if you need to make any template changes during an update.
 </p>
 <fieldset class="code_legend">
@@ -1419,4 +1419,4 @@
 
 <a href="../changelogs.php">Other Changelogs</a>
 </body>
-</html> 
+</html>

@@ -226,12 +226,12 @@ class admin_extra_questions
 									</td>
 								</tr>";
                 $this->html .= "
-						</tbody>		
+						</tbody>
 						</table>
 						</div>
 						<div style='padding: 5px;'><a href=index.php?page=dropdowns class='back_to'>
 						<i class='fa fa-backward'></i> Back to All Dropdowns</a></div>
-					
+
 				</fieldset>";
                 if (!$this->admin_site->admin_demo()) {
                     $this->html .= '</form>';
@@ -293,7 +293,7 @@ class admin_extra_questions
         $result = $this->db->Execute($this->sql_query);
         if (!$result) {
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $this->menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $this->menu_loader->userError("Internal error.");
             $this->html .= $this->menu_loader->getUserMessages();
             return false;
         }

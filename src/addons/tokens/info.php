@@ -12,7 +12,6 @@ class addon_tokens_info
     public $description = 'Allow users to use a token that covers the main cost of a listing (NOT cover the cost of listing extras).';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $pages = array (
         'chooseTokens',

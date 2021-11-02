@@ -101,7 +101,7 @@ class Registration_configuration extends Admin_site
 
             if (!$result) {
                 trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-                $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+                $menu_loader->userError("Internal error.");
                 $this->body .= $menu_loader->getUserMessages();
                 return false;
             } elseif ($result->RecordCount() > 0) {
@@ -649,7 +649,7 @@ class Registration_configuration extends Admin_site
 
             if (!$type_result) {
                 trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-                $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+                $menu_loader->userError("Internal error.");
                 $this->body .= $menu_loader->getUserMessages();
                 return false;
             }
@@ -952,7 +952,7 @@ class Registration_configuration extends Admin_site
 
         if (!$result) {
             trigger_error("ERROR SQL: " . $this->db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
             return false;
         }

@@ -84,8 +84,8 @@ class geoReq
             $overall_fail .= '<p class="body_txt1"><div style="text-align: left; background-color: #FFF; padding: 5px; border: 1px solid #EA1D25;"><span class="failed">IMPORTANT: As shown above, one or more of your server\'s minimum requirements have not been met.  These requirements must be met in order to continue with this installation.
 	<br><br>NOTE: The IonCube Loaders are FREELY available for your host to download and install on your server. There is NO COST to your host, since the version that needs to be installed is the
 	"decryption" version.
-	<br><br>Hosting Trouble? Find our recommended hosting solutions by <a href="http://geodesicsolutions.com/resources.html" class="login_link" target="_blank">CLICKING HERE</a>.</span></div></p>
-	<p>Please refer to the <a href="http://geodesicsolutions.com/support/wiki/update/start" class="login_link" target="_blank">Geodesic Solutions User Manual</a>.</p>';
+	</span></div></p>
+	<p>Please refer to the <a href="https://geodesicsolutions.org/wiki/update/start" class="login_link" target="_blank">Geodesic Solutions User Manual</a>.</p>';
 
 
         $continue_pass = '<input type="submit" name="continue" value="Continue >>" />';

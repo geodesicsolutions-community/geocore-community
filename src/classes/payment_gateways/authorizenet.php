@@ -489,7 +489,7 @@ class authorizenetPaymentGateway extends _ccPaymentGateway
         //eprocessingnetwork.com settings
         //$cc_url .= "&x_Relay_Response=false&x_Relay_URL=false&x_Delim_Data=true&x_Delim_Char=|";
 
-        $cc_url .= "&x_Email=geoclassifieds%40geodesicsolutions.com";
+        $cc_url .= "&x_Email=test%40geodesicsolutions.org";
         $cc_url .= "&x_Customer_Organization_Type=B";
 
         $cc_url .= "&x_Type=AUTH_CAPTURE";

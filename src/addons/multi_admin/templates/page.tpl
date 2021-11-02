@@ -3,11 +3,11 @@
 	<td style='text-align: left;'>
 		<div style="white-space:nowrap; padding-left: 30px;">
 			{if $page.type != 'sub_page'}<a href="index.php?mc={$page.parent}&amp;page={$page.index}">{/if}{$page.breadcrumb}{if $page.type eq 'sub_page'} (hidden){else}</a>{/if}
-			<a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,admin_menu;{$page.wiki_uri}" onclick="window.open(this.href); return false;">?</a>
+			<a href="https://geodesicsolutions.org/wiki/admin_menu/{$page.wiki_uri}" target="_blank">?</a>
 		</div>
 	</td>
 	<td style="text-align: center;">
-		<input type="checkbox" onclick="javascript: updateChecks(this)" 
+		<input type="checkbox" onclick="javascript: updateChecks(this)"
 			class="displayBox" name="display[{$index|escape}]" value="1"{if $display_permissions.$index} checked="checked"{/if} />
 	</td>
 	<td style="text-align: center;">

@@ -42,7 +42,7 @@ class Admin_auth extends Admin_site
         $this->messages[806] = "Please enter your password";
         $this->messages[807] = "Please re-enter your username";
         $this->messages[808] = "Please re-enter your password";
-        $this->messages[809] = "Your login information is incorrect." . (!geoPC::is_whitelabel() ? " <a href=\"http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,startup_tutorial_and_checklist;admin_controls;admin_login_change;reset_admin_login_when_loststart/\" onclick=\"window.open(this.href); return false;\">Help?</a>" : '');
+        $this->messages[809] = "Your login information is incorrect." . (!geoPC::is_whitelabel() ? " <a href=\"https://geodesicsolutions.org/wiki/startup_tutorial_and_checklist/admin_controls/admin_login_change/reset_admin_login_when_loststart/\" target=\"_blank\">Help?</a>" : '');
         $this->messages[810] = "No account exists by that username";
         $this->messages[811] = "Edit Userdata Form";
         $this->messages[812] = "Edit userdata form instructions";
@@ -93,7 +93,7 @@ class Admin_auth extends Admin_site
         $this->messages[857] = "Message from ";
         $this->messages[858] = "Your friend, ";
         $this->messages[859] = "thought you would be interested in this item in the Geodesic Classifieds: ";
-        $this->messages[860] = "Click on the above link or cut and paste it into your browser\n\n\rThis classifieds program was created by Geodesic Solutions\n\rhttp://www.geodesicsolutions.com/products/index.htm for product information";
+        $this->messages[860] = "Click on the above link or cut and paste it into your browser\n\n\rThis classifieds program was created by Geodesic Solutions";
         $this->messages[861] = "From: ";
         $this->messages[862] = "Reply-To: ";
         $this->messages[863] = "With the following comments: ";

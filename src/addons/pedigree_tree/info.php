@@ -13,8 +13,6 @@ class addon_pedigree_tree_info
     public $author = 'Geodesic Solutions LLC.';
     public $icon_image = 'menu_pedigree.gif';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
-    public $info_url = 'http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/79-pedigrees.html?directory=64';
     public $tags = array ('listing_tree');
     public $listing_tags = array ('listing_tree');
     public $core_events = array (

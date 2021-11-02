@@ -13,7 +13,6 @@ class addon_discount_codes_info
     var $title = 'Discount Codes';
     var $author = "Geodesic Solutions LLC.";
     var $icon_image = 'menu_discount_codes.gif';
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/69-discount-codes.html?directory=64';
     var $description = 'This addon enables the use of discount codes that apply a percentage discount to a user\'s entire cart';
     var $auth_tag = 'geo_addons';
 

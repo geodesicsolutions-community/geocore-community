@@ -15,9 +15,6 @@ class addon_bulk_uploader_info
     public $icon_image = 'menu_bulk_uploader.gif';
 
     public $auth_tag = 'geo_addons';
-    public $upgrade_url = 'http://geodesicsolutions.com/component/content/article/52-importing-exporting/60-bulk-uploader.html?directory=64';
-    public $author_url = 'http://geodesicsolutions.com';
-    public $info_url = 'http://geodesicsolutions.com/component/content/article/52-importing-exporting/60-bulk-uploader.html?directory=64';
 }
 
 /*

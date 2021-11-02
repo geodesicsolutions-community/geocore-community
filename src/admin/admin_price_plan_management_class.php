@@ -740,16 +740,6 @@ class Price_plan_management extends Admin_site
                 return false;
             }
         } else {
-            if (!(geoPC::is_ent() || geoPC::is_premier())) {
-                $this->body .= "
-						<span class=medium_font>
-							The ability to create additional Price Plans is not a feature included in this edition of
-							the software. If you determine that you are in need of additional Price Plans, please
-							consider <a target=\"blank\" href=\"http://www.geodesicsolutions.com/products/index.htm\">upgrading</a> your software package.
-						</span>";
-
-                return true;
-            }
             //insert new price plan form
             if (!$this->admin_demo()) {
                 $this->body .= "<form action=index.php?mc=pricing&page=pricing_new_price_plan method=post class='form-horizontal form-label-left'>";
@@ -2367,9 +2357,9 @@ class Price_plan_management extends Admin_site
                 //then add categories that are currently banned
                 if (count($info['main_category_ban']) > 0) {
                     foreach ($info['main_category_ban'] as $ban_key => $ban_value) {
-                        $sql = "INSERT INTO " . $this->db->geoTables->categories_exclude_per_price_plan_table . " 
+                        $sql = "INSERT INTO " . $this->db->geoTables->categories_exclude_per_price_plan_table . "
                             (price_plan_id,main_category_id_banned)
-                             VALUES 
+                             VALUES
                              (" . $category_price_plan_id . "," . $ban_key . ")";
                         $insert_banned_result = $this->db->Execute($sql);
                         if (!$insert_banned_result) {

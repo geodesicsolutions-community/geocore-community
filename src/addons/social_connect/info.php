@@ -12,7 +12,6 @@ class addon_social_connect_info
     public $description = 'Allows users to log into the site using social websites like Facebook.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $tags = array (
         'facebook_login_button',

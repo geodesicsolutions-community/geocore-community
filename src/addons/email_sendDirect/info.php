@@ -11,14 +11,13 @@ class addon_email_sendDirect_info
     var $version = '2.0.1';
     var $title = 'Main Email Sender';
     var $author = "Geodesic Solutions LLC.";
-    var $description = 'This is the main email sender.  It sends email using 
+    var $description = 'This is the main email sender.  It sends email using
 linux sendmail function, or using SMTP connection, or using the native mail() function, depending on settings in the admin.
 <br /><br />
 It sends the email right away.  If your email settings are mis-configured, it
 can cause pages that send out emails to "freeze up".';
 
     var $icon_image = 'menu_mail.gif'; //located in addons/example/icon.gif
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/55-miscellaneous/214-main-email-sender.html?directory=64';
     var $core_events = array ('email');
 
     var $exclusive = array(

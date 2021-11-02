@@ -32,7 +32,7 @@ function smarty_function_debug_templates_used ($params, Smarty_Internal_Template
 						<li>Browse to the page you want to see what templates are loaded for it.</li>
 					</ol>
 				</li>
-				<li>As always, when editing <strong>system or module</strong> templates, follow <a href="http://geodesicsolutions.com/support/wiki/tutorials/design_adv/replace_system_templates" onclick="window.open(this.href); return false;" style="text-decoration: underline;">linked instructions</a>.</li>
+				<li>As always, when editing <strong>system or module</strong> templates, follow <a href="https://geodesicsolutions.org/wiki/tutorials/design_adv/replace_system_templates" onclick="window.open(this.href); return false;" style="text-decoration: underline;">linked instructions</a>.</li>
 			</ol>
 		</p>
 		<strong>Template Files Used:</strong> (only up until this point in templates)
@@ -44,5 +44,5 @@ function smarty_function_debug_templates_used ($params, Smarty_Internal_Template
 		</ul>
 	</div>
 </fieldset>
-	<?php 
+	<?php
 }

@@ -17,10 +17,6 @@ class addon_signs_flyers_info
     //used in referencing tags, and maybe other uses in the future.
     var $auth_tag = 'geo_addons';
 
-
-    var $upgrade_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/68-signs-flyers.html?directory=64'; //[ Check For Upgrades ] link
-    var $author_url = 'http://geodesicsolutions.com'; //[ Author's Site ] link
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/53-added-value/68-signs-flyers.html?directory=64'; //[ More Info ] link
     var $tag_info_url = 'index.php?mc=addon_example_admin&page=addon_signs_flyers_tag_help';
 
     var $core_events = array('my_account_links_add_link');

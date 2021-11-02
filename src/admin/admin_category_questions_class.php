@@ -617,7 +617,7 @@ class Admin_category_questions extends Admin_site
         $result = $db->Execute($sql);
         if (!$result) {
             trigger_error("ERROR SQL: " . $db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
 
             return false;
@@ -961,7 +961,7 @@ class Admin_category_questions extends Admin_site
         $result = $db->Execute($sql);
         if (!$result) {
             trigger_error("ERROR SQL: " . $db->ErrorMsg());
-            $menu_loader->userError("Internal error. Please contact <a href='http://www.geodesicsolutions.com/support/index.htm'>support</a>.");
+            $menu_loader->userError("Internal error.");
             $this->body .= $menu_loader->getUserMessages();
             return false;
         }

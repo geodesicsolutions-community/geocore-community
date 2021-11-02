@@ -1,9 +1,9 @@
 {* 17.01.0-7-gfabc24f *}
 		<tr>
 			<th class="col_ftr" colspan="4" style="text-align:left; padding-left:10px; white-space:nowrap; vertical-align:middle;">
-				<i class="fa {$category.image}"></i> 
+				<i class="fa {$category.image}"></i>
 				{if $category.breadcrumb}{$category.breadcrumb}{else}[ NO NAME ]{/if}
-				{if $category.wiki_uri}<a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,admin_menu;{$category.wiki_uri}" onclick="window.open(this.href); return false;">?</a>{/if}
+				{if $category.wiki_uri}<a href="https://geodesicsolutions.org/wiki/admin_menu/{$category.wiki_uri}" target="_blank">?</a>{/if}
 			</th>
 		</tr>
 {foreach from=$category.children_pages item="_page"}

@@ -19,9 +19,6 @@ class addon_exporter_info
     public $icon_image = 'menu_listing_export.gif';
     public $description = "Allows admins to export listings, and possibly (at a later time) users, and other data.";
     public $auth_tag = 'geo_addons';
-    public $upgrade_url = 'http://geodesicsolutions.com/component/content/article/52-importing-exporting/75-listing-export.html?directory=64'; //[ Check For Upgrades ] link
-    public $author_url = 'http://geodesicsolutions.com'; //[ Author's Site ] link
-    public $info_url = 'http://geodesicsolutions.com/component/content/article/52-importing-exporting/75-listing-export.html?directory=64'; //[ More Info ] link
 
     const SETTINGS_TABLE = '`geodesic_addon_exporter_settings`';
 }

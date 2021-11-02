@@ -14,9 +14,6 @@ class addon_google_maps_info
     public $description = 'The Google maps addons allows you the ability to use maps on your pages powered by maps.google.com.';
     public $auth_tag = 'geo_addons';
     public $icon_image = 'menu_google.gif';
-    public $upgrade_url = 'http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/78-google-maps.html?directory=64';
-    public $author_url = 'http://geodesicsolutions.com';
-    public $info_url = 'http://geodesicsolutions.com/component/content/article/50-browsing-enhancements/78-google-maps.html?directory=64';
     public $tags = array (
         'listing_map'
     );

@@ -13,7 +13,6 @@ class addon_anonymous_listing_info
     var $title = 'Anonymous Listing';
     var $author = "Geodesic Solutions LLC.";
     var $icon_image = 'menu_anonymous.gif';
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/55-miscellaneous/77-anonymous-listing.html?directory=64';
     var $description = 'This addon enables the posting of anonymous listings, to be used on 4.0.0 or higher.';
     var $auth_tag = 'geo_addons';
     var $core_events = array(

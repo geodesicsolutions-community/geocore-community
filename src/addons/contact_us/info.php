@@ -12,7 +12,6 @@ class addon_contact_us_info
     public $description = 'Allows adding a contact us form on any page, that sends an e-mail to the specified e-mail address in the admin panel.';
     public $author = 'Geodesic Solutions LLC.';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $pages = array (
         'main'

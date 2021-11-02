@@ -2,10 +2,13 @@
 
 class Admin_classauction_tools extends Admin_site
 {
+    /**
+     * @deprecated see if still used, if not, remove
+     */
     function display_admin_tools_license()
     {
         if (isset($_GET['licenseRefreshed']) && $_GET['licenseRefreshed']) {
-            geoAdmin::m('License Data successfully refreshed from ' . (geoPC::is_whitelabel() ? 'master' : 'geodesicsolutions.com') . ' license server.', geoAdmin::SUCCESS);
+            geoAdmin::m('License Data successfully refreshed from license server.', geoAdmin::SUCCESS);
         }
 
         $view = geoView::getInstance();

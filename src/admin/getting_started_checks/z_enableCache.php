@@ -18,8 +18,8 @@ class z_enableCache extends geoGettingStartedCheck
      * Descriptive text that explains the check and how to resolve it
      * @var String
      */
-    public $description = 'If your host is capable, turn on the <a href="index.php?page=cache_config&mc=site_setup">Site Cache</a> to improve page load times. 
-	Technical information about the site cache is available in the <a href="http://geodesicsolutions.com/support/geocore-wiki/doku.php/id,admin_menu;site_setup;cache;start">User Manual</a>';
+    public $description = 'If your host is capable, turn on the <a href="index.php?page=cache_config&mc=site_setup">Site Cache</a> to improve page load times.
+	Technical information about the site cache is available in the <a href="https://geodesicsolutions.org/wiki/admin_menu/site_setup/cache/start">User Manual</a>';
 
     /**
      * Value that represents how important this check is towards final completion.

@@ -156,7 +156,7 @@ does not actually exist, there is a broken image instead.  See info.php in the a
      *
      * @var string
      */
-    public $upgrade_url = 'http://geodesicsolutions.com/component/content/article/49-programming-trouble-shooting/72-example-addon.html?directory=64';
+    public $upgrade_url = 'https://geodesicsolutions.org';
 
     /**
      * Optional, URL for author site link, used in link [ Author's Site ].  If not used, the link will
@@ -166,7 +166,7 @@ does not actually exist, there is a broken image instead.  See info.php in the a
      *
      * @var string
      */
-    public $author_url = 'http://geodesicsolutions.com';
+    public $author_url = 'https://geodesicsolutions.org';
 
     /**
      * Optional, URL for more info link, used in link [ More Info ].  If not used, the link will
@@ -176,7 +176,7 @@ does not actually exist, there is a broken image instead.  See info.php in the a
      *
      * @var string
      */
-    public $info_url = 'http://geodesicsolutions.com/component/content/article/49-programming-trouble-shooting/72-example-addon.html?directory=64';
+    public $info_url = 'https://geodesicsolutions.org';
 
     /**
      * Optional, URL for tag info link, used in link [ Tag Details ],  If not used, the link will not show for this addon.

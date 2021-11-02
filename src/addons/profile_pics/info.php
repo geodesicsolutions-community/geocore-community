@@ -12,7 +12,6 @@ class addon_profile_pics_info
     public $author = 'Geodesic Solutions LLC.';
     public $icon_image = '';
     public $auth_tag = 'geo_addons';
-    public $author_url = 'http://geodesicsolutions.com';
 
     public $core_events = array (
         'User_management_information_display_user_data',

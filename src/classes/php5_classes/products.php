@@ -1073,7 +1073,7 @@ final class geoPC
      */
     private static $_latestVersion;
     /**
-     * Gets the latest version as reported by geodesicsolutions.com
+     * Gets the latest version as reported by geodesicsolutions.org
      * @return string|bool Will return the latest version, or bool false if it
      *  could not get the latest version.
      *  @since Version 4.1.0
@@ -2339,7 +2339,7 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
 
         if (in_array($user_agent, $robots)) {
             //this is one of the "full" user agent matches...
-            trigger_error("DEBUG ROBOT SESSION: Full robot user agent match!  If this is NOT a bot, let us know the following info, send to sales@geodesicsolutions.com:\nUser agent: \n$user_agent\n");
+            trigger_error("DEBUG ROBOT SESSION: Full robot user agent match!  If this is NOT a bot, let us know the following info:\nUser agent: \n$user_agent\n");
             define('IS_ROBOT', true);
             return true;
         }
@@ -2349,7 +2349,7 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
             if (strpos($user_agent, $partial) !== false) {
                 //matches part of string so we don't have to include every single
                 //variation of a user-agent that a particular robot uses
-                trigger_error("DEBUG ROBOT SESSION:  Partial robot user agent match! If this is NOT a bot, let us know the following info, send to sales@geodesicsolutions.com:\nPartial Match:\n$partial\nuser agent:\n$user_agent\n");
+                trigger_error("DEBUG ROBOT SESSION:  Partial robot user agent match! If this is NOT a bot, let us know the following info:\nPartial Match:\n$partial\nuser agent:\n$user_agent\n");
                 define('IS_ROBOT', true);
                 return true;
             }
@@ -2364,7 +2364,7 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
             return true;
         }
 
-        trigger_error("DEBUG ROBOT SESSION: No robot user agent match, this is most likely a 'real visitor', or a bot that is not yet on the list!  If you think this is a bot, let us know at sales@geodesicsolutions.com - the User agent:\n$user_agent\n");
+        trigger_error("DEBUG ROBOT SESSION: No robot user agent match, this is most likely a 'real visitor', or a bot that is not yet on the list!  If you think this is a bot, let us know - the User agent:\n$user_agent\n");
         define('IS_ROBOT', false);
         return false;
     }

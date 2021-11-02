@@ -15,9 +15,6 @@ class addon_multi_admin_info
     public $description = 'Adds the ability to allow multiple users to access certain admin pages, and gives ability to specify which users can access what.<br /><br /> If this addon has not yet been added to the user manual, you can find instructions
 included with the addon package in the docs/ folder</a>.';
     public $auth_tag = 'geo_addons';
-    public $upgrade_url = 'http://geodesicsolutions.com/component/content/article/54-access-security/61-multi-admin.html?directory=64'; //[ Check For Upgrades ] link
-    public $author_url = 'http://geodesicsolutions.com'; //[ Author's Site ] link
-    public $info_url = '../addons/multi_admin/docs/help.html'; //[ More Info ] link
     public $core_events = array (
         'auth_admin_login',
         'auth_admin_display_page',

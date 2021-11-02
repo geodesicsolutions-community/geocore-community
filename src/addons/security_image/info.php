@@ -23,10 +23,6 @@ When enabled, this addon\'s settings are accessed through <em style="white-space
     ##Optional Vars##
     //if these vars are included, they will be used.
 
-    var $upgrade_url = 'http://geodesicsolutions.com/component/content/article/54-access-security/70-security-image.html?directory=64'; //[ Check For Upgrades ] link
-    var $author_url = 'http://geodesicsolutions.com'; //[ Author's Site ] link
-    var $info_url = 'http://geodesicsolutions.com/component/content/article/54-access-security/70-security-image.html?directory=64'; //[ More Info ] link
-
     //[ Tag Details ] link.  This is an example of linking relatively...
     //Note that you can link by relative location for any of the URL's...
     var $tag_info_url = 'index.php?mc=addon_security_image_admin&page=addon_security_image_tag_help';

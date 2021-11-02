@@ -11,7 +11,7 @@ class ADMIN_AJAXController_homeLicense extends admin_AJAX
     {
         //get news from RSS
         require_once ADMIN_DIR . 'rss_news_reader.php';
-        //$reader = new rss_reader('http://www.geodesicsolutions.com/coblog/feed/');
+        // todo: maybe set up an RSS feed on geodesicsolutions.org
         $reader = new rss_reader('http://geodesicsolutions.com/latest-software-news-blog.feed?type=rss');
         $reader->setTitle('Geodesic Solutions News');
         $reader->setMaxEntries(4);
@@ -67,13 +67,7 @@ class ADMIN_AJAXController_homeLicense extends admin_AJAX
 
             if (!defined('DEMO_MODE_TEXT')) {
                 $settings['packageId'] = $packageId = geoPC::getPackageId();
-                if ($packageId) {
-                    $settings['downloadLink'] = 'https://geodesicsolutions.com/geo_store/customers/index.php?task=my_package_details&package_id=' . $packageId . '&tab=downloads';
-                }
             }
-            $settings['support_updates_moreInfo_link'] = 'http://geodesicsolutions.com/software-services/61-software-support-update-service/211-software-support-update-service.html';
-            $settings['contactLink'] = 'mailto:sales@geodesicsolutions.com';
-
             $settings['maxSeats'] = geoPC::maxSeats();
             if ($settings['maxSeats'] == -1) {
                 $settings['maxSeats'] = 'Unlimited';
