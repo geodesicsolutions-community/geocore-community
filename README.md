@@ -25,6 +25,12 @@ We have experimental docker set up!
 
 ## First time setup for docker:
 
+If you do not already have `docker` set up and working on your computer, you will need to do that first.
+
+You can find the docker installation at https://docs.docker.com/get-docker/
+
+The rest of the instructions below assume you have docker installed and working.
+
 ### 1. First, `cd` into the base folder for the software.
 
 When you use `ls` you should see the `src/` folder and all the files at the base level.  If you are on Windows,
