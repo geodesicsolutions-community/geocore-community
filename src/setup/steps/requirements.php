@@ -56,8 +56,7 @@ $failed = '<span class="failed"><img src="images/no.gif" alt="no" title="no"></s
 $passed = '<span class="passed"><img src="images/yes.gif" alt="yes" title="yes"></span>';
 
 $overallPass = '<p class="passed">All minimum requirements met.</p>';
-$overallPass .= '<p><label><input type="checkbox" name="license" id="license" /> I have read and agree to the
-    <a href="../docs/license.html">License Agreement</a></label></p>';
+$overallPass .= '<p><label><input type="checkbox" name="license" id="license" /> I have read and agree to the License Agreement</label></p>';
 
 $overallFail = '<p class="body_txt1"><div style="text-align: left; background-color: #FFF; padding: 5px; border: 1px
     solid #EA1D25;"><span class="failed">IMPORTANT: As shown above, one or more of your server\'s minimum requirements
@@ -73,7 +72,7 @@ if (defined('IAMDEVELOPER')) {
     // allow to keep going even if req fail, if developer..
     $continueFail = $continuePass;
     $overallFail .= '<p><label><input type="checkbox" name="license" id="license" /> I have read and agree to the
-        <a href="../docs/license.html" class="login_link">License Agreement</a></label></p>';
+        License Agreement</label></p>';
 }
 //start out with passed message, then replace if one of the requirements fail.
 $overall = $overallPass;

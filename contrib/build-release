@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# builds the software for release - should be run using composer.
+# this is quick and dirty - hopefully we'll switch to use github actions at some point.
+
+composer install --no-dev --optimize-autoloader
+
+# remove existing file if exists
+rm geocore-ce.zip
+
+# add license to base folder and all contents of src to base folder, minus a few things
+zip geocore-ce.zip LICENSE
+cd src/
+# add files in src as the base folder.. but:
+# exclude config.php
+# exclude templates_c contents
+# exclude user_images contents
+# exclude _geocache/ contents except:
+#   add _geocache/index.php
+zip ../geocore-ce.zip -r * -x config.php -x templates_c/* -x user_images/* -x _geocache/*
+zip ../geocore-ce.zip _geocache/index.php
