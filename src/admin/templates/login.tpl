@@ -118,9 +118,7 @@
 								<a href="https://geodesicsolutions.org/wiki/startup_tutorial_and_checklist/admin_controls/admin_login_change/reset_admin_login_when_loststart/" onclick="window.open(this.href); return false;">Forgot Password?</a>
 							</div>
 						{/if}
-
-
-						<div id="login_copyright">Copyright 2001-2018. All Rights Reserved.</div>
+						<div id="login_copyright">Copyright 2022. All Rights Reserved.</div>
 					</div>
 					<div id="login_bottom"></div>
 				</div>

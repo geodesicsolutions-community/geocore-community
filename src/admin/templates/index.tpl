@@ -216,9 +216,8 @@
 							</div>
 							<div id="footer">
 								<div id="footer-inside">
-									<p>Copyright © 2022</p>
-                                    <p>
-                                        Licensed under <a href="https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE" target="_blank">MIT License</a>
+									<p>
+                                        Distributed freely under <a href="https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE" target="_blank">MIT License</a>
                                     </p>
 								</div>
 							</div>
