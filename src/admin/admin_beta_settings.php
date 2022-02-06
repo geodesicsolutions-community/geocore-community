@@ -2,13 +2,17 @@
 
 class Beta_configuration
 {
-
-
     var $admin_site;
     var $messages;
     var $db;
     var $settings;
     var $dev_settings;
+
+    public function __construct()
+    {
+        $this->admin_site = Singleton::getInstance('Admin_site');
+        $this->db = DataAccess::getInstance();
+    }
 
     function initSettings()
     {
@@ -124,17 +128,6 @@ to derive the cost of the listing renewal.  This only affects the cost of renewa
         $this->dev_settings[] = 'joe_edwards_discountLink';
     }
 
-    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    /**
-     * Email configuration constructor.  This is responsible for loading the appropriate page, and
-     * then running site->display_page().
-     */
-    function Beta_configuration()
-    {
-        $this->admin_site = Singleton::getInstance('Admin_site');
-        $this->db = DataAccess::getInstance();
-    } //end of function Site_configuration
-
     function display_beta_general_settings()
     {
         $this->initSettings();
@@ -145,14 +138,14 @@ to derive the cost of the listing renewal.  This only affects the cost of renewa
         $this->admin_site->body .= '<div style="text-align: left;">
 <form action="" method="POST">
 <h3 style="color: red;">Welcome to the Geodesic Beta Feature Set!!</h3>
-These settings are for features that <strong>may not be fully functional</strong> 
+These settings are for features that <strong>may not be fully functional</strong>
 yet, but are implemented in the software. Please read these notes about settings found in this section:
 <ol>
 	<li>Most of these settings are here because they are not fully tested yet,
 		but we wanted to make them available to you as a client.  A few of these
 		settings are here because we have not decided whether to make them part
 		of the main application	or not.  These settings are only available to Enterprise level
-		products.</li>	
+		products.</li>
 	<li>Any beta settings (or features turned on by these settings) are subject to be changed
 		drastically, or even removed in future versions.</li>
 	<li><strong>These settings are BETA.</strong>  Changing them might have unexpected consequences,

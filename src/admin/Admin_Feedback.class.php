@@ -7,10 +7,10 @@ if(!defined('FEEDBACK_ICON_MAX_VALUE')) {
 }
 
 class Admin_Feedback {
-	var $_db;
-	var $_id;
+	private $_db;
+	private $_id;
 
-	function Admin_Feedback() {
+	public function __construct() {
 		$this->_db = DataAccess::getInstance();
 	}
 
@@ -161,7 +161,8 @@ class Admin_Feedback {
 		$userdata = $result->FetchRow();
 
 		if($feedback["rate"] == 1 && $previous['rate'] != 1) {
-			$query = "update ".$db->geoTables->userdata_table." set feedback_positive_result = ".$userdata['feedback_positive_count']+1;
+			$query = "update ".$db->geoTables->userdata_table." set feedback_positive_result = "
+                .($userdata['feedback_positive_count']+1);
 			if($previous['rate'] == 0) {
 				// If the previous rate was neutral
 				$query .= ", feedback_score = ".($userdata['feedback_score']+1);

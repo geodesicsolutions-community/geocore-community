@@ -5,7 +5,7 @@ class user_export
     var $db;
     var $admin_site;
     var $menu_loader;
-    function user_export()
+    public function __construct()
     {
         $db = true;
         include(GEO_BASE_DIR . "get_common_vars.php");
@@ -14,6 +14,7 @@ class user_export
         $this->admin_site = Singleton::getInstance('Admin_site');
         $this->db = $db;
     }
+
     function display_user_export()
     {
         if (!geoPC::is_ent()) {

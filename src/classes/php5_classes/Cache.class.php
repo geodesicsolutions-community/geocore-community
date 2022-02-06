@@ -2,7 +2,7 @@
 //Cache.class.php
 /**
  * This holds all the tools for using Geo Cache in it.
- * 
+ *
  * @package System
  * @since Version 3.1.0
  */
@@ -18,12 +18,12 @@ define('GEO_NO_COMPRESSION',false);
 /**
  * This is the main part of the Geo cache system, it does all the "low level"
  * stuff like writing files and escaping cache data.
- * 
+ *
  * @package System
  * @since Version 3.1.0
  */
 class geoCache {
-	
+
 	/**
 	 * Cache settings that can be used by get() and set(),
 	 * and are saved to cache settings file.
@@ -31,13 +31,13 @@ class geoCache {
 	 * @var Array
 	 */
 	public static $settings;
-	
+
 	/**
 	 * Array of files that will be written on page end
 	 * @var array
 	 */
 	public static $files;
-	
+
 	/**
 	 * Used internally
 	 * @internal
@@ -64,7 +64,7 @@ class geoCache {
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets a set of default cache settings
 	 *
@@ -76,13 +76,13 @@ class geoCache {
 		$min30 = 60*30;
 		$hour1= 60*60;
 		$day1 = 60*60*24;
-		$settings = array (	
+		$settings = array (
 			'use_cache' => true, //main on/off
 			'cache_page' => true, //cache page/module output
 			'cache_module' => true, //cache module data (not the output)
 			'cache_setting' => true, //cache site settings data
 			'cache_text' => true, //cache page/module messages
-		
+
 			//settings for age of cache:
 			// settof of -1 = no cache at all, setting of 0 = cache forever.
 			'age_page_all' => $day1, //default time: cache lasts 24 hours.
@@ -265,10 +265,10 @@ class geoCache {
 		if (isset(self::$settings[$index])){
 			return self::$settings[$index];
 		}
-			
+
 		return false;
 	}
-	
+
 	/**
 	 * Set the given index to the given value, in the cache
 	 * settings, and update the cache settings file.
@@ -279,28 +279,28 @@ class geoCache {
 	public static function set ($index, $value){
 		//force it to refresh if changing use_cache
 		$force = ($index == 'use_cache')? true: false;
-		
+
 		//make sure system is inited..
 		self::initSettings();
 
 		self::$settings[$index] = $value;
-		
+
 		//write to settings file.
 		//first, create text to write.
 		$settingTxt = '<?php return('.self::quoteVal(self::$settings).');';
 		if ($force){
 			//update the init file system,
 			//force it to re-do checks.
-			geoCache::initCacheFileSystem($force);	
+			geoCache::initCacheFileSystem($force);
 		}
 		//now write it to file.
 		self::write('_cacheSettings.php',$settingTxt);
 	}
-	
+
 	/**
 	 * Reads the contents of the given filename, as long as the file has not expired,
 	 * and is in a sub-folder of the CACHE_DIR.
-	 * 
+	 *
 	 * The filename must be one that was previously written to using geoString::write()
 	 *
 	 * @param String $filename The filename, relative to the main cache dir CACHE_DIR
@@ -311,14 +311,14 @@ class geoCache {
 			trigger_error('ERROR CACHE: Filename string length is 0, invalid filename specified.');
 			return false;
 		}
-		
+
 		if (GEO_CACHE_STORAGE == 'memcache'){
 			//using memcache to store
 			if (!self::_memcacheInit()){
 				return false;
 			}
 			$recordItem = ($filename == '_geoCachedItems')? false: true;
-			
+
 			$filename = GEO_MEMCACHE_SETTING_PREFIX.$filename;
 			$storage = self::$memcache->get($filename);
 			if ($recordItem && !$storage){
@@ -333,10 +333,10 @@ class geoCache {
 			}
 			return $storage;
 		}
-		
-		
+
+
 		$file = CACHE_DIR.$filename;
-		
+
 		if (strpos(dirname($file),dirname(CACHE_DIR)) !== 0){
 			//file is outside of CACHE_DIR location, block reading this file
 			trigger_error('ERROR CACHE: Read attempt failed!  Debug info: Attempt to read outside of CACHE_DIR directory!  $filename='.geoString::specialChars($filename).' CACHE_DIR='.CACHE_DIR.' CACHE_DIR.$filename='.$file);
@@ -345,12 +345,12 @@ class geoCache {
 		if (isset(self::$files[$filename])){
 			//this one has not been written to file yet
 			$txt = self::$files[$filename]['contents'];
-			
+
 			trigger_error('DEBUG STATS CACHE: Read called for a file that has not been written yet, but is
 				already set internally in the queue to be written.');
 			return $txt;
 		}
-		
+
 		if (!file_exists($file)){
 			//file is so new, the file does not exist yet!
 			trigger_error('DEBUG STATS CACHE: geoCache::read - file ('.$file.') does not exist, return false');
@@ -368,7 +368,7 @@ class geoCache {
 			trigger_error('ERROR CACHE: getting expire for file failed!');
 			return false;
 		}
-		
+
 		if (intval($age) != $age || strlen($age)>12){
 			//some kind of weird age, not a number
 			trigger_error('DEBUG CACHE: geoCache::read() - age is either too long, or not an integer, probably this is an older cache file.');
@@ -384,7 +384,7 @@ class geoCache {
 				return false;
 			}
 		}
-		
+
 		$handle = fopen($file, 'r');
 		if (!$handle){
 			//open for read did not work
@@ -398,17 +398,17 @@ class geoCache {
 			fclose($handle);
 			return false;
 		}
-		
+
 		//read the contents of the file.
 		trigger_error('DEBUG STATS CACHE: geoCache::read('.$filename.') - before main read');
 		$string = fread($handle, filesize($file));
-		
+
 		flock($handle, LOCK_UN);
 		fclose($handle);
 		trigger_error('DEBUG STATS CACHE: geoCache::read('.$filename.') - end');
 		return trim($string);
 	}
-	
+
 
 	/**
 	 * returns true of false depending on wether memcache is enabled or not
@@ -440,13 +440,13 @@ class geoCache {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * If memcache is turned on, use this to get the memcache object to do
 	 * fancy things like connecting to several different servers, or changing
 	 * server settings or something.
-	 * 
-	 * Note:  If this is called before memcache is initialized, you MUST 
+	 *
+	 * Note:  If this is called before memcache is initialized, you MUST
 	 * make a connection to the server yourself using memcache->connect() or
 	 * memcache->pconnect()
 	 *
@@ -514,7 +514,7 @@ class geoCache {
 					unset($current_cached[$filename]);
 					self::$memcache->set(GEO_MEMCACHE_SETTING_PREFIX.'_geoCachedItems',$current_cached,GEO_NO_COMPRESSION,0);
 				}
-				
+
 				self::$memcache->delete(GEO_MEMCACHE_SETTING_PREFIX.'_geoCachedItems_LOCK');
 				break;//finished, so exit out of the loop.
 			}
@@ -522,14 +522,14 @@ class geoCache {
 			usleep(100000);
 		}
 	}
-	
+
 	/**
 	 * Writes the given text to the given file, and records
 	 * the amount of time to keep the file around.
 	 *
 	 * @param String $filename relative to cache dir
 	 * @param String $txt text to write to file (binary safe)
-	 * @param Int $expire_time Amount of time, in seconds, to 
+	 * @param Int $expire_time Amount of time, in seconds, to
 	 *  keep the file around before expireing it.  If 0, file will
 	 *  never expire automatically
 	 * @return Boolean True if write was successful, false otherwise.
@@ -541,12 +541,12 @@ class geoCache {
 			trigger_error('ERROR CACHE: Filename string length is 0, invalid filename specified.');
 			return false;
 		}
-		
+
 		if (GEO_CACHE_STORAGE == 'memcache'){
 			//using memcache to store
 			$ignore = array ('_cacheSettings.php', '_geoCachedItems');
 			$recordItem = (in_array($filename,$ignore))? false: true;
-			
+
 			$filename = GEO_MEMCACHE_SETTING_PREFIX.$filename;
 			if (!self::_memcacheInit()){
 				return false;
@@ -556,30 +556,30 @@ class geoCache {
 			}
 			return (self::$memcache->set($filename, $txt, GEO_NO_COMPRESSION, $expire_time));
 		}
-		
+
 		self::initCacheFilesystem();
 		$file = CACHE_DIR . $filename;
 		trigger_error('DEBUG STATS CACHE: Top of write() for file '.$file);
-		
+
 		//add the expiration time to the beginning of the file.
 		if ($expire_time > 0){
 			//if expire time is > 0, then add it to current time
 			//we record when the file expires, not how long till it expires
 			$expire_time = ($expire_time + time());
 		}
-		
+
 		//write the cache to the file.
 		if (!is_array(self::$files)){
 			self::$files = array();
 		}
 		self::$files[$filename]['contents'] = $txt;
 		self::$files[$filename]['expire'] = $expire_time;
-		
+
 		trigger_error('DEBUG STATS CACHE: geoCache::write() - end');
 		//it got this far, it should have been successful.
 		return true;
 	}
-	
+
 	/**
 	 * Expires a certain file from existance (or if using memcache, removes
 	 * the given index)
@@ -593,7 +593,7 @@ class geoCache {
 			trigger_error('ERROR CACHE: Filename string length is 0, invalid filename specified.');
 			return false;
 		}
-		
+
 		if (GEO_CACHE_STORAGE == 'memcache'){
 			//using memcache to store
 			$filename = GEO_MEMCACHE_SETTING_PREFIX.$filename;
@@ -601,10 +601,10 @@ class geoCache {
 				return false;
 			}
 			self::_memcacheRemoveFromRegistry($filename);
-			
+
 			return (self::$memcache->delete($filename));
 		}
-		
+
 		$filename = CACHE_DIR.$filename;
 		if (file_exists($filename)){
 			unlink($filename);
@@ -614,11 +614,11 @@ class geoCache {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Writes all the pending files in one go.  This is so that this process can be done in app_bottom, so that
 	 * it is done after the page is already sent to the client.
-	 * 
+	 *
 	 * This is meant to be called from app_bottom.
 	 */
 	public static function writeCache () {
@@ -626,7 +626,7 @@ class geoCache {
 			//using memcache to store
 			//All writes when using memcache are done at that time, so there
 			//is nothing to do here.
-			
+
 			//But, we can take advantage of this time to close our connection, so
 			//that we are a friendly script.
 			self::_memcacheAddToRegistry();
@@ -636,11 +636,11 @@ class geoCache {
 			}
 			return true;
 		}
-		
+
 		if (!is_array(geoCache::$files) || count(geoCache::$files) == 0){
 			//no files to write.
 			trigger_error('DEBUG STATS CACHE: geoCache::writeCache() - top - no files to write.');
-		
+
 			return false;
 		}
 		trigger_error('DEBUG STATS CACHE: geoCache::writeCache() - start');
@@ -648,7 +648,7 @@ class geoCache {
 		$files = array_keys(geoCache::$files);
 		foreach ($files as $filename) {
 			//we loop through index keys, to cut down on amount of duplicate data since contents of cache can get quite large.
-			
+
 			$file = CACHE_DIR . $filename;
 			if (strpos(dirname($file),dirname(CACHE_DIR)) !== 0){
 				//file is outside of CACHE_DIR location, block writing this file
@@ -665,51 +665,51 @@ class geoCache {
 				touch(dirname($file).'/index.php');
 			}
 			trigger_error('DEBUG STATS CACHE: geoCache::writeCache() - writting file '.$filename);
-			
+
 			//write the file contents, be sure to obtain exclusive lock to prevent race conditions
 			$results = file_put_contents ($file, self::$files[$filename]['contents'], LOCK_EX);
-			
+
 			if ($results === false) {
 				//something went wrong with writting
 				trigger_error('DEBUG STATS CACHE: geoCache::writeCache() - error writting cache file, file_put_contents returned false.');
 				continue;
 			}
-			
+
 			//write info about expire time
 			$expire_result = file_put_contents($file.'.EXPIRE',self::$files[$filename]['expire'], LOCK_EX);
 			if ($expire_result === false) {
 				//something went wrong with writting
 				trigger_error('DEBUG STATS CACHE: geoCache::writeCache() - error writting expiration of cache file, file_put_contents returned false.');
 			}
-			
+
 			trigger_error('DEBUG STATS CACHE: geoCache::writeCache() - finished writting file.');
-			
+
 			unset($file);
 			unset(self::$files[$filename]);
 		}
 		trigger_error('DEBUG STATS CACHE: geoCache::writeCache() - finished writting all files.');
 	}
-	
+
 	/**
 	 * Simulate including a cache file previously created using geoCache::write().
 	 * Since the cache file will have expiration data on the first line,
 	 * it cannot be included directly, so this function must be used instead
 	 * to simulate including the file.
-	 * 
+	 *
 	 * Note: when using cache, never design it so that the cache file returns the
 	 *  boolean false, otherwise you will not be able to tell the difference between
 	 *  a cache miss and it just returning false.  Instead, wrap the false var in
 	 *  an array or something.
 	 *
 	 * @param string $filename
-	 * @return Mixed Boolean false if the read failed, or the results of 
+	 * @return Mixed Boolean false if the read failed, or the results of
 	 *  what would happen if you included the file.
 	 */
 	public static function inc ($filename){
 		$result = include CLASSES_DIR . PHP5_DIR . 'Cache.inc.php';
 		return $result;
 	}
-	
+
 	/**
 	 * Sees if the given filename exists or not.
 	 * Filename should be relative to
@@ -724,13 +724,13 @@ class geoCache {
 			trigger_error('ERROR CACHE: Filename string length is 0, invalid filename specified.');
 			return false;
 		}
-		
+
 		if (GEO_CACHE_STORAGE == 'memcache'){
 			//using memcache to store
 			if (!self::_memcacheInit()){
 				return false;
 			}
-			
+
 			$filename = GEO_MEMCACHE_SETTING_PREFIX.$filename;
 			if (self::$memcache->get($filename) === false) {
 				return false;
@@ -738,9 +738,9 @@ class geoCache {
 				return true;
 			}
 		}
-		
+
 		$file = CACHE_DIR.$filename;
-		
+
 		if (strpos(dirname($file),dirname(CACHE_DIR)) !== 0){
 			//file is outside of CACHE_DIR location, block reading this file
 			trigger_error('ERROR CACHE: Read attempt failed!  Debug info: Attempt to read outside of CACHE_DIR directory!  $filename='.geoString::specialChars($filename).' CACHE_DIR='.CACHE_DIR.' CACHE_DIR.$filename='.$file);
@@ -749,7 +749,7 @@ class geoCache {
 		if (isset(self::$files[$filename])){
 			return true;
 		}
-		
+
 		if (!file_exists($file)){
 			//file is so new, the file does not exist yet!
 			trigger_error('DEBUG STATS CACHE: geoCache::read - file ('.$file.') does not exist, return false');
@@ -763,7 +763,7 @@ class geoCache {
 		}
 		//file should be so small, don't need to worry about locking.
 		$age = (int)file_get_contents($file.'.EXPIRE');
-		
+
 		if ($age > 0){
 			//this file expires, make sure it has not already expired.
 			$currentTime = time();
@@ -775,11 +775,11 @@ class geoCache {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Goes through all the cache files, and looks for any that should expire, and delete's
 	 * them.
-	 * 
+	 *
 	 * @param string $dir
 	 */
 	public static function cleanUp ($dir = CACHE_DIR)
@@ -789,7 +789,7 @@ class geoCache {
 			//memcache does it's own cleaning, don't need to do anything
 			return;
 		}
-		
+
 		if (strpos(dirname($dir),dirname(CACHE_DIR)) !== 0){
 			//file is outside of CACHE_DIR location, block cleaning this dir.
 			return false;
@@ -836,8 +836,8 @@ class geoCache {
 		closedir($dh);
 		clearstatcache();
 	}
-	
-	
+
+
 	/**
 	 * Removes all of the cache files from the _geocache sub-folders.
 	 *
@@ -857,7 +857,7 @@ class geoCache {
 		if (!in_array($type, $accepted_types)){
 			trigger_error('ERROR CACHE: Cannot clear cache of type '.$type.', that type is not known.  (security precaution, only known types can be cleared)');
 		}
-		
+
 		if (GEO_CACHE_STORAGE == 'memcache'){
 			//using memcache to store
 			if (!self::_memcacheInit()){
@@ -888,7 +888,7 @@ class geoCache {
 			}
 			return ;
 		}
-		
+
 		//delete from filesystem
 		switch ($type){
 			case 'all':
@@ -899,38 +899,38 @@ class geoCache {
 				//force it to write the settings.
 				self::set('use_cache', $use_cache);
 				//break ommited on purpose
-				
+
 			case 'modules':
 				//remove all files in _modules
 				geoCache::rUnlink(CACHE_DIR.'_modules', false);
 				if ($type != 'all') {break 1;}
-				
+
 			case 'settings':
 				//remove all files in _settings
 				geoCache::rUnlink(CACHE_DIR.'_settings', false);
 				if ($type != 'all') {break 1;}
-				
+
 			case 'text':
 				//remove all files in _text
 				geoCache::rUnlink(CACHE_DIR.'_text', false);
 				if ($type != 'all') {break 1;}
-				
+
 			case 'pages':
 				//remove all files in _pages
 				geoCache::rUnlink(CACHE_DIR.'_pages', false);
 				if ($type != 'all') {break 1;}
-				
+
 			case 'templates':
 				//remove all files in _templates
 				geoCache::rUnlink(CACHE_DIR.'_templates', false);
 				if ($type != 'all') {break 1;}
-				
+
 			case 'temp':
 				//remove all files in _temp
 				geoCache::rUnlink(CACHE_DIR.'_temp', false);
 		}
 	}
-	
+
 	/**
 	 * Used by clearCache() to clear all the sub-folders of the cache system.
 	 * This is DANGEROUS!  Carefull what dir you are sicking this thing on!
@@ -944,7 +944,7 @@ class geoCache {
 			//file is outside of CACHE_DIR location, block reading this file
 			return;
 		}
-		
+
 		if(!$dh = opendir($dir)) return;
 		while (($obj = readdir($dh))) {
 			if($obj=='.' || $obj=='..') continue;
@@ -955,25 +955,25 @@ class geoCache {
 			rmdir($dir);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Initializes the cache filesystem, creating files
 	 *  and folders when needed, but only if the cache
 	 *  file system is turned on.
-	 * 
+	 *
 	 * @param bool $force If true, force it to init even if it already inited in
 	 *   this page load.
-	 * @return Boolean true if cache file system was 
+	 * @return Boolean true if cache file system was
 	 *  initialized, false otherwise.
 	 */
 	public static function initCacheFilesystem($force = false){
 		static $cache_system = null;
-		
+
 		if (!$force && !is_null($cache_system)){
 			return $cache_system;
 		}
-		
+
 		if (GEO_CACHE_STORAGE == 'memcache'){
 			if (self::_memcacheInit() === false){
 				$cache_system = false;
@@ -981,7 +981,7 @@ class geoCache {
 			}
 		} else {
 			//Using filesystem, do filesystem checks
-			
+
 			if (!geoCache::is_writable(CACHE_DIR)){
 				trigger_error('DEBUG STATS CACHE: initCacheFilesystem() failed.');
 				$cache_system = false;
@@ -996,33 +996,33 @@ class geoCache {
 				}
 			}
 		}
-		
-		
+
+
 		//make sure cacheing is turned on:
 		if (!geoCache::get('use_cache')){
 			trigger_error('DEBUG STATS CACHE: Cache System Turned Off');
 			$cache_system = false;
 			return false;
 		}
-		
+
 		//If it gets this far, all systems are go!
 		$cache_system = true;
 		return true;
 	}
-	
+
 	/**
 	 * Should be over-written by class, this function
 	 * should take in variable specific to the type of
 	 * cache (settings, page, template, etc), and save
 	 * the cache to a file to be used later by the matching
 	 * process() function.
-	 * 
+	 *
 	 * @return Boolean false if update failed.
 	 *
 	 */
 	public function update ()
 	{
-		
+
 	}
 	/**
 	 * Should be over-written by class, this function
@@ -1034,10 +1034,10 @@ class geoCache {
 	 */
 	public function process ()
 	{
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Correctly checks to see if file or folder is writable.
 	 * This accounts for Windows ACLs bug.
@@ -1052,12 +1052,12 @@ class geoCache {
 			//memcache is always writable...
 			return true;
 		}
-		
+
 		//will work in despite of Windows ACLs bug
 		//NOTE: use a trailing slash for folders!!!
 		//see http://bugs.php.net/bug.php?id=27609
 		//see http://bugs.php.net/bug.php?id=30931
-		if ($path{strlen($path)-1}=='/') // recursively return a temporary file path
+		if ($path[strlen($path)-1]=='/') // recursively return a temporary file path
 		    return self::is_writable($path.uniqid(mt_rand()).'.tmp');
 		else if (is_dir($path))
 		    return self::is_writable($path.'/'.uniqid(mt_rand()).'.tmp');
@@ -1071,9 +1071,9 @@ class geoCache {
 		    unlink($path);
 		return true;
 	}
-	
+
 	/**
-	 * Quotes given text to make it safe to use in php file, 
+	 * Quotes given text to make it safe to use in php file,
 	 * to prevent code injection.  See contents of function to
 	 * see what is quoted and how.
 	 *
@@ -1093,7 +1093,7 @@ class geoCache {
 		 */
 		return preg_replace('/((\<[?%]{1}(php)?)|([?%]{1}\>)|(\<script language\=\"?php\"?))/i','<'.'?php echo \'$1\'; ?'.'>',$text);
 	}
-	
+
 	/**
 	 * Quotes a given variable, converting it to a string
 	 *  that can be used in a php file to re-create
@@ -1111,11 +1111,11 @@ class geoCache {
 		}
 		return var_export($var, true);
 	}
-	
+
 	/**
 	 * Serializes params passed in smarty tags, so that can be used as part of
 	 * cache file name.
-	 * 
+	 *
 	 * @param array $params
 	 * @return string
 	 * @since Version 7.1.1
@@ -1124,14 +1124,14 @@ class geoCache {
 	{
 		$params = (array)$params;
 		unset($params['assign']);
-		
+
 		//sort by key so that they are always in same order
 		ksort($params);
 		if (!$params) {
 			//nothing to serialize
 			return '';
 		}
-		
+
 		$serial = '';
 		foreach ($params as $key => $val) {
 			$key = preg_replace('/[^-a-zA-Z0-9_]*/','',$key);
@@ -1148,7 +1148,7 @@ class geoCache {
 
 /**
  * Part of Geo Cache system, this part specifically tuned to work best with cacheing language specific messages.
- * 
+ *
  * @package System
  * @since Version 3.1.0
  */
@@ -1164,11 +1164,11 @@ class geoCacheText extends geoCache
 	 */
 	private function __construct ()
 	{
-		
+
 	}
 	/**
 	 * Gets an instance of the cache object.
-	 * 
+	 *
 	 * @return geoCacheText
 	 */
 	public static function getInstance(){
@@ -1178,21 +1178,21 @@ class geoCacheText extends geoCache
 		}
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Inits the cache file system, specific for files needed
 	 * for text cache.
-	 * 
+	 *
 	 * @param bool $force
 	 * @return Boolean result of init
 	 */
 	public static function initCacheFilesystem($force = false){
 		static $cache_system = null;
-		
+
 		if (!$force && !is_null($cache_system)){
 			return $cache_system;
 		}
-		
+
 		if (!geoCache::get('cache_text')){
 			trigger_error('DEBUG STATS CACHE: Text cache turned off, return false.');
 			$cache_system = false;
@@ -1207,7 +1207,7 @@ class geoCacheText extends geoCache
 		$cache_system = true;
 		return true;
 	}
-	
+
 	/**
 	 * Updates the text cache for the given language and page
 	 *
@@ -1227,9 +1227,9 @@ class geoCacheText extends geoCache
 		trigger_error('DEBUG STATS CACHE: Top of geoCacheText::update');
 		$language_id = intval($language_id);
 		$page_id = intval($page_id);
-		
+
 		if (!$language_id || !$page_id) return false;
-		
+
 		//initialize cache, in case this is the first time the cache
 		//is being used.
 		if (!self::initCacheFilesystem()){
@@ -1240,21 +1240,21 @@ class geoCacheText extends geoCache
 		$filename = '_text/_text_l'.$language_id.'p'.$page_id.'.php';
 		//make sure it is an array.
 		if (!is_array($text_array)){
-			
+
 			$text_array = array();
 		}
 		$cache_text = '<?php return('.geoCache::quoteVal($text_array).');';
-		
+
 		//write to file, never expire since data is expired when text is changed...
 		return (geoCache::write($filename, $cache_text, 0));
 	}
-	
+
 	/**
 	 * Removes the text data cache for a given language and page
-	 * 
+	 *
 	 * @param Int $language_id
 	 * @param Int $page_id
-	 * 
+	 *
 	 * @return Boolean result of expire attempt.
 	 */
 	public static function expire ($language_id, $page_id=0)
@@ -1269,14 +1269,14 @@ class geoCacheText extends geoCache
 		$filename = '_text/_text_l'.$language_id.'p'.$page_id.'.php';
 		return geoCache::expire($filename);
 	}
-	
+
 	/**
 	 * Gets the data for the given language and page from
 	 *  the cache.
 	 *
 	 * @param int $language_id
 	 * @param int $page_id
-	 * 
+	 *
 	 * @return Mixed The message data for the given page, or
 	 *  false if cache miss.
 	 */
@@ -1294,11 +1294,11 @@ class geoCacheText extends geoCache
 		}
 		$language_id = intval($language_id);
 		$page_id = intval($page_id);
-		
+
 		if (!$language_id || !$page_id) return false;
-		
+
 		self::initCacheFilesystem();
-		
+
 		$filename = '_text/_text_l'.$language_id.'p'.$page_id.'.php';
 		$text = geoCache::inc ($filename);
 		if (!is_array($text)){
@@ -1312,7 +1312,7 @@ class geoCacheText extends geoCache
 /**
  * Part of Geo Cache system, specifically tuned to work best with cacheing module data (which
  * will be an array).
- * 
+ *
  * @package System
  * @since Version 3.1.0
  */
@@ -1328,11 +1328,11 @@ class geoCacheModule extends geoCache {
 	 */
 	private function __construct()
 	{
-		
+
 	}
 	/**
 	 * Gets an instance of the cache object.
-	 * 
+	 *
 	 * @return geoCacheModule
 	 */
 	public static function getInstance()
@@ -1343,38 +1343,38 @@ class geoCacheModule extends geoCache {
 		}
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Inits the cache filesystem, specific for module cache
 	 *  needs.
-	 * 
+	 *
 	 * @param bool $force
 	 * @return Result of cache init.
 	 */
 	public static function initCacheFilesystem($force = false){
 		static $cache_system = null;
-		
+
 		if (!$force && !is_null($cache_system)){
 			return $cache_system;
 		}
-		
+
 		if (!geoCache::get('cache_module')){
 			trigger_error('DEBUG STATS CACHE: Module cache turned off, return false.');
 			$cache_system = false;
 			return false;
 		}
-		
+
 		if (!parent::initCacheFilesystem()) {
 			trigger_error('DEBUG STATS CACHE: initCacheFilesystem() failed.');
 			$cache_system = false;
 			return false;
 		}
-		
+
 		//directories should now be set up and ready to go.
 		$cache_system = true;
 		return true;
 	}
-	
+
 	/**
 	 * Updates the cache for the given module, or creates the cache
 	 * if it does not exist yet.
@@ -1387,12 +1387,12 @@ class geoCacheModule extends geoCache {
 	{
 		//check inputs
 		trigger_error('DEBUG STATS CACHE: Top of geoCacheModule::update');
-		
+
 		if (!$module_id) {
 			trigger_error('DEBUG STATS CACHE: update failed, $module_id invalid.');
 			return false;
 		}
-		
+
 		//initialize cache, in case this is the first time the cache
 		//is being used.
 		if (!self::initCacheFilesystem()){
@@ -1405,10 +1405,10 @@ class geoCacheModule extends geoCache {
 		//write to cache, expire of never since this is just data, it is auto updated on change
 		return (geoCache::write($filename, $cache_text, 0));
 	}
-	
+
 	/**
 	 * Removes the module data cache for a given module.
-	 * 
+	 *
 	 * @param Int $module_id
 	 */
 	public static function expire ($module_id)
@@ -1418,7 +1418,7 @@ class geoCacheModule extends geoCache {
 		$filename = '_modules/_module'.$module_id.'.php';
 		return geoCache::expire($filename);
 	}
-	
+
 	/**
 	 * Processes a given module, and returns the data for
 	 *  that module.
@@ -1438,7 +1438,7 @@ class geoCacheModule extends geoCache {
 			trigger_error('DEBUG STATS CACHE: Invalid $module_id!  Cant continue');
 			return false;
 		}
-		
+
 		self::initCacheFilesystem();
 		$filename = '_modules/_module'.$module_id.'.php';
 		if (GEO_CACHE_STORAGE == 'filesystem' && !file_exists(CACHE_DIR.$filename)){
@@ -1456,7 +1456,7 @@ class geoCacheModule extends geoCache {
 /**
  * Part of Geo Cache system, specifically tuned to work best with cacheing site-wide
  * key=value type settings.
- * 
+ *
  * @package System
  * @since Version 3.1.0
  */
@@ -1470,11 +1470,11 @@ class geoCacheSetting extends geoCache {
 	 * Private constructor to keep new thingy from being created outside of getInstance()
 	 */
 	private function __construct(){
-		
+
 	}
 	/**
 	 * Gets an instance of the cache object.
-	 * 
+	 *
 	 * @return geoCacheSetting
 	 */
 	public static function getInstance(){
@@ -1484,17 +1484,17 @@ class geoCacheSetting extends geoCache {
 		}
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Inits the cache filesystem, specific for files
 	 * needed for settings cache
-	 * 
+	 *
 	 * @param bool $force
 	 * @return result of init.
 	 */
 	public static function initCacheFilesystem($force = false){
 		static $cache_system = null;
-		
+
 		if (!$force && !is_null($cache_system)){
 			trigger_error('DEBUG STATS CACHE: geoCacheSetting::initCacheFilesystem - already done');
 			return $cache_system;
@@ -1504,18 +1504,18 @@ class geoCacheSetting extends geoCache {
 			$cache_system = false;
 			return false;
 		}
-		
+
 		if (!parent::initCacheFilesystem()) {
 			trigger_error('DEBUG STATS CACHE: initCacheFilesystem() failed.');
 			$cache_system = false;
 			return false;
 		}
-		
+
 		//directories should now be set up and ready to go.
 		$cache_system = true;
 		return true;
 	}
-	
+
 	/**
 	 * Updates the cache for the given template, or creates the cache
 	 * if it does not exist yet.
@@ -1533,7 +1533,7 @@ class geoCacheSetting extends geoCache {
 			trigger_error('DEBUG STATS CACHE: update failed, invalid input.');
 			return false;
 		}
-		
+
 		//initialize cache, in case this is the first time the cache
 		//is being used.
 		if (!self::initCacheFilesystem()){
@@ -1546,10 +1546,10 @@ class geoCacheSetting extends geoCache {
 		//write to file system, expires never since it's data
 		return (geoCache::write($filename,$cache_text,0));
 	}
-	
+
 	/**
 	 * Removes the cache for a given setting type.
-	 * 
+	 *
 	 * @param String $type Type of setting
 	 */
 	public static function expire ($type)
@@ -1558,7 +1558,7 @@ class geoCacheSetting extends geoCache {
 		$filename = '_settings/_'.$type.'.php';
 		return geoCache::expire($filename);
 	}
-	
+
 	/**
 	 * Processes a given setting type cache
 	 *
@@ -1594,7 +1594,7 @@ class geoCacheSetting extends geoCache {
 
 /**
  * Cache system specifically tuned to work best with cacheing output of pages and modules
- * 
+ *
  * @package System
  * @since Version 3.1.0
  */
@@ -1604,7 +1604,7 @@ class geoCachePage extends geoCache {
 	 * @internal
 	 */
 	private static $instance;
-	
+
 	/**
 	 * Array of data for use by the cached page.
 	 *
@@ -1616,11 +1616,11 @@ class geoCachePage extends geoCache {
 	 */
 	private function __construct()
 	{
-		
+
 	}
 	/**
 	 * Gets an instance of the cache object.
-	 * 
+	 *
 	 * @return geoCachePage
 	 */
 	public static function getInstance(){
@@ -1630,38 +1630,38 @@ class geoCachePage extends geoCache {
 		}
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Inits the cache file system specific for storeing
 	 * page cache.
-	 * 
+	 *
 	 * @param bool $force
 	 * @return Boolean results of init
 	 */
 	public static function initCacheFilesystem($force = false){
 		static $cache_system = null;
-		
+
 		if (!$force && !is_null($cache_system)){
 			return $cache_system;
 		}
-		
+
 		if (!geoCache::get('cache_page')){
 			trigger_error('DEBUG STATS CACHE: Page cache turned off, return false.');
 			$cache_system = false;
 			return false;
 		}
-		
+
 		if (!parent::initCacheFilesystem()) {
 			trigger_error('DEBUG STATS CACHE: initCacheFilesystem() failed.');
 			$cache_system = false;
 			return false;
 		}
-		
+
 		//directories should now be set up and ready to go.
 		$cache_system = true;
 		return true;
 	}
-	
+
 	/**
 	 * Add new data to be accessible by the cache, stuff
 	 *  like mainbody.
@@ -1684,7 +1684,7 @@ class geoCachePage extends geoCache {
 			$this->pageData[$key] = $data[$key];
 		}
 	}
-		
+
 	/**
 	 * Updates the page cache, given the page, language, category,
 	 * and logged in status.
@@ -1699,19 +1699,19 @@ class geoCachePage extends geoCache {
 	 */
 	public function update ($page_id=0, $language_id=0, $cat_id=0, $logged_in=false, $pageCode='', $params = array())
 	{
-		trigger_error('DEBUG STATS CACHE: Top of geoCachePage::update'); 
+		trigger_error('DEBUG STATS CACHE: Top of geoCachePage::update');
 		$language_id = intval($language_id);
 		$logged_in = ($logged_in)? 'in': 'out';
 		$cat_id = intval($cat_id);
 		$params = (array)$params;
 
 		trigger_error('DEBUG STATS CACHE: Top of geoCachePage::update _pages/_p'.$page_id.'l'.$language_id.'c'.$cat_id.'logged_'.$logged_in.'.php');
-		
+
 		if (!$page_id || !$language_id) {
 			trigger_error('DEBUG STATS CACHE: initCacheFilesystem() returned false');
 			return false;
 		}
-		
+
 		if($logged_in === 'in' && geoCache::get('nocache_admin_'.$page_id)) {
 			//for this module, we do not use the cache for admin users (to prevent edit/delete buttons from sticking around for others)
 			$user_id = geoSession::getInstance()->getUserId();
@@ -1722,14 +1722,14 @@ class geoCachePage extends geoCache {
 				return false;
 			}
 		}
-		
+
 		$params = $this->serializeParams($params);
 		if ($params==='TOO_LONG') {
 			//don't use cache for this one...
 			trigger_error('DEBUG STATS CACHE: geoCachePage::update - params too long, not caching this one.');
 			return false;
 		}
-		
+
 		$filename = '_pages/_p'.$page_id.'l'.$language_id.'c'.$cat_id.'logged_'.$logged_in.$params.'.php';
 		$index = 'age_page_'.$page_id;
 		if (geoCache::get($index) === false){
@@ -1741,9 +1741,9 @@ class geoCachePage extends geoCache {
 		if (!$this->checkForFilters($page_id)){
 			return false;
 		}
-		
+
 		//make sure the page is allowed to be updated
-		
+
 		//initialize cache, in case this is the first time the cache
 		//is being used.
 		if (!self::initCacheFilesystem()){
@@ -1753,7 +1753,7 @@ class geoCachePage extends geoCache {
 		}
 		return (geoCache::write($filename,$pageCode,geoCache::get($index)));
 	}
-	
+
 	/**
 	 * Whether or not the given page id should be cached or not.
 	 *
@@ -1773,7 +1773,7 @@ class geoCachePage extends geoCache {
 		if (geoCache::get($index) == -1) return false;
 		return true;
 	}
-	
+
 	/**
 	 * Checks to see if user is using filters, and if so, checks
 	 *  to see if the given page can still use cache when filters
@@ -1796,16 +1796,16 @@ class geoCachePage extends geoCache {
 			trigger_error('DEBUG STATS CACHE: Page cache turned off, return false.');
 			return false;
 		}
-		
+
 		$db = DataAccess::getInstance();
 		if ($db->getTableSelect(DataAccess::SELECT_BROWSE)->hasWhere()) {
 			//some filter or another is turned on
 			return geoCache::get('cache_filter_page_'.$page_id);
 		}
-		//no filters, 
+		//no filters,
 		return true;
 	}
-	
+
 	/**
 	 * Removes the cache for the given page, language, cat, and logged in
 	 *  status.
@@ -1822,12 +1822,12 @@ class geoCachePage extends geoCache {
 		trigger_error('DEBUG STATS CACHE: Top of geoCachePage::expire');
 		$language_id = intval($language_id);
 		$logged_in = ($logged_in)? 'in': 'out';
-		
+
 		if (!$page_id || !$language_id) return false;
 		$filename = '_pages/_p'.$page_id.'l'.$language_id.'c'.$cat_id.'logged_'.$logged_in.'.php';
 		return geoCache::expire($filename);
 	}
-	
+
 	/**
 	 * Process cache, echos or returns the cached page, given the
 	 *  page, language, category, and loged in status.
@@ -1836,7 +1836,7 @@ class geoCachePage extends geoCache {
 	 * @param Int $language_id
 	 * @param Int $cat_id
 	 * @param Boolean $logged_in
-	 * @param (Optional)Boolean $return if set to true, will return the 
+	 * @param (Optional)Boolean $return if set to true, will return the
 	 *  cache instead of echoing, this should correspond to how the cache
 	 *  was stored when using update()
 	 * @param array $params The array of parameters passed by smarty tag, added in version 7.1.1
@@ -1851,17 +1851,17 @@ class geoCachePage extends geoCache {
 			trigger_error('DEBUG STATS CACHE: Page cache turned off, return false.');
 			return false;
 		}
-		
+
 		$language_id = intval($language_id);
 		$cat_id = intval($cat_id);
 		$logged_in = ($logged_in)? 'in': 'out';
 		$params = (array)$params;
-		
+
 		if (!$page_id || !$language_id) {
 			trigger_error('DEBUG STATS CACHE: geoCachePage::process - input check failed.');
 			return false;
 		}
-		
+
 		if($logged_in === 'in' && geoCache::get('nocache_admin_'.$page_id)) {
 			//for this module, we do not use the cache for admin users (to prevent edit/delete buttons from sticking around for others)
 			$user_id = geoSession::getInstance()->getUserId();
@@ -1872,28 +1872,28 @@ class geoCachePage extends geoCache {
 				return false;
 			}
 		}
-		
+
 		//check for filters
 		if (!$this->checkForFilters($page_id)){
 			trigger_error('DEBUG STATS CACHE: geoCachePage::process - checkForFilters returned false.');
 			return false;
 		}
-		
+
 		self::initCacheFilesystem();
-		
+
 		$params = $this->serializeParams($params);
 		if ($params==='TOO_LONG') {
 			//don't use cache for this one...
 			trigger_error('DEBUG STATS CACHE: geoCachePage::process - params too long, not caching this one.');
 			return false;
 		}
-		
+
 		$filename = '_pages/_p'.$page_id.'l'.$language_id.'c'.$cat_id.'logged_'.$logged_in.$params.'.php';
-		
+
 		//vars available to page
 		$addon = geoAddon::getInstance();
 		$db = DataAccess::getInstance();
-		
+
 		if (!geoCache::file_exists($filename)) {
 			return false;
 		}
@@ -1909,7 +1909,7 @@ class geoCachePage extends geoCache {
 				$result = ob_get_contents();
 				ob_end_clean();
 			}
-			
+
 			$result = geoAddon::triggerDisplay('filter_display_page_nocache',$result,geoAddon::FILTER);
 		}
 		if ($return) {
@@ -1917,16 +1917,16 @@ class geoCachePage extends geoCache {
 		}
 		//If you do ever want cache to display, make sure it's more than 1 char...
 		if (strlen($result) > 1) echo $result;
-		
+
 		//this was a cache hit, if we get this far stuff was probably echoed
 		//because thats how this type of cache works.
 		return true;
 	}
-	
+
 	/**
 	 * Quotes the given text to be used as contents of php cache file, to be
 	 * used for update()
-	 * 
+	 *
 	 * @param String $pageCode Non quoted string
 	 * @return String suitable for use in a php cache file.
 	 */
@@ -1934,14 +1934,14 @@ class geoCachePage extends geoCache {
 	{
 		//filter text
 		$pageCode = geoAddon::triggerDisplay('filter_display_page',$pageCode,geoAddon::FILTER);
-		
+
 		//to be used as part of return statement, so
 		//slash single quotes.
 		$pageCode = addcslashes($pageCode, '\'\\');
-		
+
 		//the page cache must return the text, so add the return statement
 		$pageCode = '<?php return (\''.$pageCode.'\');';
-		
+
 		return $pageCode;
 	}
 }
