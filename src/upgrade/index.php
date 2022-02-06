@@ -61,11 +61,8 @@ class geoReq
         $overall_fail = '';
         $overall_pass = '<p class="passed">All minimum requirements met.</p>';
         //license agreement
-        if (file_exists('../docs/license.html')) {
-            $checkbox = '<p><label><input type="checkbox" name="license" id="license" /> Yes, I have read and agree to the <a href="../docs/license.html" class="login_link">License Agreement</a></label></p>';
-        } else {
-            $checkbox = '<p><label><input type="checkbox" name="license" id="license" /> Yes, I have read and agree to the Software License Agreement, which is available in the client area of the Geodesic cart system.</label></p>';
-        }
+        $checkbox = '<p><label><input type="checkbox" name="license" id="license" /> Yes, I have read and agree to the Software License Agreement.</label></p>';
+
         if (!$this->regen_php_failed && defined('IAMDEVELOPER')) {
             $overall_fail .= $checkbox;
         }
