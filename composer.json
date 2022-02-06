@@ -27,9 +27,9 @@
             "bash contrib/setup"
         ],
         "check": [
-            "@php-check"
+            "@cs-check"
         ],
-        "php-check": "phpcs -s --standard=./contrib/phpcs-ruleset.xml",
-        "php-fix": "phpcbf --colors --standard=./contrib/phpcs-ruleset.xml"
+        "cs-check": "phpcs -s --standard=./contrib/phpcs-ruleset.xml",
+        "cs-fix": "phpcbf --colors --standard=./contrib/phpcs-ruleset.xml"
     }
 }
