@@ -25,5 +25,8 @@ src/geo_templates/
 !src/geo_templates/marquee/
 !src/geo_templates/tempo/
 
-# Built zip file
+# Built zip files
 geocore-ce.zip
+fusion.zip
+marquee.zip
+tempo.zip
