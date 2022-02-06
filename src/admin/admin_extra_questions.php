@@ -21,7 +21,7 @@ class admin_extra_questions
 // variable for the database
     var $sql_query; // variable for sql queries
 
-    function admin_extra_questions()
+    public function __construct()
     {
         $this->menu_loader = geoAdmin::getInstance();
         $this->db = DataAccess::getInstance();

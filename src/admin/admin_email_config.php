@@ -11,7 +11,7 @@ class Email_configuration
      * Email configuration constructor.  This is responsible for loading the appropriate page, and
      * then running site->display_page().
      */
-    function Email_configuration()
+    public function __construct()
     {
         $this->admin_site = Singleton::getInstance('Admin_site');
 
@@ -60,7 +60,7 @@ emails to be sent.</p>';
         $tpl_vars['is_prem'] = geoPC::is_premier();
 
         $tooltips = array();
-        $tooltips['order'] = geoHTML::showTooltip('Notify on Order Approval', 'When an order has been approved by the admin, or when payment has been received and the order is 
+        $tooltips['order'] = geoHTML::showTooltip('Notify on Order Approval', 'When an order has been approved by the admin, or when payment has been received and the order is
 			automatically approved by the system, send a notification to the user.
 			<br /><br />
 			This will be <em>in addition to</em> any notifications about listings that have been placed.

@@ -22,7 +22,7 @@ class wysiwyg_configuration
             'vibrant-ink',
             'xq-dark',
         );
-    function wysiwyg_configuration()
+    public function __construct()
     {
         $this->admin_site = Singleton::getInstance('Admin_site');
     }
