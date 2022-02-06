@@ -37,8 +37,17 @@
 </style>
 </head>
 <body>
-<h1>Changelogs</h1>
-<p>Below is a list of changelogs available.</p>
+<h1>New Changelogs in Github Releases</h1>
+<ul class="nav">
+    <li>
+        <a href="https://github.com/geodesicsolutions-community/geocore-community/releases" target="_blank">
+            Newer Releases 20.0.0+
+        </a>
+    </li>
+</ul>
+
+<h1>Legacy Changelogs</h1>
+<p>Below is a list of changelogs available for releases before 20.0.0.</p>
 
 <ul class="nav">
 <?php
@@ -93,4 +102,4 @@ foreach ($versions as $version => $info) {
     </li>
 </ul>
 </body>
-</html> 
+</html>
