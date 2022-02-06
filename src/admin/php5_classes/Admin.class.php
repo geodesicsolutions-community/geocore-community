@@ -641,26 +641,7 @@ class geoAdmin {
 			}
 		}
 		$type = 'Core';
-		$typeDisplay = 'GeoCore';
-
-		if (geoPC::license_only()) {
-			$typeDisplay .= ' '.ucfirst(geoPC::license_only());
-			$view->license_only = geoPC::license_only();
-		} else {
-			$typeDisplay .= ' MAX';
-		}
-
-		if (geoPC::is_trial()) {
-			$typeDisplay .= ' (Trial)';
-		}
-		if (geoPC::is_leased()) {
-			$typeDisplay .= ' (Leased)';
-		}
-
-		if($gt = geoPC::geoturbo_status()) {
-			$typeDisplay = "GeoTurbo";
-			if($gt === 'plus') $typeDisplay .= " Plus";
-		}
+		$typeDisplay = 'GeoCore CE';
 
 		$view->product_type = $type;
 		$view->product_typeDisplay = $typeDisplay;

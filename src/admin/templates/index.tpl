@@ -2,11 +2,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>GeoCore | GeoCore Admin</title>
-			{if $charset}<me{*
-				A spacer to get eclipse to stop
-				trying to open the file with "unknown charset
-				of {$charset}"  *}ta http-equiv="Content-Type" content="text/html; charset={$charset}" />{/if}
+		<title>GeoCore CE Admin Panel</title>
+			{if $charset}<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />{/if}
 
 			{* 3rd Party CSS -- Loaded separately here because our stuff needs to override some of it later *}
 			 <!-- Bootstrap -->
@@ -215,12 +212,15 @@
 					<footer>
 						<div class="pull-right">
 							<div id="footer-top">
-								<p>{if !$white_label}{$product_typeDisplay}{/if} DB Ver. {$product_version}
-								{if !$white_label}<span style="white-space:nowrap;">[ <a href="https://geodesicsolutions.org/changelog/" onclick="window.open(this.href); return false;">Changelog</a> ]</span>{/if} </p>
+								<p>GeoCore CE (Community Edition) DB Ver. {$product_version}
+								{if !$white_label}<span style="white-space:nowrap;">[ <a href="https://github.com/geodesicsolutions-community/geocore-community/releases" target="_blank">Changelog</a> ]</span>{/if} </p>
 							</div>
 							<div id="footer">
 								<div id="footer-inside">
-									<p>Copyright &copy;2001-2018</p>
+									<p>Copyright © 2022</p>
+                                    <p>
+                                        Licensed under <a href="https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE" target="_blank">MIT License</a>
+                                    </p>
 								</div>
 							</div>
 						</div>
