@@ -3,39 +3,38 @@
 <html>
 	<head>
 		<title>GeoCore CE Admin Panel</title>
-			{if $charset}<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />{/if}
+        {if $charset}<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />{/if}
 
-			{* 3rd Party CSS -- Loaded separately here because our stuff needs to override some of it later *}
-			 <!-- Bootstrap -->
-			<link href="css/bootstrap.css" rel="stylesheet">
-			<!-- Font Awesome -->
-			<link href="css/font-awesome.css" rel="stylesheet">
+        {* 3rd Party CSS -- Loaded separately here because our stuff needs to override some of it later *}
+            <!-- Bootstrap -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="css/font-awesome.css" rel="stylesheet">
 
-			{head_html}
+        {head_html}
 
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<script type="text/javascript">
-				jQuery(document).ready(function () {
-					gjUtil.inAdmin = true;
-					gjUtil.ready();
-				});
-				//Wait for entire page to be done for this stuff to load
-				jQuery(window).load(function () {
-					gjUtil.load();
-				});
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                gjUtil.inAdmin = true;
+                gjUtil.ready();
+            });
+            //Wait for entire page to be done for this stuff to load
+            jQuery(window).load(function () {
+                gjUtil.load();
+            });
 
-				//Load the 'old' prototype-based stuff
-				Event.observe(window, 'load', function () {
-					geoUtil.init();
-				});
-			</script>
+            //Load the 'old' prototype-based stuff
+            Event.observe(window, 'load', function () {
+                geoUtil.init();
+            });
+        </script>
 
-			<!-- This file has final overrides and most of the styles specific to the "new" admin design. Load it very last -->
-			<link href="css/admin_theme.css" rel="stylesheet">
+        <!-- This file has final overrides and most of the styles specific to the "new" admin design. Load it very last -->
+        <link href="css/admin_theme.css" rel="stylesheet">
 	</head>
-
-	<body{if $body_tag_html} $body_tag_html{/if} class="nav-md">
+	<body class="nav-md">
 		<div class="container body">
 			<div class="main_container">
 				<div class="col-md-3 left_col">
