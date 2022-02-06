@@ -1,6 +1,6 @@
 {* 16.03.0-3-gb5f334d *}
 <form action="index.php?run=show_upgrades" method="POST" id="req_form">
-<div style="border: 2px solid #1382B7; padding: 3px; background-color:#FFF;"> 
+<div style="border: 2px solid #1382B7; padding: 3px; background-color:#FFF;">
 <table cellpadding="2" cellspacing="2">
 	<thead>
 		<tr>
@@ -22,11 +22,6 @@
 			<td class="result">{$mysql_result}</td>
 			<td class="req">{$mysql_req}</td>
 			<td class="setting">{$mysql_text}</td>
-		</tr>
-		<tr style="background-color: #FFF;">
-			<td class="result">{$ioncube_ini_result}</td>
-			<td class="req">{$ioncube_ini_req}</td>
-			<td class="setting">{$ioncube_ini_text}</td>
 		</tr>
 	</tbody>
 </table>

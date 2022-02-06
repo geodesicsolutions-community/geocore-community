@@ -45,9 +45,13 @@ unset($versions['beta']);
 #Add new versions to top.  Make sure to change the latest version.
 # Don't forget to update updateFactory.php as well!
 
-$versions['18.02.0'] = array(
-        'to' => 'latest',
+$versions['20.0.0'] = [
+    'to' => 'latest',
+];
 
+$versions['18.02.0'] = array(
+    'to' => '20.0.0',
+    'folder' => 'none',
 );
 
 $versions['17.12.0'] = array(

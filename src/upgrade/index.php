@@ -4,7 +4,7 @@
 error_reporting(0);
 
 define('MIN_MYSQL', '4.1.0');
-define('MIN_PHP', '5.4.0');
+define('MIN_PHP', '7.4.0');
 
 // un-comment to see errors..
 //ini_set('display_errors','stdout');
@@ -27,7 +27,6 @@ if (!is_writable(GEO_BASE_DIR . 'templates_c/')) {
     die('Upgrade error: you need to make the directory <strong>' . GEO_BASE_DIR . 'templates_c/</strong> writable (CHMOD 777).');
 }
 
-
 /**
  * Checks the min requirements, needs to work with PHP4 and not be encoded,
  * so that it can properly display requirement check page even when requirements
@@ -39,10 +38,10 @@ class geoReq
 {
     //If this is set to true, will use templates to show what it looks like when
     //PHP checks fail...  See upgrade/templates/requirement_check_php_fail.tpl.php
-    var $regen_php_failed = false;
+    private $regen_php_failed = false;
 
     //set to true to test the "PHP Failed" script
-    var $view_php_failed_tpl = false;
+    private $view_php_failed_tpl = false;
 
     /**
      * Replaces the template body with the requirement check.
@@ -94,7 +93,6 @@ class geoReq
         //req text
         $php_version_req = 'PHP Version ' . MIN_PHP . '+';
         $mysql_req = 'MySQL Version ' . MIN_MYSQL . '+';
-        $ioncube_ini_req = 'ionCube Loader';
 
         //start out with passed message, then replace if one of the requirements fail.
         $overall = $overall_pass;
@@ -140,36 +138,6 @@ class geoReq
             $overall = $overall_fail;
             $continue = $continue_fail;
         }
-        ////IONCUBE INI CHECK
-        $ioncube_ini = $this->ioncubeCheck($ioncube_ini_text, $package);
-        //replace ioncube ini req text
-        $this->tplVars['ioncube_ini_req'] = $ioncube_ini_req;
-
-
-        ////See which loader will be used
-        if ($ioncube_ini) {
-            //ioncube ini will be used.
-            if ($package == 'both') {
-                //change failed message to the not needed message, since one of the requirements was met.
-                $failed = $not_needed;
-            }
-        } else {
-            //use all the default returned text values.
-            //keep the failed message as failed, since all 3 requirements failed.
-            $overall = $overall_fail;
-            $continue = $continue_fail;
-        }
-
-
-        //replace runtime result
-        $this->tplVars['ioncube_runtime_result'] = ($ioncube_runtime) ? $passed : $failed;
-        //replace ini result
-        $this->tplVars['ioncube_ini_result'] = ($ioncube_ini) ? $passed : $failed;
-
-        //replace runtime text
-        $this->tplVars['ioncube_runtime_text'] = $ioncube_runtime_text;
-        //replace runtime text
-        $this->tplVars['ioncube_ini_text'] = $ioncube_ini_text;
 
         if ($this->regen_php_failed) {
             //we are pretending PHP is failing, in order to re-generate the
@@ -178,10 +146,6 @@ class geoReq
             //mysql
             $this->tplVars['mysql_text'] = $not_tested_debug;
             $this->tplVars['mysql_result'] = $not_needed;
-
-            //ioncube
-            $this->tplVars['ioncube_ini_text'] = $not_tested_debug;
-            $this->tplVars['ioncube_ini_result'] = $not_needed;
         }
 
         //replace overall text
@@ -266,23 +230,6 @@ class geoReq
         $text = 'MySQL - Version not known ' . $reason;
         //version not known, but mysql is at least installed, so proceed.
         return true;
-    }
-
-    function ioncubeCheck(&$text, $package)
-    {
-        $loaded = extension_loaded('ionCube Loader');
-        if ($loaded) {
-            $text .= 'Installed';
-            return true;
-        }
-        $url = "http://www.ioncube.com/loader_installation.php";
-        if (file_exists('../ioncube/loader-wizard.php')) {
-            $url = "../ioncube/loader-wizard.php";
-        }
-        $text .= '<span style="font-weight: bold; color:#EA1D25;">Not Installed.</span>  You can find instructions <a href="' . $url . '" class="login_link">here</a>.';
-        $text .= '<p>If your site was fully operational prior to this update, you may need to copy the <strong>php.ini</strong> file from your root directory into the <strong>upgrade</strong> directory so that this script can detect ionCube and proceed.</p>';
-
-        return false;
     }
 }
 if (isset($_GET['resetProgress']) && $_GET['resetProgress']) {

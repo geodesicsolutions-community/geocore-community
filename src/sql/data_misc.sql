@@ -3152,5 +3152,5 @@ INSERT INTO `geodesic_user_groups_price_plans` (`id`, `group_id`, `price_plan_id
 --
 
 INSERT INTO `geodesic_version` (`db_version`) VALUES
-('18.02.0');
+('20.0.0');
 
