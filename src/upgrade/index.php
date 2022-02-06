@@ -60,7 +60,16 @@ class geoReq
         $overall_fail = '';
         $overall_pass = '<p class="passed">All minimum requirements met.</p>';
         //license agreement
-        $checkbox = '<p><label><input type="checkbox" name="license" id="license" /> Yes, I have read and agree to the Software License Agreement.</label></p>';
+        $checkbox = '
+            <p>
+                <label>
+                    <input type="checkbox" name="license" id="license" /> Yes, I have read and agree to the Software
+                    <a
+                        href="https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE"
+                        target="_blank"
+                    >License Agreement</a>.
+                </label>
+            </p>';
 
         if (!$this->regen_php_failed && defined('IAMDEVELOPER')) {
             $overall_fail .= $checkbox;

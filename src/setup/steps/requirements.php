@@ -51,12 +51,18 @@ function mysqlCheck(&$text, $phpCheck)
     return true;
 }
 
+$licenseLink = '<a
+        href="https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE"
+        target="_blank"
+    >License Agreement</a>';
+
 //replace with images eventually, instead of text...
 $failed = '<span class="failed"><img src="images/no.gif" alt="no" title="no"></span>';
 $passed = '<span class="passed"><img src="images/yes.gif" alt="yes" title="yes"></span>';
 
 $overallPass = '<p class="passed">All minimum requirements met.</p>';
-$overallPass .= '<p><label><input type="checkbox" name="license" id="license" /> I have read and agree to the License Agreement</label></p>';
+$overallPass .= '<p><label><input type="checkbox" name="license" id="license" /> I have read and agree to the
+    ' . $licenseLink . '</label></p>';
 
 $overallFail = '<p class="body_txt1"><div style="text-align: left; background-color: #FFF; padding: 5px; border: 1px
     solid #EA1D25;"><span class="failed">IMPORTANT: As shown above, one or more of your server\'s minimum requirements
@@ -72,7 +78,7 @@ if (defined('IAMDEVELOPER')) {
     // allow to keep going even if req fail, if developer..
     $continueFail = $continuePass;
     $overallFail .= '<p><label><input type="checkbox" name="license" id="license" /> I have read and agree to the
-        License Agreement</label></p>';
+        ' . $licenseLink . '</label></p>';
 }
 //start out with passed message, then replace if one of the requirements fail.
 $overall = $overallPass;
