@@ -313,22 +313,3 @@ if (!defined('MEMCACHE_ALREADY_INITIALIZED_CUSTOM') && defined('GEO_DIRS_DEFINED
  * like environments.
  */
 #define ('GEO_CURL_CAINFO', '/absolute/path/to/cacert.pem');
-
-/*
- ----Encoder Method Settings----
-
- The software requires either Ioncube, or Zend Optimizer, to decode certain
- files dealing with the software license.  Normally, the software will detect
- if IonCube can be used, and if it can, use the IonCube encoded files.  If it
- detects that IonCube is not installed or cannot be used, it will instead
- use the Zend Optimizer encoded files automatically.
-
- If IonCube is detected, but for whatever reason IonCube will not work, you
- can force it to use Zend Optimizer encoded files automatically using the setting
- below.
-*/
-
-//Un-comment the following line to force the use of Zend Optimizer,
-//even if IonCube is detected on the server.
-
-#define ('DEFAULT_ENCODE_METHOD','zend');
