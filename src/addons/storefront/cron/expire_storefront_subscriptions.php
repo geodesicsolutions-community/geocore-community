@@ -42,7 +42,7 @@ if (geoPC::is_ent()) {
 $this->log('Deleting all storefront subscriptions that should be expired already.', __line__);
 $sql = "DELETE FROM `geodesic_addon_storefront_subscriptions`
 	WHERE `expiration` < " . (geoUtil::time() - $grace) . " AND `onhold_start_time` = 0";
-$expire_subscriptions_results = $this->db->Execute($sql, array((int)$planRow['price_plan_id']));
+$expire_subscriptions_results = $this->db->Execute($sql);
 
 if (!$expire_subscriptions_results) {
     $this->log('Error running query, cron job failed.  query: ' . $sql . ' - Error Msg: ' . $this->db->ErrorMsg(), __line__);
