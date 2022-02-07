@@ -8,11 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
-		{if $on_license_page}
-			License Details
-		{else}
-			Admin Login
-		{/if}
+		Admin Login
 	</title>
 
 	{* 3rd Party CSS -- Loaded separately here because our stuff needs to override some of it later *}
@@ -86,7 +82,6 @@
 	 <section class="login_content">
 		<form action="index.php" method="post" id="login_form">
 			{if $error}<div class="login_error">{$error}</div>{/if}
-			{if $license_error}<div class="login_error">{$license_error}</div>{/if}
 			{if $cookie_error}<div class="login_error">{$cookie_error}</div>{/if}
 			<div id="login_box">
 				<div id="login_sub">
@@ -95,29 +90,14 @@
 						{if !$white_label}<h1 id="login_product_name">{$product_name}<span style="font-size: 0.6em;">&nbsp;{$version}</span></h1>{/if}
 						{if $white_label}<p>{/if}<h2 id="login_software_type">{$software_type}</h2>{if $white_label}</p>{/if}
 						<div id="login_form_fields">
-							{if $on_license_page}
-								{$username_field}{$password_field}
-								<div id="login_username_block">{$license_label}{$license_field}</div>
-							{else}
-								<div id="login_username_block">{$username_label}{$username_field}</div>
-
-								<div id="login_password_block">{$password_label}{$password_field}</div>
-								{if $smarty.get.page}<input type="hidden" name="page" value="{$smarty.get.page}" />{/if}
-							{/if}
+                            <div id="login_username_block">{$username_label}{$username_field}</div>
+                            <div id="login_password_block">{$password_label}{$password_field}</div>
+                            {if $smarty.get.page}<input type="hidden" name="page" value="{$smarty.get.page}" />{/if}
 						</div>
-						{if $on_license_page && $must_agree}
-							{$must_agree}
-						{/if}
 						<div id="submit_button">
 							<input type="hidden" id="cookieexists" name="cookieexists" value="false" />
 							<input type="submit" value="{$submit}" class="btn btn-default submit" />
 						</div>
-
-						{if !$on_license_page && !$white_label}
-							<div id="forgot_pass_link">
-								<a href="https://geodesicsolutions.org/wiki/startup_tutorial_and_checklist/admin_controls/admin_login_change/reset_admin_login_when_loststart/" onclick="window.open(this.href); return false;">Forgot Password?</a>
-							</div>
-						{/if}
 						<div id="login_copyright">Copyright 2022. All Rights Reserved.</div>
 					</div>
 					<div id="login_bottom"></div>
