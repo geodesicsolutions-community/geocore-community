@@ -85,10 +85,9 @@
 			{if $cookie_error}<div class="login_error">{$cookie_error}</div>{/if}
 			<div id="login_box">
 				<div id="login_sub">
-					{if !$white_label} <div id="logo_spacer"> </div> {/if}
 					<div id="login_right">
-						{if !$white_label}<h1 id="login_product_name">{$product_name}<span style="font-size: 0.6em;">&nbsp;{$version}</span></h1>{/if}
-						{if $white_label}<p>{/if}<h2 id="login_software_type">{$software_type}</h2>{if $white_label}</p>{/if}
+						<h1 id="login_product_name">Admin Panel Login <span style="font-size: 0.6em;">&nbsp;{$version}</span></h1>
+						<h2 id="login_software_type">Authorized Access Only!</h2>
 						<div id="login_form_fields">
                             <div id="login_username_block">{$username_label}{$username_field}</div>
                             <div id="login_password_block">{$password_label}{$password_field}</div>
@@ -96,7 +95,7 @@
 						</div>
 						<div id="submit_button">
 							<input type="hidden" id="cookieexists" name="cookieexists" value="false" />
-							<input type="submit" value="{$submit}" class="btn btn-default submit" />
+							<input type="submit" value="Login" class="btn btn-default submit" />
 						</div>
 						<div id="login_copyright">Copyright 2022. All Rights Reserved.</div>
 					</div>
