@@ -88,12 +88,10 @@ $continue = $continuePass;
 
 ////PHP VERSION CHECK
 $phpVersionText = phpversion();
-$php = version_compare($phpVersionText, "5.4.0") >= 0;
+$php = version_compare($phpVersionText, "7.4.0") >= 0;
 $phpVersionResult = $php ? $passed : $failed;
 
 if (!$php) {
-    //php failed, and the requirement is PHP 5.4 so show message about
-    //ability to use Geo 3.1
     $overall = $overallFail;
     $continue = $continueFail;
 }
