@@ -36,25 +36,34 @@ if (!is_writable(GEO_BASE_DIR . 'templates_c/')) {
  */
 class geoReq
 {
-    //If this is set to true, will use templates to show what it looks like when
-    //PHP checks fail...  See upgrade/templates/requirement_check_php_fail.tpl.php
-    private $regen_php_failed = false;
+    /**
+     * Set to true to pretend a test failed (to test the test display)
+     *
+     * @var boolean
+     */
+    private $pretendTestFailed = false;
 
-    //set to true to test the "PHP Failed" script
-    private $view_php_failed_tpl = false;
+    /**
+     * Set to true to pretend the test failed and it needs to use the "safe" stand-alone page.
+     *
+     * This will make it show requirement_check_php_fail.tpl.php
+     *
+     * @var boolean
+     */
+    private $pretentTestFailedAndNoSmarty = false;
 
     /**
      * Replaces the template body with the requirement check.
      * Uses repuirement_check.php and requirement_check.html.
      */
-    function reqCheck()
+    public function reqCheck()
     {
         $this->step_text = 'Requirement Check';
 
         $failed = '<span class="failed"><img src="images/no.gif" alt="no" title="no"></span>';
         $passed = '<span class="passed"><img src="images/yes.gif" alt="yes" title="yes"></span>';
         $not_needed = '---';
-        if ($this->regen_php_failed) {
+        if ($this->pretendTestFailed) {
             $not_tested_debug = 'Not Tested, since PHP version check failed above.';
         }
         $overall_fail = '';
@@ -71,31 +80,35 @@ class geoReq
                 </label>
             </p>';
 
-        if (!$this->regen_php_failed && defined('IAMDEVELOPER')) {
+        if (!$this->pretendTestFailed && defined('IAMDEVELOPER')) {
             $overall_fail .= $checkbox;
         }
         $overall_pass .= $checkbox;
         //back up agreement
         $overall_pass .= '<p><label><input type="checkbox" name="backup_agree" id="backup_agree" /> Yes, I have <strong>backed up</strong> the entire database and all files.</label></p>';
-        if (!$this->regen_php_failed && defined('IAMDEVELOPER')) {
+        if (!$this->pretendTestFailed && defined('IAMDEVELOPER')) {
             $overall_fail .= '<p><label><input type="checkbox" name="backup_agree" id="backup_agree" /> Yes, I have <strong>backed up</strong> the entire database and all files.</label></p>';
         }
 
-        $package = 'both';
-        if (file_exists('package.php')) {
-            $package = include 'package.php';
-        }
-
-            $overall_fail .= '<p class="body_txt1"><div style="text-align: left; background-color: #FFF; padding: 5px; border: 1px solid #EA1D25;"><span class="failed">IMPORTANT: As shown above, one or more of your server\'s minimum requirements have not been met.  These requirements must be met in order to continue with this installation.
-	<br><br>NOTE: The IonCube Loaders are FREELY available for your host to download and install on your server. There is NO COST to your host, since the version that needs to be installed is the
-	"decryption" version.
-	</span></div></p>
-	<p>Please refer to the <a href="https://geodesicsolutions.org/wiki/update/start" class="login_link" target="_blank">Geodesic Solutions User Manual</a>.</p>';
-
+        $overall_fail .= '
+            <p class="body_txt1">
+                <div style="text-align: left; background-color: #FFF; padding: 5px; border: 1px solid #EA1D25;">
+                    <span class="failed">
+                        IMPORTANT: As shown above, one or more of your server\'s minimum requirements have not been
+                        met.  These requirements must be met in order to continue with this installation.
+	                </span>
+                </div>
+            </p>
+	        <p>
+                Please refer to the
+                <a href="https://geodesicsolutions.org/wiki/update/start" class="login_link" target="_blank">
+                    GeoCore CE User Manual
+                </a>.
+            </p>';
 
         $continue_pass = '<input type="submit" name="continue" value="Continue >>" />';
         $continue_fail = '';
-        if (!$this->regen_php_failed && defined('IAMDEVELOPER')) {
+        if (!$this->pretendTestFailed && defined('IAMDEVELOPER')) {
             //allow to keep going even if req fail, if developer..
             $continue_fail = $continue_pass;
         }
@@ -108,16 +121,10 @@ class geoReq
         //start out with the continue as pass, then replace if one of the requirements fail.
         $continue = $continue_pass;
 
-
-
-        $this->tplVars['package'] = $package;
-
         ////PHP VERSION CHECK
         $version_num = phpversion();
-        if ($this->regen_php_failed) {
-            $version_num = '<?php echo phpversion(); ?>';
-        }
-        $php = ($this->regen_php_failed) ? false : version_compare($version_num, MIN_PHP, '>=');
+
+        $php = ($this->pretendTestFailed) ? false : version_compare($version_num, MIN_PHP, '>=');
         $php_text = 'PHP ' . $version_num;
 
         if (!$php) {
@@ -148,7 +155,7 @@ class geoReq
             $continue = $continue_fail;
         }
 
-        if ($this->regen_php_failed) {
+        if ($this->pretendTestFailed) {
             //we are pretending PHP is failing, in order to re-generate the
             //requirement check php file..
 
@@ -163,7 +170,7 @@ class geoReq
         $this->tplVars['continue'] = $continue;
 
         //developer force version form
-        if (defined('IAMDEVELOPER') && !$this->regen_php_failed) {
+        if (defined('IAMDEVELOPER') && !$this->pretendTestFailed) {
             $developer = '<p>DEVELOPER FEATURE: Force upgrade to version: <input type="text" name="force_version" value="7.4.4" /><br /><input type="submit" value="Force Version >>" /></p>';
         } else {
             $developer = '';
@@ -173,15 +180,15 @@ class geoReq
     /**
      * Takes the template, does tag substitution, and echos it.
      */
-    function display_page()
+    public function display_page()
     {
         //replace the upgrade step with the text.
         $this->tplVars['upgrade_step'] = $this->step_text;
         //replace the header text
         $this->tplVars['head'] = $this->head_text;
 
-        if ($this->view_php_failed_tpl || version_compare(phpversion(), MIN_PHP, '<')) {
-            //does not meet PHP 5.4 requrements, use dummy requirements page
+        if ($this->pretentTestFailedAndNoSmarty || version_compare(phpversion(), MIN_PHP, '<')) {
+            //does not meet PHP requrements, use dummy requirements page
             require 'templates/requirement_check_php_fail.tpl.php';
             return;
         }
@@ -198,7 +205,8 @@ class geoReq
 
         $tpl->display('index.tpl');
     }
-    function mysqlCheck(&$text, $php_check)
+
+    public function mysqlCheck(&$text, $php_check)
     {
         if (!function_exists('mysql_connect') && !function_exists('mysqli_connect')) {
             //mysql not even installed.
@@ -241,6 +249,7 @@ class geoReq
         return true;
     }
 }
+
 if (isset($_GET['resetProgress']) && $_GET['resetProgress']) {
     //reset the update progress, can be used when a previous update was not "finished"
     //resulting in error.
