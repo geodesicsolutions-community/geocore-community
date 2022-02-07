@@ -64,9 +64,8 @@ function registration($db, $product, &$template, $errors = 0, $config = 0)
     // URL of register.php
     $template = str_replace("(!REGISTER_URL_LABEL!)", "<b>URL of register.php file:</b>", $template);
     $template = str_replace("(!REGISTER_URL_DESCRIPTION!)", "The register.php can be placed anywhere you like within your software's distribution files.", $template);
-    $string = "<input name=b[url_register] ";
-    $string .= "value=\"http://" . $_SERVER["SERVER_NAME"] . $url_path . "register.php\" ";
-    $string .= "type=text size=65>";
+    $url = htmlspecialchars('http://' . $_SERVER['HTTP_HOST'] . $url_path . 'register.php', ENT_QUOTES, 'UTF-8');
+    $string = '<input name="b[url_register]" value="' . $url . '" type="text" size="65">';
     if ($errors == 1) {
         echo "Please enter a valid filename or none.  If you feel this is in error please leave it blank and set it in the admin after install in the registration configuration section.";
     }

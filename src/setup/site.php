@@ -45,11 +45,13 @@ function site($db, $product, &$template, $error = 0)
 
     // Application URL
     $template = str_replace("(!APP_URL_LABEL!)", "Application URL:", $template);
-    $string = "<input name=conf[url] type=text size=70 value=";
+
+    $string = '';
     if ($error['url']) {
-        $string .= "\"\">";
+        $string .= '<input name="conf[url]" type="text" size="70">';
     } else {
-        $string .= "\"http://" . $_SERVER["SERVER_NAME"] . $url_path . "index.php\">";
+        $url = htmlspecialchars('http://' . $_SERVER['HTTP_HOST'] . $url_path . 'index.php', ENT_QUOTES, 'UTF-8');
+        $string .= '<input name="conf[url]" type="text" size="70" value="' . $url . '">';
     }
     if ($error['url']) {
         $error_string .= "<br>Please enter a valid URL.";
