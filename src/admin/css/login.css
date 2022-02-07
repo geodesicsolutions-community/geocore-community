@@ -52,9 +52,9 @@ ul a {
 }
 
 .login_error .note {
-	text-align:left; 
-	margin:5px; 
-	border:thin #FF9B9B dashed; 
+	text-align:left;
+	margin:5px;
+	border:thin #FF9B9B dashed;
 	padding:5px;
 }
 
@@ -92,7 +92,6 @@ a.login_link:visited {
 
 #logo_spacer {
 	height: 70px;
-	background: #2A3F54 url('../admin_images/login/logo_login_geocore.png') center center no-repeat;
 	border-bottom: 1px solid #D9DEE4;
 }
 
@@ -113,7 +112,7 @@ a.login_link:visited {
 	margin-top: 60px;
 }
 
-#login_right {	
+#login_right {
 	width: 100%;
 }
 

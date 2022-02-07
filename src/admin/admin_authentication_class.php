@@ -2,37 +2,30 @@
 
 class Admin_auth extends Admin_site
 {
+    public $classified_user_id;
+    public $username;
+    public $classified_level;
+    public $auth_messages;
+    public $error_messages;
+    public $error_found;
 
-       var $secret;
-       var $error;
-       var $login_cookie_time;
-       var $classified_user_id;
-       var $username;
-       var $classified_level;
-       var $auth_messages;
-       var $error_messages;
-       var $error_found;
+    /**
+     * email that all administration messages will be sent to
+     *
+     * @var string
+     */
+    public $admin_email = "";
 
-       //email that all administration messages will be sent to
-       var $admin_email = "";
+    public $messages = [];
 
-       var $messages = array();
+    public $notify_data;
 
-       var $notify_data;
-
-       var $debug = 0;
-       var $debug_auth = 0;
-
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    public $debug = 0;
+    public $debug_auth = 0;
 
     public function __construct()
     {
-        //constuctor
-        //echo "hello from admin auth<br>\n";
         parent::__construct();
-        $this->secret = "somethingverylong";
-
         $this->messages[800] = "Login Form";
         $this->messages[801] = "login instructions";
         $this->messages[802] = "Admin Username";
@@ -42,7 +35,7 @@ class Admin_auth extends Admin_site
         $this->messages[806] = "Please enter your password";
         $this->messages[807] = "Please re-enter your username";
         $this->messages[808] = "Please re-enter your password";
-        $this->messages[809] = "Your login information is incorrect." . (!geoPC::is_whitelabel() ? " <a href=\"https://geodesicsolutions.org/wiki/startup_tutorial_and_checklist/admin_controls/admin_login_change/reset_admin_login_when_loststart/\" target=\"_blank\">Help?</a>" : '');
+        $this->messages[809] = "Your login information is incorrect.";
         $this->messages[810] = "No account exists by that username";
         $this->messages[811] = "Edit Userdata Form";
         $this->messages[812] = "Edit userdata form instructions";
@@ -113,11 +106,9 @@ class Admin_auth extends Admin_site
 		If you continue to experience problems, make sure you are <strong>not using http://localhost</strong> to access the software.  Also check the <strong>settings in your config.php</strong> for <strong>COOKIE_DOMAIN</strong>, usually this can be left commented out to be automatically detected, but some servers the auto detection does not work so the setting needs to be specified..";
         $this->messages[871] = "<span class='error_msg'>Error: Login browser cookie could not be updated.</span>  To fix this problem, please clear all browser cookies and then close all browser windows (including this one).  Then, open a new browser window and try again.<br /><br />
 		If you continue to experience problems, make sure you are <strong>not using http://localhost</strong> to access the software.  Also check the <strong>settings in your config.php</strong> for <strong>COOKIE_DOMAIN</strong>, usually this can be left commented out to be automatically detected, but some servers the auto detection does not work so the setting needs to be specified..";
-    } //end of function Auth
+    }
 
-//#############################################################################
-
-    function login($db, $username, $password, $license_key = 0, $sessionId = 0)
+    public function login($db, $username, $password, $license_key = 0, $sessionId = 0)
     {
         if (!$sessionId) {
             if ($this->debug) {
@@ -178,57 +169,15 @@ class Admin_auth extends Admin_site
                 echo $key . " is the key to " . $value . "<br>\n";
             }
         }
-        $license = $license_key;
         $login_data = $this->product_configuration->verify_credentials($username, $password, $license_key);
 
-        if ($login_data === false || !$this->product_configuration->discover_type()) {
-            //see if it is the license that is not valid.
-            if ($login_data) {
-                $errors = $this->product_configuration->errors();
-
-                $extra_details = '';
-                if ($errors) {
-                    $extra_details = "<br />
-				<div class=\"note\">License Validation Results: $errors</div>";
-                }
-                if (!$license_key) {
-                    if ($this->db->get_site_setting('license')) {
-                        //validation failed.
-                        $this->auth_messages['license_key'] = 'Current license has failed validation.  Contact Geo Support if you need to update your license installation location.' . $extra_details;
-                    } elseif (isset($_POST['b']['license_key'])) {
-                        $this->auth_messages["license_key"] = "Please enter your license key.";
-                    }
-                } else {
-                    $this->auth_messages["license_key"] = "License key provided seems to be invalid." . $extra_details;
-                }
-                $this->error_found ++;
-                return false;
-            }
+        if ($login_data === false) {
             $this->error_found ++;
             $this->auth_messages["login"] = $this->messages[809];
             return false;
         }
         //login was good.
 
-        //make sure not going over seats
-        $maxSeats = geoPC::maxSeats();
-        if ($maxSeats >= 0 && $maxSeats <= geoSession::currentAdminSeats()) {
-            //maxSeats is not -1 and is less or equal to number of admin users logged in,
-            //so don't allow login (but do show message as to why)
-
-            $this->auth_messages["login"] = "The maximum number of simultaneous admin users are currently logged in.";
-
-            //show number of minutes until next session expires, if possible.
-            $since = time() - (60 * 20);
-            $sql = "SELECT `last_time` FROM " . geoTables::session_table . " WHERE `user_id`>0 AND `admin_session`='Yes' AND `last_time`>$since ORDER BY `last_time`";
-            $time = (int)$this->db->GetOne($sql);
-            if ($time) {
-                $time = time() - $time;
-                $minutes = 20 - (int)(($time + 1) / 60);
-                $this->auth_messages["login"] .= "  The next session expires in $minutes minutes.";
-            }
-            return false;
-        }
         $sql = "select level,email,firstname,lastname from " . $this->db->geoTables->userdata_table . " where id = ?";
         $level_result = $this->db->Execute($sql, array($login_data["id"]));
         if ($this->debug) {
@@ -275,11 +224,9 @@ class Admin_auth extends Admin_site
         }
         $session->initSession(true); //get it to update the session id.
         return true;
-    } //end of function login
+    }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function auth_error()
+    public function auth_error()
     {
         $this->body .= "<table cellpadding=5 cellspacing=1 border=0 align=center width=600>\n";
         $this->body .= "<tr>\n\t<td class=medium_error_font>" . $this->messages[832] . "</td>\n</tr>\n";
@@ -287,14 +234,11 @@ class Admin_auth extends Admin_site
             $this->body .= "<tr>\n\t<td class=medium_font>\n\t" . $this->error_message . "</td>\n</tr>\n";
         }
         $this->body .= "</table>\n";
-    } //end of function auth_error
+    }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    function validate_login($info)
+    public function validate_login($info)
     {
-        $session = true;
-        include(GEO_BASE_DIR . 'get_common_vars.php');
-
+        $session = geoSession::getInstance();
         $tpl = new geoTemplate(geoTemplate::ADMIN);
 
         $tpl->assign($info);
@@ -304,7 +248,8 @@ class Admin_auth extends Admin_site
         echo $tpl->fetch('validating_login.tpl');
         return true;
     }
-    function admin_login_form($db = 0, $username = 0, $password = 0, $license_key = 0)
+
+    public function admin_login_form($db = 0, $username = 0, $password = 0, $license_key = 0)
     {
         $show_login = true;
         //make sure we have access to product..
@@ -315,7 +260,6 @@ class Admin_auth extends Admin_site
             //only show them the link.
             $show_login = false;
         }
-        $on_license_page = false;
         $input_type = 'text';
         $input_type_password = 'password';
         $product_name = "";
@@ -342,44 +286,15 @@ class Admin_auth extends Admin_site
             }
         }
 
-        $tpl->assign('login_logo', 'admin_images/login/logo_login_geocore.jpg');
         $tpl->assign('software_type', $software_type);
-
-        if (!defined('DISCOVERED')) {
-            //license key is not set yet. check login credentials, then show license form.
-            $credits = $this->product_configuration->verify_credentials($username, $password);
-            //$tpl->assign('login_logo','admin_images/login/logo_license_screen.jpg');
-            //$product_name = "Geo Product";
-            if ($credits && $show_login) {
-                //they logged in ok, so verify login then show license details
-                //or lack thereof
-                $on_license_page = true;
-                $input_type = 'hidden';
-                $input_type_password = 'hidden';
-
-                $submit_text = "Enter";
-                $tpl->assign('software_type', 'License Information');
-                $tpl->assign('must_agree', $this->product_configuration->mustAgree());
-                $install_info = $this->product_configuration->get_installation_info();
-            } else {
-                //echo $username.' pass '.$password;
-                $skip_add = true;
-
-                $tpl->assign('software_type', '&nbsp;');
-            }
-        }
-        if (geoPC::is_leased()) {
-            $product_name .= ' Leased';
-        }
-
 
         $tpl->assign('product_name', $product_name);
         $tpl->assign('white_label', geoPC::is_whitelabel());
-        $tpl->assign('on_license_page', $on_license_page);
 
+        $error = '';
         if ($this->auth_messages["login"]) {
             if (defined('DEMO_MODE')) {
-                $error = "Incorrect Username/Password. Please use username: admin and password: geodesic1 to log into this demo.";
+                $error .= "Incorrect Username/Password. Please use username: admin and password: geodesic1 to log into this demo.";
             } else {
                 $error .= $this->auth_messages["login"];
             }
@@ -403,26 +318,14 @@ class Admin_auth extends Admin_site
         }
         $username_field .= " />\n\t";
 
-
-        $password_field .= '<input type="' . $input_type_password . '" name="b[password]" class="form-control" placeholder="' . $this->messages[803] . '"';
+        $password_field = '<input type="' . $input_type_password . '" name="b[password]" class="form-control" placeholder="' . $this->messages[803] . '"';
         if (defined('DEMO_MODE')) {
             $password_field .= "value=\"geodesic1\"";
-        } elseif ($on_license_page) {
-            //pre fill out the password, if on the license page.
-            $password_field .= 'value="' . geoString::specialChars($password) . '"';
         }
         $password_field .= " />\n\t";
         if (!$license_key) {
             $license_key = $this->db->get_site_setting('license');
         }
-        $license_field = "<input type='text' id='license_key_field' name='b[license_key]' value='$license_key' class='form-control' placeholder='Enter License Key' />";
-
-        if ($this->auth_messages["license_key"]) {
-            $license_error .= $this->auth_messages["license_key"];
-        }
-
-        $submit = (!$submit_text) ? "Login" : $submit_text;
-
         $sql = "select * from " . $this->db->geoTables->version_table;
         $result = $this->db->Execute($sql);
         if (!$result) {
@@ -480,9 +383,6 @@ If you enter the license when your admin folder is not set correctly, the licens
             'password_label' => $password_label,
             'password_field' => $password_field,
             'error' => $error,
-            'license_error' => $license_error,
-            'license_label' => $license_label,
-            'license_field' => $license_field,
             'submit' => $submit,
         );
         $tpl->assign($vars);
@@ -491,11 +391,9 @@ If you enter the license when your admin folder is not set correctly, the licens
         $this->auth_messages["login"] = 0;
         $this->error_messages["username"] = 0;
         $this->error_messages["password"] = 0;
-    } //end of function admin_login_form
+    }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function edit_admin_login_form($db)
+    public function edit_admin_login_form($db)
     {
 
         $sql = "select `username` from " . $this->logins_table . " where id = 1";
@@ -542,9 +440,7 @@ If you enter the license when your admin folder is not set correctly, the licens
         return true;
     }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function update_admin_login($db, $info = 0)
+    public function update_admin_login($db, $info = 0)
     {
         if (is_array($info)) {
             if (trim($info['password']) != trim($info['password_verify'])) {
@@ -558,7 +454,7 @@ If you enter the license when your admin folder is not set correctly, the licens
             $sql = "select id from " . $this->logins_table . " where username = ? and id != 1";
             $result = $this->db->Execute($sql, array($info['username']));
             if (!$result) {
-                $this->error["registration"] = urldecode($this->messages[230]);
+                geoAdmin::m('DB Error, try again', geoAdmin::ERROR);
                 return false;
             } elseif ($result->RecordCount() > 0) {
                 geoAdmin::m("That username already exists. Please try another", geoAdmin::ERROR);
@@ -605,15 +501,12 @@ If you enter the license when your admin folder is not set correctly, the licens
         return false;
     }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function verify_license()
+    public function verify_license()
     {
         return $this->product_configuration->discover_type();
     }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    function display_admin_tools_password()
+    public function display_admin_tools_password()
     {
         if (!$this->edit_admin_login_form($this->db)) {
             return false;
@@ -621,8 +514,8 @@ If you enter the license when your admin folder is not set correctly, the licens
         $this->display_page();
     }
 
-    function update_admin_tools_password()
+    public function update_admin_tools_password()
     {
         return $this->update_admin_login($this->db, $_REQUEST["b"]);
     }
-} //end of class Auth
+}
