@@ -146,23 +146,8 @@ class DataAccess
      */
     private function __clone()
     {
-        //this shoudl never be cloned
-        throw new Exception('No cloning permitted!  Make sure that the setting "zend.ze1_compatibility_mode" is turned OFF in your php.ini configuration file.');
-    }
-
-    /**
-     * Not implemented yet, should only implement if need to add checking
-     * for result sets.
-     *
-     * @param Object $results DB result set
-     * @return Boolean true if it's ok, false otherwise
-     * @internal
-     */
-    private function _checkResults($results)
-    {
-        //not implemented yet.  Only need to implement if
-        //hacking becomes a big problem.
-        return true;
+        //this should never be cloned
+        throw new Exception('No cloning permitted!');
     }
 
     /**
@@ -175,7 +160,10 @@ class DataAccess
         if (!$this->IsConnected()) {
             //get the database settings.
             require(GEO_BASE_DIR . 'config.default.php');
-            $this->db_info = array( 'db_host' => $db_host, 'db_name' => $database);
+            $this->db_info = [
+                'db_host' => $db_host,
+                'db_name' => $database
+            ];
             try {
                 $this->db = ADONewConnection($db_type);
 

@@ -71,13 +71,6 @@ function geo_exception_handler($exception) {
 
 set_exception_handler('geo_exception_handler');
 
-//Fix for stupid sites that have magic_quotes_runtime turned on...  Must turn it off!
-if (function_exists('set_magic_quotes_runtime') && get_magic_quotes_runtime()) {
-	//must check for function first, since function will be removed from PHP in
-	//future, along with ability to turn this stupid setting on.  Hooray!
-	set_magic_quotes_runtime(false);
-}
-
 if (!defined('PHP5_DIR') && version_compare('5.2.0', phpversion()) < 1) {
 	//we are in a php 5 enviroment, use php5 clases where applicable
 	//trigger_error('DEBUG STATS: Using php5 classes.');
@@ -86,7 +79,8 @@ if (!defined('PHP5_DIR') && version_compare('5.2.0', phpversion()) < 1) {
 	//trigger_error('DEBUG STATS: Using php4 classes.');
 	define('PHP5_DIR', '');
 
-	//If you want to allow using PHP 4 version, un-comment the following line.  Note that many systems will be "broken" because there
+	//If you want to allow using PHP 4 version, un-comment the following line.  Note that many systems will be
+    //"broken" because there
 	//are no PHP 4 versions of those systems.
 	die ('<h1 style="color: red">Error:  Minimum Server Requirements not met.</h1>
 
@@ -124,7 +118,6 @@ if (GEO_CACHE_CONTROL) {
 
 define('GEO_DIRS_DEFINED',1);
 //require core functionality files
-require_once CLASSES_DIR . 'adodb/adodb.inc.php';
 require_once CLASSES_DIR . PHP5_DIR . 'Utility.class.php';
 require_once CLASSES_DIR . PHP5_DIR .'products.php';
 require_once CLASSES_DIR . PHP5_DIR . 'DataAccess.class.php';

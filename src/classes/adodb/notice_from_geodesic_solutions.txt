@@ -1,6 +1,0 @@
-This is to notify you that the files contained in the adodb folder are not 
-complete, some files have been removed from the original adodb package to 
-reduce the amount of space.  For the full adodb package, see 
-http://adodb.sourceforge.net/
-
-For license information regarding adodb, see the file LICENSE.md in this folder.

@@ -221,14 +221,14 @@ class geoReq
             $text .= 'MySQL not installed, or not configured to work properly with PHP.';
             return false;
         }
-        @include('../config.default.php');
+        include('../config.default.php');
         if ($php_check && isset($db_host) && $db_host != 'your_database_hostname' && strlen($db_host)) {
             //if config.php is already set up, attempt to get server version.
             //adodb should be included by now.
-            include_once(CLASSES_DIR . 'adodb/adodb.inc.php');
-            @$db =& ADONewConnection($db_type);
+            require_once GEO_BASE_DIR . 'vendor/adodb/adodb-php/adodb.inc.php';
+            $db = ADONewConnection($db_type);
 
-            @$db->Connect($db_host, $db_username, $db_password, $database);
+            $db->Connect($db_host, $db_username, $db_password, $database);
             $info = $db->ServerInfo();
             if (is_array($info)) {
                 $mysql_version = $info['version'];
