@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file combines, reduces, and compresses the CSS / JS content of the page.
  *
@@ -111,14 +112,14 @@ $write_contents = true;
 $valid_types = array('css','js');
 
 $tables = array (
-	'css' => '`geodesic_combined_css_list`',
-	'js' => '`geodesic_combined_js_list`',
-	);
+    'css' => '`geodesic_combined_css_list`',
+    'js' => '`geodesic_combined_js_list`',
+    );
 
 //servers that have display_errors on can sometimes dump extraneous PHP warnings into the output files, which helps no
 //one and breaks lots of stuff
 //force it to be off, here, for sanity's sake
-ini_set('display_errors','off');
+ini_set('display_errors', 'off');
 
 ## Utility functions here!
 
@@ -126,293 +127,298 @@ ini_set('display_errors','off');
 
 class Combine
 {
-	private $_type, $_resource_id, $_contents, $_content_filename, $_working_path, $_charset, $_externalDomain,
-		$_externalPath, $_external_url_base;
-	private $_files = array();
+    private $_type, $_resource_id, $_contents, $_content_filename, $_working_path, $_charset, $_externalDomain,
+        $_externalPath, $_external_url_base;
+    private $_files = array();
 
-	private $_cssInHack;
+    private $_cssInHack;
 
 
-	public $db;
+    public $db;
 
-	public $noMinifyJs, $noMinifyCss; //just a couple of settings that need to be held here
+    public $noMinifyJs, $noMinifyCss; //just a couple of settings that need to be held here
 
-	private $_content_types = array (
-		'css' => 'text/css',
-		'js' => 'application/javascript',
-		);
+    private $_content_types = array (
+        'css' => 'text/css',
+        'js' => 'application/javascript',
+        );
 
-	private $cacheBuster;
+    private $cacheBuster;
 
-	/**
-	 * Main constructor.
-	 *
-	 * @param string $resource_type Either js or css
-	 * @param int $resource_id
-	 * @param int $charset
-	 */
-	public function __construct ($resource_type, $resource_id, $charset)
-	{
-		if (in_array($resource_type, array ('css', 'js'))) {
-			$this->_type = $resource_type;
-		}
-		$this->_resource_id = (int)$resource_id;
-		$this->_charset = trim($charset);
-		$this->cacheBuster = sha1(time());
-	}
-	/**
-	 * This sends the common headers to use.
-	 */
-	public function sendHeaders ()
-	{
-		//TODO: make this a setting somewhere
-		$expires = 60*60*24*365;
+    /**
+     * Main constructor.
+     *
+     * @param string $resource_type Either js or css
+     * @param int $resource_id
+     * @param int $charset
+     */
+    public function __construct($resource_type, $resource_id, $charset)
+    {
+        if (in_array($resource_type, array ('css', 'js'))) {
+            $this->_type = $resource_type;
+        }
+        $this->_resource_id = (int)$resource_id;
+        $this->_charset = trim($charset);
+        $this->cacheBuster = sha1(time());
+    }
+    /**
+     * This sends the common headers to use.
+     */
+    public function sendHeaders()
+    {
+        //TODO: make this a setting somewhere
+        $expires = 60 * 60 * 24 * 365;
 
-		$content_type = $this->_content_types[$this->_type];
+        $content_type = $this->_content_types[$this->_type];
 
-		header ("Content-Type: $content_type; charset: $this->_charset");
-		header("Cache-Control: maxage=$expires");
-		header("Expires: ".gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
-	}
+        header("Content-Type: $content_type; charset: $this->_charset");
+        header("Cache-Control: maxage=$expires");
+        header("Expires: " . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
+    }
 
-	/**
-	 * Add a list (array) of files to the list.
-	 * @param array $file_list
-	 * @return boolean True if files were added successfully, false if invalid input
-	 */
-	public function addFiles ($file_list)
-	{
-		if (!is_array($file_list)) {
-			//un-do serialization
-			$file_list = unserialize(base64_decode(trim($file_list)));
-		}
-		if (!$file_list || !is_array($file_list)) {
-			return false;
-		}
+    /**
+     * Add a list (array) of files to the list.
+     * @param array $file_list
+     * @return boolean True if files were added successfully, false if invalid input
+     */
+    public function addFiles($file_list)
+    {
+        if (!is_array($file_list)) {
+            //un-do serialization
+            $file_list = unserialize(base64_decode(trim($file_list)));
+        }
+        if (!$file_list || !is_array($file_list)) {
+            return false;
+        }
 
-		foreach ($file_list as $filename) {
-			//this way makes sure to preserve the file order
-			if (!in_array($filename, $this->_files)) {
-				//we only add once...
-				$this->_files[] = $filename;
-			}
-		}
-		return true;
-	}
+        foreach ($file_list as $filename) {
+            //this way makes sure to preserve the file order
+            if (!in_array($filename, $this->_files)) {
+                //we only add once...
+                $this->_files[] = $filename;
+            }
+        }
+        return true;
+    }
 
-	/*
-	 * Get the list of files.
-	 */
-	public function getFiles ()
-	{
-		return $this->_files;
-	}
+    /*
+     * Get the list of files.
+     */
+    public function getFiles()
+    {
+        return $this->_files;
+    }
 
-	/**
-	 * Main function, this processes the list of files and echo's the contents.
-	 */
-	public function echoContents ()
-	{
-		//Note: we work on $this->_contents so we don't have to pass stuff around a bunch
+    /**
+     * Main function, this processes the list of files and echo's the contents.
+     */
+    public function echoContents()
+    {
+        //Note: we work on $this->_contents so we don't have to pass stuff around a bunch
 
-		foreach ($this->_files as $filename) {
-			$this->_working_path = $this->_content_filename = '';
-			if ($this->_type === 'js') {
-				//nothing fancy, just stick all the contents together
-				$this->_contents .= trim($this->_getContents($filename))."\n";
-			} else {
-				//have to fix the paths for each individual file
-				$contents = trim($this->_getContents($filename));
+        foreach ($this->_files as $filename) {
+            $this->_working_path = $this->_content_filename = '';
+            if ($this->_type === 'js') {
+                //nothing fancy, just stick all the contents together
+                $this->_contents .= trim($this->_getContents($filename)) . "\n";
+            } else {
+                //have to fix the paths for each individual file
+                $contents = trim($this->_getContents($filename));
 
-				if (!strlen($contents)) {
-					//nothing in this one...
-					continue;
-				}
-				$this->_content_filename = $filename;
-				$this->_working_path = dirname($filename);
+                if (!strlen($contents)) {
+                    //nothing in this one...
+                    continue;
+                }
+                $this->_content_filename = $filename;
+                $this->_working_path = dirname($filename);
 
-				//fix URL's
-				$this->_contents .= $this->fixCssUrls($contents);
-			}
-		}
-		//minify the contents
-		$this->minify();
-		//now echo
-		echo $this->_contents;
-	}
-	/**
-	 * This parses the contents for any url(...) statements, and adjusts them to
-	 * account for the CSS being used from a different location than the original
-	 * file.
-	 *
-	 * @param string $contents
-	 * @return string
-	 */
-	public function fixCssUrls ($contents)
-	{
-		return preg_replace_callback('/url[\s]*\([\s\'"]*[^\'")]*[\'"\s]*\)/', array($this, '_fixCssUrl'), $contents);
-	}
+                //fix URL's
+                $this->_contents .= $this->fixCssUrls($contents);
+            }
+        }
+        //minify the contents
+        $this->minify();
+        //now echo
+        echo $this->_contents;
+    }
+    /**
+     * This parses the contents for any url(...) statements, and adjusts them to
+     * account for the CSS being used from a different location than the original
+     * file.
+     *
+     * @param string $contents
+     * @return string
+     */
+    public function fixCssUrls($contents)
+    {
+        return preg_replace_callback('/url[\s]*\([\s\'"]*[^\'")]*[\'"\s]*\)/', array($this, '_fixCssUrl'), $contents);
+    }
 
-	/**
-	 * Minifies the contents.  The contents must be retrieved prior to calling this.
-	 *
-	 * @return string
-	 */
-	public function minify ()
-	{
-		if ($this->_type == 'js') {
-			return $this->_minifyJs();
-		}
-		return $this->_minifyCss();
-	}
-	/**
-	 * Use to set the external URL settings to use
-	 *
-	 * @param string $external_url_base
-	 * @param string $classifieds_url
-	 */
-	public function setExternalUrls ($external_url_base, $classifieds_url)
-	{
-		$media_url = $external_url_base;
-		if (!$media_url) {
-			$media_url = dirname($classifieds_url).'/';
-		}
-		$info = parse_url($media_url);
-		if (!$info) {
-			//not a proper URL...  use empty string and hope for best, that's all we can do.
-			$this->_externalDomain = $this->_externalPath = '';
-			return;
-		}
-		//echo $media_url."\n";
-		$this->_externalDomain = $info['scheme'].'://'.$info['host'];
-		if (isset($info['port']) && $info['port']) {
-			//allow for different port in the domain
-			$this->_externalDomain .= ':'.$info['port'];
-		}
-		$this->_externalPath = '/'.trim($info['path'],'/').'/';
+    /**
+     * Minifies the contents.  The contents must be retrieved prior to calling this.
+     *
+     * @return string
+     */
+    public function minify()
+    {
+        if ($this->_type == 'js') {
+            return $this->_minifyJs();
+        }
+        return $this->_minifyCss();
+    }
+    /**
+     * Use to set the external URL settings to use
+     *
+     * @param string $external_url_base
+     * @param string $classifieds_url
+     */
+    public function setExternalUrls($external_url_base, $classifieds_url)
+    {
+        $media_url = $external_url_base;
+        if (!$media_url) {
+            $media_url = dirname($classifieds_url) . '/';
+        }
+        $info = parse_url($media_url);
+        if (!$info) {
+            //not a proper URL...  use empty string and hope for best, that's all we can do.
+            $this->_externalDomain = $this->_externalPath = '';
+            return;
+        }
+        //echo $media_url."\n";
+        $this->_externalDomain = $info['scheme'] . '://' . $info['host'];
+        if (isset($info['port']) && $info['port']) {
+            //allow for different port in the domain
+            $this->_externalDomain .= ':' . $info['port'];
+        }
+        $this->_externalPath = '/' . trim($info['path'], '/') . '/';
 
-		//store them so we got em
-		$this->_external_url_base = $external_url_base;
-	}
+        //store them so we got em
+        $this->_external_url_base = $external_url_base;
+    }
 
-	public function getSetting ($db, $setting, $checkOld = false)
-	{
-		$return = $db->GetOne("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='{$setting}'");
-		if (!$return && $checkOld) {
-			$return = $db->GetOne("SELECT `{$setting}` FROM `geodesic_classifieds_configuration`");
-		}
-		return $return;
-	}
-	/**
-	 * Cleans the URL, gets rid of any ".", "..", and consecutive /, changes the
-	 * dir seperator to /.
-	 *
-	 * NOTE: this is a simplified version of geoFile::cleanPath(), but geared
-	 * specifically for use on URL's rather than file paths
-	 *
-	 * @param string $path
-	 * @param bool $saveUpDots If true, and there are parent folder (../) at the
-	 *   beginning, it preserves those at the start.  Otherwise it removes beginning
-	 *   ../ from returned path.  Param added in version 7.3.4.
-	 * @return string
-	 */
-	public function cleanRelativeUrl ($path, $saveUpDots = false)
-	{
-		$path = trim($path);
-		//just in case there are wrong slashes in there...
-		$path = str_replace('\\', '/', $path);
+    public function getSetting($db, $setting, $checkOld = false)
+    {
+        $return = $db->GetOne("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='{$setting}'");
+        if (!$return && $checkOld) {
+            $return = $db->GetOne("SELECT `{$setting}` FROM `geodesic_classifieds_configuration`");
+        }
+        return $return;
+    }
+    /**
+     * Cleans the URL, gets rid of any ".", "..", and consecutive /, changes the
+     * dir seperator to /.
+     *
+     * NOTE: this is a simplified version of geoFile::cleanPath(), but geared
+     * specifically for use on URL's rather than file paths
+     *
+     * @param string $path
+     * @param bool $saveUpDots If true, and there are parent folder (../) at the
+     *   beginning, it preserves those at the start.  Otherwise it removes beginning
+     *   ../ from returned path.  Param added in version 7.3.4.
+     * @return string
+     */
+    public function cleanRelativeUrl($path, $saveUpDots = false)
+    {
+        $path = trim($path);
+        //just in case there are wrong slashes in there...
+        $path = str_replace('\\', '/', $path);
 
-		$start = (substr($path,0,1) == '/')? '/' : '';
+        $start = (substr($path, 0, 1) == '/') ? '/' : '';
 
-		$end = (substr($path, -1) == '/')? '/' : '';
+        $end = (substr($path, -1) == '/') ? '/' : '';
 
-		$parts = array_filter(explode('/', $path), 'strlen');
-		$absolutes = array();
-		foreach ($parts as $part) {
-			//TODO: Check to make sure this works on different charset encoding!
-			if ($part == '.') continue;
+        $parts = array_filter(explode('/', $path), 'strlen');
+        $absolutes = array();
+        foreach ($parts as $part) {
+            //TODO: Check to make sure this works on different charset encoding!
+            if ($part == '.') {
+                continue;
+            }
 
-			if ($part == '..' && (!$saveUpDots || !empty($absolutes))) {
-				array_pop($absolutes);
-			} else {
-				$absolutes[] = $part;
-			}
-		}
-		//make sure to NOT return just //
-		if (!count($absolutes) && $start && $end) {
-			//nothing in middle, and there is start & end, so to
-			//prevent returning "//" force it to return only start.
-			return $start;
-		}
+            if ($part == '..' && (!$saveUpDots || !empty($absolutes))) {
+                array_pop($absolutes);
+            } else {
+                $absolutes[] = $part;
+            }
+        }
+        //make sure to NOT return just //
+        if (!count($absolutes) && $start && $end) {
+            //nothing in middle, and there is start & end, so to
+            //prevent returning "//" force it to return only start.
+            return $start;
+        }
 
-		return $start.implode('/', $absolutes).$end;
-	}
-	/**
-	 * Whether the given haystack starts with the given string
-	 * @param string $haystack
-	 * @param string|array $needle If an array, will return true if any of the
-	 *   values are at the start of haystack.
-	 * @return boolean
-	 */
-	public function startsWith ($haystack, $needle)
-	{
-		if (is_array($needle)) {
-			foreach ($needle as $n) {
-				if ($this->startsWith($haystack, $n)) {
-					//found a match
-					return true;
-				}
-			}
-			return false;
-		}
-		return !strncmp($haystack, $needle, strlen($needle));
-	}
+        return $start . implode('/', $absolutes) . $end;
+    }
+    /**
+     * Whether the given haystack starts with the given string
+     * @param string $haystack
+     * @param string|array $needle If an array, will return true if any of the
+     *   values are at the start of haystack.
+     * @return boolean
+     */
+    public function startsWith($haystack, $needle)
+    {
+        if (is_array($needle)) {
+            foreach ($needle as $n) {
+                if ($this->startsWith($haystack, $n)) {
+                    //found a match
+                    return true;
+                }
+            }
+            return false;
+        }
+        return !strncmp($haystack, $needle, strlen($needle));
+    }
 
-	private function _minifyJs ()
-	{
-		if($this->noMinifyJs) {
-			//not minifying JS -- just combining, so nothing to do here
-			return;
-		}
-		//this is pretty intensive, up the execution time
-		set_time_limit(60);
-		$this->_contents = JSMinPlus::minify($this->_contents);
-	}
+    private function _minifyJs()
+    {
+        if ($this->noMinifyJs) {
+            //not minifying JS -- just combining, so nothing to do here
+            return;
+        }
+        //this is pretty intensive, up the execution time
+        set_time_limit(60);
+        $this->_contents = JSMinPlus::minify($this->_contents);
+    }
 
-	/**
-	 * Addapted from the 3rd party minify library
-	 */
-	private function _minifyCss ()
-	{
-		if($this->noMinifyCss) {
-			//not minifying CSS -- just combining, so nothing to do here
-			return;
-		}
-		//make sure it only uses newlines, none of that windows stuff
-		$this->_contents = str_replace("\r\n", "\n", $this->_contents);
+    /**
+     * Addapted from the 3rd party minify library
+     */
+    private function _minifyCss()
+    {
+        if ($this->noMinifyCss) {
+            //not minifying CSS -- just combining, so nothing to do here
+            return;
+        }
+        //make sure it only uses newlines, none of that windows stuff
+        $this->_contents = str_replace("\r\n", "\n", $this->_contents);
 
-		// preserve empty comment after '>'
-		// http://www.webdevout.net/css-hacks#in_css-selectors
-		$this->_contents = preg_replace('@>/\\*\\s*\\*/@', '>/*keep*/', $this->_contents);
+        // preserve empty comment after '>'
+        // http://www.webdevout.net/css-hacks#in_css-selectors
+        $this->_contents = preg_replace('@>/\\*\\s*\\*/@', '>/*keep*/', $this->_contents);
 
-		// preserve empty comment between property and value
-		// http://css-discuss.incutio.com/?page=BoxModelHack
-		$this->_contents = preg_replace('@/\\*\\s*\\*/\\s*:@', '/*keep*/:', $this->_contents);
-		$this->_contents = preg_replace('@:\\s*/\\*\\s*\\*/@', ':/*keep*/', $this->_contents);
+        // preserve empty comment between property and value
+        // http://css-discuss.incutio.com/?page=BoxModelHack
+        $this->_contents = preg_replace('@/\\*\\s*\\*/\\s*:@', '/*keep*/:', $this->_contents);
+        $this->_contents = preg_replace('@:\\s*/\\*\\s*\\*/@', ':/*keep*/', $this->_contents);
 
-		// apply callback to all valid comments (and strip out surrounding ws
-		$this->_contents = preg_replace_callback('@\\s*/\\*([\\s\\S]*?)\\*/\\s*@'
-				,array($this, '_cssRemoveComments'), $this->_contents);
+        // apply callback to all valid comments (and strip out surrounding ws
+        $this->_contents = preg_replace_callback(
+            '@\\s*/\\*([\\s\\S]*?)\\*/\\s*@',
+            array($this, '_cssRemoveComments'),
+            $this->_contents
+        );
 
-		// remove ws around { } and last semicolon in declaration block
-		$this->_contents = preg_replace('/\\s*{\\s*/', '{', $this->_contents);
-		$this->_contents = preg_replace('/;?\\s*}\\s*/', '}', $this->_contents);
+        // remove ws around { } and last semicolon in declaration block
+        $this->_contents = preg_replace('/\\s*{\\s*/', '{', $this->_contents);
+        $this->_contents = preg_replace('/;?\\s*}\\s*/', '}', $this->_contents);
 
-		// remove ws surrounding semicolons
-		$this->_contents = preg_replace('/\\s*;\\s*/', ';', $this->_contents);
+        // remove ws surrounding semicolons
+        $this->_contents = preg_replace('/\\s*;\\s*/', ';', $this->_contents);
 
-		// remove ws around urls
-		$this->_contents = preg_replace('/
+        // remove ws around urls
+        $this->_contents = preg_replace('/
                 url\\(      # url(
                 \\s*
                 ([^\\)]+?)  # 1 = the URL (really just a bunch of non right parenthesis)
@@ -420,8 +426,8 @@ class Combine
                 \\)         # )
             /x', 'url($1)', $this->_contents);
 
-		// remove ws between rules and colons
-		$this->_contents = preg_replace('/
+        // remove ws between rules and colons
+        $this->_contents = preg_replace('/
                 \\s*
                 ([{;])              # 1 = beginning of block or rule separator
                 \\s*
@@ -432,8 +438,9 @@ class Combine
                 (\\b|[#\'"-])        # 3 = first character of a value
             /x', '$1$2:$3', $this->_contents);
 
-		// remove ws in selectors
-		$this->_contents = preg_replace_callback('/
+        // remove ws in selectors
+        $this->_contents = preg_replace_callback(
+            '/
                 (?:              # non-capture
                     \\s*
                     [^~>+,\\s]+  # selector part
@@ -443,425 +450,440 @@ class Combine
                 \\s*
                 [^~>+,\\s]+      # selector part
                 {                # open declaration block
-            /x'
-				,array($this, '_cssSelectorWhitespace'), $this->_contents);
+            /x',
+            array($this, '_cssSelectorWhitespace'),
+            $this->_contents
+        );
 
-		// minimize hex colors
-		$this->_contents = preg_replace('/([^=])#([a-f\\d])\\2([a-f\\d])\\3([a-f\\d])\\4([\\s;\\}])/i'
-				, '$1#$2$3$4$5', $this->_contents);
+        // minimize hex colors
+        $this->_contents = preg_replace(
+            '/([^=])#([a-f\\d])\\2([a-f\\d])\\3([a-f\\d])\\4([\\s;\\}])/i',
+            '$1#$2$3$4$5',
+            $this->_contents
+        );
 
-		// remove spaces between font families
-		$this->_contents = preg_replace_callback('/font-family:([^;}]+)([;}])/'
-				,array($this, '_cssFontFamilyWS'), $this->_contents);
+        // remove spaces between font families
+        $this->_contents = preg_replace_callback(
+            '/font-family:([^;}]+)([;}])/',
+            array($this, '_cssFontFamilyWS'),
+            $this->_contents
+        );
 
-		// replace any ws involving newlines with a single newline
-		$this->_contents = preg_replace('/[ \\t]*\\n+\\s*/', "\n", $this->_contents);
+        // replace any ws involving newlines with a single newline
+        $this->_contents = preg_replace('/[ \\t]*\\n+\\s*/', "\n", $this->_contents);
 
-		// separate common descendent selectors w/ newlines (to limit line lengths)
-		$this->_contents = preg_replace('/([\\w#\\.\\*]+)\\s+([\\w#\\.\\*]+){/', "$1\n$2{", $this->_contents);
+        // separate common descendent selectors w/ newlines (to limit line lengths)
+        $this->_contents = preg_replace('/([\\w#\\.\\*]+)\\s+([\\w#\\.\\*]+){/', "$1\n$2{", $this->_contents);
 
-		// Use newline after 1st numeric value (to limit line lengths).
-		$this->_contents = preg_replace('/
+        // Use newline after 1st numeric value (to limit line lengths).
+        $this->_contents = preg_replace(
+            '/
             ((?:padding|margin|border|outline):\\d+(?:px|em)?) # 1 = prop : 1st numeric value
             \\s+
-            /x'
-				,"$1\n", $this->_contents);
+            /x',
+            "$1\n",
+            $this->_contents
+        );
 
-		// prevent triggering IE6 bug: http://www.crankygeek.com/ie6pebug/
-		$this->_contents = preg_replace('/:first-l(etter|ine)\\{/', ':first-l$1 {', $this->_contents);
+        // prevent triggering IE6 bug: http://www.crankygeek.com/ie6pebug/
+        $this->_contents = preg_replace('/:first-l(etter|ine)\\{/', ':first-l$1 {', $this->_contents);
 
-		$this->_contents = trim($this->_contents);
-	}
+        $this->_contents = trim($this->_contents);
+    }
 
-	/**
-	 * Addapted from the 3rd party minify library
-	 */
-	private function _cssRemoveComments ($matches)
-	{
-		$hasSurroundingWs = (trim($matches[0]) !== $matches[1]);
-		$matches = $matches[1];
-		// $matches is the comment content w/o the surrounding tokens,
-		// but the return value will replace the entire comment.
-		if ($matches === 'keep') {
-			return '/**/';
-		}
-		if ($matches === '" "') {
-			// component of http://tantek.com/CSS/Examples/midpass.html
-			return '/*" "*/';
-		}
-		if (preg_match('@";\\}\\s*\\}/\\*\\s+@', $matches)) {
-			// component of http://tantek.com/CSS/Examples/midpass.html
-			return '/*";}}/* */';
-		}
-		if ($this->_cssInHack) {
-			// inversion: feeding only to one browser
-			if (preg_match('@
+    /**
+     * Addapted from the 3rd party minify library
+     */
+    private function _cssRemoveComments($matches)
+    {
+        $hasSurroundingWs = (trim($matches[0]) !== $matches[1]);
+        $matches = $matches[1];
+        // $matches is the comment content w/o the surrounding tokens,
+        // but the return value will replace the entire comment.
+        if ($matches === 'keep') {
+            return '/**/';
+        }
+        if ($matches === '" "') {
+            // component of http://tantek.com/CSS/Examples/midpass.html
+            return '/*" "*/';
+        }
+        if (preg_match('@";\\}\\s*\\}/\\*\\s+@', $matches)) {
+            // component of http://tantek.com/CSS/Examples/midpass.html
+            return '/*";}}/* */';
+        }
+        if ($this->_cssInHack) {
+            // inversion: feeding only to one browser
+            if (
+                preg_match('@
                     ^/               # comment started like /*/
                     \\s*
                     (\\S[\\s\\S]+?)  # has at least some non-ws content
                     \\s*
                     /\\*             # ends like /*/ or /**/
-                @x', $matches, $n)) {
-		                // end hack mode after this comment, but preserve the hack and comment content
-				$this->_cssInHack = false;
-				return "/*/{$n[1]}/**/";
-			}
-		}
-		if (substr($matches, -1) === '\\') { // comment ends like \*/
-			// begin hack mode and preserve hack
-			$this->_cssInHack = true;
-			return '/*\\*/';
-		}
-		if ($matches !== '' && $matches[0] === '/') { // comment looks like /*/ foo */
-			// begin hack mode and preserve hack
-			$this->_cssInHack = true;
-			return '/*/*/';
-		}
-		if ($this->_cssInHack) {
-			// a regular comment ends hack mode but should be preserved
-			$this->_cssInHack = false;
-			return '/**/';
-		}
-		// if there's any surrounding whitespace, it may be important, so
-		// replace the comment with a single space
-		return $hasSurroundingWs? ' ': '';
-	}
-	/**
-	 * Addapted from the 3rd party minify library
-	 */
-	private function _cssSelectorWhitespace($matches)
-	{
-		// remove ws around the combinators
-		return preg_replace('/\\s*([,>+~])\\s*/', '$1', $matches[0]);
-	}
-	/**
-	 * Addapted from the 3rd party minify library
-	 */
-	private function _cssFontFamilyWS($matches)
-	{
-		// must not eliminate WS between words in unquoted families
-		$pieces = preg_split(
+                @x', $matches, $n)
+            ) {
+                        // end hack mode after this comment, but preserve the hack and comment content
+                $this->_cssInHack = false;
+                return "/*/{$n[1]}/**/";
+            }
+        }
+        if (substr($matches, -1) === '\\') { // comment ends like \*/
+            // begin hack mode and preserve hack
+            $this->_cssInHack = true;
+            return '/*\\*/';
+        }
+        if ($matches !== '' && $matches[0] === '/') { // comment looks like /*/ foo */
+            // begin hack mode and preserve hack
+            $this->_cssInHack = true;
+            return '/*/*/';
+        }
+        if ($this->_cssInHack) {
+            // a regular comment ends hack mode but should be preserved
+            $this->_cssInHack = false;
+            return '/**/';
+        }
+        // if there's any surrounding whitespace, it may be important, so
+        // replace the comment with a single space
+        return $hasSurroundingWs ? ' ' : '';
+    }
+    /**
+     * Addapted from the 3rd party minify library
+     */
+    private function _cssSelectorWhitespace($matches)
+    {
+        // remove ws around the combinators
+        return preg_replace('/\\s*([,>+~])\\s*/', '$1', $matches[0]);
+    }
+    /**
+     * Addapted from the 3rd party minify library
+     */
+    private function _cssFontFamilyWS($matches)
+    {
+        // must not eliminate WS between words in unquoted families
+        $pieces = preg_split(
             '/(\'[^\']+\'|"[^"]+")/',
             $matches[1],
             -1,
             PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
         );
-		$out = 'font-family:';
-		while (null !== ($piece = array_shift($pieces))) {
-			if ($piece[0] !== '"' && $piece[0] !== "'") {
-				$piece = preg_replace('/\\s+/', ' ', $piece);
-				$piece = preg_replace('/\\s?,\\s?/', ',', $piece);
-			}
-			$out .= $piece;
-		}
-		return $out . $matches[2];
-	}
+        $out = 'font-family:';
+        while (null !== ($piece = array_shift($pieces))) {
+            if ($piece[0] !== '"' && $piece[0] !== "'") {
+                $piece = preg_replace('/\\s+/', ' ', $piece);
+                $piece = preg_replace('/\\s?,\\s?/', ',', $piece);
+            }
+            $out .= $piece;
+        }
+        return $out . $matches[2];
+    }
 
-	/**
-	 * This is the companion to a preg match in fixCssUrls().
-	 *
-	 * @param array $matches
-	 * @return string
-	 */
-	private function _fixCssUrl ($matches)
-	{
-		$full = $matches[0];
+    /**
+     * This is the companion to a preg match in fixCssUrls().
+     *
+     * @param array $matches
+     * @return string
+     */
+    private function _fixCssUrl($matches)
+    {
+        $full = $matches[0];
 
-		//figure out the URL part of it...
+        //figure out the URL part of it...
 
-		//start by taking off the beginning url
-		$url = substr($full, 3);
+        //start by taking off the beginning url
+        $url = substr($full, 3);
 
-		//trim off the outside stuff
-		$url = trim($url, " \t\n\r\0\x0B()'\"");
+        //trim off the outside stuff
+        $url = trim($url, " \t\n\r\0\x0B()'\"");
 
-		if (false) {
-			//Debug what URL is generated...
-			$full = '/* '.$url.' */ '.$full;
-			return $full;
-		}
+        if (false) {
+            //Debug what URL is generated...
+            $full = '/* ' . $url . ' */ ' . $full;
+            return $full;
+        }
 
-		if ($this->_looksLikeFullUrl($url)) {
-			//already uses absolute URL...  Don't change
-			return $full;
-		}
+        if ($this->_looksLikeFullUrl($url)) {
+            //already uses absolute URL...  Don't change
+            return $full;
+        }
 
-		if ($this->_looksLikeFullUrl($this->_working_path)) {
-			//the working path is absolute URL...  That means the CSS file is a
-			//remote file on some other website.
+        if ($this->_looksLikeFullUrl($this->_working_path)) {
+            //the working path is absolute URL...  That means the CSS file is a
+            //remote file on some other website.
 
-			if ($this->startsWith($url,'/')) {
-				//stick it
-				$url = $this->_getDomain($this->_working_path).$this->cleanRelativeUrl($url);
-			} else {
-				//url is relative...  we need it to be a big url though
-				$url = $this->_getFullUrl($url);
-			}
-		} else {
-			//this one actually more complicated...  We need to figure out the path
-			if (!$this->startsWith($url,'/')) {
-				//NOT starting with / so have to parse it...
-				$url = $this->cleanRelativeUrl($this->_externalPath.$this->_working_path.'/'.$url);
-			}
-		}
-		if ($url) {
-			return "url('$url')";
-		}
+            if ($this->startsWith($url, '/')) {
+                //stick it
+                $url = $this->_getDomain($this->_working_path) . $this->cleanRelativeUrl($url);
+            } else {
+                //url is relative...  we need it to be a big url though
+                $url = $this->_getFullUrl($url);
+            }
+        } else {
+            //this one actually more complicated...  We need to figure out the path
+            if (!$this->startsWith($url, '/')) {
+                //NOT starting with / so have to parse it...
+                $url = $this->cleanRelativeUrl($this->_externalPath . $this->_working_path . '/' . $url);
+            }
+        }
+        if ($url) {
+            return "url('$url')";
+        }
 
-		return $full;
-	}
+        return $full;
+    }
 
-	private function _looksLikeFullUrl ($url)
-	{
-		return $this->startsWith($url, array('//', 'http://','https://'));
-	}
+    private function _looksLikeFullUrl($url)
+    {
+        return $this->startsWith($url, array('//', 'http://','https://'));
+    }
 
-	private function _getFullUrl ($filename)
-	{
-		if (strpos($filename, '//')===0) {
-			//starts with // so add protocol
-			$filename = 'http:'.$filename;
-		}
+    private function _getFullUrl($filename)
+    {
+        if (strpos($filename, '//') === 0) {
+            //starts with // so add protocol
+            $filename = 'http:' . $filename;
+        }
 
-		if (!$this->startsWith($filename,array('http://','https://'))) {
-			//must be a relative URL
-			$filename = $this->cleanRelativeUrl($filename, true);
+        if (!$this->startsWith($filename, array('http://','https://'))) {
+            //must be a relative URL
+            $filename = $this->cleanRelativeUrl($filename, true);
 
-			$pathIsUrl = $this->_looksLikeFullUrl($this->_working_path);
+            $pathIsUrl = $this->_looksLikeFullUrl($this->_working_path);
 
-			if ($this->startsWith($filename,'/')) {
-				//called absolutely.  So strip down URL to just the base.
-				$domain = ($pathIsUrl)?
+            if ($this->startsWith($filename, '/')) {
+                //called absolutely.  So strip down URL to just the base.
+                $domain = ($pathIsUrl) ?
                     $this->_getDomain($this->_working_path) : $this->_getDomain($this->_externalDomain);
 
-				$filename = $domain.$filename;
-			} else {
-				//filename is relative...  put it together
-				if ($pathIsUrl) {
-					//external path is URL...
-					$domain = $this->_getDomain($this->_working_path);
-					$path = $this->_getPath($this->_working_path).'/';
-				} else {
-					//use external domain
-					$domain = $this->_externalDomain;
-					$path = $this->_externalPath;
-				}
-				$filename = $domain.$this->cleanRelativeUrl($path.$filename);
-			}
-		}
+                $filename = $domain . $filename;
+            } else {
+                //filename is relative...  put it together
+                if ($pathIsUrl) {
+                    //external path is URL...
+                    $domain = $this->_getDomain($this->_working_path);
+                    $path = $this->_getPath($this->_working_path) . '/';
+                } else {
+                    //use external domain
+                    $domain = $this->_externalDomain;
+                    $path = $this->_externalPath;
+                }
+                $filename = $domain . $this->cleanRelativeUrl($path . $filename);
+            }
+        }
 
-		return $filename;
-	}
+        return $filename;
+    }
 
-	private function _getDomain ($url)
-	{
-		$info = parse_url($url);
-		$scheme = (isset($info['scheme']))? $info['scheme'].':' : '';
-		return $scheme.'//'.$info['host'];
-	}
+    private function _getDomain($url)
+    {
+        $info = parse_url($url);
+        $scheme = (isset($info['scheme'])) ? $info['scheme'] . ':' : '';
+        return $scheme . '//' . $info['host'];
+    }
 
-	private function _getPath ($url)
-	{
-		$info = parse_url($url);
-		return (isset($info['path']))? $info['path'] : '/';
-	}
+    private function _getPath($url)
+    {
+        $info = parse_url($url);
+        return (isset($info['path'])) ? $info['path'] : '/';
+    }
 
-	/**
-	 * Used to get the contents of the given filename
-	 * @param string $filename
-	 * @return string
-	 */
-	private function _getContents ($filename)
-	{
-		$filename = self::_getFullUrl($filename);
-		if (!$filename) {
-			return '';
-		}
+    /**
+     * Used to get the contents of the given filename
+     * @param string $filename
+     * @return string
+     */
+    private function _getContents($filename)
+    {
+        $filename = self::_getFullUrl($filename);
+        if (!$filename) {
+            return '';
+        }
 
-		return $this->_urlGetContents($filename);
-	}
+        return $this->_urlGetContents($filename);
+    }
 
-	/**
-	 * Gets the URL contents.  Note that this gets the file contents "locally"
-	 * if the URL looks like it is for the normal location.
-	 *
-	 * @param string $url
-	 * @return string
-	 */
-	private function _urlGetContents ($url)
-	{
-		if (stripos($url, $this->_externalDomain.$this->_externalPath) === 0) {
-			//starts with the external domain (this one)...
-			$base = dirname(__FILE__);
+    /**
+     * Gets the URL contents.  Note that this gets the file contents "locally"
+     * if the URL looks like it is for the normal location.
+     *
+     * @param string $url
+     * @return string
+     */
+    private function _urlGetContents($url)
+    {
+        if (stripos($url, $this->_externalDomain . $this->_externalPath) === 0) {
+            //starts with the external domain (this one)...
+            $base = dirname(__FILE__);
 
-			//first get rid of the domain and path...
-			$filename = substr($url, strlen($this->_externalDomain.$this->_externalPath));
+            //first get rid of the domain and path...
+            $filename = substr($url, strlen($this->_externalDomain . $this->_externalPath));
 
-			//now then... this file should be inside geo_templates or whatever it is
-			//so take that part off then pass it through the relative URL fixer thingy...
-			$filename = $this->cleanRelativeUrl($base.'/../'.$filename);
+            //now then... this file should be inside geo_templates or whatever it is
+            //so take that part off then pass it through the relative URL fixer thingy...
+            $filename = $this->cleanRelativeUrl($base . '/../' . $filename);
 
-			if ($filename && file_exists($filename)) {
-				//we found it!
-				return file_get_contents($filename);
-			}
-			//if filename does not exist, fall through to the normal stuff that
-			//gets it over the net
-		}
+            if ($filename && file_exists($filename)) {
+                //we found it!
+                return file_get_contents($filename);
+            }
+            //if filename does not exist, fall through to the normal stuff that
+            //gets it over the net
+        }
 
-		if (!function_exists('curl_init')) {
-			//they don't have curl, OR this isn't a URL...
-			//Checks for making sure it doesn't escape the folder should be done
-			//prior to calling this...
+        if (!function_exists('curl_init')) {
+            //they don't have curl, OR this isn't a URL...
+            //Checks for making sure it doesn't escape the folder should be done
+            //prior to calling this...
 
-			return file_get_contents($url);
-		}
-		// bust cache
-		if (strpos($url, '?') === false) {
-			$url .= '?cacheBuster=' . $this->cacheBuster;
-		}
-		$link = curl_init();
-		curl_setopt($link, CURLOPT_URL, $url);
-		curl_setopt($link, CURLOPT_HEADER, 0);
-		if(!ini_get('open_basedir')) {
-			//cannot use FOLLOWLOCATION if open_basedir is set in ini
-			curl_setopt($link, CURLOPT_FOLLOWLOCATION, true);
-		}
-		curl_setopt($link, CURLOPT_RETURNTRANSFER, true);
-		//This is just a CSS or JS, no security threat, if someone 'gets in middle'
-		//of this, so what?
-		curl_setopt($link, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($link, CURLOPT_SSL_VERIFYHOST, false);
-		curl_setopt($link, CURLOPT_CONNECTTIMEOUT, 30);
+            return file_get_contents($url);
+        }
+        // bust cache
+        if (strpos($url, '?') === false) {
+            $url .= '?cacheBuster=' . $this->cacheBuster;
+        }
+        $link = curl_init();
+        curl_setopt($link, CURLOPT_URL, $url);
+        curl_setopt($link, CURLOPT_HEADER, 0);
+        if (!ini_get('open_basedir')) {
+            //cannot use FOLLOWLOCATION if open_basedir is set in ini
+            curl_setopt($link, CURLOPT_FOLLOWLOCATION, true);
+        }
+        curl_setopt($link, CURLOPT_RETURNTRANSFER, true);
+        //This is just a CSS or JS, no security threat, if someone 'gets in middle'
+        //of this, so what?
+        curl_setopt($link, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($link, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($link, CURLOPT_CONNECTTIMEOUT, 30);
 
-		$response = curl_exec($link);
+        $response = curl_exec($link);
 
-		curl_close($link);
-		return $response;
-	}
+        curl_close($link);
+        return $response;
+    }
 
-	/**
-	 * Writes the given contents to the given file, making checks along the way
-	 * in case there are problems, so that an accurate error message can be
-	 * shown in the case of a problem.
-	 *
-	 * The path in this method must be inside the current "jailed" directory,
-	 * or the operation will fail and an admin error thrown. {@link geoFile::jailTo()}
-	 *
-	 * @param string $file Either absolute location, or relative to the
-	 *   current "jailed" directory.
-	 * @param string $contents
-	 * @param bool $use_lock if false, will NOT try to lock the file when writing.
-	 * @return bool true on success, false on failure.  If failure, it will
-	 *   generate an admin error message as well.
-	 */
-	public function fwrite ($file, $contents, $use_lock = true, $useCHMOD=true)
-	{
-		if (!$this->mkdir(dirname($file))) {
-			//mkdir failed...
-			return false;
-		}
-		//write the file
+    /**
+     * Writes the given contents to the given file, making checks along the way
+     * in case there are problems, so that an accurate error message can be
+     * shown in the case of a problem.
+     *
+     * The path in this method must be inside the current "jailed" directory,
+     * or the operation will fail and an admin error thrown. {@link geoFile::jailTo()}
+     *
+     * @param string $file Either absolute location, or relative to the
+     *   current "jailed" directory.
+     * @param string $contents
+     * @param bool $use_lock if false, will NOT try to lock the file when writing.
+     * @return bool true on success, false on failure.  If failure, it will
+     *   generate an admin error message as well.
+     */
+    public function fwrite($file, $contents, $use_lock = true, $useCHMOD = true)
+    {
+        if (!$this->mkdir(dirname($file))) {
+            //mkdir failed...
+            return false;
+        }
+        //write the file
 
-		if (file_exists($file) && !is_writable($file)) {
-			$this->error('Could not edit the existing file ('.$file.'), not able to write the file.');
-			return false;
-		}
+        if (file_exists($file) && !is_writable($file)) {
+            $this->error('Could not edit the existing file (' . $file . '), not able to write the file.');
+            return false;
+        }
 
-		if (!$handle = fopen($file,'w')) {
-			$this->error('An error occurred when attempting to write the file ('.$file.'), check file permissions
+        if (!$handle = fopen($file, 'w')) {
+            $this->error('An error occurred when attempting to write the file (' . $file . '), check file permissions
                 (CHMOD 777) and try again.');
-			return false;
-		}
-		if ($use_lock && !flock($handle, LOCK_EX)) {
-			//flock does not work on all systems, for now "quietly" ignore the error
-			$use_lock = false;
-		}
-		// Write $somecontent to our opened file.
-		if (fwrite($handle, $contents) === false) {
-			$this->error("Cannot write to file ($file)");
-			if ($use_lock) {
-				flock($handle, LOCK_UN);
-			}
-			return false;
-		}
-		if ($use_lock) {
-			//flush the output and release the lock
-			fflush($handle);
-			flock($handle, LOCK_UN);
-		}
-		fclose($handle);
-		if ($useCHMOD) {
-			chmod($file, 0777);
-		}
-		return true;
-	}
+            return false;
+        }
+        if ($use_lock && !flock($handle, LOCK_EX)) {
+            //flock does not work on all systems, for now "quietly" ignore the error
+            $use_lock = false;
+        }
+        // Write $somecontent to our opened file.
+        if (fwrite($handle, $contents) === false) {
+            $this->error("Cannot write to file ($file)");
+            if ($use_lock) {
+                flock($handle, LOCK_UN);
+            }
+            return false;
+        }
+        if ($use_lock) {
+            //flush the output and release the lock
+            fflush($handle);
+            flock($handle, LOCK_UN);
+        }
+        fclose($handle);
+        if ($useCHMOD) {
+            chmod($file, 0777);
+        }
+        return true;
+    }
 
-	/**
-	 * Makes the given directory (parents as well).
-	 *
-	 * The paths in this method must be inside the current "jailed" directory,
-	 * or the operation will fail and an admin error thrown. {@link geoFile::jailTo()}
-	 *
-	 * @param string $dir Either absolute location, or relative to the current
-	 *   "jailed" directory.
-	 * @return bool true on success, false on failure.  If failure, it will
-	 *   generate an admin error message as well.
-	 */
-	public function mkdir ($dir, $useCHMOD=true)
-	{
-		//make sure the dir ends in a / so it doesn't fail inJail check
-		if (substr($dir,-1,1) != '/') $dir .= '/';
+    /**
+     * Makes the given directory (parents as well).
+     *
+     * The paths in this method must be inside the current "jailed" directory,
+     * or the operation will fail and an admin error thrown. {@link geoFile::jailTo()}
+     *
+     * @param string $dir Either absolute location, or relative to the current
+     *   "jailed" directory.
+     * @return bool true on success, false on failure.  If failure, it will
+     *   generate an admin error message as well.
+     */
+    public function mkdir($dir, $useCHMOD = true)
+    {
+        //make sure the dir ends in a / so it doesn't fail inJail check
+        if (substr($dir, -1, 1) != '/') {
+            $dir .= '/';
+        }
 
-		//see if the dir exists first, we might not need to create it
-		if (is_dir($dir) && is_writable($dir)) {
-			return true;
-		}
-		if ($useCHMOD) {
-			//change umask if needed
-			umask(0);
-		}
+        //see if the dir exists first, we might not need to create it
+        if (is_dir($dir) && is_writable($dir)) {
+            return true;
+        }
+        if ($useCHMOD) {
+            //change umask if needed
+            umask(0);
+        }
 
-		//recursively create directory, setting the chmod as we go
-		mkdir ($dir, 0777, true);
+        //recursively create directory, setting the chmod as we go
+        mkdir($dir, 0777, true);
 
-		//see if the dir exists now
-		if (is_dir($dir) && is_writable($dir)) {
-			return true;
-		}
-		//is not a dir or is not writable, either way it's bad
-		$this->error('Error creating directory ('.$dir.') - cannot continue with action.  Check file/directory '
+        //see if the dir exists now
+        if (is_dir($dir) && is_writable($dir)) {
+            return true;
+        }
+        //is not a dir or is not writable, either way it's bad
+        $this->error('Error creating directory (' . $dir . ') - cannot continue with action.  Check file/directory '
             . 'permissions and try again. (Failed post creation "exists" and "writable" checks)');
-		return false;
-	}
+        return false;
+    }
 
-	public function error($msg)
-	{
-		$msg = str_replace('*/', '*  /',$msg);
-		echo "\n/* ERROR --- $msg */\n";
-	}
+    public function error($msg)
+    {
+        $msg = str_replace('*/', '*  /', $msg);
+        echo "\n/* ERROR --- $msg */\n";
+    }
 }
 
 
 ##  Figure out what resource to show
 $resource = $_GET['r'];
 if (!strlen($resource)) {
-	//Could not determine the resource
-	die ('INVALID RESOURCE 1');
+    //Could not determine the resource
+    die('INVALID RESOURCE 1');
 }
 
-$parts = explode('.',$resource);
-if (count($parts)!==2) {
-	//Wrong Access!
-	die ('INVALID RESOURCE 2');
+$parts = explode('.', $resource);
+if (count($parts) !== 2) {
+    //Wrong Access!
+    die('INVALID RESOURCE 2');
 }
 
 $resource_id = (int)$parts[0];
 $resource_type = trim($parts[1]);
 
 if (!in_array($resource_type, $valid_types) || $resource_id <= 0) {
-	//either wrong extension specified, or invalid ID number specified...
-	die ('INVALID RESOURCE 3');
+    //either wrong extension specified, or invalid ID number specified...
+    die('INVALID RESOURCE 3');
 }
 
 //turn on zlib.output_compression so that contents are compressed if available
@@ -870,67 +892,67 @@ if (!in_array($resource_type, $valid_types) || $resource_id <= 0) {
 //ini_set('zlib.output_compression', 'on');
 
 if (!strlen($db_host)) {
-	//This is the "normal" behavior when "not in stand-alone mode"
-	include '../config.default.php';
+    //This is the "normal" behavior when "not in stand-alone mode"
+    include '../config.default.php';
     $adodb_folder = GEO_BASE_DIR . 'vendor/';
-	$minify_library_folder = CLASSES_DIR . 'php5_classes/minify/';
-	$min_folder = GEO_TEMPLATE_DIR.'.min/';
-	//Set the charset based on config settings, only if defined though
-	if (defined('CHARSET_TO')) {
-		$charset = CHARSET_TO;
-	} else if (defined('CHARSET_CLEAN')) {
-		$charset = CHARSET_CLEAN;
-	}
+    $minify_library_folder = CLASSES_DIR . 'php5_classes/minify/';
+    $min_folder = GEO_TEMPLATE_DIR . '.min/';
+    //Set the charset based on config settings, only if defined though
+    if (defined('CHARSET_TO')) {
+        $charset = CHARSET_TO;
+    } elseif (defined('CHARSET_CLEAN')) {
+        $charset = CHARSET_CLEAN;
+    }
 }
 
 
 $combo = new Combine($resource_type, $resource_id, $charset);
 
-$generated_filename = $min_folder.$resource_type.'/'.$resource_id.'.'.$resource_type;
+$generated_filename = $min_folder . $resource_type . '/' . $resource_id . '.' . $resource_type;
 
 $table = $tables[$resource_type];
 
 //First, check if the file exists or not already
 if (file_exists($generated_filename)) {
-	$combo->sendHeaders();
-	readfile($generated_filename);
-	echo "\n/* ON-FLY - LOADED */\n";
-	//no DB connection at this point, nothing else to do
-	exit;
+    $combo->sendHeaders();
+    readfile($generated_filename);
+    echo "\n/* ON-FLY - LOADED */\n";
+    //no DB connection at this point, nothing else to do
+    exit;
 }
 
 //Need to generate the contents!
 
 require_once $adodb_folder . 'adodb/adodb-php/adodb.inc.php';
 if ($resource_type === 'js') {
-	require_once $minify_library_folder . 'JSMinPlus.php';
+    require_once $minify_library_folder . 'JSMinPlus.php';
 }
 
 ##  - Make DB connection
 
 try {
-	$db = ADONewConnection($db_type);
+    $db = ADONewConnection($db_type);
 
-	if (isset($persistent_connections)&&$persistent_connections) {
-		if (!$db->PConnect($db_host, $db_username, $db_password, $database)) {
-			echo 'Could not connect to database. (err1)';
-			exit;
-		}
-	} else {
-		if (!$db->Connect($db_host, $db_username, $db_password, $database)) {
-			echo "Could not connect to database. (err2)";
-			exit;
-		}
-	}
+    if (isset($persistent_connections) && $persistent_connections) {
+        if (!$db->PConnect($db_host, $db_username, $db_password, $database)) {
+            echo 'Could not connect to database. (err1)';
+            exit;
+        }
+    } else {
+        if (!$db->Connect($db_host, $db_username, $db_password, $database)) {
+            echo "Could not connect to database. (err2)";
+            exit;
+        }
+    }
 } catch (exception $e) {
-	echo 'Could not connect to database. (err3)';
-	exit;
+    echo 'Could not connect to database. (err3)';
+    exit;
 }
-if (isset($strict_mode) && $strict_mode){
-	$db->Execute('SET SESSION sql_mode=\'\'');
+if (isset($strict_mode) && $strict_mode) {
+    $db->Execute('SET SESSION sql_mode=\'\'');
 }
-if (isset($force_db_connection_charset) && strlen(trim($force_db_connection_charset))){
-	$db->Execute("SET NAMES '$force_db_connection_charset'");
+if (isset($force_db_connection_charset) && strlen(trim($force_db_connection_charset))) {
+    $db->Execute("SET NAMES '$force_db_connection_charset'");
 }
 $db->SetFetchMode(ADODB_FETCH_ASSOC) ;
 
@@ -939,18 +961,18 @@ $db->SetFetchMode(ADODB_FETCH_ASSOC) ;
 //Get the info about this resource
 $file_list = $db->GetOne("SELECT `file_list` FROM $table WHERE `id`=?", array($resource_id));
 if (!$file_list) {
-	$db->Close();
-	die ('INVALID/EXPIRED RESOURCE');
+    $db->Close();
+    die('INVALID/EXPIRED RESOURCE');
 }
-$external_url_base = $combo->getSetting($db,'external_url_base');
+$external_url_base = $combo->getSetting($db, 'external_url_base');
 
 if (!$external_url_base) {
-	$classifieds_url = $combo->getSetting($db,'classifieds_url',true);
+    $classifieds_url = $combo->getSetting($db, 'classifieds_url', true);
 } else {
-	$classifieds_url = '';
+    $classifieds_url = '';
 }
 $combo->setExternalUrls($external_url_base, $classifieds_url);
-$useCHMOD = $combo->getSetting($db,'useCHMOD');
+$useCHMOD = $combo->getSetting($db, 'useCHMOD');
 
 //get a couple of settings here, since we don't have a db connection later on
 $combo->noMinifyJs = $combo->getSetting($db, 'noMinifyJs');
@@ -960,7 +982,7 @@ $combo->noMinifyCss = $combo->getSetting($db, 'noMinifyCss');
 $db->Close();
 
 if (!$file_list) {
-	die ('INVALID/EXPIRED RESOURCE');
+    die('INVALID/EXPIRED RESOURCE');
 }
 $combo->addFiles($file_list);
 
@@ -972,7 +994,7 @@ ob_start();
  * this file directly, see user manual for tips.
  *
  * Contains files:
- * <?php echo implode(' | ', $combo->getFiles())."\n"; ?>
+ * <?php echo implode(' | ', $combo->getFiles()) . "\n"; ?>
  *
  */
 <?php
@@ -985,7 +1007,7 @@ $combo->sendHeaders();
 //capture and echo contents... capture so we can write to file.
 $contents = ob_get_flush();
 if ($contents && $write_contents) {
-	$combo->fwrite($generated_filename, $contents, true, $useCHMOD);
+    $combo->fwrite($generated_filename, $contents, true, $useCHMOD);
 }
 //for debugging, make it obvious when contents are generated on the fly vs.
 //loading from static files

@@ -5,12 +5,11 @@
 
     <!-- Exclude libraries -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/classes/adodb/*</exclude-pattern>
     <exclude-pattern>*/classes/pclzip/*</exclude-pattern>
     <exclude-pattern>*/classes/PEAR/*</exclude-pattern>
     <exclude-pattern>*/classes/php5_classes/smarty/*</exclude-pattern>
     <exclude-pattern>*/classes/php5_classes/swift5/*</exclude-pattern>
-    <exclude-pattern>*/geo_templates/*</exclude-pattern>
+    <exclude-pattern>*/geo_templates/**/*</exclude-pattern>
 
     <!-- list of default files and paths to check relative to contrib/ (ignored if set on command line) -->
     <file>../src</file>
