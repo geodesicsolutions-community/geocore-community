@@ -74,7 +74,7 @@ $db_type = "mysqli";
 //    server.
 
 //The parent folder that adodb is in.  This should not include the adodb folder
-//itself.  GOOD:  "parent/path/"  BAD:  "parent/path/adodb/"
+//itself.  GOOD:  "parent/path/"  BAD:  "parent/path/adodb/"  BAD:  "parent/path/adodb/adodb-php/"
 //!!! Leave these BLANK when used with the software (not in stand-alone mode)!!!
 $adodb_folder = "";
 
@@ -115,7 +115,8 @@ $tables = array (
 	'js' => '`geodesic_combined_js_list`',
 	);
 
-//servers that have display_errors on can sometimes dump extraneous PHP warnings into the output files, which helps no one and breaks lots of stuff
+//servers that have display_errors on can sometimes dump extraneous PHP warnings into the output files, which helps no
+//one and breaks lots of stuff
 //force it to be off, here, for sanity's sake
 ini_set('display_errors','off');
 
@@ -198,6 +199,7 @@ class Combine
 		}
 		return true;
 	}
+
 	/*
 	 * Get the list of files.
 	 */
@@ -538,7 +540,12 @@ class Combine
 	private function _cssFontFamilyWS($matches)
 	{
 		// must not eliminate WS between words in unquoted families
-		$pieces = preg_split('/(\'[^\']+\'|"[^"]+")/', $matches[1], null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+		$pieces = preg_split(
+            '/(\'[^\']+\'|"[^"]+")/',
+            $matches[1],
+            -1,
+            PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
+        );
 		$out = 'font-family:';
 		while (null !== ($piece = array_shift($pieces))) {
 			if ($piece[0] !== '"' && $piece[0] !== "'") {
@@ -624,7 +631,8 @@ class Combine
 
 			if ($this->startsWith($filename,'/')) {
 				//called absolutely.  So strip down URL to just the base.
-				$domain = ($pathIsUrl)? $this->_getDomain($this->_working_path) : $this->_getDomain($this->_externalDomain);
+				$domain = ($pathIsUrl)?
+                    $this->_getDomain($this->_working_path) : $this->_getDomain($this->_externalDomain);
 
 				$filename = $domain.$filename;
 			} else {
@@ -761,7 +769,8 @@ class Combine
 		}
 
 		if (!$handle = fopen($file,'w')) {
-			$this->error('An error occurred when attempting to write the file ('.$file.'), check file permissions (CHMOD 777) and try again.');
+			$this->error('An error occurred when attempting to write the file ('.$file.'), check file permissions
+                (CHMOD 777) and try again.');
 			return false;
 		}
 		if ($use_lock && !flock($handle, LOCK_EX)) {
@@ -821,7 +830,8 @@ class Combine
 			return true;
 		}
 		//is not a dir or is not writable, either way it's bad
-		$this->error('Error creating directory ('.$dir.') - cannot continue with action.  Check file/directory permissions and try again. (Failed post creation "exists" and "writable" checks)');
+		$this->error('Error creating directory ('.$dir.') - cannot continue with action.  Check file/directory '
+            . 'permissions and try again. (Failed post creation "exists" and "writable" checks)');
 		return false;
 	}
 
@@ -862,7 +872,7 @@ if (!in_array($resource_type, $valid_types) || $resource_id <= 0) {
 if (!strlen($db_host)) {
 	//This is the "normal" behavior when "not in stand-alone mode"
 	include '../config.default.php';
-	$adodb_folder = CLASSES_DIR;
+    $adodb_folder = GEO_BASE_DIR . 'vendor/';
 	$minify_library_folder = CLASSES_DIR . 'php5_classes/minify/';
 	$min_folder = GEO_TEMPLATE_DIR.'.min/';
 	//Set the charset based on config settings, only if defined though
@@ -891,7 +901,7 @@ if (file_exists($generated_filename)) {
 
 //Need to generate the contents!
 
-require_once $adodb_folder . 'adodb/adodb.inc.php';
+require_once $adodb_folder . 'adodb/adodb-php/adodb.inc.php';
 if ($resource_type === 'js') {
 	require_once $minify_library_folder . 'JSMinPlus.php';
 }

@@ -5,7 +5,7 @@ include_once('../ini_tools.php');
 //geoRaiseMemoryLimit('64M');
 
 include_once('../config.default.php');
-include_once(CLASSES_DIR . 'adodb/adodb.inc.php');
+require_once GEO_BASE_DIR . 'vendor/adodb/adodb-php/adodb.inc.php';
 
 // phpcs:disable
 
@@ -71,7 +71,7 @@ class upgrade
       */
      var $pricePlanMap = array ();
 
-    function upgrade()
+    public function __construct()
     {
         $this->_connectDB();
     }

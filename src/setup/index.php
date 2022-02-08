@@ -34,17 +34,7 @@ if ($step !== 'requirements') {
     // if we have ini_tools available, up the memory limit.
     include_once('../ini_tools.php');
     geoRaiseMemoryLimit('32M');
-
-    //allow the adodb files to be in the setup folder.
-    if (file_exists('adodb/adodb.inc.php')) {
-        include_once('adodb/adodb.inc.php');
-    } elseif (file_exists('../classes/adodb/adodb.inc.php')) {
-        include_once('../classes/adodb/adodb.inc.php');
-    } else {
-        die('Error:  <strong>adodb/</strong> folder & drivers not found.  These are required for the setup to continue.
-            Please upload the adodb/ folder to the same location as it exists in the software package.
-	    <br /><br /><a href="mailto:support@geodesicsolutions.com">Contact support</a> if you require assistance.');
-    }
+    require_once '../vendor/adodb/adodb-php/adodb.inc.php';
 }
 
 if ($step !== 'requirements' && $step !== 'config.php' && $step !== 'dbtest' && $step !== 'config.php_check') {

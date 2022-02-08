@@ -37,7 +37,7 @@ class geoUpdateFactory
         if (!defined('PHP5_DIR')) {
             define('PHP5_DIR', 'php5_classes/');
         }
-        require_once(CLASSES_DIR . 'adodb/adodb.inc.php');
+        require_once GEO_BASE_DIR . 'vendor/adodb/adodb-php/adodb.inc.php';
         require_once CLASSES_DIR . PHP5_DIR . 'products.php';
     }
 
@@ -77,9 +77,9 @@ class geoUpdateFactory
     private function connectDB()
     {
         if (!(isset($this->db) && is_object($this->db))) {
-            include_once(CLASSES_DIR . 'adodb/adodb.inc.php');
+            require_once GEO_BASE_DIR . 'vendor/adodb/adodb-php/adodb.inc.php';
             include(GEO_BASE_DIR . 'config.default.php');
-            $this->db =& ADONewConnection($db_type);
+            $this->db = ADONewConnection($db_type);
 
             if (isset($persistent_connections) && $persistent_connections) {
                 if (!$this->db->PConnect($db_host, $db_username, $db_password, $database)) {

@@ -14,7 +14,8 @@
         "ext-gd": "*",
         "ext-mysqli": "*",
         "ext-openssl": "*",
-        "stripe/stripe-php": "^7.67"
+        "stripe/stripe-php": "^7.67",
+        "adodb/adodb-php": "^5.22"
 	},
 	"config": {
         "vendor-dir": "src/vendor"
