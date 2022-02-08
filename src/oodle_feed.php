@@ -223,8 +223,9 @@ $oodleCatMap = (isset($oodleCatMap) && is_array($oodleCatMap)) ? $oodleCatMap : 
 if ($generateOodleCatMapFile) {
     //don't generate an oodle feed!  generate a oodle category map file contents!
     $db = DataAccess::getInstance();
-    $cats = $db->GetAll("SELECT `c`.`category_id`, `c`.`parent_id`, `l`.`category_name` FROM " . geoTables::categories_table
-        . " c, " . geoTables::categories_languages_table . " l WHERE c.category_id=l.category_id AND l.language_id=1 ORDER BY `c`.`parent_id`, `c`.`display_order`");
+    $cats = $db->GetAll("SELECT `c`.`category_id`, `c`.`parent_id`, `l`.`category_name` FROM "
+        . geoTables::categories_table . " c, " . geoTables::categories_languages_table
+        . " l WHERE c.category_id=l.category_id AND l.language_id=1 ORDER BY `c`.`parent_id`, `c`.`display_order`");
     $orderedCats = array();
     foreach ($cats as $cat) {
         $pId = $cat['parent_id'];
@@ -237,7 +238,8 @@ if ($generateOodleCatMapFile) {
         }
 
         $cat['category_name'] = $name;
-        $cat['oodleCategory'] = (isset($oodleCatMap[$cat['category_id']])) ? $oodleCatMap[$cat['category_id']] : 'sales';
+        $cat['oodleCategory'] = (isset($oodleCatMap[$cat['category_id']]))
+            ? $oodleCatMap[$cat['category_id']] : 'sales';
         $orderedCats[$cat['category_id']] = $cat;
     }
     $tpl = new geoTemplate('system', 'ListingFeed');

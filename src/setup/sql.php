@@ -41,7 +41,8 @@ function sql($db, &$template)
                 splitSqlFile(current($file_array), $db);
                 //redirect to self
                 $url_path = str_replace('index.php', "install_redirect.php", $_SERVER["PHP_SELF"]);
-                $redirect_url = "http://" . $_SERVER["HTTP_HOST"] . $url_path . "?key=" . ($key_to_files + 1) . "&total=" . (count($file_array));
+                $redirect_url = "http://" . $_SERVER["HTTP_HOST"] . $url_path . "?key=" . ($key_to_files + 1)
+                    . "&total=" . (count($file_array));
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: no-cache');
                 header("Location: " . $redirect_url);
@@ -81,9 +82,10 @@ function splitSqlFile($filename, $db)
                 $result = $db->Execute($buffer);
                 if (!$result) {
                     //do not continue.
-                    die('<span style="color:red; font-weight:bold;">Critical Installation Error:</span> The SQL query below produced an error.  The setup cannot continue until the problem has been fixed.  Contact Geo Support if you require assistance.<br />
-		<strong>Query:</strong> ' . $buffer . '<br />
-		<strong>DB Error Message: </strong>' . $db->ErrorMsg() . '<br /><br />');
+                    die('<span style="color:red; font-weight:bold;">Critical Installation Error:</span> The SQL query
+                        below produced an error.  The setup cannot continue until the problem has been fixed.<br />
+                        <strong>Query:</strong> ' . $buffer . '<br />
+                        <strong>DB Error Message: </strong>' . $db->ErrorMsg() . '<br /><br />');
                 }
                 $buffer = '';
             }

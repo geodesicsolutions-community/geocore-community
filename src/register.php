@@ -4,11 +4,21 @@
 require_once('app_top.register.php');
 
 if (strlen($register->debug_email) > 0) {
-    $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+    $register->sendMail(
+        $register->debug_email,
+        'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+        'LINE = ' . __LINE__,
+        'FILE = register.php'
+    );
 }
 if ($user_id !== 0) {
     if (strlen($register->debug_email) > 0) {
-        $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+        $register->sendMail(
+            $register->debug_email,
+            'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+            'LINE = ' . __LINE__,
+            'FILE = register.php'
+        );
     }
     //strip off 'register.php' from url then redirect
     $home_page = substr($_SERVER['PHP_SELF'], 0, -12);
@@ -26,7 +36,12 @@ if ($db->get_site_setting('disable_registration')) {
         echo "about to confirm this user<BR>\n";
     }
     if (strlen($register->debug_email) > 0) {
-        $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+        $register->sendMail(
+            $register->debug_email,
+            'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+            'LINE = ' . __LINE__,
+            'FILE = register.php'
+        );
     }
     if ($register->confirm($_REQUEST["hash"], $_REQUEST["username"])) {
         if ($debug_register) {
@@ -35,29 +50,54 @@ if ($db->get_site_setting('disable_registration')) {
         //display the registration confirmation completion
         $register->set_new_user_id_in_current_session();
         if (strlen($register->debug_email) > 0) {
-            $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+            $register->sendMail(
+                $register->debug_email,
+                'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+                'LINE = ' . __LINE__,
+                'FILE = register.php'
+            );
         }
         $register->registration_confirmation_success();
         if (strlen($register->debug_email) > 0) {
-            $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+            $register->sendMail(
+                $register->debug_email,
+                'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+                'LINE = ' . __LINE__,
+                'FILE = register.php'
+            );
         }
         $register->remove_registration_session();
         exit;
     } else {
         if (strlen($register->debug_email) > 0) {
-            $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+            $register->sendMail(
+                $register->debug_email,
+                'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+                'LINE = ' . __LINE__,
+                'FILE = register.php'
+            );
         }
         //display the error message from confirmation
         $register->confirmation_error();
     }
 } elseif (isset($_REQUEST['b']) && $_REQUEST["b"] == 4) {
     if (strlen($register->debug_email) > 0) {
-        $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+        $register->sendMail(
+            $register->debug_email,
+            'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+            'LINE = ' . __LINE__,
+            'FILE = register.php'
+        );
     }
     $register->end_registration();
 } elseif (isset($_REQUEST['b']) && $_REQUEST["b"] == 5) {
     if (strlen($register->debug_email) > 0) {
-        $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+        $register->sendMail(
+            $register->debug_email,
+            'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+            'LINE = ' . __LINE__,
+            'FILE = register.php'
+        );
     }
     //reset filter
     //***old "filter" functionality removed in 7.3.0***
@@ -65,7 +105,12 @@ if ($db->get_site_setting('disable_registration')) {
     $register->registration_form_1($db);
 } else {
     if (strlen($register->debug_email) > 0) {
-        $register->sendMail($register->debug_email, 'DEBUG ' . substr($register->uniqueTimeStamp(), -6), 'LINE = ' . __LINE__, 'FILE = register.php');
+        $register->sendMail(
+            $register->debug_email,
+            'DEBUG ' . substr($register->uniqueTimeStamp(), -6),
+            'LINE = ' . __LINE__,
+            'FILE = register.php'
+        );
     }
     //show the basic form to register
     $register->error_found = 0;
@@ -81,11 +126,17 @@ if ($db->get_site_setting('disable_registration')) {
                 } else {
                     $register->registration_code_form();
                 }
-            } elseif (isset($_REQUEST['c']['bypass_registration_code']) && strlen(trim($_REQUEST["c"]["bypass_registration_code"])) > 0) {
+            } elseif (
+                isset($_REQUEST['c']['bypass_registration_code'])
+                && strlen(trim($_REQUEST["c"]["bypass_registration_code"])) > 0
+            ) {
                 $register->update_registration_code_checked(1);
                 $register->set_default_group();
                 $register->registration_form_1($db);
-            } elseif (isset($_REQUEST["c"]['submit_registration_code']) && strlen(trim($_REQUEST["c"]['submit_registration_code'])) > 0) {
+            } elseif (
+                isset($_REQUEST["c"]['submit_registration_code'])
+                && strlen(trim($_REQUEST["c"]['submit_registration_code'])) > 0
+            ) {
                 if ($register->check_registration_code($_REQUEST["c"]["registration_code"])) {
                     //check for group splash page
                     $register->group_splash_page();

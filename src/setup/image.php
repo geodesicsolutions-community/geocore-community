@@ -1,39 +1,41 @@
 <?php
 
-/*
- *	Copyright (c) 2004 Geodesic Solutions, LLC
- *	GeoInstaller
- *	All rights reserved
- *	http://www.geodesicsolutions.com
- *
- *	Module:		Image Module
- *	Filename:	image.php
- */
-
-
 function image(&$template, $product_id, $error = 0)
 {
     $file = file_get_contents("image.html");
     $file = "<form name=save action=index.php?a=image_save method=post>" . $file;
     $template = str_replace("(!MAINBODY!)", $file, $template);
-    $template = str_replace("(!BACK!)", "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">", $template);
-
-
-    // Image upload to database?
-    /*
-    $template = str_replace("(!IMAGES_UPLOAD_DB_LABEL!)", "upload images to database or file directory:", $template);
-    $template = str_replace("(!IMAGES_UPLOAD_DB_DESCRIPTION!)", "If you choose to allow user to upload images which way do you want to save the image files? You can save the image in the database or as image files in a directory on the server. We recommend saving the images as files on the server. But if server permissions or other problems prevent this you can use the database. If you use the database method your database could possibly become very large and difficult to backup.", $template);
-    $template = str_replace("(!IMAGES_UPLOAD_DB_DB!)", "<input type=radio name=config[upload] value=1>Save images in database", $template);
-    $template = str_replace("(!IMAGES_UPLOAD_DB_FILE!)", "<input type=radio name=config[upload] value=2 checked>Save images as file", $template);
-    */
+    $template = str_replace(
+        "(!BACK!)",
+        "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">",
+        $template
+    );
 
     // Use GD library imagecreatetruecolor
-    $template = str_replace("(!GD_LABEL!)", "<b>imagecreatetruecolor (GD Library 2.0+) switch:</b><br>Select \"Do not use\" if gdLibrary 2.0+ is not installed on your server.", $template);
-    $template = str_replace("(!GD_VALUE_0!)", "<input type=radio name=config[gdlib] value=0 checked>Default, use imagecreatruecolor", $template);
-    $template = str_replace("(!GD_VALUE_1!)", "<input type=radio name=config[gdlib] value=1>Do not use imagecreatruecolor", $template);
+    $template = str_replace(
+        "(!GD_LABEL!)",
+        "<b>imagecreatetruecolor (GD Library 2.0+) switch:</b><br>Select \"Do not use\" if gdLibrary 2.0+ is not
+            installed on your server.",
+        $template
+    );
+    $template = str_replace(
+        "(!GD_VALUE_0!)",
+        "<input type=radio name=config[gdlib] value=0 checked>Default, use imagecreatruecolor",
+        $template
+    );
+    $template = str_replace(
+        "(!GD_VALUE_1!)",
+        "<input type=radio name=config[gdlib] value=1>Do not use imagecreatruecolor",
+        $template
+    );
 
     // URL path to image upload directory
-    $template = str_replace("(!URL_PATH_LABEL!)", "<b>URL path to image directory if allow uploaded to a file:</b><br>If you save uploaded images then the software will need a place to store these images.  Please specify it here.", $template);
+    $template = str_replace(
+        "(!URL_PATH_LABEL!)",
+        "<b>URL path to image directory if allow uploaded to a file:</b><br>If you save uploaded images then the
+            software will need a place to store these images.  Please specify it here.",
+        $template
+    );
     $string = "<input name=config[url_image_directory] size=40 type=text ";
     if (strlen(trim($error['url_image_directory_value'])) != 0) {
         $string .= "value=" . $error['url_image_directory_value'] . ">";
@@ -76,7 +78,17 @@ function image(&$template, $product_id, $error = 0)
     }
 
     // Directory path to images directory
-    $template = str_replace("(!DIR_PATH_LABEL!)", "<b>absolute directory path to image directory if allow uploaded to a file:</b><br>If you allow uploading of images, the absolute path of that directory must be <br>specified.  Make sure that there is a trailing slash on this pathname. We have <br>prepopulated this field with what appears to be the correct path to your default<br> \"images\" folder.  However, you may need to correct this path as some servers <br>will not provide us with the exact data needed to populate the field below.<br><b>Yahoo Hosting</b> customers should enter the same path used above in the<br> \"URL path to image directory\" field. For example, both fields should be identical.", $template);
+    $template = str_replace(
+        "(!DIR_PATH_LABEL!)",
+        "<b>absolute directory path to image directory if allow uploaded to a file:</b><br>If you allow uploading of
+            images, the absolute path of that directory must be <br>specified.  Make sure that there is a trailing
+            slash on this pathname. We have <br>prepopulated this field with what appears to be the correct path to
+            your default<br> \"images\" folder.  However, you may need to correct this path as some servers <br>will
+            not provide us with the exact data needed to populate the field below.<br><b>Yahoo Hosting</b> customers
+            should enter the same path used above in the<br> \"URL path to image directory\" field. For example, both
+            fields should be identical.",
+        $template
+    );
     $string = "<input name=config[abs_image_directory] size=55 type=text ";
     if (strlen(trim($error['abs_image_directory_value'])) != 0) {
         $string .= "value=\"" . $error['abs_image_directory_value'] . "\">";
@@ -91,7 +103,11 @@ function image(&$template, $product_id, $error = 0)
     }
 
     // Max size of uploaded files
-    $template = str_replace("(!UPLOAD_SIZE_LABEL!)", "<b>Maximum size of uploaded file:</b><br>Set the maximum file size (in bytes) that a user may upload.", $template);
+    $template = str_replace(
+        "(!UPLOAD_SIZE_LABEL!)",
+        "<b>Maximum size of uploaded file:</b><br>Set the maximum file size (in bytes) that a user may upload.",
+        $template
+    );
     $string = "<input name=config[maximum_upload_size] type=text ";
     if (strlen($error['maximum_upload_size']) != 0) {
         $string .= "value = " . $error['maximum_upload_size_value'] . "> bytes";
@@ -103,8 +119,16 @@ function image(&$template, $product_id, $error = 0)
     }
     $template = str_replace("(!UPLOAD_SIZE!)", $string, $template);
 
-    $template = str_replace("(!SUBMIT!)", "<div id='submit_button'><input type='submit' class='theButton' value='Save'></div>", $template);
-    $template = str_replace("(!SKIP!)", "<a href=index.php?a=registration class='skip_link'>Skip this step</a></form>", $template);
+    $template = str_replace(
+        "(!SUBMIT!)",
+        "<div id='submit_button'><input type='submit' class='theButton' value='Save'></div>",
+        $template
+    );
+    $template = str_replace(
+        "(!SKIP!)",
+        "<a href=index.php?a=registration class='skip_link'>Skip this step</a></form>",
+        $template
+    );
 
     return 0;
 }
@@ -129,14 +153,15 @@ function image_save($db, $product, $config)
         if (!is_readable("../config.php") && !is_writable("../config.php")) {
             if (!@chmod("../config.php", 0777)) {
                 $error_code["file_perm"] = "Unable to set file permissions.  Please change permissions on the
-						images directory manually to 777 for Unix/Linux Servers or Read/Write/Execute for Windows Servers
-						and then press skip below.";
+                    images directory manually to 777 for Unix/Linux Servers or Read/Write/Execute for Windows Servers
+                    and then press skip below.";
                 $errors++;
             }
         }
     } else {
         // Reaches here if directory is not valid
-        $error_code['url_image_directory'] = 'The filename you entered is not a valid directory.  Please enter a valid directory.<br>';
+        $error_code['url_image_directory'] = 'The filename you entered is not a valid directory.  Please enter a valid
+            directory.<br>';
         $error_code['url_image_directory_value'] = $config['url_image_directory'];
         $errors++;
     }
@@ -147,7 +172,8 @@ function image_save($db, $product, $config)
     }
     if (!is_dir($config['abs_image_directory'])) {
         // Reaches here if directory is not valid
-        $error_code['abs_image_directory'] = 'The filename you entered is not a valid directory.  Please enter a valid directory.<br>';
+        $error_code['abs_image_directory'] = 'The filename you entered is not a valid directory.  Please enter a valid
+            directory.<br>';
         $error_code['abs_image_directory_value'] = $config['abs_image_directory'];
         $errors++;
     }
@@ -163,7 +189,10 @@ function image_save($db, $product, $config)
         return $error_code;
     }
 
-    $sql_query = "UPDATE `" . $product['ad_config'] . "` SET " . $product['upload'] . " = 2, " . $product['url_image_directory'] . " = \"" . $config['url_image_directory'] . "\", " . $product['maximum_upload_size'] . " = " . $config['maximum_upload_size'] . ", " . $product['abs_image_directory'] . " = \"" . $config['abs_image_directory'] . "\"";
+    $sql_query = "UPDATE `" . $product['ad_config'] . "` SET " . $product['upload'] . " = 2, "
+        . $product['url_image_directory'] . " = \"" . $config['url_image_directory'] . "\", "
+        . $product['maximum_upload_size'] . " = " . $config['maximum_upload_size'] . ", "
+        . $product['abs_image_directory'] . " = \"" . $config['abs_image_directory'] . "\"";
     $result = $db->Execute($sql_query);
     //echo $sql_query.'<br>';
     if (!$result) {

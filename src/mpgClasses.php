@@ -1,5 +1,7 @@
 <?php
 
+// phpcs:disable
+
 /*
  * mpgClasses.php
  * 3rd Party API for Moneris Payment Gateway

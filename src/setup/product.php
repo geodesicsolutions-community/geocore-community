@@ -1,15 +1,5 @@
 <?php
 
-/*
- *	Copyright (c) 2004 Geodesic Solutions, LLC
- *	GeoInstaller
- *	All rights reserved
- *	http://www.geodesicsolutions.com
- *
- *	Products Definitions File
- *	Filename:	product.php
- */
-
 // Geodesic Solutions Emails
 define('SUPPORT', 'geosupport@geodesicsolutions.com');          // Support email address
 define('INSTALL_EMAIL', 'install@geodesicsolutions.com');       // Install email address

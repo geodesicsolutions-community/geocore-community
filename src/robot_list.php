@@ -33,6 +33,7 @@
 
 ####  FULL User Agents  ####
 
+// phpcs:disable Generic.Files.LineLength.TooLong
 $robots[] = 'Mozilla/4.0 (Search Engine Marketing Tactics Amsterdam 2002 Information Spider)'; //Amsterdam 2002
 $robots[] = 'Mozilla/3.0 (compatible; AvantGo 3.2)'; //AvantGo 3.2
 $robots[] = 'BDFetch'; //BDFetch

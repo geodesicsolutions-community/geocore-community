@@ -7,6 +7,8 @@ include_once('../ini_tools.php');
 include_once('../config.default.php');
 include_once(CLASSES_DIR . 'adodb/adodb.inc.php');
 
+// phpcs:disable
+
 class upgrade
 {
 
@@ -185,7 +187,10 @@ class upgrade
         );
 
         $this->ignoreColumn = array(
-            "geodesic_classifieds_ad_configuration" => array("user_ad_template","user_extra_template","user_checkbox_template","auctions_user_ad_template","auctions_user_extra_template","auctions_user_checkbox_template","full_size_image_template","ad_detail_print_friendly_template","auction_detail_print_friendly_template"),
+            "geodesic_classifieds_ad_configuration" => array("user_ad_template","user_extra_template",
+                "user_checkbox_template","auctions_user_ad_template","auctions_user_extra_template",
+                "auctions_user_checkbox_template","full_size_image_template","ad_detail_print_friendly_template",
+                "auction_detail_print_friendly_template"),
             "geodesic_classifieds_configuration" => array("buy_now_image","reserve_met_image")
         );
 
@@ -546,7 +551,7 @@ class upgrade
 
     function fixQuestionLanguages($oldValues)
     {
-        $sql = "INSERT INTO `geodesic_classifieds_sell_questions_languages` SET 
+        $sql = "INSERT INTO `geodesic_classifieds_sell_questions_languages` SET
 			`question_id`=?, `language_id`=1, `name`=?, `explanation`=?, `choices`=?";
         $result = $this->db->Execute($sql, array($oldValues['question_id'], $oldValues['name'] . '',$oldValues['explanation'] . '', $oldValues['choices'] . ''));
         if (!$result) {

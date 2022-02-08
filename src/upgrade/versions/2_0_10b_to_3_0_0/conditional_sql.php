@@ -24,9 +24,10 @@ $sql_not_strict = array (
 
 );
 
+// phpcs:disable Generic.Files.LineLength.TooLong
 
 $sql_not_strict [] = 'ALTER TABLE `geodesic_classifieds_sell_session` ADD COLUMN new_pictures int(3) NOT NULL DEFAULT 0';
-$sql_not_strict [] = 'ALTER TABLE `geodesic_auctions_feedbacks` ADD COLUMN `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT FIRST, 
+$sql_not_strict [] = 'ALTER TABLE `geodesic_auctions_feedbacks` ADD COLUMN `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
 	ADD PRIMARY KEY(`id`)';
 $sql_not_strict [] = 'ALTER TABLE `geodesic_groups` ADD COLUMN `restrictions_bitmask` int(4) NOT NULL DEFAULT 63';
 #add new allow_site_balance column, and make default to 1.
@@ -531,9 +532,9 @@ if ($templateIdResult = $this->_db->Execute("SELECT user_ad_template, user_extra
     //classifieds
     $classifiedsTemplates =  array();
     if (
-        $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE 
-	template_id = " . $templateIdResult["user_ad_template"] . " OR 
-	template_id = " . $templateIdResult["user_extra_template"] . " OR 
+        $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE
+	template_id = " . $templateIdResult["user_ad_template"] . " OR
+	template_id = " . $templateIdResult["user_extra_template"] . " OR
 	template_id = " . $templateIdResult["user_checkbox_template"] . " OR
 	template_id = " . $templateIdResult["ad_detail_print_friendly_template"])
     ) {
@@ -553,9 +554,9 @@ if ($templateIdResult = $this->_db->Execute("SELECT user_ad_template, user_extra
     //auctions
     $auctionsTemplates =  array();
     if (
-        $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE 
-	template_id = " . $templateIdResult["auctions_user_ad_template"] . " OR 
-	template_id = " . $templateIdResult["auctions_user_extra_template"] . " OR 
+        $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE
+	template_id = " . $templateIdResult["auctions_user_ad_template"] . " OR
+	template_id = " . $templateIdResult["auctions_user_extra_template"] . " OR
 	template_id = " . $templateIdResult["auctions_user_checkbox_template"] . " OR
 	template_id = " . $templateIdResult["auction_detail_print_friendly_template"])
     ) {
@@ -580,10 +581,10 @@ if ($templateIdResults = $this->_db->Execute("SELECT ad_detail_display_template_
             //classifieds
             $classifiedsTemplates =  array();
             if (
-                $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE 
-			template_id = " . $templateIdResult["ad_detail_display_template_id"] . " OR 
-			template_id = " . $templateIdResult["ad_detail_extra_display_template_id"] . " OR 
-			template_id = " . $templateIdResult["ad_detail_checkbox_display_template_id"] . " OR 
+                $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE
+			template_id = " . $templateIdResult["ad_detail_display_template_id"] . " OR
+			template_id = " . $templateIdResult["ad_detail_extra_display_template_id"] . " OR
+			template_id = " . $templateIdResult["ad_detail_checkbox_display_template_id"] . " OR
 			template_id = " . $templateIdResult["ad_detail_print_friendly_template"])
             ) {
                 while ($templateCodeResult = $templateCodeResults->FetchRow()) {
@@ -603,10 +604,10 @@ if ($templateIdResults = $this->_db->Execute("SELECT ad_detail_display_template_
             //auctions
             $auctionsTemplates =  array();
             if (
-                $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE 
-			template_id = " . $templateIdResult["auction_detail_display_template_id"] . " OR 
-			template_id = " . $templateIdResult["auction_detail_extra_display_template_id"] . " OR 
-			template_id = " . $templateIdResult["auction_detail_checkbox_display_template_id"] . " OR 
+                $templateCodeResults = $this->_db->Execute("SELECT template_id, template_code FROM `geodesic_templates` WHERE
+			template_id = " . $templateIdResult["auction_detail_display_template_id"] . " OR
+			template_id = " . $templateIdResult["auction_detail_extra_display_template_id"] . " OR
+			template_id = " . $templateIdResult["auction_detail_checkbox_display_template_id"] . " OR
 			template_id = " . $templateIdResult["auction_detail_print_friendly_template"])
             ) {
                 while ($templateCodeResult = $templateCodeResults->FetchRow()) {

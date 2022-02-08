@@ -40,17 +40,18 @@ if ($show_module['module_display_sub_category_nav_links']) {
 			child_cat.category_id,
 			child_lang.category_name
 			FROM geodesic_categories_languages AS parent_lang
-			INNER JOIN geodesic_categories AS parent_cat 
+			INNER JOIN geodesic_categories AS parent_cat
 			ON parent_lang.category_id = parent_cat.category_id
-			LEFT JOIN geodesic_categories AS child_cat 
+			LEFT JOIN geodesic_categories AS child_cat
 			ON child_cat.parent_id = parent_cat.category_id
-			INNER JOIN geodesic_categories_languages AS child_lang 
+			INNER JOIN geodesic_categories_languages AS child_lang
 			ON child_lang.category_id = child_cat.category_id
 			WHERE parent_cat.parent_id $parentIn AND child_cat.category_id IS NOT NULL
 			AND parent_lang.language_id = " . $page->language_id . "
 			AND child_lang.language_id = " . $page->language_id . "
 			AND parent_cat.enabled='yes' AND child_cat.enabled='yes'
-			ORDER BY parent_cat.parent_id, parent_cat.display_order, parent_lang.category_name, child_cat.display_order, child_lang.category_name";
+			ORDER BY parent_cat.parent_id, parent_cat.display_order, parent_lang.category_name,
+                child_cat.display_order, child_lang.category_name";
     $rows = $this->GetAll($sql);
     foreach ($rows as $row) {
         $sub_categories[$row['parent_id']][] = $row;
@@ -68,7 +69,7 @@ if ($show_module['module_display_sub_category_nav_links']) {
 $sql = "SELECT lang.category_id, lang.category_name, lang.description, lang.language_id,
 	lang.category_image, lang.category_image_alt, cat.auction_category_count, cat.category_count
 	FROM " . geoTables::categories_table . " as cat, " . geoTables::categories_languages_table . " as lang where
-	cat.parent_id {$parentIn} and cat.category_id = lang.category_id and lang.language_id = {$page->language_id} 
+	cat.parent_id {$parentIn} and cat.category_id = lang.category_id and lang.language_id = {$page->language_id}
 	and cat.enabled='yes' order by cat.display_order, lang.category_name";
 
 $rows = $this->GetAll($sql);
@@ -86,7 +87,14 @@ foreach ($rows as $row) {
             'auction_count' => $row['auction_category_count'],
         );
 
-        $row ['category_counts'] = $page->display_category_count($db, $row['category_id'], $show_module['browsing_count_format'], '', '', $category_count);
+        $row ['category_counts'] = $page->display_category_count(
+            $db,
+            $row['category_id'],
+            $show_module['browsing_count_format'],
+            '',
+            '',
+            $category_count
+        );
     }
     $row['category_name'] = geoString::fromDB($row['category_name']);
     $row['category_description'] = geoString::fromDB($row['description']);
@@ -107,7 +115,12 @@ unset($rows, $sub_categories);
 
 $columns = ($show_module['number_of_browsing_columns']) ? $show_module['number_of_browsing_columns'] : 1;
 $maxColumnCount = ceil($catCount / $columns);
-$tpl_vars['categories'] = geoBrowse::categoryColumnSort($categories, $columns, $show_module['alpha_across_columns'], $maxColumnCount);
+$tpl_vars['categories'] = geoBrowse::categoryColumnSort(
+    $categories,
+    $columns,
+    $show_module['alpha_across_columns'],
+    $maxColumnCount
+);
 
 
 $tpl_vars['error_message'] = $page->error_message;

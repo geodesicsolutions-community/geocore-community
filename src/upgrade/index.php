@@ -24,7 +24,8 @@ require_once CLASSES_DIR . PHP5_DIR . 'smarty/Smarty.class.php';
 
 ##  Do a few checks:
 if (!is_writable(GEO_BASE_DIR . 'templates_c/')) {
-    die('Upgrade error: you need to make the directory <strong>' . GEO_BASE_DIR . 'templates_c/</strong> writable (CHMOD 777).');
+    die('Upgrade error: you need to make the directory <strong>'
+        . GEO_BASE_DIR . 'templates_c/</strong> writable (CHMOD 777).');
 }
 
 /**
@@ -69,12 +70,16 @@ class geoReq
         $overall_fail = '';
         $overall_pass = '<p class="passed">All minimum requirements met.</p>';
         //license agreement
+        // phpcs:disable Generic.Files.LineLength.TooLong
+        $url = 'https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE';
+        // phpcs:enable Generic.Files.LineLength.TooLong
+
         $checkbox = '
             <p>
                 <label>
                     <input type="checkbox" name="license" id="license" /> Yes, I have read and agree to the Software
                     <a
-                        href="https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE"
+                        href="' . $url . '"
                         target="_blank"
                     >License Agreement</a>.
                 </label>
@@ -85,9 +90,11 @@ class geoReq
         }
         $overall_pass .= $checkbox;
         //back up agreement
-        $overall_pass .= '<p><label><input type="checkbox" name="backup_agree" id="backup_agree" /> Yes, I have <strong>backed up</strong> the entire database and all files.</label></p>';
+        $overall_pass .= '<p><label><input type="checkbox" name="backup_agree" id="backup_agree" /> Yes, I have
+            <strong>backed up</strong> the entire database and all files.</label></p>';
         if (!$this->pretendTestFailed && defined('IAMDEVELOPER')) {
-            $overall_fail .= '<p><label><input type="checkbox" name="backup_agree" id="backup_agree" /> Yes, I have <strong>backed up</strong> the entire database and all files.</label></p>';
+            $overall_fail .= '<p><label><input type="checkbox" name="backup_agree" id="backup_agree" /> Yes, I have
+                <strong>backed up</strong> the entire database and all files.</label></p>';
         }
 
         $overall_fail .= '
@@ -171,7 +178,8 @@ class geoReq
 
         //developer force version form
         if (defined('IAMDEVELOPER') && !$this->pretendTestFailed) {
-            $developer = '<p>DEVELOPER FEATURE: Force upgrade to version: <input type="text" name="force_version" value="7.4.4" /><br /><input type="submit" value="Force Version >>" /></p>';
+            $developer = '<p>DEVELOPER FEATURE: Force upgrade to version: <input type="text" name="force_version"
+                value="7.4.4" /><br /><input type="submit" value="Force Version >>" /></p>';
         } else {
             $developer = '';
         }
@@ -238,7 +246,8 @@ class geoReq
                 }
             }
         }
-        $reason = '(database connection settings not configured in config.php) - Version will be checked at the db connection step.';
+        $reason = '(database connection settings not configured in config.php) - Version will be checked at the db
+            connection step.';
         if (!$php_check) {
             //not checked, since if before PHP 5, the mysql check will cause a fatal
             //syntax error.
@@ -265,9 +274,11 @@ if (isset($_GET['resetProgress']) && $_GET['resetProgress']) {
 }
 
 if ($_GET['run'] == 'show_upgrades' && !isset($_POST['license'])) {
-    die('You must agree to the License Agreement to proceed with the upgrade. Please <a href="index.php">go back</a>, read the License Agreement, and click the appropriate checkbox before continuing.');
+    die('You must agree to the License Agreement to proceed with the upgrade. Please <a href="index.php">go back</a>,
+        read the License Agreement, and click the appropriate checkbox before continuing.');
 } elseif ($_GET['run'] == 'show_upgrades' && !isset($_POST['backup_agree'])) {
-    die('You must create a site backup to proceed with the upgrade. Once you have created a backup, please <a href="index.php">go back</a>, and click the appropriate checkbox before continuing.');
+    die('You must create a site backup to proceed with the upgrade. Once you have created a backup, please
+        <a href="index.php">go back</a>, and click the appropriate checkbox before continuing.');
 } elseif (isset($_GET['force_version']) && defined('IAMDEVELOPER')) {
     require_once 'updateFactory.php';
 

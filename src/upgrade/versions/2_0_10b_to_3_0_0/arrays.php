@@ -1,5 +1,6 @@
 <?php
 
+// phpcs:disable Generic.Files.LineLength.TooLong
 //the normal arrays
 
 //

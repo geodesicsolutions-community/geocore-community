@@ -79,7 +79,8 @@ function reset_admin_pass($user, $pass)
     }
 
     //insert into logins table.
-    $sql = 'UPDATE ' . geoTables::logins_table . ' SET `username` = ?, `password` = ?, `hash_type`=?, `salt`=? WHERE `id` = 1';
+    $sql = 'UPDATE ' . geoTables::logins_table . ' SET `username` = ?, `password` = ?, `hash_type`=?, `salt`=?
+        WHERE `id` = 1';
     $result = $db->Execute($sql, array($user, $hashed_pass, $hash_type, $salt));
 
     //update userdata table
@@ -113,8 +114,10 @@ li, div {
 </head>
 <body>
 <h1 style="color:green;">Admin Password Reset Tool - Password Successfully Reset</h1>
-<p>The admin username and password have been reset according to the settings in the file <strong>reset_admin_password.php</strong>.<br /><br />
-Admin login will be disabled until you turn the tool back off:</p>
+<p>The admin username and password have been reset according to the settings in the file
+    <strong>reset_admin_password.php</strong>.
+    <br /><br />
+    Admin login will be disabled until you turn the tool back off:</p>
 <ol>
 <li>Edit the file <strong>reset_admin_password.php</strong> and find the lines that look similar to this:
 <div class="code">
@@ -129,7 +132,8 @@ define('TURN_ON_RESET_PASSWORD_TOOL', <strong style="color:red;">1</strong>);<br
 define('TURN_ON_RESET_PASSWORD_TOOL', <strong style="color:red;">0</strong>);<br />
 </div></li>
 <li>Upload the file with the changes.</li>
-<li>Log into the admin, using the username and password that were set in the <strong>reset_admin_password.php</strong> file.  If it still does not give you the form to log in, that means the tool is still "turned on".
+<li>Log into the admin, using the username and password that were set in the <strong>reset_admin_password.php</strong>
+    file.  If it still does not give you the form to log in, that means the tool is still "turned on".
 </li>
 </ol>
 </body>
@@ -137,8 +141,12 @@ define('TURN_ON_RESET_PASSWORD_TOOL', <strong style="color:red;">0</strong>);<br
     <?php
 }
 
-if (defined('TURN_ON_RESET_PASSWORD_TOOL') && TURN_ON_RESET_PASSWORD_TOOL && isset($_GET['reset_password']) && $_GET['reset_password'] == sha1('reset_the_pass_now')) {
+if (
+    defined('TURN_ON_RESET_PASSWORD_TOOL')
+    && TURN_ON_RESET_PASSWORD_TOOL
+    && isset($_GET['reset_password'])
+    && $_GET['reset_password'] == sha1('reset_the_pass_now')
+) {
     //run the function.
     reset_admin_pass($admin_username, $admin_password);
 }
-?>

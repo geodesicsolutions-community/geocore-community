@@ -8,6 +8,39 @@ require_once(CLASSES_DIR . 'rpc/XMLRPC.class.php');
  */
 class geoUpdateFactory
 {
+    private $db;
+    private $upgrades = [];
+    private $currentUpgradeIndex;
+    private $queries = [];
+    public $tplVars = [];
+    public $step_text;
+
+    /**
+     * add additional text to the head tag in the template.
+     *
+     * @var string
+     */
+    public $header_text;
+
+    /**
+     * Used in addQuery to keep track of the query number.
+     * @var int
+     */
+    private $q_index = 1;
+
+    public function __construct()
+    {
+        //set up main template.
+        $this->step_text = '';
+        $this->header_text = '';
+        require_once '../config.default.php';
+        if (!defined('PHP5_DIR')) {
+            define('PHP5_DIR', 'php5_classes/');
+        }
+        require_once(CLASSES_DIR . 'adodb/adodb.inc.php');
+        require_once CLASSES_DIR . PHP5_DIR . 'products.php';
+    }
+
     public static function getReleaseDate()
     {
         //When you update versions.php be sure to update the version number here and the date of release!
@@ -21,79 +54,52 @@ class geoUpdateFactory
         if (!isset($versions[$latest]) || $versions[$latest]['to'] != 'latest') {
             //So we don't forget to update the above
             if (defined('IAMDEVELOPER')) {
-                die('<strong style="color: red;">ERROR!!!!</strong>  You forgot to update <strong>$latest</strong> and <strong>$released</strong> in <strong>updateFactory.php</strong>!
+                die('
+                    <strong style="color: red;">ERROR!!!!</strong>  You forgot to update <strong>$latest</strong>
+                    and <strong>$released</strong> in <strong>updateFactory.php</strong>!
                     Search that file for those vars (will be near top) and update them.<br /><br />
                     If the version is released today, the $released should be set to <strong>' . time() . '</strong>
-                    ');
+                ');
             }
-            die(
-                '<strong>Config Error:</strong>  The versions.php and updateFactory.php files have a file version mismatch. Please contact Support.<br /><br /><strong>' . time() . '</strong>'
-            );
+            die('
+                <strong>Config Error:</strong>  The versions.php and updateFactory.php files have a file version
+                mismatch. Please contact Support.<br /><br />
+                <strong>' . time() . '</strong>
+            ');
         }
         return $released;
     }
 
-
-    private $_db, $pc;
-    private $_oldProduct;
-    private $_upgrades = array();
-    private $_currentUpgradeIndex;
-    private $_queries = array();
-    private $_interHTML = '';
-    public $tplVars = array();
-    public $step_text;
-    public $header_text; //add additional text to the head tag in the template.
-
-    const licenseChecksDev = false;//DO NOT TOUCH!  Auto-changed by demo update
-    //const licenseChecksDev = 'internal_coolness';//DO NOT TOUCH!  Auto-changed by demo update
-
-    /**
-     * Constructor.. don't bother with Singleton, since update is so simple, no
-     * need for singleton stuff.
-     */
-    public function __construct()
-    {
-        //set up main template.
-        $this->step_text = '';
-        $this->header_text = '';
-        require_once '../config.default.php';
-        if (!defined('PHP5_DIR')) {
-            define('PHP5_DIR', 'php5_classes/');
-        }
-        require_once(CLASSES_DIR . 'adodb/adodb.inc.php');
-        require_once CLASSES_DIR . PHP5_DIR . 'products.php';
-        $this->pc = geoPC::getInstance('geoUpdateFactory');
-    }
     /**
      * Should only be used internaly.  If a database connection
      * has not been made yet, it makes one.
      */
-    private function _connectDB()
+    private function connectDB()
     {
-        if (!(isset($this->_db) && is_object($this->_db))) {
+        if (!(isset($this->db) && is_object($this->db))) {
             include_once(CLASSES_DIR . 'adodb/adodb.inc.php');
             include(GEO_BASE_DIR . 'config.default.php');
-            $this->_db =& ADONewConnection($db_type);
+            $this->db =& ADONewConnection($db_type);
 
             if (isset($persistent_connections) && $persistent_connections) {
-                if (!$this->_db->PConnect($db_host, $db_username, $db_password, $database)) {
+                if (!$this->db->PConnect($db_host, $db_username, $db_password, $database)) {
                     echo 'Could not connect to database (persistent connection).';
                     exit;
                 }
             } else {
-                if (!$this->_db->Connect($db_host, $db_username, $db_password, $database)) {
+                if (!$this->db->Connect($db_host, $db_username, $db_password, $database)) {
                     echo "Could not connect to database.";
                     exit;
                 }
             }
             //fix SQL strict mode.
             if (isset($strict_mode) && $strict_mode) {
-                $this->_db->Execute('SET SESSION sql_mode=\'\'');
+                $this->db->Execute('SET SESSION sql_mode=\'\'');
             }
             //fix db connection charset
             if (isset($force_db_connection_charset) && strlen(trim($force_db_connection_charset)) > 0) {
-                $this->_db->Execute("SET NAMES '$force_db_connection_charset'");
-                //$this->_db->Execute("SET CHARACTER SET $force_db_connection_charset");
+                $this->db->Execute("SET NAMES '$force_db_connection_charset'");
+                //$this->db->Execute("SET CHARACTER SET $force_db_connection_charset");
             }
         }
     }
@@ -105,8 +111,8 @@ class geoUpdateFactory
      */
     public function tableExists($tableName)
     {
-        $this->_connectDB();
-        $result = $this->_db->Execute("show tables");
+        $this->connectDB();
+        $result = $this->db->Execute("show tables");
         while ($row = $result->FetchRow()) {
             if (in_array($tableName, $row)) {
                 return true;
@@ -122,8 +128,8 @@ class geoUpdateFactory
      */
     public function fieldExists($tableName, $fieldName)
     {
-        $this->_connectDB();
-        $result = $this->_db->Execute("show columns from $tableName");
+        $this->connectDB();
+        $result = $this->db->Execute("show columns from $tableName");
         if (!$result) {
             return false;
         } else {
@@ -141,9 +147,9 @@ class geoUpdateFactory
      */
     public function getCurrentVersion()
     {
-        $this->_connectDB();
+        $this->connectDB();
         $sql = 'SELECT `db_version` FROM `geodesic_version`';
-        $result = $this->_db->Execute($sql);
+        $result = $this->db->Execute($sql);
         if (!$result) {
             //probably really old version
             return 'unknown';
@@ -157,19 +163,17 @@ class geoUpdateFactory
      */
     public function serialize()
     {
-        $this->_connectDB();
+        $this->connectDB();
         $incomplete_upgrade = false;
-        if (count($this->_upgrades)) {
+        if (count($this->upgrades)) {
             $current = $this->getCurrentVersion();
             $current_i = 0;
             if (!$this->tableExists('geodesic_upgrade_progress')) {
                 $this->createUpgradeTables();
             }
-            foreach ($this->_upgrades as $index => $data) {
+            foreach ($this->upgrades as $index => $data) {
                 if ($data['status'] == 2 && $index == ($current_i + 1)) {
                     //successfully updated to this version.
-                    $from = $data['from'];
-                    $to = $data['to'];
                     $current_order_id = $index;
                     $current = $data['to'];
                     $current_i = $index;
@@ -177,11 +181,13 @@ class geoUpdateFactory
                 if ($data['status'] == 1 || $data['status'] == -1) {
                     $incomplete_upgrade = true;
                 }
-                $sql = "REPLACE INTO `geodesic_upgrade_progress` SET `order_id` = $index, `from` = '{$data['from']}', `to` = '{$data['to']}', `status` = '{$data['status']}'";
+                $sql = "REPLACE INTO `geodesic_upgrade_progress` SET `order_id` = $index, `from` = '{$data['from']}',
+                    `to` = '{$data['to']}', `status` = '{$data['status']}'";
                 //$query_data = array ($index, $data['to'],$data['status']);
-                $result =& $this->_db->Execute($sql);
+                $result =& $this->db->Execute($sql);
                 if (!$result) {
-                    $message = 'Could not update the upgrade progress in the table `geodesic_upgrade_progress`.  <strong>DB Error</strong>: ' . $this->_db->ErrorMsg();
+                    $message = 'Could not update the upgrade progress in the table `geodesic_upgrade_progress`.
+                        <strong>DB Error</strong>: ' . $this->db->ErrorMsg();
                     $this->criticalError($message, __line__);
                 }
             }
@@ -191,27 +197,23 @@ class geoUpdateFactory
             }
         }
 
-        if ($incomplete_upgrade && count($this->_queries)) {
+        if ($incomplete_upgrade && count($this->queries)) {
             //record queries in database.
 
             //make sure query table exists
             if (!$this->tableExists('geodesic_upgrade_queries')) {
                 $this->createUpgradeTables();
             }
-            //clear the old entries
-            /*$sql = 'TRUNCATE TABLE `geodesic_upgrade_progress`';
-            $result = $this->_db->Execute($sql);
-            if (!$result){
-                $message = 'Could not truncate the table `geodesic_upgrade_queries`.  <strong>DB Error</strong>: '.$this->_db->ErrorMsg();
-                $this->criticalError($message, __line__);
-            }*/
-            foreach ($this->_queries[$current_order_id] as $order_id => $queries) {
+
+            foreach ($this->queries[$current_order_id] as $order_id => $queries) {
                 foreach ($queries as $query_id => $data) {
-                    $sql = 'REPLACE INTO `geodesic_upgrade_queries` SET `query_id` = ?, `order_id` = ?, strict` = ?, `status` = ?, `sql` = ?';
+                    $sql = 'REPLACE INTO `geodesic_upgrade_queries` SET `query_id` = ?, `order_id` = ?, strict` = ?,
+                        `status` = ?, `sql` = ?';
                     $query_data = array ($query_id, $order_id, $data['strict'], $data['status'], $data['sql']);
-                    $result = $this->_db->Execute($sql, $query_data);
+                    $result = $this->db->Execute($sql, $query_data);
                     if (!$result) {
-                        $message = 'Could not update the upgrade query progress in the table `geodesic_upgrade_queries`.  <strong>DB Error</strong>: ' . $this->_db->ErrorMsg();
+                        $message = 'Could not update the upgrade query progress in the table
+                            `geodesic_upgrade_queries`.  <strong>DB Error</strong>: ' . $this->db->ErrorMsg();
                         $this->criticalError($message, __line__);
                     }
                 }
@@ -219,14 +221,16 @@ class geoUpdateFactory
         } elseif (!$incomplete_upgrade && $this->tableExists('geodesic_upgrade_queries')) {
             //the upgrade looks like it completed, so empty out the queries table.
             $sql = 'TRUNCATE `geodesic_upgrade_queries`';
-            $result = $this->_db->Execute($sql);
+            $result = $this->db->Execute($sql);
             if (!$result) {
                 //its probably ok that it messed up... probably...
                 //but still report it
-                echo 'Internal Notice: The upgrade queries table `geodesic_upgrade_queries` was unable to be emptied.  DB Error Message: ' . $this->_db->ErrorMsg() . '<br />';
+                echo 'Internal Notice: The upgrade queries table `geodesic_upgrade_queries` was unable to be emptied.
+                    DB Error Message: ' . $this->db->ErrorMsg() . '<br />';
             }
         }
     }
+
     /**
      * Gets the upgrade progress from the database and re-constructs the
      * upgrade progress data, thus un serializing the data..
@@ -238,18 +242,19 @@ class geoUpdateFactory
         }
         include('versions/versions.php');
         //get versions from database.
-        $this->_connectDB();
+        $this->connectDB();
         $sql = 'SELECT * FROM `geodesic_upgrade_progress` ORDER BY `order_id`';
-        $result = $this->_db->Execute($sql);
+        $result = $this->db->Execute($sql);
         if (!$result) {
-            $message = 'Error:  Could not retrieve upgrade progress from the database.  <strong>DB Error</strong>: ' . $this->_db->ErrorMsg();
+            $message = 'Error:  Could not retrieve upgrade progress from the database.  <strong>DB Error</strong>: '
+                . $this->db->ErrorMsg();
             $this->criticalError($message, __line__);
         }
         if ($result->RecordCount() == 0) {
             //no upgrades in the database...
             return false;
         }
-        $this->_upgrades = array();
+        $this->upgrades = [];
         $incomplete = false;
         $highest_i = 0;
         $current_version = $this->getCurrentVersion();
@@ -261,8 +266,15 @@ class geoUpdateFactory
         }
         while ($row = $result->FetchRow()) {
             //verify that the from does go to the correct to.
-            if (!$finished_upgrades && !(isset($versions[$row['from']] ['to']) && $versions[$row['from']]['to'] == $row['to'])) {
-                $message = 'Progress data in database is corrupt (entries in `geodesic_upgrade_progress` do not match upgrades array).  Please contact Geodesic Support.';
+            if (
+                !$finished_upgrades
+                && !(
+                    isset($versions[$row['from']]['to'])
+                    && $versions[$row['from']]['to'] == $row['to']
+                )
+            ) {
+                $message = 'Progress data in database is corrupt (entries in `geodesic_upgrade_progress` do not match
+                    upgrades array).';
                 $this->criticalError($message, __line__);
             }
             if ($row['status'] == 1 || $row['status'] == -1) {
@@ -271,9 +283,9 @@ class geoUpdateFactory
                 $incomplete = true;
             }
             if ($row['from'] == $current_version) {
-                $this->_currentUpgradeIndex = $row['order_id'];
+                $this->currentUpgradeIndex = $row['order_id'];
             }
-            $this->_upgrades[$row['order_id']] = array (
+            $this->upgrades[$row['order_id']] = array (
                 'from' => $row['from'],
                 'to' => $row['to'],
                 'folder' => $versions[$row['from']]['folder'],
@@ -282,70 +294,45 @@ class geoUpdateFactory
         }
 
         $sql = 'SELECT * FROM `geodesic_upgrade_queries` ORDER BY `query_id`';
-        $result = $this->_db->Execute($sql);
+        $result = $this->db->Execute($sql);
         if (!$result) {
-            $message = 'Could not get incomplete query data from the database table `geodesic_upgrade_queries`.  <strong>DB Error</strong>: ' . $this->_db->ErrorMsg();
+            $message = 'Could not get incomplete query data from the database table `geodesic_upgrade_queries`.
+                <strong>DB Error</strong>: ' . $this->db->ErrorMsg();
             $this->criticalError($message, __line__);
         }
         while ($row = $result->FetchRow()) {
-            $this->_queries [$row['order_id']] [$row['query_id']] = array (
+            $this->queries [$row['order_id']] [$row['query_id']] = array (
                 'strict' => $row['strict'],
                 'status' => $row['status'],
                 'sql' => $row['sql']    //at this point, sql query is not known.
             );
         }
-        if (isset($this->_currentUpgradeIndex) && !$finished_upgrades) {
-            $this->_upgrades[$this->_currentUpgradeIndex]['status'] = 1;
+        if (isset($this->currentUpgradeIndex) && !$finished_upgrades) {
+            $this->upgrades[$this->currentUpgradeIndex]['status'] = 1;
         }
 
         return true;
     }
-    /**
-     * Not used or implemented yet.
-     */
-    public function prereqsMet()
-    {
-        //not fully implemented, and may not finish
-        //unless needed for later version.
-        if (count($this->_upgrades)) {
-            while (list(, $obj) = each($this->_upgrades)) {
-                if (!$obj->prereqsMet()) {
-                    return false;
-                }
-            }
-        }
-    }
-    /**
-     * Not used or fully implemented yet.
-     */
-    public function getPrereqs()
-    {
-        //not fully implemented, and may not finish
-        //unless needed for later version.
-        if (count($this->_upgrades)) {
-            $prereqs = array();
-            while (list(, $obj) = each($this->_upgrades)) {
-                $prereqs = array_merge($prereqs, $obj->getPrereqs());
-            }
-        }
-    }
+
     /**
      * Removes the tables used for storing upgrade progress, for use
      * when an upgrade is finished.
      */
     public function removeUpgradeTables()
     {
-        $this->_connectDB();
+        $this->connectDB();
         $sql = 'DROP TABLE IF EXISTS `geodesic_upgrade_progress`';
-        $result =& $this->_db->Execute($sql);
+        $result =& $this->db->Execute($sql);
         if (!$result) {
-            $error = 'Table `geodesic_upgrade_progress` not able to be dropped.  <strong>DB Error Message:</strong>' . $this->_db->ErrorMsg();
+            $error = 'Table `geodesic_upgrade_progress` not able to be dropped.
+                <strong>DB Error Message:</strong>' . $this->db->ErrorMsg();
             $this->criticalError($error);
         }
         $sql = 'DROP TABLE IF EXISTS `geodesic_upgrade_queries`';
-        $result =& $this->_db->Execute($sql);
+        $result =& $this->db->Execute($sql);
         if (!$result) {
-            $error = 'Table `geodesic_upgrade_queries` not able to be dropped.  <strong>DB Error Message:</strong>' . $this->_db->ErrorMsg();
+            $error = 'Table `geodesic_upgrade_queries` not able to be dropped.
+                <strong>DB Error Message:</strong>' . $this->db->ErrorMsg();
             $this->criticalError($error);
         }
     }
@@ -382,29 +369,33 @@ class geoUpdateFactory
      */
     public function createUpgradeTables($start_fresh = false)
     {
-        $this->_connectDB();
+        $this->connectDB();
 
         $error_message = 'A table was not able to be created, please check settings in config.php and
-make sure the database user has sufficient privilages to create, alter, and drop tables for the given database.
-<br /><br />
-Once you have made the needed changes, come back to this page and refresh.  Contact Geodesic Support with the error reported below, if you need further assistance.
-<br /><br />';
+            make sure the database user has sufficient privilages to create, alter, and drop tables for the given
+            database.
+            <br /><br />
+            Once you have made the needed changes, come back to this page and refresh.  Contact Geodesic Support with
+            the error reported below, if you need further assistance.
+            <br /><br />';
         $error = false;
 
         if ($start_fresh) {
             //drop the tables before creating them.
             $sql = 'DROP TABLE IF EXISTS `geodesic_upgrade_progress`';
-            $result =& $this->_db->Execute($sql);
+            $result =& $this->db->Execute($sql);
             if (!$result) {
                 $error = __line__;
-                $error_message .= 'Error when attempting to drop table `geodesic_upgrade_progress`.  <strong>DB Error Message:</strong>' . $this->_db->ErrorMsg();
+                $error_message .= 'Error when attempting to drop table `geodesic_upgrade_progress`.
+                    <strong>DB Error Message:</strong>' . $this->db->ErrorMsg();
             }
             if (!$error) {
                 $sql = 'DROP TABLE IF EXISTS `geodesic_upgrade_queries`';
-                $result =& $this->_db->Execute($sql);
+                $result =& $this->db->Execute($sql);
                 if (!$result) {
                     $error = __line__;
-                    $error_message .= 'Error when attempting to drop table `geodesic_upgrade_queries`.  <strong>DB Error Message:</strong>' . $this->_db->ErrorMsg();
+                    $error_message .= 'Error when attempting to drop table `geodesic_upgrade_queries`.
+                        <strong>DB Error Message:</strong>' . $this->db->ErrorMsg();
                 }
             }
         }
@@ -419,11 +410,12 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
                 )
             )";
 
-            $result = $this->_db->Execute($sql);
+            $result = $this->db->Execute($sql);
             if (!$result) {
                 //that aint good!
                 $error = __line__;
-                $error_message .= 'Error when attempting to create `geodesic_upgrade_progress` table.  <strong>DB Error Message:</strong> ' . $this->_db->ErrorMsg();
+                $error_message .= 'Error when attempting to create `geodesic_upgrade_progress` table.
+                    <strong>DB Error Message:</strong> ' . $this->db->ErrorMsg();
             }
         }
         if (!$error) {
@@ -437,18 +429,23 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
                     `query_id`
                 )
             )";
-            $result = $this->_db->Execute($sql);
+            $result = $this->db->Execute($sql);
             if (!$result) {
                 $error = __line__;
-                $error_message .= 'Error when attempting to create `geodesic_upgrade_queries` table.  <strong>DB Error Message:</strong> ' . $this->_db->ErrorMsg();
+                $error_message .= 'Error when attempting to create `geodesic_upgrade_queries` table.
+                    <strong>DB Error Message:</strong> ' . $this->db->ErrorMsg();
             }
         }
 
         //now check to make sure tables were actually created.
-        if (!$error && (!$this->tableExists('geodesic_upgrade_progress') || !$this->tableExists('geodesic_upgrade_queries'))) {
+        if (
+            !$error
+            && (!$this->tableExists('geodesic_upgrade_progress') || !$this->tableExists('geodesic_upgrade_queries'))
+        ) {
             //there were no errors reported, but one of the tables do not exist...
             $error = __line__;
-            $error_message .= 'Upgrade tables were not able to be created, however no DB errors were reported when attempting to create the tables.';
+            $error_message .= 'Upgrade tables were not able to be created, however no DB errors were reported
+                when attempting to create the tables.';
         }
         if ($error) {
             //there was an error!
@@ -472,24 +469,35 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         include('versions/versions.php');
         $current_version = $this->getCurrentVersion();
 
-        if (isset($versions[$current_version]) && $versions[$current_version]['to'] == 'latest' && !($_GET['run'] != 'finish' && isset($versions['beta']) && is_array($versions['beta']))) {
+        if (
+            isset($versions[$current_version])
+            && $versions[$current_version]['to'] == 'latest'
+            && !(
+                $_GET['run'] != 'finish'
+                && isset($versions['beta'])
+                && is_array($versions['beta'])
+            )
+        ) {
             //This is the cleanup step...
-            $this->_upgrades = 'none';
+            $this->upgrades = 'none';
             $this->removeUpgradeTables();
             $this->clearCache(true);
             return true;
         }
 
         //check to see if the current version is a new version or not.
-        if (!isset($versions[$current_version]) && !(isset($versions['beta']) && in_array($current_version, $versions['beta']['beta_versions']))) {
+        if (
+            !isset($versions[$current_version])
+            && !(isset($versions['beta']) && in_array($current_version, $versions['beta']['beta_versions']))
+        ) {
             //this is an older version, so redirect them to the
             //old upgrader.
             //first, make sure the site settings table is created.
-            $this->_db->Execute('CREATE TABLE IF NOT EXISTS `geodesic_site_settings` (
-  `setting` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY  (`setting`)
-)');
+            $this->db->Execute('CREATE TABLE IF NOT EXISTS `geodesic_site_settings` (
+                `setting` varchar(255) NOT NULL,
+                `value` varchar(255) NOT NULL,
+                PRIMARY KEY  (`setting`)
+            )');
             $this->header_text = '<meta http-equiv="refresh" content="0;url=versions/pre_2.0.10/" />';
             $ver = ($current_version == 'pre') ? 'Unknown' : $current_version;
             $message = 'Loading <a href="versions/pre_2.0.10/">pre - 2.0.10 upgrade routine...</a>.';
@@ -502,7 +510,10 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         //First, see if in the process of doing an upgrade
         if (!$serial) {
             //see if we should be running all of the beta versions...
-            if (isset($versions['beta']['beta_versions']) && in_array($current_version, $versions['beta']['beta_versions'])) {
+            if (
+                isset($versions['beta']['beta_versions'])
+                && in_array($current_version, $versions['beta']['beta_versions'])
+            ) {
                 //this is one of the versions that is part of upgrading to beta,
                 //but this is starting a brand new upgrade, so start them from the start.
                 $current_version = $versions['beta']['start'];
@@ -515,7 +526,7 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
             $this_version = $versions[$current_version];
             if (strtolower($this_version['to']) == 'latest') {
                 $message = 'Software is already upgraded, to version ' . $this_version . '
-<br />' . $this->getFinishedLinks();
+                    <br />' . $this->getFinishedLinks();
                 $this->removeUpgradeTables();
                 $this->clearCache(true);
                 //do not go any further, no upgrades to do.
@@ -534,7 +545,7 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
             }
             while ($this_version['to'] !== 'latest' && key_exists($this_version['to'], $versions)) {
                 //add the version.
-                $this->_upgrades[$version_index] = $this_version;
+                $this->upgrades[$version_index] = $this_version;
                 //remember the from version
                 $from = $this_version['to'];
                 //set the next version
@@ -552,10 +563,11 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         //start running upgrades
 
         $interStatus = true;
-        $interFile = 'versions/' . $this->_upgrades[$this->_currentUpgradeIndex]['folder'] . '/interactive.php';
+        $interFile = 'versions/' . $this->upgrades[$this->currentUpgradeIndex]['folder'] . '/interactive.php';
         if (file_exists($interFile)) {
             //include the interactive file, anything it outputs we put in a box to display.
-            //whatever it returns, if it's true then we proceed to next step, if false then we do not proceed to next step yet.
+            //whatever it returns, if it's true then we proceed to next step, if false then we do not proceed to
+            // next step yet.
 
             ob_start();
             $interStatus = include($interFile);
@@ -571,14 +583,14 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
 
             if ($overall) {
                 //if run queries was successful, then update the upgrade.
-                $this->_upgrades[$this->_currentUpgradeIndex]['status'] = 2;
+                $this->upgrades[$this->currentUpgradeIndex]['status'] = 2;
             } else {
                 //there was some error...
-                $this->_upgrades[$this->_currentUpgradeIndex]['status'] = -1;
+                $this->upgrades[$this->currentUpgradeIndex]['status'] = -1;
             }
         } else {
             //set status to 1 indicating we are curently doing stuff
-            $this->_upgrades[$this->_currentUpgradeIndex]['status'] = 1;
+            $this->upgrades[$this->currentUpgradeIndex]['status'] = 1;
         }
 
         //store the results.
@@ -586,11 +598,6 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
 
         return $overall;
     }
-    /**
-     * Used in addQuery to keep track of the query number.
-     * @var int
-     */
-    private $_q_index = 1;
 
     /**
      * Adds a query to the list of queries that should be run for the update.
@@ -600,12 +607,14 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
      */
     public function addQuery($sql, $strict)
     {
-        $this->_queries[$this->_currentUpgradeIndex][$this->_q_index]['sql'] = $sql;
-        $this->_queries[$this->_currentUpgradeIndex][$this->_q_index]['strict'] = (isset($this->_queries[$this->_q_index]['strict'])) ? $this->_queries[$this->_q_index]['strict'] : $strict;
+        $this->queries[$this->currentUpgradeIndex][$this->q_index]['sql'] = $sql;
+        $this->queries[$this->currentUpgradeIndex][$this->q_index]['strict'] =
+            isset($this->queries[$this->q_index]['strict']) ? $this->queries[$this->q_index]['strict'] : $strict;
         //set status to 0 (not run), if it is not set already
-        $this->_queries[$this->_currentUpgradeIndex][$this->_q_index]['status'] = (isset($this->_queries[$this->_q_index]['status'])) ? $this->_queries[$this->_q_index]['status'] : 0;
+        $this->queries[$this->currentUpgradeIndex][$this->q_index]['status'] =
+            isset($this->queries[$this->q_index]['status']) ? $this->queries[$this->q_index]['status'] : 0;
 
-        $this->_q_index++;
+        $this->q_index++;
     }
 
     /**
@@ -615,19 +624,20 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
      */
     final public function getQueries()
     {
-        if (!count($this->_upgrades) || !isset($this->_currentUpgradeIndex)) {
+        if (!count($this->upgrades) || !isset($this->currentUpgradeIndex)) {
             //there was an error, display the error message and exit.
-            $error_message = 'Current upgrade not known in function getQueries(). Debug Info: Upgrade Count: ' . count($this->_upgrades) . ' Current Upgrade Index: ' . print_r($this->_currentUpgradeIndex, 1);
+            $error_message = 'Current upgrade not known in function getQueries(). Debug Info: Upgrade Count: '
+                . count($this->upgrades) . ' Current Upgrade Index: ' . print_r($this->currentUpgradeIndex, 1);
             $this->criticalError($error_message, __line__);
         }
         //if folder=none, then there are not any queries to run for that upgrade.
-        if ($this->_upgrades[$this->_currentUpgradeIndex]['folder'] == 'none') {
-            $this->_queries[$this->_currentUpgradeIndex] = array();
+        if ($this->upgrades[$this->currentUpgradeIndex]['folder'] == 'none') {
+            $this->queries[$this->currentUpgradeIndex] = [];
             return true;
         }
 
         //first, need to get queries from main.sql
-        $main_sql_filename = 'versions/' . $this->_upgrades[$this->_currentUpgradeIndex]['folder'] . '/main.sql';
+        $main_sql_filename = 'versions/' . $this->upgrades[$this->currentUpgradeIndex]['folder'] . '/main.sql';
         if (is_file($main_sql_filename)) {
             //main.sql file exists, so load queries for it.
             $this->splitSqlFile($main_sql_filename);
@@ -636,7 +646,8 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         }
 
         //now, see if there is conditional_sql
-        $conditional_sql_filename = 'versions/' . $this->_upgrades[$this->_currentUpgradeIndex]['folder'] . '/conditional_sql.php';
+        $conditional_sql_filename = 'versions/' . $this->upgrades[$this->currentUpgradeIndex]['folder']
+            . '/conditional_sql.php';
         if (is_file($conditional_sql_filename)) {
             //conditional_sql.php exists, so load queries from it.
             include($conditional_sql_filename);
@@ -660,7 +671,7 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         }
 
         //now load up text arrays and stuff.
-        $arrays_filename = 'versions/' . $this->_upgrades[$this->_currentUpgradeIndex]['folder'] . '/arrays.php';
+        $arrays_filename = 'versions/' . $this->upgrades[$this->currentUpgradeIndex]['folder'] . '/arrays.php';
         if (is_file($arrays_filename)) {
             include $arrays_filename;
 
@@ -675,14 +686,15 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
             //$upgrade_array array
             if (isset($upgrade_array) && is_array($upgrade_array)) {
                 $sql_query = "SELECT `language_id` FROM `geodesic_pages_languages`";
-                $language_result = $this->_db->Execute($sql_query);
+                $language_result = $this->db->Execute($sql_query);
                 if (!$language_result) {
-                    die("Error on " . __LINE__ . $this->_db->ErrorMsg());
+                    die("Error on " . __LINE__ . $this->db->ErrorMsg());
                 }
                 $array_keys = array_keys($insert_text_array);
                 foreach ($array_keys as $key) {
-                    $test_sql_query = "SELECT * FROM `geodesic_pages_messages` WHERE `message_id` = " . $insert_text_array[$key][0];
-                    $test_result = $this->_db->Execute($test_sql_query);
+                    $test_sql_query = "SELECT * FROM `geodesic_pages_messages` WHERE `message_id` = "
+                        . $insert_text_array[$key][0];
+                    $test_result = $this->db->Execute($test_sql_query);
                     if (!$test_result) {
                         die("Error on " . __LINE__);
                     } elseif ($test_result->RecordCount() == 0) {
@@ -692,8 +704,10 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
                         $sql_query = "INSERT INTO `geodesic_pages_messages`
                             (`message_id`,`name`,`description`,`text`,`page_id`,`display_order`,`classauctions`)
                             VALUES
-                            (" . $insert_text_array[$key][0] . ",\"" . $insert_text_array[$key][1] . "\",\"" . $insert_text_array[$key][2] . "\",\"" . $insert_text_array[$key][3] . "\",
-                            \"" . $insert_text_array[$key][4] . "\",\"" . $insert_text_array[$key][5] . "\",\"" . $insert_text_array[$key][6] . "\")";
+                            (" . $insert_text_array[$key][0] . ",\"" . $insert_text_array[$key][1] . "\",\""
+                            . $insert_text_array[$key][2] . "\",\"" . $insert_text_array[$key][3] . "\",
+                            \"" . $insert_text_array[$key][4] . "\",\"" . $insert_text_array[$key][5] . "\",\""
+                            . $insert_text_array[$key][6] . "\")";
                     } else {
                         $sql_query = '';
                     }
@@ -703,13 +717,17 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
                 while ($show_language = $language_result->FetchRow()) {
                     reset($upgrade_array);
                     foreach (array_keys($upgrade_array) as $key) {
-                        $sql_query = "SELECT `text_id` FROM `geodesic_pages_messages_languages` WHERE `text_id` = " . $upgrade_array[$key][1] . " AND `language_id` = " . $show_language["language_id"];
-                        $test_result = $this->_db->Execute($sql_query);
+                        $sql_query = "SELECT `text_id` FROM `geodesic_pages_messages_languages` WHERE `text_id` = "
+                            . $upgrade_array[$key][1] . " AND `language_id` = " . $show_language["language_id"];
+                        $test_result = $this->db->Execute($sql_query);
                         if (!$test_result) {
                             die("Error on " . __LINE__);
                         }
                         if ($test_result->RecordCount() == 0) {
-                            $sql_query = "INSERT INTO `geodesic_pages_messages_languages` (`page_id`, `text_id`,`language_id`,`text`) VALUES (" . $upgrade_array[$key][0] . "," . $upgrade_array[$key][1] . ",\"" . $show_language["language_id"] . "\",\"" . $upgrade_array[$key][3] . "\")";
+                            $sql_query = "INSERT INTO `geodesic_pages_messages_languages`
+                                (`page_id`, `text_id`,`language_id`,`text`)
+                                VALUES (" . $upgrade_array[$key][0] . "," . $upgrade_array[$key][1] . ",\""
+                                . $show_language["language_id"] . "\",\"" . $upgrade_array[$key][3] . "\")";
                         } else {
                             //still hold the place, so the query index isn't messed up
                             $sql_query = '';
@@ -723,14 +741,20 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
             }
             if (isset($remove_old_array) && is_array($remove_old_array) && count($remove_old_array) > 0) {
                 //add query to query list.
-                $this->addQuery("DELETE FROM `geodesic_pages_messages_languages` WHERE `text_id` in (" . implode(', ', $remove_old_array) . ")", 0);
+                $this->addQuery("DELETE FROM `geodesic_pages_messages_languages` WHERE `text_id` in ("
+                    . implode(', ', $remove_old_array) . ")", 0);
                 //add query to query list.
-                $this->addQuery("DELETE FROM `geodesic_pages_messages` WHERE `message_id` in (" . implode(', ', $remove_old_array) . ")", 0);
+                $this->addQuery("DELETE FROM `geodesic_pages_messages` WHERE `message_id` in ("
+                    . implode(', ', $remove_old_array) . ")", 0);
                 //free up memory
                 unset($remove_old_array);
             }
 
-            if (isset($remove_old_pages_array) && is_array($remove_old_pages_array) && count($remove_old_pages_array) > 0) {
+            if (
+                isset($remove_old_pages_array)
+                && is_array($remove_old_pages_array)
+                && count($remove_old_pages_array) > 0
+            ) {
                 //remove old pages
                 $page_in = '`page_id` IN (' . implode(', ', $remove_old_pages_array) . ')';
                 //remove from geodesic_pages
@@ -755,7 +779,7 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
     public function runQueries()
     {
         //run the queries.
-        $keys = array_keys($this->_queries[$this->_currentUpgradeIndex]);
+        $keys = array_keys($this->queries[$this->currentUpgradeIndex]);
         //make sure the keys are in order...
         sort($keys);
 
@@ -766,48 +790,55 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
         }
 
         foreach ($keys as $key) {
-            if ($this->_queries[$this->_currentUpgradeIndex][$key]['status'] == 1) {
+            if ($this->queries[$this->currentUpgradeIndex][$key]['status'] == 1) {
                 //if already run, don't run again
                 //echo 'Skipping query, cuz status says already run.<br />';
                 continue;
-            } elseif ($this->_queries[$this->_currentUpgradeIndex][$key]['status'] == -1 && !$this->_queries[$this->_currentUpgradeIndex][$key]['strict']) {
+            } elseif (
+                $this->queries[$this->currentUpgradeIndex][$key]['status'] == -1
+                && !$this->queries[$this->currentUpgradeIndex][$key]['strict']
+            ) {
                 //if already run, but error, and it wasn't strict
                 //don't run again (but if it is strict, it will attempt to run query again)
                 //echo 'Skipping query, cuz already run with error.<br />';
                 continue;
             }
 
-            if (strlen(trim($this->_queries[$this->_currentUpgradeIndex][$key]['sql'])) == 0) {
+            if (strlen(trim($this->queries[$this->currentUpgradeIndex][$key]['sql'])) == 0) {
                 //query is blank, don't attempt to run
                 //but do pretend it was run successfully.
-                $this->_queries[$this->_currentUpgradeIndex][$key]['status'] = '1';
+                $this->queries[$this->currentUpgradeIndex][$key]['status'] = '1';
                 //echo 'Skipping query, cuz strlen is 0<br />';
                 continue;
             }
 
             //run the sql!
-            $sql = $this->_queries[$this->_currentUpgradeIndex][$key]['sql'];
-            $result = $this->_db->Execute($sql);
+            $sql = $this->queries[$this->currentUpgradeIndex][$key]['sql'];
+            $result = $this->db->Execute($sql);
             //record the error message now
             $err_msg = '';
             if (!$result) {
-                $err_msg = $this->_db->ErrorMsg();
+                $err_msg = $this->db->ErrorMsg();
             }
             //echo 'Just executed query: '.$sql.'<br />';
-            $this->_queries[$this->_currentUpgradeIndex][$key]['status'] = (($result !== false) ? '1' : '-1');
-            $result_sql = 'REPLACE INTO `geodesic_upgrade_queries` SET `query_id`=' . $key . ', `strict`=' . $this->_queries[$this->_currentUpgradeIndex][$key]['strict'] . ',`status`=' . $this->_queries[$this->_currentUpgradeIndex][$key]['status'];
+            $this->queries[$this->currentUpgradeIndex][$key]['status'] = (($result !== false) ? '1' : '-1');
+            $result_sql = 'REPLACE INTO `geodesic_upgrade_queries` SET `query_id`=' . $key . ', `strict`='
+                . $this->queries[$this->currentUpgradeIndex][$key]['strict'] . ',`status`='
+                . $this->queries[$this->currentUpgradeIndex][$key]['status'];
 
 
-            $result_result = $this->_db->Execute($result_sql);
+            $result_result = $this->db->Execute($result_sql);
             if (!$result_result) {
-                $this->criticalError('Error when saving query progress. <strong>DB Error Msg:</strong>' . $this->_db->ErrorMsg(), __line__);
+                $this->criticalError('Error when saving query progress. <strong>DB Error Msg:</strong>'
+                    . $this->db->ErrorMsg(), __line__);
             }
-            if (!$result && $this->_queries[$this->_currentUpgradeIndex][$key]['strict']) {
+            if (!$result && $this->queries[$this->currentUpgradeIndex][$key]['strict']) {
                 //this is a strict query, and the query failed!
                 //stop executing queries...
-                echo '<span style="color:red; font-weight:bold;">Critical Upgrade Error:</span> The upgrade query below produced an error.<br />
-<strong>Query:</strong> ' . $sql . '<br />
-<strong>DB Error Message: </strong>' . $err_msg . '<br /><br />';
+                echo '<span style="color:red; font-weight:bold;">Critical Upgrade Error:</span> The upgrade query
+                    below produced an error.<br />
+                    <strong>Query:</strong> ' . $sql . '<br />
+                    <strong>DB Error Message: </strong>' . $err_msg . '<br /><br />';
                 return false;
             }
         }
@@ -868,8 +899,8 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
     public function updateCurrentVersion($new_version)
     {
         $sql = 'UPDATE `geodesic_version` SET `db_version` = ? LIMIT 1';
-        $this->_connectDB();
-        $result =& $this->_db->Execute($sql, array($new_version));
+        $this->connectDB();
+        $result =& $this->db->Execute($sql, array($new_version));
         if (!$result) {
             return false;
         }
@@ -884,30 +915,35 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
     {
         $body = '';
         $button = '';
-        if (!$this->_upgrades) {
+        if (!$this->upgrades) {
             return;
         }
-        if ($this->_upgrades == 'none') {
+        if ($this->upgrades == 'none') {
             //no upgrades to run!
-            $body = '<br /><span style="color: #6B9133; font-weight: bold;"><span style="font-size: 32px;">Congratulations!</span><br />Software upgrade to ' . $this->getCurrentVersion() . ' is complete.</span><br /><br /><br />
-<br /><br />' . $this->getFinishedLinks();
+            $body = '<br /><span style="color: #6B9133; font-weight: bold;"><span style="font-size: 32px;">
+                Congratulations!</span><br />Software upgrade to ' . $this->getCurrentVersion() . ' is complete.</span>
+                <br /><br /><br />
+                <br /><br />' . $this->getFinishedLinks();
         } else {
             $this->tplVars['body_tpl'] = 'body.tpl';
-            $this->tplVars['upgradeIndex'] = $this->_currentUpgradeIndex;
-            $this->tplVars['upgradeStatus'] = $this->_upgrades[$this->_currentUpgradeIndex]['status'];
-            $this->tplVars['upgrades'] = $this->_upgrades;
+            $this->tplVars['upgradeIndex'] = $this->currentUpgradeIndex;
+            $this->tplVars['upgradeStatus'] = $this->upgrades[$this->currentUpgradeIndex]['status'];
+            $this->tplVars['upgrades'] = $this->upgrades;
 
-            if ($this->_currentUpgradeIndex == 0) {
+            if ($this->currentUpgradeIndex == 0) {
                 //first stage, just show all stages.
 
                 $this->step_text .= 'Review Main Upgrades';
-            } elseif ($this->_upgrades[$this->_currentUpgradeIndex]['status'] == '-1') {
+            } elseif ($this->upgrades[$this->currentUpgradeIndex]['status'] == '-1') {
                 //there were errors for one of the upgrades.
                 $this->step_text .= 'Error Running Main Upgrades';
-            } elseif (isset($this->_upgrades[$this->_currentUpgradeIndex + 1])) {
+            } elseif (isset($this->upgrades[$this->currentUpgradeIndex + 1])) {
                 //Do more upgrades...
                 $this->tplVars['moreUpdates'] = 1;
-            } elseif ($this->_upgrades[$this->_currentUpgradeIndex]['status'] == '2' && $this->_upgrades[$this->_currentUpgradeIndex]['to'] == $this->getCurrentVersion()) {
+            } elseif (
+                $this->upgrades[$this->currentUpgradeIndex]['status'] == '2'
+                & $this->upgrades[$this->currentUpgradeIndex]['to'] == $this->getCurrentVersion()
+            ) {
                 //all upgrades are complete
                 if ($_POST['cleanup']) {
                     $this->tplVars['finishedAll'] = 1;
@@ -927,8 +963,7 @@ Once you have made the needed changes, come back to this page and refresh.  Cont
      */
     public function criticalError($message, $line = 'n/a')
     {
-        $message = "<strong>Internal Critical Error ($line):</strong>$message<br /><br />
-Please contact Geodesic Support.";
+        $message = "<strong>Internal Critical Error ($line):</strong>$message";
         $this->tplVars['body'] = $message;
         $this->display_page();
         exit;
@@ -946,8 +981,8 @@ Please contact Geodesic Support.";
         //show upgrades
         $body .= 'Upgrades:
 ';
-        if (count($this->_upgrades)) {
-            foreach ($this->_upgrades as $upgrade) {
+        if (count($this->upgrades)) {
+            foreach ($this->upgrades as $upgrade) {
                 switch ($upgrade['status']) {
                     case -1:
                         $status = 'Critical Errors';
@@ -966,11 +1001,11 @@ Please contact Geodesic Support.";
 ";
             }
         }
-        if (count($this->_queries)) {
+        if (count($this->queries)) {
             $body .= '
 Queries Recorded:
 ';
-            foreach ($this->_queries as $index => $data) {
+            foreach ($this->queries as $index => $data) {
                 $strict = ($data['strict']) ? 'yes' : 'no';
                 switch ($data['status']) {
                     case -1:
@@ -987,17 +1022,18 @@ Queries Recorded:
 ";
             }
         }
-        if (!(count($this->_queries) || count($this->_upgrades))) {
+        if (!(count($this->queries) || count($this->upgrades))) {
             $body .= 'No upgrade progress data stored in database.  Did the upgrade complete already?
-Note that on successful upgrade completion, the log is cleared.
-The log is only preserved if errors occurr during the upgrade process.';
+                Note that on successful upgrade completion, the log is cleared.
+                The log is only preserved if errors occurr during the upgrade process.';
         }
         $next = (isset($_GET['next'])) ? $_GET['next'] : 'continue';
-        $body = "Upgrade Log: <br /><textarea cols=\"90\" rows=\"10\" readonly=\"readonly\">" . htmlspecialchars($body) . "</textarea>
-<br />
-<form method=\"POST\" action=\"index.php?run=$next\">
-    <input type=\"submit\" value=\"Continue or Finish Upgrade >>\" />
-</form>";
+        $body = "Upgrade Log: <br /><textarea cols=\"90\" rows=\"10\" readonly=\"readonly\">"
+            . htmlspecialchars($body) . "</textarea>
+            <br />
+            <form method=\"POST\" action=\"index.php?run=$next\">
+                <input type=\"submit\" value=\"Continue or Finish Upgrade >>\" />
+            </form>";
         $this->tplVars['body'] = $body;
     }
     /**
@@ -1015,69 +1051,9 @@ The log is only preserved if errors occurr during the upgrade process.';
 
     public function getLicenseKey()
     {
-        $this->_connectDB();
-        $row = $this->_db->GetRow("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='license'");
+        $this->connectDB();
+        $row = $this->db->GetRow("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='license'");
         return (isset($row['value'])) ? $row['value'] : '';
-    }
-
-    private $configuration_data;
-
-    /**
-     * Set up GeoCore master switches so that they mirror the version in use before the update, when coming from the old split products
-     */
-    private function geoCore_init_listingTypes()
-    {
-        $oldKey = $this->getLicenseKey();
-        $type = 0;
-        if (stripos('classauctions', $oldKey) !== false) {
-            //coming from classauctions -- use existing settings
-            return true;
-        } elseif (stripos('classifieds', $oldKey) !== false) {
-            $type = 1;
-        } elseif (stripos('auctions', $oldKey) !== false) {
-            $type = 2;
-        } else {
-            //not an old product -- skip this step
-            return true;
-        }
-
-        //if we're coming from classauctions, leave things as they are -- the upgrade sorts that later
-        //if coming from something else, set it up to look like the old classauctions switch is set, so that the upgrade will sort it later
-        $this->_connectDB();
-        $sql = "UPDATE `geodesic_classifieds_configuration` SET `listing_type_allowed` = ?";
-        $result = $this->_db->Execute($sql, array($type));
-        return ($result) ? true : false;
-    }
-
-    /**
-     * Handy to get "site settings" merged with "configuration data" when such info is needed
-     * during an update.  Acts just like the same-named method in main DataAccess class.
-     *
-     * @param bool $return_table
-     * @return array
-     */
-    private function get_site_settings()
-    {
-        //force_fresh_get is no longer needed, since we update the config table automatically.
-        if (isset($this->configuration_data)) {
-             //dont get the data twice if we already have it.
-             return $this->_filterSettings();
-        }
-
-        $sql = "SELECT * FROM `geodesic_classifieds_configuration`";
-        $this->configuration_data = $this->_db->GetRow($sql);
-
-        //to get the new site settings.
-        $sql = 'SELECT `setting`, `value` FROM `geodesic_site_settings`';
-
-         $rows = $this->_db->GetAll($sql);
-
-        foreach ($rows as $row) {
-            //side effect: any settings duplicated in configuration data and sit config tables,
-            //will be overridden by the newer table.
-            $this->configuration_data[$row['setting']] = $row['value'];
-        }
-         return $this->configuration_data;
     }
 
     /**
@@ -1091,10 +1067,16 @@ The log is only preserved if errors occurr during the upgrade process.';
     public function addFieldLocationDefaults($locationName, $mimicLocation = 'browsing')
     {
         //make sure new location does not already have settings on it
-        $count = (int)$this->_db->GetOne("SELECT COUNT(*) FROM `geodesic_fields` WHERE `display_locations` LIKE ?", array ('%"' . $locationName . '"%'));
+        $count = (int)$this->db->GetOne(
+            "SELECT COUNT(*) FROM `geodesic_fields` WHERE `display_locations` LIKE ?",
+            array ('%"' . $locationName . '"%')
+        );
 
         //first figure out if there are any fields that have browsing turned on..
-        $rows = $this->_db->GetAll("SELECT * FROM `geodesic_fields` WHERE `display_locations` LIKE ?", array ('%"' . $mimicLocation . '"%'));
+        $rows = $this->db->GetAll(
+            "SELECT * FROM `geodesic_fields` WHERE `display_locations` LIKE ?",
+            array ('%"' . $mimicLocation . '"%')
+        );
 
         foreach ($rows as $row) {
             $locations = unserialize($row['display_locations']);
@@ -1102,8 +1084,10 @@ The log is only preserved if errors occurr during the upgrade process.';
             if (in_array($mimicLocation, $locations)) {
                 $locations[] = $locationName;
 
-                $locations = $this->_db->qstr(serialize($locations));
-                $sql = ($count) ? '' : "UPDATE `geodesic_fields` SET `display_locations`=$locations WHERE `group_id`='{$row['group_id']}' AND `category_id`='{$row['category_id']}' AND `field_name`='{$row['field_name']}' LIMIT 1";
+                $locations = $this->db->qstr(serialize($locations));
+                $sql = ($count) ? '' : "UPDATE `geodesic_fields` SET `display_locations`=$locations WHERE
+                    `group_id`='{$row['group_id']}' AND `category_id`='{$row['category_id']}' AND
+                    `field_name`='{$row['field_name']}' LIMIT 1";
                 $this->addQuery($sql, 0);
             }
         }

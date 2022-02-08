@@ -15,8 +15,10 @@ if ($show_module['is_ajax']) {
     $page->messages = $page->messages + $this->get_text(true, 59);
 }
 
-//IMPORTANT: due to new ajax pagination, $show_module can be affected by user input and should NOT be assumed to be clean
-//module_replace_tag, in particular, is dumped straight into a couple of templates, so be extra sure there's no funny business going on in it
+//IMPORTANT: due to new ajax pagination, $show_module can be affected by user input and should NOT be assumed to be
+//clean
+//module_replace_tag, in particular, is dumped straight into a couple of templates, so be extra sure there's no funny
+//business going on in it
 $show_module['module_replace_tag'] = geoString::specialChars($show_module['module_replace_tag']);
 
 $browsing = new geoBrowse();
@@ -28,7 +30,8 @@ $query = (isset($query)) ? $query : $db->getTableSelect(DataAccess::SELECT_BROWS
 $classTable = geoTables::classifieds_table;
 
 //strip out by item type
-//$show_module['module_display_type_listing'] WILL ALWAYS BE ZERO IF NOT CLASSAUCTIONS. THE SWITCH IN ADMIN IS NOT AVAILABLE TO CHOOSE.
+//$show_module['module_display_type_listing'] WILL ALWAYS BE ZERO IF NOT CLASSAUCTIONS. THE SWITCH IN ADMIN IS NOT
+//AVAILABLE TO CHOOSE.
 if (geoMaster::is('classifieds') && geoMaster::is('auctions')) {
     if ($show_module['module_display_type_listing'] == 1) {
         //only show classifieds.
@@ -74,7 +77,11 @@ if (isset($show_module['cat_id'])) {
         //passed in a scalar value; clean it as an int
         $tpl_vars['cat_id'] = (int)$show_module['cat_id'];
     }
-} elseif (isset($tpl_vars['is_featured_category']) && $tpl_vars['is_featured_category'] && $show_module['module_category']) {
+} elseif (
+    isset($tpl_vars['is_featured_category'])
+    && $tpl_vars['is_featured_category']
+    && $show_module['module_category']
+) {
     $tpl_vars['cat_id'] = (int)$show_module['module_category'];
 }
 if (isset($show_module['not_cat_id'])) {
@@ -116,7 +123,10 @@ $query->where("EXISTS ({$subQuery})");
 unset($subQuery, $imgTable);
 
 //allow addons to add to or modify the query
-geoAddon::triggerUpdate('Browse_pic_module_generate_query', array('this' => $this, 'query' => $query, 'show_module' => $show_module));
+geoAddon::triggerUpdate(
+    'Browse_pic_module_generate_query',
+    array('this' => $this, 'query' => $query, 'show_module' => $show_module)
+);
 
 //set limit
 $pageNumber = (int)$show_module['results_page'];
@@ -134,7 +144,16 @@ $browse_result = $db->Execute('' . $query);
 $numListings = $db->GetOne('' . $query->getCountQuery());
 $numPages = ceil($numListings / $show_module['module_number_of_ads_to_display']);
 if ($numPages > 1 && $show_module['use_pagination'] == 1) {
-    $tpl_vars['module_pagination'] = geoPagination::getHTML($numPages, $pageNumber, '', '', '', false, false, $show_module['module_replace_tag']);
+    $tpl_vars['module_pagination'] = geoPagination::getHTML(
+        $numPages,
+        $pageNumber,
+        '',
+        '',
+        '',
+        false,
+        false,
+        $show_module['module_replace_tag']
+    );
 }
 
 //unset query, we are done with it, don't want it accidentally persisting for another module.
@@ -156,9 +175,11 @@ if ($browse_result->RecordCount() < 1) {
     $fields = $browsing->fields->getModuleFields($show_module['module_replace_tag']);
 
     //whether to show auctions or not...
-    $show_auctions = (geoMaster::is('auctions') && in_array($show_module['module_display_type_listing'], array(0,2,4)));
+    $show_auctions = (geoMaster::is('auctions')
+        && in_array($show_module['module_display_type_listing'], array(0,2,4)));
 
-    $show_classifieds = (geoMaster::is('classifieds') && in_array($show_module['module_display_type_listing'], array(0,1)));
+    $show_classifieds = (geoMaster::is('classifieds')
+        && in_array($show_module['module_display_type_listing'], array(0,1)));
 
     //set up header view vars
     $headers['css'] = 'module_' . $show_module['module_replace_tag'];
@@ -172,7 +193,8 @@ if ($browse_result->RecordCount() < 1) {
     //NOTE2: SEtting both text and label, even though gallery view only uses "label",
     //so that someone could easily switch to use grid view instead and the labels
     //would be used for column headers.
-    $cfg['cols']['type'] = (geoMaster::is('classifieds') && geoMaster::is('auctions') && $show_module['module_display_type_text']) ? true : false;
+    $cfg['cols']['type'] = (geoMaster::is('classifieds') && geoMaster::is('auctions')
+        && $show_module['module_display_type_text']) ? true : false;
     $headers['type'] = array(
         'css' => 'item_type_pic_info',
         'label' => $txt_vars['module_display_listing_column'],
@@ -205,7 +227,7 @@ if ($browse_result->RecordCount() < 1) {
         $cfg['cols']['icons'] = (bool)$fields['icons'];
     }
 
-    $cfg['description_under_title'] = ($fields['description'] && $show_module['module_display_ad_description_where']) ? true : false;
+    $cfg['description_under_title'] = ($fields['description'] && $show_module['module_display_ad_description_where']);
 
     $cfg['cols']['description'] = ($fields['description'] && !$cfg['description_under_title']) ? true : false;
     $headers['description'] = array(
@@ -332,7 +354,8 @@ if ($browse_result->RecordCount() < 1) {
         'reorder' => 68,
     );
 
-    $cfg['cols']['time_left'] = (($show_classifieds && $fields['classified_time_left']) || ($show_auctions && $fields['auction_time_left'])) ? true : false;
+    $cfg['cols']['time_left'] = (($show_classifieds && $fields['classified_time_left'])
+        || ($show_auctions && $fields['auction_time_left'])) ? true : false;
     $headers['time_left'] = array(
         'css' => 'price_pic_info',
         'label' => $txt_vars['module_display_time_left'],
@@ -340,14 +363,16 @@ if ($browse_result->RecordCount() < 1) {
         'reorder' => 70,
     );
 
-    $cfg['cols']['edit'] = (geoSession::getInstance()->getUserID() == 1 || geoAddon::triggerDisplay('auth_listing_edit', true, geoAddon::NOT_NULL)) ? true : false;
+    $cfg['cols']['edit'] = (geoSession::getInstance()->getUserID() == 1
+        || geoAddon::triggerDisplay('auth_listing_edit', true, geoAddon::NOT_NULL)) ? true : false;
     $headers['edit'] = array(
         'css' => 'price_pic_info',
         'label' => 'edit',
         'text' => 'edit'
     );
 
-    $cfg['cols']['delete'] = (geoSession::getInstance()->getUserID() == 1 || geoAddon::triggerDisplay('auth_listing_delete', true, geoAddon::NOT_NULL)) ? true : false;
+    $cfg['cols']['delete'] = (geoSession::getInstance()->getUserID() == 1
+        || geoAddon::triggerDisplay('auth_listing_delete', true, geoAddon::NOT_NULL)) ? true : false;
     $headers['delete'] = array(
         'css' => 'price_pic_info',
         'label' => 'delete',
@@ -360,7 +385,11 @@ if ($browse_result->RecordCount() < 1) {
      * vars: array (this => Object) (this is the instance of $this.
      * return: array (css => string (CSS Class), text => string (what should be displayed)
      */
-    $tpl_vars['addonHeaders'] = geoAddon::triggerDisplay('Browse_module_display_browse_result_addHeader', array('this' => $page, 'fields' => $fields, 'show_module' => $show_module), geoAddon::ARRAY_ARRAY);
+    $tpl_vars['addonHeaders'] = geoAddon::triggerDisplay(
+        'Browse_module_display_browse_result_addHeader',
+        array('this' => $page, 'fields' => $fields, 'show_module' => $show_module),
+        geoAddon::ARRAY_ARRAY
+    );
 
     if ($browsing->configuration_data['popup_while_browsing']) {
         $cfg['popup'] = true;
@@ -409,7 +438,8 @@ if ($browse_result->RecordCount() < 1) {
     $browsing->configuration_data['featured_thumbnail_max_width'] = (int)$show_module['module_thumb_width'];
     $browsing->configuration_data['featured_thumbnail_max_height'] = (int)$show_module['module_thumb_height'];
     $browsing->configuration_data['display_all_of_description'] = ((int)$show_module['length_of_description'] == 0);
-    $browsing->configuration_data['module_title_and_optional_length'] = $browsing->configuration_data['length_of_description'] = (int)$show_module['length_of_description'];
+    $browsing->configuration_data['module_title_and_optional_length'] =
+        $browsing->configuration_data['length_of_description'] = (int)$show_module['length_of_description'];
 
     while ($row = $browse_result->FetchRow()) {
         $id = $row['id']; //template expects $listings to be keyed by classified id
@@ -421,10 +451,14 @@ if ($browse_result->RecordCount() < 1) {
         $listings[$id] = $browsing->commonBrowseData($row, $text, true, false);
 
         //css is different enough to not include in the common file
-        $listings[$id]['css'] = '';//'browsing_result_table_body_' . (($count++ % 2 == 0) ? 'even' : 'odd') . (($row['bolding']) ? '_bold' : '');
+        $listings[$id]['css'] = '';
 
         //also do addons separately
-        $listings[$id]['addonData'] = geoAddon::triggerDisplay('Browse_module_display_browse_result_addRow', array('this' => $page,'show_classifieds' => $row, 'fields' => $fields, 'show_module' => $show_module), geoAddon::ARRAY_ARRAY);
+        $listings[$id]['addonData'] = geoAddon::triggerDisplay(
+            'Browse_module_display_browse_result_addRow',
+            array('this' => $page,'show_classifieds' => $row, 'fields' => $fields, 'show_module' => $show_module),
+            geoAddon::ARRAY_ARRAY
+        );
     }
     $tpl_vars['listings'] = $listings;
 }
