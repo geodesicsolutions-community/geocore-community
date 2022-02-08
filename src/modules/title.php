@@ -18,15 +18,18 @@ $page->get_ad_configuration(0, 1);
 if ($page->ad_configuration_data["title_module_language_display"] == 1) {
     $language_id = $this->getLanguage();
     if ($page->page_id == 1) {
-        //get the language id from the listing itself as that is language of the important content irrespective of browsing language
+        //get the language id from the listing itself as that is language of the important content irrespective of
+        //browsing language
         $listing_data = geoListing::getListing($_REQUEST['b']);
         $language_id = $listing_data->language_id;
     }
-    //if not listing display page use the language id of the user browsing the site as they are seeing pages in that language
+    //if not listing display page use the language id of the user browsing the site as they are seeing pages in that
+    //language
     $sql = "SELECT * FROM " . $page->pages_languages_table . " WHERE language_id=?";
     $language_result = $db->GetRow($sql, array($language_id));
     if ($language_result) {
-        $tpl_vars["language_text"] = $page->messages[502382] . geoString::fromDB($language_result['language']) . $page->messages[502383];
+        $tpl_vars["language_text"] = $page->messages[502382] . geoString::fromDB($language_result['language'])
+            . $page->messages[502383];
     }
 } else {
     $tpl_vars["language_text"] = "";
@@ -83,10 +86,12 @@ switch ($page->page_id) {
         break;
 
     case 4: //notify friend form
-        $text = ((strlen(trim($page->messages[502303])) > 0) ? ($page->messages[502303] . " '" . geoListing::getTitle($_REQUEST["b"]) . "'") : $default_text);
+        $text = ((strlen(trim($page->messages[502303])) > 0) ? ($page->messages[502303] . " '"
+            . geoListing::getTitle($_REQUEST["b"]) . "'") : $default_text);
         break;
     case 6: //contact seller form
-        $text = ((strlen(trim($page->messages[502304])) > 0) ? ($page->messages[502304] . " '" . geoListing::getTitle($_REQUEST["b"]) . "'") : $default_text);
+        $text = ((strlen(trim($page->messages[502304])) > 0) ? ($page->messages[502304] . " '"
+            . geoListing::getTitle($_REQUEST["b"]) . "'") : $default_text);
         break;
     case 15: //registration information collection
         $text = ((strlen(trim($page->messages[502305])) > 0) ? $page->messages[502305] : $default_text);
@@ -101,45 +106,59 @@ switch ($page->page_id) {
         $text = ((strlen(trim($page->messages[502306])) > 0) ? $page->messages[502306] : $default_text);
         break;
     case 22: //user current listings page
-        $text = ((strlen(trim($page->messages[502308])) > 0) ? ($page->messages[502308] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502308])) > 0) ? ($page->messages[502308] . " "
+            . $username) : $default_text);
         break;
     case 23: //user expired listings page
-        $text = ((strlen(trim($page->messages[502309])) > 0) ? ($page->messages[502309] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502309])) > 0) ? ($page->messages[502309] . " "
+            . $username) : $default_text);
         break;
     case 24: //user current communications page
-        $text = ((strlen(trim($page->messages[502310])) > 0) ? ($page->messages[502310] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502310])) > 0) ? ($page->messages[502310] . " "
+            . $username) : $default_text);
         break;
     case 25: //view specific communication page
-        $text = ((strlen(trim($page->messages[502311])) > 0) ? ($page->messages[502311] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502311])) > 0) ? ($page->messages[502311] . " "
+            . $username) : $default_text);
         break;
     case 26: //communication configuration page
-        $text = ((strlen(trim($page->messages[502312])) > 0) ? ($page->messages[502312] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502312])) > 0) ? ($page->messages[502312] . " "
+            . $username) : $default_text);
         break;
     case 27: //listing filters/saved search page
-        $text = ((strlen(trim($page->messages[502313])) > 0) ? ($page->messages[502313] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502313])) > 0) ? ($page->messages[502313] . " "
+            . $username) : $default_text);
         break;
     case 28: //add new listing filter/saved search form page
-        $text = ((strlen(trim($page->messages[502314])) > 0) ? ($page->messages[502314] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502314])) > 0) ? ($page->messages[502314] . " "
+            . $username) : $default_text);
         break;
     case 30: //user favorites page
-        $text = ((strlen(trim($page->messages[502315])) > 0) ? ($page->messages[502315] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502315])) > 0) ? ($page->messages[502315] . " "
+            . $username) : $default_text);
         break;
     case 31: //edit listing home
         $text = ((strlen(trim($page->messages[502316])) > 0) ? ($page->messages[502316]) : $default_text);
         break;
     case 35: //view expired listings detail page
-        $listing_title = ((is_numeric($_REQUEST['c']) && ($_REQUEST['c'] != 0)) ? geoListing::getTitle($_REQUEST['c']) : '');
-        $text = ((strlen(trim($listing_title)) > 0 ) ? ($page->messages[502317] . " '" . $listing_title . "'") : $default_text);
+        $listing_title = is_numeric($_REQUEST['c']) && $_REQUEST['c'] != 0 ?
+            geoListing::getTitle($_REQUEST['c']) : '';
+        $text = strlen(trim($listing_title)) > 0 ?
+            $page->messages[502317] . " '" . $listing_title . "'" : $default_text;
         break;
     case 36: //verify listing removal page
-        $listing_title = ((is_numeric($_REQUEST['c']) && ($_REQUEST['c'] != 0)) ? geoListing::getTitle($_REQUEST['c']) : '');
-        $text = ((strlen(trim($listing_title)) > 0 ) ? ($page->messages[502318] . " (" . $listing_title . ")") : $default_text);
+        $listing_title = (is_numeric($_REQUEST['c']) && ($_REQUEST['c'] != 0)) ?
+            geoListing::getTitle($_REQUEST['c']) : '';
+        $text = (strlen(trim($listing_title)) > 0 ) ?
+            ($page->messages[502318] . " (" . $listing_title . ")") : $default_text;
         break;
     case 37: //view user personal information page
-        $text = ((strlen(trim($page->messages[502319])) > 0) ? ($page->messages[502319] . " " . $username) : $default_text);
+        $text = (strlen(trim($page->messages[502319])) > 0) ?
+            ($page->messages[502319] . " " . $username) : $default_text;
         break;
     case 38: //edit user personal information page
-        $text = ((strlen(trim($page->messages[502320])) > 0) ? ($page->messages[502320] . " " . $username) : $default_text);
+        $text = (strlen(trim($page->messages[502320])) > 0) ?
+            ($page->messages[502320] . " " . $username) : $default_text;
         break;
     case 39: //login page
         $text = ((strlen(trim($page->messages[502321])) > 0) ? $page->messages[502321] : $default_text);
@@ -151,11 +170,13 @@ switch ($page->page_id) {
         $text = ((strlen(trim($page->messages[502323])) > 0) ? $page->messages[502323] : $default_text);
         break;
     case 43: //user management home page
-        $text = ((strlen(trim($page->messages[502324])) > 0) ? ($page->messages[502324] . " " . $username) : $default_text);
+        $text = (strlen(trim($page->messages[502324])) > 0) ?
+            ($page->messages[502324] . " " . $username) : $default_text;
         break;
     case 44: //search and search page results page
         if (isset($_REQUEST["b"]["search_text"]) && (strlen(trim($_REQUEST["b"]["search_text"])) > 0)) {
-            $text = ((strlen(trim($page->messages[502324])) > 0) ? ($page->messages[502324] . " '" . urldecode($_REQUEST["b"]["search_text"]) . "'") : $default_text);
+            $text = (strlen(trim($page->messages[502324])) > 0) ?
+                ($page->messages[502324] . " '" . urldecode($_REQUEST["b"]["search_text"]) . "'") : $default_text;
         } else {
             $text = ((strlen(trim($page->messages[502325])) > 0) ? $page->messages[502325] : $default_text);
         }
@@ -163,7 +184,8 @@ switch ($page->page_id) {
     case 55: //sellers other listings page
         //need sellers username
         $username = geoUser::userName((int)$_REQUEST['b']);
-        $text = ((strlen(trim($page->messages[502326])) > 0) ? ($page->messages[502326] . " " . $username) : $default_text);
+        $text = (strlen(trim($page->messages[502326])) > 0) ?
+            ($page->messages[502326] . " " . $username) : $default_text;
         break;
     case 56: //renew/upgrade listings page
         $text = ((strlen(trim($page->messages[502327])) > 0) ? $page->messages[502327] : $default_text);
@@ -172,13 +194,16 @@ switch ($page->page_id) {
         $text = ((strlen(trim($page->messages[502328])) > 0) ? $page->messages[502328] : $default_text);
         break;
     case 62: //browse featured pic listings page
-        $text = ((strlen(trim($page->messages[502329])) > 0) ? ($page->messages[502329] . " " . $category_name) : $default_text);
+        $text = ((strlen(trim($page->messages[502329])) > 0) ?
+            ($page->messages[502329] . " " . $category_name) : $default_text);
         break;
     case 63: //browse featured listing text only page
-        $text = ((strlen(trim($page->messages[502330])) > 0) ? ($page->messages[502330] . " " . $category_name) : $default_text);
+        $text = ((strlen(trim($page->messages[502330])) > 0) ?
+            ($page->messages[502330] . " " . $category_name) : $default_text);
         break;
     case 64: //browse newest listings page
-        $text = ((strlen(trim($page->messages[502331])) > 0) ? ($page->messages[502331] . " " . $category_name) : $default_text);
+        $text = ((strlen(trim($page->messages[502331])) > 0) ?
+            ($page->messages[502331] . " " . $category_name) : $default_text);
         break;
     case 70: //flyer form page
         $text = ((strlen(trim($page->messages[502332])) > 0) ? $page->messages[502332] : $default_text);
@@ -202,12 +227,16 @@ switch ($page->page_id) {
         $tpl_vars['category_name'] = geoString::fromDB($name);
         break;
     case 115: //voting comments view
-        $listing_title = ((is_numeric($_REQUEST['b']) && ($_REQUEST['b'] != 0)) ? geoListing::getTitle($_REQUEST['b']) : '');
-        $text = ((strlen(trim($listing_title)) > 0 ) ? ($page->messages[502337] . " '" . $listing_title . "'") : $default_text);
+        $listing_title = ((is_numeric($_REQUEST['b']) && ($_REQUEST['b'] != 0)) ?
+            geoListing::getTitle($_REQUEST['b']) : '');
+        $text = ((strlen(trim($listing_title)) > 0 ) ?
+            ($page->messages[502337] . " '" . $listing_title . "'") : $default_text);
         break;
     case 116: //voting form
-        $listing_title = ((is_numeric($_REQUEST['b']) && ($_REQUEST['b'] != 0)) ? geoListing::getTitle($_REQUEST['b']) : '');
-        $text = ((strlen(trim($listing_title)) > 0 ) ? ($page->messages[502338] . " '" . $listing_title . "'") : $default_text);
+        $listing_title = ((is_numeric($_REQUEST['b']) && ($_REQUEST['b'] != 0)) ?
+            geoListing::getTitle($_REQUEST['b']) : '');
+        $text = ((strlen(trim($listing_title)) > 0 ) ?
+            ($page->messages[502338] . " '" . $listing_title . "'") : $default_text);
         break;
     case 135: //extra page 1
         $text = ((strlen(trim($page->messages[502339])) > 0) ? $page->messages[502339] : $default_text);
@@ -282,53 +311,66 @@ switch ($page->page_id) {
         break;
 
     case 10157: //Feedback Home
-        $text = ((strlen(trim($page->messages[502362])) > 0) ? ($page->messages[502362] . " " . $view->username) : $default_text);
+        $text = ((strlen(trim($page->messages[502362])) > 0) ?
+            ($page->messages[502362] . " " . $view->username) : $default_text);
         break;
 
     case 10158: //feedback about specific client
         $user = geoUser::getUser($_REQUEST["d"]);
-        $text = ((strlen(trim($page->messages[502363])) > 0) ? ($page->messages[502363] . " " . trim($user->username)) : $default_text);
+        $text = ((strlen(trim($page->messages[502363])) > 0) ?
+            ($page->messages[502363] . " " . trim($user->username)) : $default_text);
         break;
         //get userid of feedback displayed
     case 10159: //open feedbase for current client
-        $text = ((strlen(trim($page->messages[502364])) > 0) ? ($page->messages[502364] . " " . $view->username) : $default_text);
+        $text = ((strlen(trim($page->messages[502364])) > 0) ?
+            ($page->messages[502364] . " " . $view->username) : $default_text);
         break;
     case 10160: //leave feedback
         $title = geoListing::getTitle($_REQUEST["d"]);
-        $text = ((strlen(trim($page->messages[502365])) > 0) ? ($page->messages[502365] . " " . $title . "(" . $_REQUEST["d"] . ")") : $default_text);
+        $text = ((strlen(trim($page->messages[502365])) > 0) ?
+            ($page->messages[502365] . " " . $title . "(" . $_REQUEST["d"] . ")") : $default_text);
         break;
     case 10161: //feedback thank you
         $title = geoListing::getTitle($_REQUEST["d"]);
-        $text = ((strlen(trim($page->messages[502366])) > 0) ? ($page->messages[502366] . " " . $title . "(" . $_REQUEST["d"] . ")") : $default_text);
+        $text = ((strlen(trim($page->messages[502366])) > 0) ?
+            ($page->messages[502366] . " " . $title . "(" . $_REQUEST["d"] . ")") : $default_text);
         break;
     case 10162: //feedback error page
         $title = geoListing::getTitle($_REQUEST["d"]);
-        $text = ((strlen(trim($page->messages[502367])) > 0) ? ($page->messages[502367] . " " . $title . "(" . $_REQUEST["d"] . ")") : $default_text);
+        $text = ((strlen(trim($page->messages[502367])) > 0) ?
+            ($page->messages[502367] . " " . $title . "(" . $_REQUEST["d"] . ")") : $default_text);
         break;
     case 10163: //bid setup page
         $title = geoListing::getTitle($_REQUEST["b"]);
-        $text = ((strlen(trim($page->messages[502368])) > 0) ? ($page->messages[502368] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
+        $text = ((strlen(trim($page->messages[502368])) > 0) ?
+            ($page->messages[502368] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
         break;
     case 10164: //bid error page
         $title = geoListing::getTitle($_REQUEST["b"]);
-        $text = ((strlen(trim($page->messages[502369])) > 0) ? ($page->messages[502369] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
+        $text = ((strlen(trim($page->messages[502369])) > 0) ?
+            ($page->messages[502369] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
         break;
     case 10165: //bid successful page
         $title = geoListing::getTitle($_REQUEST["b"]);
-        $text = ((strlen(trim($page->messages[502370])) > 0) ? ($page->messages[502370] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
+        $text = ((strlen(trim($page->messages[502370])) > 0) ?
+            ($page->messages[502370] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
         break;
     case 10171: //bid history page
         $title = geoListing::getTitle($_REQUEST["b"]);
-        $text = ((strlen(trim($page->messages[502371])) > 0) ? ($page->messages[502371] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
+        $text = ((strlen(trim($page->messages[502371])) > 0) ?
+            ($page->messages[502371] . " " . $title . "(" . $_REQUEST["b"] . ")") : $default_text);
         break;
     case 10175: //Users Current Bids Page
-        $text = ((strlen(trim($page->messages[502372])) > 0) ? ($page->messages[502372] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502372])) > 0) ?
+            ($page->messages[502372] . " " . $username) : $default_text);
         break;
     case 10183: //sellers blacklist page
-        $text = ((strlen(trim($page->messages[502373])) > 0) ? ($page->messages[502372] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502373])) > 0) ?
+            ($page->messages[502372] . " " . $username) : $default_text);
         break;
     case 10184: //sellers invited list page
-        $text = ((strlen(trim($page->messages[502374])) > 0) ? ($page->messages[502374] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502374])) > 0) ?
+            ($page->messages[502374] . " " . $username) : $default_text);
         break;
     case 10201: //seller to buyer transaction page
         $text = ((strlen(trim($page->messages[502375])) > 0) ? $page->messages[502375] : $default_text);
@@ -346,7 +388,8 @@ switch ($page->page_id) {
         $text = ((strlen(trim($page->messages[502379])) > 0) ? $page->messages[502379] : $default_text);
         break;
     case 10209: //my account home page
-        $text = ((strlen(trim($page->messages[502324])) > 0) ? ($page->messages[502324] . " " . $username) : $default_text);
+        $text = ((strlen(trim($page->messages[502324])) > 0) ?
+            ($page->messages[502324] . " " . $username) : $default_text);
         break;
 
 

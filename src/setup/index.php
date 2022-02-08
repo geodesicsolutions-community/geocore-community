@@ -164,7 +164,6 @@ if (in_array($step, $redoneSteps)) {
 
 
         case 'login':
-        case 'login_save':
         case 'image':
             /*  Start image information */
             include_once("image.php");
@@ -222,17 +221,10 @@ if (in_array($step, $redoneSteps)) {
                                         "Please click the \"continue\"  button to move on to the next step.",
                     $template
                 );
-                $template = str_replace("(!CONTINUE!)", '<div id="submit_button"><a href="index.php?a=email"
+                $template = str_replace("(!CONTINUE!)", '<div id="submit_button"><a href="index.php?a=congrats"
                     style="padding-top:.25em;">Continue</a></div>', $template);
             }
             /*  End saving registration information */
-            break;
-
-        case 'email':
-            /*  Start testing email information */
-            include_once("email.php");
-            $errors = email($db, $install[$product_type], $template);
-            /*  End testing email information   */
             break;
 
         case 'congrats':

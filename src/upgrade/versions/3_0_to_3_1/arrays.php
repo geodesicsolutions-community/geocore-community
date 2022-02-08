@@ -1,5 +1,6 @@
 <?php
 
+// phpcs:disable Generic.Files.LineLength.TooLong
 $upgrade_array = array (
     array (9, 500110, 1, 'no+title%0D%0A'),
     array (37, 500111, 1, 'Final+Fee+Charge+Fixed%0D%0A'),

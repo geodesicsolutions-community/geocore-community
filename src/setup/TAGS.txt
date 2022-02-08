@@ -57,16 +57,6 @@ site_success:
 (!SUCCESS!)
 (!CONTINUE!)
 
-login:
-(!INTRO!)
-(!PASSWORD_LABEL!)
-(!PASSWORD_FIELD!)
-(!SUBMIT!)
-
-login_success:
-(!SUCCESS!)
-(!CONTINUE!)
-
 image:
 (!IMAGES_UPLOAD_DB_LABEL!)
 (!IMAGES_UPLOAD_DB_DESCRIPTION!)

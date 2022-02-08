@@ -1,15 +1,5 @@
 <?php
 
-/*
- *	Copyright (c) 2004 Geodesic Solutions, LLC
- *	GeoInstaller
- *	All rights reserved
- *	http://www.geodesicsolutions.com
- *
- *	Module:		config.php Checking Module
- *	Filename:	config_check.php
- */
-
 function config_check(&$template, $error = 0)
 {
     // Replace (!MAINBODY!) with file template

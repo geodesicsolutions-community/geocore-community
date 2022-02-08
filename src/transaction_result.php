@@ -1,19 +1,20 @@
 <?php
 
-/* This is a way to show the success or failure page for a given transaction without affecting anything else
-    it only allows showing transactions belonging to the current user
-    and should be used for display ONLY
-
-    mainly, this is used for some rare payment gateways like Paypal Advanced that like to put things in an iframe and leave them there,
-        as a way to break out of that and show the results full-screen
-*/
-
+/**
+ * This is a way to show the success or failure page for a given transaction without affecting anything else, it only
+ * allows showing transactions belonging to the current user and should be used for display ONLY.
+ *
+ * Mainly, this is used for some rare payment gateways like Paypal Advanced that like to put things in an iframe and
+ * leave them there, as a way to break out of that and show the results full-screen
+ */
 
 require_once 'app_top.main.php';
 
 class geoFakeGateway extends geoPaymentGateway
 {
-    //just a cheap way to get access to geoPaymentGateway's protected function
+    /**
+     * Just a cheap way to get access to geoPaymentGateway's protected function
+     */
     public static function show($success, $status, $render, $invoice, $transaction)
     {
         parent::_successFailurePage($success, $status, $render, $invoice, $transaction);

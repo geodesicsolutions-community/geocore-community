@@ -50,11 +50,12 @@ function mysqlCheck(&$text, $phpCheck)
     //version not known, but mysql is at least installed, so proceed.
     return true;
 }
-
+// phpcs:disable Generic.Files.LineLength.TooLong
 $licenseLink = '<a
         href="https://github.com/geodesicsolutions-community/geocore-community/blob/42e315b06b57a3a42b1352713258866fc691be70/LICENSE"
         target="_blank"
     >License Agreement</a>';
+// phpcs:enable Generic.Files.LineLength.TooLong
 
 //replace with images eventually, instead of text...
 $failed = '<span class="failed"><img src="images/no.gif" alt="no" title="no"></span>';

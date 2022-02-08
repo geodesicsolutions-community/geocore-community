@@ -85,7 +85,12 @@ foreach ($versions as $version => $info) {
         <?php
         //reset high
         $high = '';
-    } elseif (!$high && !isset($info['norelease']) && strpos($version, 'beta') === false && strpos($version, 'rc') === false) {
+    } elseif (
+        !$high &&
+        !isset($info['norelease']) &&
+        strpos($version, 'beta') === false &&
+        strpos($version, 'rc') === false
+    ) {
         $high = $version;
     }
     //don't bother going past version 6.0.0

@@ -277,7 +277,8 @@ $siteOffItem['title'] = 'Site Under Maintenance';
 //If you specify something other than 'detect', it needs to be an absolute link.
 $siteOffItem['link'] = 'detect';
 //Note that HTML IS allowed here.
-$siteOffItem['description'] = "<strong>We're sorry.  Our site is temporarily undergoing routine maintenance.  Please check back soon.</strong>";
+$siteOffItem['description'] = "<strong>We're sorry.  Our site is temporarily undergoing routine maintenance.  Please
+    check back soon.</strong>";
 //leave next line intact
 $feed->siteOffItem = $siteOffItem;
 
@@ -433,7 +434,11 @@ if (!isset($feed->forceMaxListings)) {
     $feed->forceMaxListings = 100;
 }
 //set the limit
-if ($feed->maxListings == geoListingFeed::URL_SET && isset($_GET['maxListings']) && intval($_GET['maxListings']) <= $feed->forceMaxListings) {
+if (
+    $feed->maxListings == geoListingFeed::URL_SET
+    && isset($_GET['maxListings'])
+    && intval($_GET['maxListings']) <= $feed->forceMaxListings
+) {
     $feed->maxListings = $_GET['maxListings'];
 }
 

@@ -16,7 +16,8 @@ if (($show_module['module_display_ad_description']) && ($tpl_vars['parent_catego
     //not sure wtf this is for, leaving in just in case it is used
     $parent_category_name = geoCategory::getName($tpl_vars['parent_category'], true);
     $tpl_vars['parent_category_text'] = $page->messages[2433] . $parent_category_name;
-    $tpl_vars['parent_category_url'] = $this->get_site_setting('classifieds_file_name') . '?a=5&amp;b=' . $tpl_vars['parent_category'];
+    $tpl_vars['parent_category_url'] = $this->get_site_setting('classifieds_file_name')
+        . '?a=5&amp;b=' . $tpl_vars['parent_category'];
 }
 
 if (geoPC::is_ent()) {

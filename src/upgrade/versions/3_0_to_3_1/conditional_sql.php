@@ -31,29 +31,39 @@ $sql_not_strict[] = "ALTER TABLE `geodesic_pages` DROP `module_display_auction_i
 $sql_not_strict[] = "ALTER TABLE `geodesic_categories` ADD COLUMN `use_auto_title` TINYINT(1) NOT NULL DEFAULT 0";
 $sql_not_strict[] = "ALTER TABLE `geodesic_categories` ADD COLUMN `auto_title` VARCHAR(255) NOT NULL DEFAULT 0";
 
-$sql_not_strict[] = "ALTER TABLE `geodesic_auctions_final_fee_price_increments` ADD COLUMN `charge_fixed` DOUBLE(16,2) NOT NULL DEFAULT '0.00'";
-$sql_not_strict[] = "ALTER TABLE `geodesic_auctions_final_fee_price_increments` CHANGE `charge` `charge` DOUBLE( 16, 2 ) NOT NULL DEFAULT '0.00'";
+$sql_not_strict[] = "ALTER TABLE `geodesic_auctions_final_fee_price_increments` ADD COLUMN `charge_fixed` DOUBLE(16,2)
+    NOT NULL DEFAULT '0.00'";
+$sql_not_strict[] = "ALTER TABLE `geodesic_auctions_final_fee_price_increments` CHANGE `charge` `charge`
+    DOUBLE( 16, 2 ) NOT NULL DEFAULT '0.00'";
 
 //Add charset column to language table
-$sql_not_strict [] = " ALTER TABLE `geodesic_pages_languages` ADD `charset` ENUM( 'ISO-8859-1', 'ISO-8859-15', 'UTF-8', 'cp866', 'cp1251', 'cp1252', 'KOI8-R', 'BIG5', 'GB2312', 'BIG5-HKSCS', 'Shift_JIS', 'EUC-JP' ) NOT NULL DEFAULT 'ISO-8859-1'";
+$sql_not_strict [] = " ALTER TABLE `geodesic_pages_languages` ADD `charset` ENUM( 'ISO-8859-1', 'ISO-8859-15', 'UTF-8',
+    'cp866', 'cp1251', 'cp1252', 'KOI8-R', 'BIG5', 'GB2312', 'BIG5-HKSCS', 'Shift_JIS', 'EUC-JP' ) NOT NULL DEFAULT
+    'ISO-8859-1'";
 
 //field for entire_word check box in admin under Badwords
 $sql_not_strict [] = "ALTER TABLE `geodesic_text_badwords` ADD `entire_word` TINYINT(1) NOT NULL DEFAULT '0'";
 
-$sql_not_strict[] = "UPDATE `geodesic_credit_card_choices` SET `name` = 'AIM Method', `explanation` = 'This allows the use of AIM Method processors such as Authorize.net and PayTrace' WHERE `cc_id` = 1";
+$sql_not_strict[] = "UPDATE `geodesic_credit_card_choices` SET `name` = 'AIM Method', `explanation` =
+    'This allows the use of AIM Method processors such as Authorize.net and PayTrace' WHERE `cc_id` = 1";
 
 $sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_sell_session` ADD COLUMN `end_mode` TINYINT(4) NOT NULL";
-$sql_not_strict[] = "ALTER TABLE `geodesic_pages_fonts` ADD COLUMN `custom_css` TEXT NOT NULL";
+
+$sql_not_strict[] = "ALTER TABLE `geodesic_pages_fonts` ADD COLUMN `custom_css` TEXT NOT NULL";
 
 $sql_not_strict[] = "UPDATE `geodesic_pages_messages` SET `classauctions` = '0' WHERE `message_id` = '500074' LIMIT 1";
 
 $sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_sell_session` ADD COLUMN `address` VARCHAR(255)";
 $sql_not_strict[] = "ALTER TABLE `geodesic_classifieds` ADD COLUMN `location_address` VARCHAR(255)";
-$sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_ad_configuration` ADD COLUMN `use_address_field` TINYINT(4) NOT NULL DEFAULT '0'";
-$sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_ad_configuration` ADD COLUMN `editable_address_field` TINYINT(4) NOT NULL DEFAULT '0'";
-$sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_ad_configuration` ADD COLUMN `address_length` TINYINT(4) NOT NULL DEFAULT '50'";
+$sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_ad_configuration` ADD COLUMN `use_address_field` TINYINT(4) NOT
+    NULL DEFAULT '0'";
+$sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_ad_configuration` ADD COLUMN `editable_address_field` TINYINT(4)
+    NOT NULL DEFAULT '0'";
+$sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_ad_configuration` ADD COLUMN `address_length` TINYINT(4) NOT
+    NULL DEFAULT '50'";
 $sql_not_strict[] = "ALTER TABLE `geodesic_categories` ADD COLUMN `use_address_field` TINYINT(4) NOT NULL DEFAULT '0'";
-$sql_not_strict[] = "ALTER TABLE `geodesic_categories` ADD COLUMN `display_browsing_address_field` TINYINT(4) NOT NULL DEFAULT '0'";
+$sql_not_strict[] = "ALTER TABLE `geodesic_categories` ADD COLUMN `display_browsing_address_field` TINYINT(4) NOT
+    NULL DEFAULT '0'";
 
 
 //move credit card up in diplay order of transacion detail form
@@ -62,11 +72,16 @@ $result = $this->_db->Execute($query);
 $result = $result->FetchRow();
 
 if ($result['name'] == "Credit Card") {
-    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '99' WHERE `payment_choice_id` =5 LIMIT 1";
-    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '5' WHERE `payment_choice_id` =4 LIMIT 1";
-    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '4' WHERE `payment_choice_id` =3 LIMIT 1";
-    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '3' WHERE `payment_choice_id` =2 LIMIT 1";
-    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '2' WHERE `payment_choice_id` =99 LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '99' WHERE `payment_choice_id` =5
+        LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '5' WHERE `payment_choice_id` =4
+        LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '4' WHERE `payment_choice_id` =3
+        LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '3' WHERE `payment_choice_id` =2
+        LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_payment_choices` SET `payment_choice_id` = '2' WHERE `payment_choice_id` =99
+        LIMIT 1";
 } else {
     $sql_not_strict[] = "";
     $sql_not_strict[] = "";

@@ -1,7 +1,7 @@
 <?php
 
 include_once('app_top.common.php');
-            //Formatting for help topics
+// Formatting for help topics
 $tpl = new geoTemplate('system', 'other');
 
 if ($_REQUEST["a"]) {
@@ -18,7 +18,8 @@ if ($_REQUEST["a"]) {
         }
     } elseif ($_REQUEST["c"]) {
         $language_id = $db->getLanguage();
-        $sql_query = "SELECT * FROM `geodesic_classifieds_sell_questions_languages` WHERE question_id = ? and language_id = ?";
+        $sql_query = "SELECT * FROM `geodesic_classifieds_sell_questions_languages` WHERE question_id = ?
+            and language_id = ?";
         $language_specific_result = $db->Execute($sql_query, array($_REQUEST["c"],$language_id));
         if ((!$language_specific_result) || ($language_specific_result->RecordCount() != 1)) {
             //set the default language text from the classified_sell_questions_table
@@ -43,7 +44,8 @@ if ($_REQUEST["a"]) {
             return false;
         }
         //get the page ID
-        $sql = "SELECT `page_id` FROM " . geoTables::pages_text_languages_table . " WHERE `text_id`=? AND `language_id`=?";
+        $sql = "SELECT `page_id` FROM " . geoTables::pages_text_languages_table . " WHERE `text_id`=?
+            AND `language_id`=?";
         $result = $db->GetRow($sql, array($textId, $languageId));
         if (!$result || !$result['page_id']) {
             return false;

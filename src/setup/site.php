@@ -1,15 +1,5 @@
 <?php
 
-/*
- *	Copyright (c) 2004 Geodesic Solutions, LLC
- *	GeoInstaller
- *	All rights reserved
- *	http://www.geodesicsolutions.com
- *
- *	Module:		Site Module
- *	Filename:	site.php
- */
-
 function site($db, $product, &$template, $error = 0)
 {
     // Get the define file and put the data in here
@@ -31,13 +21,21 @@ function site($db, $product, &$template, $error = 0)
             "</form>";
 
     $template = str_replace("(!MAINBODY!)", $file, $template);
-    $template = str_replace("(!BACK!)", "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">", $template);
+    $template = str_replace(
+        "(!BACK!)",
+        "<input type=button name=back value=\"<< Back\" onClick=\"history.go(-1)\">",
+        $template
+    );
 
     $template = str_replace(
         "(!INTRO!)",
-        "<br>Now we will set up the Site Configuration data for your site. These fields can be changed later through your software's Admin Control Panel.\n" .
-                            "The Wizard has prepopulated the fields below for you based upon information gathered thus far in the installation process. Please verify that all paths below are correct and make any necessary adjustments.<br><br>
-							Unless instructed otherwise by your host, ensure that all URL Fields use this format: <br><br><strong>http://www.yoursitename.com</strong><br><br>\n",
+        "<br>Now we will set up the Site Configuration data for your site. These fields can be changed later through
+        your software's Admin Control Panel.\n" .
+        "The Wizard has prepopulated the fields below for you based upon information gathered thus
+        far in the installation process. Please verify that all paths below are correct and make any necessary
+        adjustments.<br><br>
+		Unless instructed otherwise by your host, ensure that all URL Fields use this format:
+        <br><br><strong>http://www.yoursitename.com</strong><br><br>\n",
         $template
     );
 
@@ -104,7 +102,8 @@ function site($db, $product, &$template, $error = 0)
     if ($conf[$product['email_config']] == 3) {
         $string .= "checked";
     }
-    $string .= "> 3 - allows no headers or \"from\" to be set (for Yahoo hosting the lead email on the account is used as the return email address)\"";
+    $string .= "> 3 - allows no headers or \"from\" to be set (for Yahoo hosting the lead email on the account is used
+        as the return email address)\"";
     $string = '';
     $template = str_replace("(!EMAIL_SETTING_3!)", $string, $template);
     if ($error['email_config']) {
@@ -129,7 +128,8 @@ function site($db, $product, &$template, $error = 0)
     $template = str_replace("(!ADMIN_EMAIL_ERROR!)", $error_string, $template);
 
     // Submit button
-    $template = str_replace("(!SUBMIT!)", "<div id='submit_button'><input type='submit' class='theButton' value='Save'></div>", $template);
+    $template = str_replace("(!SUBMIT!)", "<div id='submit_button'><input type='submit' class='theButton'
+        value='Save'></div>", $template);
 
     // Take out excess tags that werent used
     // already done at bottom of index.
@@ -212,7 +212,8 @@ function site_save($db, $conf, $product)
         }
     }
 
-    $sql_query = "update " . $product['userdata'] . " set " . $product['admin_email'] . " = '" . $conf['admin_registration_email'] . "'";
+    $sql_query = "update " . $product['userdata'] . " set " . $product['admin_email'] . " = '"
+        . $conf['admin_registration_email'] . "'";
     //echo $sql_query.'<Br>';
     $result = $db->Execute($sql_query);
     if (!$result) {
