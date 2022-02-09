@@ -50,7 +50,7 @@ if (!defined('GEO_TIMEZONE_SET_GUESS')) {
 //is the charset used when cleaning strings, similar to this:
 //htmlspecialchars($string, ENT_COMPAT,CHARSET_CLEAN)
 if (!defined('CHARSET_CLEAN')) {
-	define('CHARSET_CLEAN', ((defined('CHARSET'))? CHARSET: 'UTF-8'));
+	define('CHARSET_CLEAN', 'UTF-8');
 }
 
 //Optional - Charset from - used to convert a string to a certain charset before
@@ -212,3 +212,20 @@ if (!defined('GEO_MESSAGES')) {
 	define('GEO_ERROR',3);
 	define('GEO_MESSAGES',1);
 }
+
+/**
+ * Rare settings - should not change these in production environment most of the time
+ */
+
+if (!defined('GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN')) {
+    define('GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN', false);
+}
+
+if (!defined('GEO_CURL_CAINFO')) {
+    define('GEO_CURL_CAINFO', '');
+}
+
+if (!defined('COOKIE_DOMAIN')) {
+    define('COOKIE_DOMAIN', null);
+}
+

@@ -148,7 +148,7 @@ class money_orderPaymentGateway extends geoPaymentGateway
             $message = "Admin,\n\n";
             $message .= "An order has been placed and is on hold because a " . self::gateway_name . " type was chosen. See the unapproved orders section of the admin.\n\n";
             $message .= "Additional orders may be in the unapproved ads section that you were not sent an email. These will be failed auto pay attempts or if you are approving all ads.\n\n";
-            $cart->db->sendMail($cart->db->get_site_setting('site_email'), $subject, $message);
+            geoEmail::sendMail($cart->db->get_site_setting('site_email'), $subject, $message);
         }
 
         //gateway is last thing to be called, so it needs to be the one that clears the session...
