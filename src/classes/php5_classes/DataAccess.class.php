@@ -192,7 +192,8 @@ class DataAccess
             }
             //See if we need to turn off sql strict mode.  $strict_mode to be set in config.php.
             if (isset($strict_mode) && $strict_mode) {
-                //10/19/2016 -- strict_mode=1 is now a config.php default, so this always happens unless explicitly turned off
+                //10/19/2016 -- strict_mode=1 is now a config.php default, so this always happens unless explicitly
+                //turned off
                 $this->Execute('SET SESSION sql_mode=\'\'');
             }
             //Manually force the database connection to use a different charset than what
@@ -330,7 +331,8 @@ class DataAccess
         $this->queries[$sqlI]['time'][] = $execution_time;
 
         if ($statement === false) {
-            trigger_error('ERROR SQL: Error Running db->Prepare(), query: ' . $sql . ' Error Message: ' . $this->db->ErrorMsg());
+            trigger_error('ERROR SQL: Error Running db->Prepare(), query: ' . $sql
+                . ' Error Message: ' . $this->db->ErrorMsg());
             return false;
         }
         return $statement;
@@ -361,7 +363,8 @@ class DataAccess
             $this->queries[$sqlI]['time'][] = $execution_time;
 
             if ($result === false) {
-                trigger_error('ERROR SQL: Error Running db->GetArray(), query: ' . $sql . ' Error Message: ' . $this->db->ErrorMsg());
+                trigger_error('ERROR SQL: Error Running db->GetArray(), query: ' . $sql . ' Error Message: '
+                    . $this->db->ErrorMsg());
                 return false;
             }
             return $result;
@@ -396,7 +399,8 @@ class DataAccess
             $this->numExecutes ++;
             $this->queries[$sqlI]['time'][] = $execution_time;
         } catch (Exception $e) {
-            trigger_error('ERROR SQL STATS: Error Running db->GetOne(), query: ' . $sql . ' Error Message: ' . $this->db->ErrorMsg());
+            trigger_error('ERROR SQL STATS: Error Running db->GetOne(), query: ' . $sql
+                . ' Error Message: ' . $this->db->ErrorMsg());
             return false;
         }
         return $result;
@@ -584,9 +588,11 @@ class DataAccess
     public function getStats()
     {
         //returns some stats.
-        $stats = 'Num Queries: ' . $this->numExecutes . ' Time spent on queries: ' . $this->executeTime . ' sec.<br />' . "\n";
+        $stats = 'Num Queries: ' . $this->numExecutes . ' Time spent on queries: ' . $this->executeTime
+            . ' sec.<br />' . "\n";
         $stats .= 'Query Stats:' . "\n";
-        $stats .= "<table border=\"1\"><thead><tr><th>Time(s) each query took</th><th>Query</th><th># times executed</th></thead><tbody>\n";
+        $stats .= "<table border=\"1\"><thead><tr><th>Time(s) each query took</th><th>Query</th>
+            <th># times executed</th></thead><tbody>\n";
         foreach ($this->queries as $query => $q_stat) {
             $totalT = 0;
             if (count($q_stat['time']) > 2) {
@@ -595,7 +601,8 @@ class DataAccess
                 }
                 $q_stat['time'][] = "<br /><strong>Total</strong>:{$totalT}";
             }
-            $stats .= "<tr><td>" . implode(', ', $q_stat['time']) . "</td><td>$query</td><td>{$q_stat['count']}</td></tr>\n";
+            $stats .= "<tr><td>" . implode(', ', $q_stat['time'])
+                . "</td><td>$query</td><td>{$q_stat['count']}</td></tr>\n";
         }
         $stats .= "</tbody></table>\n";
         if (defined('IAMDEVELOPER') && self::ADODB_DEBUG) {
@@ -826,7 +833,8 @@ class DataAccess
                     $sql = 'DELETE FROM ' . geoTables::site_settings_long_table . ' WHERE `setting` = ? LIMIT 1';
                     $result = $this->Execute($sql, array($setting));
                     if (!$result) {
-                        trigger_error('ERROR SQL: Error deleting long setting ' . $setting . ' - Query: ' . $sql . ' ERROR: ' . $this->db->ErrorMsg());
+                        trigger_error('ERROR SQL: Error deleting long setting ' . $setting . ' - Query: ' . $sql
+                            . ' ERROR: ' . $this->db->ErrorMsg());
                         return false;
                     }
                 }
@@ -863,16 +871,19 @@ class DataAccess
             $table_to_delete_from = geoTables::site_settings_table;
         }
         if ($pushToDb) {
-            trigger_error('DEBUG STATS_EXTRA: DataAccess::set_site_setting() - Setting ' . $setting . ' to ' . $value . ' in table ' . $table_to_use);
+            trigger_error('DEBUG STATS_EXTRA: DataAccess::set_site_setting() - Setting ' . $setting . ' to ' . $value
+                . ' in table ' . $table_to_use);
             $sql = 'REPLACE INTO ' . $table_to_use . ' SET `setting` = ?, `value` = ?';
             $result = $this->Execute($sql, array($setting, $value));
             if (!$result) {
-                trigger_error('ERROR STATS_EXTRA SQL: DataAccess::set_site_setting() - Setting ' . $setting . ' query failed!  Setting not set!');
+                trigger_error('ERROR STATS_EXTRA SQL: DataAccess::set_site_setting() - Setting ' . $setting
+                    . ' query failed!  Setting not set!');
                 return false;
             }
             if ($use_long) {
                 //delete the other setting just in case it was set already.
-                trigger_error('DEBUG STATS_EXTRA: DataAccess::set_site_setting() - use_long so deleting ' . $setting . ' from other table ' . $table_to_delete_from);
+                trigger_error('DEBUG STATS_EXTRA: DataAccess::set_site_setting() - use_long so deleting ' . $setting
+                    . ' from other table ' . $table_to_delete_from);
                 $sql = 'DELETE FROM ' . $table_to_delete_from . ' WHERE `setting` = ? LIMIT 1';
                 $result = $this->Execute($sql, array($setting));
                 if (!$result) {
@@ -1003,7 +1014,8 @@ class DataAccess
                     $cacheTextArray = $textCache->process($language_id, $page_id);
                 }
                 if ($cache_on) {
-                    trigger_error('DEBUG STATS: cache process: $language_id = ' . $language_id . ' page_id = ' . $page_id);
+                    trigger_error('DEBUG STATS: cache process: $language_id = ' . $language_id . ' page_id = '
+                        . $page_id);
                 }
                 if (!$cache_on || $cacheTextArray === false) {
                     $use_cache = false;
@@ -1043,7 +1055,8 @@ class DataAccess
             } else {
                 $where = 'page_id in ( ' . implode(', ', $in_text) . ' )';
             }
-            $sql = "SELECT `text_id`,`text`, `page_id` from " . geoTables::pages_text_languages_table . " WHERE $where AND `language_id` = '{$this->getLanguage()}'";
+            $sql = "SELECT `text_id`,`text`, `page_id` from " . geoTables::pages_text_languages_table
+                . " WHERE $where AND `language_id` = '{$this->getLanguage()}'";
             //echo $sql."<br>\n";
             if (!is_array($this->messages)) {
                 $this->messages = array();
@@ -1079,7 +1092,8 @@ class DataAccess
                 $textCache->update($language_id, $page_id, $cacheArray[$page_id]);
             } elseif ($cache_on) {
                 foreach ($cacheArray as $page_id => $page_text) {
-                    trigger_error('DEBUG STATS: Updating: $language_id: ' . $language_id . ' page_id = ' . $page_id . ' $page_text = ' . htmlspecialchars($page_text));
+                    trigger_error('DEBUG STATS: Updating: $language_id: ' . $language_id . ' page_id = ' . $page_id
+                        . ' $page_text = ' . htmlspecialchars($page_text));
                     $textCache->update($language_id, $page_id, $page_text);
                 }
             }
@@ -1282,7 +1296,10 @@ class DataAccess
             }
             //let params passed in through the module tag to over-write default module settings
             $show_module = array_merge($show_module, $params);
-            if (isset($show_module['module_file_name']) && (file_exists(MODULES_DIR . $show_module['module_file_name']))) {
+            if (
+                isset($show_module['module_file_name'])
+                && (file_exists(MODULES_DIR . $show_module['module_file_name']))
+            ) {
                 //process module
                 trigger_error('DEBUG MODULE: DataAccess::moduleTag(' . $tag . ') - processing!');
                 //set vars used by module
@@ -1313,7 +1330,14 @@ class DataAccess
                 if ($pageCache->canCache($tag)) {
                     //do our own brand of caching, don't use smarty's as that would
                     //require yet another folder to be writable
-                    $pageCache->update($tag, $language_id, $cat_id, $logged_in, geoCachePage::quotePage($cacheResult), $params);
+                    $pageCache->update(
+                        $tag,
+                        $language_id,
+                        $cat_id,
+                        $logged_in,
+                        geoCachePage::quotePage($cacheResult),
+                        $params
+                    );
                 }
                 trigger_error("DEBUG MODULE: DataAccess::moduleTag($tag) - $tag : $file");
             }
@@ -1406,7 +1430,8 @@ class DataAccess
         $this->init();
         $ip_result = $this->db->Execute($sql);
         if (!$ip_result) {
-            trigger_error('ERROR SQL: SQL query failed for retrieving banned ips.  Query:' . $sql . ' Error: ' . $this->ErrorMsg());
+            trigger_error('ERROR SQL: SQL query failed for retrieving banned ips.  Query:' . $sql . ' Error: '
+                . $this->ErrorMsg());
             return false;
         }
         if ($ip_result->RecordCount() > 0) {
@@ -1424,7 +1449,8 @@ class DataAccess
             if (isset($_GET['check_ban_ip']) && $_GET['check_ban_ip']) {
                 //If there is a get ver check_ban_ip and it is true, display whether or not the ip is banned or not.
                 //this will only happen if there are IPs to ban in the ip table.
-                die($ip_to_check . ' - IP BANNED? ' . (($ban_me) ? 'YES, this IP will only see front page of site.' : 'NO, this ip not banned.'));
+                die($ip_to_check . ' - IP BANNED? ' . (($ban_me)
+                    ? 'YES, this IP will only see front page of site.' : 'NO, this ip not banned.'));
             }
             if ($ban_me) {
                 //this ip exists in the ip ban list
@@ -1501,118 +1527,6 @@ class DataAccess
             $this->_tableSelects[$for] = $tableSelect;
         }
         return ($copy) ? clone $this->_tableSelects[$for] : $this->_tableSelects[$for];
-    }
-
-    /**
-     * Add a where clause to filter all listings by when browsing the site.  This
-     * is the method used for the different built-in filters such as zip filter,
-     * state filter, geographic navigation, etc.
-     *
-     * @param string $name The name, needs to be unique.  Used to make sure the same
-     *   filter is not applied multiple times.
-     * @param string $sql The where clause to add to SQL queries, should be
-     *   something like "`column`='value'"
-     * @param array $data (optional)If the SQL query uses ? such as "`column`=?", this is
-     *   the array of data that would be passed as the second param when the SQL
-     *   query is executed.
-     * @param string $additionalTable (optional) WILL CAUSE ERROR - Using this parameter
-     *   will cause it to print an error and exit.
-     * @deprecated Since version 6.0.0, this will be removed.  Use the geoTableSelect
-     *   object returned by calling $db->getTableSelect('browse') instead.
-     */
-    public function addBrowsingWhereClause($name, $sql, $data = null, $additionalTable = null)
-    {
-        if (strlen(trim($name)) == 0) {
-            return false;
-        }
-        $query = $this->getTableSelect(self::SELECT_BROWSE);
-
-        if ($additionalTable !== null) {
-            $query->join($additionalTable);
-        }
-
-        if ($data !== null) {
-            //need the DB initted for parts of this
-            $this->init();
-            //Addapted from ADODB library
-            if (!is_array($data)) {
-                $data = array($data);
-            }
-
-            $element0 = reset($data);
-            # is_object check because oci8 descriptors can be passed in
-            $array_2d = is_array($element0) && !is_object(reset($element0));
-            //remove extra memory copy of input -mikefedyk
-            unset($element0);
-
-            $sqlarr = explode('?', $sql);
-            $nparams = sizeof($sqlarr) - 1;
-            if (!$array_2d) {
-                $data = array($data);
-            }
-            foreach ($data as $arr) {
-                $sql = '';
-                $i = 0;
-                //Use each() instead of foreach to reduce memory usage -mikefedyk
-                while (list(, $v) = each($arr)) {
-                    $sql .= $sqlarr[$i];
-                    // from Ron Baldwin <ron.baldwin#sourceprose.com>
-                    // Only quote string types
-                    $typ = gettype($v);
-                    if ($typ == 'string') {
-                        //New memory copy of input created here -mikefedyk
-                        $sql .= $this->qstr($v);
-                    } elseif ($typ == 'double') {
-                        $sql .= str_replace(',', '.', $v); // locales fix so 1.1 does not get converted to 1,1
-                    } elseif ($typ == 'boolean') {
-                        $sql .= $v ? $this->true : $this->false;
-                    } elseif ($typ == 'object') {
-                        if (method_exists($v, '__toString')) {
-                            $sql .= $this->qstr($v->__toString());
-                        } else {
-                            $sql .= $this->qstr((string) $v);
-                        }
-                    } elseif ($v === null) {
-                        $sql .= 'NULL';
-                    } else {
-                        $sql .= $v;
-                    }
-                    $i += 1;
-
-                    if ($i == $nparams) {
-                        break;
-                    }
-                } // while
-                if (isset($sqlarr[$i])) {
-                    $sql .= $sqlarr[$i];
-                    if ($i + 1 != sizeof($sqlarr)) {
-                        $this->db->outp_throw("Input Array does not match ?: " . htmlspecialchars($sql), 'Execute');
-                    }
-                } elseif ($i != sizeof($sqlarr)) {
-                    $this->db->outp_throw("Input array does not match ?: " . htmlspecialchars($sql), 'Execute');
-                }
-            }
-        }
-
-        $query->where($sql, $name);
-    }
-
-    /**
-     * NO LONGER USED!  We will be removing this method in a future release, for
-     * now it will always return false!  If you previously used this method,
-     * most likely you are also using the method getBrowsingWhereClause() which
-     * has been totally removed.  You will need to change your code to use
-     * DataAccess->getTableSelect() to build your SQL, see that method's documentation
-     * for more info.
-     *
-     * @return bool
-     * @deprecated In version 6.0.0, Feb 28, 2011.  Will be removed in a future
-     *   feature release.  For now, this function will always return false.  The
-     *   replacement is DataAccess->getTableSelect(DataAccess::SELECT_BROWSE)->hasWhere()
-     */
-    public function isBrowsingWhereClause()
-    {
-        return false;
     }
 
     /**
