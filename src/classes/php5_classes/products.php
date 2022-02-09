@@ -10,10 +10,6 @@
  * Make sure the DataAccess class is included, so we have a db connection.
  */
 require_once(CLASSES_DIR . PHP5_DIR . 'DataAccess.class.php');
-/**
- * Needed for communicating with license server.
- */
-require_once(CLASSES_DIR . 'rpc/XMLRPC.class.php');
 
 /**
  * Used for login credential validation, password hashing, etc. along with
@@ -500,14 +496,21 @@ final class geoPC
      * @return Mixed false if credentials do not match, or an array with user data if verified.
      * @since The $checkAdmin param added in Version 4.1.0.
      */
-    public function verify_credentials($username, $password, $license = false, $check_email_as_user = true, $checkAdmin = false, $verifyStatus = true)
-    {
+    public function verify_credentials(
+        $username,
+        $password,
+        $license = false,
+        $check_email_as_user = true,
+        $checkAdmin = false,
+        $verifyStatus = true
+    ) {
         //verify inputs.
         // GUTTED (had some license checks mixed in)
 
         if (!(strlen($username) > 0 && strlen($password) > 0)) {
             //if either the username or password are empty, return false.
-            trigger_error('DEBUG SESSION:' . 'verify_credentials(\'' . $username . '\', \'' . $password . '\') = false, username or password is empty.', __line__);
+            trigger_error('DEBUG SESSION:' . 'verify_credentials(\'' . $username . '\', \'' . $password
+                . '\') = false, username or password is empty.', __line__);
             return false;
         }
 
@@ -516,10 +519,16 @@ final class geoPC
         $result = $this->db->Execute($sql, array($username));
         if (!$result) {
             //database error
-            trigger_error('DEBUG SESSION:' . '[ERROR] - verify_credentials() SQL error: SQL= ' . $sql . ' Error=' . $this->db->ErrorMsg(), __line__);
+            trigger_error('DEBUG SESSION:' . '[ERROR] - verify_credentials() SQL error: SQL= ' . $sql . ' Error='
+                . $this->db->ErrorMsg(), __line__);
             return false;
         }
-        if ($result->RecordCount() == 0 && (strpos($username, '@') !== false) && $check_email_as_user && !defined('IN_ADMIN')) {
+        if (
+            $result->RecordCount() == 0
+            && (strpos($username, '@') !== false)
+            && $check_email_as_user
+            && !defined('IN_ADMIN')
+        ) {
             //there are no users by that username.  Try the email.
             $sql = 'SELECT * FROM ' . geoTables::userdata_table . ' WHERE email = ?';
             $userdata_result = $this->db->Execute($sql, array($username));
@@ -529,7 +538,8 @@ final class geoPC
             }
             if ($userdata_result->RecordCount() != 1) {
                 //we do not try to verify if multiple users w/ same email are used.
-                trigger_error('DEBUG SESSION:' . '[ERROR] - multiple users with same e-mail - invalid login for user: ' . $username, __line__);
+                trigger_error('DEBUG SESSION:' . '[ERROR] - multiple users with same e-mail - invalid login for user: '
+                    . $username, __line__);
                 return false;
             }
             $user_data = $userdata_result->FetchRow();
@@ -539,19 +549,23 @@ final class geoPC
             }
             if ($user_data['id'] == 1) {
                 //do not allow admin user to log in using e-mail!
-                trigger_error('DEBUG SESSION:' . '[ERROR] - verify_credentials() - Admin user is not allowed to log in using e-mail! username=' . $username . ' pass=' . $password);
+                trigger_error('DEBUG SESSION:' . '[ERROR] - verify_credentials() - Admin user is not allowed to log in
+                    using e-mail! username=' . $username . ' pass=[HIDDEN]');
                 return false;
             }
             //now try again, this time using the actual username, and force no e-mail
             // verification, to prevent infinite recursive calls.
-            trigger_error('DEBUG SESSION: [NOTICE] - verify_credentials() - appears they entered their e-mail, so re-validating using their username.  Details used: user=' . $user_data['username'] . ' pass=[HIDDEN]');//.$password);
+            trigger_error('DEBUG SESSION: [NOTICE] - verify_credentials() - appears they entered their e-mail,
+                so re-validating using their username.  Details used: user=' . $user_data['username']
+                . ' pass=[HIDDEN]');
             return $this->verify_credentials($user_data['username'], $password, $license, false);
         }
 
         if ($result->RecordCount() != 1) {
             //there are more than one user by that username?  do not bother verifying,
             //there is an error.
-            trigger_error('DEBUG SESSION:' . '[ERROR] - multiple users with same username - invalid login for user: ' . $username);
+            trigger_error('DEBUG SESSION:' . '[ERROR] - multiple users with same username - invalid login for user: '
+                . $username);
             return false;
         }
 
@@ -560,7 +574,12 @@ final class geoPC
         //make sure the username is valid, since we are using like, want to elimitate
         //the use of %
         //allow different case for username.
-        if (!(strlen($login_data['username']) == strlen($username) && strlen(stristr($login_data['username'], $username)) == strlen($login_data['username']))) {
+        if (
+            !(
+                strlen($login_data['username']) == strlen($username)
+                && strlen(stristr($login_data['username'], $username)) == strlen($login_data['username'])
+            )
+        ) {
             //Seems that username is not matching up.
             trigger_error('DEBUG SESSION:' . '[ERROR] - invalid login, username not found. user: ' . $username);
             return false;
@@ -588,7 +607,10 @@ final class geoPC
         if (!defined('IN_ADMIN') && $checkAdmin && isset($_COOKIE['admin_classified_session'])) {
             //add on hash types for admin to check
             //get admin hash type
-            $adminType = $this->db->GetOne("SELECT `hash_type` FROM " . geoTables::logins_table . " WHERE `username`=?", array($this->getAdminUser($_COOKIE['admin_classified_session'])));
+            $adminType = $this->db->GetOne(
+                "SELECT `hash_type` FROM " . geoTables::logins_table . " WHERE `username`=?",
+                array($this->getAdminUser($_COOKIE['admin_classified_session']))
+            );
             if ($adminType && isset($allTypes[$adminType])) {
                 $adminTypes = array_intersect_key($allTypes, array($adminType => ''));
             } else {
@@ -608,7 +630,10 @@ final class geoPC
                 $userCheck = $this->getAdminUser($_COOKIE['admin_classified_session']);
                 if ($userCheck) {
                     //need to get the hassed pass for admin
-                    $adminInfo = $this->db->GetRow("SELECT `password`,`salt` FROM " . geoTables::logins_table . " WHERE `username` = ?", array($userCheck));
+                    $adminInfo = $this->db->GetRow(
+                        "SELECT `password`,`salt` FROM " . geoTables::logins_table . " WHERE `username` = ?",
+                        array($userCheck)
+                    );
                     $passCheck = $adminInfo['password'];
                     $saltCheck = $adminInfo['salt'];
                     unset($adminInfo);
@@ -684,7 +709,8 @@ final class geoPC
                             return $login_data;
                         } else {
                             //trying to log in w/o admin user login.
-                            trigger_error('DEBUG SESSION:[NOTICE] verify_credentials() - user/pass BAD for admin login: username: ' . $username . ' password: ' . $password);
+                            trigger_error('DEBUG SESSION:[NOTICE] verify_credentials() - user/pass BAD for admin login:
+                                username: ' . $username . ' password: [HIDDEN]');
                             return false;
                         }
                     }
@@ -695,7 +721,8 @@ final class geoPC
                         unset($login_data['password'], $login_data['salt']);
                         return $login_data;
                     } else {
-                        trigger_error('DEBUG SESSION:[NOTICE] verify_credentials() - user/pass verified successfully but STATUS failed, so returning false: username: ' . $username . ' password: ******');
+                        trigger_error('DEBUG SESSION:[NOTICE] verify_credentials() - user/pass verified successfully
+                            but STATUS failed, so returning false: username: ' . $username . ' password: [HIDDEN]');
                         return false;
                     }
                 }
@@ -704,7 +731,8 @@ final class geoPC
         }
         //Just went through each different hash type, and none of them matched up,
         //so the password must not be valid.
-        trigger_error('DEBUG SESSION:' . '[NOTICE] verify_credentials() - user/pass FAILED - user & pass do not match: username: ' . $username . ' password: ' . $password);
+        trigger_error('DEBUG SESSION:' . '[NOTICE] verify_credentials() - user/pass FAILED - user & pass do not match:
+            username: ' . $username . ' password: [HIDDEN]');
         return false;
     }
 
@@ -729,7 +757,11 @@ final class geoPC
 
         //look for a session
         $db = DataAccess::getInstance();
-        $session = $db->GetRow("SELECT `user_id` FROM " . geoTables::session_table . " WHERE `classified_session`=? AND `admin_session`='Yes'", array($sessionId));
+        $session = $db->GetRow(
+            "SELECT `user_id` FROM " . geoTables::session_table . "
+                WHERE `classified_session`=? AND `admin_session`='Yes'",
+            array($sessionId)
+        );
 
         if (!$session) {
             //no such session found
@@ -884,8 +916,10 @@ final class geoPC
      *
      * @return Array An array of arrays using the form:  key = hash type, value is an array
      *   with 'length' => either fixed length that all hashed passwords will be, or -1 if variable length,
-     *   'saltLength'=> the fixed length for how long salt values are, 0 if not use salt, or -1 for variable length salt,
-     *   'name' => the name, used to set this hash type as default hash used in admin. If blank, this will not show as option in admin.
+     *   'saltLength'=> the fixed length for how long salt values are, 0 if not use salt, or -1 for variable length
+     *     salt,
+     *   'name' => the name, used to set this hash type as default hash used in admin. If blank, this will not show as
+     *     option in admin.
      */
     public function get_hash_types()
     {
@@ -999,7 +1033,8 @@ final class geoPC
             $salt = '' . $password_hashed['salt'];
             $password_hashed = $password_hashed['password'];
         }
-        $sql = 'UPDATE ' . $this->db->geoTables->logins_table . ' SET password = ?, salt = ?, hash_type = ? WHERE username = ?';
+        $sql = 'UPDATE ' . $this->db->geoTables->logins_table
+            . ' SET password = ?, salt = ?, hash_type = ? WHERE username = ?';
         $result = $this->db->Execute($sql, array($password_hashed, $salt, $type, $username));
         if (!$result) {
             //query failed.
@@ -1207,7 +1242,9 @@ final class geoPC
             trigger_error("DEBUG STATS: Server does not seem to have CURL, falling back to attempt
                     using file_get_contents()");
             if ($additionalHeaders) {
-                $context = stream_context_create(array('http' => array('method' => 'GET', 'header' => implode("\r\n", $additionalHeaders))));
+                $context = stream_context_create([
+                    'http' => ['method' => 'GET', 'header' => implode("\r\n", $additionalHeaders)]
+                ]);
                 $results = file_get_contents($url, false, $context);
             } else {
                 $results = file_get_contents($url);
@@ -1225,11 +1262,11 @@ final class geoPC
 
         curl_setopt($link, CURLOPT_HEADER, 0);
         curl_setopt($link, CURLOPT_RETURNTRANSFER, true);
-        if (defined('GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN') && GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN) {
+        if (GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN) {
             //ONLY turn off verifypeer / verify host if set to
             curl_setopt($link, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($link, CURLOPT_SSL_VERIFYHOST, false);
-        } elseif (defined('GEO_CURL_CAINFO') && strpos(GEO_CURL_CAINFO, '.pem') !== false) {
+        } elseif (strpos(GEO_CURL_CAINFO, '.pem') !== false) {
             //Specifying an alternate location for CA cert bundle
             curl_setopt($link, CURLOPT_CAINFO, GEO_CURL_CAINFO);
         }
@@ -1260,7 +1297,8 @@ final class geoPC
      * @param array|string $params The array of post parameters or query string
      * @param int $timeout Number of seconds for connection timeout. Param added
      *   in version 7.0.4
-     * @param array $additionalHeaders an array of additional HTTP headers to send with the request, beyond the normal ones
+     * @param array $additionalHeaders an array of additional HTTP headers to send with the request, beyond the normal
+     *   ones
      * @since Version 5.1.2
      */
     public static function urlPostContents($url, $params, $timeout = 30, $additionalHeaders = null)
@@ -1319,11 +1357,11 @@ final class geoPC
             curl_setopt($link, CURLOPT_POST, true);
             curl_setopt($link, CURLOPT_POSTFIELDS, $params);
             curl_setopt($link, CURLOPT_VERBOSE, false);
-            if (defined('GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN') && GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN) {
+            if (GEO_CURL_SSL_CACERT_VERIFY_PEER_IS_BROKEN) {
                 //ONLY turn off verifypeer / verify host if set to
                 curl_setopt($link, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($link, CURLOPT_SSL_VERIFYHOST, false);
-            } elseif (defined('GEO_CURL_CAINFO') && strpos(GEO_CURL_CAINFO, '.pem') !== false) {
+            } elseif (strpos(GEO_CURL_CAINFO, '.pem') !== false) {
                 //Specifying an alternate location for CA cert bundle
                 curl_setopt($link, CURLOPT_CAINFO, GEO_CURL_CAINFO);
             }
@@ -1339,14 +1377,6 @@ final class geoPC
             trigger_error('DEBUG STATS: Finished getting POST contents (using CURL).');
             return $results;
         }
-    }
-    /**
-     * Print debug, only works if debuging
-     * @internal
-     */
-    public function printDebug()
-    {
-        // GUTTED
     }
 }
 
@@ -1466,8 +1496,10 @@ class geoSession
 
     /**
      * Allow detecting whether the current device is a tablet.
-     * Note that Mobile_Detect does not do its own internal caching, so be sure to cache the result and only call it once per pageload
-     * Also note that a given device being a "tablet" does not preclude any particular result from isMobile() (that is, either a Desktop or Mobile could also be a Tablet)
+     * Note that Mobile_Detect does not do its own internal caching, so be sure to cache the result and only call it
+     * once per pageload
+     * Also note that a given device being a "tablet" does not preclude any particular result from isMobile() (that is,
+     * either a Desktop or Mobile could also be a Tablet)
      */
     public static function isTablet()
     {
@@ -1509,11 +1541,15 @@ class geoSession
         trigger_error('DEBUG SESSION:' . '[NOTICE] -- cleanSessions() - Removing old sessions.');
         /*
              IMPORTANT: select the session IDs to delete, then remove specifically those from ALL tables
-                -- this is much faster than the old way (which was to delete the sessions, and then delete from other tables where the IDs were missing)
-                    because searching by negation gets super slow with lots of records, especially because the keys are hashes and thus index don't help a whole lot...
-                -- there's also the added benefit of skipping a couple queries entirely if there are no sessions to remove right now
+                -- this is much faster than the old way (which was to delete the sessions, and then delete from other
+                    tables where the IDs were missing)
+                    because searching by negation gets super slow with lots of records, especially because the keys are
+                    hashes and thus index don't help a whole lot...
+                -- there's also the added benefit of skipping a couple queries entirely if there are no sessions to
+                    remove right now
 
-            A better way to do this would be to create a trigger on the main session table to delete from the others, but that requires MYSQL 5.0.2, which is beyond our current min-reqs
+            A better way to do this would be to create a trigger on the main session table to delete from the others,
+            but that requires MYSQL 5.0.2, which is beyond our current min-reqs
 
         */
 
@@ -1550,11 +1586,14 @@ class geoSession
         }
         if (strlen($sessionId) < 30) {
             //something is wrong with this session id.
-            trigger_error('DEBUG SESSION:' . '[ERROR] -- closeSession() - session id stringlen is < 30, so not removing.  $sessionId = ' . $sessionId);
+            trigger_error('DEBUG SESSION:' . '[ERROR] -- closeSession() - session id stringlen is < 30, so not removing.
+                $sessionId = ' . $sessionId);
             return false;
         }
-        trigger_error('DEBUG SESSION:' . '[NOTICE] -- closeSession() - removing session for $sessionId = ' . $sessionId);
-        $sql_query = "DELETE FROM " . geoTables::session_table . " WHERE " . geoTables::field_session_id . " = ? LIMIT 1";
+        trigger_error('DEBUG SESSION:' . '[NOTICE] -- closeSession() - removing session for $sessionId = '
+            . $sessionId);
+        $sql_query = "DELETE FROM " . geoTables::session_table . " WHERE " . geoTables::field_session_id
+            . " = ? LIMIT 1";
         $this->db->Execute($sql_query, array ($sessionId));
 
         //delete registry
@@ -1577,15 +1616,19 @@ class geoSession
         $sid = $this->getSessionId();
         if (!$sid || strlen($sid) < 32) {
             //something is wrong with this sid!
-            trigger_error('DEBUG SESSION:' . '[ERROR] -- logOut() - session id stringlen is < 32, so not loging out.  $sid = ' . $sid);
+            trigger_error('DEBUG SESSION:' . '[ERROR] -- logOut() - session id stringlen is < 32, so not loging out.
+                $sid = ' . $sid);
             return false;
         }
         //kill the session
-        trigger_error('DEBUG SESSION:' . '[NOTICE] -- logOut() - Logging out session id = ' . $sid . ', username = ' . $this->getUserName());
-        $sql = "delete from {$this->db->geoTables->session_table} where {$this->db->geoTables->field_session_id} = ? LIMIT 1";
+        trigger_error('DEBUG SESSION:' . '[NOTICE] -- logOut() - Logging out session id = ' . $sid . ', username = '
+            . $this->getUserName());
+        $sql = "delete from {$this->db->geoTables->session_table} where
+            {$this->db->geoTables->field_session_id} = ? LIMIT 1";
         $result = $this->db->Execute($sql, array($sid));
         if (!$result) {
-            trigger_error('DEBUG SESSION:' . '[ERROR] -- logOut() - SQL Execute Error: SQL=' . $sql . ' Error Reported: ' . $this->db->ErrorMsg());
+            trigger_error('DEBUG SESSION:' . '[ERROR] -- logOut() - SQL Execute Error: SQL=' . $sql
+                . ' Error Reported: ' . $this->db->ErrorMsg());
             return false;
         }
 
@@ -1595,7 +1638,10 @@ class geoSession
         $this->_pendingChanges = false;
 
         if (!defined('IN_GEO_API')) {
-            geoAddon::triggerUpdate('session_logout', array('userid' => $this->getUserId(), 'username' => $this->getUserName()));
+            geoAddon::triggerUpdate(
+                'session_logout',
+                array('userid' => $this->getUserId(), 'username' => $this->getUserName())
+            );
         }
 
         //clear the user's cookie
@@ -1633,9 +1679,6 @@ class geoSession
             //also unset any cookies specific to this folder, just in case...
             setcookie($this->cookie_name, false, 0);
 
-            //attempt to unset older saved cookies
-            //header("Set-Cookie: ".$this->cookie_name."=0; path=/; domain=".$domain."; expires=".gmstrftime("%A, %d-%b-%Y %H:%M:%S GMT",$expires));
-
             //unset the cookie w/o the .
             $domain = preg_replace('/^\./', '', $domain);
             setcookie($this->cookie_name, false, 0, '/', $domain);
@@ -1643,10 +1686,6 @@ class geoSession
                 $realDomain = preg_replace('/^\./', '', $realDomain);
                 setcookie($this->cookie_name, false, 0, '/', $realDomain);
             }
-            //unset the cookie with www added
-            //setcookie($this->cookie_name, false, 0, '/', 'www.'.$domain);
-            //unset with .www added
-            //setcookie($this->cookie_name, false, 0, '/', '.www.'.$domain);
         }
         if (isset($_COOKIE[$this->cookie_name])) {
             unset($_COOKIE[$this->cookie_name]);
@@ -1663,7 +1702,8 @@ class geoSession
         do {
             $sid = md5(uniqid(rand(), 1));
             $sid = substr($sid, 0, 32);
-            $query = "select {$this->db->geoTables->field_session_id} from " . $this->db->geoTables->session_table . " where " . $this->db->geoTables->field_session_id . " = '" . $sid . "'";
+            $query = "select {$this->db->geoTables->field_session_id} from " . $this->db->geoTables->session_table
+                . " where " . $this->db->geoTables->field_session_id . " = '" . $sid . "'";
             $result = $this->db->Execute($query) or die($this->db->ErrorMsg());
         } while ($result->RecordCount() > 0);
         return $sid;
@@ -1682,14 +1722,17 @@ class geoSession
         $current_time = time();//$this->shiftedTime();
         $admin_session = (defined('IN_ADMIN')) ? 'Yes' : 'No';
 
-        $sql_query = "UPDATE " . geoTables::session_table . " SET `last_time` = ? WHERE " . geoTables::field_session_id . " = ? AND `admin_session`='$admin_session'";
+        $sql_query = "UPDATE " . geoTables::session_table . " SET `last_time` = ? WHERE " . geoTables::field_session_id
+            . " = ? AND `admin_session`='$admin_session'";
         $data = array ($current_time, $sessionId);
         if ($this->db->Execute($sql_query, $data) === false) {
             trigger_error("SQL ERROR: Couldn't update session. " . $this->db->ErrorMsg());
             trigger_error('FLUSH MESSAGES');
             if (defined('IN_ADMIN')) {
                 die("Database query error.
-                <br /><br />The most common cause is that strict mode may need to be turned on in your config.php file.  To fix, in your <strong>config.php</strong> try setting <strong>\$config_mode = 1;</strong> if it is currently set to 0.");
+                <br /><br />The most common cause is that strict mode may need to be turned on in your config.php file.
+                To fix, in your <strong>config.php</strong> try setting <strong>\$config_mode = 1;</strong> if it is
+                currently set to 0.");
             }
             die("We're sorry, our site is experiencing problems. Please come back later.");
         }
@@ -1722,7 +1765,7 @@ class geoSession
             if (count($parts) != 4 || !is_numeric($parts[3])) {
                 $addDot = true;
             }
-        } elseif (defined('COOKIE_DOMAIN')) {
+        } elseif (COOKIE_DOMAIN !== null) {
             $domain = COOKIE_DOMAIN;
         } else {
             $domain = geoPC::cleanHostName($_SERVER['HTTP_HOST']);
@@ -1773,14 +1816,16 @@ class geoSession
         $ip = $this->getUniqueUserInfo($custom_id);
         $ip_field = $this->getIpField();
         $admin_session = (defined('IN_ADMIN')) ? 'Yes' : 'No';
-        $sql_query = "INSERT INTO " . geoTables::session_table . " (" . geoTables::field_session_id . ", `user_id`, `last_time`, $ip_field, `admin_session`) values (?,?,?,?,?)";
+        $sql_query = "INSERT INTO " . geoTables::session_table . " (" . geoTables::field_session_id
+            . ", `user_id`, `last_time`, $ip_field, `admin_session`) values (?,?,?,?,?)";
         $data = array($custom_id, 0, $current_time, $ip, $admin_session);
 
         if (!$this->db->Execute($sql_query, $data)) {
             trigger_error("ERROR SESSIONS: Couldn't insert session. " . $this->db->ErrorMsg());
-            die("We're sorry, our site is experiencing problems. Please come back later."); //DB Query error, don't give
-                                                                                            //client any info, in case this is
-                                                                                            //a hacking attempt.
+            //DB Query error, don't give
+            //client any info, in case this is
+            //a hacking attempt.
+            die("We're sorry, our site is experiencing problems. Please come back later.");
         }
 
         $this->userId = 0;
@@ -1796,7 +1841,6 @@ class geoSession
             $domain = $this->_getCookieDomain();
             $realDomain = $this->_getCookieDomain(true);
             // This cookie will be unavailable until the next page load
-            /*/header("Set-Cookie: ".$this->cookie_name."=".$custom_id."; path=/; domain=".$domain."; expires=".gmstrftime("%A, %d-%b-%Y %H:%M:%S GMT",$expires));*/
             setcookie($this->cookie_name, $custom_id, 0, '/', $domain);
 
             if (!defined('COOKIE_DOMAIN') && $domain != $realDomain) {
@@ -1869,7 +1913,8 @@ class geoSession
     public function initSession($force = false, $force_session_id = false)
     {
         if ($force) {
-            //forcing a different session from what may have already happened on this pageload, so clear any stale status
+            //forcing a different session from what may have already happened on this pageload, so clear any stale
+            //status
             self::$status = null;
         }
 
@@ -1894,12 +1939,15 @@ status=new');
         //get session information
         $ip_field = $this->getIpField();
         $admin_session = (defined('IN_ADMIN')) ? 'Yes' : 'No';
-        $sql_query = "SELECT " . geoTables::field_session_id . " AS `sid`, `user_id`, `last_time`, `$ip_field` as `ip` FROM " . geoTables::session_table . " WHERE " . geoTables::field_session_id . " = ? AND `admin_session`='$admin_session'";
+        $sql_query = "SELECT " . geoTables::field_session_id . " AS `sid`, `user_id`, `last_time`, `$ip_field` as `ip`
+            FROM " . geoTables::session_table . " WHERE " . geoTables::field_session_id
+            . " = ? AND `admin_session`='$admin_session'";
         $result = $this->db->Execute($sql_query, array($_COOKIE[$this->cookie_name]));
 
         if ($result === false) {
-            trigger_error('ERROR SQL SESSION: Attempt to get session data from the database failed.  Error reported by mysql:' . $this->db->ErrorMsg() . '
-status=error (db error)');
+            trigger_error('ERROR SQL SESSION: Attempt to get session data from the database failed.  Error reported by
+                mysql:' . $this->db->ErrorMsg() . '
+                status=error (db error)');
             if (!isset(self::$status)) {
                 self::$status = 'error';
             }
@@ -1917,7 +1965,8 @@ status=error (db error)');
             }
 
             //if it is not found, must be an old cookie, or potential hacker
-            trigger_error('DEBUG SESSION:' . '[ERROR] initSession() - Amount of results for session is: ' . $result->RecordCount() . ', when it should be 1. going to create new session.
+            trigger_error('DEBUG SESSION:' . '[ERROR] initSession() - Amount of results for session is: '
+                . $result->RecordCount() . ', when it should be 1. going to create new session.
 status=changed (record count for session is wrong)');
             if (!isset(self::$status)) {
                 self::$status = 'changed';
@@ -1934,7 +1983,8 @@ status=changed (record count for session is wrong)');
             //ip field has not be set yet for this connection type, so set it.
             $ip = $this->getUniqueUserInfo($sid);
             $sql_query = "UPDATE " . $this->db->geoTables->session_table . "
-                SET `$ip_field` = ? WHERE " . $this->db->geoTables->field_session_id . " = ? AND `admin_session`='$admin_session' LIMIT 1";
+                SET `$ip_field` = ? WHERE " . $this->db->geoTables->field_session_id
+                . " = ? AND `admin_session`='$admin_session' LIMIT 1";
             $data = array ($ip, $sid);
             $result = $this->db->Execute($sql_query, $data);
             if (!$result) {
@@ -1951,11 +2001,15 @@ status=changed (record count for session is wrong)');
 
             //do some debugging output
             if ($credentials['ip'] !== $this->getUniqueUserInfo($sid)) {
-                trigger_error('ERROR SESSION:' . '[NOTICE] initSession() : The user\'s session data does not match.  Saved Session Data: ' . $credentials['ip'] . ' -- getUniqueUserInfo() says Session Data: ' . $this->getUniqueUserInfo($sid) . ' -- Session ID: ' . $sid . '
+                trigger_error('ERROR SESSION:' . '[NOTICE] initSession() : The user\'s session data does not match.
+                    Saved Session Data: ' . $credentials['ip'] . ' -- getUniqueUserInfo() says Session Data: '
+                    . $this->getUniqueUserInfo($sid) . ' -- Session ID: ' . $sid . '
 status=change (user-agent changed)');
             }
             if (($current_time - $credentials['last_time']) > $this->_getSessionTimeout($user_id)) {
-                trigger_error('DEBUG SESSION:' . '[NOTICE] initSession() : The user\'s session has timed out.  Last visit: ' . ($current_time - $credentials['last_time']) . ' Session Time Out: ' . $this->_getSessionTimeout($user_id) . ' -- Session ID: ' . $sid . '
+                trigger_error('DEBUG SESSION:' . '[NOTICE] initSession() : The user\'s session has timed out.
+                    Last visit: ' . ($current_time - $credentials['last_time']) . ' Session Time Out: '
+                    . $this->_getSessionTimeout($user_id) . ' -- Session ID: ' . $sid . '
 status=change (session timed out)');
             }
             trigger_error('ERROR SESSION: The session that was stored (or not stored) in the
@@ -1969,7 +2023,8 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
                 if ($this->cookie_name == 'admin_classified_session') {
                     //they are on admin side... print out an error so they contact us.
                     //solution is to run the upgrade script again. the ip column needs to be varchar(40)
-                    echo '<span style="color:red; align:center;">ADMIN LOGIN ERROR:  Session table in the database may need to be updated.  Please contact Geodesic Support.</span><br>';
+                    echo '<span style="color:red; align:center;">ADMIN LOGIN ERROR:  Session table in the database may
+                        need to be updated.  Please contact Geodesic Support.</span><br>';
                 }
             }
             //cookie is invalid, so start a new session.
@@ -2031,9 +2086,11 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
                 $mobile = 'desktop';
             }
             $this->_registry->set('device_type', $mobile);
-            //and also do some rudimentary browser testing. There's probably lots of room to improve this, but just a quick baseline...
+            //and also do some rudimentary browser testing. There's probably lots of room to improve this, but just a
+            //quick baseline...
             $ua = getenv('HTTP_USER_AGENT');
             $browser_type = 'Unknown';
+            // phpcs:disable Generic.Files.LineLength.TooLong
             if (strpos($ua, 'iPhone') !== false) {
                 $browser_type = 'iPhone';
             } elseif (strpos($ua, 'Android') !== false) {
@@ -2058,6 +2115,7 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
                 //don't store browser type if we're not sure what it is from the above -- it's probably a bot
                 $this->_registry->set('browser_type', $browser_type);
             }
+            // phpcs:enable Generic.Files.LineLength.TooLong
         }
 
 
@@ -2334,12 +2392,14 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
         }
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-        //un-comment this to see count of how big each list has gotten (shown in debug messages)
-        //trigger_error("DEBUG ROBOT:  Checking against ".count($robots)." \"full\" user agents and ".count($robotP)." \"partial\" user agents...");
+        //un-comment these lines to see count of how big each list has gotten (shown in debug messages)
+        //trigger_error("DEBUG ROBOT:  Checking against ".count($robots)." \"full\" user agents and ".count($robotP)
+        //." \"partial\" user agents...");
 
         if (in_array($user_agent, $robots)) {
             //this is one of the "full" user agent matches...
-            trigger_error("DEBUG ROBOT SESSION: Full robot user agent match!  If this is NOT a bot, let us know the following info:\nUser agent: \n$user_agent\n");
+            trigger_error("DEBUG ROBOT SESSION: Full robot user agent match!  If this is NOT a bot, let us know the
+                following info:\nUser agent: \n$user_agent\n");
             define('IS_ROBOT', true);
             return true;
         }
@@ -2349,7 +2409,8 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
             if (strpos($user_agent, $partial) !== false) {
                 //matches part of string so we don't have to include every single
                 //variation of a user-agent that a particular robot uses
-                trigger_error("DEBUG ROBOT SESSION:  Partial robot user agent match! If this is NOT a bot, let us know the following info:\nPartial Match:\n$partial\nuser agent:\n$user_agent\n");
+                trigger_error("DEBUG ROBOT SESSION:  Partial robot user agent match! If this is NOT a bot, let us know
+                    the following info:\nPartial Match:\n$partial\nuser agent:\n$user_agent\n");
                 define('IS_ROBOT', true);
                 return true;
             }
@@ -2364,7 +2425,8 @@ database is not valid.  Here is the data returned from the database:<br>' . prin
             return true;
         }
 
-        trigger_error("DEBUG ROBOT SESSION: No robot user agent match, this is most likely a 'real visitor', or a bot that is not yet on the list!  If you think this is a bot, let us know - the User agent:\n$user_agent\n");
+        trigger_error("DEBUG ROBOT SESSION: No robot user agent match, this is most likely a 'real visitor', or a bot
+            that is not yet on the list!  If you think this is a bot, let us know - the User agent:\n$user_agent\n");
         define('IS_ROBOT', false);
         return false;
     }
