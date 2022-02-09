@@ -1353,24 +1353,6 @@ class DataAccess
     }
 
     /**
-     * Do not use this any more, instead use geoEmail::sendMail()
-     *
-     * @param string $to
-     * @param string $subject
-     * @param string $content
-     * @param (optional)string $from pass zero for site default
-     * @param (optional)string $replyTo pass zero for site default
-     * @param (optional)string $charset pass zero for site default
-     * @param (optional)string $type HTML, plain text, etc, use zero for site default
-     * @deprecated 03/23/2009
-     */
-    public function sendMail($to, $subject, $content, $from = 0, $replyTo = 0, $charset = 0, $type = 0)
-    {
-        geoEmail::sendMail($to, $subject, $content, $from, $replyTo, $charset, $type);
-        return true;
-    }
-
-    /**
      * Gets the current database settings.  Meant to be used for api integration.
      * @return array Array containing the db type and the database name.
      */
