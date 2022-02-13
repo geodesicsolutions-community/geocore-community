@@ -1093,25 +1093,6 @@ switch ($_REQUEST["a"]) {
         }
         break;
 
-    case 22:
-        //extra page
-        $site = new geoSite();
-        if (($_REQUEST["b"]) && (is_numeric($_REQUEST["b"]))) {
-            if (!$site->extra_page($db, $_REQUEST["b"])) {
-                include_once(CLASSES_DIR . "browse_ads.php");
-                $browse = new Browse_ads($user_id, $language_id, 0, 0);
-                if (!$browse->main()) {
-                    $browse->browse_error();
-                }
-            }
-        } else {
-            include_once(CLASSES_DIR . "browse_ads.php");
-            $browse = new Browse_ads($user_id, $language_id, 0, 0);
-            if (!$browse->main()) {
-                $browse->browse_error();
-            }
-        }
-        break;
     case 25:
         //display sellers within a category
         //b will contain the category id
