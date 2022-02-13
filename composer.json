@@ -9,7 +9,7 @@
         "wiki": "https://geodesicsolutions.org/wiki"
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.4",
         "ext-curl": "*",
         "ext-gd": "*",
         "ext-mysqli": "*",
