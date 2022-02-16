@@ -11,7 +11,7 @@ class browse_vote extends geoSite
 
 //########################################################################
 
-    function Browse_vote($db = 0, $classified_user_id, $language_id, $category_id = 0, $page = 0, $classified_id = 0, $filter_id = 0, $product_configuration = 0)
+    function __construct($db = 0, $classified_user_id, $language_id, $category_id = 0, $page = 0, $classified_id = 0, $filter_id = 0, $product_configuration = 0)
     {
         if ($category_id) {
             $this->site_category = (int)$category_id;
@@ -213,7 +213,7 @@ class browse_vote extends geoSite
         $view->listing = $listing->toArray();
 
         $sql = "select * from " . geoTables::voting_table . " where classified_id = " . $classified_id . "
-		     order by date_entered desc 
+		     order by date_entered desc
 		     limit " . (($this->page_result - 1) * $db->get_site_setting('number_of_vote_comments_to_display')) . "," . $db->get_site_setting('number_of_vote_comments_to_display');
         $result = $db->Execute($sql);
         if ((!$result)) {

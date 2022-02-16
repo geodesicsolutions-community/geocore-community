@@ -21,7 +21,8 @@
         "vendor-dir": "src/vendor"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.6"
+        "squizlabs/php_codesniffer": "^3.6",
+        "phpstan/phpstan": "^1.4"
     },
     "scripts": {
         "post-install-cmd": [
@@ -32,6 +33,7 @@
         ],
         "cs-check": "phpcs -s --standard=./contrib/phpcs-ruleset.xml",
         "cs-fix": "phpcbf --colors --standard=./contrib/phpcs-ruleset.xml",
+        "stan": "php -d memory_limit=2G src/vendor/bin/phpstan analyse src",
         "build-release": "bash contrib/build-release"
     }
 }

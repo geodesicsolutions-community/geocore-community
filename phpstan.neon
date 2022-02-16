@@ -1,0 +1,14 @@
+parameters:
+    # Let's get level 0 working then we can improve...
+    level: 0
+    # We want to make sure it is compatible with PHP 7.1
+    phpVersion: 70100
+    paths:
+        - src
+    excludePaths:
+        - src/vendor
+        - src/templates_c
+        # ignore upgrade for now, to focus on main codeset
+        - src/upgrade
+        - src/setup
+        - src/pre_setup
