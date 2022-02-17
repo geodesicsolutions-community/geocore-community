@@ -51,7 +51,10 @@ foreach ($rows as $user_id) {
     $subject = $msgs[500447];
     $tpl = new geoTemplate('system', 'emails');
     $tpl->assign('salutation', $user->getSalutation());
-    $tpl->assign('add_balance_url', $this->db->get_site_setting('classifieds_url') . '?a=cart&amp;action=new&amp;main_type=account_balance');
+    $tpl->assign(
+        'add_balance_url',
+        $this->db->get_site_setting('classifieds_url') . '?a=cart&amp;action=new&amp;main_type=account_balance'
+    );
     $tpl->assign('balance', $user->account_balance);
     $tpl->assign('balance_history_url', $this->db->get_site_setting('classifieds_url') . '?a=4&amp;b=18');
     $tpl->assign('balance_negative_date', $user->date_balance_negative);
