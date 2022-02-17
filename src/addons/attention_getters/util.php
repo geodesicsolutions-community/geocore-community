@@ -6,16 +6,13 @@
 
 class addon_attention_getters_util
 {
-
-    var $db;
-    function addon_attention_getters_util()
+    private $db;
+    public function __construct()
     {
-        $db = true;
-        require(GEO_BASE_DIR . "get_common_vars.php");
-        $this->db = $db;
+        $this->db = DataAccess::getInstance();
     }
 
-    function get_attention_getter_url($choice)
+    public function get_attention_getter_url($choice)
     {
         $sql = "select * from " . $this->db->geoTables->choices_table . " where choice_id = " . $choice;
         $attention_getter_result = $this->db->Execute($sql);
@@ -33,15 +30,15 @@ class addon_attention_getters_util
     }
 
 
-    function attention_getter_javascript()
+    public function attention_getter_javascript()
     {
         $js =  <<< ag_js
 		<script type='text/javascript'>
-			
+
 			function Disab() {
 			var ch =  document.getElementById('agCheckbox');
 			var obj = document.getElementsByName('c[attention_getter_choice]');
-			
+
 			for (i =0; i < obj.length;i++)
 			{
 			if (ch.checked)
@@ -52,25 +49,25 @@ class addon_attention_getters_util
 			obj[i].checked = false;
 			}
 			}
-		
+
 		}
 
 
 		function Enab(myid)
 		{
-			if (!myid) 
+			if (!myid)
 			{
 			myid = 0;
 			return false;
 			}
-		
-			var obj = document.getElementsByName('c[attention_getter_choice]');		 
+
+			var obj = document.getElementsByName('c[attention_getter_choice]');
 			var rd =  document.getElementById('geo_radio'+myid);
 			var ch =  document.getElementById('agCheckbox');
-			
+
 			rd.checked = true;
 			ch.checked = true;
-			
+
 			for (i =0; i < obj.length;i++)
 			{
 			obj[i].disabled=false;
@@ -83,16 +80,15 @@ ag_js;
         return $js;
     }
 
-    function display_attention_getter_choices($params)
+    public function display_attention_getter_choices($params)
     {
-        $text =& geoAddon::getText('geo_addons', 'attention_getters');
-
+        $text = geoAddon::getText('geo_addons', 'attention_getters');
 
         $allFree = !geoMaster::is('site_fees');
         $price_plan = $params["price_plan"];
         $display_amount = $params["cost"];
         $body = "";
-        if ((isset($price_plan['use_attention_getters']) && $price_plan['use_attention_getters']) || !geoPC::is_ent()) {
+        if ((isset($price_plan['use_attention_getters']) && $price_plan['use_attention_getters'])) {
             $sql_query = "select * from " . geoTables::choices_table . " where type_of_choice = 10";
             $attention_getters_result = $this->db->Execute($sql_query);
             if (!$attention_getters_result) {
@@ -130,16 +126,13 @@ ag_js;
         return $body;
     }
 
-
-
     public function autoAdd($fromDir, $clearExisting = false)
     {
         $fromDir = trim($fromDir);
         if (!is_dir(GEO_BASE_DIR . $fromDir)) {
             return false;
         }
-        $db = 1;
-        include GEO_BASE_DIR . 'get_common_vars.php';
+        $db = DataAccess::getInstance();
 
         if ($clearExisting) {
             $db->Execute("DELETE FROM " . geoTables::choices_table . " WHERE `type_of_choice`=10");
@@ -147,7 +140,7 @@ ag_js;
 
         $existing = $db->GetAssoc("SELECT `choice_id`, `value` FROM " . geoTables::choices_table . " WHERE `type_of_choice`=10");
 
-        $sql = $db->Prepare("INSERT INTO " . geoTables::choices_table . " 
+        $sql = $db->Prepare("INSERT INTO " . geoTables::choices_table . "
 		(`type_of_choice`,`display_value`, `value`)
 		VALUES (10, ?, ?)");
         if (!$sql) {
