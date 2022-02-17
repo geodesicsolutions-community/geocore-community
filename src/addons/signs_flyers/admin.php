@@ -9,7 +9,7 @@ class addon_signs_flyers_admin extends addon_signs_flyers_info
     var $db;
     var $admin_site;
 
-    function addon_signs_flyers_admin()
+    public function __construct()
     {
         if (!Singleton::isInstance('Admin_site')) {
             return false;
