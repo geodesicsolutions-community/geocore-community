@@ -1,28 +1,23 @@
 <?php
 
-//addons/anonymous_listing/info.php
-
-# Anonymous Listing Addon
-
 class addon_anonymous_listing_info
 {
-    //The following are required variables
-    var $name = 'anonymous_listing';
-    var $version = '1.7.0';
-    var $core_version_minimum = '17.01.0';
-    var $title = 'Anonymous Listing';
-    var $author = "Geodesic Solutions LLC.";
-    var $icon_image = 'menu_anonymous.gif';
-    var $description = 'This addon enables the posting of anonymous listings, to be used on 4.0.0 or higher.';
-    var $auth_tag = 'geo_addons';
-    var $core_events = array(
+    public $name = 'anonymous_listing';
+    public $version = '1.7.0';
+    public $core_version_minimum = '17.01.0';
+    public $title = 'Anonymous Listing';
+    public $author = "Geodesic Solutions LLC.";
+    public $icon_image = 'menu_anonymous.gif';
+    public $description = 'This addon enables the posting of anonymous listings, to be used on 4.0.0 or higher.';
+    public $auth_tag = 'geo_addons';
+    public $core_events = [
         'Browse_ads_display_browse_result_addHeader',
         'Browse_ads_display_browse_result_addRow'
-    );
-    public $pages = array ('anon_pass');
-    public $pages_info = array(
-        'anon_pass' => array ('main_page' => 'cart_page.tpl', 'title' => 'Listing Process - Anon Password Step'),
-    );
+    ];
+    public $pages = ['anon_pass'];
+    public $pages_info = [
+        'anon_pass' => ['main_page' => 'cart_page.tpl', 'title' => 'Listing Process - Anon Password Step'],
+    ];
 }
 
 /*

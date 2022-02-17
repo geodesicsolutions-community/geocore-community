@@ -1,20 +1,12 @@
 <?php
 
-//addons/anonymous_listing/setup.php
-
-# Anonymous Listing Addon
-
 require_once ADDON_DIR . 'anonymous_listing/info.php';
 
 class addon_anonymous_listing_setup extends addon_anonymous_listing_info
 {
-
-    function install()
+    public function install()
     {
-
-        //get $db connection - use get_common_vars.php to be forward compatible
-        $db = true;
-        include(GEO_BASE_DIR . 'get_common_vars.php');
+        $db = DataAccess::getInstance();
 
         $sql = "CREATE TABLE IF NOT EXISTS `geodesic_addon_anonymous_listing` (
   				`listing_id` int(14) NOT NULL,
@@ -35,27 +27,35 @@ class addon_anonymous_listing_setup extends addon_anonymous_listing_info
         return true;
     }
 
-    function upgrade($old_version)
+    public function upgrade($old_version)
     {
         $db = DataAccess::getInstance();
         switch ($old_version) {
             case '1.0.0':
                 //first release didn't have text in db by default
                 //check to see if text for this addon exists in db
-                $sql = "SELECT `auth_tag` FROM `geodesic_addon_text` WHERE `auth_tag` = 'geo_addons' AND `addon` = 'anonymous_listing'";
+                $sql = "SELECT `auth_tag` FROM `geodesic_addon_text`
+                    WHERE `auth_tag` = 'geo_addons' AND `addon` = 'anonymous_listing'";
                 $result = $db->Execute($sql);
                 if ($result->RecordCount() == 0) {
                     //no text yet -- insert the defaults
-                    $sql = "INSERT INTO `geodesic_addon_text` (`auth_tag`, `addon`, `text_id`, `language_id`, `text`) VALUES 
-					('geo_addons', 'anonymous_listing', 'passwordLabel', 1, 'Input the password to edit this listing: '),
-					('geo_addons', 'anonymous_listing', 'passwordButtonText', 1, 'Submit'),
-					('geo_addons', 'anonymous_listing', 'passwordError', 1, 'Incorrect password. Please try again.'),
-					('geo_addons', 'anonymous_listing', 'passwordCancelLink', 1, 'Cancel Edit'),
-					('geo_addons', 'anonymous_listing', 'placementText1', 1, 'You are placing this listing anonymously.'),
-					('geo_addons', 'anonymous_listing', 'placementText2', 1, 'You will be able to edit it later by using the following password:'),
-					('geo_addons', 'anonymous_listing', 'placementContinueLink', 1, 'Continue placing this listing'),
-					('geo_addons', 'anonymous_listing', 'placementCancelLink', 1, 'Cancel Listing'),
-					('geo_addons', 'anonymous_listing', 'emailText', 1, 'You have placed this listing anonymously. To edit it in the future, you will need to input this password:')";
+                    $sql = "INSERT INTO `geodesic_addon_text` (`auth_tag`, `addon`, `text_id`, `language_id`, `text`)
+                        VALUES
+                        ('geo_addons', 'anonymous_listing', 'passwordLabel', 1,
+                            'Input the password to edit this listing: '),
+                        ('geo_addons', 'anonymous_listing', 'passwordButtonText', 1, 'Submit'),
+                        ('geo_addons', 'anonymous_listing', 'passwordError', 1,
+                            'Incorrect password. Please try again.'),
+                        ('geo_addons', 'anonymous_listing', 'passwordCancelLink', 1, 'Cancel Edit'),
+                        ('geo_addons', 'anonymous_listing', 'placementText1', 1,
+                            'You are placing this listing anonymously.'),
+                        ('geo_addons', 'anonymous_listing', 'placementText2', 1,
+                            'You will be able to edit it later by using the following password:'),
+                        ('geo_addons', 'anonymous_listing', 'placementContinueLink', 1,
+                            'Continue placing this listing'),
+                        ('geo_addons', 'anonymous_listing', 'placementCancelLink', 1, 'Cancel Listing'),
+                        ('geo_addons', 'anonymous_listing', 'emailText', 1,
+                            'You have placed this listing anonymously. Use this password to edit the listing:')";
                     if (!$db->Execute($sql)) {
                         return false;
                     }
@@ -93,13 +93,12 @@ class addon_anonymous_listing_setup extends addon_anonymous_listing_info
         return true;
     }
 
-    function uninstall()
+    public function uninstall()
     {
-        $db = true;
-        include GEO_BASE_DIR . 'get_common_vars.php';
+        $db = DataAccess::getInstance();
 
         $sql = 'DELETE TABLE `geodesic_addon_anonymous_listing`';
-        $result = $db->Execute($sql);
+        $db->Execute($sql);
 
         $registry = geoAddon::getRegistry('anonymous_listing', true);
         if ($registry) {
@@ -133,7 +132,7 @@ class addon_anonymous_listing_setup extends addon_anonymous_listing_info
      *
      * @return bool success
      */
-    function addAnonUser()
+    public function addAnonUser()
     {
         $db = DataAccess::getInstance();
         $registry = geoAddon::getRegistry('anonymous_listing', true);
@@ -144,7 +143,7 @@ class addon_anonymous_listing_setup extends addon_anonymous_listing_info
         }
 
         //create a new user, reserved for anonymous
-        $sql = "INSERT IGNORE INTO `geodesic_logins` (username, password, status) VALUES 
+        $sql = "INSERT IGNORE INTO `geodesic_logins` (username, password, status) VALUES
 					('Anonymous', '', 0)";
         $result = $db->Execute($sql);
         if (!$result) {
@@ -174,7 +173,8 @@ class addon_anonymous_listing_setup extends addon_anonymous_listing_info
         $sql = "select * from geodesic_user_groups_price_plans where id=1";
         $defaults = $db->GetRow($sql);
         $sql = "INSERT INTO geodesic_user_groups_price_plans (id, group_id, price_plan_id, auction_price_plan_id) VALUES
-				('" . $id . "','" . $defaults['group_id'] . "','" . $defaults['price_plan_id'] . "','" . $defaults['auction_price_plan_id'] . "')";
+            ('" . $id . "','" . $defaults['group_id'] . "','" . $defaults['price_plan_id'] . "','"
+            . $defaults['auction_price_plan_id'] . "')";
         $result = $db->Execute($sql);
         if (!$result) {
             return false;

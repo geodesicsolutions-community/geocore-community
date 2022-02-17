@@ -1,8 +1,5 @@
 <?php
 
-//addons/anonymous_listing/pages.php
-
-
 class addon_anonymous_listing_pages
 {
     public function anon_pass()

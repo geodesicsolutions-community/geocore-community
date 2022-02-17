@@ -38,7 +38,7 @@ class bridge_vbulletin extends addon_bridge_util
 
     var $debug = false; //to prevent errors when old code outputs debug stuff...
 
-    function bridge_vbulletin()
+    public function __construct()
     {
         $this->setting_desc['config_path']['desc'] .=  '
 			<br />Detected Path to this Installation\'s Root: <span class="color-primary-two">' . GEO_BASE_DIR . '</span>';

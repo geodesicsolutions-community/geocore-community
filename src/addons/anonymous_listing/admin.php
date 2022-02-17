@@ -1,22 +1,13 @@
 <?php
 
-//addons/anonymous_listing/admin.php
-
-# Anonymous Listing Addon
-
 class addon_anonymous_listing_admin extends addon_anonymous_listing_info
 {
+    private $admin_site;
 
-    function addon_anonymous_listing_admin()
+    public function __construct()
     {
         if (Singleton::isInstance('Admin_site')) {
-            if (strlen(PHP5_DIR)) {
-                $this->admin_site = Singleton::getInstance('Admin_site');
-                $this->db = DataAccess::getInstance();
-            } else {
-                $this->admin_site =& Singleton::getInstance('Admin_site');
-                $this->db =& DataAccess::getInstance();
-            }
+            $this->admin_site = Singleton::getInstance('Admin_site');
         } else {
             //if the admin site does not exist yet, something weird is going on,
             //since the admin site should have been the class to initialize this.
@@ -24,9 +15,11 @@ class addon_anonymous_listing_admin extends addon_anonymous_listing_info
         }
     }
 
-    function init_text($language_id)
+    public function init_text($language_id)
     {
-        $return_var = array();
+        $return_var = [];
+
+        // phpcs:disable Generic.Files.LineLength.TooLong
         $return_var['passwordLabel'] = array (
             'name' => 'Password prompt',
             'desc' => 'Labels the text entry field that allows a user to input the anonymous edit password for a listing',
@@ -134,13 +127,12 @@ class addon_anonymous_listing_admin extends addon_anonymous_listing_info
         return $return_var;
     }
 
-    function init_pages()
+    public function init_pages()
     {
-        //menu_page::addonAddPage($index, $parent, $title, $addon_name, $image, $type);
         menu_page::addonAddPage('anonymous_listing_options', '', 'Settings', 'anonymous_listing', $this->icon_image);
     }
 
-    function display_anonymous_listing_options()
+    public function display_anonymous_listing_options()
     {
         $menu_loader = geoAdmin::getInstance();
 
@@ -175,7 +167,7 @@ class addon_anonymous_listing_admin extends addon_anonymous_listing_info
         $this->admin_site->display_page();
     }
 
-    function update_anonymous_listing_options()
+    public function update_anonymous_listing_options()
     {
         $registry = geoAddon::getRegistry('anonymous_listing');
         $data = $_POST['anon_info'];

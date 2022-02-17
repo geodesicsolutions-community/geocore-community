@@ -7,15 +7,15 @@
 class addon_attention_getters_info
 {
     //The following are required variables
-    var $name = 'attention_getters';
-    var $version = '3.1.0';
-    var $core_version_minimum = '17.01.0';
-    var $title = 'Attention Getters';
-    var $author = "Geodesic Solutions LLC.";
-    var $icon_image = "menu_attn_getter.gif";
-    var $description = 'This addon enables the use of attention getters.  This addon is compatible
+    public $name = 'attention_getters';
+    public $version = '3.1.0';
+    public $core_version_minimum = '17.01.0';
+    public $title = 'Attention Getters';
+    public $author = "Geodesic Solutions LLC.";
+    public $icon_image = "menu_attn_getter.gif";
+    public $description = 'This addon enables the use of attention getters.  This addon is compatible
 	with Geo 4.0+.';
-    var $auth_tag = 'geo_addons';
+    public $auth_tag = 'geo_addons';
 }
 /*
  * CHANGELOG - Attention Getters
