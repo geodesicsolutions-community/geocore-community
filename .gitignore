@@ -30,7 +30,4 @@ src/geo_templates/
 !src/geo_templates/tempo/
 
 # Built zip files
-geocore-ce.zip
-fusion.zip
-marquee.zip
-tempo.zip
+build/
