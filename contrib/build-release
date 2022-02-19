@@ -5,11 +5,14 @@
 
 composer install --no-dev --optimize-autoloader
 
-# remove existing file if exists
-rm geocore-ce.zip fusion.zip marquee.zip tempo.zip
+# make folder if not exists
+mkdir build
+
+# remove existing files if exists
+rm build/geocore-ce.zip build/fusion.zip build/marquee.zip build/tempo.zip
 
 # add license to base folder and all contents of src to base folder, minus a few things
-zip geocore-ce.zip LICENSE
+zip build/geocore-ce.zip LICENSE
 cd src/
 
 # add files in src as the base folder.. but:
@@ -20,19 +23,23 @@ cd src/
 #   - _geocache
 #   - geo_templates
 #   - .DS_Store files (Mac OS file)
-zip ../geocore-ce.zip -r * -x config.php "templates_c/*" "user_images/*" "_geocache/*" "geo_templates/*" "*.DS_Store"
+zip ../build/geocore-ce.zip -r * -x config.php "templates_c/*" "user_images/*" "_geocache/*" "geo_templates/*" "*.DS_Store"
 
 # add the starting files needed for _geocache
-zip ../geocore-ce.zip _geocache/index.php _geocache/.htaccess
+zip ../build/geocore-ce.zip _geocache/index.php _geocache/.htaccess
 
 # Add empty folders for user_images, templates_c
-zip ../geocore-ce.zip user_images templates_c
+zip ../build/geocore-ce.zip user_images templates_c
 
 # Add the default template and min.php in geo_templates (Note: we exclude the extra template sets for now)
-zip ../geocore-ce.zip geo_templates/min.php -r geo_templates/default/* -x "*.DS_Store"
+zip ../build/geocore-ce.zip geo_templates/min.php -r geo_templates/default/* -x "*.DS_Store"
 
 # Make a download specificaly for the extra template sets - done so they can be uploaded using the manager if desired
 cd geo_templates
-zip ../../fusion.zip -r fusion -x "*.DS_Store"
-zip ../../marquee.zip -r marquee -x "*.DS_Store"
-zip ../../tempo.zip -r tempo -x "*.DS_Store"
+zip ../../build/fusion.zip -r fusion -x "*.DS_Store"
+zip ../../build/marquee.zip -r marquee -x "*.DS_Store"
+zip ../../build/tempo.zip -r tempo -x "*.DS_Store"
+
+echo
+echo --- Build complete!  Check the zips in the build/ folder ---
+echo
