@@ -4,8 +4,6 @@
 require_once CLASSES_DIR . 'php5_classes/File.class.php';
 require_once CLASSES_DIR . 'php5_classes/String.class.php';
 require_once CLASSES_DIR . 'php5_classes/Template.class.php';
-require_once CLASSES_DIR . 'php5_classes/smarty/Smarty.class.php';
-
 
 class geoTemplatesExport
 {
@@ -129,7 +127,7 @@ class geoTemplatesExport
 
 /*
  * Leave first line of this file intact to make software updates easier!
- * 
+ *
  * File Created from Geo pre-5.0 design exporter (GIT: $1)
  */
 ';

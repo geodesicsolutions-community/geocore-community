@@ -1,19 +1,4 @@
 <?php
-//Template.class.php
-/**
- * Holds the geoTemplate class.
- *
- * @package System
- * @since Version 4.0.0
- */
-
-
-/**
- * Smarty could be included via the autoloader in app_top.common.php, but still
- * requiring it here anyways so it's slightly less magical and less confusion for
- * people trying to troubleshoot.
- */
-require_once CLASSES_DIR.PHP5_DIR.'smarty/Smarty.class.php';
 
 /**
  * Template object that extends the Smarty class (a 3rd party library) to enable
