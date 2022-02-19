@@ -230,17 +230,13 @@ class Admin_site
         }
     }
 
-//########################################################################
-
     function admin_footer($db)
     {
         include_once("admin_footer.php");
         return true;
-    } //end of function admin_footer
+    }
 
-//########################################################################
-
-    function securityCheck()
+    public static function securityCheck()
     {
         $children = array();
 
@@ -443,23 +439,7 @@ class Admin_site
         return $html;
     }
 
-//#########################################################################
-
-    function inputError($message = "Invalid input", $line, $file)
-    {
-        Admin_site::error($message, $line, $file);
-    }
-
-//#########################################################################
-
-    function requestError($message = "Invalid request", $line, $file)
-    {
-        Admin_site::error($message, $line, $file);
-    }
-
-//#########################################################################
-
-    function error($message = "Error", $line, $file, $isUserFriendly = true)
+    public static function error($message = "Error", $line = 0, $file = '', $isUserFriendly = true)
     {
         if ($isUserFriendly) {
             echo "
@@ -804,7 +784,7 @@ class Admin_site
 	                      	" . geoUserRating::render($user_id) . "
 	                      	 <a href='index.php?mc=users&page=users_ratings_detail&b=$user_id' style='font-size: 0.9em;'>Rating Details</a>
 	                      </div>
-	
+
 						  <div style='font-size: 1.1rem; padding: 10px 0;'>";
 
             $address = ((strlen(trim($user_data["address"])) > 0) ? $user_data["address"] : "") .

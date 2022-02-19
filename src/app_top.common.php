@@ -3,7 +3,8 @@
 set_error_handler('geo_default_debug_error_handler');
 
 //set up error handling.
-function geo_default_debug_error_handler($errno, $errstr, $errfile, $errline, $errcontext){
+function geo_default_debug_error_handler($errno, $errstr, $errfile, $errline, $errcontext = null)
+{
 	static $queue = array();
 
 	$data = array ('errno' => $errno,

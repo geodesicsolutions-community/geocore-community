@@ -108,10 +108,6 @@ class Notifications {
 
 		Notifications::add(Admin_site::securityCheck());
 
-	//	Notifications::addCheck(array('Admin_site', 'securityCheck'));
-
-		//Notifications::addCheck(array('Admin_template_management','checkTemplatesAndNotify'));
-
 		if(geoMaster::is('auctions')) {
 			Notifications::addCheck(array('Ad_configuration', 'incrementExists'));
 		}
