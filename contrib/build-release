@@ -19,7 +19,8 @@ cd src/
 #   - user_images
 #   - _geocache
 #   - geo_templates
-zip ../geocore-ce.zip -r * -x config.php "templates_c/*" "user_images/*" "_geocache/*" "geo_templates/*"
+#   - .DS_Store files (Mac OS file)
+zip ../geocore-ce.zip -r * -x config.php "templates_c/*" "user_images/*" "_geocache/*" "geo_templates/*" "*.DS_Store"
 
 # add the starting files needed for _geocache
 zip ../geocore-ce.zip _geocache/index.php _geocache/.htaccess
@@ -28,10 +29,10 @@ zip ../geocore-ce.zip _geocache/index.php _geocache/.htaccess
 zip ../geocore-ce.zip user_images templates_c
 
 # Add the default template and min.php in geo_templates (Note: we exclude the extra template sets for now)
-zip ../geocore-ce.zip geo_templates/min.php -r geo_templates/default/*
+zip ../geocore-ce.zip geo_templates/min.php -r geo_templates/default/* -x "*.DS_Store"
 
 # Make a download specificaly for the extra template sets - done so they can be uploaded using the manager if desired
 cd geo_templates
-zip ../../fusion.zip -r fusion
-zip ../../marquee.zip -r marquee
-zip ../../tempo.zip -r tempo
+zip ../../fusion.zip -r fusion -x "*.DS_Store"
+zip ../../marquee.zip -r marquee -x "*.DS_Store"
+zip ../../tempo.zip -r tempo -x "*.DS_Store"
