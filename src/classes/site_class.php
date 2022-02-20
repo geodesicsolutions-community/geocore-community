@@ -1071,7 +1071,7 @@ jQuery(window).load(gjUtil.load);
         return $tpl->fetch("image_block/$galleryStyle.tpl");
     }
 
-    public function display_image_tag($db, $value, $for_gallery = 0, $size, &$tpl)
+    public function display_image_tag($db, $value, $for_gallery, $size, &$tpl)
     {
         if ($value['icon'] && !$value['thumb_url']) {
             //non-image file for which we want to display an icon
@@ -2008,9 +2008,7 @@ jQuery(window).load(gjUtil.load);
         return mktime($hour, $min, 0, $month, $day, $year);
     }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function get_high_bidder_username($db = 0, $auction_id, $reverse_auction = false)
+    public function get_high_bidder_username($db, $auction_id, $reverse_auction = false)
     {
         if ($this->debug) {
             echo "<br>TOP OF GET_HIGH_BIDDER_USERNAME<Br>\n";
