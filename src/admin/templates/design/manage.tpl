@@ -11,7 +11,7 @@
 	</script>
 {/if}
 
-{include file="design/parts/workingOn.tpl"}
+{legacy_include file="design/parts/workingOn.tpl"}
 
 <form action="index.php?page=design_download_file" method="post" id="downloadForm">
 	<input type="hidden" name="auto_save" value="1" />
@@ -110,7 +110,7 @@
 		<div id="refreshFilelistBox" style="display: none;">
 			<img src="admin_images/loading.gif" alt="Loading..." /> &nbsp; Loading...
 		</div>
-		
+
 		<div id="designFileList">
 			{include file="design/parts/fileList.tpl"}
 		</div>

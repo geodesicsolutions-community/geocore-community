@@ -1,6 +1,6 @@
 {* 16.09.0-79-gb63e5d8 *}
 {$adminMsgs}
-{include file='design/parts/designModeBox.tpl'}
+{include file='admin/design/parts/designModeBox.tpl'}
 
 <script>
 jQuery(function () {
@@ -13,7 +13,7 @@ jQuery(function () {
 			jQuery('#googleApiBox').show('fast');
 		}
 	};
-	
+
 	var minifyShowHide = function () {
 		if (jQuery('#minifyEnabled').prop('checked')) {
 			jQuery('.minifyOn').show('fast');
@@ -42,15 +42,15 @@ jQuery(function () {
 	};
 	minifyHtShowHide();
 	jQuery('#tplHtaccess').click(minifyHtShowHide);
-	
+
 	var changeExtBase = function () {
 		var ext_url = jQuery('#external_url_base').val();
 		jQuery('.external_url_base').text(ext_url);
 	}
 	changeExtBase();
-	
+
 	jQuery('#external_url_base').change(changeExtBase);
-	
+
 	googleLibCheck();
 	jQuery('#minifyLibs').click(googleLibCheck);
 });
@@ -80,22 +80,22 @@ jQuery(function () {
 			  <div class='col-md-6 col-sm-6 col-xs-12'>
 			  	<span class="external_url_base">{$external_url_base}</span>{$GEO_TEMPLATE_LOCAL_DIR|escape}
 			  </div>
-        		</div>			
+        		</div>
 
 			<div class='form-group'>
 			<label class='control-label col-md-5 col-sm-5 col-xs-12 pad-top-0'>Template Set Folder: </label>
 			  <div class='col-md-6 col-sm-6 col-xs-12'>
 			  	<span class="external_url_base">{$external_url_base}</span>{$GEO_JS_LIB_LOCAL_DIR|escape}
 			  </div>
-        		</div>	
-        		
+        		</div>
+
 			<div class="center">
 				<br />
 				<input type="submit" name="auto_save" value="Save Settings" />
 			</div>
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend>Optimization Settings</legend>
 		<div class='x_content'>
@@ -106,16 +106,16 @@ jQuery(function () {
 			  	<input type="checkbox" name="minifyEnabled" id="minifyEnabled" value="1" {if $minifyEnabled}checked="checked"{/if}/>&nbsp;
 			  	Combine, Minify, and Compress CSS and JS <br><span class="small_font">(Recommended for Live Sites)</span>
 			  </div>
-        		</div>	
-        		
+        		</div>
+
 			<div class="minifyOn">
-				{if $minifyEnabled}				
+				{if $minifyEnabled}
 					<div class="center">
 						<a href="index.php?page=design_clear_combined" class="mini_cancel lightUpLink">Clear Combined CSS &amp; JS</a>
 						<br /><br />
 					</div>
 				{/if}
-				
+
 				<div class='form-group'>
 				<label class='control-label col-md-5 col-sm-5 col-xs-12'></label>
 				  <div class='col-md-7 col-sm-7 col-xs-12'>
@@ -138,8 +138,8 @@ jQuery(function () {
 					<input type="checkbox" name="noMinifyCss" id="noMinifyCss" value="1" {if $noMinifyCss}checked="checked"{/if}/>&nbsp;
 					Compatibility: do NOT minify CSS <br><span class="small_font">(combine only -- useful for older designs or server configurations that prevent minification)</span>
 				  </div>
-				</div>						
-				
+				</div>
+
 			</div>
 
 			<div class='form-group'>
@@ -148,7 +148,7 @@ jQuery(function () {
 			  	<input type="checkbox" name="filter_trimwhitespace" value="1" {if $filter_trimwhitespace}checked="checked"{/if} />&nbsp;
 			  	Trim repeated whitespace from final HTML output <br><span class="small_font">(Recommended for sites with a high percentage of mobile or low-bandwidth users)</span>
 			  </div>
-        		</div>	
+        		</div>
 
 			<div class='form-group'>
 			<label class='control-label col-md-4 col-sm-4 col-xs-12'></label>
@@ -156,8 +156,8 @@ jQuery(function () {
 			  	<input type="checkbox" name="useGoogleLibApi" value="1" id="useGoogleLibApi" {if $useGoogleLibApi}checked="checked"{/if} />&nbsp;
 			  	Use Google Libraries API <br><span class="small_font">(Allows faster loading of available JS libraries - <a href="http://code.google.com/apis/libraries/devguide.html" onclick="window.open(this.href); return false;">Info Here</a>)</span>
 			  </div>
-        		</div>	
-			
+        		</div>
+
 			<div class='form-group'>
 			<label class='control-label col-md-4 col-sm-4 col-xs-12'></label>
 			  <div class='col-md-7 col-sm-7 col-xs-12'>
@@ -165,7 +165,7 @@ jQuery(function () {
 			  	Use <strong>{ldelim}footer_html}</strong> to delay loading of certain javascript
 			  </div>
         		</div>
-  
+
 			<div class='form-group'>
 			<label class='control-label col-md-4 col-sm-4 col-xs-12'></label>
 			  <div class='col-md-7 col-sm-7 col-xs-12'>
@@ -173,9 +173,9 @@ jQuery(function () {
 			  	Use <strong>.htaccess</strong> for <strong>{$GEO_TEMPLATE_LOCAL_DIR}</strong> (requires apache)
 			  </div>
         		</div>
-        		
+
 			<div class="htaccessOn">
-			
+
 				<div class='form-group'>
 				<label class='control-label col-md-5 col-sm-5 col-xs-12'></label>
 				  <div class='col-md-7 col-sm-7 col-xs-12'>
@@ -190,7 +190,7 @@ jQuery(function () {
 					<input type="checkbox" name="tplHtaccess_compress" value="1" {if $tplHtaccess_compress}checked="checked"{/if}/>&nbsp;
 					.htaccess - <strong>Compress Files</strong> <br><span class="small_font">(requires mod_deflate Apache Module)</span>
 				  </div>
-				</div>			
+				</div>
 
 				<div class='form-group'>
 				<label class='control-label col-md-5 col-sm-5 col-xs-12'></label>
@@ -207,7 +207,7 @@ jQuery(function () {
 					.htaccess - Use mod_rewrite for Combined CSS/JS</strong>
 				  </div>
 				</div>
-				
+
 			</div>
 			<div class="center">
 				<br />
@@ -215,7 +215,7 @@ jQuery(function () {
 			</div>
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend>Advanced Settings</legend>
 		<div class='x_content'>
@@ -229,27 +229,27 @@ jQuery(function () {
 				<em><strong>Warning:</strong> May break site, and WILL require additional steps for software updates</em>
 			  </div>
         		</div>
-        		
+
 			<div class='form-group'>
 			<label class='control-label col-md-4 col-sm-4 col-xs-12'></label>
 			  <div class='col-md-7 col-sm-7 col-xs-12'>
 			  	<input name="useCHMOD" id="chmod" type="checkbox" value="1" {if $useCHMOD}checked="checked"{/if} />&nbsp;
 			  	CHMOD 777 Files <br><span class="small_font">(affects operations on files)</span>
 			  </div>
-        		</div>	
-        		
+        		</div>
+
 			{if $canEditSystemTemplates && $advMode}
 				{include file="design/parts/editSystemWarning.tpl"}
 			{/if}
-			
+
 			<div class='form-group' {if !$advMode} style="display: none;"{/if}>
 			<label class='control-label col-md-4 col-sm-4 col-xs-12'></label>
 			  <div class='col-md-7 col-sm-7 col-xs-12'>
 			  	<input name="canEditSystemTemplates" id="canEditSystemTemplates" type="checkbox" value="1" {if $canEditSystemTemplates}checked="checked"{/if} />&nbsp;
 			  	Allow Edit of system, module, and addon Templates
 			  </div>
-        		</div>	
-        		
+        		</div>
+
 			{if $iamdeveloper}
 				<div class='form-group' {if !$advMode} style="display: none;"{/if}>
 				<label class='control-label col-md-4 col-sm-4 col-xs-12'></label>
@@ -259,7 +259,7 @@ jQuery(function () {
 				  </div>
 				</div>
 			{/if}
-			
+
 			<div class="center">
 				<br />
 				<input type="submit" name="auto_save" value="Save Settings" />

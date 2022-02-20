@@ -1,6 +1,6 @@
 {* 16.09.0-79-gb63e5d8 *}
 {$adminMsgs}
-{include file='design/parts/designModeBox.tpl'}
+{include file='admin/design/parts/designModeBox.tpl'}
 <form action="index.php?page=design_sets" method="post">
 	<fieldset>
 		<legend>Template Sets</legend>
@@ -88,7 +88,7 @@
 							</tr>
 						{/if}
 					{/foreach}
-					
+
 					{foreach $t_sets as $t_set}
 						{if !in_array($t_set,$t_sets_used)}
 							{if !$inactiveTsetDisplayed}
@@ -156,7 +156,7 @@
 				<a href='index.php?page=design_sets_upload' class='lightUpLink btn btn-primary btn-xs'><i class="fa fa-upload"></i> Upload Template Set</a>
 				<br /><br />
 				<a href="index.php?page=design_sets_copy&amp;t_set=merged" class="btn btn-primary btn-xs lightUpLink"><i class="fa fa-chain"></i> Merge Sets Together</a>
-				
+
 				{if $showExport}
 					<br /><br />
 					<a class="lightUpLink btn btn-primary btn-xs" href="index.php?page=design_sets_export"><i class="fa fa-share-square-o"></i> Export Pre-5.0 Design to Template Set</a>

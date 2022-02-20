@@ -1,7 +1,7 @@
 {* 7.5.3-36-gea36ae7 *}
 
 {$adminMsgs}
-{include file="design/parts/workingOn.tpl" g_type="admin"}
+{include file="admin/design/parts/workingOn.tpl"}
 
 <fieldset>
 	<legend>Edit Template(s) Attached for This Page</legend>
@@ -24,7 +24,7 @@
 						<div class="rightColumn">
 							<span class="text_green">{$t_set}</span>
 							<br />
-							<strong>Change to:</strong> 
+							<strong>Change to:</strong>
 							{foreach from=$workWithList item=workWith}
 								{if $workWith!=$t_set}
 									[<a href="index.php?page=page_attachments_edit&amp;pageId={$pageId|escape}&amp;t_set={$workWith|escape}">{$workWith}</a>] &nbsp;
@@ -34,7 +34,7 @@
 						<div class="clearColumn"></div>
 					</div>
 				{/if}
-				
+
 				<div class="{cycle values="row_color1,row_color2"}">
 					<div class="leftColumn">Page ID:</div>
 					<div class="rightColumn">
@@ -125,7 +125,7 @@
 							<td>
 								<input type="hidden" name="new[cat][languageId]" value="1" />
 								<input type="hidden" name="new[cat][catIdNocheck]" value="{$newCatId}" />
-								
+
 								{include g_type="admin" file="design/parts/templateDropdown.tpl" showBlankTemplate=1 selectName='new[cat][template]'}
 							</td>
 						</tr>
