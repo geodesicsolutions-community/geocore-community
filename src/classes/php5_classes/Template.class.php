@@ -942,7 +942,11 @@ class geoTemplate extends Smarty {
 		$path_to_use = false;
 		if ($g_type == self::ADMIN) {
 			//all admin templates are in the admin/templates/ directory.  There is no seperate template set.
-			$path_to_use = ADMIN_DIR . "templates/$template_filename";
+			$path_to_use = ADMIN_DIR . "templates/";
+            if ($g_resource) {
+                $path_to_use .= $g_resource . '/';
+            }
+            $path_to_use .= $template_filename;
 		} else {
 			$t_set = self::whichTemplateSet($g_type, $g_resource, $template_filename);
 			$template_filename = self::cleanFilename($template_filename);
