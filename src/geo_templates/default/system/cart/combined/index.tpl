@@ -2,9 +2,9 @@
 
 
 <div class="combined_stepsBreadcrumb">
-	{include file='cart_steps.tpl' g_resource='cart'}
+	{include file='system/cart/cart_steps.tpl'}
 </div>
-{include file='inline_preview_box.tpl' g_resource='cart'}
+{include file='system/cart/inline_preview_box.tpl'}
 
 {* Prevent cart steps from showing multiple times *}
 {$cartSteps=false}
@@ -20,11 +20,11 @@
 	<h1 class="title">{$txt1}</h1>
 	{foreach $step_tpls as $step => $step_info}
 		<div id="combined_{$step|replace:':':'-'}" class="combined_step_section">
-			{include file='combined/step_section.tpl'}
+			{include file='system/cart/combined/step_section.tpl'}
 		</div>
 	{/foreach}
 	<div class="center">
-		{if $listing_types_allowed} 
+		{if $listing_types_allowed}
 			{* Used by category changing *}
 			<input type="hidden" id="listing_types_allowed" name="listing_types_allowed" value="{$listing_types_allowed}" />
 		{/if}
@@ -35,7 +35,7 @@
 			<input type="submit" name="forcePreview" value="{$preview_button_txt}" class="button" />
 		{/if}
 		{if $forcePreviewButtonOnly}
-			{* Use hidden main submit, that way can only be "clicked" using JS *} 
+			{* Use hidden main submit, that way can only be "clicked" using JS *}
 			<input type="submit" name="combined_submit" value="1" style="display: none;" class="mainSubmit" />
 		{else}
 			<input type="submit" name="combined_submit" value="{$submit_button_txt}" class="button mainSubmit" />

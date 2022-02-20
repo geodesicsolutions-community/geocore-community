@@ -44,6 +44,17 @@ class geoTemplate extends Smarty {
 	 */
 	const DEVICE_ANY = 'any';
 
+    /**
+     * List of valid g-types
+     */
+    public const VALID_G_TYPES = [
+        self::ADDON,
+        self::ADMIN,
+        self::MODULE,
+        self::SYSTEM,
+        self::EXTERNAL,
+        self::MAIN_PAGE,
+    ];
 
 	/**
 	 * What this is set to determines the search behavior and where the
@@ -166,7 +177,7 @@ class geoTemplate extends Smarty {
 	public static function cleanTemplateSetName ($name)
 	{
 		$name = preg_replace('/[^-a-zA-Z0-9_\.]+/','',$name);
-		if (in_array($name, self::$_invalidTSetNames) || in_array(substr($entry,0,1), array ('_','.'))) {
+		if (in_array($name, self::$_invalidTSetNames) || in_array(substr($name,0,1), array ('_','.'))) {
 			//invalid name, either it is reserved, or it starts with . or _
 			return '';
 		}
@@ -409,8 +420,16 @@ class geoTemplate extends Smarty {
 	 * @return string The value to return as a custom smarty function.
 	 * @since Geo version 7.1.0
 	 */
-	public static function loadInternalTemplate ($params, $smarty, $file, $g_type=null, $g_resource=null, $tpl_vars=array(), $pre='',$post='')
-	{
+	public static function loadInternalTemplate (
+        $params,
+        $smarty,
+        $file,
+        $g_type = null,
+        $g_resource = null,
+        $tpl_vars = [],
+        $pre = '',
+        $post = ''
+    ) {
 		//Need to merge params passed in with template vars, so that the params
 		//over-ride template vars.
 
@@ -427,13 +446,21 @@ class geoTemplate extends Smarty {
 		//even allow file to be over-ridden in params
 		$file = (isset($params['file']))? trim($params['file']) : $file;
 
-		$_template = $smarty->createTemplate($file, $smarty);
-
-		$_template->assign($vars);
-
-		//Allow g_type and g_resource to be over-ridden in params
+        //Allow g_type and g_resource to be over-ridden in params
 		$g_type = (isset($params['g_type']))? $params['g_type'] : $g_type;
 		$g_resource = (isset($params['g_resource']))? $params['g_resource'] : $g_resource;
+
+        $name = implode(
+            '/',
+            array_filter([
+                $g_type,
+                $g_resource,
+                $file
+            ])
+        );
+        $_template = $smarty->createTemplate($name, null, null, $smarty);
+
+		$_template->assign($vars);
 
 		if ($g_type!==null || $g_resource!==null) {
 			//Only set g_type and g_resource if they are specified
@@ -692,7 +719,7 @@ class geoTemplate extends Smarty {
 			$this->loadFilter('output','strip_forms');
 		}
 		//Need to get used tags when compiling
-		$this->get_used_tags = true;
+		$this->_cache['get_used_tags'] = true;
 		$this->loadFilter('post','process_tags');
 
 		if($db->get_site_setting('filter_trimwhitespace') && !defined('IN_ADMIN')) {
@@ -717,21 +744,6 @@ class geoTemplate extends Smarty {
 					}
 				}
 			}
-		}
-	}
-
-	/**
-	 * Loads the template resource handler
-	 * @param unknown $resource_type
-	 * @return unknown
-	 */
-	protected function loadTemplateResourceHandler ($resource_type)
-	{
-		if (in_array($resource_type, 'geotset')) {
-			$_resource_class = 'Smarty_Internal_Resource_' . ucfirst($resource_type);
-			return new $_resource_class($this->smarty);
-		} else {
-			return parent::loadTemplateResourceHandler($resource_type);
 		}
 	}
 
@@ -964,7 +976,9 @@ class geoTemplate extends Smarty {
 			if ($dieOnError) {
 				//go ahead and display an error on the page, instead of just causing
 				//a fatal error.
-				if ($g_resource) $g_type .= '/'.$g_resource;
+				if ($g_resource) {
+                    $g_type .= '/'.$g_resource;
+                }
 				self::template404("$g_type/$template_filename");
 			}
 			if ($falseOnError) {

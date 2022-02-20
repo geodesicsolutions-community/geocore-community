@@ -17,7 +17,7 @@
 {if !$in_ajax}<div id="offsite_videos_outer" class="clearfix">{/if}
 	{foreach from=$offsite_videos.slots item='slot' key='slotNum' name='offsite_video_slots'}
 		<div id="offsite_video_slot_{$slotNum}" class="offsite_video_slot">
-			{include file='offsite_videos/upload_slot.tpl'}
+			{include file='system/order_items/offsite_videos/upload_slot.tpl'}
 		</div>
 	{/foreach}
 	<br />

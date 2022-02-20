@@ -12,7 +12,7 @@
 		<li id="classifiedsTab"{if !$display_all_tab_browsing} class="activeTab"{/if}>{$messages.501689}</li>
 		<li id="auctionsTab">{$messages.501690}</li>
 	</ul>
-	
+
 	<div class="tabContents">
 		<div id="allTabContents"></div>
 {else}
@@ -23,7 +23,7 @@
 	{if $show_auctions&&!$disable_browsing_tabs}<div id="classifiedsTabContents">{/if}
 		<div class="content_box">
 			<h2 class="title">{$messages.886} {$current_category_name}</h2>
-			{include file='common/grid_view.tpl'
+			{include file='system/browsing/common/grid_view'
 				listings=$classified_browse_result.listings
 				no_listings=$classified_browse_result.no_listings
 				addonHeaders=$classified_browse_result.addonHeaders
@@ -38,7 +38,7 @@
 	{if $show_classifieds&&!$disable_browsing_tabs}<div id="auctionsTabContents">{/if}
 		<div class="content_box">
 			<h2 class="title">{$messages.100886} {$current_category_name}</h2>
-			{include file='common/grid_view.tpl'
+			{include file='system/browsing/common/grid_view'
 				listings=$auction_browse_result.listings
 				no_listings=$auction_browse_result.no_listings
 				addonHeaders=$auction_browse_result.addonHeaders

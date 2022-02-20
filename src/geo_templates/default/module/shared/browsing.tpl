@@ -1,7 +1,7 @@
 {* 7.5.3-125-gf5f0a9a *}
 {if $is_ajax}
 	{* loading this as the results of an ajax pagination call. only interested in the internal data, which will replace the contents of div#module_content_{tag} below *}
-	{include file=$browse_tpl g_type='system' g_resource='browsing'}
+	{include file="system/browsing/$browse_tpl"}
 	{if $module_pagination}<div>{$module_pagination}</div>{/if}
 {else}
 	{* this is the "main" display (first page) *}
@@ -9,7 +9,7 @@
 		<h3 class="title">{$header_title}</h3>
 	{/if}
 	<div id="module_content_{$module.module_replace_tag}">
-		{include file=$browse_tpl g_type='system' g_resource='browsing'}
+		{include file="system/browsing/$browse_tpl"}
 		{if $module_pagination}<div>{$module_pagination}</div>{/if}
 	</div>
 	{if $module_pagination}
@@ -19,7 +19,7 @@
 					{
 						tag: '{$module.module_replace_tag}',
 						results_page: page,
-						params: {$params_json} {*this way any smarty-set parameters get passed along to the next "page" *} 
+						params: {$params_json} {*this way any smarty-set parameters get passed along to the next "page" *}
 					},
 					function(returned) {
 						jQuery('#module_content_{$module.module_replace_tag}').html(returned);

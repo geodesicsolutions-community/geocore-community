@@ -11,17 +11,17 @@
 {elseif $mini_cart_only == 1}
 	{if $show_cart}
 		{$geo_mini_cart_displayed=1 scope='global'}
-		{include file="my_account_links_minicart.tpl" g_resource=''}
+		{include file="module/my_account_links_minicart"}
 	{/if}
 {else}
 	{if $show_cart}
 		{* Need to let the main cart know, wherever it is, that a mini cart was displayed *}
 		{$geo_mini_cart_displayed=1 scope='global'}
 		<div id="left_cart">
-			{include file="my_account_links_minicart.tpl" g_resource=''}
+			{include file="module/my_account_links_minicart"}
 		</div>
 	{/if}
-	
+
 	{if $show_account_finance_section && ($orderItemLinks || $paymentGatewayLinks)}
 		{capture assign=accountFinanceContents}
 			{* Capture the links, then put them where we want them. *}
@@ -39,7 +39,7 @@
 										{$itemLink.icon}
 									{/if}
 									{$itemLink.label}
-									
+
 								{if !$itemLink.link}</h3>{else}</a>{/if}
 							</li>
 						{/if}
@@ -58,7 +58,7 @@
 								{/if}
 									{if $gatewayLink.icon}{$gatewayLink.icon}{/if}
 									{$gatewayLink.label}
-								
+
 								{if !$gatewayLink.link}</h3>{else}</a>{/if}
 							</li>
 						{/if}
@@ -96,19 +96,19 @@
 								{if $listItem.icon}
 									{$listItem.icon}
 								{/if}
-					
+
 								{$listItem.label}
-								
+
 								{if $listItem.badge === 0 || $listItem.badge > 0}
 									<span class="badge">{$listItem.badge}</span>
 								{/if}
-								
+
 								{if !$listItem.link}
 									</span>
 								{else}
 									</a>
 								{/if}
-																
+
 							</li>
 						{/if}
 					{/foreach}

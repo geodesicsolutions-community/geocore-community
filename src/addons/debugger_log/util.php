@@ -32,7 +32,7 @@ class addon_debugger_log_util
         $endTags = ($endTags === false) ? 0 : $endTags; //make sure compare is evaluated correctly
         if (is_array($this->tags['debug']) && strpos($message, 'DEBUG') !== false && count($this->tags['debug'])) {
             foreach ($this->tags['debug'] as $tag) {
-                $loc = @strpos($message, strtoupper($tag)); //suppress error output, for some reason this causes error thrown sometimes
+                $loc = $tag && $message ? strpos($message, strtoupper($tag)) : false;
                 if ($loc !== false && $loc < $endTags) {
                     //only log if the tag is turned on, and the tag happens before the first :
                     $log_this = true;
@@ -42,7 +42,7 @@ class addon_debugger_log_util
         }
         if (!$log_this && is_array($this->tags['error']) && strpos($message, 'ERROR') !== false && count($this->tags['error'])) {
             foreach ($this->tags['error'] as $tag) {
-                $loc = @strpos($message, strtoupper($tag)); //suppress error output, for some reason this causes error thrown sometimes
+                $loc = $message && $tag ? strpos($message, strtoupper($tag)) : false;
                 if ($loc !== false && $loc < $endTags) {
                     //only log if the tag is turned on, and the tag happens before the first :
                     $log_this = true;

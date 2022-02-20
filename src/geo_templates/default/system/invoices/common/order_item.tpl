@@ -12,7 +12,7 @@
 
 {if $item.children ne false}
 	{foreach from=$item.children key=sk item=sub_item}
-		{include file="common/order_item.tpl" k=$sk item=$sub_item is_sub=1}
+		{include file="system/invoices/common/order_item.tpl" k=$sk item=$sub_item is_sub=1}
 	{/foreach}
 
 	{if !$is_sub}

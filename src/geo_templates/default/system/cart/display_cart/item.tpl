@@ -12,8 +12,8 @@
 		{/if}
 	</div>
 	{if !$allFree}
-		<div class="cart_item_cost">	
-			{if !$view_only}		
+		<div class="cart_item_cost">
+			{if !$view_only}
 				{$item.priceDisplay}
 			{else}
 				{$item.total|displayPrice:false:false:'cart'}
@@ -42,7 +42,7 @@
 {if $item.children ne false}
 	{if !$view_only}
 		{foreach from=$item.children key=sk item=sub_item}
-			{include file="display_cart/item.tpl" k=$sk item=$sub_item is_sub=1}
+			{include file="system/cart/display_cart/item.tpl" k=$sk item=$sub_item is_sub=1}
 		{/foreach}
 		{if !$allFree && !$is_sub}
 			<div class="cart_item_subtotal">

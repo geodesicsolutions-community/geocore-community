@@ -6,7 +6,7 @@
 			<span class="error_message">{$error}</span>
 		{/if}
 	</label>
-	{include file="subscription/period_selection.tpl"}
-	
+	{include file="system/order_items/subscription/period_selection.tpl"}
+
 	<div class="clr"></div>
 </div>

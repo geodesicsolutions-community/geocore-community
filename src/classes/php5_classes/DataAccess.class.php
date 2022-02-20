@@ -1274,7 +1274,6 @@ class DataAccess
             //get page data.
             trigger_error('DEBUG MODULE: DataAccess::moduleTag(' . $tag . ') - not from cache');
 
-
             //echo('DEBUG STATS: db::replaceTag( '.$tag.', '.$language_id.', '.$cat_id.', '.$logged_in.')<br />');
             if (geoCache::get('cache_module')) {
                 $moduleCache = geoCacheModule::getInstance();

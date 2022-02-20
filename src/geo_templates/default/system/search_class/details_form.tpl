@@ -26,7 +26,7 @@
 					<option value="0"{if $je_search_setting != 1} selected="selected"{/if}>{$messages.581}</option>
 					<option value="2"{if $je_search_setting == 1} selected="selected"{/if}>{$messages.1437}</option>
 				</select>
-				
+
 				{if $is_auction eq 1}
 					<select class="field" name="b[classified_auction_search]">
 						<option value="0" selected="selected">{$messages.200021}</option>
@@ -40,7 +40,7 @@
 			</div>
 			<div style="width:100%; text-align: center;">
 			{if $queryFields.title}
-				<div style="text-align:center; margin: 5px auto 10px auto; font-size: 0.8em; display: inline;">			
+				<div style="text-align:center; margin: 5px auto 10px auto; font-size: 0.8em; display: inline;">
 					<label><input type='checkbox' id='search_titles' name='b[search_titles]' value='1' checked='checked' />&nbsp;{$messages.575}&nbsp;&nbsp;</label>
 				</div>
 			{/if}
@@ -77,26 +77,26 @@
 					</select> {$messages.502442}</label>
 				</div>
 			{/if}
-					
+
 			{if $messages.1442}
 				<h3 class="subtitle">{$messages.1442}</h3>
 			{/if}
-			
+
 			<div class="{cycle values='row_odd,row_even'} rwd-center">
 				<div class="leveled_cat">
 					<label class="field_label spacer"></label>
 					{$lev_field=$cats}
 					{$leveledCatSearch=true}
 					{foreach $cats.levels as $info}
-						{include file='../order_items/shared/leveled_fields/level.tpl'}
+						{include file='system/order_items/shared/leveled_fields/level.tpl'}
 					{/foreach}
 					{$leveledCatSearch=false} {* make sure this doesn't bleed over into other leveled field thingys *}
 					<input type='hidden' name='b[subcategories_also]' value='1' />
 					{* to support legacy opt field scripts against new leveled category selector, use a hidden input: *}
-					<input type='hidden' id='adv_searchCat' value='0' name='c' />	
+					<input type='hidden' id='adv_searchCat' value='0' name='c' />
 				</div>
 			</div>
-			
+
 			{if $queryFields.price}
 				<h3 class="subtitle">{$messages.788}</h3>
 				<div class="{cycle values='row_odd,row_even'} rwd-center">
@@ -107,7 +107,7 @@
 			{/if}
 		</div>
 	</div>
-	
+
 	{if $queryFields.business_type}
 		<div>
 			<div class="search_content_box">
@@ -129,33 +129,33 @@
 			</div>
 		</div>
 	{/if}
-	
+
 	{if $feeshare_active == 1}
 		<h3 class="subtitle">by attached storefront</h3>
 		<div class="{cycle values='row_odd,row_even'} rwd-center">
 			<label class="field_label">{$feeshare_attachtouserlabel}</label>
-			<select name="b[attached_user_search_id]" class="field"> 
+			<select name="b[attached_user_search_id]" class="field">
 				<option value="0"></option>
 			{foreach from=$feeshare_userattachmentchoices item=name key=userid}
 				<option value="{$userid}"{if $userid == $attached_user_search_id} selected="selected"{/if}>{$name}</option>
 			{/foreach}
 			</select>
-		</div>			
-	{/if}	
-		
-	
+		</div>
+	{/if}
+
+
 	<div class="clr"></div>
 	{* NOTE: This is where category-specific questions will be inserted *}
 	<div id="catQuestions" style="display: none;"></div>
-	
+
 	<div class="clr"></div>
-	
+
 	{if $region_selector || $use_zip_distance_calculator || $queryFields.city || $queryFields.zip || $show_optionals || $addonCriteria || $leveled_fields}
 		{* only show this container if it's actually going to have something inside of it *}
-		
+
 		<div class="search_content_box">
 			{if $use_zip_distance_calculator eq 1}
-				<h3 class="subtitle">{$messages.1949}</h3>				
+				<h3 class="subtitle">{$messages.1949}</h3>
 				<div class="{cycle values='row_odd,row_even'} rwd-center">
 					{if $zipsearch_by_location}
 						{$zipsearchByLocation_html}
@@ -183,27 +183,27 @@
 			{/if}
 			{if $queryFields.city}
 				<div class="{cycle values='row_odd,row_even'} rwd-center">
-					<label for="by_city" class="field_label">{$messages.500808}</label> 
+					<label for="by_city" class="field_label">{$messages.500808}</label>
 					<input type="text" id="by_city" name="b[by_city]" maxlength="50" class="field" />
 				</div>
 			{/if}
 			{if !$use_zip_distance_calculator && $queryFields.zip}
 				<div class="{cycle values='row_odd,row_even'} rwd-center">
-					<label for="by_zip_code" class="field_label">{$messages.577}</label> 
+					<label for="by_zip_code" class="field_label">{$messages.577}</label>
 					<input type="text" id="by_zip_code" name="b[by_zip_code]" maxlength="50" class="field" />
 				</div>
 			{/if}
-			
-			
+
+
 			{if $show_optionals || $addonCriteria || $leveled_fields}
 				<h3 class="subtitle">{$messages.500807}</h3>
 			{/if}
-			
+
 			{if $leveled_fields}
 				{foreach $leveled_fields as $lev_id => $lev_field}
 					{* Note: already checks for if should show in PHP *}
 					<div class="{cycle values='row_odd,row_even'} rwd-center">
-						{include g_resource='order_items' file='shared/leveled_fields/main.tpl'}
+						{include file='system/order_items/shared/leveled_fields/main.tpl'}
 					</div>
 				{/foreach}
 			{/if}
@@ -244,7 +244,7 @@
 									{/foreach}
 								</ul>
 								<div class="clr"></div>
-								
+
 								{if $o.other_box}<input type="checkbox" class="other_dummy_checkbox" /> {$messages.1458} <input type="text" name="b[optional_field_{$o.field_number}][other]" class="field" />{/if}
 							</div>
 						{/if}
@@ -253,7 +253,7 @@
 			{/if}
 		</div>
 	{/if}
-	
+
 	<div class="center">
 		<input type='submit' value='{$messages.584}' name='b[search]' class='button' />
 	</div>

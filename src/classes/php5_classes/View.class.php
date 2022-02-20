@@ -566,7 +566,7 @@ class geoView implements Iterator
 			//don't do anything, error will be output by part that displays.
 			return;
 		}
-		$tags = $_tpl->used_tags;
+		$tags = $_tpl->_cache['used_tags'];
 
 		if(!$tags) {
 			//no tags found -- nothing to do here
@@ -1109,7 +1109,7 @@ class geoView implements Iterator
 	public function setFooterTpl ($tpl_file, $addon_name = '', $system_resource = '')
 	{
 		if (!$this->useFooterJs) {
-			return $this->setHearTpl($tpl_file, $addon_name, $system_resource);
+			return $this->setHeadTpl($tpl_file, $addon_name, $system_resource);
 		}
 		//don't use this->_viewVars directly to avoid possible
 		//problems with the iteration.

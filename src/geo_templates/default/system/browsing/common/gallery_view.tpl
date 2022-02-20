@@ -11,9 +11,9 @@
 		<div class="gallery_inner">
 			{foreach $listings as $id=>$listing}
 				{if $gallery_columns&&$listing@index%$gallery_columns == 0}<div class="gallery_row">{/if}
-				
+
 				{if $main_page_gallery_sub_template}
-					{include file=$main_page_gallery_sub_template g_type='main_page' g_resource=''}
+					{include file="main_page/$main_page_gallery_sub_template"}
 				{else}
 					<article class="listing columns-{$gallery_columns}">
 						<div class="article_inner {$listing.css}">
@@ -35,20 +35,20 @@
 									{$listing.type}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.title}
 								<div class="title">
 									{if $headers.title.label}<em>{$headers.title.label}</em>{/if}
 									{if $listing.icons.sold && $cfg.icons.sold}<img src="{$cfg.icons.sold}" alt="" />{/if}
-									<h3><a href="{$cfg.listing_url}{$id}"{include file='common/popup_link.tpl'}>{$listing.title}</a></h3>
+									<h3><a href="{$cfg.listing_url}{$id}"{include file='system/browsing/common/popup_link.tpl'}>{$listing.title}</a></h3>
 									{if $listing.icons.verified && $cfg.icons.verified}<div><img src="{$cfg.icons.verified}" class="verified_icon" alt="" /></div>{/if}
 									{if $listing.icons.buy_now && $cfg.icons.buy_now}<div><img src="{$cfg.icons.buy_now}" class="buy_now_icon" alt="" /></div>{/if}
 									{if $listing.icons.reserve_met && $cfg.icons.reserve_met}<div><img src="{$cfg.icons.reserve_met}" class="reserve_met_icon" alt="" /></div>{/if}
 									{if $listing.icons.reserve_not_met && $cfg.icons.reserve_not_met}<div><img src="{$cfg.icons.reserve_not_met}" class="reserve_not_met_icon" alt="" /></div>{/if}
 									{if $listing.icons.no_reserve && $cfg.icons.no_reserve}<div><img src="{$cfg.icons.no_reserve}" class="no_reserve_icon" alt="" /></div>{/if}
-									
+
 									{if $listing.icons.attention_getter}<div><img src="{$listing.attention_getter_url}" class="attention_getter_icon attention-getter-inline" alt="" /></div>{/if}
-									
+
 									{if $listing.icons.addon_icons}
 										{foreach $listing.icons.addon_icons as $addon => $icon}
 											<div>{$icon}</div>
@@ -62,37 +62,37 @@
 								{if $listing.icons.reserve_met && $cfg.icons.reserve_met}<div><img src="{$cfg.icons.reserve_met}" class="reserve_met_icon" alt="" /></div>{/if}
 								{if $listing.icons.reserve_not_met && $cfg.icons.reserve_not_met}<div><img src="{$cfg.icons.reserve_not_met}" class="reserve_not_met_icon" alt="" /></div>{/if}
 								{if $listing.icons.no_reserve && $cfg.icons.no_reserve}<div><img src="{$cfg.icons.no_reserve}" class="no_reserve_icon" alt="" /></div>{/if}
-								
+
 								{if $listing.icons.attention_getter}<div><img src="{$listing.attention_getter_url}" class="attention_getter_icon attention-getter-inline" alt="" /></div>{/if}
-								
+
 								{if $listing.icons.addon_icons}
 									{foreach $listing.icons.addon_icons as $addon => $icon}
 										<div>{$icon}</div>
 									{/foreach}
 								{/if}
 							{/if}
-							
+
 							{if $cfg.cols.business_type&&$listing.business_type}
 								<p class="business_type">
 									{if $headers.business_type.label}<em>{$headers.business_type.label}</em>{/if}
 									{$listing.business_type}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.description||$cfg.description_under_title}
 							 	<p class="description">
 									{if $headers.description.label}<em>{$headers.description.label}</em>{/if}
 									{$listing.description}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.tags && $listing.tags}
 								<p class="tag_list_data">
 									{if $headers.tags.label}<em>{$headers.tags.label}</em>{/if}
 									{listing tag='listing_tags_links'}
 								</p>
 							{/if}
-							
+
 							{section name=optionals start=1 loop=21}
 								{assign var='field' value=$smarty.section.optionals.index}
 								{if $cfg.cols.optionals.$field&&$listing.optionals.$field}
@@ -102,7 +102,7 @@
 									</p>
 								{/if}
 							{/section}
-							
+
 							{if $cfg.cols.address&&$listing.address}
 								{* TODO:  use <address></address> for address elements? *}
 								<p class="address">
@@ -110,14 +110,14 @@
 									{$listing.address}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.city&&$listing.city}
 								<p class="city">
 									{if $headers.city.label}<em>{$headers.city.label}</em>{/if}
 									{$listing.city}
 								</p>
 							{/if}
-							
+
 							{for $level=1 to $cfg.maxLocationDepth}
 								{$col = "region_level_$level"}
 								{if $cfg.cols.$col&&$listing.$col}
@@ -127,49 +127,49 @@
 									</p>
 								{/if}
 							{/for}
-							
+
 							{if $cfg.cols.zip&&$listing.zip}
 								<p class="zip">
 									{if $headers.zip.label}<em>{$headers.zip.label}</em>{/if}
 									{$listing.zip}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.location_breadcrumb&&$listing.location_breadcrumb}
 								<p class="region_breadcrumb">
 									{if $headers.location_breadcrumb.label}<em>{$headers.location_breadcrumb.label}</em>{/if}
 									{$listing.location_breadcrumb}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.num_bids&&$listing.num_bids}
 								<p class="number_bids">
 									{if $headers.num_bids.label}<em>{$headers.num_bids.label}</em>{/if}
 									{$listing.num_bids}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.price&&$listing.price}
 								<p class="price">
 									{if $headers.price.label}<em>{$headers.price.label}</em>{/if}
 									{$listing.price}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.entry_date&&$listing.entry_date}
 								<p class="entry_date">
 									{if $headers.entry_date.label}<em>{$headers.entry_date.label}</em>{/if}
 									{$listing.entry_date}
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.time_left&&$listing.time_left}
 								<p class="time_left">
 									{if $headers.time_left.label}<em>{$headers.time_left.label}</em>{/if}
 									{$listing.time_left}
 								</p>
 							{/if}
-							
+
 							{foreach $headers.leveled as $lev_id => $levels}
 								{foreach $levels as $level => $levelHeader}
 									<p class="{$levelHeader.css}">
@@ -178,7 +178,7 @@
 									</p>
 								{/foreach}
 							{/foreach}
-							
+
 							{if $listing.addonData}
 								{* let addons add columns if they want to *}
 								{foreach $listing.addonData as $addonRows}
@@ -190,13 +190,13 @@
 									{/foreach}
 								{/foreach}
 							{/if}
-							
+
 							{if $cfg.cols.edit}
 								<p class="edit">
 									<a href="{$classifieds_file_name}?a=cart&amp;action=new&amp;main_type=listing_edit&amp;listing_id={$id}"><img src="{external file='images/buttons/listing_edit.gif'}" alt="" /></a>
 								</p>
 							{/if}
-							
+
 							{if $cfg.cols.delete}
 								<p class="delete">
 									<a onclick="if (!confirm('Are you sure you want to delete this?')) return false;" href="{$classifieds_file_name}?a=99&amp;b={$id}"><img src="{external file='images/buttons/listing_delete.gif'}" alt="" /></a>
@@ -206,7 +206,7 @@
 						</div>
 					</article>
 				{/if}
-				
+
 				{if $gallery_columns && ($listing@iteration%$gallery_columns==0||$listing@last)}</div>{/if}
 			{/foreach}
 			<div class="clear"></div>
