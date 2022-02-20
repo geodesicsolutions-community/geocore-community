@@ -29,5 +29,8 @@ src/geo_templates/
 !src/geo_templates/marquee/
 !src/geo_templates/tempo/
 
+src/user_images/
+!src/user_images/.empty
+
 # Built zip files
 build/
