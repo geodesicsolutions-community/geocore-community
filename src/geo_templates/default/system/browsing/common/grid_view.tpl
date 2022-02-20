@@ -68,7 +68,7 @@
 							</td>
 						{/if}
 
-						{if count($headers.optionals) > 0}
+						{if $headers.optionals && count($headers.optionals) > 0}
 							{foreach from=$headers.optionals item=optional_header key="fieldNum"}
 								{* $headers.optionals is indexed 1-20, so you could split this out of the loop if you really wanted to...
 									e.g.: $headers.optionals.1.text to get the header text for "optional field 1" *}
