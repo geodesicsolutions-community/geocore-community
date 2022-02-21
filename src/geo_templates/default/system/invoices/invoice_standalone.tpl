@@ -4,10 +4,10 @@
 	<link href="../{external file='css/custom.css'}" rel="stylesheet" type="text/css" />
 	<link href="../{external file='css/system/invoices/invoice_styles.css'}" rel="stylesheet" type="text/css" />
 {else}
-	{include file="common/head.tpl"}
+	{include file="system/invoices/common/head.tpl"}
 {/if}
-{include file="common/invoice_body.tpl"}
+{include file="system/invoices/common/invoice_body.tpl"}
 {if $showOrderDetails}
-	{include file="common/order_details.tpl"}
+	{include file="system/invoices/common/order_details.tpl"}
 {/if}
-{include file="common/footer.tpl"}
+{include file="system/invoices/common/footer.tpl"}

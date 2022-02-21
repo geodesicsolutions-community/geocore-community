@@ -2,7 +2,7 @@
 
 {*  NOTE:  This template will need to be moved to the anon addon sooner or later.  *}
 
-{include file="cart_steps.tpl" g_resource="cart"}
+{include file="system/cart/cart_steps.tpl"}
 <div class="content_box">
 	<h1 class="title">{$msgs.passPageTitle}</h1>
 	<form action="{$nextPage}" method="post">

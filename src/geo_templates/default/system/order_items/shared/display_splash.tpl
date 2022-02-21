@@ -1,11 +1,11 @@
 {* 7.1.2-41-gc6918fc *}
-{* 
+{*
 	Note: This template used in cart checkout process anywhere a splash page is used.
 	If you need it, the item type will be stored in $item_name (such as classified, auction,
 	renew_upgrade, etc.)
  *}
 
-{include file="cart_steps.tpl" g_resource="cart"}
+{include file="system/cart/cart_steps.tpl"}
 
 {$splash}
 {if !$steps_combined}

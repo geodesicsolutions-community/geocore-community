@@ -1,8 +1,6 @@
 <?php
-//outputfilter.strip_forms.php
 
-
-//this fella makes it so that $template->used_tags is populated with just the info
+//this fella makes it so that $template->_cache['used_tags'] is populated with just the info
 //we need, without having to re-compile templates every time.
 
 function smarty_postfilter_process_tags ($source, Smarty_Internal_Template $template)
@@ -13,12 +11,12 @@ function smarty_postfilter_process_tags ($source, Smarty_Internal_Template $temp
 		'module' => array(),
 	);
 	$addSection = false;
-	foreach ($template->used_tags as $tag) {
+	foreach ($template->_cache['used_tags'] as $tag) {
 		if (!in_array($tag[0], array('addon','include','module','listing'))) {
 			//not addon or include tag
 			continue;
 		}
-		
+
 		$vars = array();
 		foreach ($tag[1] as $var) {
 			foreach ($var as $name => $val) {
@@ -28,14 +26,14 @@ function smarty_postfilter_process_tags ($source, Smarty_Internal_Template $temp
 		if ($tag[0]=='include') {
 			//go through includes as well
 			$info = array();
-			
+
 			$info['file'] = $vars['file'];
 			if (strpos($info['file'],'".')!==false) {
 				//This is "dynamic" included file with embedded part to it, not possible
 				//to pre-load in this case
 				continue;
 			}
-			
+
 			if (isset($vars['g_type'])) {
 				$info['g_type'] = $vars['g_type'];
 			}
@@ -58,12 +56,12 @@ function smarty_postfilter_process_tags ($source, Smarty_Internal_Template $temp
 			//Note:  Do NOT check to see if addon is enabled and has the tag
 			//able to be used at this point, or template would need to be re-compiled
 			//every time addon is enabled/disabled
-			
+
 			$info = array();
-			
+
 			$info['addon'] = $vars['addon'];
 			$info['tag'] = $vars['tag'];
-			
+
 			//make key such that if the same addon tag is used multiple times, it is
 			//still only added to the array once
 			$extra['addon'][implode(':',$info)] = $info;
@@ -74,9 +72,9 @@ function smarty_postfilter_process_tags ($source, Smarty_Internal_Template $temp
 	$template->mustCompile();
 	if ($addSection) {
 		//there is stuff to process
-		
-		$section = '<?php $_smarty_tpl->used_tags = '.var_export($extra,1).'; ?>';
-		
+
+		$section = '<?php $_smarty_tpl->_cache[\'used_tags\'] = '.var_export($extra,1).'; ?>';
+
 		$source = str_replace('/*/%%SmartyHeaderCode%%*/?>','/*/%%SmartyHeaderCode%%*/?>'.$section,$source);
 	}
 	return $source;

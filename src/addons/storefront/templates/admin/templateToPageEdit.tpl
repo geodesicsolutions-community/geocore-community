@@ -1,7 +1,7 @@
 {* 7.4.4-10-g8576128 *}
 
 {$adminMsgs}
-{include file="design/parts/workingOn.tpl" g_type="admin"}
+{include file="admin/design/parts/workingOn.tpl"}
 
 <fieldset>
 	<legend>Edit Template(s) Attached for This Page</legend>
@@ -24,7 +24,7 @@
 						<div class="rightColumn">
 							<span class="text_green">{$t_set}</span>
 							<br />
-							<strong>Change to:</strong> 
+							<strong>Change to:</strong>
 							{foreach from=$workWithList item=workWith}
 								{if $workWith!=$t_set}
 									[<a href="index.php?page=page_attachments_edit&amp;pageId={$pageId|escape}&amp;t_set={$workWith|escape}">{$workWith}</a>] &nbsp;
@@ -37,14 +37,14 @@
 				{*  Commenting out for now, don't think this is a feature that
 					would be used much, and it just makes things more complicated...
 					The below would be the alternate to showing "Attachment(s) Saved For:" above
-					
+
 				<div class="{cycle values="row_color1,row_color2"}">
 					<div class="leftColumn">Attachments from:</div>
 					<div class="rightColumn">
 						<strong>{$t_set}</strong>/main_page/attachments/templates_to_page/{$pageId}.php
 						{if $workWithList.1}
 							<br />
-							<strong>Change to:</strong> 
+							<strong>Change to:</strong>
 							{foreach from=$workWithList item=workWith}
 								{if $workWith!=$t_set}
 									[<a href="index.php?page=page_attachments_edit&amp;pageId={$pageId|escape}&amp;t_set={$workWith|escape}">{$workWith}</a>] &nbsp;
@@ -161,7 +161,7 @@
 							<td>
 								<input type="hidden" name="new[cat][languageId]" value="1" />
 								<input type="hidden" name="new[cat][catIdNocheck]" value="{$newCatId}" />
-								
+
 								{include g_type="admin" file="design/parts/templateDropdown.tpl" showBlankTemplate=1 selectName='new[cat][template]'}
 							</td>
 						</tr>

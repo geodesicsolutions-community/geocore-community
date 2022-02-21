@@ -7,8 +7,8 @@
 
 {if $streamlined}
 	{* This is the new way to do category browsing. Instead of showing a big block of text on the page, add a button to the breadcrumb that opens a list of categories in a lightbox *}
-	{include file='common/category_breadcrumb.tpl'}
-	
+	{include file='system/browsing/common/category_breadcrumb.tpl'}
+
 	<div class="category_block" style="display: none;">
 		<div class="cat-block-popout">
 			{*<div class="closeBoxX"></div>*}
@@ -20,8 +20,8 @@
 								<li class="element category_{$cat.category_id} {cycle values="row_even,row_odd"}">
 									<div class="main_cat_title">
 										{if $cat.category_image}<img src="{external file=$cat.category_image}" alt="{$cat.category_image_alt}" />{/if}
-										<span class="category_title">{$cat.category_name}</span> 
-										{if $cat.category_count}<span class="listing_counts">{$cat.category_count}</span>{/if} 
+										<span class="category_title">{$cat.category_name}</span>
+										{if $cat.category_count}<span class="listing_counts">{$cat.category_count}</span>{/if}
 										{if $cat.new_ad_icon}{$cat.new_ad_icon}{/if}
 									</div>
 								</li>
@@ -33,7 +33,7 @@
 		</div>
 	</div>
 {else}
-	
+
 	{*
 		$tree_display_mode:
 			0: show tree below subcategories
@@ -41,17 +41,17 @@
 			2: show tree below AND above subcategories
 			3: do not show tree
 	*}
-	
+
 	{if $tree_display_mode == 1 or $tree_display_mode == 2}
-		{include file='common/category_breadcrumb.tpl'}
+		{include file='system/browsing/common/category_breadcrumb.tpl'}
 	{/if}
-	
+
 	{if $show_no_subcats}
 		<div class="center sub_note">
 			{$text.no_subcats} {$current_category_name}
 		</div>
 	{/if}
-	
+
 	{if $show_subcats}
 		<div class="clearfix category_block">
 			{foreach from=$categories item=cats key=column}
@@ -92,9 +92,9 @@
 			{/foreach}
 		</div>
 	{/if}
-	
+
 	{if $tree_display_mode == 0 or $tree_display_mode == 2}
-		{include file='common/category_breadcrumb.tpl'}
+		{include file='system/browsing/common/category_breadcrumb.tpl'}
 	{/if}
 
 

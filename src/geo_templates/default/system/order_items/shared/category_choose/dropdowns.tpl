@@ -1,6 +1,6 @@
 {* 7.6.3-149-g881827a *}
 
-{include file="cart_steps.tpl" g_resource="cart"}
+{include file='system/cart/cart_steps.tpl'}
 
 <div class="content_box">
 	{if !$steps_combined}
@@ -10,14 +10,14 @@
 	<p class="page_instructions">
 		{$desc1}
 	</p>
-	
+
 	<div class="leveled_cat{if $steps_combined} combined_update_fields{/if}{if $error_msgs.category} field_error_row{/if}">
 		{if $error_msgs.category}
 			<div class="error_message">{$error_msgs.category}</div>
 		{/if}
 		{$lev_field=$cats}
 		{foreach $cats.levels as $info}
-			{include file='shared/leveled_fields/level.tpl'}
+			{include file='system/order_items/shared/leveled_fields/level.tpl'}
 		{/foreach}
 	</div>
 </div>

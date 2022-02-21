@@ -5,7 +5,7 @@
 ## this file directly, but you can
 ## if you want.
 ## 
-## Generated: Dec 15, 2009 19:05:48
+## Generated: Feb 20, 2022 23:38:44
 ###########################################
 $return = (isset($return))? $return: array();
 
@@ -15,7 +15,7 @@ $return = (isset($return))? $return: array();
 /**
  * Module Attachment(s)  Syntax:
  * $return['modules'][module_id(int)] = tag (string)
- * tag: lowercase, without surrounding (! or !) from old system
+ * tag: the module's tag, something like "display_username"
  */
 //No attached modules
 

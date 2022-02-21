@@ -13,6 +13,18 @@ services:
       - .:/var/www/html/
       - ./contrib/docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+  web-php8:
+    build:
+      context: .
+      dockerfile: Dockerfile.php8
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html/
+      - ./contrib/docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
   db:
     image: mariadb
     restart: always

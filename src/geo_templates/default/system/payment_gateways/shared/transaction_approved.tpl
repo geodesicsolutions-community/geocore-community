@@ -2,7 +2,7 @@
 
 <div class="content_box">
 	<h1 class="title">{$page_title}</h1>
-	
+
 	{if $success_failure_message}
 		<p class="page_instructions">{$page_desc}</p>
 		<div class="success_box">
@@ -13,13 +13,13 @@
 			{$page_desc}
 		</div>
 	{/if}
-	
+
 	<br />
-	
+
 	{if $cart_items}
 		<div>
 			<h3 class="title">{$messages.500896}</h3>
-			{include file='display_cart/index.tpl' g_resource='cart' view_only=1 items=$cart_items}
+			{include file='system/cart/display_cart/index.tpl' view_only=1 items=$cart_items}
 			<div class="clear"></div>
 		</div>
 		<br />

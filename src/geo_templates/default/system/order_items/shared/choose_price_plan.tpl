@@ -1,6 +1,6 @@
 {* 7.5.3-125-gf5f0a9a *}
 
-{include file="cart_steps.tpl" g_resource="cart"}
+{include file="system/cart/cart_steps.tpl"}
 
 <div class="content_box">
 	{if $steps_combined}
@@ -12,7 +12,7 @@
 	<p class="page_instructions">
 		{$messages.2463}
 	</p>
-	
+
 	{if $error_msgs.cart_error}
 		<div class="field_error_box">
 			{$error_msgs.cart_error}
@@ -33,7 +33,7 @@
 						{if $price_plan.description}
 							<p class="category_description">{$price_plan.description}</p>
 						{/if}
-					{if !$steps_combined}					
+					{if !$steps_combined}
 						</a>
 					{else}
 						</label>

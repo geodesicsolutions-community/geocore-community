@@ -3,7 +3,7 @@
 	{* Template designers: if you want to use a totally different template file for edit
 	   listings, you would surround it with these if smarty tags.  The same goes for classified,
 	   auction, and reverse_auction, just change 'listing_edit' as appropriate in the if stmt *}
-	
+
 {/if}
 
 <h2 class="title">
@@ -33,7 +33,7 @@
 	</div>
 </div>
 <div id="imagesUploaded" class="media-preview-container clearfix">
-	{include file='images/preview.tpl'}
+	{include file='system/order_items/images/preview.tpl'}
 </div>
 {if $steps_combined&&$is_ajax_combined}
 	{* Loaded as part of combined steps, need to 're-initialize' stuff... *}

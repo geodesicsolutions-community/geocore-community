@@ -3584,7 +3584,7 @@ class DesignManage
                 $errors .= 'Cannot modify default template set.';
             } elseif (isset($locationInfo['type']) && !in_array($locationInfo['type'], array ('main_page','external'))) {
                 $errors .= 'Cannot create folder/file in system/module/addon locations.
-				Instead, copy any template(s) you may wish to modify from the default template 
+				Instead, copy any template(s) you may wish to modify from the default template
 				set, to your own template set, then you can modify it there.';
             }
 
@@ -3740,7 +3740,7 @@ class DesignManage
                 $errors .= 'Cannot create a new file here!  If you want to make a new template, create one in the main_page sub-directory.';
             } elseif (!in_array($locationInfo['type'], array ('main_page','external'))) {
                 $errors .= 'Cannot create folder/file in system/module/addon locations.
-				Instead, copy any template(s) you may wish to modify from the default template 
+				Instead, copy any template(s) you may wish to modify from the default template
 				set, to your own template set, then you can modify it there.';
             }
 
@@ -4754,7 +4754,7 @@ class DesignManage
         $attachmentFile = $this->_file->absolutize($attachmentFile);
         $skip_sub_pages = true;
         $attachments = include $attachmentFile;
-        if (count($attachments['already_attached']) > 1) {
+        if (isset($attachments['already_attached']) && count($attachments['already_attached']) > 1) {
             //this attachment file was created PRE-4.2
             //some tricky tricks to not include sub-page files when re-creating the file ;)
             $already_attached = $attachments['already_attached'];

@@ -10,7 +10,7 @@
 				<li class="element  category_{$cat.category_id}">
 					<a href="{$link}{$cat.category_id}">
 						{if $module.display_category_image && $cat.category_image}<img src="{external file=$cat.category_image}" alt="{$cat.category_image_alt}" />{/if}
-						
+
 						{$cat.category_name}
 						{if $cat.category_counts}{$cat.category_counts}{/if}
 						{if $cat.new_ad_icon}{$cat.new_ad_icon}{/if}
@@ -19,7 +19,7 @@
 						<p>{$cat.category_description}</p>
 					{/if}
 					{if $cat.sub_categories}
-						{include file='subcategories.tpl' g_resource='shared' sub_categories=$cat.sub_categories}
+						{include file='module/shared/subcategories.tpl' sub_categories=$cat.sub_categories}
 					{/if}
 				</li>
 			{/foreach}

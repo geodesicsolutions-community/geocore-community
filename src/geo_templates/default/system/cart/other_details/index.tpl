@@ -1,8 +1,8 @@
 {* 7.5.3-125-gf5f0a9a *}
 
 {if !$full_step}
-	{include file="cart_steps.tpl" g_resource="cart"}
-	{include file='inline_preview_box.tpl' g_resource='cart'}
+	{include file="system/cart/cart_steps.tpl"}
+	{include file='system/cart/inline_preview_box.tpl'}
 {/if}
 
 {if !$steps_combined}
@@ -13,7 +13,7 @@
 	{/foreach}
 {/if}
 {if !$full_step && !$steps_combined}<form action="{$form_url}" method="post">{/if}
-	
+
 	<div class="content_box">
 		{if $steps_combined}
 			<h1 class="title">{$page_title2}</h1>
@@ -23,16 +23,16 @@
 			<h3 class="subtitle">{$page_title2}</h3>
 			<p class="page_instructions">{$page_desc}</p>
 		{/if}
-		
+
 		{foreach from=$items item=item key=item_key}
 			{* ::Allow a specific order item to over-write parts of the template:: *}
 			{if $item.entire_box ne ''}
 				{$item.entire_box}
 			{else}
-				{include file='other_details/item_box.tpl' g_type='system' g_resource='cart' left=$item.left right=$item.right checkbox=$item.checkbox checkbox_hidden=$item.checkbox_hidden checked=$item.checked checkbox_name=$item.checkbox_name price_display=$item.price_display title=$item.title display_help_link=$item.display_help_link}
+				{include file='system/cart/other_details/item_box.tpl' left=$item.left right=$item.right checkbox=$item.checkbox checkbox_hidden=$item.checkbox_hidden checked=$item.checked checkbox_name=$item.checkbox_name price_display=$item.price_display title=$item.title display_help_link=$item.display_help_link}
 			{/if}
 		{/foreach}
-		
+
 		<div class='clear'></div>
 	</div>
 	{if !$full_step && !$steps_combined}
@@ -42,7 +42,7 @@
 				<input type="submit" name="forcePreview" value="{$preview_button_txt}" class="button" />
 			{/if}
 			{if $forcePreviewButtonOnly}
-				{* Use hidden main submit, that way can only be "clicked" using JS *} 
+				{* Use hidden main submit, that way can only be "clicked" using JS *}
 				<input type="submit" value="1" style="display: none;" class="mainSubmit" />
 			{else}
 				<br /><br />

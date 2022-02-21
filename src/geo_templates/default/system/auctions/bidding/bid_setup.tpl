@@ -26,7 +26,7 @@
 					{if $cost_options.groups}
 						<div class="cntr">
 							<label class="field_label">{$messages.502271}</label>
-							{include file='bidding/cost_options.tpl'}
+							{include file='system/auctions/bidding/cost_options'}
 						</div>
 						{if $verify && $cost_options_cost}
 							<div class="{cycle values='row_even,row_odd'} cntr">
@@ -131,7 +131,7 @@
 			{if $cost_options.groups}
 				<div class="{cycle values='row_even,row_odd'}">
 					<label class="field_label">{$messages.502271}</label>
-					{include file='bidding/cost_options.tpl'}
+					{include file='system/auctions/bidding/cost_options'}
 				</div>
 				{if $verify && $cost_options_cost}
 					<div class="{cycle values='row_even,row_odd'} cntr">
@@ -170,7 +170,7 @@
 				{if $cost_options.groups}
 					<div class="{cycle values='row_even,row_odd'} cntr">
 						<label class="field_label">{$messages.502271}</label>
-						{include file='bidding/cost_options.tpl'}
+						{include file='system/auctions/bidding/cost_options'}
 					</div>
 					{if $verify && $cost_options_cost}
 						<div class="{cycle values='row_even,row_odd'} cntr">

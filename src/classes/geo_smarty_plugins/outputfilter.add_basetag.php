@@ -1,8 +1,4 @@
 <?php
-//outputfilter.add_basetag.php
-
-
-//this smarty plugin is nice
 
 function smarty_outputfilter_add_basetag ($output, Smarty_Internal_Template $smarty)
 {

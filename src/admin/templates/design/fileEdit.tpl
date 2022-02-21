@@ -46,7 +46,7 @@
 			{/foreach}
 		</ul>
 	</div>
-	
+
 	<div class="page_note" style="margin: 10px 25px;">
 		<span><strong>Access:</strong> {$access}</span>
 	</div>
@@ -69,14 +69,14 @@
 			<li id="attachedToTab"><i class="fa fa-file"></i><span class="visible-lg-inline"> Template Attached To..</span></li>
 		{/if}
 	</ul>
-	
+
 	<div class="tabContents" id="editorContents">
 		<div id="editTemplateButtons" style="display: none;">{strip}
 			<img src="admin_images/icons/download.png" id="downloadTemplate" alt="Download Template" title="Download Template" class="autoTemplateButton" />
 			<img src="admin_images/icons/upload.png" id="uploadTemplate" alt="Upload Changes" title="Upload Changes" class="autoTemplateButton" />
 			{if $canEdit}<input type="image" src="admin_images/icons/save.png" alt="Save Changes" title="Save Changes" />{/if}
 			{if $restoreDefault}
-				<img src="admin_images/icons/restore.png" id="restoreDefault" alt="Restore Default Contents" title="Restore Default Contents" class="autoTemplateButton" /> 
+				<img src="admin_images/icons/restore.png" id="restoreDefault" alt="Restore Default Contents" title="Restore Default Contents" class="autoTemplateButton" />
 			{/if}
 			{if $fileType=='main_page'}
 				<div class="buttonSeperator"></div>
@@ -86,7 +86,7 @@
 		<div id="popupButtonHook"></div>
 		<input type="hidden" name="contentsPre" id="tplContentsPre" />
 		<input type="hidden" name="contentsPost" id="tplContentsPost" />
-		
+
 		{if $default_contents}
 			<div class="leftCss">
 				<strong>{$css_filename} file (Edit This)</strong>
@@ -101,12 +101,12 @@
 			{* normal display *}
 			<textarea name="contents" id="tplContents"{if !$canEdit} readonly="readonly"{/if} rows="50" cols="300">{$contents|escape}</textarea>
 		{/if}
-		
+
 		<div id="editNotes">
 			{if $codemirrorSearch}
 				<p class="page_note" style="float: right;">
 					<strong class="text_blue">Search / Replace Shortcut Keys</strong><br /><br />
-					
+
 					<strong>Start Searching:</strong> Ctrl-F / Cmd-F<br />
 					<strong>Find next:</strong> Ctrl-G / Cmd-G<br />
 					<strong>Find previous:</strong> Shift-Ctrl-G / Shift-Cmd-G<br />
@@ -115,7 +115,7 @@
 				</p>
 			{/if}
 		</div>
-		
+
 		<br /><br />
 		{if $canEdit}
 			<div class="center">
@@ -125,8 +125,8 @@
 		{/if}
 		<div class="clear"></div>
 	</div>
-	
-	{if $fileType=='main_page'}	
+
+	{if $fileType=='main_page'}
 		<div id="attachmentsTabContents" class="tabContents">
 		    <div style="background-color: #F7F7F7; padding: 3px;">
 			<p class="page_note">
@@ -141,7 +141,7 @@
 					<div class="clearColumn"></div>
 				</div>
 			{/if}
-			
+
 			<p class="large_font" style="text-align:center;">Attachments in template: <strong class="text_green">{$file}</strong></p>
 			<div class="col_hdr_top">Attached Modules</div>
 			{foreach from=$attachments.modules item=module key=moduleId}
@@ -173,12 +173,12 @@
 			{foreachelse}
 				<div style="text-align: center;" class="medium_font">N/A</div>
 			{/foreach}
-			
+
 			<div class="col_hdr_top">Sub-Templates</div>
 			{foreach from=$attachments.sub_pages item=sub_page}
 				<div class="{cycle values="row_color1,row_color2"}">
 					<div class="leftColumn">
-						{$sub_page.name} 
+						{$sub_page.name}
 						[{foreach from=$sub_page.tsets item=tset name=subpageTSets}
 							<a href="index.php?page=design_edit_file&amp;file={$tset|escape}/main_page/{$sub_page.name|escape}">{$tset}</a>{if !$smarty.foreach.subpageTSets.last},{/if}
 						{foreachelse}
@@ -232,5 +232,5 @@
 	{/if}
 	<!--  Dummy div, design and edit share same div -->
 	<div id="codeTabContents"></div>
-	
+
 {if $canEdit}</form>{/if}

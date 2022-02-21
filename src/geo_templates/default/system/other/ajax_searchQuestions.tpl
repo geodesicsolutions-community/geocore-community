@@ -7,14 +7,14 @@
 			{foreach $leveled_fields as $lev_id => $lev_field}
 				{* Note: already checks for if should show in PHP *}
 				<div class="{cycle values='row_odd,row_even'}">
-					{include g_resource='order_items' file='shared/leveled_fields/main.tpl'}
+					{include file='system/order_items/shared/leveled_fields/main.tpl'}
 				</div>
 			{/foreach}
 		{/if}
 		{foreach from=$optionals item=field key=i}
 			<div class="{cycle values="row_even,row_odd"}">
 				<label for="search_text" class="field_label">{$field.label|fromDB}</label>
-				
+
 				{if $field.type == 'numbers'}
 					<span style="white-space: nowrap;">{$messages.1440} <input name='b[optional_field_{$i}][lower]' size='15' maxlength='15' class="field" /></span>
 					<span style="white-space: nowrap;">{$messages.1441} <input name='b[optional_field_{$i}][higher]' size='15' maxlength='15' class="field" /></span>
@@ -33,17 +33,17 @@
 							{/foreach}
 						</ul>
 						<div class="clr"></div>
-						
+
 						{if $field.other_box}<input type="checkbox" class="other_dummy_checkbox" /> {$messages.1458} <input type="text" name="b[optional_field_{$i}][other]" class="field" />{/if}
 					</div>
 				{/if}
 			</div>
 		{/foreach}
-		
+
 		{foreach from=$questions item=q}
 			<div class="{cycle values="row_even,row_odd"}">
 				<label for="search_text" class="field_label">{$q.label}</label>
-				
+
 				{if $q.type == 'date'}
 					<span style="white-space: nowrap;">{$messages.501040} <input name='b[question_value][{$q.key}][low_date]' size='10' maxlength='10' class="field dateInput" /></span>
 					<span style="white-space: nowrap;">{$messages.501041} <input name='b[question_value][{$q.key}][high_date]' size='10' maxlength='10' class="field dateInput" /></span>
@@ -80,7 +80,7 @@
 								{/foreach}
 							</ul>
 							<div class="clr"></div>
-							
+
 							{if $q.other}<input type="checkbox" class="other_dummy_checkbox" /> {$messages.500659} <input class="field other_input_field" type="text" name="b[question_value][{$q.key}][other]" />{/if}
 						{/if}
 					</div>

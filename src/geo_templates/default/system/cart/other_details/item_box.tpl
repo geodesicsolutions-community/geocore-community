@@ -3,11 +3,11 @@
 	{if $right ne ''}
 		{$right}
 	{else}
-		{include file='other_details/right.tpl'}
+		{include file='system/cart/other_details/right.tpl'}
 	{/if}
 	{if $left ne ''}
 		{$left}
 	{else}
-		{include file='other_details/left.tpl'}
+		{include file='system/cart/other_details/left.tpl'}
 	{/if}
 </div>

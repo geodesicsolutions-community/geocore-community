@@ -7,12 +7,12 @@
 	{if $details.section_head}
 		{* Allow adding a section head above the next contents *}
 		{if !$details@first}</div><br /><div class="content_box">{/if}
-		
+
 		<h1 class="title">{$details.section_head}</h1>
 	{/if}
 	{if $details.section_sub_head}
 		{* Allow adding a sub-section head above the next contents *}
-		
+
 		<h3 class="subtitle">{$details.section_sub_head}</h3>
 	{/if}
 	{if $details.section_desc}
@@ -21,7 +21,10 @@
 	{/if}
 	{if $details.tpl}
 		{* way to include sub-template *}
-		{include file=$details.tpl.file g_type=$details.tpl.g_type g_resource=$details.tpl.g_resource}
+        {assign var="type" value=$details.tpl.g_type}
+        {assign var="resource" value=$details.tpl.g_resource}
+        {assign var="file" value=$details.tpl.file}
+		{include file="$type/$resource/$file"}
 	{elseif $details.full}
 		{* Or it can include the full contents in the actual variable *}
 		{$details.full}

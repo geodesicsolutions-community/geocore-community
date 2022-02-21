@@ -171,7 +171,7 @@ class addon_bulk_uploader_admin extends Admin_site
 		<div class="form-group">
 			<label class="control-label col-md-5 col-sm-5 col-xs-12">Process a single file at once: ' . geoHTML::showTooltip(
             'Process a single file at once',
-            'With this option selected, the cron update will only execute a single Revolving Inventory update each run, regardless of how many are due. This can help 
+            'With this option selected, the cron update will only execute a single Revolving Inventory update each run, regardless of how many are due. This can help
 					ease the burden on the server when dealing with several update files that would otherwise update at the same time.'
         ) . '</label>
 			<div class="col-md-6 col-sm-6 col-xs-12">
@@ -3473,7 +3473,7 @@ if there are any listings in your file that did not include a <strong>seller</st
     }
 
 
-    function insertImages($images, $classified_id, $imageBase = '', $totalImages, $fastMode = 0, $imageCaptions)
+    public function insertImages($images, $classified_id, $imageBase, $totalImages, $fastMode, $imageCaptions)
     {
         if (!$classified_id) {
             die("classified ID is not set");

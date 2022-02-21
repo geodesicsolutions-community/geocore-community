@@ -1203,8 +1203,9 @@ class addon_storefront_util extends addon_storefront_info
 
             $price_plans_with_free_storefront = array();
 
-            $sql = "SELECT plan_item FROM " . geoTables::plan_item_registry . " WHERE (`index_key` = 'free_storefronts' AND `val_string` = '1')";
-            $plans_with_free_storefronts = $db->Execute($sql, array());
+            $sql = "SELECT plan_item FROM "
+                . geoTables::plan_item_registry . " WHERE (`index_key` = 'free_storefronts' AND `val_string` = '1')";
+            $plans_with_free_storefronts = $db->Execute($sql);
             $price_plans_with_free_storefront = array();
             if (!$plans_with_free_storefronts || ($plans_with_free_storefronts->RecordCount() == 0)) {
                 $this->price_plans_with_free_storefronts = $price_plans_with_free_storefront;

@@ -1,6 +1,6 @@
 {* 17.03.0-30-g0210372 *}
 
-{include file="cart_steps.tpl" g_resource="cart"}
+{include file='system/cart/cart_steps.tpl'}
 
 <div class="jit_login_form" style="text-align: center; width: 95%; margin: 0 auto;">
 

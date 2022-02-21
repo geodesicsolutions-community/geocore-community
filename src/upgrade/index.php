@@ -20,7 +20,7 @@ if (!defined('PHP5_DIR')) {
     define('PHP5_DIR', 'php5_classes/');
 }
 
-require_once CLASSES_DIR . PHP5_DIR . 'smarty/Smarty.class.php';
+require_once GEO_BASE_DIR . 'vendor/autoload.php';
 
 ##  Do a few checks:
 if (!is_writable(GEO_BASE_DIR . 'templates_c/')) {

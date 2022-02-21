@@ -23,6 +23,8 @@ instructions.
 
 We have experimental docker set up!
 
+**Note:** We also have PHP 8.1 set up, however it is a work in progress.  See the instructions in [the wiki here](https://github.com/geodesicsolutions-community/geocore-community/wiki/Using-PHP-8-in-Docker)
+
 ## First time setup for docker:
 
 If you do not already have `docker` set up and working on your computer, you will need to do that first.
@@ -52,7 +54,7 @@ only be used for local test environment, like it mentions at the top docker is n
 
 Run:
 ```
-docker-compose build
+docker-compose build web
 ```
 
 Note: this step may be needed any time there are major changes such as updating PHP version and the like.
@@ -61,7 +63,7 @@ Note: this step may be needed any time there are major changes such as updating 
 
 Run:
 ```
-docker compose up
+docker-compose up
 ```
 
 After this point, you can use Docker Desktop to start up the containers, they should be listed under the

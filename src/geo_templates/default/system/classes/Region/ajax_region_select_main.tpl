@@ -3,9 +3,9 @@
 	<label class="field_label{if $required} required{/if}">{$regionsLabel}{if $required} *{/if}</label>
 {/if}
 <div class="region_selector_wrapper_{$fieldName_class}" style="display: inline-block;">
-	
-	{include file='Region/ajax_region_select.tpl'}
-		
+
+	{include file='system/classes/Region/ajax_region_select.tpl'}
+
 </div>
 <div class="region_selector_placeholders_{$fieldName_class}{if $buildDown}_multiline{/if}" style="{if $buildDown}display: block; margin-left: 13.33em;{else}display: inline-block;{/if}">
 	{foreach $fakeLevels as $fake}
@@ -13,7 +13,7 @@
 			{if $fake.use_label === 'yes'}<label class="field_label region_label">{$fake.label}</label>{/if}<br />
 			<select name="fake_region" class="field" disabled="disabled"><option value=""></option></select>
 		</div>
-		
+
 		{* only show the fake box if its direct parent either doesn't exist or exists and has no value *}
 		{add_footer_html}
 			<script type="text/javascript">

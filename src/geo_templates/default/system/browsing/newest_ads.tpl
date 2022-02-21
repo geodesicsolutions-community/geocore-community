@@ -2,7 +2,7 @@
 
 {$category_cache}
 
-{include file='common/browse_mode_buttons.tpl'}
+{include file='system/browsing/common/browse_mode_buttons.tpl'}
 
 {if $show_classifieds&&$show_auctions&&!$disable_browsing_tabs}
 	<ul class="tabList">
@@ -10,7 +10,7 @@
 		<li id="classifiedsTab"{if !$display_all_tab_browsing} class="activeTab"{/if}>{$messages.501672}</li>
 		<li id="auctionsTab">{$messages.501673}</li>
 	</ul>
-	
+
 	<div class="tabContents">
 		<div id="allTabContents"></div>
 {else}
@@ -21,7 +21,7 @@
 	{if $show_auctions&&!$disable_browsing_tabs}<div id="classifiedsTabContents">{/if}
 		<div class="content_box">
 			<h2 class="title">{$messages.899} {$current_category_name}</h2>
-			{include file=$browse_tpl
+			{include file="system/browsing/$browse_tpl"
 				listings=$classified_browse_result.listings
 				no_listings=$classified_browse_result.no_listings
 				addonHeaders=$classified_browse_result.addonHeaders
@@ -36,7 +36,7 @@
 	{if $show_classifieds&&!$disable_browsing_tabs}<div id="auctionsTabContents">{/if}
 	<div class="content_box">
 		<h2 class="title">{$messages.100899} {$current_category_name}</h2>
-		{include file=$browse_tpl
+		{include file="system/browsing/$browse_tpl"
 			listings=$auction_browse_result.listings
 			no_listings=$auction_browse_result.no_listings
 			addonHeaders=$auction_browse_result.addonHeaders

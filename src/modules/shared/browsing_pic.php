@@ -1,14 +1,5 @@
 <?php
 
-//modules/shared/browsing_pic.php
-
-
-//This is a common file, since all featured modules work basically the same.
-if (geoPC::is_print() && $this->get_site_setting('disableAllBrowsing')) {
-    //browsing disabled, do not show module contents
-    return;
-}
-
 if ($show_module['is_ajax']) {
     //add in the common text (page 59) when reloading this via ajax
     // (the + operator preserves numerical array keys, unlike array_merge())

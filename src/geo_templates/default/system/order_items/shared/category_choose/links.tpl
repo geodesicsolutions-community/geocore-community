@@ -1,6 +1,6 @@
 {* 7.5.3-125-gf5f0a9a *}
 
-{include file="cart_steps.tpl" g_resource="cart"}
+{include file='system/cart/cart_steps.tpl'}
 
 <div class="content_box">
 	<h1 class="title">{$title1}</h1>
@@ -11,18 +11,18 @@
 			<strong class="text_highlight">{$parent_cat_name}</strong> {$text1} {$num_cats}{$text2}
 		{/if}
 	</p>
-	
+
 	{if $error_msgs.cart_error}
 		<div class="field_error_box">
 			{$error_msgs.cart_error}
 		</div>
 	{/if}
-	
+
 	<p class="page_instructions">{$desc2}</p>
-	
+
 	{* capture each category into the correct column *}
 	{foreach from=$cat_data key=i item=cat}
-		{capture append="column_{$i % $colspan}"}		
+		{capture append="column_{$i % $colspan}"}
 				<li class="element category_{$cat.category_id}">
 					<div class="main_cat_title">
 					<a href="{$process_form_url}&amp;b={$cat.category_id}">
@@ -38,7 +38,7 @@
 				</li>
 		{/capture}
 	{/foreach}
-	
+
 	{* print all the columns in order, and add in the captured data from above *}
 	<div class="clearfix">
 		{section name=colLoop loop=$colspan}
@@ -51,7 +51,7 @@
 			</div>
 		{/section}
 	</div>
-	
+
 	{if $listings_only_in_terminal ne 1}
 		<div class="center">
 			{$text3}
