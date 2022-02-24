@@ -7,8 +7,8 @@ class addon_core_display_info
 {
 
     public $name = 'core_display';
-    public $version = '1.3.0';
-    public $core_version_minimum = '17.01.0';
+    public $version = '1.4.0';
+    public $core_version_minimum = '20.0.0';
     public $title = '<strong style="font-style: italic;">Core</strong> Display';
     public $author = "Geodesic Solutions LLC.";
     public $description = 'This addon is used internally to easily display content on multiple pages';
@@ -35,6 +35,9 @@ class addon_core_display_info
 
 /**
  * Core Display Changelog
+ *
+ * 1.4.0 - Requires 20.0.0
+ *  - Updates in templates required by new version
  *
  * 1.3.0 - REQUIRES 17.01.0
  *  - Implemented new admin design

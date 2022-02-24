@@ -415,7 +415,7 @@ class addon_core_display_tags extends addon_core_display_info
         $tpl_vars['gallery_columns'] = $reg->get('featured_column_count', 4);
         //for backwards compatibility in templates
         $tpl_vars['gallery_percent'] = round((100 / max(1, $tpl_vars['gallery_columns'])), 2);
-        $tpl_vars['browse_tpl'] = 'common/gallery_view.tpl';
+        $tpl_vars['browse_tpl'] = 'system/browsing/common/gallery_view.tpl';
 
         return geoTemplate::loadInternalTemplate(
             $params,
