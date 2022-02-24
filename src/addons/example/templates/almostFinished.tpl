@@ -5,7 +5,7 @@
 	adding an eWidget to the cart.
 *}
 
-{include file="cart_steps.tpl" g_resource="cart" g_type="system"}
+{include file="system/cart/cart_steps.tpl"}
 
 {foreach from=$error_msgs item=err_msg}
 	<div class="cart_error">
@@ -26,7 +26,7 @@ this fact.</p>
 to add your order item to the cart.  They don't even have to collect information
 if you don't want them to!</p>
 {*
- NOTE:  $process_form_url is one of the variables automatically set 
+ NOTE:  $process_form_url is one of the variables automatically set
  using $cart->getCommonTemplateVars()
 *}
 <a href="{$process_form_url}" class="button">Finish &gt;</a>

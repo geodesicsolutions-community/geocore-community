@@ -63,7 +63,7 @@ class addon_example_info
      *
      * @var string
      */
-    public $version = '2.5.5';
+    public $version = '2.6.0';
 
     /**
      * Optional, if the Geodesic base software's version is not at least this number, the addon will not install/enable/upgrade
@@ -73,7 +73,7 @@ class addon_example_info
      * @since Geo version 4.0.5 -- this var will have no effect in versions before Geo 4.0.5.
      * @var string
      */
-    public $core_version_minimum = '7.4beta1';
+    public $core_version_minimum = '20.0.0';
 
     /**
      * Required, the title of the addon that will be displayed in the menu
@@ -570,6 +570,9 @@ does not actually exist, there is a broken image instead.  See info.php in the a
  *
  * This is not a complete changelog, this is mostly for internal use.  In the
  * user manual, see Development > Changes to Note
+ *
+ * 2.6.0 - GeoCore 20.0.0
+ *  - Changes needed for new version of Smarty template engine
  *
  * 2.5.5 - Geo 7.4beta1
  *  - Added new hook admin_category_manage_add_links and admin_category_list_specific_icons
