@@ -110,8 +110,9 @@ class geoAddon {
 	{
 		if (self::$_needAddonUpdates && !self::$_needAddonUpdatesMsg && class_exists('Notifications',false)) {
 			self::$_needAddonUpdatesMsg = true;
-			Notifications::addCheck( create_function( "", "
-	return '<strong style=\"color:red\">Addon(s) Require Upgrade:</strong> The addon(s) will be inactive until they have been updated in the <a href=\"index.php?page=addon_tools\">Manage Addons Page</a>.';"));
+			Notifications::addCheck(function() {
+	            return '<strong style="color:red">Addon(s) Require Upgrade:</strong> The addon(s) will be inactive until they have been updated in the <a href="index.php?page=addon_tools">Manage Addons Page</a>.';
+            });
 		}
 		if (!$force && isset($this->enabledAddons) && is_array($this->enabledAddons)){
 			//already got the enabled addons!
@@ -138,8 +139,9 @@ class geoAddon {
 								self::$_needAddonUpdates = true;
 								if (class_exists('Notifications',false)) {
 									self::$_needAddonUpdatesMsg = true;
-									Notifications::addCheck( create_function( "", "
-	return '<strong style=\"color:red\">Addon(s) Require Upgrade:</strong> The addon(s) will be inactive until they have been updated in the <a href=\"index.php?page=addon_tools\">Manage Addons Page</a>.';"));
+									Notifications::addCheck(function () {
+                                        return '<strong style="color:red">Addon(s) Require Upgrade:</strong> The addon(s) will be inactive until they have been updated in the <a href="index.php?page=addon_tools">Manage Addons Page</a>.';
+                                    });
 								}
 							}
 							if (!$enableCheck) {
