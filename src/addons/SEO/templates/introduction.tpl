@@ -7,7 +7,7 @@
 {if $settings.type eq 2}
 	<br />
 	Your are currently using the "old" SEO engine and URL's.<br /><br />
-	<span style='color:red'>Warning:</span> 
+	<span style='color:red'>Warning:</span>
 	By clicking on the "continue" button, you will <strong>start the process to enable using the new style urls</strong>.
 	Any current urls will be replaced by the new style urls.
 	<br />
@@ -18,7 +18,7 @@
 
 {if $checks_pass eq 'no'}
 <div class='medium_font'>
-<strong>Warning - Unable to proceed:</strong> This add-on requires your server to handle url re-write procedures. 
+<strong>Warning - Unable to proceed:</strong> This add-on requires your server to handle url re-write procedures.
 <br />
 <br />
 We're sorry. Our software is detecting that will not be able to finish this process until the above issue is fixed.<br/>
@@ -39,10 +39,10 @@ Here are a few suggestions to fix the above "Warning"...
 </ul>
 </div>
 {else}
-This SEO First-Time Wizard will guide you through the steps needed to start using search engine friendly 
+This SEO First-Time Wizard will guide you through the steps needed to start using search engine friendly
 URL's on your site.  Click continue below to get started.
 <br /><br />
-{include g_type="admin" file="HTML/add_button.tpl" link="?mc=addon_cat_SEO&page=addon_SEO_main_config&step=1" label="Continue"}
+{include file="admin/HTML/add_button.tpl" link="?mc=addon_cat_SEO&page=addon_SEO_main_config&step=1" label="Continue"}
 
 
 {/if}
