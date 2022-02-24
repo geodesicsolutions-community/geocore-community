@@ -5,8 +5,13 @@ class Browse_ads extends geoBrowse
     public $browsing_options = array();
     private static $_cfg, $_headers, $_fields, $_text;
 
-    public function __construct($classified_user_id = 0, $language_id, $category_id = 0, $page = 0, $classified_id = 0)
-    {
+    public function __construct(
+        $classified_user_id = 0,
+        $language_id = null,
+        $category_id = 0,
+        $page = 0,
+        $classified_id = 0
+    ) {
         $db = $this->db = DataAccess::getInstance();
         $user_id = geoSession::getInstance()->getUserId();
         if ($category_id) {

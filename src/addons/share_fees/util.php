@@ -1,12 +1,9 @@
 <?php
 
-# Share Fees Addon
-
 require_once ADDON_DIR . 'share_fees/info.php';
 
 class addon_share_fees_util
 {
-
     /**
      * Used internally
      * @internal
@@ -30,7 +27,6 @@ class addon_share_fees_util
      * @return boolean false if type doesn't exist| returns true if setup properly
      * @since Version 7.4.5
      */
-
     public function __construct()
     {
         $this->getInfo();
@@ -143,7 +139,7 @@ class addon_share_fees_util
     {
         if ($this->attachment_info == 0) {
             $db = DataAccess::getInstance();
-            $row = $db->GetRow("SELECT * FROM " . $this->user_share_fees_configuration_table, array());
+            $row = $db->GetRow("SELECT * FROM " . $this->user_share_fees_configuration_table);
             $this->attachment_info = $row;
             $this->active = $this->attachment_info['active'];
         }
@@ -662,7 +658,7 @@ class addon_share_fees_util
     {
         $db = DataAccess::getInstance();
 
-        $fee_types_list = $db->GetRow("SELECT fee_types_shared FROM " . $this->user_share_fees_configuration_table, array());
+        $fee_types_list = $db->GetRow("SELECT fee_types_shared FROM " . $this->user_share_fees_configuration_table);
         if (!$fee_types_list) {
             return false;
         } else {
