@@ -1,6 +1,6 @@
 {* 7.5.3-125-gf5f0a9a *}
 
-{include file="cart_steps.tpl" g_resource="cart" g_type="system"}
+{include file="system/cart/cart_steps.tpl"}
 
 {foreach from=$error_msgs item=err_msg}
 	<div class="cart_error">
