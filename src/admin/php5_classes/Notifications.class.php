@@ -184,7 +184,7 @@ class Notifications {
 		if (DataAccess::getInstance()->get_site_setting('developer_supress_notify')) {
 			return;
 		}
-		if(@is_callable($callback)) {
+		if(is_callable($callback)) {
 			Notifications::_checks($callback);
 			return true;
 		} else {
