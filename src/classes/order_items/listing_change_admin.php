@@ -189,7 +189,7 @@ class listing_change_adminOrderItem extends _listing_placement_commonOrderItem
      *
      * Used when creating a new item.  This gets the old listing's data and sets up the stuff for it to be renewed/upgraded
      */
-    public function geoCart_initItem_new($call_children = true, $item_type)
+    public function geoCart_initItem_new($item_type)
     {
         //this item is only used in the admin
         return false;
