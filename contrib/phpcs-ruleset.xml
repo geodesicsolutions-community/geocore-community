@@ -28,4 +28,11 @@
         <!-- This is done in most of the directly accessed files (like index.php), just need to move to bootstrap -->
         <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
     </rule>
+
+    <!--
+        Useful rules we may want to use to target specific problems:
+
+        PEAR.Functions.ValidDefaultValue.NotAtEnd
+
+    -->
 </ruleset>
