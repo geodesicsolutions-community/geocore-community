@@ -36,9 +36,11 @@ function smarty_function_legacy_include ($params, Smarty_Internal_Template $smar
     }
 
     $path .= $params['file'];
+    $copy = clone $smarty;
+    $copy->assign($params);
     if ($params['assign']) {
-        $smarty->assign($params['assign'], $smarty->fetch($path, null, null, $smarty));
+        $copy->assign($params['assign'], $copy->fetch($path, null, null, $smarty));
         return '';
     }
-    $smarty->display($path, null, null, $smarty);
+    $copy->display($path, null, null, $smarty);
 }

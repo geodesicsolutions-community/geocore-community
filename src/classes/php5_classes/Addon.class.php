@@ -1385,7 +1385,7 @@ class geoAddon {
 		$info = Singleton::getInstance('addon_'.$addonName.'_info');
 
 		//See if the addon has pages, if it does, auto-assign templates
-		if (!isset($info->pages) && count($info->pages) == 0) {
+		if (!isset($info->pages) || count($info->pages) == 0) {
 			//no addon pages
 			return true;
 		}
