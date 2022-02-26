@@ -26,9 +26,6 @@
         "phpstan/phpstan": "^1.4"
     },
     "scripts": {
-        "post-install-cmd": [
-            "bash contrib/setup"
-        ],
         "check": [
             "@cs-check"
         ],
