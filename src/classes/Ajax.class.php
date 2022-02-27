@@ -168,7 +168,7 @@ class geoAjax
 	 *
 	 * @param string $data
 	 */
-	public function decodeJSON ($data)
+	public static function decodeJSON ($data)
 	{
 		return json_decode($data);
 	}
