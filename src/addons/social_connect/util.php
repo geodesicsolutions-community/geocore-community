@@ -764,7 +764,15 @@ class addon_social_connect_util extends addon_social_connect_info
             $tpl = new geoTemplate(geoTemplate::ADDON, $this->name);
             $tpl->assign('user_data', $user_info);
 
-            geoEmail::sendMail($db->get_site_setting('registration_admin_email'), "registration complete for {$user_info['username']} (Facebook)", $tpl->fetch('admin/emails/register_complete.tpl'), 0, 0, 0, 'text/html');
+            geoEmail::sendMail(
+                $db->get_site_setting('registration_admin_email'),
+                "registration complete for {$user_info['username']} (Facebook)",
+                $tpl->fetch('addon/social_connect/admin/emails/register_complete.tpl'),
+                0,
+                0,
+                0,
+                'text/html'
+            );
         }
 
         //got this far?  Registered successfully!

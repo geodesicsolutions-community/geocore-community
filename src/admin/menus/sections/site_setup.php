@@ -30,7 +30,7 @@ if (isset($api_db_host) && strlen($api_db_host) > 0) {
     menu_page::addPage('main_api_integration', 'site_setup', 'API Integration', 'fa-gear', 'admin_module_loader_class.php', 'module_loader');
     //2 birds with one stone: Also show an alert in the admin, to make sure
     //they realize that the API has been replaced by the Bridge Addon:
-    Notifications::addCheck(function() {
+    Notifications::addCheck(function () {
         return '<strong>Compatibility Alert:</strong> You still have the API database settings configured in your
             config.php, however the Geo API has been replaced by the new Bridge Addon.  After you have migrated the
             API installations over to use the new Bridge Addon, you can turn this notice off by removing the API

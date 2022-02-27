@@ -406,7 +406,7 @@ class addon_discount_codes_admin extends addon_discount_codes_info
             $tpl = new geoTemplate(geoTemplate::ADDON, $this->name);
             $tpl->assign($tpl_vars);
 
-            echo $tpl->fetch('admin/stats.tpl');
+            echo $tpl->fetch('addon/discount_codes/admin/stats.tpl');
             geoView::getInstance()->setRendered(true);
         } else {
             geoView::getInstance()->setBodyTpl('admin/stats.tpl', $this->name)

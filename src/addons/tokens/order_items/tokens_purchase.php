@@ -55,7 +55,7 @@ class tokens_purchaseOrderItem extends geoOrderItem
         $tpl = new geoTemplate(geoTemplate::ADDON, 'tokens');
         $tpl->assign($tpl_vars);
 
-        return $tpl->fetch('admin/tokens_purchase_prices.tpl');
+        return $tpl->fetch('addon/tokens/admin/tokens_purchase_prices.tpl');
     }
 
     /**

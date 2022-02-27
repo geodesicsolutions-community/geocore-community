@@ -32,5 +32,7 @@ src/geo_templates/
 src/user_images/
 !src/user_images/.empty
 
+src/.htaccess
+
 # Built zip files
 build/
