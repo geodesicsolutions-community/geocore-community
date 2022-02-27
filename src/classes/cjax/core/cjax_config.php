@@ -111,7 +111,7 @@ if (!class_exists('CJAX')) {
          *
          * @return CJAX OBJECT
          */
-        function init()
+        function init($echo = false)
         {
             return self::initciate();
         }
@@ -141,7 +141,7 @@ if (!class_exists('CJAX')) {
          * with singleton patterm
          * @return CJAX OBJECT
          */
-        function initciate()
+        public static function initciate()
         {
             return singleton::getInstance('CJAX_FRAMEWORK');
         }

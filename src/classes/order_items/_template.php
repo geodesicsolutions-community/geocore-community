@@ -1,17 +1,9 @@
 <?php
 
-//order_items/_template.php
 /**
  * This is a "developer template" that documents most, if not all, of what an
  * order item can do in the system.
  *
- * @package System
- * @since Version 4.0.0
- */
-
-
-
-/**
  * Developers: use this file as a template to create a new order item.
  *
  * If this is a 3rd party order item,
@@ -891,8 +883,9 @@ class _templateOrderItem extends geoOrderItem
             //item being added does not have anything to do with this item, so no need to check vars.
             return;
         }
-        if (!$check) {
-            //dummy check, to demonstrate how to tell the cart there is a problem and to not proceed to next step yet.
+        //dummy check, to demonstrate how to tell the cart there is a problem and to not proceed to next step yet.
+        $checkThatShouldStopCartFromGoingToNextStep = true;
+        if (!$checkThatShouldStopCartFromGoingToNextStep) {
             $cart->addError();
         }
 
@@ -1353,7 +1346,7 @@ class _templateOrderItem extends geoOrderItem
      *
      * @return string
      */
-    public function geoOrder_processStatusChange_emailItemInfo()
+    public function geoOrder_processStatusChange_emailItemInfo($overrideTitle = '')
     {
         //TODO: implement or remove or return empty string.
 
@@ -1543,7 +1536,7 @@ class _templateOrderItem extends geoOrderItem
 
         //call children if needed
         $children = geoOrderItem::getChildrenTypes(self::type);
-        geoOrderItem::calUpdate('cron_close_listings', $vars, $children);
+        geoOrderItem::callUpdate('cron_close_listings', $vars, $children);
     }
 
     /**
@@ -1570,7 +1563,7 @@ class _templateOrderItem extends geoOrderItem
 
         //call children if needed
         $children = geoOrderItem::getChildrenTypes(self::type);
-        geoOrderItem::calUpdate('buy_now_close', $vars, $children);
+        geoOrderItem::callUpdate('buy_now_close', $vars, $children);
     }
 
     /**

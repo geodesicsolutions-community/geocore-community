@@ -384,7 +384,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             }
             //should not get here unless weird error.. this just fallback so user doesn't see blank page
             if (!$cart->isCombinedStep()) {
-                return self::categoryDisplay();
+                return self::categoryDisplay(null);
             }
         }
 
@@ -2699,7 +2699,7 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
                 $message .= "email: " . $mailTo . "\n";
             }
             $message .= "    order id: " . $order_id . "[" . $admin_url . "?page=orders_list_order_details&order_id=" . $order_id . "]\n";
-            if (count($transaction) > 0) {
+            if (is_array($transaction) && count($transaction) > 0) {
                 foreach ($transaction as $tran) {
                     if (is_object($tran)) {
                         continue;

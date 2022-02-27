@@ -206,7 +206,7 @@ under the setting name.'
      * Optional, Can over-ride the function from the main util, if you want to do different
      * logging than the main way
      */
-    function log($message)
+    public function log($message, $critical = false)
     {
         echo $message; //just echo it out!  Yee haw! (I would suggest taking this function out once
         //your bridge is fully tested, and just let the backend handle logging...

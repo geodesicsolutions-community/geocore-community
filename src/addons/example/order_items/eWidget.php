@@ -157,8 +157,7 @@ class eWidgetOrderItem extends geoOrderItem
         //Note: No need to clean the value, we clean the value when saving the value
 
         //get the db so we can get pre and post currency to display the cost nicely
-        $db = 1;
-        require GEO_BASE_DIR . 'get_common_vars.php';
+        $db = DataAccess::getInstance();
 
         $inputField = $db->get_site_setting('precurrency');
         //Note: for settings, it works best to use an array with the name
@@ -323,7 +322,7 @@ class eWidgetOrderItem extends geoOrderItem
      * See {@link _templateOrderItem::geoCart_initSteps()} for full documentation.
      *
      */
-    public static function geoCart_initSteps()
+    public static function geoCart_initSteps($allPossible = false)
     {
         //Get the cart to add some steps to it
         $cart = geoCart::getInstance();
