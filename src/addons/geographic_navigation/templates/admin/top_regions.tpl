@@ -3,4 +3,4 @@
 <div class="page_note">All regions in this section are part of the Geographic Navigation Addon, you control
 all levels of these regions.  See the user manual for examples.</div>
 
-{include file="admin/regions_list.tpl" regions=$uregions}
+{include file="addon/geographic_navigation/admin/regions_list.tpl" regions=$uregions}

@@ -19,26 +19,26 @@
 				}
 			});
 		};
-		
+
 		//go ahead and update now
 		updateFiltersDep();
-		
+
 		//make check all work
 		jQuery('input.checkAll').click(function () {
 			var isChecked = jQuery(this).prop('checked');
 			jQuery(this).closest('table').find('.enabledCheckbox').prop('checked',isChecked);
 		});
-		
+
 		//make the leveled fields "enabled" depending on other features
 		jQuery('input.leveled').click(function () {
 			var isChecked = jQuery(this).prop('checked');
 			var level = jQuery(this).siblings('input.leveled_level').val();
 			var leveled_field = jQuery(this).siblings('input.leveled_field').val();
-			
+
 			//it is checked, make sure lower levels are also checked...
 			jQuery('input.leveled_field[value='+leveled_field+']').each(function () {
 				var thisLevel=jQuery(this).siblings('input.leveled_level').val();
-				
+
 				if (isChecked && thisLevel<level) {
 					jQuery(this).siblings('input.leveled').prop('checked',true);
 				} else if (!isChecked&&thisLevel>level) {
@@ -48,7 +48,7 @@
 			//once done, update filter dependency dropdowns
 			updateFiltersDep();
 		});
-		
+
 		jQuery('input.enabledCheckbox:not(.leveled)').click(updateFiltersDep);
 	});
 	//]]>
@@ -64,7 +64,7 @@
 			{else}
 				There are currently no saved <span style="color: #FF0000;">Site-Wide</span> Browsing Filter settings. Save this form to begin using Browsing Filters.
 			{/if}
-		</p>		
+		</p>
 	{else}
 		<div class="center" style="margin: 10px auto;">
 			<a class="btn btn-default source" href="index.php?page=browsing_filter_settings&reset=yes&category={$category_id}">
@@ -76,19 +76,19 @@
 			</a>
 		</div>
 	{/if}
-	
+
 	{if !$category_id}
 		<fieldset>
 			<legend>General Settings</legend>
 			<div class='x_content'>
-			
+
 				<div class='form-group'>
 				<label class='control-label col-md-5 col-sm-5 col-xs-12'></label>
 				  <div class='col-md-7 col-sm-7 col-xs-12'>
 				    <input type="checkbox" name="browsing_filters_enabled" value="1" {if $browsing_filters_enabled}checked="checked"{/if} />&nbsp;
 				    {$browsing_filters_enabled_tooltip} Show Browsing Filters Automatically when Browsing
 				  </div>
-				</div>	
+				</div>
 
 				<div class='form-group'>
 				<label class='control-label col-md-5 col-sm-5 col-xs-12'></label>
@@ -96,7 +96,7 @@
 				    <input type="checkbox" name="no_filter_counts" value="1" {if $no_filter_counts}checked="checked"{/if} />&nbsp;
 				    {$no_filter_counts_tooltip} Hide Filter Counts</span>
 				  </div>
-				</div>	
+				</div>
 
 				<div class='form-group'>
 				<label class='control-label col-md-5 col-sm-5 col-xs-12'>Use Values: {$use_listing_values_tooltip}</label>
@@ -112,14 +112,14 @@
 				  <input type="text" name="expandable_threshold" class='form-control col-md-7 col-xs-12' value="{$expandable_threshold}" size="2" />
 				  </div>
 				</div>
-						
+
 				<div class="center">
 					<input type="submit" name="auto_save" class="mini_button" value="Save" />
 				</div>
 			</div>
-		</fieldset>		
+		</fieldset>
 	{/if}
-		
+
 	<fieldset>
 		<legend>General Fields</legend>
 		<div class="table-responsive">
@@ -141,7 +141,7 @@
 							<td>Price</td>
 							<td style="text-align: center;"><input type="checkbox" class="enabledCheckbox" name="settings[price][enabled]" value="1" {if $settings.price.enabled}checked="checked"{/if} /></td>
 							<td style="text-align: center;"><input type="number" name="settings[price][display_order]" value="{$settings.price.display_order}" /></td>
-							<td style="text-align: center;">{include file="admin/browsing_filter_dependency/select.tpl" field='price'}</td>
+							<td style="text-align: center;">{include file="addon/core_display/admin/browsing_filter_dependency/select.tpl" field='price'}</td>
 							{foreach $languages as $l}
 								{$id = $l.language_id}
 								<td style="text-align: center;"><input type="text" name="settings[price][languages][{$id}]" value="{$settings.price.languages.$id}" /></td>
@@ -157,7 +157,7 @@
 			{/if}
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend>Multi-Level Fields</legend>
 		<div>
@@ -197,7 +197,7 @@
 								<td style="text-align: center;"><input type="number" name="settings[{$field}][display_order]" value="{$settings.$field.display_order}" /></td>
 								<td style="text-align: center;">
 									{if $info.level<2}
-										{include file='admin/browsing_filter_dependency/select.tpl' leveled_field=$info.leveled_field}
+										{include file='addon/core_display/admin/browsing_filter_dependency/select.tpl' leveled_field=$info.leveled_field}
 									{else}
 										{$info.leveled_field_label} - Level {$info.level-1}
 										<input type="hidden" name="settings[{$field}][dependency]" value="leveled_{$info.leveled_field}_{$info.level-1}" />
@@ -228,7 +228,7 @@
 			{/if}
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend>Optional Fields</legend>
 		<div class="table-responsive">
@@ -251,7 +251,7 @@
 							<td>{$name}</td>
 							<td style="text-align: center;"><input type="checkbox" class="enabledCheckbox" name="settings[{$field}][enabled]" value="1" {if $settings.$field.enabled}checked="checked"{/if} /></td>
 							<td style="text-align: center;"><input type="number" name="settings[{$field}][display_order]" value="{$settings.$field.display_order}" /></td>
-							<td style="text-align: center;">{include file="admin/browsing_filter_dependency/select.tpl" field=$field}</td>
+							<td style="text-align: center;">{include file="addon/core_display/admin/browsing_filter_dependency/select.tpl" field=$field}</td>
 							{foreach $languages as $l}
 								{$id = $l.language_id}
 								<td style="text-align: center;"><input type="text" name="settings[{$field}][languages][{$id}]" value="{$settings.$field.languages.$id}" /></td>
@@ -268,7 +268,7 @@
 		{/if}
 		</div>
 	</fieldset>
-		
+
 	{if $category_id}
 		<fieldset>
 			<legend>Category-Specific Fields</legend>
@@ -280,7 +280,7 @@
 							<th>Field Name</th>
 							<th style="white-space: nowrap;"><input type="checkbox" class="checkAll" /> Enabled</th>
 							<th>Display Order</th>
-							<th>Depends on</th>							
+							<th>Depends on</th>
 							{foreach $languages as $l}
 								<th>{$l.language} Name</th>
 							{/foreach}
@@ -293,7 +293,7 @@
 								<td>{$name}</td>
 								<td style="text-align: center;"><input type="checkbox" class="enabledCheckbox" name="settings[{$field}][enabled]" value="1" {if $settings.$field.enabled}checked="checked"{/if} /></td>
 								<td style="text-align: center;"><input type="number" name="settings[{$field}][display_order]" value="{$settings.$field.display_order}" /></td>
-								<td style="text-align: center;">{include file="admin/browsing_filter_dependency/select.tpl" field=$field}</td>
+								<td style="text-align: center;">{include file="addon/core_display/admin/browsing_filter_dependency/select.tpl" field=$field}</td>
 								{foreach $languages as $l}
 									{$id = $l.language_id}
 									<td style="text-align: center;"><input type="text" name="settings[{$field}][languages][{$id}]" value="{$settings.$field.languages.$id}" /></td>
