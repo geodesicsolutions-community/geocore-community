@@ -22,7 +22,7 @@ class CLASSES_AJAXController_RegionSelect extends classes_AJAX
 
         //do all the stuff needed to make the prevalue JSON string back into a PHP array so it plays nice with the region function
         $prevalue = array();
-        $arr = (array)geoAjax::getInstance()->decodeJSON(geoString::specialCharsDecode($_POST['prevalue']));
+        $arr = (array)geoAjax::decodeJSON(geoString::specialCharsDecode($_POST['prevalue']));
         //at this point, array keys are Strings. make them ints so they compare right with values later
         foreach ($arr as $key => $value) {
             $prevalue[intval($key)] = intval($value);
