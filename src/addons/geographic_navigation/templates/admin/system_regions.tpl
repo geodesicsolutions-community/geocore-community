@@ -4,12 +4,12 @@
 <fieldset>
 	<legend>Country &amp; State/Provinces</legend>
 	<div>
-		{include file="admin/countries.tpl"}
+		{include file="addon/geographic_navigation/admin/countries.tpl"}
 	</div>
 </fieldset>
 <fieldset>
 	<legend>Top-Level Regions</legend>
 	<div>
-		{include file="admin/top_regions.tpl"}
+		{include file="addon/geographic_navigation/admin/top_regions.tpl"}
 	</div>
 </fieldset>

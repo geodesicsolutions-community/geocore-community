@@ -15,7 +15,7 @@ class Smarty_Resource_Geo_tset extends Smarty_Resource
      * @param string $path
      * @return ?array
      */
-    private function getDetailsFromPath($path, $evenAdmin = false)
+    private function getDetailsFromPath($path)
     {
         $details = [
             'g_type' => '',
@@ -28,10 +28,7 @@ class Smarty_Resource_Geo_tset extends Smarty_Resource
             // path does not have what we need, the first part is not a g_type or there is not enough parts
             return null;
         }
-        if (!$evenAdmin && $parts[0] === 'admin') {
-            // if first part is admin, this "could" be an addon template, so check other ways first
-            return null;
-        }
+
         $details['g_type'] = array_shift($parts);
         $details['g_resource'] = count($parts) > 1 ? array_shift($parts) : '';
         $details['name'] = implode('/', $parts);
@@ -148,11 +145,6 @@ class Smarty_Resource_Geo_tset extends Smarty_Resource
             if ($details) {
                 return [$details['g_type'], $details['g_resource'], $details['name']];
             }
-        }
-        // try the path again this time accept admin
-        $details = $this->getDetailsFromPath($source->name, true);
-        if ($details) {
-            return [$details['g_type'], $details['g_resource'], $details['name']];
         }
         // could not get anything, try sensible defaults maybe they will work
         return [

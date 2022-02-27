@@ -2,7 +2,7 @@
 {$notices}
 
 {capture assign="multiSelect"}
-	<strong>Multi-Select Tip:</strong> To select or un-select multiple entries, hold down CTRL in Windows 
+	<strong>Multi-Select Tip:</strong> To select or un-select multiple entries, hold down CTRL in Windows
 		or CMD in OS X while left-clicking.
 {/capture}
 {capture assign="exportButton"}
@@ -14,9 +14,9 @@
 	<br />
 	{$exportButton}
 	<input type="hidden" name="auto_save" value="1" />
-	
+
 	<br /><br /><br />
-	
+
 	<ul class="tabList">
 		<li id="criteriaTab" class="activeTab">Export Criteria</li>
 		<li id="dataTab">Data Exported</li>
@@ -192,12 +192,12 @@
 				</div>
 			</fieldset>
 		</div>
-		
+
 		<div class="clear"></div>
 	</div>
-	
+
 	<div class="tabContents" id="dataTabContents">
-	
+
 		<div class="form-group">
 			<label class='control-label col-xs-12 col-sm-5'>Export Type</label>
 			<div class="col-xs-12 col-sm-6">
@@ -215,7 +215,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 		<div class='col-xs-12 col-sm-4'>
 			<fieldset>
 				<legend>Main Fields</legend>
@@ -247,7 +247,7 @@
 						<option value="url_link_2">URL Link 2</option>
 						<option value="url_link_3">URL Link 3</option>
 						<option value="email">E-Mail</option>
-						<option value="mapping_location">Mapping Location</option>				
+						<option value="mapping_location">Mapping Location</option>
 						<option value="better_placement">Better placement</option>
 						<option value="optional_field_1">Optional field 1</option>
 						<option value="optional_field_2">Optional field 2</option>
@@ -309,7 +309,7 @@
 							<input type="radio" name="fieldFormat[date]" value="unix" checked="checked" /> 1184618389 <em>(Unix timestamp)</em><br />
 							<input type="radio" name="fieldFormat[date]" value="date_time" /> 07/16/2007 - 20:39:49<br />
 							<input type="radio" name="fieldFormat[date]" value="date" /> 07/16/2007<br />
-							<input type="radio" name="fieldFormat[date]" value="custom" /> 
+							<input type="radio" name="fieldFormat[date]" value="custom" />
 								Custom (see <a href="http://php.net/date" target="_new">date</a>):<br />
 								<input type="text" class='form-control' style="margin-left: 13px;" name="fieldFormat[date_custom]" value="m/d/Y - H:i:s" size="10" />
 						</div>
@@ -350,7 +350,7 @@
 					<div>
 						<p class="page_note">Load any previously saved export settings.</p>
 						<div id="loadTable">
-							{include file='admin/load_settings_table.tpl'}
+							{include file='addon/exporter/admin/load_settings_table.tpl'}
 						</div>
 					</div>
 				</fieldset>

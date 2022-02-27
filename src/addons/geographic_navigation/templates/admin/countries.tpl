@@ -5,4 +5,4 @@ as regions in the Geographic Navigation addon, and add additional levels of Geog
 <br /><br />
 Un-check the box next to any country or state/province that you do not
 want to be used by the Geographic Navigation Addon.</div>
-{include file="admin/regions_list.tpl"}
+{include file="addon/geographic_navigation/admin/regions_list.tpl"}
