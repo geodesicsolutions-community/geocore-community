@@ -38,7 +38,7 @@ class charitable_badgeOrderItem extends geoOrderItem
 
         $tpl = new geoTemplate('addon', 'charity_tools');
         $tpl->assign($tpl_vars);
-        return $tpl->fetch('admin/plan_settings.tpl');
+        return $tpl->fetch('addon/charity_tools/admin/plan_settings.tpl');
     }
 
     /**

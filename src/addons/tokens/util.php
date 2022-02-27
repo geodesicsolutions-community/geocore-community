@@ -22,7 +22,7 @@ class addon_tokens_util extends addon_tokens_info
         $tpl = new geoTemplate(geoTemplate::ADDON, $this->name);
         $tpl->assign($tpl_vars);
 
-        return $tpl->fetch('admin/show_tokens_user.tpl');
+        return $tpl->fetch('addon/tokens/admin/show_tokens_user.tpl');
     }
 
     public function core_Admin_user_management_update_users_view($user_id)
@@ -138,7 +138,7 @@ class addon_tokens_util extends addon_tokens_info
         $tpl = new geoTemplate(geoTemplate::ADDON, $this->name);
         $tpl->assign($tpl_vars);
 
-        return $tpl->fetch('admin/group_settings.tpl');
+        return $tpl->fetch('addon/tokens/admin/group_settings.tpl');
     }
 
     public function core_Admin_Group_Management_edit_group_update($vars)
