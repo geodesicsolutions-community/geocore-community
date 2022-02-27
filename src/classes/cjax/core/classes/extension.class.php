@@ -1,13 +1,13 @@
 <?php
 # Author :  Carlos Galindo
 # Website: ComponentAjax.com
-# Date :  2008 1:56:13 AM 
+# Date :  2008 1:56:13 AM
 # Copyright 2008
 
 class extension  extends CoreEvents  {
-	
+
 	/**
-	 * Makes sure the extension are registered 
+	 * Makes sure the extension are registered
 	 *
 	 * @var boolean function
 	 */
@@ -18,25 +18,25 @@ class extension  extends CoreEvents  {
 	 * @var array $extensions
 	 */
 	private static $extensions = array();
-	
+
 	/**
 	 * Obtain the loaded extensions
 	 *
 	 * @return array $extensions
 	 */
-	public function get()
+	public function get($value = null)
 	{
 		return self::$extensions;
 	}
-	
-	function init()
+
+	function init($echo = false)
 	{
 		if(!self::$shutdown_register_extensions) {
 			register_shutdown_function(array(__CLASS__,'register'));
 			self::$shutdown_register_extensions = true;
 		}
 	}
-	
+
 	/**
 	 * Add an extension to the extensions stack
 	 *
@@ -51,12 +51,12 @@ class extension  extends CoreEvents  {
 		$extension = array('name' =>$f, 'base' =>$ext_path);
 		self::$extensions[$ext_name] =  $extension;
 	}
-	
+
 	/**
 	 * Register extensions
 	 *
 	 */
-	public static function register() 
+	public static function register()
 	{
 		if(empty(self::$extensions)) return true;
 		foreach (self::$extensions as $extension) {
