@@ -89,7 +89,7 @@ class HTTP_Request {
     * @var string
     */
     public $_user;
-    
+
     /**
     * Basic Auth Password
     * @var string
@@ -101,25 +101,25 @@ class HTTP_Request {
     * @var object Net_Socket
     */
     public $_sock;
-    
+
     /**
     * Proxy server
     * @var string
     */
     public $_proxy_host;
-    
+
     /**
     * Proxy port
     * @var integer
     */
     public $_proxy_port;
-    
+
     /**
     * Proxy username
     * @var string
     */
     public $_proxy_user;
-    
+
     /**
     * Proxy password
     * @var string
@@ -133,7 +133,7 @@ class HTTP_Request {
     public $_postData;
 
    /**
-    * Request body  
+    * Request body
     * @var string
     */
     public $_body;
@@ -145,7 +145,7 @@ class HTTP_Request {
     public $_bodyDisallowed = array('TRACE');
 
    /**
-    * Files to post 
+    * Files to post
     * @var array
     */
     public $_postFiles = array();
@@ -155,25 +155,25 @@ class HTTP_Request {
     * @var float
     */
     public $_timeout;
-    
+
     /**
     * HTTP_Response object
     * @var object HTTP_Response
     */
     public $_response;
-    
+
     /**
     * Whether to allow redirects
     * @var boolean
     */
     public $_allowRedirects;
-    
+
     /**
     * Maximum redirects allowed
     * @var integer
     */
     public $_maxRedirects;
-    
+
     /**
     * Current number of redirects
     * @var integer
@@ -193,7 +193,7 @@ class HTTP_Request {
     public $_listeners = array();
 
    /**
-    * Whether to save response body in response object property  
+    * Whether to save response body in response object property
     * @var bool
     */
     public $_saveBody = true;
@@ -286,7 +286,7 @@ class HTTP_Request {
             $this->addHeader('Accept-Encoding', 'gzip');
         }
     }
-    
+
     /**
     * Generates a Host header for HTTP/1.1 requests
     *
@@ -303,14 +303,14 @@ class HTTP_Request {
 
         } elseif ($this->_url->port == 443 AND strcasecmp($this->_url->protocol, 'https') == 0 AND strpos($this->_url->url, ':443') !== false) {
             $host = $this->_url->host . ':' . $this->_url->port;
-        
+
         } else {
             $host = $this->_url->host;
         }
 
         return $host;
     }
-    
+
     /**
     * Resets the object to its initial state (DEPRECATED).
     * Takes the same parameters as the constructor.
@@ -344,7 +344,7 @@ class HTTP_Request {
             $this->addHeader('Host', $this->_generateHostHeader());
         }
     }
-    
+
     /**
     * Sets a proxy to be used
     *
@@ -438,8 +438,8 @@ class HTTP_Request {
     function addQueryString($name, $value, $preencoded = false)
     {
         $this->_url->addQueryString($name, $value, $preencoded);
-    }    
-    
+    }
+
     /**
     * Sets the querystring to literally what you supply
     *
@@ -471,7 +471,7 @@ class HTTP_Request {
 
    /**
     * Recursively applies the callback function to the value
-    * 
+    *
     * @param    mixed   Callback function
     * @param    mixed   Value to process
     * @access   private
@@ -492,9 +492,9 @@ class HTTP_Request {
 
    /**
     * Adds a file to upload
-    * 
+    *
     * This also changes content-type to 'multipart/form-data' for proper upload
-    * 
+    *
     * @access public
     * @param  string    name of file-upload field
     * @param  mixed     file name(s)
@@ -546,8 +546,8 @@ class HTTP_Request {
     }
 
     /**
-    * Clears any postdata that has been added (DEPRECATED). 
-    * 
+    * Clears any postdata that has been added (DEPRECATED).
+    *
     * Useful for multiple request scenarios.
     *
     * @access public
@@ -560,7 +560,7 @@ class HTTP_Request {
 
     /**
     * Appends a cookie to "Cookie:" header
-    * 
+    *
     * @param string $name cookie name
     * @param string $value cookie value
     * @access public
@@ -570,10 +570,10 @@ class HTTP_Request {
         $cookies = isset($this->_requestHeaders['cookie']) ? $this->_requestHeaders['cookie']. '; ' : '';
         $this->addHeader('Cookie', $cookies . $name . '=' . $value);
     }
-    
+
     /**
-    * Clears any cookies that have been added (DEPRECATED). 
-    * 
+    * Clears any cookies that have been added (DEPRECATED).
+    *
     * Useful for multiple request scenarios
     *
     * @access public
@@ -645,7 +645,7 @@ class HTTP_Request {
             AND $this->getResponseCode() < 399
             AND !empty($this->_response->_headers['location'])) {
 
-            
+
             $redirect = $this->_response->_headers['location'];
 
             // Absolute URL
@@ -653,9 +653,9 @@ class HTTP_Request {
                 $this->_url = new Net_URL($redirect);
                 $this->addHeader('Host', $this->_generateHostHeader());
             // Absolute path
-            } elseif ($redirect{0} == '/') {
+            } elseif ($redirect[0] == '/') {
                 $this->_url->path = $redirect;
-            
+
             // Relative path
             } elseif (substr($redirect, 0, 3) == '../' OR substr($redirect, 0, 2) == './') {
                 if (substr($this->_url->path, -1) == '/') {
@@ -665,7 +665,7 @@ class HTTP_Request {
                 }
                 $redirect = Net_URL::resolvePath($redirect);
                 $this->_url->path = $redirect;
-                
+
             // Filename, no path
             } else {
                 if (substr($this->_url->path, -1) == '/') {
@@ -731,7 +731,7 @@ class HTTP_Request {
 
     /**
     * Returns cookies set in response
-    * 
+    *
     * @access public
     * @return mixed     array of response cookies, false if none are present
     */
@@ -784,19 +784,19 @@ class HTTP_Request {
         }
 
         // No post data or wrong method, so simply add a final CRLF
-        if (in_array($this->_method, $this->_bodyDisallowed) || 
+        if (in_array($this->_method, $this->_bodyDisallowed) ||
             (HTTP_REQUEST_METHOD_POST != $this->_method && empty($this->_body))) {
 
             $request .= "\r\n";
 
         // Post data if it's an array
-        } elseif (HTTP_REQUEST_METHOD_POST == $this->_method && 
+        } elseif (HTTP_REQUEST_METHOD_POST == $this->_method &&
                   (!empty($this->_postData) || !empty($this->_postFiles))) {
 
             // "normal" POST request
             if (!isset($boundary)) {
                 $postdata = implode('&', array_map(
-                    create_function('$a', 'return $a[0] . \'=\' . $a[1];'), 
+                    create_function('$a', 'return $a[0] . \'=\' . $a[1];'),
                     $this->_flattenArray('', $this->_postData)
                 ));
 
@@ -842,7 +842,7 @@ class HTTP_Request {
             $request .= 'Content-Length: ' . strlen($this->_body) . "\r\n\r\n";
             $request .= $this->_body;
         }
-        
+
         return $request;
     }
 
@@ -878,7 +878,7 @@ class HTTP_Request {
    /**
     * Adds a Listener to the list of listeners that are notified of
     * the object's events
-    * 
+    *
     * @param    object   HTTP_Request_Listener instance to attach
     * @return   boolean  whether the listener was successfully attached
     * @access   public
@@ -894,15 +894,15 @@ class HTTP_Request {
 
 
    /**
-    * Removes a Listener from the list of listeners 
-    * 
+    * Removes a Listener from the list of listeners
+    *
     * @param    object   HTTP_Request_Listener instance to detach
     * @return   boolean  whether the listener was successfully detached
     * @access   public
     */
     function detach(&$listener)
     {
-        if (!is_a($listener, 'HTTP_Request_Listener') || 
+        if (!is_a($listener, 'HTTP_Request_Listener') ||
             !isset($this->_listeners[$listener->getId()])) {
             return false;
         }
@@ -913,7 +913,7 @@ class HTTP_Request {
 
    /**
     * Notifies all registered listeners of an event.
-    * 
+    *
     * Events sent by HTTP_Request object
     * 'sentRequest': after the request was sent
     * Events sent by HTTP_Response object
@@ -921,7 +921,7 @@ class HTTP_Request {
     * 'tick': on receiving a part of response body (the part is passed in $data)
     * 'gzTick': on receiving a gzip-encoded part of response body (ditto)
     * 'gotBody': after receiving the response body (passes the decoded body in $data if it was gzipped)
-    * 
+    *
     * @param    string  Event name
     * @param    mixed   Additional data
     * @access   private
@@ -951,13 +951,13 @@ class HTTP_Response
     * @var string
     */
     public $_protocol;
-    
+
     /**
     * Return code
     * @var string
     */
     public $_code;
-    
+
     /**
     * Response headers
     * @var array
@@ -965,7 +965,7 @@ class HTTP_Response
     public $_headers;
 
     /**
-    * Cookies set in response  
+    * Cookies set in response
     * @var array
     */
     public $_cookies;
@@ -1004,8 +1004,8 @@ class HTTP_Response
 
    /**
     * Processes a HTTP response
-    * 
-    * This extracts response code, headers, cookies and decodes body if it 
+    *
+    * This extracts response code, headers, cookies and decodes body if it
     * was encoded in some way
     *
     * @access public
@@ -1078,7 +1078,7 @@ class HTTP_Response
         list($headername, $headervalue) = explode(':', $header, 2);
         $headername  = strtolower($headername);
         $headervalue = ltrim($headervalue);
-        
+
         if ('set-cookie' != $headername) {
             if (isset($this->_headers[$headername])) {
                 $this->_headers[$headername] .= ',' . $headervalue;
@@ -1144,7 +1144,7 @@ class HTTP_Response
 
    /**
     * Read a part of response body encoded with chunked Transfer-Encoding
-    * 
+    *
     * @access private
     * @return string
     */
@@ -1154,7 +1154,7 @@ class HTTP_Response
         if (0 == $this->_chunkLength) {
             $line = $this->_sock->readLine();
             if (preg_match('/^([0-9a-f]+)/i', $line, $matches)) {
-                $this->_chunkLength = hexdec($matches[1]); 
+                $this->_chunkLength = hexdec($matches[1]);
                 // Chunk with zero length indicates the end
                 if (0 == $this->_chunkLength) {
                     $this->_sock->readLine(); // make this an eof()
@@ -1175,7 +1175,7 @@ class HTTP_Response
 
    /**
     * Notifies all registered listeners of an event.
-    * 
+    *
     * @param    string  Event name
     * @param    mixed   Additional data
     * @access   private
