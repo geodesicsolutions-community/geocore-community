@@ -33,6 +33,7 @@ src/user_images/
 !src/user_images/.empty
 
 src/.htaccess
+src/addons/exporter/exports/
 
 # Built zip files
 build/
