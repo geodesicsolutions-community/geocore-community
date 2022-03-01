@@ -120,9 +120,7 @@ class Admin_user_management extends Admin_site
 					<td colspan='100%' style='text-align: left;'>Users currently logged in: " . $currentUsers  . "</td>
 				</tr>
 			</table>";
-    } //end of list_user
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function list_user_order_by_box($db)
     {
@@ -152,9 +150,7 @@ class Admin_user_management extends Admin_site
         $this->body .= "</td>\n</tr>\n";
         $this->body .= "</table></fieldset>\n";
         $this->body .= "</form>\n";
-    } //end of function list_user_order_by_box
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function show_user_line($db, $show)
     {
@@ -193,9 +189,8 @@ class Admin_user_management extends Admin_site
         }
         $this->body .= "<td align=center>" . $view_button . " " . $remove_button . "</td>";
         $this->body .= "</tr>\n";
-    } //end of function show_user_line
+    }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     function current_logged_in_users($db)
     {
         $userList = "";
@@ -213,7 +208,7 @@ class Admin_user_management extends Admin_site
         }
         return $userList;
     }
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     function edit_user_form($db, $user_id = 0)
     {
         $menu_loader = geoAdmin::getInstance();
@@ -649,9 +644,7 @@ class Admin_user_management extends Admin_site
                 return false;
             }
         }
-    } //end of function edit_user_form
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function change_subscription_form($db, $user_id = 0, $subscription_id = 0)
     {
@@ -702,9 +695,7 @@ class Admin_user_management extends Admin_site
         } else {
             return false;
         }
-    } //end of function change_subscription_form
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function update_subscription($db, $user_id = 0, $subscription_id = 0, $subscription_info = 0)
     {
@@ -764,8 +755,6 @@ class Admin_user_management extends Admin_site
             return false;
         }
     }
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     function update_user_info($db, $user_id = 0, $user_info = 0)
     {
@@ -1120,15 +1109,11 @@ class Admin_user_management extends Admin_site
             echo "returning true<br>\n";
         }
         return true;
-    } //end of function update_user_info
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function lock_unlock_user($db, $user_id)
     {
-    } //end of function update_user_info
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function remove_user_verify($user_id)
     {
@@ -1169,9 +1154,7 @@ class Admin_user_management extends Admin_site
 
 
         return true;
-    } //end of function remove_user_verify
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function remove_user($user_id, $silentSuccess = false)
     {
@@ -1339,9 +1322,7 @@ class Admin_user_management extends Admin_site
             $admin->message('User Removed.');
         }
         return true;
-    } //end of function remove_user
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function remove_ad_filters($db, $user_id)
     {
@@ -1373,9 +1354,7 @@ class Admin_user_management extends Admin_site
         } else {
             return false;
         }
-    } //end of function remove_ad_filters
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function user_search_box()
     {
@@ -1387,9 +1366,7 @@ class Admin_user_management extends Admin_site
         $this->body .= "<td>" . $this->medium_font . "<input type=text size=30 maxsize=30 name=b[search_by_text]></font>\n\t</td>\n</tr>\n";
         $this->body .= "</table>\n";
         $this->body .= "</form>\n";
-    } //end of function user_search_box
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function search_users($db, $search_info = 0)
     {
@@ -1583,9 +1560,7 @@ class Admin_user_management extends Admin_site
             //no search info to search by
             return false;
         }
-    } //end of function user_search_box
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function display_search_results($db, $sql_query = 0)
     {
@@ -1684,9 +1659,7 @@ class Admin_user_management extends Admin_site
             //no query to search with
             return false;
         }
-    }//end of display_search_results
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function advanced_user_search()
     {
@@ -1697,41 +1670,6 @@ class Admin_user_management extends Admin_site
         }
         geoView::getInstance()->setBodyTpl('search_users.tpl')->setBodyVar($tpl_vars);
     }
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function show_range_of_users($db, $sql_query = 0, $limit_by)
-    {
-        if ($sql_query) {
-            $result = $this->db->Execute($sql_query);
-            if (!$result) {
-                $this->site_error($this->db->ErrorMsg());
-                return false;
-            } elseif ($result->RecordCount() > 0) {
-                $total_count = ($result->RecordCount() - 1);
-                //echo $total_count." is the total count<bR>\n";
-                $counter = 1;
-                $number_of_times = 0;
-                if ($total_count > 25) {
-                    $this->body .= "<table cellpadding=2 cellspacing=1 border=0 align=center width=\"100%\">\n";
-                    $this->body .= "<tr>\n\t<td>\n\t";
-                    while ($number_of_times < 6) {
-                        $this->body .= "<a href=index.php?mc=users&page=users_list&b[limit]=" . $counter . "&b[order_by]=" . $limit_by . "><span class=medium_font>" . $counter . "-" . ($counter + 25) . "</span></a> | ";
-
-                        $counter = $counter + 25;
-                        $number_of_times++;
-                    }
-                    if ($number_of_times == 6) {
-                        $this->body .= "<a href=index.php?mc=users&page=users_list&b[limit]=" . ($total_count - 25) . "&b[order_by]=" . $limit_by;
-                    }
-                    $this->body .= "</td>\n</tr>\n</table>\n";
-                }
-            }
-            return true;
-        }
-    } //end of function show_range_of_users
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     function group_dropdown($db)
     {
@@ -1764,9 +1702,7 @@ class Admin_user_management extends Admin_site
         } else {
             return "<input type=hidden name=b[search_group] value='1'>\n\t";
         }
-    } //end of function group_dropdown
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function insert_new_user_form($db)
     {
@@ -2124,9 +2060,7 @@ class Admin_user_management extends Admin_site
         $this->body .= "</fieldset>";
         $this->body .= ($this->admin_demo()) ? '</div>' : "</form>";
         return true;
-    } //end of function insert_new_user_form
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function check_info($db)
     {
@@ -2361,9 +2295,7 @@ class Admin_user_management extends Admin_site
         } else {
             return true;
         }
-    } //end of function check_info($info)
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function check_username($db)
     {
@@ -2401,9 +2333,7 @@ class Admin_user_management extends Admin_site
             }
         }
          return true;
-    } //end of function check_username($username)
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function get_form_variables($info)
     {
@@ -2418,9 +2348,7 @@ class Admin_user_management extends Admin_site
                 //echo $key." is the key and this is the value - ".$this->classified_variables[$key]."<br>\n";
             }
         }
-    } //end of function get_sell_form_variables ($info)
-
-//#####################################################################
+    }
 
     function check_password()
     {
@@ -2440,10 +2368,7 @@ class Admin_user_management extends Admin_site
             $this->error_found++;
         }
         return true;
-    } //end of function check_password
-
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function insert_new_user($db)
     {
@@ -2554,10 +2479,7 @@ class Admin_user_management extends Admin_site
         geoAddon::triggerUpdate('user_register', $this->classified_variables);
         $this->new_user_id = $user_id;
         return true;
-    } //end of function insert_new_user
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+    }
 
     function get_price_plan_from_group($db, $group_id = 0, $item = 0)
     {
@@ -2612,9 +2534,7 @@ class Admin_user_management extends Admin_site
             //just display the user_id
             return false;
         }
-    } //end of function get_price_plan_from_group
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function increase_image_count($db, $classified_id = 0)
     {
@@ -2644,9 +2564,7 @@ class Admin_user_management extends Admin_site
         } else {
             return false;
         }
-    } //end of function increase_image_count
-
-//##################################################################################
+    }
 
     function update_account_balance($db, $user_id = 0, $amount = 0)
     {
@@ -2685,9 +2603,8 @@ class Admin_user_management extends Admin_site
         } else {
             return false;
         }
-    } //end of function update_account_balance
+    }
 
-//##################################################################################
     function display_users_list()
     {
         $this->body .= geoAdmin::m();
@@ -2705,7 +2622,6 @@ class Admin_user_management extends Admin_site
     {
     }
 
-//##################################################################################
     function display_users_view()
     {
         if ($_REQUEST["b"]) {
@@ -2740,7 +2656,7 @@ class Admin_user_management extends Admin_site
         geoAddon::triggerUpdate('Admin_user_management_update_users_view', intval($_GET['b']));
         return true;
     }
-//##################################################################################
+
     function display_users_edit()
     {
         if ($_REQUEST["b"]) {
@@ -2763,7 +2679,7 @@ class Admin_user_management extends Admin_site
         }
         return false;
     }
-//##################################################################################
+
     function display_users_remove()
     {
         $this->body .= geoAdmin::m();
@@ -2783,7 +2699,7 @@ class Admin_user_management extends Admin_site
         }
         return false;
     }
-//##################################################################################
+
     function display_users_add()
     {
         if (PHP5_DIR) {
@@ -2812,7 +2728,7 @@ class Admin_user_management extends Admin_site
         }
         return false; //if it gets this far, user not added.
     }
-//##################################################################################
+
     function display_users_search()
     {
         if ($_REQUEST["b"]) {
@@ -2826,7 +2742,7 @@ class Admin_user_management extends Admin_site
     function update_users_search()
     {
     }
-//##################################################################################
+
     function display_users_subs_change()
     {
         if (($_REQUEST["b"]) && ($_POST["d"])) {
@@ -2849,7 +2765,7 @@ class Admin_user_management extends Admin_site
         }
         return false;
     }
-//##################################################################################
+
     function display_users_subs_delete()
     {
         if ($_REQUEST["b"]) {
@@ -2896,7 +2812,7 @@ class Admin_user_management extends Admin_site
         }
         return true;
     }
-//##################################################################################
+
     function display_users_restart_ad()
     {
         $listingId = intval($_REQUEST["b"]);
@@ -3297,7 +3213,6 @@ class Admin_user_management extends Admin_site
     function update_users_max_photos()
     {
     }
-//##################################################################################
 
     public function display_users_ratings_detail()
     {
@@ -3409,4 +3324,4 @@ class Admin_user_management extends Admin_site
         geoAdmin::m('Purged ' . $removed . ' users', geoAdmin::SUCCESS);
         return true;
     }
-} //end of class Admin_user_management
+}
