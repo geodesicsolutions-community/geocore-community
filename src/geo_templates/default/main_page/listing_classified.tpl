@@ -466,8 +466,6 @@
 	<!-- ADVERTISEMENT BEGIN -->
 	<h4 class="title">{$additional_text_3}</h4>
 	<div class="content_box_3 cntr banner">
-        {* If you change the name of the sample banner below, be sure to update src\admin\getting_started_checks\design_removeDefaultBannersListingDetailsPage.php *}
-        {* NOTE: The above only pertains to Coders changing the software distro, not end users. *}
 		<a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>
 		<a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>
 		<a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>

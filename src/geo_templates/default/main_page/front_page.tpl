@@ -208,8 +208,6 @@
 
 				<!-- BANNER BEGIN -->
 				{* Example place for 300x100 image banners *}
-                {* If you change the name of the sample banner below, be sure to update \admin\getting_started_checks\design_removeDefaultBannersFrontPage.php *}
-                {* NOTE: The above only pertains to Coders changing the software distro, not end users. *}
 				<div class="content_box cntr banner">
 					<a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>
 				</div>
