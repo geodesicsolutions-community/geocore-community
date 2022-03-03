@@ -565,9 +565,7 @@ class Admin_site
             }
         }
         return true;
-    } //end of function get_page
-
-//########################################################################
+    }
 
     function get_price_plan_name($db, $price_plan_id = 0)
     {
@@ -588,9 +586,7 @@ class Admin_site
         } else {
             return false;
         }
-    } //end of function get_price_plan_name
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function get_price_plan($db, $price_plan_id = 0, $category_id = 0)
     {
