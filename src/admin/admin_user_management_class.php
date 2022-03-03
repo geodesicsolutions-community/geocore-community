@@ -127,36 +127,6 @@ class Admin_user_management extends Admin_site
 			</table>";
     }
 
-    function list_user_order_by_box($db)
-    {
-        $this->body .= "<form action=index.php?mc=users&page=users_list id=sortForm method=post>\n";
-        $this->body .= "<input type='hidden' name='auto_save' value='1'>";
-        $this->body .= "<fieldset id='SortUsers'><legend>Sort Users</legend><table width=600 cellpadding=5 cellspacing=1 border=0 align=center>\n";
-        $this->body .= "<tr>\n\t<td class=medium_font align=center>\n\t<br><input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 1) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=1><strong>by Username&nbsp;&nbsp;</strong>\n\t<input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 2) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=2><strong>by Last Name&nbsp;&nbsp;</strong>\n\t<input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 3) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=3><strong>by Date Joined (latest first)&nbsp;&nbsp;</strong>\n\t<input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 4) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=4><strong>by Date Joined (earliest first)&nbsp;&nbsp;</strong><br><br>\n\t\n\t";
-
-        $this->body .= $this->group_dropdown($db);
-
-        $this->body .= "</td>\n</tr>\n";
-        $this->body .= "</table></fieldset>\n";
-        $this->body .= "</form>\n";
-    }
-
     function show_user_line($db, $show)
     {
         $current_status = $this->get_current_status($db, $show["id"]);
@@ -1724,7 +1694,7 @@ class Admin_user_management extends Admin_site
         geoView::getInstance()->setBodyTpl('search_users.tpl')->setBodyVar($tpl_vars);
     }
 
-    function group_dropdown($db)
+    function group_dropdown()
     {
 
         if (geoPC::is_ent() || geoPC::is_premier() || geoPC::is_basic()) {
