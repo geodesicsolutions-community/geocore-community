@@ -865,7 +865,7 @@ class geoAdmin {
 	 * @return geoAdmin
 	 * @since 3.1.0
 	 */
-	public function userError( $str ) {
+	public function userError($str = null) {
 		if( null === $str ) {
 			$str = "Internal error.";
 		}
