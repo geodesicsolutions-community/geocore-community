@@ -50,14 +50,14 @@ class design_removeDefaultBannersListingDetailsPage extends geoGettingStartedChe
         if (geoMaster::is('auctions')) {
             $name = 'listing_auction.tpl';
             $custom = file_get_contents(geoTemplate::getFilePath(geoTemplate::MAIN_PAGE, '', $name));
-            if ((strpos($custom, '<a href="#"><img src="{external file=\'images/banners/banner1_160w.jpg\'}" alt="" /></a>') !== false)) {
+            if ((strpos($custom, '<img src="{external file=\'images/banners/sample_300x100.jpg\'}"') !== false)) {
                 return false;
             }
         }
         if (geoMaster::is('classifieds')) {
             $name = 'listing_classified.tpl';
             $custom = file_get_contents(geoTemplate::getFilePath(geoTemplate::MAIN_PAGE, '', $name));
-            if ((strpos($custom, '<a href="#"><img src="{external file=\'../images/banners/banner1_160w.jpg\'}" alt="" /></a>') !== false)) {
+            if ((strpos($custom, '<img src="{external file=\'images/banners/sample_300x100.jpg\'}"') !== false)) {
                 return false;
             }
         }
