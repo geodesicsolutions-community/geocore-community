@@ -2,10 +2,6 @@
 
 class Admin_user_management extends Admin_site
 {
-    //used to keep track of what 'order by' the previous search took place in
-    //if current is different from this one the search will respond with the first 25 of the
-    //returned search set
-    private $order_by_switch = 0;
     private $search_group = 0;
     private $user_management_error;
     private $debug_user = 1;
