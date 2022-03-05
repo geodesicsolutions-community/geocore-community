@@ -7,7 +7,7 @@
 			<strong>Slot:</strong> {$video.slot}<br />
 			<strong>Youtube ID:</strong> {$video.video_id}
 		</p>
-        <iframe src="https://www.youtube.com/embed/{$video.media_content_url|escape}" width="240" title="YouTube video player" frameborder="0"
+        <iframe src="https://www.youtube.com/embed/{$video.media_content_url|escape}" width="480" height="390" title="YouTube video player" frameborder="0"
         allow="encrypted-media"></iframe>
 	</div>
 {/foreach}
