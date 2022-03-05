@@ -4,7 +4,7 @@ class Admin_user_management extends Admin_site
 {
     private $search_group = 0;
     private $user_management_error;
-    private $debug_user = 1;
+    private $debug_user = 0;
     private $updated = 0;
 
     private function list_users()
@@ -935,7 +935,6 @@ class Admin_user_management extends Admin_site
         $geographicOverrides = geoRegion::getLevelsForOverrides();
         $locations = $_REQUEST['locations'];
         geoRegion::setUserRegions($user_id, $locations);
-
 
         $sql_query = "update " . $this->userdata_table . " set
 			firstname = \"" . addslashes($user_info["firstname"]) . "\",
