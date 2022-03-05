@@ -2,30 +2,21 @@
 
 class Auction_list_bids extends geoSite
 {
+    private $auction_user_id;
 
-    var $auction_id;
-    var $auction_user_id;
-    var $feedback_messages;
-    var $user_data;
+    private $debug_bids = 0;
 
-    // Debug variables
-    var $filename = "user_management_list_bids_auctions.php";
-    var $function_name;
-
-    var $debug_bids = 0;
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function __construct($db = null, $language_id = null, $auction_user_id = null, $production_configuration = null)
+    public function __construct()
     {
         parent::__construct();
         $this->auction_user_id = geoSession::getInstance()->getUserId();
-    } //end of function Auction_feedback
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     /**
      * Normally, drives page body for My Current Bids page.
-     * @param bool $returnCountOnly If true, returns a count of active bids, and writes no content directly (useful to My Account Links module)
+     *
+     * @param bool $returnCountOnly If true, returns a count of active bids, and writes no content directly (useful to
+     *   My Account Links module)
      * @return bool|int
      */
     public function list_auctions_with_your_bid($returnCountOnly = false)
@@ -211,7 +202,7 @@ class Auction_list_bids extends geoSite
 
         if ($returnCountOnly) {
             //used by My Account Links module to create a badge for number of open bids
-            return count($auctions) ? count($auctions) : 0;
+            return !empty($auctions) ? count($auctions) : 0;
         }
 
         $tpl->assign('userManagementHomeLink', $this->configuration_data['classifieds_file_name'] . "?a=4");
@@ -219,6 +210,4 @@ class Auction_list_bids extends geoSite
         $this->display_page();
         return true;
     }
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-} // end of Auction_list_bids
+}
