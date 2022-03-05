@@ -1,5 +1,3 @@
-{* 7.4beta1-61-gf4fc972 *}
-
 <div{if !$slot.empty} class="offsite_video_is_sortable"{/if}>
 	<div class="offsite_video_box_title_buttons"{if $slot.empty} style="display: none;"{/if}>
 		<span class="delete_offsite_video" id="deleteYoutube_{$slotNum}">
@@ -10,6 +8,7 @@
 			{/if}
 		</span>
 	</div>
+
 	<div class="offsite_video_box_title{if $slot.editing}_editing{elseif $slot.empty}_empty{/if}">
 		{if $slot.editing}
 			{$messages.500919}
@@ -19,17 +18,19 @@
 			{$messages.500921}
 		{/if}
 	</div>
+
 	<div class="preview_offsite_video_box">
 		{if $slot.error}
 			<div class="error">{$slot.error}</div>
 		{/if}
 		{if !$slot.empty}
-			<object width="240" height="195">
-				<param name="movie" value="{$slot.media_content_url}"></param>
-				<embed src="{$slot.media_content_url}" type="{$slot.media_content_type}" width="240" height="195"></embed>
-			</object>
+
+            <iframe src="https://www.youtube.com/embed/{$slot.media_content_url|escape}"
+            width="240" title="YouTube video player" frameborder="0" allow="encrypted-media;"></iframe>
+
 		{/if}
 	</div>
+
 	<span class="offsite_video_slot_label">{$messages.500922}</span> <span class="offsite_video_slot_value">{$slotNum}</span><br />
 	{if $slot.cost}
 		<span class="offsite_video_cost_label">{$messages.500923}</span> <span class="offsite_video_cost_value">{$slot.cost}</span><br />
