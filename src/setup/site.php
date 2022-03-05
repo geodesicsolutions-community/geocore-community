@@ -45,13 +45,14 @@ function site($db, $product, &$template, $error = 0)
     $template = str_replace("(!APP_URL_LABEL!)", "Application URL:", $template);
 
     $string = '';
-    if ($error['url']) {
+    if (!empty($error['url'])) {
         $string .= '<input name="conf[url]" type="text" size="70">';
     } else {
         $url = htmlspecialchars('http://' . $_SERVER['HTTP_HOST'] . $url_path . 'index.php', ENT_QUOTES, 'UTF-8');
         $string .= '<input name="conf[url]" type="text" size="70" value="' . $url . '">';
     }
-    if ($error['url']) {
+    $error_string = '';
+    if (!empty($error['url'])) {
         $error_string .= "<br>Please enter a valid URL.";
     }
     $template = str_replace("(!APP_URL_FIELD!)", $string, $template);
@@ -60,22 +61,20 @@ function site($db, $product, &$template, $error = 0)
     // Application file name
     $template = str_replace("(!APP_FILENAME_LABEL!)", "Application Filename:", $template);
     $string = "<input name=conf[filename] type=text size=70 value=\"";
-    if ($error['filename']) {
+    if (!empty($error['filename'])) {
         $string .= "\">";
     } elseif (is_array($product['filename'])) {
-    // && ($conf[$product['filename'][0]] || $conf[$product['filename'][1]]))
-    //      || $conf[$product['filename']])
         if ($conf[$product['filename'][0]]) {
             $string .= $conf[$product['filename'][0]] . "\">";
         } else {
             $string .= "index.php\">";
         }
-    } elseif ($conf[$product['filename']]) {
+    } elseif (!empty($conf[$product['filename']])) {
         $string .= $conf[$product['filename']] . "\">";
     } else {
         $string .= "index.php\">";
     }
-    if ($error['filename']) {
+    if (!empty($error['filename'])) {
         $error_string = "Please enter a valid URL.";
     }
     $template = str_replace("(!APP_FILENAME_FIELD!)", $string, $template);
@@ -85,43 +84,43 @@ function site($db, $product, &$template, $error = 0)
     // Email
     $template = str_replace("(!EMAIL_LABEL!)", ''/*"Email Configuration:"*/, $template);
     $string = "<input type=radio name=conf[email_config] value=1 ";
-    if ($conf[$product['email_config']] == 1 || !$conf[$product['email_config']]) {
+    if (empty($conf[$product['email_config']]) || $conf[$product['email_config']] == 1) {
         $string .= "checked";
     }
     $string .= "> 1 - (recommended) allows the setting of additional headers (reply-to,...etc)\"";
     $string = '';
     $template = str_replace("(!EMAIL_SETTING_1!)", $string, $template);
     $string = "<input type=radio name=conf[email_config] value=2 ";
-    if ($conf[$product['email_config']] == 2) {
+    if (!empty($conf[$product['email_config']]) && $conf[$product['email_config']] == 2) {
         $string .= "checked";
     }
     $string .= "> 2 - allows only \"from\" header to be set\"";
     $string = '';
     $template = str_replace("(!EMAIL_SETTING_2!)", $string, $template);
     $string = "<input type=radio name=conf[email_config] value=3 ";
-    if ($conf[$product['email_config']] == 3) {
+    if (!empty($conf[$product['email_config']]) && $conf[$product['email_config']] == 3) {
         $string .= "checked";
     }
     $string .= "> 3 - allows no headers or \"from\" to be set (for Yahoo hosting the lead email on the account is used
         as the return email address)\"";
     $string = '';
     $template = str_replace("(!EMAIL_SETTING_3!)", $string, $template);
-    if ($error['email_config']) {
+    if (!empty($error['email_config'])) {
         str_replace("(!EMAIL_ERROR!)", "Please select one value from above.", $template);
     }
 
     // Admin email
     $template = str_replace("(!ADMIN_EMAIL_LABEL!)", "Admin E-mail address:", $template);
     $string = "<input name=\"conf[admin_registration_email]\" type=\"text\" size=\"70\" ";
-    if (!$error['admin_registration_email']) {
-        if (!$install[$product_type]["admin_registration_email"]) {
+    if (empty($error['admin_registration_email'])) {
+        if (empty($product_type) || empty($install[$product_type]["admin_registration_email"])) {
             $string .= "value=\"geoproducts@mygeoproducts.com\"";
         } else {
             $string .= "value=\"" . $install[$product_type]["admin_registration_email"] . '"';
         }
     }
     $string .= ">";
-    if ($error['admin_registration_email']) {
+    if (!empty($error['admin_registration_email'])) {
         $error_string = "Please enter a valid email address.";
     }
     $template = str_replace("(!ADMIN_EMAIL_FIELD!)", $string, $template);

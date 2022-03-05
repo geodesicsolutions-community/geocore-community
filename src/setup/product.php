@@ -1,9 +1,5 @@
 <?php
 
-// Geodesic Solutions Emails
-define('SUPPORT', 'geosupport@geodesicsolutions.com');          // Support email address
-define('INSTALL_EMAIL', 'install@geodesicsolutions.com');       // Install email address
-
 /*
  *	Install table explanation:
  *	All variables are defined in a huge 2 dimensional array called $install.
