@@ -2987,6 +2987,7 @@ CREATE TABLE IF NOT EXISTS `geodesic_userdata` (
   `new_listing_alert_last_sent` INT(11) NOT NULL DEFAULT '0',
   `new_listing_alert_gap` INT(11) NOT NULL DEFAULT '86400',
   `attached_user_message` text NOT NULL,
+  `admin_note` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `email` (`email`)
