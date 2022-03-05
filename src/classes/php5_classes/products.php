@@ -1462,12 +1462,6 @@ class geoSession
         return self::$_instance;
     }
 
-    public function currentAdminSeats()
-    {
-        // GUTTED
-        return 0;
-    }
-
     /**
      * Get instance of the Mobile_Detect class, handy for detecting info about
      * the device used

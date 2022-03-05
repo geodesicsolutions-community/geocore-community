@@ -72,9 +72,9 @@ class ADMIN_AJAXController_homeLicense extends admin_AJAX
             if ($settings['maxSeats'] == -1) {
                 $settings['maxSeats'] = 'Unlimited';
             }
-            $settings['currentSeats'] = geoSession::currentAdminSeats();
+            $settings['currentSeats'] = 0;
 
-            $settings['show_upgrade_pricing'] = (geoPC::is_ent()) ? false : true;
+            $settings['show_upgrade_pricing'] = false;
         }
 
         $tpl->assign($settings);
