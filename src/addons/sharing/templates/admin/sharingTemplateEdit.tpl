@@ -79,10 +79,13 @@
 					{if $read_only}
 						{$attachments.1.0}
 					{else}
-						{include g_type="admin" file="design/parts/templateDropdown.tpl" templateSelected=$attachments.1.0 selectName='attachments[1][0]' selectId=defaultTemplate}
+						{include file="admin/design/parts/templateDropdown.tpl" templateSelected=$attachments.1.0 selectName='attachments[1][0]' selectId=defaultTemplate}
 					{/if}
 					{if $from_defaults}
-						<br /><div class="error"><strong>Note:</strong>  Attachments loaded from defaults.  Verify/change template attachment(s) and save changes.</div>
+						<br />
+                        <div class="error">
+                            <strong>Note:</strong>  Attachments loaded from defaults.  Verify/change template attachment(s) and save changes.
+                        </div>
 					{elseif !$attachments.1.0}
 						<br /><div class="error">Not currently set in the template set!  Choose a default template and save changes.</div>
 					{/if}
