@@ -2,43 +2,32 @@
 
 class Admin_user_management extends Admin_site
 {
-    //used to keep track of what 'order by' the previous search took place in
-    //if current is different from this one the search will respond with the first 25 of the
-    //returned search set
-    var $order_by_switch = 0;
-    var $search_group = 0;
-    var $user_management_error;
-    var $filter_dropdown_id_array = array();
-    var $filter_dropdown_name_array = array();
-    var $debug_user = 0;
-    var $updated = 0;
+    private $search_group = 0;
+    private $user_management_error;
+    private $debug_user = 0;
+    private $updated = 0;
 
-    function list_users($list_info = 0)
+    private function list_users()
     {
-        //list_info will contain
-        //order by = list_info[order_by]
-        //limit = list_info[limit]
-        //search_group = list_info[search_group]
-        //only prints 25 users at a time
-        //shows username,first name, last name, #current listings, locked, edit, remove
-
-        // U+25B2
-        // U+25BC
         require_once(ADMIN_DIR . 'AJAX.php');
         require_once(ADMIN_DIR . 'AJAXController/ListUsers.php');
 
-        geoAdmin::getInstance()->v()->addTop("<script type='text/javascript'>" . ADMIN_AJAXController_ListUsers::getJavascript() . "</script>");
+        geoAdmin::getInstance()->v()
+            ->addTop("<script type='text/javascript'>" . ADMIN_AJAXController_ListUsers::getJavascript() . "</script>");
 
         $this->body .= "<div class='x-content search-users-input'>
-							<form action='index.php?mc=users&page=users_search' class='form-horizontal form-label-left' method='post'>
-							  <div class='form-group'>
-							    <div class='input-group'>
-								  <input type='text' name='b[text_to_search]' class='form-control selected-border' placeholder='Search Users' style='border-right:0;'/>
-								  <input type='hidden' name='b[search_group]' value='0' />
-								  <input type='hidden' name='b[search_type]' value='1' />
-								  <span class='input-group-btn'><input type='submit' value='Go' class='btn btn-primary' /></span>
+							<form action='index.php?mc=users&page=users_search' class='form-horizontal form-label-left'
+                                method='post'>
+							    <div class='form-group'>
+							        <div class='input-group'>
+								        <input type='text' name='b[text_to_search]' class='form-control selected-border'
+                                            placeholder='Search Users' style='border-right:0;'/>
+                                        <input type='hidden' name='b[search_group]' value='0' />
+                                        <input type='hidden' name='b[search_type]' value='1' />
+                                        <span class='input-group-btn'><input type='submit' value='Go'
+                                            class='btn btn-primary' /></span>
+							        </div>
 							    </div>
-							  </div>
 							</form>
 						</div>";
 
@@ -47,29 +36,42 @@ class Admin_user_management extends Admin_site
 		<table cellpadding=2 cellspacing=0 width=100% class=\"table table-hover table-striped table-bordered\">
 			<thead>
 				<tr class=\"col_hdr_top\">
-					<th width=15% class=\"sorting_col\" id='username' style='text-align:left; min-width:100px;'><a href=\"javascript:geo_sortTable('username', 'body');\">Username</a>&nbsp;<img src='admin_images/admin_arrow_up.gif' id='dir_arrow'></th>
-					<th width=10% id='lastname' style='text-align:left; min-width:60px;'><a href=\"javascript:geo_sortTable('lastname', 'body');\">Last</a>&nbsp;</th>
-					<th width=10% id='firstname' style='text-align:left; min-width:65px;'><a href=\"javascript:geo_sortTable('firstname', 'body');\">First</a>&nbsp;</th>
-					<th width=10% id='status' style='min-width:75px;'><a href=\"javascript:geo_sortTable('status', 'body');\">Status</a>&nbsp;</th>";
+					<th width=15% class=\"sorting_col\" id='username' style='text-align:left; min-width:100px;'>
+                        <a href=\"javascript:geo_sortTable('username', 'body');\">Username</a>&nbsp;
+                        <img src='admin_images/admin_arrow_up.gif' id='dir_arrow'></th>
+					<th width=10% id='lastname' style='text-align:left; min-width:60px;'><a
+                        href=\"javascript:geo_sortTable('lastname', 'body');\">Last</a>&nbsp;</th>
+					<th width=10% id='firstname' style='text-align:left; min-width:65px;'><a
+                        href=\"javascript:geo_sortTable('firstname', 'body');\">First</a>&nbsp;</th>
+					<th width=10% id='status' style='min-width:75px;'><a
+                        href=\"javascript:geo_sortTable('status', 'body');\">Status</a>&nbsp;</th>";
         if (geoMaster::is('classifieds') && geoMaster::is('auctions')) {
             $this->body .= "
-					<th width=15% class=\"col_hdr\" id='price_plan_id' style='min-width:150px;'><a href=\"javascript:geo_sortTable('price_plan_id', 'body');\">Classifieds Pricing</a>&nbsp;</th>
-					<th width=15% class=\"col_hdr\" id='auction_price_plan_id' style='min-width:150px;'><a href=\"javascript:geo_sortTable('auction_price_plan_id', 'body');\">Auctions Pricing</a>&nbsp;</th>";
+					<th width=15% class=\"col_hdr\" id='price_plan_id' style='min-width:150px;'>
+                        <a href=\"javascript:geo_sortTable('price_plan_id', 'body');\">
+                        Classifieds Pricing</a>&nbsp;</th>
+					<th width=15% class=\"col_hdr\" id='auction_price_plan_id' style='min-width:150px;'>
+                        <a href=\"javascript:geo_sortTable('auction_price_plan_id', 'body');\">
+                        Auctions Pricing</a>&nbsp;</th>";
         } elseif (geoMaster::is('auctions')) {
             if (geoPC::is_ent() || geoPC::is_premier() || geoPC::is_basic()) {
                 $this->body .= "
-					<th width=15% class=\"col_hdr\" id='auction_price_plan_id'><a href=\"javascript:geo_sortTable('auction_price_plan_id', 'body');\">Price Plan</a>&nbsp;</th>";
+					<th width=15% class=\"col_hdr\" id='auction_price_plan_id'><a
+                    href=\"javascript:geo_sortTable('auction_price_plan_id', 'body');\">Price Plan</a>&nbsp;</th>";
             }
         } elseif (geoMaster::is('classifieds')) {
             if (geoPC::is_ent() || geoPC::is_premier() || geoPC::is_basic()) {
                 $this->body .= "
-					<th width=15% class=\"col_hdr\" id='price_plan_id'><a href=\"javascript:geo_sortTable('price_plan_id', 'body');\">Price Plan</a>&nbsp;</th>";
+					<th width=15% class=\"col_hdr\" id='price_plan_id'><a
+                        href=\"javascript:geo_sortTable('price_plan_id', 'body');\">Price Plan</a>&nbsp;</th>";
             }
         }
         $this->body .= "
-					<th width=10% class=\"col_hdr\" id='date_joined' style='min-width:80px;'><a href=\"javascript:geo_sortTable('date_joined', 'body');\">Joined</a>&nbsp;</th>
+					<th width=10% class=\"col_hdr\" id='date_joined' style='min-width:80px;'>
+                        <a href=\"javascript:geo_sortTable('date_joined', 'body');\">Joined</a>&nbsp;</th>
 					<th width=15% class=\"col_hdr\">
-						Display <select name='limit_by' id='limit_by' onchange='geo_setUsers(this.options[this.selectedIndex].value)'>
+						Display <select name='limit_by' id='limit_by'
+                            onchange='geo_setUsers(this.options[this.selectedIndex].value)'>
 							<option value='10'>10</option>
 							<option value='25' selected>25</option>
 							<option value='50'>50</option>
@@ -81,11 +83,10 @@ class Admin_user_management extends Admin_site
 			</thead>";
 
         $this->body .= "
-
-
 			<tbody id='result_body'>
 				<tr>
-					<td valign=center align=center colspan=\"100%\"><img src='admin_images/loading.gif'><br />Loading...</td>
+					<td valign=center align=center colspan=\"100%\"><img src='admin_images/loading.gif'>
+                        <br />Loading...</td>
 				</tr>
 			</tbody>
 
@@ -120,41 +121,7 @@ class Admin_user_management extends Admin_site
 					<td colspan='100%' style='text-align: left;'>Users currently logged in: " . $currentUsers  . "</td>
 				</tr>
 			</table>";
-    } //end of list_user
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function list_user_order_by_box($db)
-    {
-        $this->body .= "<form action=index.php?mc=users&page=users_list id=sortForm method=post>\n";
-        $this->body .= "<input type='hidden' name='auto_save' value='1'>";
-        $this->body .= "<fieldset id='SortUsers'><legend>Sort Users</legend><table width=600 cellpadding=5 cellspacing=1 border=0 align=center>\n";
-        $this->body .= "<tr>\n\t<td class=medium_font align=center>\n\t<br><input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 1) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=1><strong>by Username&nbsp;&nbsp;</strong>\n\t<input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 2) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=2><strong>by Last Name&nbsp;&nbsp;</strong>\n\t<input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 3) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=3><strong>by Date Joined (latest first)&nbsp;&nbsp;</strong>\n\t<input onClick=\"document.getElementById('sortForm').submit();\" type=radio name=b[order_by]";
-        if ($this->order_by_switch == 4) {
-            $this->body .= " checked";
-        }
-        $this->body .= " value=4><strong>by Date Joined (earliest first)&nbsp;&nbsp;</strong><br><br>\n\t\n\t";
-
-        $this->body .= $this->group_dropdown($db);
-
-        $this->body .= "</td>\n</tr>\n";
-        $this->body .= "</table></fieldset>\n";
-        $this->body .= "</form>\n";
-    } //end of function list_user_order_by_box
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function show_user_line($db, $show)
     {
@@ -193,9 +160,8 @@ class Admin_user_management extends Admin_site
         }
         $this->body .= "<td align=center>" . $view_button . " " . $remove_button . "</td>";
         $this->body .= "</tr>\n";
-    } //end of function show_user_line
+    }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     function current_logged_in_users($db)
     {
         $userList = "";
@@ -213,8 +179,8 @@ class Admin_user_management extends Admin_site
         }
         return $userList;
     }
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    function edit_user_form($db, $user_id = 0)
+
+    private function edit_user_form($user_id = 0)
     {
         $menu_loader = geoAdmin::getInstance();
 
@@ -256,8 +222,8 @@ class Admin_user_management extends Admin_site
 
         $user_data = $this->get_user_data($user_id);
         //highlight_string(print_r($user_data,1));
-        $sql_query = "select * from " . $this->db->geoTables->logins_table . "	where id = " . $user_id;
-        $password_result = $this->db->Execute($sql_query);
+        $sql_query = "select * from " . $this->db->geoTables->logins_table . "	where id = ?";
+        $password_result = $this->db->Execute($sql_query, [$user_id]);
         if (!$password_result) {
             return false;
         } elseif ($password_result->RecordCount() == 1) {
@@ -270,12 +236,17 @@ class Admin_user_management extends Admin_site
                 $this->body .= $menu_loader->getUserMessages();
                 //display the form to edit the userdata
                 if (!$this->admin_demo()) {
-                    $this->body .= "<form action=index.php?mc=users&page=users_edit&b=" . $user_id . " class='form-horizontal form-label-left' method=post>\n";
+                    $this->body .= "<form action=index.php?mc=users&page=users_edit&b=" . (int)$user_id
+                        . " class='form-horizontal form-label-left' method=post>\n";
                 } else {
                     $this->body .= "<div class='form-horizontal'>";
                 }
 
-                $this->body .= "<div class=\"page-title1\">User: <span class='color-primary-two'><span style='font-weight: bold; white-space:nowrap;'>" . stripslashes($user_data["firstname"]) . " " . stripslashes($user_data["lastname"]) . "</span>	| " . $user_data["username"] . "</span> <span class='color-primary-six' style='font-size: 0.8em; white-space:nowrap;'>(User ID#: " . $user_id . ")</span></div>";
+                $this->body .= "<div class=\"page-title1\">User: <span class='color-primary-two'>
+                    <span style='font-weight: bold; white-space:nowrap;'>" . stripslashes($user_data["firstname"])
+                    . " " . stripslashes($user_data["lastname"]) . "</span>	| " . $user_data["username"]
+                    . "</span> <span class='color-primary-six' style='font-size: 0.8em; white-space:nowrap;'>
+                    (User ID#: " . $user_id . ")</span></div>";
                 $this->body .= "<fieldset id='PersonalUserData'><legend>Personal Data</legend>";
                 $this->body .= "<div class='x_content'>";
 
@@ -285,10 +256,11 @@ class Admin_user_management extends Admin_site
 
                 $this->body .= "<div class='form-group'>";
                 $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>User ID:</label>";
-                $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><span class='vertical-form-fix'>" . $user_data["id"] . "</span></div>";
+                $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><span class='vertical-form-fix'>"
+                    . $user_data["id"] . "</span></div>";
                 $this->body .= "</div>";
 
-                $current_status = $this->get_current_status($db, $user_id);
+                $current_status = $this->get_current_status(null, $user_id);
 
                 //find out if this is the Anonymous user
                 $anon = geoAddon::getRegistry('anonymous_listing');
@@ -299,7 +271,8 @@ class Admin_user_management extends Admin_site
                 }
                 $isAnon = ($user_id == $anon_user) ? true : false;
 
-                if ($user_id != 1 && !$isAnon) { // can't change username/password/status for admin/anon users from this form
+                if ($user_id != 1 && !$isAnon) {
+                    // can't change username/password/status for admin/anon users from this form
                     $this->body .= "<div class='form-group'>";
                     $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Current Status:</label>";
                     $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'> ";
@@ -315,7 +288,10 @@ class Admin_user_management extends Admin_site
                     $this->body .= "</div>";
                     $this->body .= "</div>";
 
-                    if (strlen($show_password['password']) == 40 || $this->db->get_site_setting('client_pass_hash') !== 'core:plain') {
+                    if (
+                        strlen($show_password['password']) == 40
+                        || $this->db->get_site_setting('client_pass_hash') !== 'core:plain'
+                    ) {
                         //most likely, password is hashed...
                         $pass_req_text = 'Required if Username Edited Above';
                         $new_pass_text = 'New ';
@@ -327,20 +303,28 @@ class Admin_user_management extends Admin_site
                     }
 
                     $this->body .= "<div class='form-group'>";
-                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Username: " . $this->show_tooltip(2, 1) . "</label>";
-                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><input type=text name=c[username] class='form-control col-md-7 col-xs-12' value=\"" . $user_data["username"] . "\" />";
+                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Username: "
+                        . $this->show_tooltip(2, 1) . "</label>";
+                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><input type=text name=c[username]
+                        class='form-control col-md-7 col-xs-12' value=\"" . $user_data["username"] . "\" />";
                     $this->body .= "</div>";
                     $this->body .= "</div>";
 
                     $this->body .= "<div class='form-group'>";
-                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>{$new_pass_text}Password: " . $this->show_tooltip(1, 1) . "</label>";
-                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><input type=\"password\" name=\"c[password]\" class='form-control col-md-7 col-xs-12' placeholder='{$pass_req_text}' value=\"{$pass}\">";
+                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>
+                        {$new_pass_text}Password: " . $this->show_tooltip(1, 1) . "</label>";
+                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
+                        <input type=\"password\" name=\"c[password]\" class='form-control col-md-7 col-xs-12'
+                        placeholder='{$pass_req_text}' value=\"" . geoString::specialChars($pass) . "\">";
                     $this->body .= "</div>";
                     $this->body .= "</div>";
 
                     $this->body .= "<div class='form-group'>";
-                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>{$new_pass_text}Password Verifier: " . $this->show_tooltip(1, 1) . "</label>";
-                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><input type=\"password\" name=\"c[password_verifier]\" class='form-control col-md-7 col-xs-12' value=\"{$pass}\">";
+                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>
+                        {$new_pass_text}Password Verifier: " . $this->show_tooltip(1, 1) . "</label>";
+                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
+                        <input type=\"password\" name=\"c[password_verifier]\"
+                        class='form-control col-md-7 col-xs-12' value=\"{$pass}\">";
                     $this->body .= "</div>";
                     $this->body .= "</div>";
                 }
@@ -371,7 +355,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<div class='form-group'>";
                 $tooltip = geoHTML::showTooltip('Admin Note', "Here, you can save a short, private note about this user, viewable only in the admin");
                 $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Admin Note: {$tooltip}</label>";
-                $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><textarea name='c[admin_note]' class='form-control'>" . geoString::fromDB($user_data['admin_note']) . '</textarea>';
+                $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><textarea name='c[admin_note]' class='form-control'>" . geoString::specialChars($user_data['admin_note']) . '</textarea>';
                 $this->body .= "</div>";
                 $this->body .= "</div>";
 
@@ -525,115 +509,110 @@ class Admin_user_management extends Admin_site
                         }
                     }
                 }
-
                 $this->body .= "</div></fieldset>";
 
+                if ($user_id != 1) {
+                    //admin user can't change these settings
+                    $this->body .= "<fieldset id='AccountInfo'><legend>Account Information</legend>";
+                    $this->body .= "<div class='x_content'>";
 
-                if ($user_id != 1) { //admin user can't change these settings
-                    if (geoPC::is_ent() || geoPC::is_premier() || geoPC::is_basic()) {
-                        $this->body .= "<fieldset id='AccountInfo'><legend>Account Information</legend>";
-                        $this->body .= "<div class='x_content'>";
-
-                        $sql = "select * from " . $this->user_groups_price_plans_table . " where id = " . $user_id;
-                        $user_group_result = $this->db->Execute($sql);
-                        if ($this->debug_user) {
-                            echo $sql_query . " is the query<br>\n";
-                        }
-                        if (!$user_group_result) {
-                            //echo $sql."<br>\n";
-                            //do nothing
-                        } elseif ($user_group_result->RecordCount() == 1) {
-                            $show_user_stuff = $user_group_result->FetchRow();
-                            $group_name = $this->get_group_name($db, $show_user_stuff["group_id"]);
-                            if ($group_name) {
-                                //change group
-
-                                $this->body .= "<div class='form-group'>";
-                                $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>User Group: </label>";
-                                $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
-								<select name=c[group] class='form-control col-md-7 col-xs-12'>";
-                                $sql = "select * from " . $this->classified_groups_table;
-                                $all_groups_result = $this->db->Execute($sql);
-                                if ($this->debug_user) {
-                                    echo $sql_query . " is the query<br>\n";
-                                }
-                                if (!$all_groups_result) {
-                                    //echo $sql."<br>\n";
-                                    //do nothing
-                                } elseif ($all_groups_result->RecordCount() > 0) {
-                                    while ($show_groups = $all_groups_result->FetchRow()) {
-                                        $this->body .= "<option value=" . $show_groups["group_id"];
-                                        if ($show_groups["group_id"] == $show_user_stuff["group_id"]) {
-                                            $this->body .= " selected";
-                                            $this->body .= ">" . $this->get_group_name($db, $show_groups["group_id"]) . " (current)</option>\n\t\t";
-                                        } else {
-                                            $this->body .= ">" . $this->get_group_name($db, $show_groups["group_id"]) . "</option>\n\t\t";
-                                        }
-                                    }
-                                }
-                                $recurringText = (geoPC::is_ent()) ? ", cancel all recurring billings for the user (if possible)," : '';
-                                $this->body .= "</select><br><b>NOTE:</b> Changing the User Group will delete this user's current subscriptions$recurringText and also
-									move the user into the price plan attached to the new User Group.  The credits or subscriptions can then be
-									manually added back.";
-                                $this->body .= "</div>";
-                                $this->body .= "</div>";
-                            }
-
-
-                            //change expiration or credits
-                            if (geoMaster::is('auctions')) {
-                                $auction_price_plan = $this->get_price_plan($db, $show_user_stuff["auction_price_plan_id"]);
-                            }
-                            if (geoMaster::is('classifieds')) {
-                                $classified_price_plan = $this->get_price_plan($db, $show_user_stuff["price_plan_id"]);
-                            }
-                            if ($auction_price_plan || $classified_price_plan) {
-                                //current price plan
-                                if (geoMaster::is('auctions')) {
-                                    $this->body .= "<div class='form-group'>";
-                                }
-                                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Auction Price Plan Attached: </label>";
-                                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><span class='vertical-form-fix'><a href=index.php?mc=pricing&page=pricing_edit_plans&g=" . $show_user_stuff["auction_price_plan_id"] . ">" . $auction_price_plan["name"] . "</a></span>";
-                                    $this->body .= "</div>";
-                                    $this->body .= "</div>";
-
-                                if (geoMaster::is('classifieds')) {
-                                    $this->body .= "<div class='form-group'>";
-                                }
-                                    $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Classified Price Plan Attached: </label>";
-                                    $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><span class='vertical-form-fix'><a href=index.php?mc=pricing&page=pricing_edit_plans&g=" . $show_user_stuff["price_plan_id"] . ">" . $classified_price_plan["name"] . "</a></span>";
-                                    $this->body .= "</div>";
-                                    $this->body .= "</div>";
-
-                                if ($auction_price_plan["type_of_billing"] == 2 || $classified_price_plan["type_of_billing"] == 2) {
-                                    //charge by subscription -- display when expire
-                                    $this->body .= "<tr class=row_color" . (($color++ % 2) + 1) . ">\n\t<td align=right class=medium_font><strong>Subscription Expires: </strong></td>\n\t";
-                                    $this->body .= "<td class=medium_font>\n\t";
-                                    $sql = "select * from " . $this->classified_user_subscriptions_table . " where user_id = " . $user_id;
-                                    //echo $sql."<br>\n";
-                                    $get_subscription_result = $this->db->Execute($sql);
-                                    if ($this->debug_user) {
-                                        echo $sql_query . " is the query<br>\n";
-                                    }
-                                    if (!$get_subscription_result) {
-                                        return false;
-                                    } elseif ($get_subscription_result->RecordCount() == 1) {
-                                        $show_subscription = $get_subscription_result->FetchRow();
-                                        $this->body .= "expires on " . date("M d, Y H:i:s", $show_subscription["subscription_expire"]);
-                                        $this->body .= " - - <a href='index.php?mc=users&amp;page=users_subs_delete&amp;b=$user_id&amp;auto_save=1' class='lightUpLink'>Delete Subscription</a>";
-                                    } else {
-                                        $this->body .= "expired";
-                                    }
-                                    $this->body .= "<br><a href=index.php?mc=users&page=users_subs_change&b=" . $user_id . "&c=" . $show_subscription["subscription_id"] . ">Change Expiration</a>";
-                                    $this->body .= "</td></tr>\n";
-                                }
-                            }
-                        }
-                        $this->body .= '<tr><td colspan="2">' . geoOrderItem::callDisplay('Admin_user_management_edit_user_form', $user_id) . '</td></tr>';
-                        $this->body .= "</div></fieldset>";
-                    } else {
-                        $this->body .= "<input type='hidden' name='c[group]' value='1'>";
+                    $sql = "select * from " . $this->user_groups_price_plans_table . " where id = " . $user_id;
+                    $user_group_result = $this->db->Execute($sql);
+                    if ($this->debug_user) {
+                        echo $sql_query . " is the query<br>\n";
                     }
+                    if (!$user_group_result) {
+                        //echo $sql."<br>\n";
+                        //do nothing
+                    } elseif ($user_group_result->RecordCount() == 1) {
+                        $show_user_stuff = $user_group_result->FetchRow();
+                        $group_name = $this->get_group_name(null, $show_user_stuff["group_id"]);
+                        if ($group_name) {
+                            //change group
+
+                            $this->body .= "<div class='form-group'>";
+                            $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>User Group: </label>";
+                            $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
+                            <select name=c[group] class='form-control col-md-7 col-xs-12'>";
+                            $sql = "select * from " . $this->classified_groups_table;
+                            $all_groups_result = $this->db->Execute($sql);
+                            if ($this->debug_user) {
+                                echo $sql_query . " is the query<br>\n";
+                            }
+                            if (!$all_groups_result) {
+                                //echo $sql."<br>\n";
+                                //do nothing
+                            } elseif ($all_groups_result->RecordCount() > 0) {
+                                while ($show_groups = $all_groups_result->FetchRow()) {
+                                    $this->body .= "<option value=" . $show_groups["group_id"];
+                                    if ($show_groups["group_id"] == $show_user_stuff["group_id"]) {
+                                        $this->body .= " selected";
+                                        $this->body .= ">" . $this->get_group_name(null, $show_groups["group_id"]) . " (current)</option>\n\t\t";
+                                    } else {
+                                        $this->body .= ">" . $this->get_group_name(null, $show_groups["group_id"]) . "</option>\n\t\t";
+                                    }
+                                }
+                            }
+                            $recurringText = ", cancel all recurring billings for the user (if possible),";
+                            $this->body .= "</select><br><b>NOTE:</b> Changing the User Group will delete this user's current subscriptions$recurringText and also
+                                move the user into the price plan attached to the new User Group.  The credits or subscriptions can then be
+                                manually added back.";
+                            $this->body .= "</div>";
+                            $this->body .= "</div>";
+                        }
+
+
+                        //change expiration or credits
+                        if (geoMaster::is('auctions')) {
+                            $auction_price_plan = $this->get_price_plan(null, $show_user_stuff["auction_price_plan_id"]);
+                        }
+                        if (geoMaster::is('classifieds')) {
+                            $classified_price_plan = $this->get_price_plan(null, $show_user_stuff["price_plan_id"]);
+                        }
+                        if ($auction_price_plan || $classified_price_plan) {
+                            //current price plan
+                            if (geoMaster::is('auctions')) {
+                                $this->body .= "<div class='form-group'>";
+                            }
+                            $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Auction Price Plan Attached: </label>";
+                            $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><span class='vertical-form-fix'><a href=index.php?mc=pricing&page=pricing_edit_plans&g=" . $show_user_stuff["auction_price_plan_id"] . ">" . $auction_price_plan["name"] . "</a></span>";
+                            $this->body .= "</div>";
+                            $this->body .= "</div>";
+
+                            if (geoMaster::is('classifieds')) {
+                                $this->body .= "<div class='form-group'>";
+                            }
+                            $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Classified Price Plan Attached: </label>";
+                            $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><span class='vertical-form-fix'><a href=index.php?mc=pricing&page=pricing_edit_plans&g=" . $show_user_stuff["price_plan_id"] . ">" . $classified_price_plan["name"] . "</a></span>";
+                            $this->body .= "</div>";
+                            $this->body .= "</div>";
+
+                            if ($auction_price_plan["type_of_billing"] == 2 || $classified_price_plan["type_of_billing"] == 2) {
+                                //charge by subscription -- display when expire
+                                $this->body .= "<tr class='" . $this->get_row_color()
+                                    . "'><td align=right class=medium_font><strong>Subscription Expires: </strong></td>";
+                                $this->body .= "<td class=medium_font>\n\t";
+                                $sql = "select * from " . $this->classified_user_subscriptions_table . " where user_id = " . $user_id;
+                                $get_subscription_result = $this->db->Execute($sql);
+                                if ($this->debug_user) {
+                                    echo $sql . " is the query<br>\n";
+                                }
+                                if (!$get_subscription_result) {
+                                    return false;
+                                } elseif ($get_subscription_result->RecordCount() == 1) {
+                                    $show_subscription = $get_subscription_result->FetchRow();
+                                    $this->body .= "expires on " . date("M d, Y H:i:s", $show_subscription["subscription_expire"]);
+                                    $this->body .= " - - <a href='index.php?mc=users&amp;page=users_subs_delete&amp;b=$user_id&amp;auto_save=1' class='lightUpLink'>Delete Subscription</a>";
+                                } else {
+                                    $this->body .= "expired";
+                                }
+                                $this->body .= "<br><a href=index.php?mc=users&page=users_subs_change&b=" . $user_id . "&c=" . $show_subscription["subscription_id"] . ">Change Expiration</a>";
+                                $this->body .= "</td></tr>\n";
+                            }
+                        }
+                    }
+                    $this->body .= '<tr><td colspan="2">' . geoOrderItem::callDisplay('Admin_user_management_edit_user_form', $user_id) . '</td></tr>';
+                    $this->body .= "</div></fieldset>";
                 }
 
                 if (!$this->admin_demo()) {
@@ -649,74 +628,98 @@ class Admin_user_management extends Admin_site
                 return false;
             }
         }
-    } //end of function edit_user_form
+    }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function change_subscription_form($db, $user_id = 0, $subscription_id = 0)
+    private function change_subscription_form($user_id = 0, $subscription_id = 0)
     {
-        if ($user_id) {
-            if ($subscription_id) {
-                $sql = "select * from " . $this->classified_user_subscriptions_table . " where user_id = " . $user_id;
-                //echo $sql."<br>\n";
-                $get_subscription_result = $this->db->Execute($sql);
-                if ($this->debug_user) {
-                    echo $sql_query . " is the query<br>\n";
-                }
-                if (!$get_subscription_result) {
-                    return false;
-                } elseif ($get_subscription_result->RecordCount() == 1) {
-                    $show = $get_subscription_result->FetchRow();
-                    $current_expiration = $show["subscription_expire"];
-                    //echo $current_expiration."<br>\n";
-                } else {
-                    $current_expiration = geoUtil::time();
-                }
+        if (!$user_id) {
+            return false;
+        }
+
+        if ($subscription_id) {
+            $sql = "select * from " . $this->classified_user_subscriptions_table . " where user_id = ?";
+            //echo $sql."<br>\n";
+            $get_subscription_result = $this->db->Execute($sql, [$user_id]);
+            if ($this->debug_user) {
+                echo $sql . " is the query<br>\n";
+            }
+            if (!$get_subscription_result) {
+                return false;
+            } elseif ($get_subscription_result->RecordCount() == 1) {
+                $show = $get_subscription_result->FetchRow();
+                $current_expiration = $show["subscription_expire"];
             } else {
                 $current_expiration = geoUtil::time();
             }
-            $user = $this->get_user_data($user_id);
-
-            if (!$this->admin_demo()) {
-                $this->body .= "<form action=index.php?mc=users&page=users_subs_change&b=" . $user_id . "&c=" . $subscription_id . " method=post>\n";
-            }
-            $this->body .= "<table cellpadding=2 cellspacing=1 border=0 align=center width=100% class=row_color1>\n";
-            //$this->title = "Edit This Users Subscription Expiration";
-            $this->description = "Below is this users data current subscription expiration.
-				Make any necessary changes you need and click the \"save changes\" button.";
-            $this->body .= "<tr class=row_color1>\n\t<td colspan=2 class=group_price_hdr style='color: white; font-size: 10pt; font-weight: bold;'>\n\tSubscription Expiration for " . $user["firstname"] . " " . $user["lastname"] . " <BR>
-				USERNAME: " . $user["username"] . "</font>\n\t</td>\n</tr></table>\n";
-            $this->body .= "<div>&nbsp;<br></div>";
-            $this->body .= "<fieldset id='ExpDetails'><legend>Subscription Expiration Details</legend><table cellpadding=2 cellspacing=1 border=0 align=center width=\"100%\">\n";
-            $this->body .= "<tr class=row_color2>\n\t<td class=medium_font width=40% align=right><strong>Date To Expire:</strong></td>\n";
-            $this->body .= "<td class=medium_font>";
-            $now = geoUtil::time();
-            $this->body .= $this->get_date_select("d[year]", "d[month]", "d[day]", date("Y", $current_expiration), date("n", $current_expiration), date("j", $current_expiration), date("Y", $now));
-            $this->body .= "<br><strong>Note: </strong>New subscription expiration \"time\" will be set to the end of the day you specify above.</td>\n</tr>\n";
-            if (!$this->admin_demo()) {
-                $this->body .= "<tr>\n\t<td colspan=2 align=center><input type=submit name='auto_save' value=\"Save\"></td></tr>\n";
-            }
-            $this->body .= "<tr>\n\t<td colspan=2 class=medium_font align=center><br><a href=index.php?mc=users&page=users_view&b=" . $user_id . "><strong>Back to User Data</strong></a></td></tr>\n";
-            $this->body .= "</table></fieldset>\n";
-            return true;
         } else {
+            $current_expiration = geoUtil::time();
+        }
+        $user = $this->get_user_data($user_id);
+
+        if (!$this->admin_demo()) {
+            $this->body .= '<form action="index.php?mc=users&page=users_subs_change&b='
+                . geoString::specialChars($user_id) . '&c='
+                . geoString::specialChars($subscription_id) . '" method="post">\n';
+        }
+        $this->body .= "<table cellpadding=2 cellspacing=1 border=0 align=center width=100% class=row_color1>\n";
+        $this->description = "Below is this users data current subscription expiration.
+            Make any necessary changes you need and click the \"save changes\" button.";
+        $this->body .= "<tr class=row_color1>
+            <td colspan=2 class=group_price_hdr style='color: white; font-size: 10pt; font-weight: bold;'>
+            Subscription Expiration for " . geoString::specialChars($user["firstname"])
+            . " " . geoString::specialChars($user["lastname"]) . " <br>
+            USERNAME: " . geoString::specialChars($user["username"]) . "</font>\n\t</td>\n</tr></table>\n";
+        $this->body .= "<div>&nbsp;<br></div>";
+        $this->body .= "<fieldset id='ExpDetails'>
+            <legend>Subscription Expiration Details</legend>
+            <table cellpadding=2 cellspacing=1 border=0 align=center width=\"100%\">\n";
+        $this->body .= "<tr class=row_color2>
+            <td class=medium_font width=40% align=right><strong>Date To Expire:</strong></td>\n";
+        $this->body .= "<td class=medium_font>";
+        $now = geoUtil::time();
+        $this->body .= $this->get_date_select(
+            "d[year]",
+            "d[month]",
+            "d[day]",
+            date("Y", $current_expiration),
+            date("n", $current_expiration),
+            date("j", $current_expiration),
+            date("Y", $now)
+        );
+        $this->body .= "<br><strong>Note: </strong>New subscription expiration \"time\" will be set to the end of
+            the day you specify above.</td>\n</tr>\n";
+        if (!$this->admin_demo()) {
+            $this->body .= "<tr>\n\t<td colspan=2 align=center>
+                <input type=submit name='auto_save' value=\"Save\"></td></tr>\n";
+        }
+        $this->body .= '<tr><td colspan=2 class=medium_font align=center><br>
+            <a href="index.php?mc=users&page=users_view&b=' . geoString::specialChars($user_id) . '">
+            <strong>Back to User Data</strong></a></td></tr>';
+        $this->body .= "</table></fieldset>\n";
+        return true;
+    }
+
+    private function update_subscription($user_id = 0, $subscription_id = 0, $subscription_info = 0)
+    {
+        if (!$user_id || !$subscription_info) {
+            // not enough info to do anything
             return false;
         }
-    } //end of function change_subscription_form
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function update_subscription($db, $user_id = 0, $subscription_id = 0, $subscription_info = 0)
-    {
-
-        if (($user_id) && ($subscription_id) && ($subscription_info)) {
+        if ($subscription_id) {
             //update subscription
-            $timestamp = mktime(23, 59, 59, $subscription_info["month"], $subscription_info["day"], $subscription_info["year"]);
-             //set to end of day
-            $sql_query = "update " . $this->classified_user_subscriptions_table . " set
-				subscription_expire = \"" . $timestamp . "\"
-				where user_id = " . $user_id . " and subscription_id = " . $subscription_id;
-            $update_time_result = $this->db->Execute($sql_query);
+            $timestamp = mktime(
+                23,
+                59,
+                59,
+                $subscription_info["month"],
+                $subscription_info["day"],
+                $subscription_info["year"]
+            );
+            //set to end of day
+            $sql_query = "update $this->classified_user_subscriptions_table set
+				subscription_expire = \"$timestamp\"
+				where user_id = ? and subscription_id = ?";
+            $update_time_result = $this->db->Execute($sql_query, [$user_id, $subscription_id]);
             if ($this->debug_user) {
                 echo $sql_query . " is the query<br>\n";
             }
@@ -724,57 +727,54 @@ class Admin_user_management extends Admin_site
             if (!$update_time_result) {
                 $this->site_error($this->db->ErrorMsg());
                 return false;
-            } else {
-                return true;
-            }
-        } elseif (($user_id) && ($subscription_info)) {
-            //insert new subscription
-            $sql_query = "delete from " . $this->classified_user_subscriptions_table . "
-				where user_id = " . $user_id;
-            $delete_subscription_result = $this->db->Execute($sql_query);
-            if ($this->debug_user) {
-                echo $sql_query . " is the query<br>\n";
-            }
-
-            if (!$delete_subscription_result) {
-                $this->site_error($this->db->ErrorMsg());
-                return false;
-            }
-
-            $timestamp = mktime(23, 59, 59, $subscription_info["month"], $subscription_info["day"], $subscription_info["year"]);
-
-            $user = geoUser::getUser($user_id);
-            $price_plan_id = ($user->price_plan_id) ? $user->price_plan_id : $user->auction_price_plan_id;
-
-            $sql_query = "insert into " . $this->classified_user_subscriptions_table . "
-				(price_plan_id, user_id,subscription_expire)
-				values
-				(" . $price_plan_id . "," . $user_id . "," . $timestamp . ")";
-            $insert_expiration_result = $this->db->Execute($sql_query);
-            if ($this->debug_user) {
-                echo $sql_query . " is the query<br>\n";
-            }
-
-            if (!$insert_expiration_result) {
-                $this->site_error($this->db->ErrorMsg());
-                return false;
             }
             return true;
-        } else {
+        }
+
+        //insert new subscription
+        $sql_query = "delete from $this->classified_user_subscriptions_table
+            where user_id = ?";
+        $delete_subscription_result = $this->db->Execute($sql_query, [$user_id]);
+        if ($this->debug_user) {
+            echo $sql_query . " is the query<br>\n";
+        }
+
+        if (!$delete_subscription_result) {
+            $this->site_error($this->db->ErrorMsg());
             return false;
         }
-    }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        $timestamp = mktime(
+            23,
+            59,
+            59,
+            $subscription_info["month"],
+            $subscription_info["day"],
+            $subscription_info["year"]
+        );
 
-    function update_user_info($db, $user_id = 0, $user_info = 0)
-    {
-        //make sure authorization is loaded.
-        if (!isset($this->product_configuration) || !is_object($this->product_configuration)) {
-            $this->product_configuration = geoPC::getInstance();
+        $user = geoUser::getUser($user_id);
+        $price_plan_id = ($user->price_plan_id) ? $user->price_plan_id : $user->auction_price_plan_id;
+
+        $sql_query = "insert into $this->classified_user_subscriptions_table
+            (price_plan_id, user_id,subscription_expire)
+            values
+            (?, ?, ?)";
+        $insert_expiration_result = $this->db->Execute($sql_query, [$price_plan_id, $user_id, $timestamp]);
+        if ($this->debug_user) {
+            echo $sql_query . " is the query<br>\n";
         }
 
-        if (!$user_id || !$user_info) {
+        if (!$insert_expiration_result) {
+            $this->site_error($this->db->ErrorMsg());
+            return false;
+        }
+        return true;
+    }
+
+    public function update_user_info($user_id = 0, $user_info = 0)
+    {
+        if (!$user_id || !$user_info || !is_array($user_info)) {
             //not enough info to go on
             geoAdmin::m('Not enough info supplied to complete request.', geoAdmin::ERROR);
             return false;
@@ -797,7 +797,8 @@ class Admin_user_management extends Admin_site
         }
         if ($result->RecordCount() != 1) {
             //user not found in DB?
-            geoAdmin::m('Error applying changes: Could not find user in DB (or duplicate entries), number of results for user: ' . $result->RecordCount(), geoAdmin::ERROR);
+            geoAdmin::m('Error applying changes: Could not find user in DB (or duplicate entries), number of results
+                for user: ' . $result->RecordCount(), geoAdmin::ERROR);
             return false;
         }
 
@@ -811,19 +812,20 @@ class Admin_user_management extends Admin_site
         if ($anon) {
             $anon_user = $anon->get('anon_user_id');
         }
-        $isAnon = ($anon_user && $user_id == $anon_user) ? true : false;
+        $isAnon = ($anon_user && $user_id == $anon_user);
 
         if ($user_id != 1 && !$isAnon) {
             // admin/anon cannot change user/pass here
             $show_username = $result->FetchRow();
             if ($user_info["username"] != $show_username["username"]) {
-                if (strlen($user_info['password']) == 0) {
-                    $this->user_management_error = 'Password cannot be blank to update username.  If current user\'s password seems to be hashed, the software cannot retrieve it, so you will need to supply a new password.';
+                if (strlen($user_info['password']) === 0) {
+                    $this->user_management_error = 'Password cannot be blank to update username.  If current user\'s
+                        password seems to be hashed, the software cannot retrieve it, so you will need to supply a
+                        new password.';
                 }
                 //check if username already exists for another user
-                $sql_query = "select * from " . $this->logins_table . "
-					where username = \"" . $user_info["username"] . "\" and id != " . $user_id;
-                $username_result = $this->db->Execute($sql_query);
+                $sql_query = "select * from $this->logins_table where username = ? and id != ?";
+                $username_result = $this->db->Execute($sql_query, [$user_info["username"], $user_id]);
                 if ($this->debug_user) {
                     echo $sql_query . " is the query<br>\n";
                 }
@@ -835,18 +837,29 @@ class Admin_user_management extends Admin_site
                     }
                     $this->site_error($this->db->ErrorMsg());
                     return false;
-                } elseif ($username_result->RecordCount() > 0) {
+                }
+                if ($username_result->RecordCount() > 0) {
                     //this username already exists
                     $this->user_management_error .= "Cannot change username to requested username.
 						That username already exists in the database.";
-                } elseif (strlen(trim($user_info['username'])) < $this->db->get_site_setting('min_user_length') || strlen(trim($user_info['username'])) > $this->db->get_site_setting('max_user_length')) {
+                } elseif (
+                    strlen(trim($user_info['username'])) < $this->db->get_site_setting('min_user_length')
+                    || strlen(trim($user_info['username'])) > $this->db->get_site_setting('max_user_length')
+                ) {
                     //username not proper length.
-                    $this->user_management_error .= 'Invalid username length, username must follow length guidelines set in Admin Tools & Settings > Security Settings > General Security Settings.';
+                    $this->user_management_error .= 'Invalid username length, username must follow length guidelines
+                        set in Admin Tools & Settings > Security Settings > General Security Settings.';
                 }
             }
-            $hash_type = (strlen($show_username['hash_type'])) ? $show_username['hash_type'] : $this->db->get_site_setting('client_pass_hash');
+            $hash_type = (strlen($show_username['hash_type']))
+                ? $show_username['hash_type'] : $this->db->get_site_setting('client_pass_hash');
             $salt = '';
-            $hash_pass = $this->product_configuration->get_hashed_password($user_info['username'], trim($user_info['password']), $hash_type, $show_username['salt']);
+            $hash_pass = geoPC::getInstance()->get_hashed_password(
+                $user_info['username'],
+                trim($user_info['password']),
+                $hash_type,
+                $show_username['salt']
+            );
             if (is_array($hash_pass)) {
                 $salt = $hash_pass['salt'];
                 $hash_pass = $hash_pass['password'];
@@ -867,7 +880,7 @@ class Admin_user_management extends Admin_site
                     //before we were just "verifying" the password, this time we aim to
                     //generate a new password, so do not supply the salt.
                     $hash_type = $this->db->get_site_setting('client_pass_hash');
-                    $hash_pass = $this->product_configuration->get_hashed_password($user_info['username'], trim($user_info['password']), $hash_type);
+                    $hash_pass = geoPC::getInstance()->get_hashed_password($user_info['username'], trim($user_info['password']), $hash_type);
                     $salt = '';
                     if (is_array($hash_pass)) {
                         //salt provided with return
@@ -884,9 +897,7 @@ class Admin_user_management extends Admin_site
                     if ($this->debug_password) {
                         echo $sql_query . " is the query<br>\n";
                     }
-                    if ($this->configuration_data["debug_admin"]) {
-                        $this->debug_display($db, $this->filename, $this->function_name, "logins_table", "update logins data");
-                    }
+
                     if (!$result) {
                         if ($this->debug_user) {
                             echo $this->db->ErrorMsg . "<br>";
@@ -899,9 +910,7 @@ class Admin_user_management extends Admin_site
                     //update the userdata table username value also
                     $sql_query = "update " . $this->userdata_table . " set username = ? where id = ?";
                     $result = $this->db->Execute($sql_query, array($user_info['username'], $user_id));
-                    if ($this->configuration_data["debug_admin"]) {
-                        $this->debug_display($db, $this->filename, $this->function_name, "userdata_table", "update username data");
-                    }
+
                     if (!$result) {
                         if ($this->debug_user) {
                             echo $this->db->ErrorMsg . "<br>";
@@ -926,40 +935,71 @@ class Admin_user_management extends Admin_site
         $geographicOverrides = geoRegion::getLevelsForOverrides();
         $locations = $_REQUEST['locations'];
         geoRegion::setUserRegions($user_id, $locations);
-        $user_info['city'] = ($regionOverrides['city']) ? geoRegion::getNameForRegion($locations[$regionOverrides['city']]) : $user_info['city'];
-        $user_info['state'] = ($regionOverrides['state']) ? geoRegion::getAbbreviationForRegion($locations[$regionOverrides['state']]) : $user_info['state'];
-        $user_info['country'] = ($regionOverrides['country']) ? geoRegion::getNameForRegion($locations[$regionOverrides['country']]) : $user_info['country'];
 
-        $sql_query = "update " . $this->userdata_table . " set
-			firstname = \"" . addslashes($user_info["firstname"]) . "\",
-			lastname = \"" . addslashes($user_info["lastname"]) . "\",
-			company_name = \"" . addslashes($user_info["company_name"]) . "\",
-			business_type = \"" . addslashes($user_info["business_type"]) . "\",
-			url = \"" . addslashes($user_info["url"]) . "\",
-			address = \"" . addslashes($user_info["address"]) . "\",
-			address_2 = \"" . addslashes($user_info["address_2"]) . "\",
-			city = \"" . addslashes($user_info["city"]) . "\",
-			state = \"" . $user_info["state"] . "\",
-			zip = \"" . addslashes($user_info["zip"]) . "\",
-			country = \"" . $user_info["country"] . "\",
-			" . (($user_id != 1) ? "email = \"" . addslashes($user_info["email"]) . "\"," : "") . "
-			phone = \"" . addslashes($user_info["phone"]) . "\",
-			phone2 = \"" . addslashes($user_info["phone2"]) . "\",
-			fax = \"" . addslashes($user_info["fax"]) . "\",
-			optional_field_1 = \"" . addslashes($user_info["optional_field_1"]) . "\",
-			optional_field_2 = \"" . addslashes($user_info["optional_field_2"]) . "\",
-			optional_field_3 = \"" . addslashes($user_info["optional_field_3"]) . "\",
-			optional_field_4 = \"" . addslashes($user_info["optional_field_4"]) . "\",
-			optional_field_5 = \"" . addslashes($user_info["optional_field_5"]) . "\",
-			optional_field_6 = \"" . addslashes($user_info["optional_field_6"]) . "\",
-			optional_field_7 = \"" . addslashes($user_info["optional_field_7"]) . "\",
-			optional_field_8 = \"" . addslashes($user_info["optional_field_8"]) . "\",
-			optional_field_9 = \"" . addslashes($user_info["optional_field_9"]) . "\",
-			optional_field_10 = \"" . addslashes($user_info["optional_field_10"]) . "\",
-			admin_note = \"" . geoString::toDB($user_info['admin_note']) . "\"
-			where id = " . $user_id;
+        $sql_query = "update $this->userdata_table set
+			firstname = ?,
+			lastname = ?,
+			company_name = ?,
+			business_type = ?,
+			url = ?,
+			address = ?,
+			address_2 = ?,
+			city = ?,
+			state = ?,
+			zip = ?,
+			country = ?,
+			phone = ?,
+			phone2 = ?,
+			fax = ?,
+			optional_field_1 = ?,
+			optional_field_2 = ?,
+			optional_field_3 = ?,
+			optional_field_4 = ?,
+			optional_field_5 = ?,
+			optional_field_6 = ?,
+			optional_field_7 = ?,
+			optional_field_8 = ?,
+			optional_field_9 = ?,
+			optional_field_10 = ?,
+			admin_note = ?
+			where id = ?";
 
-        $result = $this->db->Execute($sql_query);
+        $result = $this->db->Execute(
+            $sql_query,
+            [
+                $user_info["firstname"],
+                $user_info['lastname'],
+			    $user_info['company_name'],
+			    $user_info['business_type'],
+                $user_info['url'],
+			    $user_info['address'],
+			    $user_info['address_2'],
+                $user_info['city'],
+                $user_info['state'],
+                $user_info['zip'],
+                $user_info['country'],
+                $user_info['phone'],
+                $user_info['phone2'],
+                $user_info['fax'],
+                $user_info['optional_field_1'],
+                $user_info['optional_field_2'],
+                $user_info['optional_field_3'],
+                $user_info['optional_field_4'],
+                $user_info['optional_field_5'],
+                $user_info['optional_field_6'],
+                $user_info['optional_field_7'],
+                $user_info['optional_field_8'],
+                $user_info['optional_field_9'],
+                $user_info['optional_field_10'],
+                $user_info['admin_note'],
+                $user_id
+            ]
+        );
+
+        if ((int)$user_id !== 1) {
+            // only set email if not main admin account
+            $this->db->Execute("update $this->userdata_table set email=?", [$user_info['email']]);
+        }
 
         if ($user_info['apply_to_all_email']) {
             $class_sql_query = "UPDATE " . $this->classifieds_table . " SET email = \"" . $user_info['email'] . "\" WHERE seller = " . $user_id;
@@ -970,7 +1010,7 @@ class Admin_user_management extends Admin_site
         }
 
         if (!$result) {
-            if ($this->debug_user) {
+            if ($this->debug_user || true) {
                 echo $this->db->ErrorMsg() . "<br>";
                 echo $sql_query . " is the query<br>\n";
             }
@@ -1120,15 +1160,11 @@ class Admin_user_management extends Admin_site
             echo "returning true<br>\n";
         }
         return true;
-    } //end of function update_user_info
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function lock_unlock_user($db, $user_id)
     {
-    } //end of function update_user_info
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function remove_user_verify($user_id)
     {
@@ -1169,9 +1205,7 @@ class Admin_user_management extends Admin_site
 
 
         return true;
-    } //end of function remove_user_verify
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function remove_user($user_id, $silentSuccess = false)
     {
@@ -1339,9 +1373,7 @@ class Admin_user_management extends Admin_site
             $admin->message('User Removed.');
         }
         return true;
-    } //end of function remove_user
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function remove_ad_filters($db, $user_id)
     {
@@ -1373,9 +1405,7 @@ class Admin_user_management extends Admin_site
         } else {
             return false;
         }
-    } //end of function remove_ad_filters
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function user_search_box()
     {
@@ -1387,15 +1417,14 @@ class Admin_user_management extends Admin_site
         $this->body .= "<td>" . $this->medium_font . "<input type=text size=30 maxsize=30 name=b[search_by_text]></font>\n\t</td>\n</tr>\n";
         $this->body .= "</table>\n";
         $this->body .= "</form>\n";
-    } //end of function user_search_box
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function search_users($db, $search_info = 0)
     {
         $db = DataAccess::getInstance();
         if ($search_info) {
             $sql = "";
+            $begin_date = $end_date = null;
             switch ($search_info["search_type"]) {
                 case 1:
                     //search by text
@@ -1583,9 +1612,7 @@ class Admin_user_management extends Admin_site
             //no search info to search by
             return false;
         }
-    } //end of function user_search_box
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function display_search_results($db, $sql_query = 0)
     {
@@ -1684,9 +1711,7 @@ class Admin_user_management extends Admin_site
             //no query to search with
             return false;
         }
-    }//end of display_search_results
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function advanced_user_search()
     {
@@ -1698,42 +1723,7 @@ class Admin_user_management extends Admin_site
         geoView::getInstance()->setBodyTpl('search_users.tpl')->setBodyVar($tpl_vars);
     }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function show_range_of_users($db, $sql_query = 0, $limit_by)
-    {
-        if ($sql_query) {
-            $result = $this->db->Execute($sql_query);
-            if (!$result) {
-                $this->site_error($this->db->ErrorMsg());
-                return false;
-            } elseif ($result->RecordCount() > 0) {
-                $total_count = ($result->RecordCount() - 1);
-                //echo $total_count." is the total count<bR>\n";
-                $counter = 1;
-                $number_of_times = 0;
-                if ($total_count > 25) {
-                    $this->body .= "<table cellpadding=2 cellspacing=1 border=0 align=center width=\"100%\">\n";
-                    $this->body .= "<tr>\n\t<td>\n\t";
-                    while ($number_of_times < 6) {
-                        $this->body .= "<a href=index.php?mc=users&page=users_list&b[limit]=" . $counter . "&b[order_by]=" . $limit_by . "><span class=medium_font>" . $counter . "-" . ($counter + 25) . "</span></a> | ";
-
-                        $counter = $counter + 25;
-                        $number_of_times++;
-                    }
-                    if ($number_of_times == 6) {
-                        $this->body .= "<a href=index.php?mc=users&page=users_list&b[limit]=" . ($total_count - 25) . "&b[order_by]=" . $limit_by;
-                    }
-                    $this->body .= "</td>\n</tr>\n</table>\n";
-                }
-            }
-            return true;
-        }
-    } //end of function show_range_of_users
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    function group_dropdown($db)
+    function group_dropdown()
     {
 
         if (geoPC::is_ent() || geoPC::is_premier() || geoPC::is_basic()) {
@@ -1764,9 +1754,7 @@ class Admin_user_management extends Admin_site
         } else {
             return "<input type=hidden name=b[search_group] value='1'>\n\t";
         }
-    } //end of function group_dropdown
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function insert_new_user_form($db)
     {
@@ -1808,7 +1796,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 					<input type=text name=c[firstname] value=\"" . $this->classified_variables["firstname"] . "\" class='form-control col-md-7 col-xs-12'>";
                 $this->body .= "</div>";
-            if (isset($this->error[firstname])) {
+            if (isset($this->error['firstname'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>first name required</font>";
             }
             $this->body .= "</div>";
@@ -1823,7 +1811,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 					<input type=text name=c[lastname] value=\"" . $this->classified_variables["lastname"] . "\" class='form-control col-md-7 col-xs-12'>";
                 $this->body .= "</div>";
-            if (isset($this->error[lastname])) {
+            if (isset($this->error['lastname'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial face=arial>last name required</font>";
             }
             $this->body .= "</div>";
@@ -1838,7 +1826,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 					<input type=text name=c[company_name] value=\"" . $this->classified_variables["company_name"] . "\" class='form-control col-md-7 col-xs-12'>";
                 $this->body .= "</div>";
-            if (isset($this->error[company_name])) {
+            if (isset($this->error['company_name'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>company error</font>";
             }
             $this->body .= "</div>";
@@ -1852,17 +1840,17 @@ class Admin_user_management extends Admin_site
             }
                 $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 					<input type=radio name=c[business_type] class='flat' value=1";
-            if ($this->registered_variables[business_type] == 1) {
+            if ($this->registered_variables['business_type'] == 1) {
                 $this->body .= " checked";
             }
                 $this->body .= "> Individual<br>
 					<input type=radio name=c[business_type] value=2 ";
-            if ($this->registered_variables[business_type] == 2) {
+            if ($this->registered_variables['business_type'] == 2) {
                 $this->body .= " checked";
             }
                 $this->body .= "> Business";
                 $this->body .= "</div>";
-            if (isset($this->error[business_type])) {
+            if (isset($this->error['business_type'])) {
                 $this->body .= "<font class=error_message>please choose a business type</font>";
             }
             $this->body .= "</div>";
@@ -1880,7 +1868,7 @@ class Admin_user_management extends Admin_site
             }
                 $this->body .= "</div>";
 
-            if (isset($this->error[address])) {
+            if (isset($this->error['address'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>address required</font>";
             }
             $this->body .= "</div>";
@@ -1898,7 +1886,7 @@ class Admin_user_management extends Admin_site
             }
                 $this->body .= "</div>";
 
-            if (isset($this->error[address_2])) {
+            if (isset($this->error['address_2'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>address 2 required</font>";
             }
             $this->body .= "</div>";
@@ -1921,7 +1909,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "*";
             }
                     $this->body .= "</div>";
-            if (isset($this->error[city])) {
+            if (isset($this->error['city'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>city required</font>";
             }
             $this->body .= "</div>";
@@ -1936,7 +1924,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "*";
             }
                     $this->body .= "</div>";
-            if (isset($this->error[zip])) {
+            if (isset($this->error['zip'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>zip required</font>";
             }
             $this->body .= "</div>";
@@ -1951,7 +1939,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "*";
             }
                     $this->body .= "</div>";
-            if (isset($this->error[phone])) {
+            if (isset($this->error['phone'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>first contact number required</font>";
             }
             $this->body .= "</div>";
@@ -1966,7 +1954,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "*";
             }
                     $this->body .= "</div>";
-            if (isset($this->error[phone_2])) {
+            if (isset($this->error['phone_2'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>second contact number required</font>";
             }
             $this->body .= "</div>";
@@ -1982,7 +1970,7 @@ class Admin_user_management extends Admin_site
             }
                     $this->body .= "</div>";
 
-            if (isset($this->error[fax])) {
+            if (isset($this->error['fax'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial>fax required</font>";
             }
             $this->body .= "</div>";
@@ -1994,8 +1982,8 @@ class Admin_user_management extends Admin_site
 					<input type=text name=c[email] value=\"" . $this->classified_variables["email"] . "\" class='form-control col-md-7 col-xs-12'> ";
                     $this->body .= "</div>";
 
-        if (isset($this->error[email])) {
-            $this->body .= "<font color=#880000 size=1 face=arial>" . $this->error[email] . "</font>";
+        if (isset($this->error['email'])) {
+            $this->body .= "<font color=#880000 size=1 face=arial>" . $this->error['email'] . "</font>";
         }
             $this->body .= "</div>";
 
@@ -2006,8 +1994,8 @@ class Admin_user_management extends Admin_site
 					<input type=text name=c[email2] value=\"" . $this->classified_variables["email2"] . "\" class='form-control col-md-7 col-xs-12'> ";
                 $this->body .= "</div>";
 
-            if (isset($this->error[email])) {
-                $this->body .= "<font color=#880000 size=1 face=arial>" . $this->error[email2] . "</font>";
+            if (isset($this->error['email'])) {
+                $this->body .= "<font color=#880000 size=1 face=arial>" . $this->error['email2'] . "</font>";
             }
             $this->body .= "</div>";
         }
@@ -2021,7 +2009,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "*";
             }
                 $this->body .= "</div>";
-            if (isset($this->error[url])) {
+            if (isset($this->error['url'])) {
                 $this->body .= "<font color=#880000 size=1 face=arial><span class=medium_font>url required</font>";
             }
             $this->body .= "</div>";
@@ -2062,8 +2050,8 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Username:</label>";
                 $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 					<input type=text name=c[username] class='form-control col-md-7 col-xs-12' style='width:auto;' size=15 maxsize=15 value=\"" . $this->classified_variables["username"] . "\"";
-        if (isset($this->error[username])) {
-            $this->body .= "<font color=#880000 size=1 face=arial>" . urldecode($this->error[username]) . "</font>";
+        if (isset($this->error['username'])) {
+            $this->body .= "<font color=#880000 size=1 face=arial>" . urldecode($this->error['username']) . "</font>";
         } else {
             $this->body .= "<font color=#000000 size=1 face=arial></font>";
         }
@@ -2074,8 +2062,8 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Password:</label>";
                 $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 					<input type=password name=c[password] class='form-control col-md-7 col-xs-12' style='width:auto;' size=15 maxsize=15> ";
-        if (isset($this->error[password])) {
-            $this->body .= "<font color=#880000 size=1 face=arial>" . urldecode($this->error[password]) . "</font>";
+        if (isset($this->error['password'])) {
+            $this->body .= "<font color=#880000 size=1 face=arial>" . urldecode($this->error['password']) . "</font>";
         }
                 $this->body .= "</div>";
             $this->body .= "</div>";
@@ -2084,7 +2072,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Password Verifier:</label>";
                 $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'>
 					<input type=password name=c[password_confirm] class='form-control col-md-7 col-xs-12' style='width:auto;' size=15 maxsize=15> ";
-        if ($this->error[repeat_password]) {
+        if ($this->error['repeat_password']) {
             $this->body .= "<font color=#880000 size=1 face=arial>your password verifier did not match the password field</font>";
         }
                 $this->body .= "</div>";
@@ -2124,9 +2112,7 @@ class Admin_user_management extends Admin_site
         $this->body .= "</fieldset>";
         $this->body .= ($this->admin_demo()) ? '</div>' : "</form>";
         return true;
-    } //end of function insert_new_user_form
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function check_info($db)
     {
@@ -2154,36 +2140,36 @@ class Admin_user_management extends Admin_site
             //echo "checking user info<br>\n";
             if ($this->registration_configuration["use_company_name_field"]) {
                 if ($this->configuration_data["require_company_name_field"]) {
-                    if (strlen(trim($this->classified_variables[company_name])) == 0) {
-                        $this->error[company_name] = "missing company name";
+                    if (strlen(trim($this->classified_variables['company_name'])) == 0) {
+                        $this->error['company_name'] = "missing company name";
                         $this->error_found++;
                     }
                 }
             }
 
             if ($this->registration_configuration["use_registration_firstname_field"] && $this->registration_configuration["require_registration_firstname_field"]) {
-                if (strlen(trim($this->classified_variables[firstname])) == 0) {
-                    $this->error[firstname] = "please fill in the firstname";
+                if (strlen(trim($this->classified_variables['firstname'])) == 0) {
+                    $this->error['firstname'] = "please fill in the firstname";
                     $this->error_found++;
                 }
             }
 
             if ($this->registration_configuration["use_registration_lastname_field"] && $this->registration_configuration["require_registration_lastname_field"]) {
-                if (strlen(trim($this->classified_variables[lastname])) == 0) {
-                    $this->error[lastname] = "please fill in the lastname";
+                if (strlen(trim($this->classified_variables['lastname'])) == 0) {
+                    $this->error['lastname'] = "please fill in the lastname";
                     $this->error_found++;
                 }
             }
 
             if ($this->registration_configuration["use_registration_address_field"] && $this->registration_configuration["require_registration_address_field"]) {
-                if (strlen(trim($this->classified_variables[address])) == 0) {
-                    $this->error[address] = "please fill in the address";
+                if (strlen(trim($this->classified_variables['address'])) == 0) {
+                    $this->error['address'] = "please fill in the address";
                     $this->error_found++;
                 }
             }
             if (($this->registration_configuration['use_registration_address2_field']) && ($this->registration_configuration['require_registration_address2_field'])) {
-                if (strlen(trim($this->classified_variables[address_2])) == 0) {
-                    $this->error[address_2] = "please fill in the address 2";
+                if (strlen(trim($this->classified_variables['address_2'])) == 0) {
+                    $this->error['address_2'] = "please fill in the address 2";
                     $this->error_found++;
                 }
             }
@@ -2198,30 +2184,30 @@ class Admin_user_management extends Admin_site
                         return false;
                     } elseif ($result->RecordCount() > 0) {
                         //email already in use
-                        $this->error[email] = "email address already exists";
+                        $this->error['email'] = "email address already exists";
                         $this->error_found++;
                     }
                 } else {
-                    $this->error[email] = "please re-enter the email address";
+                    $this->error['email'] = "please re-enter the email address";
                     $this->error_found++;
                 }
             } else {
-                $this->error[email] = "please enter an email address";
+                $this->error['email'] = "please enter an email address";
                 $this->error_found++;
             }
             //$this->error[email] = "does not check now - remove before release";
 
             if ($this->registration_configuration["require_city_field"]) {
-                if (strlen(trim($this->classified_variables[city])) == 0) {
-                    $this->error[city] = "please fill in the city";
+                if (strlen(trim($this->classified_variables['city'])) == 0) {
+                    $this->error['city'] = "please fill in the city";
                     $this->error_found++;
                 }
             }
 
             if ($this->registration_configuration["use_zip_field"]) {
                 if ($this->configuration_data["require_zip_field"]) {
-                    if (strlen(trim($this->classified_variables[zip])) == 0) {
-                        $this->error[zip] = "please fill in the zip";
+                    if (strlen(trim($this->classified_variables['zip'])) == 0) {
+                        $this->error['zip'] = "please fill in the zip";
                         $this->error_found++;
                     }
                 }
@@ -2229,8 +2215,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_phone_field"]) {
                 if ($this->configuration_data["require_phone_field"]) {
-                    if (strlen(trim($this->classified_variables[phone])) == 0) {
-                        $this->error[phone] = "please fill in the first contact field";
+                    if (strlen(trim($this->classified_variables['phone'])) == 0) {
+                        $this->error['phone'] = "please fill in the first contact field";
                         $this->error_found++;
                     }
                 }
@@ -2238,24 +2224,24 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_phone2_field"]) {
                 if ($this->configuration_data["require_phone2_field"]) {
-                    if (strlen(trim($this->classified_variables[phone_2])) == 0) {
-                        $this->error[phone_2] = "please fill in the second contact field";
+                    if (strlen(trim($this->classified_variables['phone_2'])) == 0) {
+                        $this->error['phone_2'] = "please fill in the second contact field";
                         $this->error_found++;
                     }
                 }
             }
 
             if ($this->registration_configuration["require_fax_field"]) {
-                if (strlen(trim($this->classified_variables[fax])) == 0) {
-                    $this->error[fax] = "please fill in the fax";
+                if (strlen(trim($this->classified_variables['fax'])) == 0) {
+                    $this->error['fax'] = "please fill in the fax";
                     $this->error_found++;
                 }
             }
 
             if ($this->registration_configuration["use_url_field"]) {
                 if ($this->configuration_data["require_url_field"]) {
-                    if (strlen(trim($this->classified_variables[url])) == 0) {
-                        $this->error[url] = "please fill in the url";
+                    if (strlen(trim($this->classified_variables['url'])) == 0) {
+                        $this->error['url'] = "please fill in the url";
                         $this->error_found++;
                     }
                 }
@@ -2263,8 +2249,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_1_field"]) {
                 if ($this->registration_configuration["require_registration_optional_1_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_1])) == 0) {
-                        $this->error[optional_field_1] = "please fill in the optional field 1";
+                    if (strlen(trim($this->classified_variables['optional_field_1'])) == 0) {
+                        $this->error['optional_field_1'] = "please fill in the optional field 1";
                         $this->error_found++;
                     }
                 }
@@ -2272,8 +2258,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_2_field"]) {
                 if ($this->registration_configuration["require_registration_optional_2_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_2])) == 0) {
-                        $this->error[optional_field_2] = "please fill in the optional field 2";
+                    if (strlen(trim($this->classified_variables['optional_field_2'])) == 0) {
+                        $this->error['optional_field_2'] = "please fill in the optional field 2";
                         $this->error_found++;
                     }
                 }
@@ -2281,8 +2267,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_3_field"]) {
                 if ($this->registration_configuration["require_registration_optional_3_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_3])) == 0) {
-                        $this->error[optional_field_3] = "please fill in the optional field 3";
+                    if (strlen(trim($this->classified_variables['optional_field_3'])) == 0) {
+                        $this->error['optional_field_3'] = "please fill in the optional field 3";
                         $this->error_found++;
                     }
                 }
@@ -2290,8 +2276,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_4_field"]) {
                 if ($this->registration_configuration["require_registration_optional_4_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_4])) == 0) {
-                        $this->error[optional_field_4] = "please fill in the optional field 4";
+                    if (strlen(trim($this->classified_variables['optional_field_4'])) == 0) {
+                        $this->error['optional_field_4'] = "please fill in the optional field 4";
                         $this->error_found++;
                     }
                 }
@@ -2299,8 +2285,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_5_field"]) {
                 if ($this->registration_configuration["require_registration_optional_5_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_5])) == 0) {
-                        $this->error[optional_field_5] = "please fill in the optional field 5";
+                    if (strlen(trim($this->classified_variables['optional_field_5'])) == 0) {
+                        $this->error['optional_field_5'] = "please fill in the optional field 5";
                         $this->error_found++;
                     }
                 }
@@ -2308,8 +2294,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_6_field"]) {
                 if ($this->registration_configuration["require_registration_optional_6_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_6])) == 0) {
-                        $this->error[optional_field_6] = "please fill in the optional field 6";
+                    if (strlen(trim($this->classified_variables['optional_field_6'])) == 0) {
+                        $this->error['optional_field_6'] = "please fill in the optional field 6";
                         $this->error_found++;
                     }
                 }
@@ -2317,8 +2303,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_7_field"]) {
                 if ($this->registration_configuration["require_registration_optional_7_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_7])) == 0) {
-                        $this->error[optional_field_7] = "please fill in the optional field 7";
+                    if (strlen(trim($this->classified_variables['optional_field_7'])) == 0) {
+                        $this->error['optional_field_7'] = "please fill in the optional field 7";
                         $this->error_found++;
                     }
                 }
@@ -2326,8 +2312,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_8_field"]) {
                 if ($this->registration_configuration["require_registration_optional_8_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_8])) == 0) {
-                        $this->error[optional_field_8] = "please fill in the optional field 8";
+                    if (strlen(trim($this->classified_variables['optional_field_8'])) == 0) {
+                        $this->error['optional_field_8'] = "please fill in the optional field 8";
                         $this->error_found++;
                     }
                 }
@@ -2335,8 +2321,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_9_field"]) {
                 if ($this->registration_configuration["require_registration_optional_9_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_9])) == 0) {
-                        $this->error[optional_field_9] = "please fill in the optional field 9";
+                    if (strlen(trim($this->classified_variables['optional_field_9'])) == 0) {
+                        $this->error['optional_field_9'] = "please fill in the optional field 9";
                         $this->error_found++;
                     }
                 }
@@ -2344,8 +2330,8 @@ class Admin_user_management extends Admin_site
 
             if ($this->registration_configuration["use_registration_optional_10_field"]) {
                 if ($this->registration_configuration["require_registration_optional_10_field"]) {
-                    if (strlen(trim($this->classified_variables[optional_field_10])) == 0) {
-                        $this->error[optional_field_10] = "please fill in the optional field 10";
+                    if (strlen(trim($this->classified_variables['optional_field_10'])) == 0) {
+                        $this->error['optional_field_10'] = "please fill in the optional field 10";
                         $this->error_found++;
                     }
                 }
@@ -2361,9 +2347,7 @@ class Admin_user_management extends Admin_site
         } else {
             return true;
         }
-    } //end of function check_info($info)
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function check_username($db)
     {
@@ -2384,7 +2368,7 @@ class Admin_user_management extends Admin_site
             }
 
             if ($result->RecordCount() > 0) {
-                $this->error[username] = "username already exists";
+                $this->error['username'] = "username already exists";
                 $this->error_found++;
             } else {
                 $sql = "select * from " . $this->confirm_table . " where username = \"" . $this->classified_variables["username"] . "\"";
@@ -2395,15 +2379,13 @@ class Admin_user_management extends Admin_site
                     return false;
                 }
                 if ($result->RecordCount() > 0) {
-                    $this->error[username] = "username currently in the registration confirmation queue";
+                    $this->error['username'] = "username currently in the registration confirmation queue";
                     $this->error_found++;
                 }
             }
         }
          return true;
-    } //end of function check_username($username)
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function get_form_variables($info)
     {
@@ -2418,9 +2400,7 @@ class Admin_user_management extends Admin_site
                 //echo $key." is the key and this is the value - ".$this->classified_variables[$key]."<br>\n";
             }
         }
-    } //end of function get_sell_form_variables ($info)
-
-//#####################################################################
+    }
 
     function check_password()
     {
@@ -2440,22 +2420,16 @@ class Admin_user_management extends Admin_site
             $this->error_found++;
         }
         return true;
-    } //end of function check_password
-
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function insert_new_user($db)
     {
         //make sure authorization is loaded.
-        if (!isset($this->product_configuration) || !is_object($this->product_configuration)) {
-            $this->product_configuration = geoPC::getInstance();
-        }
         $sql = "insert into " . $this->db->geoTables->logins_table . " (username, password, hash_type, salt, status)
 			values (?, ?, ?, ?, ?)";
         $hash_type = $this->db->get_site_setting('client_pass_hash');
         //Note: do not pass in salt since generating new password, not verifying existing
-        $hash_pass = $this->product_configuration->get_hashed_password($this->classified_variables["username"], $this->classified_variables["password"], $hash_type);
+        $hash_pass = geoPC::getInstance()->get_hashed_password($this->classified_variables["username"], $this->classified_variables["password"], $hash_type);
         $salt = '';
         if (is_array($hash_pass)) {
             $salt = $hash_pass['salt'];
@@ -2554,10 +2528,7 @@ class Admin_user_management extends Admin_site
         geoAddon::triggerUpdate('user_register', $this->classified_variables);
         $this->new_user_id = $user_id;
         return true;
-    } //end of function insert_new_user
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+    }
 
     function get_price_plan_from_group($db, $group_id = 0, $item = 0)
     {
@@ -2612,9 +2583,7 @@ class Admin_user_management extends Admin_site
             //just display the user_id
             return false;
         }
-    } //end of function get_price_plan_from_group
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 
     function increase_image_count($db, $classified_id = 0)
     {
@@ -2644,9 +2613,7 @@ class Admin_user_management extends Admin_site
         } else {
             return false;
         }
-    } //end of function increase_image_count
-
-//##################################################################################
+    }
 
     function update_account_balance($db, $user_id = 0, $amount = 0)
     {
@@ -2685,9 +2652,8 @@ class Admin_user_management extends Admin_site
         } else {
             return false;
         }
-    } //end of function update_account_balance
+    }
 
-//##################################################################################
     function display_users_list()
     {
         $this->body .= geoAdmin::m();
@@ -2705,7 +2671,6 @@ class Admin_user_management extends Admin_site
     {
     }
 
-//##################################################################################
     function display_users_view()
     {
         if ($_REQUEST["b"]) {
@@ -2740,12 +2705,12 @@ class Admin_user_management extends Admin_site
         geoAddon::triggerUpdate('Admin_user_management_update_users_view', intval($_GET['b']));
         return true;
     }
-//##################################################################################
+
     function display_users_edit()
     {
         if ($_REQUEST["b"]) {
             //edit user form
-            if (!$this->edit_user_form($this->db, $_REQUEST["b"])) {
+            if (!$this->edit_user_form($_REQUEST["b"])) {
                 return false;
             }
         } else {
@@ -2756,14 +2721,15 @@ class Admin_user_management extends Admin_site
         }
         $this->display_page();
     }
-    function update_users_edit()
+
+    public function update_users_edit()
     {
         if ($_REQUEST["b"] && $_REQUEST["c"]) {
-            return $this->update_user_info($this->db, $_REQUEST["b"], $_REQUEST["c"]);
+            return $this->update_user_info($_REQUEST["b"], $_REQUEST["c"]);
         }
         return false;
     }
-//##################################################################################
+
     function display_users_remove()
     {
         $this->body .= geoAdmin::m();
@@ -2783,7 +2749,7 @@ class Admin_user_management extends Admin_site
         }
         return false;
     }
-//##################################################################################
+
     function display_users_add()
     {
         if (PHP5_DIR) {
@@ -2812,7 +2778,7 @@ class Admin_user_management extends Admin_site
         }
         return false; //if it gets this far, user not added.
     }
-//##################################################################################
+
     function display_users_search()
     {
         if ($_REQUEST["b"]) {
@@ -2826,13 +2792,13 @@ class Admin_user_management extends Admin_site
     function update_users_search()
     {
     }
-//##################################################################################
+
     function display_users_subs_change()
     {
         if (($_REQUEST["b"]) && ($_POST["d"])) {
             $this->display_user_data($this->db, $_REQUEST["b"]);
         } elseif ($_REQUEST["b"]) {
-            $this->change_subscription_form($this->db, $_REQUEST["b"], $_REQUEST["c"]);
+            $this->change_subscription_form($_REQUEST["b"], $_REQUEST["c"]);
         } else {
             $this->list_users();
         }
@@ -2842,14 +2808,14 @@ class Admin_user_management extends Admin_site
     function update_users_subs_change()
     {
         if (($_REQUEST["b"]) && ($_POST["d"])) {
-            if (!$this->update_subscription($this->db, $_REQUEST["b"], $_REQUEST["c"], $_POST["d"])) {
+            if (!$this->update_subscription($_REQUEST["b"], $_REQUEST["c"], $_POST["d"])) {
                 return false;
             }
             return true;
         }
         return false;
     }
-//##################################################################################
+
     function display_users_subs_delete()
     {
         if ($_REQUEST["b"]) {
@@ -2896,7 +2862,7 @@ class Admin_user_management extends Admin_site
         }
         return true;
     }
-//##################################################################################
+
     function display_users_restart_ad()
     {
         $listingId = intval($_REQUEST["b"]);
@@ -3189,7 +3155,7 @@ class Admin_user_management extends Admin_site
         $tpl_vars['listing']['location'] = geoRegion::displayRegionsForListing($listingId);
         $tpl_vars['listing']['locations'] = geoListing::getRegionTrees($listingId);
         $tpl_vars['entry_date_configuration'] = $this->db->get_site_setting('entry_date_configuration');
-        $tpl_vars['price_plan_name'] = $this->get_price_plan_name($db, $listing->price_plan_id);
+        $tpl_vars['price_plan_name'] = $this->get_price_plan_name(null, $listing->price_plan_id);
         $tpl_vars['is_expired'] = $listing->isExpired();
         $plans = $this->db->GetAll("SELECT `price_plan_id`, `name` FROM " . geoTables::price_plans_table . " WHERE `applies_to` = " . (int)$listing->item_type);
         $tpl_vars['plan_choices'] = (count($plans) > 1) ? $plans : false;
@@ -3297,7 +3263,6 @@ class Admin_user_management extends Admin_site
     function update_users_max_photos()
     {
     }
-//##################################################################################
 
     public function display_users_ratings_detail()
     {
@@ -3311,7 +3276,7 @@ class Admin_user_management extends Admin_site
         $countSql = "SELECT COUNT(`from`) FROM " . geoTables::user_ratings . " WHERE `about` = ?";
 
         $ratings = $db->Execute($sql, array($about));
-        $numRatings = $db->GetOne($countSql, array($about));
+        $numRatings = (int)$db->GetOne($countSql, array($about));
 
         $tpl_vars = array();
         foreach ($ratings as $rating) {
@@ -3409,4 +3374,4 @@ class Admin_user_management extends Admin_site
         geoAdmin::m('Purged ' . $removed . ' users', geoAdmin::SUCCESS);
         return true;
     }
-} //end of class Admin_user_management
+}

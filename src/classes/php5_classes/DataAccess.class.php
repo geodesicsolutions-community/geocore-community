@@ -56,6 +56,7 @@ class DataAccess
      * The real db accessor, no files should access this directly!
      *
      * @internal
+     * @var ADOConnection
      */
     private $db;
 

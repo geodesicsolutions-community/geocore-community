@@ -1,3 +1,7 @@
+<?php
+$header = isset($header) ? $header : null;
+
+?>
 <!DOCTYPE html>
 <html>
 <head>

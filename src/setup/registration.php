@@ -54,7 +54,7 @@ function registration($db, $product, &$template, $errors = 0, $config = 0)
         $template
     );
     $string = "<input name=b[site_email] ";
-    if ($config['site_email']) {
+    if (!empty($config['site_email'])) {
         $string .= "value = \"" . $config['site_email'] . "\"";
     } else {
         $string .= "value = \"" . $config_result2['registration_admin_email'] . "\"";
