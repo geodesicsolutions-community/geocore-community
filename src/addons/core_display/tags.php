@@ -1,9 +1,5 @@
 <?php
 
-//addons/core_display/tags.php
-
-
-
 class addon_core_display_tags extends addon_core_display_info
 {
 
@@ -645,7 +641,7 @@ class addon_core_display_tags extends addon_core_display_info
                 }
             }
         }
-        if (!count($filtersToShow) && !count($activeFilters)) {
+        if (empty($filtersToShow) && empty($activeFilters)) {
             //no filters to show -- return empty
             return '';
         }
