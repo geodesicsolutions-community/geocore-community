@@ -126,9 +126,7 @@
 						</div>
 						<h4 class="title">{$common_text.502438}<!-- Site Stats --></h4>
 						<div class="content_box_3 cntr banner">
-							<a href="http://www.kqzyfj.com/click-7066924-11191670" target="_blank"><img src="{external file='images/banners/1and1_300x100.jpg'}" alt="1and1 Hosting" title="1and1 Hosting" /></a>
-							<a href="http://www.hostmonster.com/track/geodesic/resources" target="_blank"><img src="{external file='images/banners/hostmonster_300x100.jpg'}" alt="HostMonster Hosting" title="HostMonster Hosting" /></a>
-							<a href="http://lunarpages.com/id/geodesic/goto/basic" target="_blank"><img src="{external file='images/banners/lunarpages_300x100.jpg'}" alt="Lunarpages.com Hosting" title="Lunarpages.com Hosting" /></a>
+        					<a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>
 						</div>
 
 						<br />
