@@ -355,7 +355,7 @@ class Admin_user_management extends Admin_site
                 $this->body .= "<div class='form-group'>";
                 $tooltip = geoHTML::showTooltip('Admin Note', "Here, you can save a short, private note about this user, viewable only in the admin");
                 $this->body .= "<label class='control-label col-md-4 col-sm-4 col-xs-12'>Admin Note: {$tooltip}</label>";
-                $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><textarea name='c[admin_note]' class='form-control'>" . geoString::fromDB($user_data['admin_note']) . '</textarea>';
+                $this->body .= "<div class='col-md-6 col-sm-6 col-xs-12'><textarea name='c[admin_note]' class='form-control'>" . geoString::specialChars($user_data['admin_note']) . '</textarea>';
                 $this->body .= "</div>";
                 $this->body .= "</div>";
 
@@ -936,36 +936,70 @@ class Admin_user_management extends Admin_site
         $locations = $_REQUEST['locations'];
         geoRegion::setUserRegions($user_id, $locations);
 
-        $sql_query = "update " . $this->userdata_table . " set
-			firstname = \"" . addslashes($user_info["firstname"]) . "\",
-			lastname = \"" . addslashes($user_info["lastname"]) . "\",
-			company_name = \"" . addslashes($user_info["company_name"]) . "\",
-			business_type = \"" . addslashes($user_info["business_type"]) . "\",
-			url = \"" . addslashes($user_info["url"]) . "\",
-			address = \"" . addslashes($user_info["address"]) . "\",
-			address_2 = \"" . addslashes($user_info["address_2"]) . "\",
-			city = \"" . addslashes($user_info["city"]) . "\",
-			state = \"" . $user_info["state"] . "\",
-			zip = \"" . addslashes($user_info["zip"]) . "\",
-			country = \"" . $user_info["country"] . "\",
-			" . (($user_id != 1) ? "email = \"" . addslashes($user_info["email"]) . "\"," : "") . "
-			phone = \"" . addslashes($user_info["phone"]) . "\",
-			phone2 = \"" . addslashes($user_info["phone2"]) . "\",
-			fax = \"" . addslashes($user_info["fax"]) . "\",
-			optional_field_1 = \"" . addslashes($user_info["optional_field_1"]) . "\",
-			optional_field_2 = \"" . addslashes($user_info["optional_field_2"]) . "\",
-			optional_field_3 = \"" . addslashes($user_info["optional_field_3"]) . "\",
-			optional_field_4 = \"" . addslashes($user_info["optional_field_4"]) . "\",
-			optional_field_5 = \"" . addslashes($user_info["optional_field_5"]) . "\",
-			optional_field_6 = \"" . addslashes($user_info["optional_field_6"]) . "\",
-			optional_field_7 = \"" . addslashes($user_info["optional_field_7"]) . "\",
-			optional_field_8 = \"" . addslashes($user_info["optional_field_8"]) . "\",
-			optional_field_9 = \"" . addslashes($user_info["optional_field_9"]) . "\",
-			optional_field_10 = \"" . addslashes($user_info["optional_field_10"]) . "\",
-			admin_note = \"" . geoString::toDB($user_info['admin_note']) . "\"
-			where id = " . $user_id;
+        $sql_query = "update $this->userdata_table set
+			firstname = ?,
+			lastname = ?,
+			company_name = ?,
+			business_type = ?,
+			url = ?,
+			address = ?,
+			address_2 = ?,
+			city = ?,
+			state = ?,
+			zip = ?,
+			country = ?,
+			phone = ?,
+			phone2 = ?,
+			fax = ?,
+			optional_field_1 = ?,
+			optional_field_2 = ?,
+			optional_field_3 = ?,
+			optional_field_4 = ?,
+			optional_field_5 = ?,
+			optional_field_6 = ?,
+			optional_field_7 = ?,
+			optional_field_8 = ?,
+			optional_field_9 = ?,
+			optional_field_10 = ?,
+			admin_note = ?
+			where id = ?";
 
-        $result = $this->db->Execute($sql_query);
+        $result = $this->db->Execute(
+            $sql_query,
+            [
+                $user_info["firstname"],
+                $user_info['lastname'],
+			    $user_info['company_name'],
+			    $user_info['business_type'],
+                $user_info['url'],
+			    $user_info['address'],
+			    $user_info['address_2'],
+                $user_info['city'],
+                $user_info['state'],
+                $user_info['zip'],
+                $user_info['country'],
+                $user_info['phone'],
+                $user_info['phone2'],
+                $user_info['fax'],
+                $user_info['optional_field_1'],
+                $user_info['optional_field_2'],
+                $user_info['optional_field_3'],
+                $user_info['optional_field_4'],
+                $user_info['optional_field_5'],
+                $user_info['optional_field_6'],
+                $user_info['optional_field_7'],
+                $user_info['optional_field_8'],
+                $user_info['optional_field_9'],
+                $user_info['optional_field_10'],
+                $user_info['admin_note'],
+                $user_id
+            ]
+        );
+
+        if ((int)$user_id !== 1) {
+            // only set email if not main admin account
+            $this->db->Execute("update $this->userdata_table set email=?", [$user_info['email']]);
+        }
 
         if ($user_info['apply_to_all_email']) {
             $class_sql_query = "UPDATE " . $this->classifieds_table . " SET email = \"" . $user_info['email'] . "\" WHERE seller = " . $user_id;
@@ -976,7 +1010,7 @@ class Admin_user_management extends Admin_site
         }
 
         if (!$result) {
-            if ($this->debug_user) {
+            if ($this->debug_user || true) {
                 echo $this->db->ErrorMsg() . "<br>";
                 echo $sql_query . " is the query<br>\n";
             }

@@ -852,7 +852,7 @@ class Admin_site
         $this->body .= geoHTML::addOption('Status:', $current_status);
 
         if ($user_data['admin_note']) {
-            $this->body .= geoHTML::addOption('Admin Note: ', nl2br(geoString::fromDB($user_data['admin_note'])));
+            $this->body .= geoHTML::addOption('Admin Note: ', nl2br(geoString::specialChars($user_data['admin_note'])));
         }
 
         if (strlen(trim($user_data["company_name"])) > 0) {
