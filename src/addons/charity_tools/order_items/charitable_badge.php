@@ -205,7 +205,7 @@ class charitable_badgeOrderItem extends geoOrderItem
             );
         }
 
-        if (!count($tpl_vars['badges'])) {
+        if (empty($tpl_vars['badges'])) {
             //no badges active for this region. nothing to show
             return '';
         }
@@ -216,7 +216,7 @@ class charitable_badgeOrderItem extends geoOrderItem
         $return = array (
             'checkbox_name' => '', //manually created checkbox
             'title' => '',
-            'help_id' => $tooltip,//manually created
+            'help_id' => null,//manually created
             'price_display' => '',
             //templates - over-write mini-template to do things like set margine or something:
             'entire_box' => $tpl->fetch('charitable_badge_choices.tpl'),
