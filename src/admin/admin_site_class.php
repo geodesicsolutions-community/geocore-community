@@ -2159,6 +2159,9 @@ class Admin_site
     }
     function add_sub_categories_for_dropdown(&$show_category, $parent, $dropdown_limit = 0)
     {
+        if (empty($show_category[$parent])) {
+            return;
+        }
         $ids = array_keys($show_category[$parent]);
         foreach ($ids as $id) {
             $pre_stage = "";

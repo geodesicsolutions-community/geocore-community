@@ -6,7 +6,7 @@
 <div class="page-title1">Template(s) Attached to:
 	<span class="color-primary-two">
 		{if $addonTitle}
-			{$addonTitle} - 
+			{$addonTitle} -
 		{/if}
 		{$pageName}
 		{if $advMode}
@@ -19,7 +19,8 @@
 <fieldset>
 	<legend>Edit Template(s) Attached to this Page</legend>
 	<div class='x_content'>
-		{if !$read_only}<form action="index.php?page=page_attachments_edit&amp;pageId={$pageId|escape}&amp;t_set={$t_set|escape}" class="form-horizontal form-label-left" method="post">{/if}
+		{if !$read_only}<form action="index.php?page=page_attachments_edit&amp;pageId={$pageId|escape}&amp;t_set={$t_set|escape}" class="form-horizontal form-label-left" method="post">
+        {else}<div class="form-horizontal">{/if}
 			{if $read_only}
 				<div class="{cycle values="row_color1,row_color2"}">
 					<div class="leftColumn">VIEW ONLY</div>
@@ -37,7 +38,7 @@
 						<div class="rightColumn">
 							<span class="text_green">{$t_set}</span>
 							<br />
-							<strong>Change to:</strong> 
+							<strong>Change to:</strong>
 							{foreach from=$workWithList item=workWith}
 								{if $workWith!=$t_set}
 									[<a href="index.php?page=page_attachments_edit&amp;pageId={$pageId|escape}&amp;t_set={$workWith|escape}">{$workWith}</a>] &nbsp;
@@ -50,14 +51,14 @@
 				{*  Commenting out for now, don't think this is a feature that
 					would be used much, and it just makes things more complicated...
 					The below would be the alternate to showing "Attachment(s) Saved For:" above
-					
+
 				<div class="{cycle values="row_color1,row_color2"}">
 					<div class="leftColumn">Attachments from:</div>
 					<div class="rightColumn">
 						<strong>{$t_set}</strong>/main_page/attachments/templates_to_page/{$pageId}.php
 						{if $workWithList.1}
 							<br />
-							<strong>Change to:</strong> 
+							<strong>Change to:</strong>
 							{foreach from=$workWithList item=workWith}
 								{if $workWith!=$t_set}
 									[<a href="index.php?page=page_attachments_edit&amp;pageId={$pageId|escape}&amp;t_set={$workWith|escape}">{$workWith}</a>] &nbsp;
@@ -99,30 +100,32 @@
 				<div class='form-group'>
 				<label class='control-label col-md-5 col-sm-5 col-xs-12'>Page URL: </label>
 				  <div class='col-md-6 col-sm-6 col-xs-12'>
-				  	<span class='vertical-form-fix'>						
+				  	<span class='vertical-form-fix'>
 				  		{if $addon}
 							<a href="{$classifieds_url}?a=ap&amp;addon={$addon}&amp;page={$addonPage}" onclick="window.open(this.href); return false;">{$classifieds_url}?a=ap&amp;addon={$addon}&amp;page={$addonPage}</a>
 						{/if}
 						{if $pageInfo.extraPage}
 							<a href="{$classifieds_url}?a=28&amp;b={$pageId}" onclick="window.open(this.href); return false;">{$classifieds_url}?a=28&amp;b={$pageId}</a>
-						{/if}						
+						{/if}
 					</span>
 				  </div>
 				</div>
 			{/if}
-			
+
 			<div class='form-group'>
 			<label class='control-label col-md-4 col-sm-4 col-xs-12'>Default Template Attachment: </label>
-			  <div class='col-md-6 col-sm-6 col-xs-12'>
+			<div class='col-md-6 col-sm-6 col-xs-12'>
 				{if $attachments.1.0 && !$templates[$attachments.1.0]}
 					<div class="error"><strong>Warning:</strong> Could not find the current template attached (<strong>{$attachments.1.0}</strong>) within working-with template sets.
 						If you save changes, the default template will be changed to the selected template below.
 					</div>
 				{/if}
 				{if $read_only}
-					{$attachments.1.0}
+					<span style="font-weight: bold;">
+                        <div class="form-control col-md-7 col-xs-12">{$attachments.1.0}</div>
+                    </span>
 				{else}
-					<span style="font-weight: bold;">{include file="design/parts/templateDropdown.tpl" templateSelected=$attachments.1.0 selectName='attachments[1][0]' selectId=defaultTemplate}</span>
+					<span style="font-weight: bold;">{include file="admin/design/parts/templateDropdown.tpl" templateSelected=$attachments.1.0 selectName='attachments[1][0]' selectId=defaultTemplate}</span>
 				{/if}
 				{if $from_defaults}
 					<br /><div class="error"><strong>Note:</strong>  Attachments loaded from defaults.  Verify/change template attachment(s) and save changes.</div>
@@ -131,13 +134,13 @@
 				{/if}
 			  </div>
 			</div>
-					
+
 			<div class='header-color-primary-one'>{if $pageInfo.categoryPage && $is_ent}Category &amp; {/if}Language-Specific Template Attachments</div>
 			<p class="page_note">
-				You can attach templates on a language 
-				{if $pageInfo.categoryPage && $is_ent}and/or category{/if} specific basis 
-				by adding such attachments below.  The <strong>default template</strong> 
-				attachment set above will be used if there is no template 
+				You can attach templates on a language
+				{if $pageInfo.categoryPage && $is_ent}and/or category{/if} specific basis
+				by adding such attachments below.  The <strong>default template</strong>
+				attachment set above will be used if there is no template
 				attached for a specific language {if $pageInfo.categoryPage && $is_ent}or category{/if}.
 			</p>
 
@@ -196,7 +199,7 @@
 						<tr class="col_ftr">
 							<td></td>
 							<td>
-								
+
 								<select name="new[cat][languageId]" class="form-control col-md-7 col-xs-12">
 									{foreach from=$languages item=lang key=langId}
 										<option value="{$langId}">{if $langId!=1}{$langId} - {/if}{$lang}</option>
@@ -224,13 +227,13 @@
 				</tbody>
 			</table>
 			</div>
-			
+
 			{if $has_cat_tpls}
 				<br />
 				<p class="page_note">
 					<strong style="color: red;">** Note:</strong> You have at least one category-specific template attachment that
 					will not be used, because category specific templates is an Enterprise only feature.
-					
+
 					You can view and remove category specific template attachments, but you will not be able to add new ones or
 					edit existing category attachments.  Note that you CAN have language-specific template attachments
 					on any edition.
@@ -318,7 +321,7 @@
 							<tr class="col_ftr">
 								<td></td>
 								<td>
-									
+
 									<select name="new[extra][languageId]">
 										{foreach from=$languages item=lang key=langId}
 											<option value="{$langId}">{if $langId!=1}{$langId} - {/if}{$lang}</option>
@@ -334,19 +337,19 @@
 				</table>
 				</div>
 			{/if}
-			
-			
+
+
 			{if !$read_only}
 				<br /><div style="text-align: center;"><input type="submit" name="auto_save" value="Save" /></div>
 			{/if}
-		{if !$read_only}</form>{/if}		
+		{if !$read_only}</form>{else}</div>{/if}
 
 	</div>
 </fieldset>
 
 		<div style='padding: 5px;'><a href="index.php?page=page_attachments" class='back_to'>
 			<i class='fa fa-backward'> </i> Back to Page Attachments</a></div>
-		
+
 		{if $addonTitle}
 			<div style='padding: 5px;'><a href="index.php?page=page_attachments&amp;addon={$addon|escape}" class='back_to'>
 			<i class='fa fa-backward'> </i> List All {$addonTitle} Pages</a></div>
