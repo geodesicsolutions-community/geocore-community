@@ -32,6 +32,7 @@
         "cs-check": "phpcs -s --standard=./contrib/phpcs-ruleset.xml",
         "cs-fix": "phpcbf --colors --standard=./contrib/phpcs-ruleset.xml",
         "stan": "php -d memory_limit=2G src/vendor/bin/phpstan analyse src",
+        "scan-all": "bash contrib/scan-all",
         "build-release": "bash contrib/build-release"
     }
 }

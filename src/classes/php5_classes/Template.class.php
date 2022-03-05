@@ -1186,12 +1186,12 @@ class geoTemplate extends Smarty {
 		}
 		$trial = ' :: <span style="color: red;">TRIAL VERSION</span> :: ';
 
-		$classOnly = 'http://geodesicsolutions.com/software/classifieds-only.html';
-		$auctionOnly = 'http://geodesicsolutions.com/software/auctions-only.html';
-		$home = 'http://geodesicsolutions.com/';
+		$classOnly = 'https://geodesicsolutions.org';
+		$auctionOnly = 'https://geodesicsolutions.org';
+		$home = 'https://geodesicsolutions.org/';
 
 		$poweredBy = "$js<div style='text-align: center; background-color: white; color: black; font-weight: bold; margin: 10px; border: 1px solid black; padding: 5px;'>
-		$trial<a href='$classOnly'>Classified Ad Software</a> and <a href='$auctionOnly'>Auction Software</a> Powered by <a href='$home'>Geodesic Solutions, LLC</a>$trial</div>";
+		$trial<a href='$classOnly'>Classified Ad Software</a> and <a href='$auctionOnly'>Auction Software</a> Powered by <a href='$home'>GeoCore Community Edition (CE)</a>$trial</div>";
 
 		if (!geoPC::is_trial()) {
 			//just normal powered by text with embedded logo image
@@ -1218,7 +1218,7 @@ class geoTemplate extends Smarty {
 			}
 
 			$img = '<img src="'.$source.'" alt="" style="vertical-align: -2px; width: 13px; height: 13px;" />';
-			$poweredBy = "<div style=\"clear: both; text-align: center; color: #a9a9a9; font-size: 10px; font-weight: bold; margin:33px 10px 10px 10px; padding:5px;\"><a href=\"$home\" style=\"color: #a9a9a9; text-decoration: none;\" onclick=\"window.open(this.href); return false;\" rel=\"nofollow\">{$img} Powered by Geodesic Solutions, LLC</a></div>";
+			$poweredBy = "<div style=\"clear: both; text-align: center; color: #a9a9a9; font-size: 10px; font-weight: bold; margin:33px 10px 10px 10px; padding:5px;\"><a href=\"$home\" style=\"color: #a9a9a9; text-decoration: none;\" onclick=\"window.open(this.href); return false;\" rel=\"nofollow\">{$img} Powered by GeoCore Community Edition (CE)</a></div>";
 		}
 
 		$search = array('/<\/body[^>]*\>/i','/<body([^>]*)\>/i');

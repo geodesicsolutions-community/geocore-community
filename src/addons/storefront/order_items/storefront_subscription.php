@@ -1,9 +1,5 @@
 <?php
 
-//order_items/storefront_subscription.php
-
-# storefront addon
-
 class storefront_subscriptionOrderItem extends geoOrderItem
 {
     var $defaultProcessOrder = 25;
@@ -668,7 +664,17 @@ class storefront_subscriptionOrderItem extends geoOrderItem
         $share_fees = geoAddon::getUtil('share_fees');
         $price_plans_with_free_storefronts = geoAddon::getUtil('storefront')->getPricePlansWithFreeStorefronts();
         //Display the button, only when user is outside of their storefront expiration.
-        if ($planItem->getEnabled() && (!$cart->order || ($cart->order && count($cart->order->getItem(self::type)) == 0)) && (!in_array($pricePlanId, $price_plans_with_free_storefronts))) {
+        if (
+            $planItem->getEnabled()
+            && (
+                !$cart->order
+                || (
+                    $cart->order
+                    && count($cart->order->getItem(self::type) ?: []) == 0
+                )
+            )
+            && !in_array($pricePlanId, $price_plans_with_free_storefronts)
+        ) {
             $msgs = geoAddon::getText('geo_addons', 'storefront');
             if ($inModule) {
                 //really being called by my_account_links_newButton - same logic, different return value

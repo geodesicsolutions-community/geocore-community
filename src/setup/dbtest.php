@@ -27,7 +27,7 @@ function dbtest(&$template)
             $template = str_replace("(!DRIVER_ERROR!)", "", $template);
         }
 
-        if ($persistent_connections) {
+        if (!empty($persistent_connections)) {
             //echo " Persistent Connection <bR>";
             if (!($db->PConnect($db_host, $db_username, $db_password, $database))) {
                 $template = str_replace("(!CONNECT_ERROR!)", "ERROR!!!  Could not connect to database.<br>Please check

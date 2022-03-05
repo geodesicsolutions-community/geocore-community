@@ -36,3 +36,6 @@ RUN sed -i -e "s/html/html\/src/g" /etc/apache2/sites-enabled/000-default.conf
 
 # enable apache module rewrite
 RUN a2enmod rewrite
+
+# use default developer config
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"

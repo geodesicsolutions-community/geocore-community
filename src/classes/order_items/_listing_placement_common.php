@@ -1,7 +1,5 @@
 <?php
 
-//order_items/_listing_placement_common.php
-
 require_once CLASSES_DIR . PHP5_DIR . 'OrderItem.class.php';
 
 abstract class _listing_placement_commonOrderItem extends geoOrderItem
@@ -1152,7 +1150,9 @@ abstract class _listing_placement_commonOrderItem extends geoOrderItem
             //gotten to setting the required fields yet.
 
             $errors = $cart->getErrorMsgs();
-            $errors = array_merge($errors, $cart->site->error_variables);
+            if (!empty($cart->site->error_variables)) {
+                $errors = array_merge($errors, $cart->site->error_variables);
+            }
             $tpl_vars['error_msgs'] = $errors;
         }
 

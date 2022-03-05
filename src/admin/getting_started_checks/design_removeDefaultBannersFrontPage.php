@@ -49,6 +49,9 @@ class design_removeDefaultBannersFrontPage extends geoGettingStartedCheck
     {
         $name = 'front_page.tpl';
         $custom = file_get_contents(geoTemplate::getFilePath(geoTemplate::MAIN_PAGE, '', $name));
-        return (strpos($custom, '<a href="#"><img src="{external file=\'images/banners/banner2.jpg\'}" alt="" /></a>') === false);
+        if (strpos($custom, 'sample_300x100.jpg') || strpos($custom, '1and1_300x100.jpg')) {
+            return false;
+        }
+        return true;
     }
 }
