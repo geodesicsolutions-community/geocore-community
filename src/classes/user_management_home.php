@@ -272,8 +272,8 @@ class User_management_home extends geoSite
 
         //get all live, standard auctions ending in the next day that user has bid on,
         //that are not buy now with price_applies=item
-        $sql = "SELECT distinct(class.id) as a_id FROM `geodesic_classifieds` as class, `geodesic_auctions_bids` as bids WHERE 
-				class.id = bids.auction_id AND class.item_type = 2 AND bids.bidder = " . $this->user_id . " AND class.live = 1 
+        $sql = "SELECT distinct(class.id) as a_id FROM `geodesic_classifieds` as class, `geodesic_auctions_bids` as bids WHERE
+				class.id = bids.auction_id AND class.item_type = 2 AND bids.bidder = " . $this->user_id . " AND class.live = 1
 				AND (class.auction_type = 1 OR class.auction_type = 3) AND class.price_applies='lot' AND class.ends > " . (geoUtil::time() - 60 * 60 * 24);
         $result = $this->db->Execute($sql);
 
@@ -285,11 +285,11 @@ class User_management_home extends geoSite
              $bidded[] = $auction['a_id'];
         }
 
-
+        $win = $lose = [];
         foreach ($bidded as $idToCheck) {
             //standard auctions
-            $sql = "SELECT b.`auction_id`, b.`bidder` FROM " . geoTables::bid_table . " as b, " . geoTables::classifieds_table . " as c 
-			WHERE b.auction_id = c.id AND b.`auction_id` = " . $idToCheck . " AND c.auction_type = 1 ORDER BY 
+            $sql = "SELECT b.`auction_id`, b.`bidder` FROM " . geoTables::bid_table . " as b, " . geoTables::classifieds_table . " as c
+			WHERE b.auction_id = c.id AND b.`auction_id` = " . $idToCheck . " AND c.auction_type = 1 ORDER BY
 					b.`bid` DESC, b.`time_of_bid` ASC LIMIT 1";
             $line = $this->db->GetRow($sql);
             if ($line['bidder'] == $this->user_id) {
@@ -382,12 +382,12 @@ class User_management_home extends geoSite
                                             'link2text' => $this->messages[500562]);
         }
 
-        if (count($feedback['table']) > $this->tableRows) {
+        if (!empty($feedback['table']) && count($feedback['table']) > $this->tableRows) {
             //remove extra listings
             array_splice($feedback['table'], $this->tableRows);
         }
 
-        if (count($feedback['table']) > 0) {
+        if (!empty($feedback['table']) && count($feedback['table']) > 0) {
             $sql = "select auction_id from " . geoTables::auctions_feedbacks_table . " where rater_user_id=? AND done=0";
             $result = $this->db->Execute($sql, array($this->user_id));
             $feedbackCount = 0;
@@ -434,11 +434,12 @@ class User_management_home extends geoSite
         if ($this->messages[500568]) {
             $classStats['rows'][] = array('label' => $this->messages[500568] . $totalClass);
         }
-        if ($this->messages[500569] && geoPC::is_ent()) {
+        if ($this->messages[500569]) {
             $classStats['rows'][] = array('label' => $this->messages[500569] . $totalSold);
         }
-        if ($this->messages[500570] && geoPC::is_ent()) {
-            $classStats['rows'][] = array('label' => $this->messages[500570] . (round(($totalSold / $totalClass * 100), 2)) . "%");
+        if ($this->messages[500570]) {
+            $percent = $totalClass ? round(($totalSold / $totalClass * 100), 2) : 0;
+            $classStats['rows'][] = array('label' => $this->messages[500570] . $percent . "%");
         }
 
         $classStats['display'] = ($this->db->get_site_setting('my_account_show_classifieds')) ? true : false;
@@ -470,7 +471,7 @@ class User_management_home extends geoSite
                 $class['table'][$line['id']] = array('title' => geoString::fromDB($line['title']),
                                             'link' => $this->index . "?a=2&amp;b=" . $line['id']);
             }
-            if (count($class['table'])) {
+            if (!empty($class['table'])) {
                 $sql = "SELECT count(id) FROM " . geoTables::classifieds_table . " WHERE `seller` = ?
 					 AND `sold_displayed` = 1 AND `item_type` = 1 AND `ends` > ?";
                 $classCount = $this->db->GetOne($sql, array($this->user_id, $recent));
@@ -485,20 +486,20 @@ class User_management_home extends geoSite
 
         if ($usingAuctions) {
             //most recently closed auctions with a bid above reserve
-            $sql = "SELECT class.id, class.title, class.ends 
-					 FROM " . geoTables::classifieds_table . " as class, " . geoTables::bid_table . " as bids 
-			 		 WHERE bids.auction_id = class.id AND ((bids.bid >= class.reserve_price AND class.auction_type!=3) OR (bids.bid <= class.reserve_price AND class.auction_type=3)) 
-			 		 AND class.seller = ? AND class.live = 0 AND class.item_type = 2 AND class.ends > ? 
+            $sql = "SELECT class.id, class.title, class.ends
+					 FROM " . geoTables::classifieds_table . " as class, " . geoTables::bid_table . " as bids
+			 		 WHERE bids.auction_id = class.id AND ((bids.bid >= class.reserve_price AND class.auction_type!=3) OR (bids.bid <= class.reserve_price AND class.auction_type=3))
+			 		 AND class.seller = ? AND class.live = 0 AND class.item_type = 2 AND class.ends > ?
 			 		 GROUP BY class.id ORDER BY class.ends DESC LIMIT " . $this->tableRows;
             $result = $this->db->Execute($sql, array($this->user_id, $recent));
             while ($line = $result->FetchRow()) {
                 $auc['table'][$line['id']] = array('title' => geoString::fromDB($line['title']),
                                             'link' => $this->index . "?a=2&amp;b=" . $line['id']);
             }
-            if (count($auc['table'])) {
-                $sql = "SELECT class.id 
-					 FROM " . geoTables::classifieds_table . " as class, " . geoTables::bid_table . " as bids 
-			 		 WHERE bids.auction_id = class.id AND ((bids.bid >= class.reserve_price AND class.auction_type!=3) OR (bids.bid <= class.reserve_price AND class.auction_type=3)) 
+            if (!empty($auc['table'])) {
+                $sql = "SELECT class.id
+					 FROM " . geoTables::classifieds_table . " as class, " . geoTables::bid_table . " as bids
+			 		 WHERE bids.auction_id = class.id AND ((bids.bid >= class.reserve_price AND class.auction_type!=3) OR (bids.bid <= class.reserve_price AND class.auction_type=3))
 			 		 AND class.seller = ? AND class.live = 0 AND class.item_type = 2 AND class.ends > ?
 			 		 GROUP BY class.id";
                 $result = $this->db->Execute($sql, array($this->user_id, $recent));
