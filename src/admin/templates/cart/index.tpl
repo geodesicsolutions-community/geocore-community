@@ -100,7 +100,7 @@ div.field, input.editor_field {
 						</li>
 					</ul>
 				{/if}
-		
+
 				{if $cartLinks}
 					<h1 class="subtitle">
 						Add Items:
@@ -125,7 +125,7 @@ div.field, input.editor_field {
 							</li>
 						{/foreach}
 					</ul>
-				
+
 					{if $cartUserId && $cartStepIndex=='cart' && !$cartAction}
 						<h1 class="subtitle">Swap with Client's Cart</h1>
 						<ul>
@@ -149,9 +149,9 @@ div.field, input.editor_field {
 			</div>
 		</div>
 	</fieldset>
-	
+
 	{if $ordersInProgress}
-		{include file='cart/orders_in_progress.tpl' showLinkWarning=1}
+		{include file='admin/cart/orders_in_progress.tpl' showLinkWarning=1}
 	{/if}
 	<div class="clearColumn"></div>
 </div>
@@ -161,9 +161,9 @@ div.field, input.editor_field {
 		<legend>Admin-Side Cart for {$cartUsername} ({$cartUserId})</legend>
 		<div style="position: relative;">
 			{if $cart_tpl_files.body_html_system}
-				{include file=$cart_tpl_files.body_html g_type='system' g_resource=$cart_tpl_files.body_html_system}
+				{include file="system/{$cart_tpl_files['body_html_system']}/{$cart_tpl_files['body_html']}"}
 			{elseif $cart_tpl_files.body_html_addon}
-				{include file=$cart_tpl_files.body_html g_type='addon' g_resource=$cart_tpl_files.body_html_addon}
+				{include file="addon/{$cart_tpl_files['body_html_addon']}/{$cart_tpl_files['body_html']}"}
 			{elseif $cart_tpl_files.body_html}
 				{include file=$cart_tpl_files.body_html}
 			{elseif !$cart_body}
