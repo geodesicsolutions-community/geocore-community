@@ -51,25 +51,27 @@ $versions['20.0.0'] = [
 
 $versions['18.02.0'] = array(
     'to' => '20.0.0',
-    'folder' => 'none',
+    // Use older update to get new field that was missed in previous "new install" SQL snapshot
+    'folder' => '17.12.0',
 );
 
 $versions['17.12.0'] = array(
-        'to' => '18.02.0',
-        'folder' => 'none',
-        'changelog' => '17.12.0/changelog.html'
+    'to' => '20.0.0',
+    // Use older update to get new field that was missed in previous "new install" SQL snapshot
+    'folder' => '17.12.0',
+    'changelog' => '17.12.0/changelog.html'
 );
 
 $versions['17.10.0'] = array(
-        'to' => '17.12.0',
-        'folder' => '17.12.0'
+    'to' => '20.0.0',
+    'folder' => '17.12.0'
 );
 
 $versions['17.05.0'] = $versions['17.07.0'] = $versions['17.10.0'];
 
 
 $versions['17.04.0'] = array(
-        'to' => '17.12.0',
+        'to' => '20.0.0',
         'folder' => '17.12.0',
         'changelog' => '17.04.0/changelog.html',
 );
