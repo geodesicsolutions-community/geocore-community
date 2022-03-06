@@ -5,9 +5,9 @@
  * want to customize the CSS, copy the applicable CSS section(s) to this file
  * and customize here.  It is recommended to use the admin edit tool as it makes
  * this process a little easier.
- * 
+ *
  * --- Caveat: Background Images ---
- * 
+ *
  * Note that images loaded in the CSS are relative, so if the default CSS file
  * specifies a URL like url('../images/background.jpg') - since it is relative,
  * it will use background.jpg from the default template set, NOT your custom template
@@ -24,32 +24,32 @@ body { font-size: 1em; }
    ========================================================================== */
 
 .logo-box {
-	background: none no-repeat scroll right top white;
-	min-width: 300px;
-	min-height: 80px;
-	margin: 10px 0 0 0;
-	text-align: center;
+    background: none no-repeat scroll right top white;
+    min-width: 300px;
+    min-height: 80px;
+    margin: 10px 0 0 0;
+    text-align: center;
 }
 .logo-box .logo img {
     padding: 10px 0 0;
 }
 .fixed-link-logo {
-	background-color: #fff;
-	display: inline-block;
-	height: 34px;
-	left: 50%;
-	margin: 4px 0 0 -65px;
-	overflow: hidden;
-	position: absolute;
-	text-align: center;
-	text-decoration: none;
-	width: 130px;
+    background-color: #fff;
+    display: inline-block;
+    height: 34px;
+    left: 50%;
+    margin: 4px 0 0 -65px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    width: 130px;
 }
 
 .welcome-login {
-	display:inline; 
-	margin-left: 0.3em;
-	left: 5px;
+    display:inline;
+    margin-left: 0.3em;
+    left: 5px;
 }
 
 header.page {
@@ -57,48 +57,48 @@ header.page {
 }
 
 .user-welcome {
-	margin-right: 5px;
+    margin-right: 5px;
 }
 
 /* 52em = 832px */
 @media only screen and (min-width: 52em) {
-	.welcome-login {
-		left: 0;
-	}
-	.user-links .menu-link {
-		color: #31C461;
-	}
+    .welcome-login {
+        left: 0;
+    }
+    .user-links .menu-link {
+        color: #31C461;
+    }
 }
 
 /* 52em = 832px */
 @media only screen and (max-width: 52em) {
-	.logo-box {
-		min-width: 275px;
-		max-width: 100%;
-		text-align: center;
-		width: 100%;
-		margin: 0;
-	}
-	.logo-box img {
-    	max-width: 100%;
-		min-width: auto;
-	}
-	.fb_button, .fb_button_rtl {
-		margin: 3px;
-	}
-	.user-welcome {
-		font-size: 1.2em;
-	}
-	header.page {
-		min-height: 0.5em;
-	}
+    .logo-box {
+        min-width: 275px;
+        max-width: 100%;
+        text-align: center;
+        width: 100%;
+        margin: 0;
+    }
+    .logo-box img {
+        max-width: 100%;
+        min-width: auto;
+    }
+    .fb_button, .fb_button_rtl {
+        margin: 3px;
+    }
+    .user-welcome {
+        font-size: 1.2em;
+    }
+    header.page {
+        min-height: 0.5em;
+    }
 }
 
 /* 18em = 288px */
 @media only screen and (max-width: 18em) {
-	.logo-box {
-		min-width: 200px;
-	}
+    .logo-box {
+        min-width: 200px;
+    }
 }
 
 /* ==========================================================================
@@ -106,22 +106,22 @@ header.page {
    ========================================================================== */
 
 .search-box-hdr {
-	display: inline;
-	float: right;
-	text-align: right;
-	background-color: #DDD;
-	color: #666;
-	border-radius: 0.3em;
+    display: inline;
+    float: right;
+    text-align: right;
+    background-color: #DDD;
+    color: #666;
+    border-radius: 0.3em;
     position: absolute;
     right: 5px;
     top: 90px;
-	z-index: 10;
+    z-index: 10;
 }
 
 form.searchbox input.keyword {
-	width: 25em;
-	font-family: 'trebuchet MS', arial, helvetica;
-	background: url("../images/backgrounds/form_input.gif") repeat-x scroll left top #fff;
+    width: 25em;
+    font-family: 'trebuchet MS', arial, helvetica;
+    background: url("../images/backgrounds/form_input.gif") repeat-x scroll left top #fff;
     border: thin solid #b9b9b9;
     border-radius: 0.31em;
     color: #666;
@@ -132,20 +132,20 @@ form.searchbox input.keyword {
 }
 
 form.searchbox input.keyword::-webkit-input-placeholder {
-	/* WebKit browsers */
-	color: #9c9c9c;
+    /* WebKit browsers */
+    color: #9c9c9c;
 }
 form.searchbox input.keyword:-moz-placeholder {
-	/* Mozilla Firefox 4 to 18 */
-	color: #9c9c9c;
+    /* Mozilla Firefox 4 to 18 */
+    color: #9c9c9c;
 }
 form.searchbox input.keyword::-moz-placeholder {
-	/* Mozilla Firefox 19+ */
-	color: #9c9c9c;
+    /* Mozilla Firefox 19+ */
+    color: #9c9c9c;
 }
 form.searchbox input.keyword:-ms-input-placeholder {
-	/* Internet Explorer 10+ */
-	color: #9c9c9c;
+    /* Internet Explorer 10+ */
+    color: #9c9c9c;
 }
 
 a.search-button, input.search-button {
@@ -164,27 +164,27 @@ a.search-button, input.search-button {
 }
 
 a.search-button:hover, input.search-button:hover {
-	background-color: #FF8B17;
+    background-color: #FF8B17;
 }
 
 .search-form {
-	border-width: 0px;
-	border-style: solid;
-	border-color: #c4d9df #a4c3ca #83afb7;
-	max-width: 100%;
-	height: 2.2em;
-	padding: 0;
-	margin: 0.625em 0.1em;
-	position: relative;
-	z-index: 10;
-	overflow: hidden;
-	text-align: center;
-	display: inline-block;	
+    border-width: 0px;
+    border-style: solid;
+    border-color: #c4d9df #a4c3ca #83afb7;
+    max-width: 100%;
+    height: 2.2em;
+    padding: 0;
+    margin: 0.625em 0.1em;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
 }
 
 .field:focus {
-	border-width: thin;
-	margin: 0;
+    border-width: thin;
+    margin: 0;
 }
 
 .field {
@@ -193,12 +193,12 @@ a.search-button:hover, input.search-button:hover {
 }
 
 .search-box-hdr .zipbox {
-	font-size: 0.75rem;
+    font-size: 0.75rem;
 }
 
 .search-box-hdr .zipbox select {
     height: 26px;
-	min-width: 80px;
+    min-width: 80px;
 }
 
 .search-box-hdr #by_zip_code {
@@ -208,16 +208,16 @@ a.search-button:hover, input.search-button:hover {
 
 /* 52em = 832px */
 @media only screen and (max-width: 52em) {
-	.search-box-hdr {
-		display: none;
-	}
+    .search-box-hdr {
+        display: none;
+    }
 }
 
 /* 18em = 288px */
 @media only screen and (max-width: 18em) {
-	.field, .editor_field {
-		padding: 0.15em;
-	}
+    .field, .editor_field {
+        padding: 0.15em;
+    }
 }
 
 /* ==========================================================================
@@ -225,44 +225,44 @@ a.search-button:hover, input.search-button:hover {
    ========================================================================== */
 
 .page-bar .menu-link {
-	float: right;
-	border: none;
-	margin: 0 2px 0 0;
-	background-color: #7C7C7C;
-	transition-duration: 0.2s;
-	background-image: none;
-	font-weight: normal;
+    float: right;
+    border: none;
+    margin: 0 2px 0 0;
+    background-color: #7C7C7C;
+    transition-duration: 0.2s;
+    background-image: none;
+    font-weight: normal;
 }
 
 .page-bar .menu-link:hover {
-	color: #FFF;
-	background: #B2B2B2 none;
-	transition-duration: 0.2s;
+    color: #FFF;
+    background: #B2B2B2 none;
+    transition-duration: 0.2s;
 }
 
 .page-bar {
-	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #888;
-	border-radius: 0.5em;
-	border: 0.1em solid #666;
-	border-right: 0;
+    background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #888;
+    border-radius: 0.5em;
+    border: 0.1em solid #666;
+    border-right: 0;
 }
 
 /* 52em = 832px */
 @media only screen and (max-width: 52em) {
-	.page-bar {
-		background: none;
-		border: none;
-		border-radius: 0;
-	}
+    .page-bar {
+        background: none;
+        border: none;
+        border-radius: 0;
+    }
 }
 
 /* 52em = 832px */
 @media only screen and (min-width: 52em) {
-	.page-bar .menu-link {
-		font-size: 1.3em;
-		padding: 0.6em;
-		min-width: 10%;
-	}
+    .page-bar .menu-link {
+        font-size: 1.3em;
+        padding: 0.6em;
+        min-width: 10%;
+    }
 }
 
 
@@ -272,54 +272,54 @@ a.search-button:hover, input.search-button:hover {
 
 div.img_fix img,
 div.ad1 img {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 /* 52em = 832px */
 @media only screen and (max-width: 52em) {
-	
-	.page-bar .menu-link {
-		background: none repeat scroll 0 0 #7c7c7c;
-		margin: 0 2px 1px 0;
-		padding-left: 20px;
-		transition-duration: 0.2s;
-		width: 100%;
-		float:none;
-	}
-	.menu-link {
-		border-radius: 0;
-		background: none repeat scroll 0 0 #7c7c7c;
-		color: #FFF;
-	}
-	.user_links {
-		background: none repeat scroll 0 0 #0d5bff;
-	}
-	.menu-link:hover {
-		background-color: #b2b2b2;
-		color: #FFF;
-	}
-	.two-column .main {
-    	width: 100%;
-	}
-	
+
+    .page-bar .menu-link {
+        background: none repeat scroll 0 0 #7c7c7c;
+        margin: 0 2px 1px 0;
+        padding-left: 20px;
+        transition-duration: 0.2s;
+        width: 100%;
+        float:none;
+    }
+    .menu-link {
+        border-radius: 0;
+        background: none repeat scroll 0 0 #7c7c7c;
+        color: #FFF;
+    }
+    .user_links {
+        background: none repeat scroll 0 0 #0d5bff;
+    }
+    .menu-link:hover {
+        background-color: #b2b2b2;
+        color: #FFF;
+    }
+    .two-column .main {
+        width: 100%;
+    }
+
 }
 
 /* FRONT PAGE DISPLAY FOR 3 COLUMNS - MENU FLOATS TO TOP FOR RWD */
 /* 52em = 832px */
 @media only screen and (min-width: 52em) {
-	.three-column .front-page .sidebar {
-		left: 0%;
-	}
-	.three-column .front-page .main {
-		left: 0%;
-	}
+    .three-column .front-page .sidebar {
+        left: 0%;
+    }
+    .three-column .front-page .main {
+        left: 0%;
+    }
 }
 
 /* 28em = 448px */
 @media only screen and (max-width: 28em) {
-	.more_featured {
-		display: none;
-	}
+    .more_featured {
+        display: none;
+    }
 
 }
 
@@ -328,20 +328,20 @@ div.ad1 img {
    ========================================================================== */
 
 h1.title {
-	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #FF9A35;
+    background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #FF9A35;
 }
 h2.title {
-	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #31C461;
+    background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #31C461;
 }
 
 .design2016 h3.title,
 h3.title {
-	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #ff9a35;
-	color: #FFF;
+    background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #ff9a35;
+    color: #FFF;
 }
 h3 {
     font-size: 1em;
-	padding: 5px 0 5px 10px;
+    padding: 5px 0 5px 10px;
 }
 
 /* ==========================================================================
@@ -355,7 +355,7 @@ h3 {
 
 .category_column {
     font-size: 0.8em;
-	padding: 5px;
+    padding: 5px;
 }
 
 /* ==========================================================================
@@ -364,25 +364,25 @@ h3 {
 
 /* 52em = 832px */
 @media only screen and (min-width: 52em) {
-	.two-column .sidebar {
-		left: -80%;
-		width: 20%;
-	}	
-	.two-column .main {
-		left: 20%;
-		width: 80%;
-	}
+    .two-column .sidebar {
+        left: -80%;
+        width: 20%;
+    }
+    .two-column .main {
+        left: 20%;
+        width: 80%;
+    }
 }
 
 /* 52em = 832px */
 @media only screen and (max-width: 52em) {
-	.two-column .main {
-    	width: 100%;
-	}
-	.two-column .sidebar {
-		left: 0;
-		width: 100%;
-	}
+    .two-column .main {
+        width: 100%;
+    }
+    .two-column .sidebar {
+        left: 0;
+        width: 100%;
+    }
 }
 
 
@@ -391,54 +391,54 @@ h3 {
    ========================================================================== */
 
 nav.footer {
-	background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #888;
-	border-radius: 0;
-	border: 0.1em solid #666;
+    background: url("../images/backgrounds/title_bar_bg2.png") repeat scroll 0 0 #888;
+    border-radius: 0;
+    border: 0.1em solid #666;
     padding-right: 40%;
 }
 
 nav.footer a:hover {
-	background-color: #666;
-	transition-duration: 0.2s;
-	text-decoration: none;
-	padding-left: 5px;
+    background-color: #666;
+    transition-duration: 0.2s;
+    text-decoration: none;
+    padding-left: 5px;
 }
 
 /* 64em = 1024px */
 @media only screen and (max-width: 64em) {
-	.blurb {
-    	display: none;
-		margin: 2em 0 0;
-	}
-	nav.footer {
-    	padding-right: 0;
-	}
-	nav.footer a {
-    	color: #fff;
-	}
-	.disclaimer {
-		text-align:center;
-	}
+    .blurb {
+        display: none;
+        margin: 2em 0 0;
+    }
+    nav.footer {
+        padding-right: 0;
+    }
+    nav.footer a {
+        color: #fff;
+    }
+    .disclaimer {
+        text-align:center;
+    }
 }
 
 /* 52em = 832px */
 @media only screen and (min-width: 52em) {
-	.blurb {
-		margin: 2em 0 0;
-	}
-	footer.page:before {
-		height: 8em;
-	}
-	nav.footer {
-		border-radius: 0.3em;
-	}
+    .blurb {
+        margin: 2em 0 0;
+    }
+    footer.page:before {
+        height: 8em;
+    }
+    nav.footer {
+        border-radius: 0.3em;
+    }
 }
 
 /* 38em = 608px */
 @media only screen and (max-width: 38em) {
-	.disclaimer {
-		font-size: 0.6rem;
-	}
+    .disclaimer {
+        font-size: 0.6rem;
+    }
 }
 
 .social-contacts {
@@ -449,7 +449,7 @@ nav.footer a:hover {
 .social-contacts a {
     opacity: 1.0;
     transition-duration: 0.6s;
-	padding: 0 5px;
+    padding: 0 5px;
 }
 .social-contacts a:hover {
     opacity: 0.7;
@@ -464,28 +464,28 @@ nav.footer a:hover {
    ========================================================================== */
 
 div.multiselect {
-	display: inline-block;
+    display: inline-block;
 }
 
 div.multiselect ul {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 div.multiselect ul li {
-	list-style: none;
-	float: left;
-	padding: 0 0 0 .625em;
+    list-style: none;
+    float: left;
+    padding: 0 0 0 .625em;
 }
 div.multiselect .or_field {
-	text-align: right;
+    text-align: right;
 }
 
 .tabList li:hover {
-	background: #FFF;
-	border: 1px solid #eaeaea;
-	border-bottom: none;
-	color: #818181;
+    background: #FFF;
+    border: 1px solid #eaeaea;
+    border-bottom: none;
+    color: #818181;
 }
 
 .tabList li.activeTab {
@@ -506,7 +506,7 @@ nav.extra-links a:hover,
 .breadcrumb .active,
 .price {
     color: #31C461;
-	background-color: linear-gradient(to right, #fff, #e9edf0);
+    background-color: linear-gradient(to right, #fff, #e9edf0);
 }
 
 .featured_items .listing_set article div.article_inner, .featured_browsing .listing_set article div.article_inner {
@@ -527,19 +527,19 @@ nav.extra-links a:hover,
 }
 
 .list-group a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .price {
-	white-space: nowrap;
+    white-space: nowrap;
 }
 
 .question {
-	width: 40%;
+    width: 40%;
 }
 
 .answer {
-	padding: 0.3em 0 !important;
+    padding: 0.3em 0 !important;
 }
 
 p, pre {
@@ -551,14 +551,14 @@ p, pre {
 }
 
 .member-since-cntnr {
-	box-sizing: content-box;
+    box-sizing: content-box;
 }
 
 /* 52em = 832px */
 @media only screen and (max-width: 52em) {
-	.main_col_spcr {
-		height: 0.5em;
-	}
+    .main_col_spcr {
+        height: 0.5em;
+    }
 }
 
 
@@ -566,11 +566,11 @@ p, pre {
    GEOCORE v16 FIXES
    ========================================================================== */
 .cz-categories {
-	display: block;
+    display: block;
 }
 
-.form-wrapper { 
-	box-sizing: content-box 
+.form-wrapper {
+    box-sizing: content-box
 }
 
 .design2016 .nav-wrapper {
@@ -578,12 +578,12 @@ p, pre {
 }
 
 .design2016 h1.my_account {
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-	border-bottom: thin dotted #535353;
-	border-radius: 0;
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	color: #535353;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-bottom: thin dotted #535353;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    color: #535353;
 }
 
 a.list-group-item:hover, a.list-group-item.active, a.list-group-item.active:hover {
@@ -595,17 +595,17 @@ a.list-group-item:hover, a.list-group-item.active, a.list-group-item.active:hove
 }
 
 @media only screen and (min-width: 52em) {
-	.user-links .menu-link {
-		color: #279e4e;
-	}
+    .user-links .menu-link {
+        color: #279e4e;
+    }
 }
 
 *, *::before, *::after {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 .legend div, .legend div::before, .legend div::after,
 .legend, .legend::before, .legend::after {
-	box-sizing: content-box;
+    box-sizing: content-box;
 }
 
 .browsing_filter_container h1.browsing_filter_title {

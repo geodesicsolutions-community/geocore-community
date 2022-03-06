@@ -8,15 +8,15 @@
  */
 
 jQuery(function () {
-	jQuery('#allTab').gjTabs('onActive', function () {
-		jQuery('#classifiedsTabContents').show();
-		jQuery('#auctionsTabContents').show();
-	});
-	
-		
-	if (jQuery('#allTab').hasClass('activeTab')) {
-		//it is currently active...  Just in case tab init has already happened
-		jQuery('#classifiedsTabContents').show();
-		jQuery('#auctionsTabContents').show();
-	}
+    jQuery('#allTab').gjTabs('onActive', function () {
+        jQuery('#classifiedsTabContents').show();
+        jQuery('#auctionsTabContents').show();
+    });
+
+
+    if (jQuery('#allTab').hasClass('activeTab')) {
+        //it is currently active...  Just in case tab init has already happened
+        jQuery('#classifiedsTabContents').show();
+        jQuery('#auctionsTabContents').show();
+    }
 });

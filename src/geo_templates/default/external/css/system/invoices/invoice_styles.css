@@ -1,99 +1,99 @@
 /* 7.5.3-36-gea36ae7 */
 
 .invoice_shell {
-	border: 2px solid #cecece;
-	width: 600px;
-	padding: 15px;
-	margin: 10px;
-	font-size: 10pt;
+    border: 2px solid #cecece;
+    width: 600px;
+    padding: 15px;
+    margin: 10px;
+    font-size: 10pt;
 }
 
 .invoice_right_column {
-	float: right;
-	width: 275px;
-	padding-top: 16px;
+    float: right;
+    width: 275px;
+    padding-top: 16px;
 }
 
 .invoice_left_column {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .invoice_total {
-	width: 50%;
-	float: right;
+    width: 50%;
+    float: right;
 }
 
 .invoice_row_even {
-	background: #f7f7f7;
-	padding: 5px;
+    background: #f7f7f7;
+    padding: 5px;
 }
 
 .invoice_row_odd {
-	background: #ffffff;
-	padding: 5px;
+    background: #ffffff;
+    padding: 5px;
 }
 
 .invoice_box {
-	border: 2px solid #cecece;
-	margin: 5px;
-	padding: 0;
+    border: 2px solid #cecece;
+    margin: 5px;
+    padding: 0;
 }
 
 .invoice_box strong.right {
-	float: right;
+    float: right;
 }
 
 .invoice_box table {
-	width: 100%;
+    width: 100%;
 }
 
 .invoice_box thead th {
-	background: #eaeaea;
-	border-bottom: 1px solid #cecece;
-	padding: 5px;
-	text-transform: uppercase;
-	font-size: 11px;
+    background: #eaeaea;
+    border-bottom: 1px solid #cecece;
+    padding: 5px;
+    text-transform: uppercase;
+    font-size: 11px;
 }
 
 .invoice_box td {
-	font-size: 8pt;
+    font-size: 8pt;
 }
 
 .amount_due,.due {
-	color: #980000;
-	font-weight: bold;
+    color: #980000;
+    font-weight: bold;
 }
 
 .amount_paid,.payment {
-	color: #7ca93a;
-	font-weight: bold;
+    color: #7ca93a;
+    font-weight: bold;
 }
 
 .amount_zero {
-	color: #737373;
-	font-weight: bold;
+    color: #737373;
+    font-weight: bold;
 }
 
 .invoice_extra_pad {
-	padding: 10px 5px;
+    padding: 10px 5px;
 }
 
 h1.invoice_label {
-	font-size: 11px;
-	text-transform: uppercase;
-	color: #4987c5;
-	margin: 3px 0;
-	padding: 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #4987c5;
+    margin: 3px 0;
+    padding: 0;
 }
 
 .clear {
-	clear: both;
+    clear: both;
 }
 
 .invoice_end {
-	font-size: 11pt;
-	text-transform: uppercase;
-	text-align: right;
+    font-size: 11pt;
+    text-transform: uppercase;
+    text-align: right;
 }
 
 .printBox
@@ -107,148 +107,148 @@ h1.invoice_label {
 
 .printBox_printFriendly
 {
-	position: relative;
-	float: right;
-	right: 20px;
-	top: -40px;
-	width: 50px;
+    position: relative;
+    float: right;
+    right: 20px;
+    top: -40px;
+    width: 50px;
 }
 
 .printBox_lightbox
 {
-	position: relative;
-	float: right;
-	right: 20px;
-	top: -47px;
-	width: 50px;
+    position: relative;
+    float: right;
+    right: 20px;
+    top: -47px;
+    width: 50px;
 }
 
 BODY.print {
-	width: 670px;
+    width: 670px;
 }
 
 .content_box {
-	border: 5px solid #eaeaea;
-	padding: 1px;
+    border: 5px solid #eaeaea;
+    padding: 1px;
 }
 
 /* ######### CART STYLES ######### */
 
 .cart_item_child {
-	border: 2px solid #eaeaea;
-	padding: 2px 10px;
-	margin: 3px 5px 3px 50px;
-	font-weight: bold;
-	font-size: 12px;
-	color: #666666;
-	/*height: 21px;*/
+    border: 2px solid #eaeaea;
+    padding: 2px 10px;
+    margin: 3px 5px 3px 50px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #666666;
+    /*height: 21px;*/
 }
 
 .cart_item_child_mini {
-	border: 2px solid #eaeaea;
-	padding: 3px 10px;
-	margin: 3px 5px 3px 50px;
-	font-weight: bold;
-	font-size: 12px;
-	color: #666666;
+    border: 2px solid #eaeaea;
+    padding: 3px 10px;
+    margin: 3px 5px 3px 50px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #666666;
 }
 
 .cart_item_child_mini ul {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .cart_item_child_mini ul li {
-	list-style: none;
-	color: #aaaaaa;
+    list-style: none;
+    color: #aaaaaa;
 }
 
 
 .cart_item_child:hover {
-	background: #ffffe1;
+    background: #ffffe1;
 }
 
 .cart_item_subtotal {
-	background: #f7f7f7;
-	border: 2px solid #eaeaea;
-	padding: 2px 10px;
-	margin: 5px 5px 15px 50px;
-	font-weight: bold;
-	font-size: 14px;
-	text-align: right;
+    background: #f7f7f7;
+    border: 2px solid #eaeaea;
+    padding: 2px 10px;
+    margin: 5px 5px 15px 50px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
 }
 
 .subtotal_cart_item,
 .tax_cart_item {
-	border: 2px solid #eaeaea;
-	padding: 2px 10px;
-	margin: 5px;
-	font-weight: bold;
-	font-size: 16px;
-	color: #666666;
-	text-align: right;
-	width: 50%;
-	float: right;
+    border: 2px solid #eaeaea;
+    padding: 2px 10px;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #666666;
+    text-align: right;
+    width: 50%;
+    float: right;
 }
 
 .total_cart_item,
 .total_order_item {
-	background: #f7f7f7;
-	border: 2px solid #eaeaea;
-	padding: 2px 10px;
-	margin: 5px;
-	font-weight: bold;
-	font-size: 16px;
-	text-align: right;
-	clear: both;
-	width: 50%;
-	float: right;
+    background: #f7f7f7;
+    border: 2px solid #eaeaea;
+    padding: 2px 10px;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: right;
+    clear: both;
+    width: 50%;
+    float: right;
 }
 
 .listing_extra_item,
 .payment_item {
-	border: 5px solid #eaeaea;
-	padding: 7px 10px;
-	margin: 5px;
-	font-weight: bold;
-	font-size: 12px;
-	background: #f7f7f7;
-	color: #666666;
-	display: block;
-	vertical-align: middle;
+    border: 5px solid #eaeaea;
+    padding: 7px 10px;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    background: #f7f7f7;
+    color: #666666;
+    display: block;
+    vertical-align: middle;
 }
 
 .listing_extra_item:hover,
 .payment_item:hover {
-	background: #ffffe1;
+    background: #ffffe1;
 }
 
 .listing_extra_item_child {
-	border: 2px solid #eaeaea;
-	padding: 2px 10px;
-	margin: 5px 5px 15px 50px;
-	font-weight: bold;
-	font-size: 14px;
-	text-align: right;
+    border: 2px solid #eaeaea;
+    padding: 2px 10px;
+    margin: 5px 5px 15px 50px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
 }
 
 .cart_item_cost,
 .listing_extra_cost {
-	float: right;
-	text-align: right;
-	padding: 3px 0;
+    float: right;
+    text-align: right;
+    padding: 3px 0;
 }
 
 .cart_item_buttons {
-	float: right;
-	padding: 0 10px;
+    float: right;
+    padding: 0 10px;
 }
 
 .cart_item_label {
-	float: left;
-	padding: 3px 0;
+    float: left;
+    padding: 3px 0;
 }
 
 .cart_item div.cart_item_label {
-	padding-left: 25px;
+    padding-left: 25px;
 }

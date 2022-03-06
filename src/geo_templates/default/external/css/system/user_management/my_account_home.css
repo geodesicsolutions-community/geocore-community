@@ -2,69 +2,69 @@
 
 div.statsWrapper
 {
-	margin: 0 auto;
-	width: 650px;	
+    margin: 0 auto;
+    width: 650px;
 }
 
 div.statBox,
 div.statBoxFull
 {
-	float: left;
-	width: 300px;
-	margin: 10px;
-	padding: 1px;
-	margin-top: 0px;
+    float: left;
+    width: 300px;
+    margin: 10px;
+    padding: 1px;
+    margin-top: 0px;
 }
 div.statBoxFull
 {
-	width: 620px;
-	clear: both;
-	float: none;
+    width: 620px;
+    clear: both;
+    float: none;
 }
 table.statBox {
-	width: 100%;
+    width: 100%;
 }
 
 .boxContentCell {
-	border: 1px solid #666666;	
+    border: 1px solid #666666;
 }
 
 UL.contentList {
-	list-style-type: none;
-	margin: 3px;
-	padding: 0px;
-	text-align: left;
+    list-style-type: none;
+    margin: 3px;
+    padding: 0px;
+    text-align: left;
 }
 
 UL.contentList LI {
-	text-align: left;
-	margin: 0px;
-	padding: 0px;	
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
 }
 
 .result_table {
-	width: 100%;
+    width: 100%;
 }
 
 .result_table_header_row {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .result_table_row_even {
-	background-color: #eeeeee;
-	width: 100%;
+    background-color: #eeeeee;
+    width: 100%;
 }
 
 .result_table_row_odd {
-	background-color: #dddddd;
-	width: 100%;
+    background-color: #dddddd;
+    width: 100%;
 }
 
 /* have to specify the width of the middle part of the title bars
- because IE is too stupid to figure it out on its own */ 
+ because IE is too stupid to figure it out on its own */
 .halfTitle {
-	width: 276px;
+    width: 276px;
 }
 .fullTitle {
-	width: 596px;
+    width: 596px;
 }

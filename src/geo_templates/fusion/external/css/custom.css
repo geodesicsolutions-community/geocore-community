@@ -5,9 +5,9 @@
  * want to customize the CSS, copy the applicable CSS section(s) to this file
  * and customize here.  It is recommended to use the admin edit tool as it makes
  * this process a little easier.
- * 
+ *
  * --- Caveat: Background Images ---
- * 
+ *
  * Note that images loaded in the CSS are relative, so if the default CSS file
  * specifies a URL like url('../images/background.jpg') - since it is relative,
  * it will use background.jpg from the default template set, NOT your custom template

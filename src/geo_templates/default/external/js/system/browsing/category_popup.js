@@ -4,10 +4,10 @@
  * (especially when deferring JS to the footer)
  */
 
-jQuery(document).ready(function() {
-	jQuery('.subcategory-nav-open').click(function() {
-		jQuery(document).gjLightbox('open', function(){
-			return jQuery('.category_block').clone().show().html();
-		});
-	});
+jQuery(document).ready(function () {
+    jQuery('.subcategory-nav-open').click(function () {
+        jQuery(document).gjLightbox('open', function () {
+            return jQuery('.category_block').clone().show().html();
+        });
+    });
 });
