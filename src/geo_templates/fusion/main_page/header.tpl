@@ -124,7 +124,7 @@
 	<!-- START BANNER -->
 	<div class="banner_hdr">
 		<a href="https://geodesicsolutions.org">
-			<img style="border: medium none ;" src="{external file='images/banners/sample_468x60.jpg'}" alt="Sammple Ad Banner" title="Sammple Ad Banner">
+			<img src="{external file='images/banners/sample_468x60.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner">
 		</a>
 	</div>
     <!-- END BANNER -->
