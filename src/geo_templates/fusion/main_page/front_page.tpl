@@ -3,7 +3,7 @@
      IMPORTANT - TEXT ENTRIES ARE NO LONGER EDITED IN THIS TEMPLATE, UNLESS YOU ARE ADDING YOUR OWN TEXT. SYSTEM
      TEXT IS NOW LOCATED ENTIRELY IN THE PAGES MANAGEMENT MENU. ANY TEXT REFERENCES YOU SEE BELOW ARE SIMPLY
      "NOTES" AND ARE FOR INFORMATION PURPOSES ONLY TO HELP YOU IDENTIFY THE TEXT'S TAG IF YOU WANT TO MOVE IT.
-     MOST SYSTEM TEXT FOR THIS PARTICULAR TEMPLATE CAN BE FOUND AND EDITED AT THE FOLLOWING LOCATION: 
+     MOST SYSTEM TEXT FOR THIS PARTICULAR TEMPLATE CAN BE FOUND AND EDITED AT THE FOLLOWING LOCATION:
      PAGES MANAGEMENT > GENERAL TEMPLATE TEXT > COMMON TEMPLATE TEXT
 *}
 <html class="no-js design2016">
@@ -15,14 +15,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 		{head_html}
-		
+
 		<!--  This loads the RSS feed  -->
 		<link rel="alternate" type="application/rss+xml" title="Newest Listing Feed" href="rss_listings.php" />
-		
+
 		{include file='head_common.tpl'}
 		<script src="js/modernizr-2.6.2.min.js"></script>
 		<script>Modernizr.load({ test: Modernizr.mq('only all'),nope:'{external file="css/old_ie.css"}'});</script>
 	</head>
+
 	<body>
 		<div class="wrapper two-column">
 			{include file='header.tpl'}
@@ -38,12 +39,12 @@
 						<!-- FANCY CATEGORY DISPLAY BEGIN -->
 						{category_list}
 						<!-- FANCY CATEGORY DISPLAY END -->
-						
-						<!-- SIMPLE LINK CATEGORY DISPLAY BEGIN 
+
+						<!-- SIMPLE LINK CATEGORY DISPLAY BEGIN
 						{module tag='classified_navigation_1'}
 						SIMPLE LINK CATEGORY DISPLAY END -->
 					</div>
-					
+
 					<!-- START REGIONS -->
 					<div class="rwd-hide">
 					{if $enabledAddons.geographic_navigation}
@@ -53,28 +54,28 @@
 								<span class="glyphicon glyphicon-map-marker"></span>&nbsp;{$common_text.502402}<!-- Location -->:&nbsp;<span style="font-size: .8em; font-weight: normal;">{addon author='geo_addons' addon='geographic_navigation' tag='current_region'}&nbsp;
 								{if $geographic_navigation_region}&nbsp;[&nbsp;<a href="index.php?region=0" style="color: #FFF;">{$common_text.502401}<!-- clear --></a>&nbsp;]{/if}</span>
 							</h3>
-							{addon author='geo_addons' addon='geographic_navigation' tag='navigation'} 
+							{addon author='geo_addons' addon='geographic_navigation' tag='navigation'}
 						</div>
 					{/if}
 					</div>
 					<!-- END REGIONS -->
-					
+
 				</div>
 				<div class="content_box stats border">
 					<h3 class="title" style="padding-left: 0;"><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;{$common_text.502437}<!-- Site Stats --></h3>
 					{module tag='module_total_live_users'}
 					<div style="font-size: 0.75em; font-weight: bold; display:inline-block; line-height: 2.75em;">{$common_text.502436}<!-- Registered Users -->: </div><div style="display:inline-block;">{module tag='module_total_registered_users'}</div>
 				</div>
-			</div>	
-			<!-- LEFT COLUMN END -->	
-			
-			<!-- MAIN COLUMN BEGIN -->				
+			</div>
+			<!-- LEFT COLUMN END -->
+
+			<!-- MAIN COLUMN BEGIN -->
 			<div class="main">
-	
+
 				<!-- SEARCH FORM BOXES BEGIN -->
 				<div class="search_column_left">
 
-					<!-- form input field begin -->						
+					<!-- form input field begin -->
 					<div class="search-box-container">
 						<form>
 							<div class="form-wrapper cf">
@@ -83,7 +84,7 @@
 								<input class="keyword" type="text" placeholder="{$common_text.502412}" name="b[search_text]" /><!-- Search Keywords -->
 								<button type="submit"><span class="glyphicon glyphicon-search"></span></button>
 							</div>
-							
+
 							{if $enabledAddons.zipsearch}
 							<div class="cntr" style="font-size:.8em; margin: 10px 0;">
 								<div class="zipbox">
@@ -112,9 +113,9 @@
 							{else}
 							<div class="spacer">&nbsp;</div>
 							{/if}
-							
+
 						</form>
-						
+
 						<div class="recentButtons">
 							<div class="recent-listing-links">
 								<strong><span class="glyphicon glyphicon-calendar"></span>&nbsp;{$common_text.502418}<!-- Recent --></strong>
@@ -127,7 +128,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- form input field end -->						
+					<!-- form input field end -->
 
 				</div>
 
@@ -141,27 +142,27 @@
 					</div>
 				</div>
 				<!--  SEARCH FORM BOXES BEGIN END -->
-				<div class="clr"> </div>				
+				<div class="clr"> </div>
 				<!-- FEATURED CAROUSEL BEGIN -->
 				<div class="clr"> </div>
 				<div class="content_box gj_simple_carousel border">
 					<h3 class="title"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;{$common_text.502419}<!-- Featured Listings --></h3>
-					{* 
+					{*
 						NOTE: In order to show the module in a way that will fit in
 						the layout for this page, the {module} tag
 						below includes a number of parameters that over-write the
 						module settings set in the admin.  You must change those
 						settings "in-line" below to change them.
-						
+
 						Or, you can remove the parameter(s) from the {module}
 						tag completely, and it will use the module settings
 						as set in the admin panel.
-						
+
 						See the user manual entry for the {module} tag for
 						a list of all parameters that can be over-written in
 						this way.
 					 *}
-					{module tag='module_featured_pic_1' dynamic_image_dims=1 gallery_columns=4 module_thumb_width=160}			
+					{module tag='module_featured_pic_1' dynamic_image_dims=1 gallery_columns=4 module_thumb_width=160}
 				</div>
 				<!-- FEATURED CAROUSEL END -->
 				<div style="width: 100%;">
@@ -172,7 +173,7 @@
 								{module tag='module_hottest_ads'}
 							</div>
 						</div>
-						
+
 						<div class="half_column_right recent_ads normal-whitespace">
 							<div class="content_box border">
 								<h3 class="title"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;{$common_text.502422}<!-- Recent Listings --></h3>
@@ -180,17 +181,16 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="content_box rwd-hide border">
 						{module tag='featured_ads_1'}
 					</div>
 				</div>
-				
+
 			</div>
-			<!-- MAIN COLUMN END -->						
-			
+			<!-- MAIN COLUMN END -->
+
 		</div>
 			{include file="footer.tpl"}
 	</body>
 </html>
-
