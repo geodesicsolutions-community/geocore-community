@@ -1,24 +1,16 @@
 <?php
-//Listing.class.php
-/**
- * Holds the geoListing object.
- * 
- * @package System
- * @since Version 4.0.0
- */
-
 
 /**
  * A listing object, basically a container object for particular listing.
- * 
+ *
  * Since there are many listings, there can be many geoListing objects.  If you
  * want to get or set information for a listing, this is the object to use.
- * 
+ *
  * It uses the magic methods __get and __set which enable getting a field by
  * calling $listing->field or setting a field by using $listing->field = $value.
  * The fields are NOT automatically encoded or decoded using that, you will
  * need to encode or decode the values as necessary depending on the field.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
@@ -28,36 +20,40 @@ class geoListing
 	 * The listing data, un-encoded and everything.
 	 * @var array
 	 */
-	private $_listing_data, $_extra;
-	
+	private $_listing_data;
+
+    private $_extra;
+
 	/**
 	 * Whether or not all the fields are retrieved, or just some of them.
 	 * @var bool
 	 */
 	private $_all;
-	
+
 	/**
 	 * Whether or not the current listing is in the expired table or not.
 	 * @var bool
 	 */
 	private $_isExpired;
-	
+
 	/**
 	 * Array of listing objects
 	 * @var geoListing array
 	 */
 	private static $_listings;
-	
+
 	/**
 	 * Array of fields that are hidden when user not logged in
 	 * @var array
 	 */
 	private static $_hidden;
-	
+
+	private static $_recurringListings = [];
+
 	/**
 	 * Convienience function, gets the title for the specified listing.  It
 	 * decodes the title for you using fromDB.
-	 * 
+	 *
 	 * If you know
 	 * you will be needing more info that just the title, just get the whole
 	 * listing instead, and decode it yourself.  This is kind of like calling
@@ -75,7 +71,7 @@ class geoListing
 		}
 		return $listing_id;
 	}
-	
+
 	/**
 	 * Gets the count of how many bids there currently are for the given
 	 * listing ID.
@@ -95,7 +91,7 @@ class geoListing
 				return $listing->e_bid_count;
 			}
 		}
-		
+
 		$db = DataAccess::getInstance();
 		$sql = "SELECT count(*) total_bids FROM ".geoTables::bid_table." WHERE `auction_id`=?";
 		$count = $db->GetOne($sql,array($listing_id));
@@ -110,12 +106,12 @@ class geoListing
 		}
 		return $count;
 	}
-	
+
 	/**
 	 * Get the high bidder result for the current high bidder of the given listing.
 	 * Note that if the auction is a reverse auction, it will actually be returning
 	 * the lowest bidder...
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @return boolean|array Boolean false if no high bidder found, array result
 	 *   from the geodesic_auctions_bids table otherwise
@@ -139,24 +135,24 @@ class geoListing
 			//create a new object for each listing (like showing thousands of listings)
 			$auction_type = $db->GetOne("SELECT `auction_type` FROM ".geoTables::classifieds_table." WHERE `id`={$listing_id}");
 		}
-		
+
 		//change sorting based on if reverse auction or not
 		$sort_by = ($auction_type==3)? 'ASC': 'DESC';
-		
+
 		$high_bidder = $db->GetRow("SELECT * FROM ".geoTables::bid_table." WHERE `auction_id`={$listing_id} ORDER BY `bid` $sort_by, `time_of_bid` ASC");
-		
+
 		if ($saveCache) {
 			//save cache for the listing object
 			$listing->e_high_bidder = $high_bidder;
 		}
 		return $high_bidder;
 	}
-	
+
 	/**
 	 * Way to easily get the bid details for a bid, given the listing ID,
 	 * bidder, and quantity.  If multiple bids happen to match, will return the most
 	 * recent bid.
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @param int $bidder
 	 * @param int $quantity
@@ -168,7 +164,7 @@ class geoListing
 		return DataAccess::getInstance()->GetRow("SELECT * FROM ".geoTables::bid_table." WHERE `auction_id`=? AND `bidder`=? AND `quantity`=? ORDER BY `time_of_bid` DESC",
 				array((int)$listing_id, (int)$bidder, (int)$quantity));
 	}
-	
+
 	/**
 	 * Get the additional fees for an auction, in array format, with the total
 	 * given in the index 'total' for the returned array.
@@ -181,7 +177,7 @@ class geoListing
 		$listing_id = (int)$listing_id;
 		$saveCache = false;
 		$db = DataAccess::getInstance();
-		
+
 		if (isset(self::$_listings[$listing_id])) {
 			//listing object already exists so might as well use it
 			$saveCache = true;
@@ -193,20 +189,20 @@ class geoListing
 		} else {
 			//just in case this is done in environment that we don't want to
 			//create a new object for each listing (like showing thousands of listings)
-			
+
 			$options = array();
 			for ($i = 1; $i < 21; $i++) {
 				$options[] = "`optional_field_{$i}`";
 			}
-			
+
 			$listing_data = $db->GetRow("SELECT `seller`,`precurrency`,`postcurrency`,".implode(',',$options)." FROM ".geoTables::classifieds_table." WHERE `id`={$listing_id}");
 		}
 		$additional_fees = array();
 		$userId = $listing_data['seller'];
 		$category = (int)$db->GetOne("SELECT `category` FROM ".geoTables::listing_categories." WHERE `listing`=$listing_id AND `is_terminal`='yes'");
-		
+
 		$additional_fees['raw']['total'] = 0;
-		
+
 		$groupId = ($userId)? geoUser::getUser($userId)->group_id : 0;
 
 		$fields = geoFields::getInstance($groupId, $category);
@@ -215,7 +211,7 @@ class geoListing
 			//see if the value actually adds any cost (not 0 or blank field)
 			$option = 'optional_field_'.$i;
 			$fieldName = 'optional_field_'.$i;
-				
+
 			if ($fields->$fieldName->field_type=='cost' && $listing_data[$option]>0){
 				//this optional field needs to be displayed.
 				$additional_fees['raw'][$option] = $listing_data[$option];
@@ -231,14 +227,14 @@ class geoListing
 				$additional_fees['formatted'][$key] = geoString::displayPrice($val,$listing_data['precurrency'],$listing_data['postcurrency']);
 			}
 		}
-		
+
 		if ($saveCache) {
 			//save cache for the listing object
 			$listing->e_additional_fees = $additional_fees;
 		}
 		return $additional_fees;
 	}
-	
+
 	/**
 	 * Gets array of tags for the given listing ID
 	 * @param int $listing_id
@@ -261,7 +257,7 @@ class geoListing
 			}
 		}
 		$db = DataAccess::getInstance();
-		
+
 		$rows = $db->GetAll("SELECT `tag` FROM ".geoTables::tags." WHERE `listing_id`=$listing_id");
 		$tags = array();
 		foreach ($rows as $row) {
@@ -273,11 +269,11 @@ class geoListing
 		}
 		return $tags;
 	}
-	
+
 	/**
 	 * Gets an array of images for the listing specified, and sets a few things
 	 * like what the scaled sizes should be.
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @param Object $result_set Can pass in a database result set for a set of
 	 *   images.  This allows listing preview to work as it can be made to get
@@ -301,10 +297,10 @@ class geoListing
 				return $listing->e_images;
 			}
 		}
-		
+
 		$db = DataAccess::getInstance();
 		$ad_configuration_data = $db->GetRow("SELECT * FROM ".geoTables::ad_configuration_table);
-		
+
 		$dim = array(
 			'max_width' => (($ad_configuration_data['maximum_image_width'])? $ad_configuration_data['maximum_image_width']:250),
 			'max_height' => (($ad_configuration_data['maximum_image_height'])? $ad_configuration_data['maximum_image_height']:250),
@@ -326,7 +322,7 @@ class geoListing
 			$use_display_order=true;
 			$result_set = $db->Execute($sql);
 		}
-		
+
 		if (!$result_set || $result_set->RecordCount()==0) {
 			//error with sql OR no images, can't do much
 			if ($saveCache) {
@@ -341,7 +337,7 @@ class geoListing
 			$img['type'] = 1;
 			$img['id'] = $img['image_id'];
 			$img['url'] = $img['image_url'];
-				
+
 			if (!$img['image_width'] || !$img['image_height'] || !$img['mime_type']) {
 				//don't have image dimensions -- try to get them!
 				$imgDims = geoImage::getRemoteDims($img['id']);
@@ -351,7 +347,7 @@ class geoListing
 					$img['mime_type'] = $imgDims['mime'];
 				}
 			}
-				
+
 					//figure out scaled size dimensions
 			if ($img['image_width'] && $img['image_height']) {
 				$img['scaled']['image'] = geoImage::getScaledSize($img['image_width'],$img['image_height'],$dim['max_width'], $dim['max_height']);
@@ -370,7 +366,7 @@ class geoListing
 				$img['display_order'] = $display_order;
 				$display_order++;
 			}
-				
+
 			$images[$img['display_order']] = $img;
 		}
 		if ($saveCache) {
@@ -378,16 +374,10 @@ class geoListing
 		}
 		return $images;
 	}
-	
-	/**
-	 * returns true for Recurring listings
-	 * @param int $listing_id
-	 * @return bool 
-	 */
-	private static $_recurringListings = null;
-	public static function isRecurring($listing_id) 
+
+	public static function isRecurring($listing_id)
 	{
-		if(!count(self::$_recurringListings)) {
+		if (!count(self::$_recurringListings)) {
 			//get all recurring listings at once, so we only have to run this query once per pageload
 			$db = DataAccess::getInstance();
 			$result = $db->Execute("SELECT `listing_id` FROM ".geoTables::listing_subscription." WHERE `listing_id` = ?");
@@ -396,12 +386,11 @@ class geoListing
 			}
 		}
 		return (self::$_recurringListings[$listing_id] == 1) ? true : false;
-		
 	}
-	
+
 	/**
 	 * Get array of multi-level field values.
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @return array
 	 */
@@ -420,12 +409,12 @@ class geoListing
 				return $listing->e_leveled;
 			}
 		}
-	
+
 		$db = DataAccess::getInstance();
 		$sql = "SELECT `field_value`, `default_name`, `leveled_field`, `level` FROM ".geoTables::listing_leveled_fields." WHERE `listing`=$listing_id
 			ORDER BY `leveled_field`, `level`";
 		$result = $db->Execute($sql);
-		
+
 		if (!$result || $result->RecordCount()==0) {
 			//error with sql OR no images, can't do much
 			if ($saveCache) {
@@ -433,9 +422,9 @@ class geoListing
 			}
 			return array();
 		}
-		
+
 		$lField = geoLeveledField::getInstance();
-		
+
 		$fields = array();
 		foreach ($result as $row) {
 			$valInfo = $lField->getValueInfo($row['field_value'], true);
@@ -444,25 +433,25 @@ class geoListing
 			} else {
 				//possibly the value is no longer there, fall back on the
 				//value saved in "default value" as the name
-				
+
 				$row['name'] = geoString::fromDB($row['default_name']);
-				
+
 				//at least try to load the level info, perhaps the level will still
 				//be intact if not this specific value...
 				$row['level_info'] = $lField->getLevel($row['leveled_field'], $row['level'], $db->getLanguage());
 				$fields[$row['leveled_field']][$row['level']] = $row;
 			}
 		}
-		
+
 		if ($saveCache) {
 			$listing->e_leveled = $fields;
 		}
 		return $fields;
 	}
-	
+
 	/**
 	 * Get auction cost options for specified listing.
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @return array
 	 * @since Version 7.4.0
@@ -483,13 +472,13 @@ class geoListing
 			}
 		}
 		$db = DataAccess::getInstance();
-		
+
 		$costOptions = array (
 			'groups' => array(),
 			'hasCombined' => false,
 			'combined' => array(),
 		);
-		
+
 		//get buyer selections...
 		$result = $db->Execute("SELECT * FROM ".geoTables::listing_cost_option_group." WHERE `listing`=? ORDER BY `display_order`",array($listing_id));
 		if (!$result || $result->RecordCount() == 0) {
@@ -526,7 +515,7 @@ class geoListing
 		if ($hasCombined) {
 			//get the combined options.
 			$result = $db->Execute("SELECT * FROM ".geoTables::listing_cost_option_quantity." WHERE `listing`=?",array($listing_id));
-			
+
 			if (!$result) {
 				//failsafe, DB error
 				if ($saveCache) {
@@ -549,10 +538,10 @@ class geoListing
 		}
 		return $costOptions;
 	}
-	
+
 	/**
 	 * Gets array of regions, including "additional" regions if there are any set.
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @return array
 	 * @since Version 7.1.0
@@ -574,7 +563,7 @@ class geoListing
 		}
 		$db = DataAccess::getInstance();
 		$region = geoRegion::getInstance();
-		
+
 		$rows = $db->Execute("SELECT * FROM ".geoTables::listing_regions." WHERE `listing`=$listing_id ORDER BY `region_order`, `level`");
 		$regions = array();
 		foreach ($rows as $row) {
@@ -607,7 +596,7 @@ class geoListing
 			//populate the info, make sure to get all of the info for the region
 			//as some of it may be useful for display purposes
 			$info = ($row['region'])? $region->getRegionInfo($row['region']) : false;
-			
+
 			if (!$info) {
 				//oops, could not get the region info, fall back on the default name
 				$info = array (
@@ -623,10 +612,10 @@ class geoListing
 		}
 		return $regions;
 	}
-	
+
 	/**
 	 * Get array of categories for the given listing ID
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @return array
 	 * @since Version 7.4.0
@@ -650,10 +639,10 @@ class geoListing
 		}
 		return $categories;
 	}
-	
+
 	/**
 	 * Get the extra questions for the given listing.
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @return array Array of extra questions, each entry is an associative array
 	 *   using index's of "question", "value" (for answer), and "link" which is the URL
@@ -679,7 +668,7 @@ class geoListing
 		$db = DataAccess::getInstance();
 		$questions = array();
 		$language_id = geoSession::getInstance()->getLanguage();
-		
+
 		$sql = "SELECT vals.question_id, langs.name as name, langs.choices as choices, vals.value as value from ".geoTables::classified_extra_table." as vals, ".geoTables::questions_languages." as langs where vals.classified_id = {$listing_id} and vals.question_id = langs.question_id and langs.language_id = $language_id and checkbox !=1 order by vals.display_order asc";
 		$result = $db->Execute($sql);
 		if (!$result || $result->RecordCount() == 0) {
@@ -692,10 +681,10 @@ class geoListing
 		foreach ($result as $show_special) {
 			$row = array();
 			$row['question'] = geoString::fromDB($show_special["name"]);
-			
+
 			$row['value'] = geoString::fromDB($show_special['value']);
 			$row['link'] = false;
-			
+
 			if ($show_special['choices'] == 'url') {
 				$href = $row['value'];
 				if (strpos($href, "://") === false && strpos($href, "mailto:") === false) {
@@ -708,17 +697,17 @@ class geoListing
 			}
 			$questions[$show_special['question_id']] = $row;
 		}
-		
+
 		if ($saveCache) {
 			//save cache for the listing object
 			$listing->e_extra_questions = $questions;
 		}
 		return $questions;
 	}
-	
+
 	/**
 	 * Get the checkboxes for the given listing.
-	 * 
+	 *
 	 * @param int $listing_id
 	 * @return array Array of checkboxes, in format checks[question_id]='checkbox name'
 	 * @since Version 7.2.1
@@ -749,7 +738,7 @@ class geoListing
 			}
 			return array();
 		}
-		
+
 		foreach ($result as $row) {
 			$checks[$row['question_id']] = geoString::fromDB($row['name']);
 		}
@@ -759,7 +748,7 @@ class geoListing
 		}
 		return $checks;
 	}
-	
+
 	/**
 	 * Gets a listing according to the listing id specified, this is the main
 	 * way to get yourself a listing object.
@@ -780,11 +769,11 @@ class geoListing
 			//invalid
 			return null;
 		}
-		
+
 		if($force_refresh && isset(self::$_listings[$listing_id])) {
 			unset(self::$_listings[$listing_id]);
 		}
-		
+
 		if (!isset(self::$_listings[$listing_id]) || (self::$_listings[$listing_id] === null && $try_expired)) {
 			//listing has not been retrieved yet, or it has but is invalid but this time we are trying expired
 			$db = DataAccess::getInstance();
@@ -792,7 +781,7 @@ class geoListing
 			self::$_listings[$listing_id] = new geoListing;
 			self::$_listings[$listing_id]->_all = $get_all;
 			self::$_listings[$listing_id]->_isExpired = false;
-			
+
 			if ($get_all){
 				$sql = "SELECT * FROM ".geoTables::classifieds_table." WHERE `id`=? LIMIT 1";
 				$listing_data = $db->GetRow($sql, array($listing_id));
@@ -801,7 +790,7 @@ class geoListing
 					$listing_data = $db->GetRow($sql, array($listing_id));
 					self::$_listings[$listing_id]->_isExpired = true;
 				}
-				
+
 				if ($listing_data) {
 					//make sure ID is integer so strict comparisons work, since
 					//the original way $listing->id worked was to be an int
@@ -815,10 +804,10 @@ class geoListing
 				}
 			} else {
 				//see if it is valid
-				
+
 				$row = $db->GetRow("SELECT `id` FROM ".geoTables::classifieds_table." WHERE `id`=$listing_id LIMIT 1");
 				self::$_listings[$listing_id]->_listing_data = array ('id' => $listing_id);
-				
+
 				if (!$row && $try_expired) {
 					//see if it's in expired
 					$row = $db->GetRow("SELECT `id` FROM ".geoTables::classifieds_expired_table." WHERE `id`=$listing_id LIMIT 1");
@@ -830,26 +819,26 @@ class geoListing
 				}
 			}
 		}
-		
+
 		if (!$try_expired && isset(self::$_listings[$listing_id]) && self::$_listings[$listing_id]->_isExpired) {
 			//it exists but it is expired, and we said no to getting expired
 			return null;
 		}
-		
+
 		if (is_object(self::$_listings[$listing_id]) && $get_all && !self::$_listings[$listing_id]->_all) {
 			//get all the additional data about the listing, previously we didn't get all the data
 			$db = DataAccess::getInstance();
-			
+
 			$table = (self::$_listings[$listing_id]->_isExpired)? geoTables::classifieds_expired_table: geoTables::classifieds_table;
 			self::$_listings[$listing_id]->_listing_data = $db->GetRow("SELECT * FROM $table WHERE `id`=$listing_id LIMIT 1");
 			//need to explicitly set category the new way
 			self::$_listings[$listing_id]->_listing_data['category'] = (int)$db->GetOne("SELECT `category` FROM ".geoTables::listing_categories." WHERE `listing`=? AND `is_terminal`='yes' AND `category_order`=0", array($listing_id));
 			self::$_listings[$listing_id]->_all = true;
 		}
-		
+
 		return self::$_listings[$listing_id];
 	}
-	
+
 	/**
 	 * Whether or not this listing is from the expired table or not.
 	 * @return bool
@@ -858,34 +847,34 @@ class geoListing
 	{
 		return $this->_isExpired;
 	}
-	
+
 	/**
 	 * Finds out if this listing is locked for editing
 	 *
 	 * @return int 1 if locked, 0 otherwise
-	 */	
+	 */
 	public function isLocked ()
 	{
 		$originalOrderItemID = $this->order_item_id;
 		$orderItem = geoOrderItem::getOrderItem($originalOrderItemID);
 		if (is_object($orderItem)) {
 			return $orderItem->get('locked', 0);
-		} 
+		}
 		return 0;
 	}
-	
+
 	/**
 	 * Locks a listing, preventing other processes from modifying it until the lock is released
 	 * Also can reverse that process by passing it 0 or false
 	 *
-	 * @param boolean|int $state true|1 to lock, false|0 to unlock 
+	 * @param boolean|int $state true|1 to lock, false|0 to unlock
 	 * @return boolean true on success, false on failure
 	 */
 	public function setLocked ($state = true)
 	{
 		//handle boolean values passed to function
 		$state = (($state) ? 1 : false);
-		
+
 		$originalOrderItemID = $this->order_item_id;
 		$orderItem = geoOrderItem::getOrderItem($originalOrderItemID);
 		if (is_object($orderItem)) {
@@ -895,7 +884,7 @@ class geoListing
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Converts the listing's data into an array and returns it.
 	 *
@@ -905,15 +894,15 @@ class geoListing
 	{
 		return $this->_listing_data;
 	}
-	
+
 	/**
 	 * Gets an array of all the order item ID's for parent items that have listing or listing_id set to
 	 * this listing's ID.  Note that neither input vars will apply to the "original" order item for the
 	 * listing.
-	 * 
+	 *
 	 * This does NOT verify order items.  It will also not get any order items if
 	 * $listing->order_item_id is not set.
-	 * 
+	 *
 	 * @param bool $onlyActive If true, will only return order items current "active"
 	 * @param bool $onlyLegit If true(default), will only return order items with the Order field set.
 	 * @return array An array of order item ID's, with the first one being the "original"
@@ -930,20 +919,20 @@ class geoListing
 			$extra .= " item.status = 'active' AND ";
 		}
 		if ($onlyLegit) {
-			$extra .= " item.order != 0 AND "; 
+			$extra .= " item.order != 0 AND ";
 		}
 		//Get all the items that go with this listing ID for "legit" items (that have orders)
-		$sql = "SELECT item.id as item_id FROM `geodesic_order_item` as item, `geodesic_order_item_registry` as regi 
-		WHERE regi.order_item = item.id AND item.parent='0' AND $extra 
+		$sql = "SELECT item.id as item_id FROM `geodesic_order_item` as item, `geodesic_order_item_registry` as regi
+		WHERE regi.order_item = item.id AND item.parent='0' AND $extra
 		 (regi.index_key='listing_id' OR regi.index_key='listing')
 		 AND regi.val_string = ?
 		ORDER BY item.id";
-		
+
 		$all_items = DataAccess::getInstance()->GetAll($sql, array(''.$this->id));
 		if (!isset($all_items[0]) || $all_items[0]['item_id'] != $this->order_item_id) {
 			//item ID is not first in list, how did that happen?  Most likely it is because it is not
-			//active.  
-			
+			//active.
+
 			//We are going to force the first order item to always be used as the starter when getting order_items.
 			array_unshift($all_items, array('item_id' => $this->order_item_id));
 		}
@@ -956,13 +945,13 @@ class geoListing
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * If you get a set of listing's data, you can use this method to populate
 	 * listing objects for each of the retrieved listings.
-	 * 
+	 *
 	 * That way it does not have to get info for the same listing twice.
-	 * 
+	 *
 	 * @param array $dataSet in array form, as if $db->GetAll($sql) was used.
 	 * @since Version 5.0.0
 	 */
@@ -976,7 +965,7 @@ class geoListing
 			self::addListingData($row);
 		}
 	}
-	
+
 	/**
 	 * Add single listing's data so it doesn't have to be retrieved later.
 	 * @param array $listing
@@ -1009,19 +998,19 @@ class geoListing
 			self::$_listings[$listing_id]->_listing_data = array_merge(self::$_listings[$listing_id]->_listing_data, $listing);
 		}
 	}
-	
+
 	/**
 	 * Used by custom smarty function {listing} to display some block of info
 	 * related specifically to listing.  Note that this uses {@see geoTemplate::geoTemplate::loadInternalTemplate()}
 	 * which in turn, applies the following common abilities:
-	 * 
+	 *
 	 * - assign : if this parameter is set, it will assign the output to the specified
 	 *   variable in smarty instead of just displaying the output.
-	 * 
+	 *
 	 * - file, g_type, g_resource : these can be over-written with parameters, which
 	 *   would make it use the specified values.  This would allow to force it to
 	 *   use a different template than normal to display the contents.
-	 * 
+	 *
 	 * @param string $tag The tag to display
 	 * @param array $params The params as passed into the smarty function
 	 * @param Smarty_Internal_Template $smarty The smarty object as passed into
@@ -1040,18 +1029,18 @@ class geoListing
 			//this tag is hidden!
 			return '';
 		}
-		
-		
+
+
 		if (is_callable(array('geoListingDisplay',$tag))) {
 			return geoListingDisplay::$tag($this, $params, $smarty);
 		}
 		return '';
 	}
-	
+
 	/**
 	 * Used to display the specified field for the listing, used by the custom
 	 * smarty function {listing ...} when the "field" is specified.
-	 * 
+	 *
 	 * @param string $field The field to display.
 	 * @param array $params The params as passed into the smarty function
 	 * @param Smarty_Internal_Template $smarty The smarty object as passed into
@@ -1069,36 +1058,36 @@ class geoListing
 			//this field is hidden!
 			return '';
 		}
-		
+
 		$value = null;
 		if (isset($params['format'])) {
 			if ($params['format']=='raw') {
 				//use the raw value
-				
+
 				$value = $this->$field;
 			} else if ($params['format']=='array') {
 				//must be one of the things we know how to get...
-				
+
 				switch ($field) {
 					case 'listing':
 						//return array of all listing data
 						$value = $this->toArray();
 						break;
-						
+
 					case 'tags':
 						//get listing tags
 						$value = self::getTags($this->id);
 						break;
-						
+
 					case 'order_items':
 						//who knows, this might be useful to someone
 						$value = $this->getAllOrderItems();
 						break;
-						
+
 					case 'images':
 						$value = self::getImages($this->id);
 						break;
-						
+
 					case 'seller':
 						$value = geoUser::getUser($this->seller);
 						if ($value) {
@@ -1106,7 +1095,7 @@ class geoListing
 							$value = $value->toArray();
 						}
 						break;
-						
+
 					case 'high_bidder':
 						$value = null;
 						if ($this->item_type==2) {
@@ -1122,26 +1111,26 @@ class geoListing
 							}
 						}
 						break;
-						
+
 					case 'leveled':
 					case 'multi_level_fields':
 						$value = self::getLeveledValues($this->id);
 						break;
-						
+
 					case 'regions':
 						$value = self::getRegionTrees($this->id);
 						break;
-						
+
 					case 'extra_questions':
 						//Added in version 7.2.1
 						$value = self::getExtraQuestions($this->id);
 						break;
-						
+
 					case 'checkboxes':
 						//Added in version 7.2.1
 						$value = self::getCheckboxes($this->id);
 						break;
-						
+
 					default:
 						//don't know what they want here...  give them empty array
 						$value = array();
@@ -1150,7 +1139,7 @@ class geoListing
 			}
 		} else {
 			//get a normal "formatted" field
-			
+
 			if ($field == 'canonical_url') {
 				//special case - get the full URL
 				$value = $this->getFullUrl();
@@ -1173,14 +1162,14 @@ class geoListing
 					$this->_loadFormatted();
 					$value = (isset($this->e_formatted[$field]))? $this->e_formatted[$field] : '';
 				}
-				
+
 			} else {
 				//default behavior, get from browsing fields...
 				$this->_loadFormatted();
 				$value = (isset($this->e_formatted[$field]))? $this->e_formatted[$field] : '';
 			}
 		}
-		
+
 		//now $value will be set to whatever it should be.
 		if (isset($params['assign'])) {
 			$smarty->assign($params['assign'], $value);
@@ -1192,7 +1181,7 @@ class geoListing
 	 * For use in smarty plugins, tags, or anything really within a smarty environment,
 	 * to try to get a listing ID based on the smarty params / environment.  Most
 	 * commonly used by {listing} plugin.
-	 * 
+	 *
 	 * @param array $params The params as passed into the smarty function
 	 * @param Smarty_Internal_Template $smarty The smarty object as passed into
 	 *   the smarty function.
@@ -1203,17 +1192,17 @@ class geoListing
 	{
 		//figure out the listing ID
 		$listing_id = 0;
-		
+
 		//first see if it was passed in through params
 		if (isset($params['listing_id']) && (int)$params['listing_id']>0) {
 			$listing_id = (int)$params['listing_id'];
 		}
-		
+
 		//second see if this is listing details page, if so use the listing ID from that
 		if (!$listing_id && geoView::getInstance()->listing_id) {
 			$listing_id = (int)geoView::getInstance()->listing_id;
 		}
-		
+
 		if (!$listing_id) {
 			//last try to figure it out based on current template vars
 			$raw = $smarty->getTemplateVars('listing');
@@ -1228,10 +1217,10 @@ class geoListing
 		}
 		return $listing_id;
 	}
-	
+
 	/**
 	 * Used internally to figure out if the given field or tag is hidden or not
-	 * 
+	 *
 	 * @param string $field The field or tag
 	 * @return boolean
 	 * @since Version 7.1.0
@@ -1254,7 +1243,7 @@ class geoListing
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Loads the formatted values for this listing, and assignes to e_formatted.
 	 * used internally by displayField.
@@ -1265,12 +1254,12 @@ class geoListing
 			//nothing to do, it's already loaded!
 			return;
 		}
-		
+
 		//generate formatted fields...
-		
+
 		//we will need default browsing text for this...
 		$msgs = DataAccess::getInstance()->get_text(true, 3);
-		
+
 		//Use default text for normal category browsing...
 		$text = array(
 			'business_type' => array(
@@ -1286,14 +1275,14 @@ class geoListing
 				'closed' => $msgs[100051]
 			)
 		);
-		
+
 		$browse = Singleton::getInstance('geoBrowse');
 		$browse->messages = $msgs;
-		
+
 		//now set the formatted fields...
 		$this->e_formatted = $browse->commonBrowseData($this->toArray(), $text, false, false);
 	}
-	
+
 	/**
 	 * Get the full URL for this listing, including any subdomains and all that fun stuff
 	 * @return String
@@ -1305,23 +1294,23 @@ class geoListing
 		$db = DataAccess::getInstance();
 
 		//NOTE: subdomain parsing now part of SEO addon, if SEO is enabled as well
-		//as geographic navigation and setting to 
+		//as geographic navigation and setting to
 		$domain = substr($db->get_site_setting('classifieds_url'), (strpos($db->get_site_setting('classifieds_url'), ":")+3) );
-		
+
 		$url .= $domain;
-		
+
 		$url .= '?a=2&b='.$this->id; //mostly for use in emails, so & not encoded. caller can do it himself if required.
-		
+
 		$url = geoAddon::triggerDisplay('rewrite_single_url', array('url' => $url, 'forceNoSSL' => true), geoAddon::FILTER);
 		if (is_array($url)) {
 			//addon call returned the input array instead of a url string (meaning no addon chose to rewrite the url)
 			//make sure to return only the important part
-			$url = $url['url']; 
+			$url = $url['url'];
 		}
-				
+
 		return $url;
 	}
-	
+
 	/**
 	 * Convenience method to obtain the amount that selected Cost Options add to a bid
 	 * @param int $listing
@@ -1353,11 +1342,11 @@ class geoListing
 		}
 		return $cost_options_cost;
 	}
-	
+
 	/**
 	 * Remove the specified listing. Note that this removes the listing directly rather than archiving it.
 	 * All attached images, questions, and bids are also removed.
-	 * 
+	 *
 	 * @param int $listingId
 	 * @param bool $isArchived If true, will behave as it should when a listing
 	 *   is merely being archived.  Note that it still does NOT add the listing
@@ -1369,7 +1358,7 @@ class geoListing
 	public static function remove ($listingId, $isArchived = false)
 	{
 		$listingId = (int)$listingId;
-		
+
 		if (!$listingId) {
 			//can't remove without a proper listing ID
 			return false;
@@ -1384,7 +1373,7 @@ class geoListing
 				geoCategory::updateCategoryCountDelayed($row['category']);
 			}
 		}
-		
+
 		//delete url images
 		$sql = "SELECT `image_id` FROM ".geoTables::images_urls_table." WHERE `classified_id`=?";
 		$get_url_result = $db->Execute($sql, array($listingId));
@@ -1403,7 +1392,7 @@ class geoListing
 				}
 			}
 		}
-		
+
 		//Remove cost options
 		$sql = "SELECT `id` FROM ".geoTables::listing_cost_option_group." WHERE `listing`=?";
 		$get_cost_option_result = $db->Execute($sql, array($listingId));
@@ -1422,7 +1411,7 @@ class geoListing
 				}
 			}
 		}
-		
+
 		if(self::isRecurring($listingId)) {
 			//need to stop recurring processes on this listing
 			$recurringId = $db->GetOne("SELECT `recurring_id` FROM ".geoTables::listing_subscription." WHERE `listing_id` = ?", array($listingId));
@@ -1430,7 +1419,7 @@ class geoListing
 				geoRecurringBilling::remove($recurringId);
 			}
 		}
-		
+
 		//remove "simple" things from listings that don't need anything more
 		//than removing entries from the DB
 		$simpleRemoves = array (
@@ -1459,20 +1448,20 @@ class geoListing
 				return false;
 			}
 		}
-		
+
 		//just in case there are any already retrieved listing data...
 		if (isset(self::$_listings[$categoryId])) {
 			//reset the listing data so there is nothing to go on to update things
 			//in case something already has a reference to it.
 			self::$_listings[$listingId]->_listing_data = array();
-			
+
 			//unset so it can't be requested later
 			unset(self::$_listings[$listingId]);
 		}
-		
+
 		//call for addons to do something when listing is removed...
 		geoAddon::triggerUpdate('notify_geoListing_remove', array('listingId' => $listingId, 'isArchived' => $isArchived));
-		
+
 		//delete from classifieds table
 		$sql = "DELETE FROM ".geoTables::classifieds_table." WHERE `id` = {$listingId}";
 		$remove_result = $db->Execute($sql);
@@ -1482,7 +1471,7 @@ class geoListing
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Allows object oriented listing objects.
 	 *
@@ -1511,16 +1500,16 @@ class geoListing
 			$row = $db->GetRow($sql, array($this->id));
 			$this->_listing_data[$name] = $row[$name];
 		}
-		
+
 		if (isset($this->_listing_data[$name])){
 			return $this->_listing_data[$name];
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Allows object oriented listing objects.  (not meant to be called directly)
-	 * 
+	 *
 	 * Allows you to use $listing->price = 1.11 to set the price on a listing.
 	 *
 	 * @param string $name
@@ -1528,25 +1517,25 @@ class geoListing
 	 */
 	public function __set($name, $value){
 		$name = strtolower($name);
-		
+
 		if (strpos($name,'e_')===0) {
 			//this is "extra" data...
 			$name = substr($name,2);
 			$this->_extra[$name] = $value;
 			return true;
 		}
-		
+
 		if ($this->_isExpired && $name != 'order_item_id') {
 			//if expired, do NOT allow setting values (unless it's order_item_id)
 			return false;
 		}
-		
+
 		if (isset($this->_listing_data[$name]) && $this->_listing_data[$name] == $value) {
 			//nothing to change, it's already set to this.
 			return true;
 		}
 		$this->_listing_data[$name] = $value;
-		
+
 		$db = DataAccess::getInstance();
 		$table = ($this->_isExpired)? geoTables::classifieds_expired_table : geoTables::classifieds_table;
 		$sql = "UPDATE $table SET `$name`=?  WHERE `id`=? LIMIT 1";
