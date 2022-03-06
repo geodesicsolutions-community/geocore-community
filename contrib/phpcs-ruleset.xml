@@ -7,6 +7,12 @@
     <exclude-pattern>*/classes/PEAR/*</exclude-pattern>
     <exclude-pattern>*/classes/php5_classes/swift5/*</exclude-pattern>
     <exclude-pattern>*/geo_templates/**/*</exclude-pattern>
+    <exclude-pattern>*/js/codemirror/*</exclude-pattern>
+    <exclude-pattern>*/js/plupload/*</exclude-pattern>
+    <exclude-pattern>*/js/scriptaculous/*</exclude-pattern>
+    <exclude-pattern>*/js/prototype.js</exclude-pattern>
+    <exclude-pattern>*/js/calendarview.js</exclude-pattern>
+    <exclude-pattern>**.min.js</exclude-pattern>
 
     <!-- list of default files and paths to check relative to contrib/ (ignored if set on command line) -->
     <file>../src</file>
