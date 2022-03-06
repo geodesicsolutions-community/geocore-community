@@ -6,7 +6,6 @@
     <exclude-pattern>*/classes/pclzip/*</exclude-pattern>
     <exclude-pattern>*/classes/PEAR/*</exclude-pattern>
     <exclude-pattern>*/classes/php5_classes/swift5/*</exclude-pattern>
-    <exclude-pattern>*/geo_templates/**/*</exclude-pattern>
     <exclude-pattern>*/js/codemirror/*</exclude-pattern>
     <exclude-pattern>*/js/plupload/*</exclude-pattern>
     <exclude-pattern>*/js/scriptaculous/*</exclude-pattern>
