@@ -13,6 +13,7 @@
     <exclude-pattern>*/js/prototype.js</exclude-pattern>
     <exclude-pattern>*/js/calendarview.js</exclude-pattern>
     <exclude-pattern>**.min.js</exclude-pattern>
+    <exclude-pattern>**/croppie.js</exclude-pattern>
 
     <!-- Exclude auto generated files for smarty -->
     <exclude-pattern>*/templates_c/*</exclude-pattern>
