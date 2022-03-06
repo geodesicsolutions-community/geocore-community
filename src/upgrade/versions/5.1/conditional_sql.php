@@ -1,4 +1,5 @@
 <?php
+
 //This is where conditional queries go.
 //For cases where an sql query might not be run, in the
 //case that it is not run, add an empty string
@@ -40,12 +41,12 @@ $this->addFieldLocationDefaults('tags', 'browsing');
 //change how gallery style setting is saved, now that there are 3 different ways
 $currentView = $this->_db->GetOne("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='gallery_style'");
 if (in_array($currentView, array ('classic','gallery','filmstrip'))) {
-	//already using new settings
-	$sql_not_strict[] = '';
+    //already using new settings
+    $sql_not_strict[] = '';
 } else {
-	//if current setting is 1 then it uses "classic", if it's 0 or not set, it uses gallery.
-	$galleryStyle = ($currentView)? 'classic': 'gallery';
-	$sql_not_strict[] = "INSERT IGNORE INTO `geodesic_site_settings` SET `setting` = 'gallery_style', `value` = '$galleryStyle'";
+    //if current setting is 1 then it uses "classic", if it's 0 or not set, it uses gallery.
+    $galleryStyle = ($currentView) ? 'classic' : 'gallery';
+    $sql_not_strict[] = "INSERT IGNORE INTO `geodesic_site_settings` SET `setting` = 'gallery_style', `value` = '$galleryStyle'";
 }
 
 // Make better placement a larger field
@@ -55,37 +56,37 @@ $sql_not_strict[] = "ALTER TABLE `geodesic_classifieds` CHANGE `better_placement
 $sql_not_strict[] = "ALTER TABLE `geodesic_auctions_increments` DROP `high`";
 
 //make sure lowest bid increment starts at 0
-$currentLowest = $this->_db->GetOne ("SELECT MIN(`low`) FROM `geodesic_auctions_increments`");
+$currentLowest = $this->_db->GetOne("SELECT MIN(`low`) FROM `geodesic_auctions_increments`");
 
 if ($currentLowest === null || $currentLowest === false) {
-	//insert increment, somehow the table is empty
-	$sql_not_strict[] = "INSERT INTO `geodesic_auctions_increments` (`low`, `increment`) VALUES (0.00, 5.00)";
+    //insert increment, somehow the table is empty
+    $sql_not_strict[] = "INSERT INTO `geodesic_auctions_increments` (`low`, `increment`) VALUES (0.00, 5.00)";
 } else {
-	$sql_not_strict[] = "UPDATE `geodesic_auctions_increments` SET `low`=0.00 WHERE `low`='{$currentLowest}' LIMIT 1";
+    $sql_not_strict[] = "UPDATE `geodesic_auctions_increments` SET `low`=0.00 WHERE `low`='{$currentLowest}' LIMIT 1";
 }
 
 //fix category questions languages
 $languages = $this->_db->GetAll("SELECT `language_id` FROM `geodesic_pages_languages` WHERE `language_id`!=1");
 
 if ($languages) {
-	$sql = "SELECT * FROM `geodesic_classifieds_sell_questions_languages` WHERE language_id=1";
-	$questions = $this->_db->Execute($sql);
-	foreach ($questions as $question) {
-		foreach ($languages as $lang) {
-			$language_id = (int)$lang['language_id'];
-			$count = (int)$this->_db->GetOne("SELECT COUNT(*) FROM `geodesic_classifieds_sell_questions_languages`
+    $sql = "SELECT * FROM `geodesic_classifieds_sell_questions_languages` WHERE language_id=1";
+    $questions = $this->_db->Execute($sql);
+    foreach ($questions as $question) {
+        foreach ($languages as $lang) {
+            $language_id = (int)$lang['language_id'];
+            $count = (int)$this->_db->GetOne("SELECT COUNT(*) FROM `geodesic_classifieds_sell_questions_languages`
 				WHERE language_id=? AND question_id=?", array($language_id, $question['question_id']));
-			if (!$count) {
-				//need to insert it
-				
-				$sql_not_strict[] = "INSERT INTO `geodesic_classifieds_sell_questions_languages` SET 
+            if (!$count) {
+                //need to insert it
+
+                $sql_not_strict[] = "INSERT INTO `geodesic_classifieds_sell_questions_languages` SET 
 					question_id={$question['question_id']}, language_id={$language_id}, 
-					name=".$this->_db->qstr($question['name']).", explanation=".$this->_db->qstr($question['explanation']).",
-					choices=".$this->_db->qstr($question['choices']);
-			} else {
-				//already in there...
-				$sql_not_strict[] = '';
-			}
-		}
-	}
+					name=" . $this->_db->qstr($question['name']) . ", explanation=" . $this->_db->qstr($question['explanation']) . ",
+					choices=" . $this->_db->qstr($question['choices']);
+            } else {
+                //already in there...
+                $sql_not_strict[] = '';
+            }
+        }
+    }
 }

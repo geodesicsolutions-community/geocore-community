@@ -4,62 +4,62 @@
 /* Use caution when editing these, as it may disrupt the functionality of the popup */
 
 UL.sharing_method_list {
-	display: block;
-	float: left;
-	width: 50%;
-	list-style: none outside none;
-	padding: 0px;
-	margin: 0px;
-	margin-bottom: 10px;
+    display: block;
+    float: left;
+    width: 50%;
+    list-style: none outside none;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 10px;
 }
 
 .sharing_popup_list_container {
-	padding: 5px;
-	margin-top: 5px;
+    padding: 5px;
+    margin-top: 5px;
 }
 
 /**************** STYLES FOR CRAIGSLIST SHARE METHOD *******************/
 
 .clPreview {
-	width: 700px;
-	padding: 5px;
-	margin: 10px;
-	
-	/* base craigslist styles */
-	font-family: serif;
-	font-size: 16px;
-	font-weight: 400;
-	font-style: normal;
+    width: 700px;
+    padding: 5px;
+    margin: 10px;
+
+    /* base craigslist styles */
+    font-family: serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
 }
 .clPreview DL {
-	width: 700px;
+    width: 700px;
 }
 .clPreview DT {
-	width: 700px;
+    width: 700px;
 }
 
 .clPreview BIG {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .clShowHTML {
-	padding: 5px;
-	width: 564px;
+    padding: 5px;
+    width: 564px;
 }
 
 .clInstructions {
-	font-size: 10pt;
+    font-size: 10pt;
 }
 
 .clInput {
-	width: 96%;
+    width: 96%;
 }
 
 .share_clickToClose {
-	color: #FFFFFF;
-	font-size: 12pt;
-	font-face: Arial sans-serif;
-	float: right;
-	margin-right: 4px;
-	cursor: pointer;
+    color: #FFFFFF;
+    font-size: 12pt;
+    font-face: Arial sans-serif;
+    float: right;
+    margin-right: 4px;
+    cursor: pointer;
 }

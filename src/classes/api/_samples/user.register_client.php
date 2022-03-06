@@ -1,4 +1,5 @@
 <?php
+
 //_samples/user.register_client.php
 
 
@@ -7,24 +8,24 @@
 
 /*
 Note: This is intended for people that are familiar with editing PHP
-	files.
+    files.
 
 Instructions for using this as a stand-alone API client:
-1.	Edit this file:  Look for the line that starts with "$xmlrpc_location".
-	Change it to:
-	$xmlrpc_location = "XMLRPC.class.php";
-2.	Set the rest of the "Required Settings" as needed (like $website, $api_key, etc)
-	Each setting has it's own instructions right above it.
+1.  Edit this file:  Look for the line that starts with "$xmlrpc_location".
+    Change it to:
+    $xmlrpc_location = "XMLRPC.class.php";
+2.  Set the rest of the "Required Settings" as needed (like $website, $api_key, etc)
+    Each setting has it's own instructions right above it.
 
-	There may be optional settings as well, those can be set by
-	un-commenting them and set them as instructed.
-3.	Upload the modified file to a location that you can access from the web.
-	It does not have to be on the same website as the Geo software.
-4.	Upload the file "XMLRPC.class.php" to the same location that you uploaded
-	this file to.  The file is located in the Geo software at:
-	classes/rpc/XMLRPC.class.php
-5.	In a web browser, visit the file you uploaded in step 3.  You should see
-	the results of the API call.
+    There may be optional settings as well, those can be set by
+    un-commenting them and set them as instructed.
+3.  Upload the modified file to a location that you can access from the web.
+    It does not have to be on the same website as the Geo software.
+4.  Upload the file "XMLRPC.class.php" to the same location that you uploaded
+    this file to.  The file is located in the Geo software at:
+    classes/rpc/XMLRPC.class.php
+5.  In a web browser, visit the file you uploaded in step 3.  You should see
+    the results of the API call.
 */
 
 //  ----  Required Settings:  ----  //
@@ -52,13 +53,13 @@ $user_info['password'] = '';
 //OR if you happen to know a user group ID you want to place them in, un-comment below and change: (Var added in 5.1.0)
 //$user_info['force_user_group_id'] = 0;
 
-//If password is not available, can un-comment line below to allow registring 
+//If password is not available, can un-comment line below to allow registring
 //with blank pass, the user won't be able to login until the password is set
 //later using user edit
 //$user_info['use_blank_password'] = 1;
 
 $user_info['email'] = '';
-$user_info['company_name']='';
+$user_info['company_name'] = '';
 $user_info['business_type'] = 1;//1 for personal or 2 for business
 $user_info['firstname'] = '';
 $user_info['lastname'] = '';
@@ -68,8 +69,8 @@ $user_info['city'] = '';
 $user_info['state'] = '';
 $user_info['country'] = '';
 $user_info['zip'] = '';
-$user_info['phone']='';
-$user_info['phone2']='';
+$user_info['phone'] = '';
+$user_info['phone2'] = '';
 $user_info['fax'] = '';
 $user_info['url'] = '';
 $user_info['affiliate_html'] = '';
@@ -93,7 +94,7 @@ $user_info['optional_field_10'] = '';
 //That data will still be stored if given, but will not throw an error if missing
 //$user_info['skip_reqs'] = 1;
 
-//Un-comment the next line to make the "successful registration" return the 
+//Un-comment the next line to make the "successful registration" return the
 //contents of {body_html} for the normal register success page, in an array
 //key 'body_html'.
 //$user_info['success_body_html'] = 1;
@@ -110,12 +111,12 @@ $user_info['optional_field_10'] = '';
 //  ----  END Required Settings  ----  //
 
 
-if ($api_key == 'my_site_api_key'){
-	//settings probably not set!
-	die ('<strong style="color:red;">ERROR: Settings not set!</strong><br /><br /><em>This is a sample api client script, that requires the settings at the top of this script to be changed to match your site.</em>');
+if ($api_key == 'my_site_api_key') {
+    //settings probably not set!
+    die('<strong style="color:red;">ERROR: Settings not set!</strong><br /><br /><em>This is a sample api client script, that requires the settings at the top of this script to be changed to match your site.</em>');
 }
-require_once ($xmlrpc_location);
-$client = new IXR_Client( $website );
+require_once($xmlrpc_location);
+$client = new IXR_Client($website);
 //un-comment next line to turn debug output on for the client
 //$client->debug = true;
 
@@ -125,11 +126,11 @@ $data = $user_info;
 $data['api_key'] = $api_key;
 
 //call the user list api.
-if (!$client->query('core.user.register',$data)){
-	die('<span style="color: red;">An error occurred</span> :<br /><strong>'.$client->getErrorCode()."</strong> : ".$client->getErrorMessage().'<br /><br /><em>Check the settings at the top of this sample script to make sure they are correct.</em>');
+if (!$client->query('core.user.register', $data)) {
+    die('<span style="color: red;">An error occurred</span> :<br /><strong>' . $client->getErrorCode() . "</strong> : " . $client->getErrorMessage() . '<br /><br /><em>Check the settings at the top of this sample script to make sure they are correct.</em>');
 }
 
 //get the response
 $details = $client->getResponse();
 
-echo '<strong>Result of API call:</strong><pre>'.htmlspecialchars(print_r($details,1)).'</pre>';
+echo '<strong>Result of API call:</strong><pre>' . htmlspecialchars(print_r($details, 1)) . '</pre>';

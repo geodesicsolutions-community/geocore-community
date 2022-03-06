@@ -8,81 +8,81 @@
 /*
  * Note: geographic_navigation_column could be used for table or for div, so
  * the div. or table. part is important in the selectors in this case..
- * 
+ *
  * (Table is used with option to "sort across columns")
  */
 div.geographic_navigation_column {
-	float: left;
+    float: left;
 }
 div.geographic_navigation_column ul {
-	margin: 0;
-	padding: .3em;
+    margin: 0;
+    padding: .3em;
 }
 
 div.geographic_navigation_column ul li.element {
-	list-style: none;
-	font-weight: bold;
-	font-size: .75rem;
-	padding: .3em 0;
-	margin: 0;
+    list-style: none;
+    font-weight: bold;
+    font-size: .75rem;
+    padding: .3em 0;
+    margin: 0;
 }
 
 table.geographic_navigation_column {
-	width: 100%;
+    width: 100%;
 }
 table.geographic_navigation_column td.element {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .geographic_navigation_column ul.sub_regions li.element {
-	/* specific to sub-categories */
-	list-style: circle;
-	font-weight: normal;
-	padding: 0;
-	margin: 0 0 0 1.25em;
+    /* specific to sub-categories */
+    list-style: circle;
+    font-weight: normal;
+    padding: 0;
+    margin: 0 0 0 1.25em;
 }
 
 #geoNavChangeBox {
-	/* Change box for changing geo navigation location */
-	border: thin solid #666;
-	background-color: white;
-	padding: 1em;
-	display: inline-block;
-	
-	z-index: 50;
+    /* Change box for changing geo navigation location */
+    border: thin solid #666;
+    background-color: white;
+    padding: 1em;
+    display: inline-block;
+
+    z-index: 50;
 }
 
 .narrowRegionLevel {
-	float: left;
-	padding: .625em;
-	border-right: thin solid #a5a5a5;
+    float: left;
+    padding: .625em;
+    border-right: thin solid #a5a5a5;
 }
 
 .narrowRegionLink {
-	cursor: pointer;
+    cursor: pointer;
 }
 .narrowRegionLink:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 .selectedRegion {
-	font-weight: bold;
-	color: #7CA93A;
+    font-weight: bold;
+    color: #7CA93A;
 }
 
 .narrowRegionSelect {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .geographic_navigation_changeLink {
-	/* Change location link */
-	cursor: pointer;
+    /* Change location link */
+    cursor: pointer;
 }
 
 .category_navigation_box {
-	/*  Add a max-height to keep navigation from getting too long, and make it scroll */
-	max-height: 25em;
-	overflow: auto;
+    /*  Add a max-height to keep navigation from getting too long, and make it scroll */
+    max-height: 25em;
+    overflow: auto;
 }

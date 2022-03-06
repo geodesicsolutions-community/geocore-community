@@ -1,15 +1,21 @@
 <ruleset name="PSR-12 Code Standard">
     <description>Normal PSR-12 coding standard</description>
-    <!-- only process php files -->
-    <exclude-pattern>*\.(?!php$)</exclude-pattern>
 
     <!-- Exclude libraries -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*/classes/pclzip/*</exclude-pattern>
     <exclude-pattern>*/classes/PEAR/*</exclude-pattern>
-    <exclude-pattern>*/classes/php5_classes/smarty/*</exclude-pattern>
     <exclude-pattern>*/classes/php5_classes/swift5/*</exclude-pattern>
-    <exclude-pattern>*/geo_templates/**/*</exclude-pattern>
+    <exclude-pattern>*/js/codemirror/*</exclude-pattern>
+    <exclude-pattern>*/js/plupload/*</exclude-pattern>
+    <exclude-pattern>*/js/scriptaculous/*</exclude-pattern>
+    <exclude-pattern>*/js/prototype.js</exclude-pattern>
+    <exclude-pattern>*/js/calendarview.js</exclude-pattern>
+    <exclude-pattern>**.min.js</exclude-pattern>
+    <exclude-pattern>**/croppie.js</exclude-pattern>
+
+    <!-- Exclude auto generated files for smarty -->
+    <exclude-pattern>*/templates_c/*</exclude-pattern>
 
     <!-- list of default files and paths to check relative to contrib/ (ignored if set on command line) -->
     <file>../src</file>

@@ -1,13 +1,14 @@
 <?php
+
 ###########################################
 ## Auto-generated file
 ## It is not recommended to edit
 ## this file directly, but you can
 ## if you want.
-## 
+##
 ## Generated: Feb  4, 2016 21:32:21
 ###########################################
-$return = (isset($return))? $return: array();
+$return = (isset($return)) ? $return : array();
 
 ###########################################
 ## Module Attachments
@@ -29,7 +30,7 @@ $return ['modules'] [89] = 'module_featured_pic_1';
  * addon_name: from addon_info->name
  * tag: entry in addon_info->tags array
  */
- 
+
 $return ['addons'] ['geo_addons'] ['social_connect'] ['facebook_listing_profile_picture'] = 'facebook_listing_profile_picture';
 $return ['addons'] ['geo_addons'] ['google_maps'] ['listing_map'] = 'listing_map';
 $return ['addons'] ['geo_addons'] ['twitter_feed'] ['show_feed'] = 'show_feed';
@@ -49,33 +50,33 @@ $process_sub_pages = 0;
 
 ###########################################
 ## DO NOT EDIT BELOW THIS LINE!!!
-## 
+##
 ##  The rest of this file is used
 ##  to automatically load sub-pages
 ###########################################
 
 $return ['already_attached']['listing_classified.tpl'] = 1;
 
-$depth = (isset($depth))? $depth: 0;
+$depth = (isset($depth)) ? $depth : 0;
 
-$depth ++;
+$depth++;
 
 if ($process_sub_pages && is_array($return['sub_pages']) && !(isset($skip_sub_pages) && $skip_sub_pages)) {
-	$sub_pages = $return['sub_pages'];
-	foreach ($sub_pages as $sub_page) {
-		if (!isset($return['already_attached'][$sub_page])) {
-			//prevent infinite recursion, make sure we only do each one once
-			$return['already_attached'][$sub_page] = 1;
-			$file = geoTemplate::getFilePath('main_page','attachments',"modules_to_template/{$sub_page}.php",false);
-			if ($file !== "modules_to_template/{$sub_page}.php") {
-				require $file;
-			}
-		}
-	}
+    $sub_pages = $return['sub_pages'];
+    foreach ($sub_pages as $sub_page) {
+        if (!isset($return['already_attached'][$sub_page])) {
+            //prevent infinite recursion, make sure we only do each one once
+            $return['already_attached'][$sub_page] = 1;
+            $file = geoTemplate::getFilePath('main_page', 'attachments', "modules_to_template/{$sub_page}.php", false);
+            if ($file !== "modules_to_template/{$sub_page}.php") {
+                require $file;
+            }
+        }
+    }
 }
 
-$depth --;
+$depth--;
 
 if (!$depth) {
-	return $return;
+    return $return;
 }

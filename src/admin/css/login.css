@@ -2,48 +2,48 @@
 
 /* 16.09.0-79-gb63e5d8 */
 body {
-	background: #172D44;
-	color: #5A738E;
-	font-weight: normal;
-	font-family: Arial, sans-serif;
-	text-align: center;
+    background: #172D44;
+    color: #5A738E;
+    font-weight: normal;
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 #outerBox {
-	text-align: center;
-	display: inline-block;
+    text-align: center;
+    display: inline-block;
 }
 
 ul {
-	list-style-image: url(../admin_images/design/arrowbullet_menu.gif);
-	text-align: left;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	line-height: 2em;
-	font-weight: bold;
-	color: #FFF;
-	position:relative;
-	left: -12px;
+    list-style-image: url(../admin_images/design/arrowbullet_menu.gif);
+    text-align: left;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    line-height: 2em;
+    font-weight: bold;
+    color: #FFF;
+    position:relative;
+    left: -12px;
 }
 
 ul li * {
-	position: relative;
-	top: -3px;
+    position: relative;
+    top: -3px;
 }
 
 ul a {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .login_error {
-	width: auto;
-	margin-bottom: 10px;
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: normal;
-	color: #FF9B9B;
-	text-align: center;
-	text-shadow: 0 1px 0 #000;
+    width: auto;
+    margin-bottom: 10px;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+    color: #FF9B9B;
+    text-align: center;
+    text-shadow: 0 1px 0 #000;
 }
 
 .login_error a {
@@ -52,164 +52,164 @@ ul a {
 }
 
 .login_error .note {
-	text-align:left;
-	margin:5px;
-	border:thin #FF9B9B dashed;
-	padding:5px;
+    text-align:left;
+    margin:5px;
+    border:thin #FF9B9B dashed;
+    padding:5px;
 }
 
 a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 a.login_link {
-	color: #0B709F;
+    color: #0B709F;
 }
 
 a.login_link:active {
-	color: #0B709F;
+    color: #0B709F;
 }
 
 a.login_link:visited {
-	color: #0B709F;
+    color: #0B709F;
 }
 
 
 #login_box {
-	width: auto;
-	border: 4px solid #73879C;
-	padding: 2px;
-	max-width: 100%;
-	background: #F7F7F7;
-	background-repeat: repeat-x;
+    width: auto;
+    border: 4px solid #73879C;
+    padding: 2px;
+    max-width: 100%;
+    background: #F7F7F7;
+    background-repeat: repeat-x;
 }
 #login_sub {
-	background-repeat: no-repeat;
-	border: 1px solid transparent;
-	z-index: 100;
-	background-position: 2px 0px;
+    background-repeat: no-repeat;
+    border: 1px solid transparent;
+    z-index: 100;
+    background-position: 2px 0px;
 }
 
 #logo_spacer {
-	height: 70px;
-	border-bottom: 1px solid #D9DEE4;
+    height: 70px;
+    border-bottom: 1px solid #D9DEE4;
 }
 
 #login_left {
-	/*width: 135px;
-	border: 1px solid #0B709F;*/
-	float: left;
-	width: 135px;
-	background-repeat: no-repeat;
+    /*width: 135px;
+    border: 1px solid #0B709F;*/
+    float: left;
+    width: 135px;
+    background-repeat: no-repeat;
 }
 
 #login_left_list {
-	z-index: 10;
-	font-size: 14px;
-	color: #FFFFFF;
-	text-align: center;
-	padding-left: 8px;
-	margin-top: 60px;
+    z-index: 10;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    padding-left: 8px;
+    margin-top: 60px;
 }
 
 #login_right {
-	width: 100%;
+    width: 100%;
 }
 
 #login_product_name {
-	margin: 0px;
-	font-size: 22px;
-	text-align: center;
-	color: #0B709F;
-	padding-top: 15px;
+    margin: 0px;
+    font-size: 22px;
+    text-align: center;
+    color: #0B709F;
+    padding-top: 15px;
 }
 
 #login_software_type {
-	margin: 0px;
-	font-size: 14px;
-	text-align: center;
-	color: #0B709F;
+    margin: 0px;
+    font-size: 14px;
+    text-align: center;
+    color: #0B709F;
 }
 
 #login_form_fields {
-	width: 100%;
-	margin-top: 20px;
-	text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
 }
 
 #login_username_block {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 #login_password_block {
-	margin-top: 5px;
-	font-size: 14px;
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 #login_right input {
-	width: 95%;
-	margin: 10px auto;
+    width: 95%;
+    margin: 10px auto;
 }
 
 #login_copyright {
-	margin-top: 10px;
-	font-size: 12px;
-	font-weight: normal;
-	text-align: center;
-	clear: both;
-	background: #FFF;
-	padding: 5px 0;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+    clear: both;
+    background: #FFF;
+    padding: 5px 0;
 }
 
 #forgot_pass_link {
-	font-size: 12px;
-	font-wieght: normal;
-	margin-top: 30px;
+    font-size: 12px;
+    font-wieght: normal;
+    margin-top: 30px;
 }
 
 #license_tip {
-	width: 90%;
-	margin: 5px auto 10px auto;
-	font-size: 12px;
-	color: #000000;
-	text-align: center;
-	clear: both;
+    width: 90%;
+    margin: 5px auto 10px auto;
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    clear: both;
 }
 
 #license_help {
-	margin: 30px 5px 0 5px;
-	font-weight: normal;
-	font-size: 12px;
-	color: #000;
-	text-align: center;
-	border: 1px dashed #ff0000;
-	padding: 5px;
+    margin: 30px 5px 0 5px;
+    font-weight: normal;
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+    border: 1px dashed #ff0000;
+    padding: 5px;
 }
 
 #license_data {
-	margin: 10px 5px 0 5px;
-	border: 1px solid #000000;
-	padding: 5px;
-	text-align: left;
-	font-size: 12px;
-	color: #000000;
+    margin: 10px 5px 0 5px;
+    border: 1px solid #000000;
+    padding: 5px;
+    text-align: left;
+    font-size: 12px;
+    color: #000000;
 }
 
 #license_agree {
-	margin: 10px 5px 0 5px;
-	border: 1px solid #000000;
-	padding: 5px;
-	text-align: left;
-	font-size: 12px;
-	color: #000000;
-	font-weight: normal;
+    margin: 10px 5px 0 5px;
+    border: 1px solid #000000;
+    padding: 5px;
+    text-align: left;
+    font-size: 12px;
+    color: #000000;
+    font-weight: normal;
 }
 #license_agree input {
-	width: auto;
+    width: auto;
 }
 
 #login_bottom {
-	clear: both;
+    clear: both;
 }
 
 
@@ -217,28 +217,28 @@ a.login_link:visited {
 /*login button*/
 
 #submit_button {
-	margin: 10px auto;
-	text-align: center;
-	width: 100px;
+    margin: 10px auto;
+    text-align: center;
+    width: 100px;
 }
 
 #submit_button input.theButton {
-	color: #FFF;
-	font-family: Arial, sans-serif;
-	text-decoration: none;
-	font-weight: bold;
-	text-align: center;
-	width: 82px;
-	height: 28px;
-	padding: 0px;
-	margin: 0px;
-	background: url('../admin_images/login/btn_login.jpg') center left no-repeat; /*EDIT PER STYLESHEET*/
-	/*background-repeat: no-repeat;
-	background-position: center left;*/
-	font-size: 16px;
-	border: none;
+    color: #FFF;
+    font-family: Arial, sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    width: 82px;
+    height: 28px;
+    padding: 0px;
+    margin: 0px;
+    background: url('../admin_images/login/btn_login.jpg') center left no-repeat; /*EDIT PER STYLESHEET*/
+    /*background-repeat: no-repeat;
+    background-position: center left;*/
+    font-size: 16px;
+    border: none;
 }
 
 #submit_button input.theButton:hover, #submit_button input.theButton:active {
-	background-position: top left;
+    background-position: top left;
 }

@@ -1,29 +1,29 @@
 
 .enabled_text {
-	color:black;
+    color:black;
 }
 
 /*to remember medium font stuff*/
 td.medium_font span.enabled_text,
   td.medium_font span.disabled_text  {
-	font-family: Arial,Helvetica,sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 10pt;
     font-style: normal;
     line-height: normal;
-    font-weight: normal;	
+    font-weight: normal;
 }
 
 /* disabled detected host and port*/
 span.disabled_text strong {
-	padding-left: 5px;
-	padding-right: 5px;
-	border: thin rgb(200,200,200) dashed;
-	color:rgb(200,200,200);
+    padding-left: 5px;
+    padding-right: 5px;
+    border: thin rgb(200,200,200) dashed;
+    color:rgb(200,200,200);
 }
 /* enabled detected host and port*/
 span.enabled_text strong {
-	padding-left: 5px;
-	padding-right: 5px;
-	border: thin black dashed;
-	color:black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: thin black dashed;
+    color:black;
 }

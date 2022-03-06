@@ -1,192 +1,192 @@
 #box *
  {
- 	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
  }
- 
+
 .ToolText{position:relative; }
 .ToolTextHover{position:relative;}
 .ToolText .overtip{display: none;visibility:hidden;}
 
 .ToolTextHover .overtip{
-	position:absolute;
-	overflow:visible;
-	visibility:visible;
-	display:block;
-	width:auto;
-	border:1px solid black;
-	top:-20px;
-	left:-50px;
-	background-color:gray; 
-	color:white;
-	text-align: center;
-	z-index: 1000;
+    position:absolute;
+    overflow:visible;
+    visibility:visible;
+    display:block;
+    width:auto;
+    border:1px solid black;
+    top:-20px;
+    left:-50px;
+    background-color:gray;
+    color:white;
+    text-align: center;
+    z-index: 1000;
 }
 
  .selector
  {
-	 border: 1px solid #000000;
+     border: 1px solid #000000;
  }
- 
+
  .collapsed
  {
-	position:relative;
- 	overflow:hidden;
- 	top:0;
- 	left:0;
- 	margin-left: 0;
- 	width:700px;
+    position:relative;
+    overflow:hidden;
+    top:0;
+    left:0;
+    margin-left: 0;
+    width:700px;
  }
- 
+
   .expanded
  {
- 	clear:both;
- 	position:absolute;
- 	overflow:visible;
- 	display: inline;
- 	width:1000px;
- 	left:1px;
- 	maring-left:500px;
- 	top:200px;
+    clear:both;
+    position:absolute;
+    overflow:visible;
+    display: inline;
+    width:1000px;
+    left:1px;
+    maring-left:500px;
+    top:200px;
  }
 
 
 .section_title
 {
-	background: #000066;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 12pt;
-	font-style: normal;
-	line-height: normal;
-	color: #FFFFFF;
-	text-decoration: none;
-	font-weight: bold;
-	margin-top: 12px;
+    background: #000066;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 12pt;
+    font-style: normal;
+    line-height: normal;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 12px;
 }
 .step_label
 {
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #FFFFFF;
-	text-decoration: none;
-	width: 100%;
-	font-weight: bold;
-	margin-top: 12px;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #FFFFFF;
+    text-decoration: none;
+    width: 100%;
+    font-weight: bold;
+    margin-top: 12px;
 }
 .even_row
 {
-	background: #F0FAFF;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
+    background: #F0FAFF;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
 }
 .odd_row
 {
-	background: #FFFFFF;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
+    background: #FFFFFF;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
 }
 
 .mix_row
 {
-	background:#FFE8E8;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
+    background:#FFE8E8;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
 }
 
 .title_row
 {
-	background: #A8D3FF;
-	font-family: tahoma,arial, verdana;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
-	font-weight: bold;
+    background: #A8D3FF;
+    font-family: tahoma,arial, verdana;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .form_table
 {
-	background: #FFFFFF;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
+    background: #FFFFFF;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
 }
 .form_row
 {
-	background: #FFFFFF;
-	font-family: Verdana;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
+    background: #FFFFFF;
+    font-family: Verdana;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
 }
 .form_label
 {
-	background: #FFFFFF;
-	font-family: Tahoma;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
-	width:auto;
-	text-align:right;
+    background: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
+    width:auto;
+    text-align:right;
 }
 .error_row
 {
-	background: #FF0000;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 10pt;
-	font-style: normal;
-	line-height: normal;
-	color: #000000;
-	text-decoration: none;
+    background: #FF0000;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    text-decoration: none;
 }
 .progressBar
 {
-	background-color:#659ACC;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 8pt;
-	margin:1px;
-	padding:2px;
-	color: #FFF;
-	font-weight: bold;
+    background-color:#659ACC;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size: 8pt;
+    margin:1px;
+    padding:2px;
+    color: #FFF;
+    font-weight: bold;
 }
 .selectBoxHeader
 {
-	padding:0px 2px;
-	border-bottom:1px solid #353535;
-	border-right:1px solid #999;
-	font-family:Tahoma,Verdana;
-	font-size:8px;
+    padding:0px 2px;
+    border-bottom:1px solid #353535;
+    border-right:1px solid #999;
+    font-family:Tahoma,Verdana;
+    font-size:8px;
 }
 .defaultColumn
 {
-	margin-right:4px;
-	padding:0px 4px;
-	border-left:2px solid #999;
-	border-bottom:2px solid #353535;
+    margin-right:4px;
+    padding:0px 4px;
+    border-left:2px solid #999;
+    border-bottom:2px solid #353535;
 }
-.highlight 
+.highlight
 {
-	background: #FFFFB4;
+    background: #FFFFB4;
 }

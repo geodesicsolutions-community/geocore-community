@@ -7,9 +7,9 @@
  * @param Smarty_Internal_Template $smarty
  * @return void
  */
-function smarty_function_legacy_include ($params, Smarty_Internal_Template $smarty)
+function smarty_function_legacy_include($params, Smarty_Internal_Template $smarty)
 {
-	$path = '';
+    $path = '';
 
     if (!empty($params['g_type'])) {
         $path .= $params['g_type'] . '/';

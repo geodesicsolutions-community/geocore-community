@@ -1,260 +1,260 @@
 /* 7.6.3-149-g881827a */
 
-/* 
+/*
  * SIGNS AND FLYERS ADDON Theme Styles
  */
 
 /* ######### BODY STYLES ######### */
 body {
-	margin: 10px 0 20px 0;
-	padding: 0;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
+    margin: 10px 0 20px 0;
+    padding: 0;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
 }
 
 .left {
-	text-align: left;
+    text-align: left;
 }
 
 .right {
-	text-align: right;
+    text-align: right;
 }
 
 .center {
-	text-align: center;
+    text-align: center;
 }
 
 /* ######### MISC STYLES ######### */
 .clear,.clr {
-	clear: both;
+    clear: both;
 }
 
 a img {
-	border: none;
+    border: none;
 }
 
 /* ######### GLOBAL STYLES ######### */
 
 .box_pad {
-	padding: 5px 5px 10px 5px;
+    padding: 5px 5px 10px 5px;
 }
 
 /* ######### GLOBAL TEXT STYLES ######### */
 .main_text {
-	color: #666666;
-	font-size: 12px;
-	font-weight: standard;
+    color: #666666;
+    font-size: 12px;
+    font-weight: standard;
 }
 
 /* ######### BREADCRUMB STYLES ######### */
 .breadcrumb {
-	padding: 0 30px;
-	color: #5f6672;
-	font-size: 11px;
-	text-align: left;
-	margin: 10px 0;
-	font-weight: bold;
+    padding: 0 30px;
+    color: #5f6672;
+    font-size: 11px;
+    text-align: left;
+    margin: 10px 0;
+    font-weight: bold;
 }
 
 #breadcrumb {
-	margin: 5px 0 10px 0;
-	padding: 0;
-	height: 30px;
-	border: 5px solid #eaeaea;
-	padding: 1px;
+    margin: 5px 0 10px 0;
+    padding: 0;
+    height: 30px;
+    border: 5px solid #eaeaea;
+    padding: 1px;
 }
 
 #breadcrumb li.element {
-	background: url('../images/backgrounds/cart_step.gif') no-repeat center right;
-	font-size: 12px;
-	font-weight: bold;
-	color: #666666;
+    background: url('../images/backgrounds/cart_step.gif') no-repeat center right;
+    font-size: 12px;
+    font-weight: bold;
+    color: #666666;
 }
 
 #breadcrumb li.highlight {
-	color: #4076b1;
+    color: #4076b1;
 }
 
 #breadcrumb li.active {
-	color: #7ca93a;
+    color: #7ca93a;
 }
 
 #breadcrumb li {
-	display: block;
-	float: left;
-	height: 22px;
-	padding: 7px 40px 0 10px;
-	color: #4076b1;
-	font-size: 12px;
-	padding: 7px 40px 0 10px;
-	background: none;
+    display: block;
+    float: left;
+    height: 22px;
+    padding: 7px 40px 0 10px;
+    color: #4076b1;
+    font-size: 12px;
+    padding: 7px 40px 0 10px;
+    background: none;
 }
 
 /* ######### LISTING DETAILS STYLES ######### */
 h1.listing_title {
-	color: #4987c5;
-	padding: 0;
-	margin: 15px 10px 15px 10px;
-	font-size: 20px;
-	font-weight: bold;
-	border-bottom: 1px dashed #4987c5;
+    color: #4987c5;
+    padding: 0;
+    margin: 15px 10px 15px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px dashed #4987c5;
 }
 
 /* ######### PRINTER FRIENDLY PAGE STYLES ######### */
 .print_body {
-	background: #ffffff;
-	font-size: 11px;
+    background: #ffffff;
+    font-size: 11px;
 }
 
 .print_shell {
-	width: 700px;
-	margin: 0 auto;
+    width: 700px;
+    margin: 0 auto;
 }
 
 h1.print_title {
-	background: #eaeaea;
-	color: #4987c5;
-	font-size: 14px;
-	font-weight: bold;
-	margin: 1px 0px 10px 0px;
-	padding: 5px 3px 5px 3px;
-	border-top: 1px solid #999999;
-	border-bottom: 1px solid #999999;
+    background: #eaeaea;
+    color: #4987c5;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 1px 0px 10px 0px;
+    padding: 5px 3px 5px 3px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
 }
 
 #print_photo_column {
-	width: 500px;
-	display: block;
-	float: right;
-	text-align: center;
+    width: 500px;
+    display: block;
+    float: right;
+    text-align: center;
 }
 
 #print_photo_column img {
-	border: 5px solid #eaeaea;
-	margin-bottom: 10px;
+    border: 5px solid #eaeaea;
+    margin-bottom: 10px;
 }
 
 #print_photo_column div {
-	text-align: left;
+    text-align: left;
 }
 
 #print_listing_info_column {
-	overflow: hidden;
-	padding: 0 10px;
-	font-size: 11px;
+    overflow: hidden;
+    padding: 0 10px;
+    font-size: 11px;
 }
 
 #print_listing_info_column ul {
-	margin: 0;
-	padding: 0;
-	float: left;
-	width: 500px;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 500px;
 }
 
 #print_listing_info_column ul li {
-	list-style: none;
-	padding: 5px 0 5px 10px;
+    list-style: none;
+    padding: 5px 0 5px 10px;
 }
 
 #print_listing_info_column li.label {
-	display: block;
-	width: 200px;
-	float: left;
-	clear: both;
-	font-weight: bold;
-	color: #737373;
+    display: block;
+    width: 200px;
+    float: left;
+    clear: both;
+    font-weight: bold;
+    color: #737373;
 }
 
 #print_listing_info_column li.price {
-	color: #7ca93a;
-	font-size: 16px;
-	font-weight: bold;
-	padding: 10px 0 10px 10px;
+    color: #7ca93a;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 0 10px 10px;
 }
 
 #print_optional_fields {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #print_optional_fields li {
-	list-style: none;
-	padding: 5px;
+    list-style: none;
+    padding: 5px;
 }
 
 #print_optional_fields label {
-	font-weight: bold;
-	display: inline-block;
-	white-space: nowrap;
-	width: 175px;
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+    width: 175px;
 }
 
 .print_half_column_left {
-	width: 340px;
-	float: left;
-	margin-right: 15px;
+    width: 340px;
+    float: left;
+    margin-right: 15px;
 }
 
 .print_half_column_right {
-	width: 340px;
-	padding: 0 0 0 5px;
-	float: left;
+    width: 340px;
+    padding: 0 0 0 5px;
+    float: left;
 }
 
 .rows {
-	padding: 7px 5px;
-	background: #ffffff;
-	font-size: 12px;
-	color: #666666;
-	border-bottom: 1px dashed #666666;
+    padding: 7px 5px;
+    background: #ffffff;
+    font-size: 12px;
+    color: #666666;
+    border-bottom: 1px dashed #666666;
 }
 
 
 /* ######### SIGN SPECIFIC STYLES ######### */
 h1.listing_title_sign {
-	color: #4987c5;
-	padding: 0;
-	margin: 0px 10px 15px 10px;
-	font-size: 38px;
-	font-weight: bold;
-	border-bottom: 1px dashed #4987c5;
+    color: #4987c5;
+    padding: 0;
+    margin: 0px 10px 15px 10px;
+    font-size: 38px;
+    font-weight: bold;
+    border-bottom: 1px dashed #4987c5;
 }
 
 .for_sale {
-	margin: 0;
-	padding: 0;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
-	color: #666;
-	font-size: 120pt;
-	font-weight: bold;
-	text-align: center;
-	border: 5px solid #666;
+    margin: 0;
+    padding: 0;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    color: #666;
+    font-size: 120pt;
+    font-weight: bold;
+    text-align: center;
+    border: 5px solid #666;
 }
 
 .print_shell_sign {
-	width: 980px;
-	margin: 0 auto;
+    width: 980px;
+    margin: 0 auto;
 }
 
 #print_listing_info_column li.contact {
-	color: #7ca93a;
-	font-size: 32px;
-	font-weight: bold;
-	padding: 0;
+    color: #7ca93a;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 0;
 }
 
 .phone_sign {
-	margin: 0;
-	padding: 0;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
-	color: #666;
-	font-size: 84pt;
-	font-weight: bold;
-	text-align: center;
-	border: 0px solid #eaeaea;
+    margin: 0;
+    padding: 0;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    color: #666;
+    font-size: 84pt;
+    font-weight: bold;
+    text-align: center;
+    border: 0px solid #eaeaea;
 }
 
 .sign_text {
-	color: #666;
-	font-size: 18px;
-	font-weight: standard;
+    color: #666;
+    font-size: 18px;
+    font-weight: standard;
 }

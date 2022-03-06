@@ -97,58 +97,58 @@ color:#999;
 
 .sitemap_title
 {
-	font-family: Arial;
-	font-size: 14px;
-	color: #FFF;
-	font-weight: bold;
-	padding-top: 0px;
-	padding-right: 88px;
-	padding-left: 60px;
-	border:1px solid #0068C6;
-	background-image: url(../admin_images/design/breadcrumb_bg.gif);
-	min-height: 30px;
-	margin-top: 10px;
+    font-family: Arial;
+    font-size: 14px;
+    color: #FFF;
+    font-weight: bold;
+    padding-top: 0px;
+    padding-right: 88px;
+    padding-left: 60px;
+    border:1px solid #0068C6;
+    background-image: url(../admin_images/design/breadcrumb_bg.gif);
+    min-height: 30px;
+    margin-top: 10px;
 }
 .sitemap_title_img
 {
-	float: left;
-	margin-right: 4px;
+    float: left;
+    margin-right: 4px;
 }
 
 .sitemap_title_txt
 {
-	position: relative;
-	/*top:-15px;
-	left:-55px;
-	padding: 5px 200px 5px 55px; */
+    position: relative;
+    /*top:-15px;
+    left:-55px;
+    padding: 5px 200px 5px 55px; */
 }
 
 .sitemap_title_txt a:link
 {
-	font-size: 14px;
-	color: #FFF;
-	position: relative;
+    font-size: 14px;
+    color: #FFF;
+    position: relative;
 }
 
 .sitemap_title_txt a:visited
 {
-	font-size: 14px;
-	color: #FFF;
-	position: relative;
+    font-size: 14px;
+    color: #FFF;
+    position: relative;
 }
 
 .sitemap_title_txt a:hover
 {
-	color: #FFF;
-	position: relative;
+    color: #FFF;
+    position: relative;
 }
 
 .sitemap_title_txt_top
 {
-	height: 5px;
+    height: 5px;
 }
 
 .sitemap_parent
 {
-	color: #000;
+    color: #000;
 }

@@ -1,14 +1,14 @@
 /* 6.0.7-3-gce41f93 */
 
 #attention_getters {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #attention_getters li {
-	list-style: none;
-	display: block;
-	width: 200px;
-	float: left;
-	text-align: left;
+    list-style: none;
+    display: block;
+    width: 200px;
+    float: left;
+    text-align: left;
 }

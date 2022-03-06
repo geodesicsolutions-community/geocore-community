@@ -972,12 +972,12 @@ a.badge:focus {
 
 /* GEO ADDITION: need to add a couple of rules that affect things in this file, which is loaded after default.css */
 .needs_attention .badge {
-	background-color: #C60000;
+    background-color: #C60000;
 }
 
 @media only screen and (min-width: 52em) {
-	.pc-hide {
-		display:none;
-	}
+    .pc-hide {
+        display:none;
+    }
 }
 

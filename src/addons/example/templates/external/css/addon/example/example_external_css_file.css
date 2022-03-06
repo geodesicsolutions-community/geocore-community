@@ -8,12 +8,12 @@
  * in that folder will be automatically copied to the default template set's external/
  * folder when the addon is installed or updated.  You could then reference the file
  * in your PHP file using something similar to:
- * 
+ *
  * geoTemplate::getUrl('resource','file.ext')
- * 
+ *
  * In template file:
  * {external file='resource/file.ext'}
- * 
+ *
  * To get for this specific file, you would use:
  * PHP:
  * geoTemplate::getUrl('css','addon/example/example_external_css_file.css')
@@ -22,8 +22,8 @@
  *
  * It is highly recommended to put any files in sub-folder "addon/addon_name/" as
  * we did for this example file, to prevent file-name collisions.
- * 
+ *
  * NOTE: The above also applies to the sub-folder templates/main_page/ - if that
  * folder exists in an addon, any contents will automatically be copied to default
- * template set's main_page/ folder upon installation or updating of the addon. 
+ * template set's main_page/ folder upon installation or updating of the addon.
  */

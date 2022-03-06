@@ -1,8 +1,9 @@
 <?php
+
 //Format.class.php
 /**
  * Holds the class geoFormatString.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
@@ -11,24 +12,24 @@
 /**
  * Used to display a message nice and pretty, we'll probably be getting rid of
  * this class though so don't go crazy using it.
- * 
+ *
  * @package System
  * @since Version 4.0.0
  */
 class geoFormatString
 {
-	
-	/**
-	 * Formats a passed text to display a friendly user message.
-	 *
-	 * @param string $msg
-	 * @param int $type [GEO_SUCCESS = 1, GEO_NOTICE = 2, GEO_FAILURE = 3]
-	 * @return string
-	 */
-	public function message ( $msg, $type = GEO_SUCCESS)
-	{
-		$css = 
-		"
+
+    /**
+     * Formats a passed text to display a friendly user message.
+     *
+     * @param string $msg
+     * @param int $type [GEO_SUCCESS = 1, GEO_NOTICE = 2, GEO_FAILURE = 3]
+     * @return string
+     */
+    public function message($msg, $type = GEO_SUCCESS)
+    {
+        $css =
+        "
 		<style>
 		div.userMessage {
 			margin: 1em 0;
@@ -103,24 +104,24 @@ class geoFormatString
 
 	</style>
 		";
-		
-		geoView::getInstance()->addTop($css);
-		
-		//TODO: add  type for Failure and Notice
-		switch($type) {
-			case GEO_SUCCESS:
-				$csstype = "success";
-				break;
-			case GEO_NOTICE:
-				$csstype = "notice";
-				break;
-			case GEO_FAILURE:
-				$csstype = "error";
-				break;
-		}
-		
-		
-		$message = "
+
+        geoView::getInstance()->addTop($css);
+
+        //TODO: add  type for Failure and Notice
+        switch ($type) {
+            case GEO_SUCCESS:
+                $csstype = "success";
+                break;
+            case GEO_NOTICE:
+                $csstype = "notice";
+                break;
+            case GEO_FAILURE:
+                $csstype = "error";
+                break;
+        }
+
+
+        $message = "
 		<div class='userMessage $csstype'>
 			<ul>
 					<li>
@@ -128,8 +129,8 @@ class geoFormatString
 					</li>
 			</ul>
 		</div>";
-		
-		
-		return $message;
-	}
+
+
+        return $message;
+    }
 }
