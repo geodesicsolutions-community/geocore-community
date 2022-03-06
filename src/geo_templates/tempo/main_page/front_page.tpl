@@ -3,8 +3,8 @@
      IMPORTANT - TEXT ENTRIES ARE NO LONGER EDITED IN THIS TEMPLATE, UNLESS YOU ARE ADDING YOUR OWN TEXT. SYSTEM
      TEXT IS NOW LOCATED ENTIRELY IN THE PAGES MANAGEMENT MENU. ANY TEXT REFERENCES YOU SEE BELOW ARE SIMPLY
      "NOTES" AND ARE FOR INFORMATION PURPOSES ONLY TO HELP YOU IDENTIFY THE TEXT'S TAG IF YOU WANT TO MOVE IT.
-     MOST SYSTEM TEXT FOR THIS PARTICULAR TEMPLATE CAN BE FOUND AND EDITED AT THE FOLLOWING LOCATION: 
-     PAGES MANAGEMENT > GENERAL TEMPLATE TEXT > COMMON TEMPLATE TEXT 
+     MOST SYSTEM TEXT FOR THIS PARTICULAR TEMPLATE CAN BE FOUND AND EDITED AT THE FOLLOWING LOCATION:
+     PAGES MANAGEMENT > GENERAL TEMPLATE TEXT > COMMON TEMPLATE TEXT
 *}
 <html class="no-js design2016">
 	<head>
@@ -15,13 +15,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 		{head_html}
-		
+
 		<!--  This loads the RSS feed  -->
 		<link rel="alternate" type="application/rss+xml" title="Newest Listing Feed" href="rss_listings.php" />
-		
+
 		{include file='head_common.tpl'}
 
 	</head>
+
 	<body>
 		{include file='header.tpl'}
 		<div class="slideshow-container">
@@ -37,14 +38,14 @@
 				{/if}
 			</div>
 
-			{* 
+			{*
 				NOTE: More preformatted images for the slideshow below are located in this template sets folder:
 				external/ images/ showcase_slideshow/
-			
+
 				Or use your own images with a recommended image size of 1400px x 400px
 			*}
 			<div class="search_fade_box">
-				
+
 				<div class="gj_image_fade">
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_tech.jpg'}" alt="" /></div>
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_woman.jpg'}" alt="" /></div>
@@ -60,7 +61,7 @@
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_guitar.jpg'}" alt="" /></div>
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_jewelry.jpg'}" alt="" /></div>
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_passport.jpg'}" alt="" /></div>
-					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_food.jpg'}" alt="" /></div>					
+					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_food.jpg'}" alt="" /></div>
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_locks.jpg'}" alt="" /></div>
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_skirts.jpg'}" alt="" /></div>
 					<div style="display: none;"><img src="{external file='images/showcase_slideshow/home_camera.jpg'}" alt="" /></div>
@@ -81,17 +82,17 @@
 
 				<!-- FEATURED PC BEGIN -->
 				<div class="content_box rwd-hide content_box_override">
-					{* 
+					{*
 						NOTE: In order to show the module in a way that will fit in
 						the layout for this page, the {module} tag
 						below includes a number of parameters that over-write the
 						module settings set in the admin.  You must change those
 						settings "in-line" below to change them.
-						
+
 						Or, you can remove the parameter(s) from the {module}
 						tag completely, and it will use the module settings
 						as set in the admin panel.
-						
+
 						See the user manual entry for the {module} tag for
 						a list of all parameters that can be over-written in
 						this way.
@@ -99,7 +100,7 @@
 					{module tag='module_featured_pic_1' module_number_of_columns=5 module_number_of_ads_to_display=25 dynamic_image_dims=1}
 				</div>
 				<!-- FEATURED PC END -->
-				
+
 				<!-- Hottest and Recent Half Columns Begin -->
 				<div class="half_column_left normal-whitespace rwd-hide">
 					<h2 class="title section-collapser"><span class="glyphicon glyphicon-fire"></span>&nbsp;{$common_text.502421}<!-- Hottest Listings --></h2>
@@ -121,22 +122,22 @@
 				<div id="category_column cz-categories">
 					<div id="left_categories">
 						{category_list}
-					</div>									
+					</div>
 				</div>
-				
+
 				<!-- FEATURED MOBILE BEGIN -->
 				<div class="content_box pc-hide content_box_override">
-					{* 
+					{*
 						NOTE: In order to show the module in a way that will fit in
 						the layout for this page, the {module} tag
 						below includes a number of parameters that over-write the
 						module settings set in the admin.  You must change those
 						settings "in-line" below to change them.
-						
+
 						Or, you can remove the parameter(s) from the {module}
 						tag completely, and it will use the module settings
 						as set in the admin panel.
-						
+
 						See the user manual entry for the {module} tag for
 						a list of all parameters that can be over-written in
 						this way.
@@ -144,9 +145,9 @@
 					{module tag='module_featured_pic_1' module_number_of_columns=3 module_number_of_ads_to_display=30}
 					<div style="width: 100%; text-align:center; margin: 1em 0; text-transform: uppercase;"><a href="index.php?a=19&b[subcategories_also]=1">{$common_text.502432}<!-- More Listings --></a></div>
 				</div>
-				
+
 				<!-- FEATURED MOBILE END -->
-				
+
 				<!-- START REGIONS -->
 				<div class="rwd-hide button-hide" style="text-align:center;">
 				{if $enabledAddons.geographic_navigation}
@@ -156,22 +157,22 @@
 							<span class="glyphicon glyphicon-map-marker"></span>&nbsp;{$common_text.502402}<!-- Location -->:&nbsp;<span style="font-size: .8em; font-weight: normal;">{addon author='geo_addons' addon='geographic_navigation' tag='current_region'}&nbsp;
 							{if $geographic_navigation_region}&nbsp;[&nbsp;<a href="{$classifieds_url}?region=0">{$common_text.502401}<!-- clear --></a>&nbsp;]{/if}</span>
 						</h2>
-						{addon author='geo_addons' addon='geographic_navigation' tag='navigation' columns=5} 
+						{addon author='geo_addons' addon='geographic_navigation' tag='navigation' columns=5}
 					</div>
 				{/if}
 				</div>
-				<!-- END REGIONS -->				
-								
+				<!-- END REGIONS -->
+
 				<!-- BANNER BEGIN -->
 				{* Example place for 300x100 image banners *}
-				<div class="content_box cntr banner content_box_override">	         
-					<a href="index.php?a=28&b=136"><img src="{external file='images/banners/banner1_300x100.jpg'}" alt="Advertise" title="Advertise" /></a>
-					<a href="http://www.hostmonster.com/track/geodesic/resources" target="_blank"><img src="{external file='images/banners/hostmonster_300x100.jpg'}" alt="HostMonster Hosting" title="HostMonster Hosting" /></a>
-					<a href="http://lunarpages.com/id/geodesic/goto/basic" target="_blank"><img src="{external file='images/banners/lunarpages_300x100.jpg'}" alt="Lunarpages.com Hosting" title="Lunarpages.com Hosting" /></a>
+				<div class="content_box cntr banner content_box_override">
+            		<a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>
+		            <a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>
+		            <a href="https://geodesicsolutions.org/" target="_blank"><img src="{external file='images/banners/sample_300x100.jpg'}" alt="Sample Ad Banner" title="Sample Ad Banner" /></a>
 				</div>
 				<!-- BANNER END -->
 			</div>
-			
+
 			{include file='footer.tpl'}
 		</div>
 	</body>
