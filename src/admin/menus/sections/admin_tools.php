@@ -22,8 +22,6 @@ menu_category::addMenuCategory('admin_tools_settings', $parent_key, 'Admin Tools
 
     menu_page::addPage('admin_tools_password', 'admin_tools_settings', 'Change Password', 'fa-gears', 'admin_authentication_class.php', 'Admin_auth');
 
-    menu_page::addPage('admin_tools_license', 'admin_tools_settings', 'License Info', 'fa-gears', 'admin_classauction_tools.php', 'Admin_classauction_tools');
-
     menu_page::addPage('admin_tools_clean_images', 'admin_tools_settings', 'Remove Orphaned Images', 'fa-gears', 'admin_classauction_tools.php', 'Admin_classauction_tools');
 
 if (!geoPC::is_whitelabel()) {
