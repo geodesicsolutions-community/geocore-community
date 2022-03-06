@@ -173,7 +173,7 @@ a.fb_button_medium_rtl:active  {
   line-height: 10px;
 }
 .fb_button a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 .fb_button_small .fb_button_text {
   padding: 2px 6px 3px;

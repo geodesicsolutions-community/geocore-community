@@ -5,188 +5,188 @@
 /*****  Tree with 4 or less generations  *********/
 
 div.pedigree_tree {
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	font-size:12px;
-	white-space: nowrap;
-	overflow: auto;
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+    font-size:12px;
+    white-space: nowrap;
+    overflow: auto;
 }
 
 div.pedigree_tree ul,
 div.pedigree_tree li {
-	list-style: none outside none;
-	margin:0;
-	padding:0;
-	text-indent:0;
+    list-style: none outside none;
+    margin:0;
+    padding:0;
+    text-indent:0;
 }
 
 div.pedigree_tree li {
-	height:35px;
-	width:174px;
-	overflow: hidden;
-	z-index:1;
+    height:35px;
+    width:174px;
+    overflow: hidden;
+    z-index:1;
 }
 
 div.pedigree_tree li:hover {
-	/* For entries with really long names, make it display all the 
-		text on hover */
-	overflow: visible;
+    /* For entries with really long names, make it display all the
+        text on hover */
+    overflow: visible;
 }
 
 div.pedigree_tree li a {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_norm.gif) no-repeat scroll 0 0;
-	color:#000000;
-	display:block;
-	font-size:12px;
-	height:35px;
-	line-height:1.4em;
-	padding:2px 0 0 3px;
-	text-decoration:none;
-	width:174px;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_norm.gif) no-repeat scroll 0 0;
+    color:#000000;
+    display:block;
+    font-size:12px;
+    height:35px;
+    line-height:1.4em;
+    padding:2px 0 0 3px;
+    text-decoration:none;
+    width:174px;
 }
 
 div.pedigree_tree.pedigree_input li {
-	border: 1px solid #666666;
-	background-color: #ccc;
-	height: 31px;
-	
-	font-size:10px;
-	padding:2px 0 0 3px;
+    border: 1px solid #666666;
+    background-color: #ccc;
+    height: 31px;
+
+    font-size:10px;
+    padding:2px 0 0 3px;
 }
 
 div.pedigree_tree.pedigree_input li input.field {
-	padding: 2px;
-	margin: 0px;
-	font-size: 8px;
+    padding: 2px;
+    margin: 0px;
+    font-size: 8px;
 }
 
 /* 4th gen is not as tall */
 div.pedigree_tree ul.pedigree_gen4 li {
-	height:22px;
+    height:22px;
 }
 div.pedigree_tree ul.pedigree_gen4 li a {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_norm_sml.gif) no-repeat scroll 0 0;
-	height:20px;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_norm_sml.gif) no-repeat scroll 0 0;
+    height:20px;
 }
 
 div.pedigree_tree ul.pedigree_gen4 li a:hover {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_norm_sml_hov.gif) no-repeat scroll 0 0;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_norm_sml_hov.gif) no-repeat scroll 0 0;
 }
 
 div.pedigree_tree.pedigree_input ul.pedigree_gen4 li {
-	border: none;
-	background: transparent;
-	height: 20px;
-	
-	padding:2px 0 0 3px;
+    border: none;
+    background: transparent;
+    height: 20px;
+
+    padding:2px 0 0 3px;
 }
 
 
 div.pedigree_tree a span {
-	/* not used, but meant to allow span of stuff under name that is smaller */
-	font-size:10px;
-	line-height:1em;
+    /* not used, but meant to allow span of stuff under name that is smaller */
+    font-size:10px;
+    line-height:1em;
 }
 div.pedigree_tree li img {
-	vertical-align: middle;
-	margin-right:4px;
-	float: left;
+    vertical-align: middle;
+    margin-right:4px;
+    float: left;
 }
 div.pedigree_tree li a:hover {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_norm_hov.gif) no-repeat scroll 0 0;
-	text-decoration:underline;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_norm_hov.gif) no-repeat scroll 0 0;
+    text-decoration:underline;
 }
 
 div.pedigree_tree ul {
-	display: inline-block;
-	vertical-align: top;
-	position:relative;
+    display: inline-block;
+    vertical-align: top;
+    position:relative;
 }
 div.pedigree_tree ul.pedigree_gen1 {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_gen1.gif) no-repeat scroll left 21px;
-	height:300px;
-	margin:103px 50px 0 0;
-	width:50px;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_gen1.gif) no-repeat scroll left 21px;
+    height:300px;
+    margin:103px 50px 0 0;
+    width:50px;
 }
 div.pedigree_tree ul.pedigree_gen1 li {
-	left:30px;
-	margin:0;
-	position:absolute;
-	top:0;
+    left:30px;
+    margin:0;
+    position:absolute;
+    top:0;
 }
 div.pedigree_tree ul.pedigree_gen1 li.dam {
-	top:235px;
+    top:235px;
 }
 div.pedigree_tree ul.pedigree_gen2 {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_gen2.gif) no-repeat scroll left 30px;
-	margin-top:30px;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_gen2.gif) no-repeat scroll left 30px;
+    margin-top:30px;
 }
 div.pedigree_tree ul.pedigree_gen2 li {
-	margin:15px -5px 80px 30px;
+    margin:15px -5px 80px 30px;
 }
 div.pedigree_tree ul.pedigree_gen2 li.dam_sire {
-	margin-top:83px;
+    margin-top:83px;
 }
 div.pedigree_tree ul.pedigree_gen3 {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_gen3.gif) no-repeat scroll left 26px;
-	margin-top:5px;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_gen3.gif) no-repeat scroll left 26px;
+    margin-top:5px;
 }
 div.pedigree_tree ul.pedigree_gen3 li {
-	margin:0 0 24px 30px;
+    margin:0 0 24px 30px;
 }
 div.pedigree_tree ul.pedigree_gen3 li.sire {
-	margin-top:11px;
+    margin-top:11px;
 }
 div.pedigree_tree ul.pedigree_gen4 {
-	background:transparent url(../../../images/addon/pedigree_tree/bg_gen4.gif) no-repeat scroll -2px 18px;
+    background:transparent url(../../../images/addon/pedigree_tree/bg_gen4.gif) no-repeat scroll -2px 18px;
 }
 div.pedigree_tree ul.pedigree_gen4 li {
-	margin:5px 0 5px 25px;
+    margin:5px 0 5px 25px;
 }
 div.pedigree_tree ul.pedigree_gen4 li.sire {
-	margin-top:10px;
+    margin-top:10px;
 }
 
 .pedigree_gen1 {
-	z-index:2;
+    z-index:2;
 }
 .pedigree_gen2 {
-	z-index:1;
+    z-index:1;
 }
 .pedigree_gen3 {
-	z-index:0;
+    z-index:0;
 }
 .pedigree_gen4 {
-	z-index:3;
+    z-index:3;
 }
 
 
 /*****  Unlimited tree CSS (# generations is > 4) ********/
 
 div.sire, div.dam {
-	float: right;
-	border-left: 1px solid #000000;
-	border-collapse: collapse; 
-	font-family: Arial;
-	font-family: 8pt;
-	padding: 0px;
-	padding-bottom: 0px;
-	text-align: left;
+    float: right;
+    border-left: 1px solid #000000;
+    border-collapse: collapse;
+    font-family: Arial;
+    font-family: 8pt;
+    padding: 0px;
+    padding-bottom: 0px;
+    text-align: left;
 }
 
 div.sire {
-	background-color: #F5FCFE;
-	color: #0E6B87;
+    background-color: #F5FCFE;
+    color: #0E6B87;
 }
 
 div.dam {
-	background-color: #FFFBFD;
-	color: #CC0000;
-	border-top: 1px solid black;
+    background-color: #FFFBFD;
+    color: #CC0000;
+    border-top: 1px solid black;
 }
 div.horseData {
-	padding: 2px;
+    padding: 2px;
 }
 div.horseData img {
-	vertical-align: middle;
-	margin-right:4px;
+    vertical-align: middle;
+    margin-right:4px;
 }

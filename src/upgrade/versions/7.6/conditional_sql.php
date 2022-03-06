@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This is where conditional queries go.
  * For cases where an sql query might not be run, in the
@@ -34,10 +35,10 @@ $sql_not_strict = array (
 $sql_not_strict[] = "ALTER TABLE `geodesic_browsing_filters_settings` ADD COLUMN `display_order` int(1) NOT NULL DEFAULT '0'";
 
 //add new category specific settings for SEO features
-$sql_not_strict[] ="ALTER TABLE `geodesic_categories_languages` ADD `title_module` TEXT NOT NULL AFTER `head_html`, ADD `seo_url_contents` TEXT NOT NULL AFTER `title_module`, ADD `category_image_alt` TEXT NOT NULL AFTER `seo_url_contents`";
+$sql_not_strict[] = "ALTER TABLE `geodesic_categories_languages` ADD `title_module` TEXT NOT NULL AFTER `head_html`, ADD `seo_url_contents` TEXT NOT NULL AFTER `title_module`, ADD `category_image_alt` TEXT NOT NULL AFTER `seo_url_contents`";
 
 //add ability to display language at end of title in title module
-$sql_not_strict[] ="ALTER TABLE  `geodesic_classifieds_ad_configuration` ADD  `title_module_language_display` TINYINT NOT NULL DEFAULT  '0' AFTER  `title_module_text`";
+$sql_not_strict[] = "ALTER TABLE  `geodesic_classifieds_ad_configuration` ADD  `title_module_language_display` TINYINT NOT NULL DEFAULT  '0' AFTER  `title_module_text`";
 
 //****core db adjustments to support "share_fees" addon****
 //add column to registration process to save fee sharing user attachment choice

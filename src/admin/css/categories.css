@@ -5,18 +5,18 @@ CSS specifically for category stuff
 */
 
 .cat-attached-icons {
-	float: right;
-	vertical-align: middle;
+    float: right;
+    vertical-align: middle;
 }
 
 .cat-attached-icons img {
-	cursor: help;
+    cursor: help;
 }
 
 .cat-icon-disabled {
-	opacity: 0.1;
+    opacity: 0.1;
 }
 
 .cat-name {
-	font-size: 14px;
+    font-size: 14px;
 }

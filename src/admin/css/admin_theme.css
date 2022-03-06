@@ -39,7 +39,7 @@
   border: 1px solid #EAEAEA;
   padding: 5px 6px;
   border-radius: 50%; }
-  
+
 .section-title {
   font-size: 2.2em;
   color: #26B99A;
@@ -121,23 +121,23 @@
 
 @media (max-width: 880px) {
   .top_nav .header-search2 {
-	  right: 0;
-	  width: 100%;
-	  -webkit-border-bottom-right-radius: 0;
-	  -webkit-border-bottom-left-radius: 0;
-	  -moz-border-radius-bottomright: 0;
-	  -moz-border-radius-bottomleft: 0;
-	  border-bottom-right-radius: 0;
-	  border-bottom-left-radius: 0; }
+      right: 0;
+      width: 100%;
+      -webkit-border-bottom-right-radius: 0;
+      -webkit-border-bottom-left-radius: 0;
+      -moz-border-radius-bottomright: 0;
+      -moz-border-radius-bottomleft: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0; }
 }
 
-.top_nav .header-search2 input, 
+.top_nav .header-search2 input,
 .top_nav .header-search2 select {
   font-size: 10pt;
   line-height: 10pt;
   padding: 1px;}
 
-.top_nav .header-search2 input[type=submit], 
+.top_nav .header-search2 input[type=submit],
 .top_nav .header-search2 input[type=submit]:visited {
   border: 1px solid #fff;
   font-size: 12px;
@@ -186,11 +186,11 @@
   margin-top: 20px;
   padding: 4px;
   border: 1px solid rgba(52,73,94,0.44);
-  background: #FFF; 
+  background: #FFF;
 }
-  
+
 .img-circle img {
-	border-radius: 50%;
+    border-radius: 50%;
 }
 
 .profile_info {
@@ -203,7 +203,7 @@
   font-size: 11px;
   line-height: 30px;
   color: #BAB8B8; }
-  
+
 .profile_info a {
   text-transform: uppercase; }
 
@@ -212,10 +212,10 @@
   color: #ECF0F1;
   margin: 0;
   font-weight: 300; }
-  
+
 .profile_logout {
-	float: left;
-	padding: 25px 10px 10px;
+    float: left;
+    padding: 25px 10px 10px;
 }
 
 .profile.img_2 {
@@ -527,7 +527,7 @@ a:hover, a:focus {
 
 .top_nav .navbar-right {
   margin: 0;
-  float: right; 
+  float: right;
   white-space: nowrap;
 }
 
@@ -564,12 +564,12 @@ a:hover, a:focus {
    width: auto;
    text-transform: uppercase; }
 
-.top_nav .site-name a:visited,   
+.top_nav .site-name a:visited,
 .top_nav .site-name a {
    color: #26B99A;
    padding: 0; }
 
-.top_nav .site-name a:focus,   
+.top_nav .site-name a:focus,
 .top_nav .site-name a:hover {
    color: #000; }
 
@@ -647,7 +647,7 @@ a:hover, a:focus {
   position: relative;
   display: block;
   padding: 13px 15px 12px; }
-  
+
 @media (max-width: 480px) {
   .nav > li > a {
     padding: 12px; }
@@ -812,23 +812,23 @@ footer {
 
 /* fix old geo tables to not look terrible under bootstrappy things */
 tr.row_color1 > td, tr.row_color2 > td {
-	padding: 3px 2px;
+    padding: 3px 2px;
 }
 
 /* allow calendar glyphs on top of dateInput's */
 .dateInputOuter {
-	position: relative;
-	display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 .dateInputOuter .fa {
-	position: absolute;
-	padding: 4px 6px;
-	pointer-events: none;
-	top: 6px;
+    position: absolute;
+    padding: 4px 6px;
+    pointer-events: none;
+    top: 6px;
 }
 .dateInputOuter input {
-	padding-left: 22px;
-	width: 130px;
+    padding-left: 22px;
+    width: 130px;
 }
 
 .tiles {
@@ -4278,7 +4278,7 @@ ul.notifications {
 
 /* Fix for running bootstrap alongside prototype */
 .input-group-btn.dropdown {
-	display: table-cell !important;
+    display: table-cell !important;
 }
 
 /** Forms Adjustments **/
@@ -4462,7 +4462,7 @@ td.color-primary-four,
 
 span.group-color a:hover {
   text-decoration: underline;
-  color: #FF4500; 
+  color: #FF4500;
 }
 
 span.label-button a:visited,
@@ -4480,9 +4480,9 @@ span.label-button {
 }
 
 /* hack to make Firefox behave with responsive tables inside fieldsets
-	see: http://getbootstrap.com/css/#tables-responsive
-	
-	and also to make legends appear consistent between browsers
+    see: http://getbootstrap.com/css/#tables-responsive
+
+    and also to make legends appear consistent between browsers
  */
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
@@ -4498,9 +4498,9 @@ span.label-button {
   color: #000;
 }
 
-#breadcrumb { 
-  list-style: none; 
-  overflow: hidden; 
+#breadcrumb {
+  list-style: none;
+  overflow: hidden;
   font: 18px Sans-Serif;
   height: 34px;
   background-color: #FFFFFF;
@@ -4510,179 +4510,179 @@ span.label-button {
 
 
 @media (max-width: 768px) {
-	/* remove most of the breadcrumb styling at mobile widths */
-	#breadcrumb {
-		background-color: transparent;
-		height: auto;
-	}
-	#breadcrumb li {
-		display: inline-block;
-		font-size: 12px;
-		color: #666666;
-	}
-	
-	#breadcrumb li a {
-		color: #26B99A;
-	}
-	
-	#breadcrumb li:after {
-		content: " / ";
-	}
-	#breadcrumb li.current2,
-	#breadcrumb li.current2 a {
-		color: #ff4500;
-	}
-	#breadcrumb li:last-child:after {
-		content: "";
-	}
-	#breadcrumb li:last-child a {
-		pointer-events: none;
-		cursor: default;
-	}
-	#breadcrumb li:nth-child(n+2) {
-		padding-left: 4px;
-	}
-	
-	.breadcrumbBorder {
-		border: 5px solid #EAEAEA;
-		padding: 1px;
-		margin: 5px;
-		min-height: 40px;
-	}
+    /* remove most of the breadcrumb styling at mobile widths */
+    #breadcrumb {
+        background-color: transparent;
+        height: auto;
+    }
+    #breadcrumb li {
+        display: inline-block;
+        font-size: 12px;
+        color: #666666;
+    }
+
+    #breadcrumb li a {
+        color: #26B99A;
+    }
+
+    #breadcrumb li:after {
+        content: " / ";
+    }
+    #breadcrumb li.current2,
+    #breadcrumb li.current2 a {
+        color: #ff4500;
+    }
+    #breadcrumb li:last-child:after {
+        content: "";
+    }
+    #breadcrumb li:last-child a {
+        pointer-events: none;
+        cursor: default;
+    }
+    #breadcrumb li:nth-child(n+2) {
+        padding-left: 4px;
+    }
+
+    .breadcrumbBorder {
+        border: 5px solid #EAEAEA;
+        padding: 1px;
+        margin: 5px;
+        min-height: 40px;
+    }
 }
 
 @media (min-width: 768px) {
 
-	
-
-	#breadcrumb li {
-		list-style: none;
-		display: block;
-		float: left;
-		background: url('../admin_images/design/cart_step_divider.gif') no-repeat top right;
-		font-size: 12px;
-		font-weight: bold;
-		color: #666666;
-		padding: 0;
-		background: none no-repeat 0 0;
-		height: 34px;
-	}
-	#breadcrumb li.current,
-	#breadcrumb li.current2,
-	#breadcrumb li.current a,
-	#breadcrumb li.current2 a
-	{
-		color: #26B99A;
-		font-size: 1.5rem;
-	}
-	#breadcrumb li.current {
-		font-size: 16px;
-		padding: 9px 40px 0 20px;
-	}
-
-	.breadcrumbBorder {
-		border: 5px solid #EAEAEA;
-		padding: 1px;
-		margin: 5px;
-	}
-
-	#breadcrumb li.current2 { 
-	  padding: 8px 0 10px 40px;
-	}
 
 
-	#breadcrumb li a {
-	  color: white;
-	  text-decoration: none; 
-	  padding: 10px 0 10px 40px;
-	  background: #26B99A; 
-	  position: relative; 
-	  display: block;
-	  float: left;
-	}
+    #breadcrumb li {
+        list-style: none;
+        display: block;
+        float: left;
+        background: url('../admin_images/design/cart_step_divider.gif') no-repeat top right;
+        font-size: 12px;
+        font-weight: bold;
+        color: #666666;
+        padding: 0;
+        background: none no-repeat 0 0;
+        height: 34px;
+    }
+    #breadcrumb li.current,
+    #breadcrumb li.current2,
+    #breadcrumb li.current a,
+    #breadcrumb li.current2 a
+    {
+        color: #26B99A;
+        font-size: 1.5rem;
+    }
+    #breadcrumb li.current {
+        font-size: 16px;
+        padding: 9px 40px 0 20px;
+    }
 
-	#breadcrumb li a::after { 
-	  content: " "; 
-	  display: block; 
-	  width: 0; 
-	  height: 0;
-	  border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-	  border-bottom: 50px solid transparent;
-	  border-left: 30px solid #26B99A;
-	  position: absolute;
-	  top: 50%;
-	  margin-top: -50px; 
-	  left: 100%;
-	  z-index: 2; 
-	}
+    .breadcrumbBorder {
+        border: 5px solid #EAEAEA;
+        padding: 1px;
+        margin: 5px;
+    }
 
-	#breadcrumb li a::before { 
-	  content: " "; 
-	  display: block; 
-	  width: 0; 
-	  height: 0;
-	  border-top: 50px solid transparent;       
-	  border-bottom: 50px solid transparent;
-	  border-left: 30px solid white;
-	  position: absolute;
-	  top: 50%;
-	  margin-top: -50px; 
-	  margin-left: 1px;
-	  left: 100%;
-	  z-index: 1; 
-	}
+    #breadcrumb li.current2 {
+      padding: 8px 0 10px 40px;
+    }
 
-	#breadcrumb li:first-child a {
-	  padding-left: 10px;
-	}
-	#breadcrumb li:nth-child(1) a       { background:        #26B99A;  }
-	#breadcrumb li:nth-child(1) a:after { border-left-color: #26B99A; }
-	#breadcrumb li:nth-child(n+2) a       { background:        #8C9DAE; }
-	#breadcrumb li:nth-child(n+2) a:after { border-left-color: #8C9DAE; }
-	/* #breadcrumb li:nth-child(4) a       { background:        #8C9DAE; }
-	#breadcrumb li:nth-child(4) a:after { border-left-color: #8C9DAE; }
-	#breadcrumb li:nth-child(5) a       { background:        #8C9DAE; }
-	#breadcrumb li:nth-child(5) a:after { border-left-color: #8C9DAE; } */
-	#breadcrumb li:last-child a {
-	  background: transparent !important;
-	  
-	  pointer-events: none;
-	  cursor: default;
-	  padding: 0;
-	}
-	#breadcrumb li:last-child a::after { 
-	  border: 0; 
-	}
 
-	#breadcrumb li a:hover { 
-	  background: #73879C; 
-	}
-	#breadcrumb li a:hover:after { 
-	  border-left-color: #73879C !important; 
-	}
-	fieldset ul#breadcrumb li {
-		margin-left: 0px;
-	}
-	#breadcrumb li.current {
-		padding: 7px 5px 0px 5px;
-	}
+    #breadcrumb li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 0 10px 40px;
+      background: #26B99A;
+      position: relative;
+      display: block;
+      float: left;
+    }
+
+    #breadcrumb li a::after {
+      content: " ";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+      border-bottom: 50px solid transparent;
+      border-left: 30px solid #26B99A;
+      position: absolute;
+      top: 50%;
+      margin-top: -50px;
+      left: 100%;
+      z-index: 2;
+    }
+
+    #breadcrumb li a::before {
+      content: " ";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent;
+      border-bottom: 50px solid transparent;
+      border-left: 30px solid white;
+      position: absolute;
+      top: 50%;
+      margin-top: -50px;
+      margin-left: 1px;
+      left: 100%;
+      z-index: 1;
+    }
+
+    #breadcrumb li:first-child a {
+      padding-left: 10px;
+    }
+    #breadcrumb li:nth-child(1) a       { background:        #26B99A;  }
+    #breadcrumb li:nth-child(1) a:after { border-left-color: #26B99A; }
+    #breadcrumb li:nth-child(n+2) a       { background:        #8C9DAE; }
+    #breadcrumb li:nth-child(n+2) a:after { border-left-color: #8C9DAE; }
+    /* #breadcrumb li:nth-child(4) a       { background:        #8C9DAE; }
+    #breadcrumb li:nth-child(4) a:after { border-left-color: #8C9DAE; }
+    #breadcrumb li:nth-child(5) a       { background:        #8C9DAE; }
+    #breadcrumb li:nth-child(5) a:after { border-left-color: #8C9DAE; } */
+    #breadcrumb li:last-child a {
+      background: transparent !important;
+
+      pointer-events: none;
+      cursor: default;
+      padding: 0;
+    }
+    #breadcrumb li:last-child a::after {
+      border: 0;
+    }
+
+    #breadcrumb li a:hover {
+      background: #73879C;
+    }
+    #breadcrumb li a:hover:after {
+      border-left-color: #73879C !important;
+    }
+    fieldset ul#breadcrumb li {
+        margin-left: 0px;
+    }
+    #breadcrumb li.current {
+        padding: 7px 5px 0px 5px;
+    }
 }
 
 .tabbed-div-bg {
   background-color: #f7f7f7;
 }
-  
+
 ul.tip-list {
-	padding: 10px 20px;
-	margin-bottom: 0;
+    padding: 10px 20px;
+    margin-bottom: 0;
 }
 
 ul.tip-list li {
-	list-style: none;
+    list-style: none;
 }
 
 .activeTab .visible-lg-inline {
-	display: inline !important;
+    display: inline !important;
 }
 
 .pad-top-0 {
@@ -4719,18 +4719,18 @@ form.form-horizontal .col_ftr {
 /* this makes things that aren't text-input-sized but are in forms play well vertically with their peers */
 .form-group div input[type=checkbox],
 .form-group div input[type=radio] {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 .form-group div.vertical-form-fix,
 .form-group div .vertical-form-fix {
-	display: inline-block;
-	margin-top: 7px;
+    display: inline-block;
+    margin-top: 7px;
 }
 @media (max-width: 768px) {
-	.form-group div.vertical-form-fix,
-	.form-group div .vertical-form-fix {
-		margin-top: 0;
-	}
+    .form-group div.vertical-form-fix,
+    .form-group div .vertical-form-fix {
+        margin-top: 0;
+    }
 }
 .manageCategories .table > tfoot > tr.col_ftr > th,
 .manageCategories .table > tfoot > tr.col_ftr > td,
@@ -4740,14 +4740,14 @@ form.form-horizontal .col_ftr {
 .manageRegions .table > tfoot > tr.col_ftr > td,
 .manageRegions .table > thead > tr.col_ftr > th,
 .manageRegions .table > thead > tr.col_ftr > td {
-	padding: 3px;
+    padding: 3px;
 }
 
 .manageCategories .table > tfoot > tr.col_ftr > td a.btn,
 .manageCategories .table > thead > tr.col_ftr > td a.btn,
 .manageRegions .table > tfoot > tr.col_ftr > td a.btn,
 .manageRegions .table > thead > tr.col_ftr > td a.btn {
-	margin: 0;
+    margin: 0;
 }
 
 .blocked-list {
@@ -4764,125 +4764,125 @@ form.form-horizontal .col_ftr {
     text-decoration: none;
 }
 
-.blocked-list .icon-container { 
-    background-color: #73879C; 
-    text-align:center; 
-    padding: 10px; 
-    width: 75px; 
-    height: 75px; 
-    color: #FFF; 
-    border-radius:5px; 
+.blocked-list .icon-container {
+    background-color: #73879C;
+    text-align:center;
+    padding: 10px;
+    width: 75px;
+    height: 75px;
+    color: #FFF;
+    border-radius:5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    float: left; 
+    float: left;
     margin-right:5px;
 }
 
-.blocked-list .name-description { 
-    background-color: #4BA4DF; 
+.blocked-list .name-description {
+    background-color: #4BA4DF;
 }
 
 .blocked-list .name-description .description,
-.blocked-list .name-description .title { 
-    color: #4BA4DF; 
+.blocked-list .name-description .title {
+    color: #4BA4DF;
 }
 
-.blocked-list .expiration { 
-    background-color: #FF4500; 
+.blocked-list .expiration {
+    background-color: #FF4500;
 }
 
 .blocked-list .expiration .description,
-.blocked-list .expiration .title { 
-    color: #FF4500; 
+.blocked-list .expiration .title {
+    color: #FF4500;
 }
 
-.blocked-list .cost { 
-    background-color: #26B99A; 
+.blocked-list .cost {
+    background-color: #26B99A;
 }
 
 .blocked-list .cost .description,
-.blocked-list .cost .title { 
+.blocked-list .cost .title {
     color: #26B99A;
 }
 
-.blocked-list .category-costs { 
+.blocked-list .category-costs {
     background-color: #337ab7;
 }
 
 .blocked-list .category-costs .description,
-.blocked-list .category-costs .title { 
-    color: #337ab7; 
+.blocked-list .category-costs .title {
+    color: #337ab7;
 }
 
-.blocked-list .subscription { 
-    background-color: #F7AD02; 
+.blocked-list .subscription {
+    background-color: #F7AD02;
 }
 
 .blocked-list .subscription .description,
-.blocked-list .subscription .title { 
-    color: #F7AD02; 
+.blocked-list .subscription .title {
+    color: #F7AD02;
 }
 
-.blocked-list .icon-container i { 
+.blocked-list .icon-container i {
     font-size: 48px;
 }
 
-.blocked-list .list-details { 
-    height: 75px; 
-    background-color: #F3F3F3; 
+.blocked-list .list-details {
+    height: 75px;
+    background-color: #F3F3F3;
     padding:10px;
 }
 
-.blocked-list .title { 
-    font-size: 1.2em; 
+.blocked-list .title {
+    font-size: 1.2em;
     font-weight: bold;
 }
 
-.blocked-list .description { 
-    font-size: 1.0em; 
+.blocked-list .description {
+    font-size: 1.0em;
 }
 
 @media (max-width: 880px) {
-	.blocked-list {
-	    width: 95%;
-	}
-	.blocked-list .icon-container { 
-	    padding: 5px; 
-	    width: 50px; 
-	    height: 50px; 
-	    border-radius:3px; 
-	    -webkit-border-radius: 3px;
-	    -moz-border-radius: 3px;
-	    margin-right:2px;
-	}
-	.blocked-list .icon-container i { 
-	    font-size: 36px;
-	}
-	.blocked-list .list-details { 
-	    height: 50px; 
-	    padding: 2px 5px;
-	}
-	.blocked-list .title { 
-	    font-size: 1.0em; 
-	    font-weight: bold;
-	}
-	.blocked-list .description { 
-	    font-size: 0.8em; 
-	}
+    .blocked-list {
+        width: 95%;
+    }
+    .blocked-list .icon-container {
+        padding: 5px;
+        width: 50px;
+        height: 50px;
+        border-radius:3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        margin-right:2px;
+    }
+    .blocked-list .icon-container i {
+        font-size: 36px;
+    }
+    .blocked-list .list-details {
+        height: 50px;
+        padding: 2px 5px;
+    }
+    .blocked-list .title {
+        font-size: 1.0em;
+        font-weight: bold;
+    }
+    .blocked-list .description {
+        font-size: 0.8em;
+    }
 }
 
 #profileTabContents img {
-	max-width: 90%;
+    max-width: 90%;
 }
 
 .profile-pic-admin-preview {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 #ag_box label {
-	float: left;
+    float: left;
 }
 
 #ag_box img {
-	max-width: 50px;
+    max-width: 50px;
 }

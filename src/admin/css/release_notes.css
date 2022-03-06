@@ -2,70 +2,70 @@
 
 
 #FogBugzReleaseNotes     {
-	font-family: Verdana,Arial,sans-serif; 
+    font-family: Verdana,Arial,sans-serif;
 }
 
 
-#FogBugzReleaseNotes h1  { 
-/*	border-bottom: 1px solid #449;*/
-	font-size: 1.2em;
-	color: #005097;
-	clear:both;
+#FogBugzReleaseNotes h1  {
+/*  border-bottom: 1px solid #449;*/
+    font-size: 1.2em;
+    color: #005097;
+    clear:both;
 }
 
 
-#FogBugzReleaseNotes h2  { 
-	font-size: 1em;
+#FogBugzReleaseNotes h2  {
+    font-size: 1em;
 }
 #FogBugzReleaseNotes p   {
-	font-family: Georgia,'Times New Roman',serif;
-	margin-left: 0.5in;
-	font-size: 0.9em;
+    font-family: Georgia,'Times New Roman',serif;
+    margin-left: 0.5in;
+    font-size: 0.9em;
 }
-#FogBugzReleaseNotes ol li  { 
-	font-family: Georgia,'Times New Roman',serif; 
-	margin-left: 0.5in; 
-	font-size: 0.9em; 
+#FogBugzReleaseNotes ol li  {
+    font-family: Georgia,'Times New Roman',serif;
+    margin-left: 0.5in;
+    font-size: 0.9em;
 }
-#FogBugzFooter           { 
-	font-size: 10px; 
-	text-align:center 
+#FogBugzFooter           {
+    font-size: 10px;
+    text-align:center
 }
 ul.releaseMenuList,
 ul.tagLegendList {
-	border: 3px solid #DDD;
-	float: left;
-	padding-right: 0px;
-	padding-left: 0px;
-	padding-bottom: 5px;
-	margin-left: 20px;
-	margin-bottom: 30px;
+    border: 3px solid #DDD;
+    float: left;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 5px;
+    margin-left: 20px;
+    margin-bottom: 30px;
 }
 
 ul.releaseMenuList li,
 ul.tagLegendList li {
-	list-style: none;
-	padding-left: 15px;
-	padding-right: 15px;
+    list-style: none;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 ul.releaseMenuList li a,
 ul.tagLegendList li a {
-	text-decoration: none;
+    text-decoration: none;
 }
 #FogBugzReleaseNotes ul li a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 #FogBugzReleaseNotes ul li.ReleaseMenuTitle{
-/*	border-bottom: black solid thin; */
-	margin-bottom: 8px;
+/*  border-bottom: black solid thin; */
+    margin-bottom: 8px;
 }
 a.top_link {
-	text-decoration: none;
-	font-size: small;
+    text-decoration: none;
+    font-size: small;
 }
 a.top_link:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 /* "tag" styles */
 .featureType,
@@ -86,23 +86,23 @@ font-variant: small-caps;
 
 /* Tag Legend */
 ul.tagLegendList {
-	max-width: 350px;
-	min-width: 300px;
+    max-width: 350px;
+    min-width: 300px;
 }
 ul.tagLegendList li {
-	text-indent:-10px;
-	margin-left:10px;
-	font-size: 10px;
+    text-indent:-10px;
+    margin-left:10px;
+    font-size: 10px;
 }
 ul.tagLegendList li span {
-	font-size:12px;
-	font-weight:bold;
+    font-size:12px;
+    font-weight:bold;
 }
 ul.tagLegendList li strong,
 ul.tagLegendList li.ReleaseMenuTitle {
-	font-size:12px;
-	text-indent:0px;
-	margin-left:0px;
+    font-size:12px;
+    text-indent:0px;
+    margin-left:0px;
 }
 .previousLink{
 font-size:12px;

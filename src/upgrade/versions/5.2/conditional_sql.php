@@ -1,4 +1,5 @@
 <?php
+
 //This is where conditional queries go.
 //For cases where an sql query might not be run, in the
 //case that it is not run, add an empty string

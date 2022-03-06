@@ -2,86 +2,86 @@
 
 .addon_table,
 .addon_table tr {
-	margin: 0px;
-	padding: 3px;
-	border-spacing: 0px;
-	border: 3px solid #DDD;
-	width: 98%;
+    margin: 0px;
+    padding: 3px;
+    border-spacing: 0px;
+    border: 3px solid #DDD;
+    width: 98%;
 }
 .addon_table th,
 .addon_table td {
-	padding: 3px;
-	margin: 0px;
-	border-left: white thin solid;
-	border-top: white thin solid;
+    padding: 3px;
+    margin: 0px;
+    border-left: white thin solid;
+    border-top: white thin solid;
 }
 .addon_div tbody tr td a.btn {
-	margin-bottom: 0;
-	margin-right: 0;
+    margin-bottom: 0;
+    margin-right: 0;
 }
 
 .addon_div {
-	text-align: left;
-	padding-left: 10px;
-	width: 100%;
+    text-align: left;
+    padding-left: 10px;
+    width: 100%;
 }
 
 .addon_hdr{
-	background: #006699 url('../admin_images/design/addon_hdr.gif') repeat-x top left;
-	padding: 5px;
-	text-align: center;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size:12pt;
-	font-style: normal;
-	line-height: normal;
-	font-weight: bold;
-	color: #FFF;
-	white-space: nowrap;
+    background: #006699 url('../admin_images/design/addon_hdr.gif') repeat-x top left;
+    padding: 5px;
+    text-align: center;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size:12pt;
+    font-style: normal;
+    line-height: normal;
+    font-weight: bold;
+    color: #FFF;
+    white-space: nowrap;
 }
 
 .addon_hdr_enabled {
-	background-color: #26B99A !important;
-	padding: 5px;
-	text-align: center;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size:12pt;
-	font-style: normal;
-	line-height: normal;
-	font-weight: bold;
-	color: #FFF;
-	white-space: nowrap;
+    background-color: #26B99A !important;
+    padding: 5px;
+    text-align: center;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size:12pt;
+    font-style: normal;
+    line-height: normal;
+    font-weight: bold;
+    color: #FFF;
+    white-space: nowrap;
 }
 
 .addon_hdr_disabled {
-	background-color: #F7AD02 !important;
-	padding: 5px;
-	text-align: center;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size:12pt;
-	font-style: normal;
-	line-height: normal;
-	font-weight: bold;
-	color: #FFF;
-	white-space: nowrap;
+    background-color: #F7AD02 !important;
+    padding: 5px;
+    text-align: center;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size:12pt;
+    font-style: normal;
+    line-height: normal;
+    font-weight: bold;
+    color: #FFF;
+    white-space: nowrap;
 }
 
 .addon_hdr_notinstalled {
-	background-color: #ac2925 !important;
-	padding: 5px;
-	text-align: center;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size:12pt;
-	font-style: normal;
-	line-height: normal;
-	font-weight: bold;
-	color: #FFF;
-	white-space: nowrap;
+    background-color: #ac2925 !important;
+    padding: 5px;
+    text-align: center;
+    font-family: Arial,Helvetica, sans-serif;
+    font-size:12pt;
+    font-style: normal;
+    line-height: normal;
+    font-weight: bold;
+    color: #FFF;
+    white-space: nowrap;
 }
 
 .addon_hdr_enabled th,
 .addon_hdr_notinstalled th,
 .addon_hdr_disabled th {
-	padding: 2px !important;
-	text-align: center;
-	border-bottom-width: 0px !important;
+    padding: 2px !important;
+    text-align: center;
+    border-bottom-width: 0px !important;
 }

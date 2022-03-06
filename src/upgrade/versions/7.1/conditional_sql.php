@@ -1,4 +1,5 @@
 <?php
+
 //This is where conditional queries go.
 //For cases where an sql query might not be run, in the
 //case that it is not run, add an empty string
@@ -43,4 +44,3 @@ $sql_not_strict[] = "UPDATE `geodesic_site_settings` SET `value`='core:sha1' WHE
 		AND (`setting`='admin_pass_hash' OR `setting`='client_pass_hash')";
 $sql_not_strict[] = "UPDATE `geodesic_site_settings` SET `value`='core:plain' WHERE `value`='1'
 		AND (`setting`='admin_pass_hash' OR `setting`='client_pass_hash')";
-

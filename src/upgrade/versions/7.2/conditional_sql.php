@@ -1,4 +1,5 @@
 <?php
+
 //This is where conditional queries go.
 //For cases where an sql query might not be run, in the
 //case that it is not run, add an empty string
@@ -28,22 +29,22 @@ ADD `new_listing_alert_gap` INT(11) NOT NULL DEFAULT 86400";
 
 //set existing users to last-sent of now, so that they don't get alerted of extant listings
 $timeShift = $this->_db->GetOne("SELECT `value` FROM `geodesic_site_settings` WHERE `setting` = 'time_shift'"); //emulate geoUtil::time()
-$sql_not_strict[] = "UPDATE `geodesic_userdata` SET `new_listing_alert_last_sent` = ".(time() + 3600*$timeShift + 1)." WHERE `new_listing_alert_last_sent` = 0"; //add one second so it doesn't re-send the last alert
+$sql_not_strict[] = "UPDATE `geodesic_userdata` SET `new_listing_alert_last_sent` = " . (time() + 3600 * $timeShift + 1) . " WHERE `new_listing_alert_last_sent` = 0"; //add one second so it doesn't re-send the last alert
 
 //add price_applies column
 $sql_not_strict[] = "ALTER TABLE `geodesic_classifieds` ADD `price_applies` ENUM( 'lot', 'item' ) NOT NULL DEFAULT 'lot' AFTER `conversion_rate`";
 $sql_not_strict[] = "ALTER TABLE `geodesic_classifieds_expired` ADD `price_applies` ENUM( 'lot', 'item' ) NOT NULL DEFAULT 'lot' AFTER `conversion_rate`";
 
-if (!$this->fieldExists('geodesic_classifieds','quantity_remaining')) {
-	//add quantity remaining
-	$sql_not_strict[] = "ALTER TABLE `geodesic_classifieds` ADD `quantity_remaining` INT NOT NULL DEFAULT '0' AFTER `quantity` ";
-	//set value to same thingy - only done if column doesn't already exist
-	$sql_not_strict[] = "UPDATE `geodesic_classifieds` SET `quantity_remaining`=`quantity` WHERE `quantity_remaining`=0 AND `live`=1";
+if (!$this->fieldExists('geodesic_classifieds', 'quantity_remaining')) {
+    //add quantity remaining
+    $sql_not_strict[] = "ALTER TABLE `geodesic_classifieds` ADD `quantity_remaining` INT NOT NULL DEFAULT '0' AFTER `quantity` ";
+    //set value to same thingy - only done if column doesn't already exist
+    $sql_not_strict[] = "UPDATE `geodesic_classifieds` SET `quantity_remaining`=`quantity` WHERE `quantity_remaining`=0 AND `live`=1";
 } else {
-	//do not add fields...  we don't want to re-run the query that sets the quantity remaining
-	//as it could reset listings if this upgrade it re-run
-	$sql_not_strict[] = '';
-	$sql_not_strict[] = '';
+    //do not add fields...  we don't want to re-run the query that sets the quantity remaining
+    //as it could reset listings if this upgrade it re-run
+    $sql_not_strict[] = '';
+    $sql_not_strict[] = '';
 }
 
 //add quantity to expired table since that has become more important...
@@ -58,13 +59,13 @@ $sql_not_strict[] = "INSERT IGNORE INTO `geodesic_pages` (`page_id`, `section_id
 //convert old style of e-mail settings to new...
 $exps = array ('send_classified_expire_email' => 'classified_expire_email', 'send_auction_expire_email' => 'auction_expire_email');
 foreach ($exps as $setting => $newSetting) {
-	$val = $this->_db->GetOne("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='{$setting}'");
-	if ($val > 0) {
-		//before would allow setting to decimal for "part of day"...  force it to
-		//the closest second now.
-		$exp = floor(86400 * $val);
-		$sql_not_strict[] = "INSERT IGNORE INTO `geodesic_site_settings` SET `setting` = '{$newSetting}', `value` = '{$exp}'";
-	}
+    $val = $this->_db->GetOne("SELECT `value` FROM `geodesic_site_settings` WHERE `setting`='{$setting}'");
+    if ($val > 0) {
+        //before would allow setting to decimal for "part of day"...  force it to
+        //the closest second now.
+        $exp = floor(86400 * $val);
+        $sql_not_strict[] = "INSERT IGNORE INTO `geodesic_site_settings` SET `setting` = '{$newSetting}', `value` = '{$exp}'";
+    }
 }
 
 //Changes for favorite expiration

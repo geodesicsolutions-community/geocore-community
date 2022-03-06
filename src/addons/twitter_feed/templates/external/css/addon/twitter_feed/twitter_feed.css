@@ -2,21 +2,21 @@
 
 /* container that holds the actual feed on listing display */
 DIV.twitter_feed_show_timeline {
-	text-align: center;
-	margin: 0 auto;
+    text-align: center;
+    margin: 0 auto;
 }
 
 @media only screen and (max-width: 52em) {
-	DIV.twitter_feed_show_timeline {
-		max-width: 90%;
-	}
+    DIV.twitter_feed_show_timeline {
+        max-width: 90%;
+    }
 }
 
 /* listing placement messages */
 #twitter_feed_parse_error {
-	color: #FF0000;
+    color: #FF0000;
 }
 
 #twitter_feed_result {
-	color: #608B1F;
+    color: #608B1F;
 }
