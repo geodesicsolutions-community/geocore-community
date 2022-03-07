@@ -25,6 +25,12 @@
 			<div class="clr"></div>
 		</div>
 
+        <div>
+            Your version: <strong class="text_blue">{$version}</strong><br />
+            The latest version available on Github: <strong class="text_blue">{$latestVersion}</strong>
+        </div>
+        <br />
+
 		<div class="center"></div>
 
 		<a href="#" id="downloadToggle">See Options</a>

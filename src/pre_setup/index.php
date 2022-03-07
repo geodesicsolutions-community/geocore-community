@@ -458,9 +458,8 @@ if (isset($_REQUEST["moveData"])) {
                     <h1 id="login_product_name">&nbsp;</h1>
                     <h2 id="login_software_type">&nbsp;</h2>
                     <div id="login_form_fields">
-                    <?php echo $preSetup->body; ?>
+                        <?php echo $preSetup->body; ?>
                     </div>
-                    <div id="login_copyright">Copyright 2001-2011. <a class="login_link" href="http://geodesicsolutions.com" onclick="window.open(this.href); return false;">Geodesic Solutions, LLC.</a><br />All Rights Reserved.</div>
                 </div>
                 <div style="clear: both;"></div>
             </div>
