@@ -31,7 +31,7 @@
 		<div id="download_Links" style="display: none;">
 			<div style="margin-top: 15px;">
                 <ul class="home_links center">
-                    <li><a href="https://github.com/geodesicsolutions-community/geocore-community/releases" class="btn btn-default source">Source Code on GitHub</a></li>
+                    <li><a href="https://github.com/geodesicsolutions-community/geocore-community/releases" target="_blank" class="btn btn-default source">Source Code on GitHub</a></li>
                 </ul>
 			</div>
 			<div class="clr"></div>
