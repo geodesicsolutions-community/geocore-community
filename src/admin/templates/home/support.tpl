@@ -1,5 +1,3 @@
-{* 16.09.0-79-gb63e5d8 *}
-
 {* so we don't have to have super long thing for each link *}
 {capture assign='extrnLink'}class="mini_button" style="white-space: normal;" onclick="window.open(this.href); return false;"{/capture}
 
