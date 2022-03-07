@@ -101,7 +101,7 @@ foreach ($versions as $version => $info) {
 
 ?>
     <li>
-        <a href="https://geodesicsolutions.org/changelog/" onclick="window.open(this.href); return false;">
+        <a href="https://geodesicsolutions.org/changelog/" target="_blank">
             Previous Releases 18.02 and below (GeoCore Commercial)
         </a>
     </li>
