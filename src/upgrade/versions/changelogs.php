@@ -41,13 +41,13 @@
 <ul class="nav">
     <li>
         <a href="https://github.com/geodesicsolutions-community/geocore-community/releases" target="_blank">
-            Newer Releases 20.0.0+
+            Newer Releases 20.0.0+ (GeoCore Community Edition)
         </a>
     </li>
 </ul>
 
 <h1>Legacy Changelogs</h1>
-<p>Below is a list of changelogs available for releases before 20.0.0.</p>
+<p>Please note that there was no version 19.</p>
 
 <ul class="nav">
 <?php
@@ -101,8 +101,8 @@ foreach ($versions as $version => $info) {
 
 ?>
     <li>
-        <a href="http://geodesicsolutions.com/RELEASE_NOTES.php" onclick="window.open(this.href); return false;">
-            Previous Releases
+        <a href="https://geodesicsolutions.org/changelog/" onclick="window.open(this.href); return false;">
+            Previous Releases 18.02 and below (GeoCore Commercial)
         </a>
     </li>
 </ul>

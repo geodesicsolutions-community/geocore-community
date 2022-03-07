@@ -43,7 +43,7 @@ class geoUpdateFactory
 
     public static function getReleaseDate()
     {
-        //When you update versions.php be sure to update the version number here and the date of release!
+        // When you update versions.php be sure to update the version number here and the date of release!
 
         $latest = '18.02.0';
         //set to time for release.
