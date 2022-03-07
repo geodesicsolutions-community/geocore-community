@@ -1,6 +1,10 @@
 
 var homePage = {
 	init : function () {
+        // GeoCoreCE needs this for the Version #
+        var url = 'AJAX.php?controller=homeLicense&action=getLicenseData';
+		new Ajax.Updater('licenseVersionInfo', url);
+
 		if ($('paidSupportToggle')) {
 			$('paidSupportToggle').observe('click', homePage.paidSupportClick);
 		}
