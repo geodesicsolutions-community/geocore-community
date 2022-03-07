@@ -2705,33 +2705,6 @@ class addon_example_util extends addon_example_info
     }
 
     /**
-     * Used in admin panel home page, to add additional news feeds to the news
-     * section.  Just return the text to add to the news section.
-     *
-     * Note that this is called in an AJAX call.
-     *
-     * @return string Text to add to the news section on the admin home page
-     * @since Geo Version 5.1.2
-     */
-    public function core_admin_home_display_news()
-    {
-        //This is an example of how to display news feed from specific RSS feed
-
-        //Change this URL to the RSS feed URL you want to pull the news feed from.
-        $rss_url = 'https://geodesicsolutions.org/latest/rss_listings.php';
-
-        $reader = new rss_reader($rss_url);
-
-        //set the title displayed above the feed
-        $reader->setTitle("Example Addon News Feed");
-
-        //make it display 5 entries from feed
-        $reader->setMaxEntries(5);
-
-        return $reader->get_feed_html();
-    }
-
-    /**
      * Used in cron job that closes the listing, at the point before each listing
      * is closed.
      *

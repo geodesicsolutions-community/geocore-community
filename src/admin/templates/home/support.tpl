@@ -19,9 +19,10 @@
 
 			<div id="freeSupport_Links" style="display: none;">
 				<div style="margin-top: 10px;">
-					<strong class="text_blue">Support Resources:</strong>
 					<ul class="home_links">
-						<li><a href="https://geodesicsolutions.org/wiki/" class="btn btn-default source">User Manual</a></li>
+						<li><a href="https://geodesicsolutions.org/wiki/" class="btn btn-default source">User Manual Wiki</a></li>
+                        <li><a href="https://github.com/geodesicsolutions-community/geocore-community/discussions" class="btn btn-default source">GeoCoreCE Github Discussion Area</a></li>
+						<li><a href="https://www.facebook.com/GeoCoreCE" class="btn btn-default source">GeoCoreCE Facebook Page</a></li>
 					</ul>
 				</div>
 			</div>
