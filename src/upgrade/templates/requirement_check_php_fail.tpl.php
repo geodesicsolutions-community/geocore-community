@@ -1,7 +1,7 @@
 <?php
 
 /*
- * used when PHP requirement check failes.
+ * used when PHP requirement check fails.
  *
  * To re-generate the page, on a dev install that does meet min requirements:
  *
