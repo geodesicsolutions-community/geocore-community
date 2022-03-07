@@ -1,5 +1,9 @@
 <?php
 
+// GeoCoreCE needs this for Version numbers (current and latest available)
+// The other stuff may be able to be stripped.
+// Intellisense reports: Undefined constant 'DEMO_MODE_TEXT'.
+
 // DON'T FORGET THIS
 if (class_exists('admin_AJAX') or die()) {
 }
