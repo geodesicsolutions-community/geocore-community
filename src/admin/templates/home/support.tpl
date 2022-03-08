@@ -10,7 +10,7 @@
 			<div class="col_ftr">Free Support:</div>
 			<div class="page_note">
 				<img src="admin_images/bullet_success.png" alt="Support Active" style="margin:0 5px; vertical-align: middle; float: left;" />
-				You have free access to the support options below that do <strong class="text_blue">not expire</strong>.
+				You have free access to the support options below.
 				<div class="clr"></div>
 			</div>
 			<a href="#" id="freeSupportToggle">See Options</a>
