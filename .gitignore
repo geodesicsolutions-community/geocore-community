@@ -33,8 +33,9 @@ src/user_images/
 !src/user_images/.empty
 
 src/.htaccess
-!src/addons/exporter/exports/.empty
 src/addons/exporter/exports/
+!src/addons/exporter/exports/.empty
+!src/addons/exporter/exports/README
 
 # Built zip files
 build/
