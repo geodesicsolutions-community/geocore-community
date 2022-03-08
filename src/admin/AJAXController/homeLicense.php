@@ -75,7 +75,7 @@ class ADMIN_AJAXController_homeLicense extends admin_AJAX
         $lease_extra = ' (Or at Lease Cancellation)';
 
         if ($exp === false) {
-            $exp = 'Unknown (Error checking geodesicsolutions.com site)';
+            $exp = 'Unknown (Error checking geodesicsolutions site)';
         } elseif ((!$exp || $exp == 'never') && $leased) {
             $exp = 'Never' . $lease_extra;
         } elseif (!$exp) {
