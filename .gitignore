@@ -34,6 +34,7 @@ src/user_images/
 
 src/.htaccess
 src/addons/exporter/exports/
+!src/addons/exporter/exports/README.md
 
 # Built zip files
 build/
