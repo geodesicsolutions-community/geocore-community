@@ -1,4 +1,3 @@
-{* 6.0.7-60-g4a6c66e *}
 
 <fieldset>
 	<legend>Software Version</legend>
