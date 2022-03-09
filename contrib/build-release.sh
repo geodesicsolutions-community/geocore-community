@@ -22,14 +22,19 @@ cd src/
 #   - user_images
 #   - _geocache
 #   - geo_templates
+#   - addons/exporter/exports
 #   - .DS_Store files (Mac OS file)
-zip ../build/geocore-ce.zip -r * -x config.php "templates_c/*" "user_images/*" "_geocache/*" "geo_templates/*" "*.DS_Store"
+zip ../build/geocore-ce.zip -r * -x config.php "templates_c/*" "user_images/*" "_geocache/*" "geo_templates/*" \
+    "addons/exporter/exports/*" "*.DS_Store"
 
 # add the starting files needed for _geocache
 zip ../build/geocore-ce.zip _geocache/index.php _geocache/.htaccess
 
 # Add empty folders for user_images, templates_c
 zip ../build/geocore-ce.zip user_images templates_c
+
+# Add the almost empty folder for the exporter addon with the README.md included
+zip ../build/geocore-ce.zip addons/exporter/exports/README.md
 
 # Add the default template and min.php in geo_templates (Note: we exclude the extra template sets for now)
 zip ../build/geocore-ce.zip geo_templates/min.php -r geo_templates/default/* -x "*.DS_Store"
