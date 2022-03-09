@@ -528,7 +528,7 @@ if (!$result || $result->RecordCount() == 0) {
 
     $sql = "select `paypal_id`, `paypal_currency_rate`, `paypal_currency`, `paypal_image_url`, `paypal_item_label` from `geodesic_classifieds_configuration`";
     $result = $this->_db->GetRow($sql);
-    if ($result && strlen($result['paypal_id']) > 0 && $result['paypal_id'] != 'paypal@geodesicsolutions.org') {
+    if ($result && strlen($result['paypal_id']) > 0 && $result['paypal_id'] != 'paypal@example.com') {
         $paypal_data['paypal_id'] = $this->_db->qstr('' . $result['paypal_id']);
         $paypal_data['paypal_currency_rate'] = $this->_db->qstr('' . $result['paypal_currency_rate']);
         $paypal_data['paypal_currency_type'] = $this->_db->qstr('' . $result['paypal_currency']);
