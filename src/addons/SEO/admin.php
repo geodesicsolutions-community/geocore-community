@@ -1,7 +1,5 @@
 <?php
 
-//addons/SEO/admin.php
-
 # SEO Addon
 #for documentation on how addons work, see the example addon.
 
@@ -59,7 +57,7 @@ class addon_SEO_admin extends addon_SEO_info
 
             $HTML = "
 			<fieldset>
-				<legend>SEO Configuration $ONOFF</legend>
+				<legend>SEO Configuration</legend>
 				<div class='form-horizontal'>
 				$warning
 				<div class='form-group'>
@@ -128,7 +126,7 @@ class addon_SEO_admin extends addon_SEO_info
             $dash_name = str_replace(' ', '_', $setting_name);
 
             $newWin = (isset($_GET['step']) && $_GET['step'] == 1) ? 'onclick="window.open(this.href); return false;"' : '';
-            $edit_button = "<a href='index.php?page=addon_SEO_url_config&amp;r_id=$setting_name&bypass=$bypass' $newWin class='btn btn-xs btn-info'><i class='fa fa-pencil'></i> Edit</a>";
+            $edit_button = "<a href='index.php?page=addon_SEO_url_config&amp;r_id=$setting_name&bypass=' $newWin class='btn btn-xs btn-info'><i class='fa fa-pencil'></i> Edit</a>";
             $HTML .= '<div class="form-group">
 						<label class="control-label col-xs-12 col-sm-5">' . ucwords($setting_name) . ' URL:</label>
 						<div class="col-xs-12 col-sm-6 vertical-form-fix">' .
@@ -275,6 +273,7 @@ class addon_SEO_admin extends addon_SEO_info
                 default:
                 case 0:
                     $tip = "";
+                    $modules = [];
                     if (function_exists('apache_get_modules')) {
                         $modules = apache_get_modules();
                     }
@@ -325,6 +324,7 @@ class addon_SEO_admin extends addon_SEO_info
             }
             $tpl->assign('tip', $tip);
             $tpl->assign('go_step', $current_step);
+            $number_of_steps = 4;
             if (isset($current_step) && $current_step && !$no_step && $current_step != ($number_of_steps - 1) && $current_step != 1) {
                 $content .= "<br /><br />" . $this->nextStep();
             }
@@ -345,6 +345,7 @@ class addon_SEO_admin extends addon_SEO_info
     {
         geoView::getInstance()->addJScript('../addons/SEO/seo.js');
         $title = $this->get('title');
+        $HTML = '';
 
         $CJAX = geoCJAX::getInstance();
         $db = DataAccess::getInstance();
@@ -408,7 +409,7 @@ class addon_SEO_admin extends addon_SEO_info
 					<span id='span_current_url' style='white-space: nowrap;'>$current_url</span>
 				</div>
 			</div>
-			
+
 			<div id='div_order'>
 				{$infos['html']}
 			</div>
@@ -446,9 +447,8 @@ class addon_SEO_admin extends addon_SEO_info
 
     function update_addon_SEO_main_config()
     {
-        $admin = true;
+        $admin = geoAdmin::getInstance();
         $CJAX = geoCJAX::getInstance();
-        include GEO_BASE_DIR . 'get_common_vars.php';
 
         $CJAX->message($admin->getUserMessages(), 5);
         require GEO_BASE_DIR . 'app_bottom.php';

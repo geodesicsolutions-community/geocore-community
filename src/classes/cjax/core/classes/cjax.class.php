@@ -167,7 +167,7 @@ class CJAX_FRAMEWORK extends CoreEvents
      * @param string $class
      * @param string $html
      */
-    function create_element($obj, $type = 'div', $parent, $class = '', $html = '')
+    function create_element($obj, $type = 'div', $parent = '', $class = '', $html = '')
     {
         $this->xml("<do>create_element</do><element>$obj</element><parent>$parent</parent><class>$class</class><type>$type</type><html>$html</html>");
     }

@@ -1,7 +1,5 @@
 <?php
 
-//addons/SEO/util.php
-
 # SEO Addon (Search Engine Optimization)
 # -- AKA Mod Rewrite
 

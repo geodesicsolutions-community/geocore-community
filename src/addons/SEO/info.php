@@ -1,7 +1,5 @@
 <?php
 
-//addons/SEO/info.php
-
 # SEO Addon (Search Engine Optimization)
 
 class addon_SEO_info

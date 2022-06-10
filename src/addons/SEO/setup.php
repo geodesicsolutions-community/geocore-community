@@ -1,7 +1,5 @@
 <?php
 
-//addons/SEO/setup.php
-
 # SEO Addon
 
 require_once ADDON_DIR . 'SEO/info.php';
@@ -117,7 +115,7 @@ class addon_SEO_setup extends addon_SEO_info
             }
             $admin->userNotice('Note: Titles in URL now use dashes - for word separators instead of underscore _.  Also a few non alpha-numeric characters
 			are now allowed in the title.  You will need to re-generate the
-			.htaccess file to take advantage of these changes.  Until you do, it will continue to use underscores for word separators.  Note that old 
+			.htaccess file to take advantage of these changes.  Until you do, it will continue to use underscores for word separators.  Note that old
 			URLs that use underscore, will now have a 301 redirect to new urls using - if the setting "Force SEO URLs" setting is enabled.');
         } else {
             $admin->userNotice('Note: make sure to re-generate the .htaccess file
