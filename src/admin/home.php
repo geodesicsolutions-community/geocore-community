@@ -459,7 +459,7 @@ class geoAdminHome
 
 
         //get a table of data about the 5 most recent orders
-        $sql = "SELECT o.id, o.buyer, o.created, u.username, u.id as user_id FROM `geodesic_order` AS o,`geodesic_invoice` AS i, `geodesic_order_registry` as o_r, `geodesic_userdata` as u 
+        $sql = "SELECT o.id, o.buyer, o.created, u.username, u.id as user_id FROM `geodesic_order` AS o,`geodesic_invoice` AS i, `geodesic_order_registry` as o_r, `geodesic_userdata` as u
 			WHERE i.order = o.id AND o_r.order = o.id AND o_r.`index_key` = 'payment_type' AND u.id = o.buyer AND o.seller = 0 ORDER BY o.created DESC LIMIT 5";
         $result = $db->Execute($sql);
         $getOrderContents = $db->Prepare("SELECT `type`, `parent` FROM `geodesic_order_item` WHERE `order` = ?");
@@ -529,12 +529,10 @@ class geoAdminHome
     public function getOtherStats()
     {
         $db = DataAccess::getInstance();
+        $addon = geoAddon::getInstance();
 
-        $sql = "select count(name) from `geodesic_addons`";
-        $other_stats['addonsInstalled'] = $db->GetOne($sql);
-
-        $sql = "select count(name) from `geodesic_addons` where `enabled` = 1";
-        $other_stats['addonsEnabled'] = $db->GetOne($sql);
+        $other_stats['addonsInstalled'] = $addon->installedAddonsCount();
+        $other_stats['addonsEnabled'] = $addon->enabledAddonsCount();
 
         $sql = "select count(language_id) from `geodesic_pages_languages`";
         $other_stats['languagesInstalled'] = $db->GetOne($sql);

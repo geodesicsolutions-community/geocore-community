@@ -1537,6 +1537,28 @@ class geoAddon
     }
 
     /**
+     * Get the number of installed addons
+     *
+     * @return int
+     */
+    public function installedAddonsCount()
+    {
+        $this->loadInstalled();
+        return count($this->installedAddons);
+    }
+
+    /**
+     * Get the number of enabled addons
+     *
+     * @return int
+     */
+    public function enabledAddonsCount()
+    {
+        $this->loadEnabled();
+        return count($this->enabledAddons);
+    }
+
+    /**
      * Used by updateTemplates() to copy over templates for given addon.
      *
      * @param string $name the addon name.
