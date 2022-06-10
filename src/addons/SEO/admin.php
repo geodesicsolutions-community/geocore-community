@@ -1,7 +1,5 @@
 <?php
 
-//addons/SEO/admin.php
-
 # SEO Addon
 #for documentation on how addons work, see the example addon.
 

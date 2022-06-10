@@ -1,7 +1,5 @@
 <?php
 
-//SEO/app_top.php
-
 # SEO Addon app_top file, for making sure urls are re-written.
 
 //Do checks to see if we should do a 301 redirect, if the URL is "wrong"
