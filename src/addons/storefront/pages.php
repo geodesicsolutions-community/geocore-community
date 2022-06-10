@@ -12,8 +12,7 @@ class addon_storefront_pages extends addon_storefront_info
     public function home()
     {
         $store_id = $this->storeID = $this->init();
-        $db = true;
-        include GEO_BASE_DIR . 'get_common_vars.php';
+        $db = DataAccess::getInstance();
 
         $util = geoAddon::getUtil('storefront');
 
@@ -205,15 +204,15 @@ class addon_storefront_pages extends addon_storefront_info
         foreach ($days as $day => $tvisits) {
             $uvisits = count($ips[$day]);
             $sql = "INSERT INTO $tables->traffic SET
-				owner=?, 
-				time=?, 
+				owner=?,
+				time=?,
 				uvisits=?,
 				tvisits=?";
             $r = $db->Execute($sql, array($store_id,$day,$uvisits,$tvisits));
         }
 
         $sql = "DELETE FROM $tables->traffic_cache
-		WHERE time < $currentDate AND 
+		WHERE time < $currentDate AND
 		owner = " . $store_id;
         $result = $db->Execute($sql);
         if (!$result) {
@@ -384,8 +383,8 @@ class addon_storefront_pages extends addon_storefront_info
             $view->storefront = $setting->toArray();
         }
 
-        $sql = "SELECT * FROM $tables->user WHERE store_id=?";
-        $r = $db->Getrow($sql, $store_id);
+        $sql = "SELECT * FROM $tables->users WHERE store_id=?";
+        $r = $db->Getrow($sql, [$store_id]);
 
         //figure out what storefront template to use
         $user = geoUser::getUser($store_id);
@@ -630,9 +629,9 @@ class addon_storefront_pages extends addon_storefront_info
         //NOTE: pay attention to the join order here, as it needs to include "price plan free" users who haven't visited their storefront at all yet
         //that is to say: LEFT JOIN the subscription tables at the end so that the rest of the query still operates for users where that table is missing a row
         $sql = "SELECT DISTINCT r.region
-				FROM " . geoTables::userdata_table . " as user				
+				FROM " . geoTables::userdata_table . " as user
 				INNER JOIN " . geoTables::user_regions . " as r ON user.id = r.user AND r.level = " . $stateLevel .
-                ($price_plans_with_free_storefronts ? " LEFT JOIN " . geoTables::user_groups_price_plans_table . " as ugpp ON user.id = ugpp.id " : '') . "  
+                ($price_plans_with_free_storefronts ? " LEFT JOIN " . geoTables::user_groups_price_plans_table . " as ugpp ON user.id = ugpp.id " : '') . "
 				LEFT JOIN " . $table->subscriptions . " as sub ON user.id = sub.user_id
 				WHERE " .
                 ($price_plans_with_free_storefronts ? "(sub.expiration > " . geoUtil::time() . " OR ugpp.`price_plan_id` in " . $in_statement . " OR ugpp.`auction_price_plan_id` in " . $in_statement . ")" : "sub.expiration > " . geoUtil::time()) .
@@ -732,7 +731,6 @@ class addon_storefront_pages extends addon_storefront_info
 
             $css = "";
             $tpl_vars['pagination'] = geoPagination::getHTML($totalPages, $page_num, $link, $css);
-            $body .= $tpl_vars['pagination'];
         }
         geoView::getInstance()->setBodyTpl('list_all_stores.tpl', 'storefront')
             ->setBodyVar($tpl_vars);
