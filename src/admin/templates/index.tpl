@@ -194,8 +194,6 @@
 							{if $addon_title}<div class="page-title1">Addon: <span class="color-primary-two">{$addon_title}</span></div>{/if}
 						{/if}
 
-						{include file='lease_payment_due.tpl'}
-
 						{if !$hide_notifications}
 							<div id="notifications-box">
 								{include file="notifications"}
