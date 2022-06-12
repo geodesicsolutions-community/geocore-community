@@ -233,8 +233,8 @@ if (!$check_question_table_sql_result) {
             $check = $this->_db->GetRow("SELECT `question_id` FROM `geodesic_classifieds_sell_questions_languages` WHERE `question_id`={$row['question_id']} AND `language_id`=$lang_id");
             if (!$check) {
                 //insert into languages table.
-                $sql_strict[] = "INSERT INTO `geodesic_classifieds_sell_questions_languages` (`question_id`, `language_id`, `name`, `explanation`, `choices`) 
-				VALUES ({$row['question_id']}, $lang_id, " . $this->_db->qstr($row['name'] . '') . ", 
+                $sql_strict[] = "INSERT INTO `geodesic_classifieds_sell_questions_languages` (`question_id`, `language_id`, `name`, `explanation`, `choices`)
+				VALUES ({$row['question_id']}, $lang_id, " . $this->_db->qstr($row['name'] . '') . ",
 				" . $this->_db->qstr($row['explanation'] . '') . ", " . $this->_db->qstr($row['choices'] . '') . ")";
             } else {
                 //to keep sql count the same, so resume upgrade works properly
@@ -528,7 +528,7 @@ if (!$result || $result->RecordCount() == 0) {
 
     $sql = "select `paypal_id`, `paypal_currency_rate`, `paypal_currency`, `paypal_image_url`, `paypal_item_label` from `geodesic_classifieds_configuration`";
     $result = $this->_db->GetRow($sql);
-    if ($result && strlen($result['paypal_id']) > 0 && $result['paypal_id'] != 'paypal@geodesicsolutions.com') {
+    if ($result && strlen($result['paypal_id']) > 0 && $result['paypal_id'] != 'paypal@example.com') {
         $paypal_data['paypal_id'] = $this->_db->qstr('' . $result['paypal_id']);
         $paypal_data['paypal_currency_rate'] = $this->_db->qstr('' . $result['paypal_currency_rate']);
         $paypal_data['paypal_currency_type'] = $this->_db->qstr('' . $result['paypal_currency']);

@@ -3340,7 +3340,6 @@ $upgrade->init();
 <p class="failed" style="text-align:left; font-weight:normal;"><br><br>Be sure to read the update instructions in the <a href="https://geodesicsolutions.org/wiki/update/start" target="_blank">user manual</a>, for important additional steps after the upgrade wizard is finished.</p>
 <span style="text-align: left;"><?php echo $upgrade->body; ?></span>
                     </div>
-                    <div id="login_copyright">Copyright 2001-2011. <a class="login_link" href="http://geodesicsolutions.com" onclick="window.open(this.href); return false;">Geodesic Solutions, LLC.</a><br />All Rights Reserved.</div>
                 </div>
                 <div style="clear: both;"></div>
             </div>
