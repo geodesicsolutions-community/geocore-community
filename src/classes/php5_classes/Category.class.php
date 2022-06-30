@@ -251,7 +251,7 @@ class geoCategory
      * @param int $category_id
      * @param bool $justTheName if true, it acts like the method name sounds like,
      *   returning just the name.
-     * @return string
+     * @return string|stdClass
      */
     public static function getName($category_id, $justTheName = false)
     {
@@ -291,14 +291,12 @@ class geoCategory
         $sql = "SELECT `category_id`,`category_name`,`description` FROM " . geoTables::categories_languages_table . " WHERE language_id = ?  AND category_id !=? ORDER BY RAND() LIMIT 1";
         $result = $db->GetRow($sql, array($language_id,0));
         if ($result === false) {
-            trigger_error('ERROR CATEGORY SQL: Cat not found for id: ' . $category_id . ', Sql: ' . $sql . ' Error Msg: ' . $db->ErrorMsg());
+            trigger_error('ERROR CATEGORY SQL: Random Cat not found, Sql: ' . $sql . ' Error Msg: ' . $db->ErrorMsg());
             return false;
         }
         //use array_map, since all fields being returned (well except for the id) need to be geoString::fromDB
         $show = array_map(array('geoString','fromDB'), $result);
 
-        //save it, so we don't query the db a bunch
-        self::$_getInfoCache[$category_id][$language_id] = $show;
         return $show;
     }
     /**
@@ -447,84 +445,6 @@ class geoCategory
         $count = (int)$db->GetOne($sql, array($category_id));
         return ($count > 0);
     }
-
-
-    /**
-     * Not currently used, we plan to move the same named method in site class here,
-     * but it's not done all the way yet.
-     *
-     * @param $name
-     * @param $category_id
-     * @param $no_main
-     * @param $css_control
-     * @param $all_cat_text
-     * @param $return_type
-     * @param $max_depth
-     * @return unknown_type
-     */
-    public static function get_category_dropdown($name, $category_id = 0, $no_main = 0, $css_control = 0, $all_cat_text = '', $return_type = 1, $max_depth = -1)
-    {
-        $all_cat_text = (strlen($all_cat_text) > 0) ? $all_cat_text : "All Categories";
-        $content = "";
-
-        if (
-            !in_array($name, $this->category_dropdown_settings_array) ||
-            !in_array($max_depth, $this->category_dropdown_settings_array) ||
-            !in_array($no_main, $this->category_dropdown_settings_array)
-        ) {
-            // Empty the arrays if it is new values
-            $this->category_dropdown_settings_array = array_slice($this->category_dropdown_settings_array, 0, 0);
-            $this->category_dropdown_name_array = array_slice($this->category_dropdown_name_array, 0, 0);
-            $this->category_dropdown_id_array = array_slice($this->category_dropdown_name_array, 0, 0);
-        }
-
-        if (empty($this->category_dropdown_settings_array)) {
-            // Add settings if array is empty
-            array_push($this->category_dropdown_settings_array, $name);
-            array_push($this->category_dropdown_settings_array, $no_main);
-            array_push($this->category_dropdown_settings_array, $max_depth);
-        }
-
-
-        //echo count($this->category_dropdown_id_array)." is the count of category_dropdown_id_array<br />\n";
-        if (!$no_main) {
-            if (!in_array(0, $this->category_dropdown_id_array)) {
-                array_push($this->category_dropdown_name_array, $all_cat_text);
-                array_push($this->category_dropdown_id_array, 0);
-            }
-        }
-
-        //echo count($this->category_dropdown_id_array)." is the count of category_dropdown_id_array<br />\n";
-
-        if ((count($this->category_dropdown_id_array) == 0) || (count($this->category_dropdown_id_array) == 1)) {
-            //echo "building categories array<br />\n";
-            $this->get_all_subcategories_for_dropdown(0, 0, $max_depth);
-        } else {
-            //echo "resetting categories array<br />\n";
-            reset($this->category_dropdown_name_array);
-            reset($this->category_dropdown_id_array);
-        }
-
-        $tpl = new geoTemplate('system', 'classes');
-        $tpl->assign('name', $name);
-        $tpl->assign('css', $css_control);
-        $options = array();
-        foreach ($this->category_dropdown_name_array as $key => $value) {
-            $options[$key]['value'] = $this->category_dropdown_id_array[$key];
-            $options[$key]['label'] = geoString::fromDB($value);
-            if ($this->category_dropdown_id_array[$key] == $category_id) {
-                $options[$key]['selected'] = true;
-            }
-        }
-        $tpl->assign('options', $options);
-        $content = $tpl->fetch('Category/category_dropdown.tpl');
-        if ($return_type == 2) {
-            return $content;
-        } else {
-            $this->body .= $content;
-            return true;
-        }
-    } //end of function get_category_dropdown
 
     /**
      * Update the listing count on the given category ID.
@@ -1113,7 +1033,7 @@ class geoCategory
         $return['values'] = $rows;
         if (!$foundSelected && $selected > 0) {
             //add selected to front / end!
-            $query->where("$catTbl.`category_id`=$selected")->limit();
+            $query->where("$catTbl.`category_id`=$selected")->limit(0);
             $row = $db->GetRow($query);
             if ($row) {
                 $row['name'] = geoString::fromDB($row['category_name']);

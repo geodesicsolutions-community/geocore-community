@@ -80,9 +80,9 @@ class geoBrowsingFilter
     /**
      * Internal use.
      * @internal
-     * @var String
+     * @var array<string,static>
      */
-    private static $_activeFilters;
+    private static $_activeFilters = [];
 
     /**
      * NOTE: constructor should not be called directly. use getFilter() instead.

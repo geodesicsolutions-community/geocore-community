@@ -764,7 +764,7 @@ class geoImage
      * @return bool true if successful, false otherwise
      * @since Version 4.0.9
      */
-    public function remove($imageId)
+    public static function remove($imageId)
     {
         $imageId = (int)$imageId;
         if (!$imageId) {
@@ -839,7 +839,7 @@ class geoImage
             //couldn't get image
             return false;
         }
-        $data = getimagesize($url);
+        $data = getimagesize((string)$url);
         if (!$data) {
             //not a valid remote image, or allow_url_fopen not on
             //if image is on https, be sure server is compiled with OpenSSL

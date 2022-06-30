@@ -148,7 +148,7 @@ class geoBrowse extends geoSite
             if ($data["item_type"] == 2) {
                 //on-site payment options
                 $vars = array (
-                    'listing_id' => $id,
+                    'listing_id' => $data['id'],
                 );
                 $this_payment_options = geoSellerBuyer::callDisplay('displayPaymentTypesListing', $vars, ', ');
                 if (strlen($this_payment_options) > 0) {
@@ -224,19 +224,30 @@ class geoBrowse extends geoSite
             if ($data["auction_type"] != 2 && $data['buy_now'] > 0) {
                 //NOT dutch auction, see if should show buy now
                 $show_buy_now = false;
+                $reserveMet = $data['reserve_price'] > 0
+                    && $data['current_bid'] > 0
+                    && (
+                        (
+                            $data['auction_type'] != 3
+                            && $data['current_bid'] >= $data['reserve_price']
+                        ) || (
+                            $data['auction_type'] == 3
+                            && $data['current_bid'] <= $data['reserve_price']
+                        )
+                    );
                 if ($data['buy_now_only']) {
                     //it's buy now only, of course show it...
                     $show_buy_now = true;
                 } elseif ($data['current_bid'] == 0) {
                     //there are no bids yet, so show buy now option
                     $show_buy_now = true;
-                } elseif ($data['current_bid'] != 0 && $this->configuration_data['buy_now_reserve'] == 1 && !$reserve_met) {
+                } elseif ($data['current_bid'] != 0 && $this->configuration_data['buy_now_reserve'] == 1 && !$reserveMet) {
                     //there is a bid, but it is set to allow buy now until reserve is met
                     //and reserve is not met yet
                     $show_buy_now = true;
                 }
                 if ($show_buy_now) {
-                    $formatted['buy_now_data'] = geoString::displayPrice($show["buy_now"], $data['precurrency'], $data['postcurrency'], 'listing');
+                    $formatted['buy_now_data'] = geoString::displayPrice($data["buy_now"], $data['precurrency'], $data['postcurrency'], 'listing');
                 }
             }
             if ($data['start_time']) {
@@ -734,7 +745,7 @@ class geoBrowse extends geoSite
                     $tpl_vars['string_tree'] = $category_tree;
                 }
 
-                $tpl_vars['browse_type'] = $browse_type;
+                $tpl_vars['browse_type'] = $this->browse_type;
             }
 
             $current_category_name = geoCategory::getName($this->site_category);
@@ -810,7 +821,7 @@ class geoBrowse extends geoSite
                 }
             }
             if (!$isHomePage) {
-                $tpl_vars['streamlined'] = (count($tpl_vars['categories']) > 0) ? true : false;
+                $tpl_vars['streamlined'] = !empty($tpl_vars['categories']);
                 $tpl_vars['in_terminal_category'] = (bool)($category_result->RecordCount() == 0);
             }
             $cacheTpl->assign($tpl_vars);
@@ -878,7 +889,6 @@ class geoBrowse extends geoSite
             }
             //add this category to the currentColumn, and track the number of categories added to that column so far
             $currentCount += $add;
-            $totalCount += $add;
             $categories_sorted[$currentColumn][] = $row;
         }
 

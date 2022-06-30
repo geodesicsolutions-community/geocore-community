@@ -3122,7 +3122,7 @@ if there are any listings in your file that did not include a <strong>seller</st
         $body .= "</select>";
 
         return $body;
-    } //end of function get_category_dropdown
+    }
 
     /**
      * adds scripts and styles to the <head> of the document
