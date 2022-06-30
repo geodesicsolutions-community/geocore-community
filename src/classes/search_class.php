@@ -32,15 +32,11 @@ class Search_classifieds extends geoBrowse
     //at the expense of returning possibly less results
     var $faster_search = false;
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    public function __construct($db = 0, $language_id, $auth, $category_id = 0)
+    public function __construct($db = 0, $language_id = 0, $auth = null, $category_id = 0)
     {
         $this->site_category = (int)$category_id;
         parent::__construct();
     } //end of function Search
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     function search_form($db = 0, $search = 0)
     {
