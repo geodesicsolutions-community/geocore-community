@@ -12,6 +12,7 @@ services:
     volumes:
       - .:/var/www/html/
       - ./contrib/docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./contrib/docker/upload-limit.ini:/usr/local/etc/php/conf.d/docker-upload-limit.ini
 
   web-php8:
     build:
@@ -24,6 +25,7 @@ services:
     volumes:
       - .:/var/www/html/
       - ./contrib/docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./contrib/docker/upload-limit.ini:/usr/local/etc/php/conf.d/docker-upload-limit.ini
 
   db:
     image: mariadb
