@@ -311,8 +311,8 @@ class geoAdmin
      */
     public function load_page()
     {
-        $db = $addon = $session = true;
-        include(GEO_BASE_DIR . 'get_common_vars.php');
+        $db = DataAccess::getInstance();
+        $session = geoSession::getInstance();
         if ($session->getUserId() == 0) {
             //user not logged in
             return false;
@@ -636,7 +636,7 @@ class geoAdmin
                     //remove "admin_images/" from filename
                     $view->image = substr($view->image, strrpos($view->image, '/') + 1);
                 }
-                if ($page_data->type == 'main_page' && $page_data->index != $admin_last_page_viewed) {
+                if ($page_data->type == 'main_page') {
                     //set last viewed page.
                     $db->set_site_setting('admin_last_page_viewed', $page_name);
                 }
