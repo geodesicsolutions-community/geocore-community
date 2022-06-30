@@ -222,6 +222,7 @@ class CLASSES_AJAXController_AdvancedSearch extends classes_AJAX
             'textarea' => 'text',
             );
 
+        $categories = [];
         //here, we get the categories to check from the bottom-up, but ultimately want to display them from the top-down
         //so put the cat IDs into a reversable array, then reverse it and use it to pull the actual data
         while ($category_id != 0) {
