@@ -810,7 +810,7 @@ class geoBrowse extends geoSite
                 }
             }
             if (!$isHomePage) {
-                $tpl_vars['streamlined'] = (count($tpl_vars['categories']) > 0) ? true : false;
+                $tpl_vars['streamlined'] = !empty($tpl_vars['categories']);
                 $tpl_vars['in_terminal_category'] = (bool)($category_result->RecordCount() == 0);
             }
             $cacheTpl->assign($tpl_vars);
