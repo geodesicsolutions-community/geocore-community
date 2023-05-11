@@ -28,7 +28,19 @@ class addon_email_sendDirect_util
         } else {
             $server = $db->get_site_setting('email_SMTP_server') ? $db->get_site_setting('email_SMTP_server') : 'localhost';
             $port = $db->get_site_setting('email_SMTP_port') > 0 ? $db->get_site_setting('email_SMTP_port') : 25;
-            $security = in_array($db->get_site_setting('email_server_type'), array('ssl','tls')) ? $db->get_site_setting('email_server_type') : null;
+            switch ($db->get_site_setting('email_server_type')) {
+                case 'smtp_auth_tls':
+                case 'smtp_tls':
+                    $security = 'tls';
+                    break;
+                case 'smtp_auth_ssl':
+                case 'smtp_ssl':
+                    $security = 'ssl';
+                    break;
+                default:
+                    $security = null;
+                    break;
+            }
             $transport = Swift_SmtpTransport::newInstance($server, $port, $security);
             if ($db->get_site_setting('email_username')) {
                 $transport->setUsername($db->get_site_setting('email_username'));
